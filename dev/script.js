@@ -45,16 +45,27 @@ var PageInfo = function() {
     this.section = [];
     this.sections;
     this.currentSection;
+    this.menuClick = false;
+    this.currentEvent;
 }
 
 PageInfo.prototype.init = function() {
     var pageInfo = this;
     pageInfo.update(true,true,true);
     $('section').each(function(i) {
-        pageInfo.section[i] = {'name': $(this).attr('class'), 'position': $(this).position().top-110};
+        pageInfo.section[i] = {'name': $(this).attr('class'), 'position': $(this).position().top-82};
     });
     pageInfo.sections = pageInfo.section.length-1;
-    console.log(pageInfo.section);
+
+    $.history.init(function(hash){
+        if(hash == "") {
+            var homePage = new HomePage();
+            homePage.init();
+        } else {
+            pageInfo.update(false,false,true);
+        }
+    },
+    { unescape: ",/" });
 }
 
 PageInfo.prototype.update = function(width,height,offset) {
@@ -70,15 +81,13 @@ PageInfo.prototype.update = function(width,height,offset) {
         for(i=0; i<pageInfo.sections; i++) {
             if(i < pageInfo.sections) {
                 var nextItem = i+1;
-            } else {
-                var nextItem = false;
-            }
-            if(i < pageInfo.sections) {
                 if(pageInfo.pageOffset > pageInfo.section[i].position && pageInfo.pageOffset < pageInfo.section[nextItem].position) {
                     if(pageInfo.currentSection != i) {
-                        pageInfo.currentSection = i;
+                        //$.history.load(pageInfo.section[i].name);
                         pageInfo.changePage(i);
                     }
+                } else if(pageInfo.pageOffset >= pageInfo.section[pageInfo.sections].position){
+                    pageInfo.changePage(pageInfo.sections);
                 }
             }
         }
@@ -87,9 +96,93 @@ PageInfo.prototype.update = function(width,height,offset) {
 
 PageInfo.prototype.changePage = function(i) {
     var pageInfo = this;
+    var homePage = new HomePage();
     $('header a.selected').removeClass('selected');
-    console.log(pageInfo.section[i].name);
     $('header a[href="#'+pageInfo.section[i].name+'"]').addClass('selected');
+    // Change hash
+    //pageInfo.changeHash(pageInfo.section[i].name);
+    pageInfo.currentSection = i;
+    if(homePage.active != 1) {
+        homePage.init();
+    }
+}
+
+PageInfo.prototype.changeHash = function(n) {
+    var pageInfo = this;
+    pageInfo.currentEvent.preventDefault();
+    console.log(pageInfo.currentEvent.isDefaultPrevented());
+    window.location.hash = n;
+}
+
+var HomePage = function() {
+    this.active = false;
+    this.query = [
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '',
+        ''
+    ];
+    this.activeQuery;
+    this.timer;
+    this.time = 20000;
+}
+
+HomePage.prototype.init = function() {
+    console.log('INIT');
+    var homePage = this;
+    
+    // Get number of queries in list, pick one at random and start from there.
+    homePage.activeQuery = Math.floor(Math.random()*homePage.query.length);
+    
+    // Do ajax request
+    homePage.request();
+    
+    homePage.active = 1;
+}
+
+HomePage.prototype.request = function() {
+    var homePage = this;
+    // Clear timeout
+    clearTimeout(homePage.timer);
+    
+    // Make request
+    $.ajax({
+        url: homePage.query[homePage.activeQuery],
+        dataType: 'jsonp',
+        timeout: 10000,
+        context: homePage.item,
+        success: function(data, textStatus, jqXHR){
+            console.log('YAR', data, textStatus);
+            
+            // Set activeQuery to next in list
+            if(homePage.activeQuery < homePage.query.length) {
+                homePage.activeQuery++;
+            } else {
+                homePage.activeQuery = 0;
+            }
+            
+            // Restart Countdown
+            homePage.countdown();
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            console.log('NAY', textStatus, errorThrown);
+            // Retry with next query
+        },
+        complete: function(jqXHR, textStatus){
+            console.log(textStatus);
+        }
+    });
+}
+
+HomePage.prototype.countdown = function() {
+    var homePage = this;
+    homePage.timer = setTimeout(function() {homePage.request();}, homePage.time);
 }
 
 $(document).ready(function(){
@@ -101,17 +194,7 @@ $(document).ready(function(){
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
-    $.history.init(function(hash){
-        if(hash == "") {
-            $('header a.selected').removeClass('selected');
-            $('header a[href="#home"]').addClass('selected');
-        } else {
-            pageInfo.update(false,false,true);
-            $('header a.selected').removeClass('selected');
-            $('header a[href="#'+hash+'"]').addClass('selected');
-        }
-    },
-    { unescape: ",/" });
+    
     
     $('input.date').datepicker({
         showOn: "button",
@@ -120,7 +203,12 @@ $(document).ready(function(){
         dateFormat: 'dd/mm/yy'
     });
     
-    $(window).scroll(function(){
+    $('.mainMenu a').click(function(){
+        pageInfo.menuClick = true;
+    });
+    
+    $(window).scroll(function(e){
+        pageInfo.currentEvent = e;
         pageInfo.update(false,false,true);
     });
 });

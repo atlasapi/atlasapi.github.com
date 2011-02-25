@@ -9,11 +9,11 @@
 		<script src="script.js"></script>
 	</head>
 	<body>
-		<div class="page">
-            <header class="hr">
+	   <header class="hr">
+            <div class="content">
                 <h1 class="logo">Atlas, The video and audio index</h1>
                 <a href="#apiExplorer" class="btn btn_lrg"><span class="icn_mag"></span>API Explorer</a>
-                <nav class="cr">
+                <nav>
                     <ul class="mainMenu clearfix">
                         <li><a href="#home" class="selected">Home</a></li>
                         <li><a href="#examples">Examples</a></li>
@@ -21,20 +21,40 @@
                         <li><a href="#dataModel">Data Model</a></li>
                         <li><a href="#fullApi">Full API Reference</a></li>
                         <li><a href="#getInvolved">Get Involved</a></li>
-        			</ul>
+                        <li><a href="#about">About</a></li>
+                    </ul>
                 </nav>
-            </header>
+            </div>
+        </header>
+		<div class="page">
             <section class="home">
                 <div class="marker" id="home"></div>
-                <p class="tr mrm mbs faded">http://atlasapi.org/2.0/episode.json?genre=factual</p>
                 <div class="slideShow clearfix">
-                    <div class="showItem show_lrg">
+                    <div class="showItem show_lrg loading">
                         <img src="" />
                         <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
                     </div>
-                    <div class="showItem show_lrg">
+                    <div class="showItem show_lrg loading">
                         <img src="" />
                         <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                    </div>
+                </div>
+                <div class="controlBar clearfix">
+                    <a href="#" class="cbtn previous"><span class="icn"></span>Prev</a>
+                    <a href="#" class="cbtn wait"><span class="icn"></span><span class="js_txt"></span></a>
+                    <div class="queryHolder">
+                        <ul class="queries">
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                            <li><a href="#">http://atlasapi.org/2.0/episode.json?genre=factual</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="line">
@@ -359,6 +379,77 @@ locations: [
             <section class="getInvolved">
                 <div class="marker" id="getInvolved"></div>
                 <h2>Get Involved</h2>
+            </section>
+            
+            <section class="about">
+                <div class="marker" id="about"></div>
+                <h2>About</h2>
+                <div class="line mbl">
+                    <div class="unit size1of2">
+                        <article>
+                            <h3 class="hr">Atlas Does</h3>
+                            <ul class="list">
+                                <li>Runs sophisticated title searches</li>
+                                <li>Helps you get to content you can actually watch, like "<a href="#">I want to watch Glee and I am in the US</a>"</li>
+                                <li>Automatically produces all the content lists needed for an online video service, from episodes in a brand to a-to-z lists and the current highlights</li>
+                                <li>Stores all you expect: title, description, image, thumbnail, genres, tags and many ways to play it</li>
+                                <li>Keeps an eye on <a href="#">Twitter</a>, indexing all content mentions and <a href="#">what's currently hot</a></li>
+                                <li>Next to web, finds mobile and TV friendly content</li>
+                                <li>Lets you ask for content by time, like "<a href="#">What's on the BBC right now?</a>"</li>
+                                <li>Outputs information in <a href="#">many different formats</a></li>
+                            </ul>
+                        </article>
+                    </div>
+                    <div class="unit size1o2 lastUnit">
+                        <article>
+                            <h3 class="hr">Atlas Is</h3>
+                            <ul class="list mbl">
+                                <li>The open-source, open-API index that gathers and stores video & audio information from <a href="#">10+ sources</a>, so that you can build cool apps swiftly</li>
+                                <li>The way to learn all about a content link, of to find the content link itself</li>
+                            </ul>
+                            <h3 class="hr">Atlas Will</h3>
+                            <ul class="list">
+                                <li>Figure equivalent content from different sources</li>
+                                <li>Search across title, description, tags and genres</li>
+                                <li>Add more and more sources, and improve and augment the data from the current ones</li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
+                <div class="line mbl">
+                    <div class="unit size1of2">
+                        <article>
+                            <h3 class="hr">projects that use atlas</h3>
+                            <div class="project">
+                                <img src="" />
+                                <h4>Watch Something and something</h4>
+                            </div>
+                            <div class="project">
+                                <img src="" />
+                                <h4>Watch Something and something and something</h4>
+                            </div>
+                            <div class="project">
+                                <img src="" />
+                                <h4>Watch Something</h4>
+                            </div>
+                            <div class="project">
+                                <img src="" />
+                                <h4>Watch Something</h4>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="unit size1o2 lastUnit">
+                        <article>
+                            <h3 class="hr"><mark>Atlas</mark> is all over the internet</h3>
+                            <ul class="socialList">
+                                <li><a href="#"><img src="images/twitter.png" /><mark>@atlasapi</mark></a></li>
+                                <li><a href="#"><img src="images/github.png" /><mark>source-code, wiki and issue tracker</mark></a></li>
+                                <li><a href="#"><img src="images/google.png" /><mark>communication (groups)</mark></a></li>
+                                <li><a href="#"><img src="images/metabroadcast.png" /><mark>metabroadcast</mark></a></li>
+                            </ul>
+                        </article>
+                    </div>
+                </div>
             </section>
             
             <section class="apiExplorer">
