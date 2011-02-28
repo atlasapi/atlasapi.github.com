@@ -112,16 +112,16 @@ PageInfo.prototype.changeHash = function(n) {
 var HomePage = function() {
     this.active = false;
     this.query = [
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2'
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2'
     ];
     this.activeQuery;
     this.timer;
@@ -151,7 +151,7 @@ HomePage.prototype.request = function() {
     $.ajax({
         url: homePage.query[homePage.activeQuery],
         dataType: 'jsonp',
-        timeout: 10000,
+        timeout: 5000,
         context: homePage.item,
         success: function(data, textStatus, jqXHR){
             console.log('YAR', data, textStatus);
