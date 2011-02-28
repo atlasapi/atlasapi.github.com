@@ -152,7 +152,8 @@ HomeDemo.prototype.init = function(){
     
     // Add each query element to array
     $('.controlBar .queryHolder .queries li').each(function(i){
-        homeDemo.width += $(this).outerWidth(true);
+        /*homeDemo.width += $(this).outerWidth(true);
+        console.log('+'+$(this).outerWidth(true));*/
         homeDemo.item[i] = {'item': $(this), 'width': $(this).outerWidth(true)};
     });
     
@@ -160,27 +161,29 @@ HomeDemo.prototype.init = function(){
     homeDemo.item[0].item.addClass('current');
     
     // Set width of scroller
-    $('.queries').css('width', homeDemo.width);
+   /* console.log(homeDemo.width);
+    $('.queries').css('width', homeDemo.width);*/
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
-        if($(this).hasClass('previous')){
-            if(homeDemo.currentPosition != homeDemo.item.length){
-                homeDemo.currentPosition++;
-                if(homeDemo.currentPosition < 10){
-                    homeDemo.scrollIt(homeDemo.currentPosition,0);
-                }
-            }
-        } else if($(this).hasClass('next')) {
-            if(!$(this).hasClass('wait')){
-                if(homeDemo.currentPosition != 0){
-                    homeDemo.currentPosition--;
-                    if(homeDemo.currentPosition > 0){
-                        homeDemo.scrollIt(homeDemo.currentPosition,1);
-                    }
-                }
-            }
-        }
+    	if(!$(this).hasClass('inactive')) {
+			if($(this).hasClass('previous')){
+				clearInterval(homeDemo.timer);
+				homeDemo.currentPosition++;
+				homeDemo.scrollIt(homeDemo.currentPosition,0);
+			} else if($(this).hasClass('next')) {
+				if(!$(this).hasClass('wait')){
+					clearInterval(homeDemo.timer);
+					if(homeDemo.currentPosition != 0){
+						homeDemo.currentPosition--;
+						homeDemo.scrollIt(homeDemo.currentPosition,1);
+					} else {
+						homeDemo.countdown();
+					}
+				}
+			}
+		}
+        return false;
     });
     
     // Make first request
@@ -190,20 +193,23 @@ HomeDemo.prototype.init = function(){
 HomeDemo.prototype.scrollIt = function(pos,mod) {
     var homeDemo = this;
     console.log(pos);
-    if(pos > 0) {
-        homeDemo.countdown(1);
-        if(mod==0){
+    homeDemo.countdown();
+    if(mod==0){
+    	if(pos > 0 && pos < 10) {
             homeDemo.nav.find('.queries').animate({
-                right: '-='+homeDemo.item[pos-1].width
+                right: -775*pos
             },500);
             homeDemo.item[pos-1].item.removeClass('current');
-        } else {
-            homeDemo.nav.find('.queries').animate({
-                right: '+='+homeDemo.item[pos+1].width
-            },500);
-            homeDemo.item[pos+1].item.removeClass('current');
-        }
-    }
+	    }
+	    if(pos == 9) {
+	    	homeDemo.nav.find('.previous').addClass('inactive');
+	    }
+	} else {
+		homeDemo.nav.find('.queries').animate({
+			right: -775*pos
+		},500);
+		homeDemo.item[pos+1].item.removeClass('current');
+	}
 
     homeDemo.item[pos].item.addClass('current');
 }
@@ -225,9 +231,6 @@ HomeDemo.prototype.request = function() {
             console.log('YAR', data, textStatus);
             
             data = JSON.parse(data);
-            
-            // Restart Countdown
-            homeDemo.countdown();
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log('NAY', textStatus, errorThrown);
@@ -246,26 +249,27 @@ HomeDemo.prototype.request = function() {
     });
 }
 
-HomeDemo.prototype.countdown = function(stop) {
+HomeDemo.prototype.countdown = function() {
     var homeDemo = this;   
-    clearInterval(homeDemo);
-    
-    if(!stop){
-        var i = 20;
-        if(homeDemo.currentPosition == 0) {
-            homeDemo.timer = setInterval(function() {
-                homeDemo.nav.find('.js_txt').html(i+'s').siblings('.icn').css('width','16px');
-                i--;
-                if(i== -1){
-                    homeDemo.nav.find('.js_txt').html('Loading').siblings('.icn').css('width','0');
-                    clearTimer(homeDemo.timer);
-                    homeDemo.request();
-                }
-            }, 1000);
-        } else {
-            homeDemo.nav.find('.js_txt').html('Next').siblings('.icn').css('width','16px').parent('a').removeClass('wait');
-        }
-    }
+    clearInterval(homeDemo.timer); 
+	var i = 20;
+	var thisItem = homeDemo.nav.find('.js_txt');
+	if(homeDemo.currentPosition == 0) {
+		if(!thisItem.hasClass('inactive')){
+			thisItem.parent('a').addClass('inactive');
+		}
+		homeDemo.timer = setInterval(function() {
+			thisItem.html(i+'s').siblings('.icn').css('width','16px').parent('a').addClass('wait');
+			i--;
+			if(i== -1){
+				thisItem.html('Loading').siblings('.icn').css('width','0');
+				clearTimer(homeDemo.timer);
+				homeDemo.request();
+			}
+		}, 1000);
+	} else {
+		thisItem.html('Next').siblings('.icn').css('width','16px').parent('a').removeClass('wait').removeClass('inactive');
+	}
 }
 
 

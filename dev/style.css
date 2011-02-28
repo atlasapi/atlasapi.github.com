@@ -167,8 +167,8 @@
             .socialList li {margin-bottom: 10px;}
             .socialList img {display: inline-block; vertical-align: middle; margin-right: 10px;}
             
-            .queries {float: right; width: 500%; position: relative;}
-            .queries li {float: right; margin-left: 20px;}
+            .queries {float: right; width: 7750px; position: relative;}
+            .queries li {float: right; /*margin-left: 20px;*/ width: 775px; text-align:right;}
             .queries li a {color: #ccc;}
             .queries li.current a {color: #333;}
             .queries li.current+li a {color: #666;}
@@ -202,7 +202,7 @@
                 line-height: 24px;
                 margin-left: 20px;
             }
-            .btn:hover, .btn:focus {
+            .btn:hover, .btn:focus, .cbtn:hover, .cbtn:focus {
                 text-decoration: none;
                 border: 1px solid #333;
             }
@@ -239,14 +239,19 @@
                 color: #fff;
                 font-size: 14px;
                 text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
-                border: 1px solid #bbb;
+                border: 1px solid #d371a2;
+                /*border: 1px solid #bbb;*/
                 padding: 3px 10px 5px;
                 display: inline-block;
                 vertical-align: center;
-                background-color: #d4d1d2;
+                background-color: #eb80b5;
+                background: -moz-linear-gradient(top, #eb80b5, #ef308f);
+                background: -webkit-gradient(linear, left top, left bottom, from(#eb80b5), to(#ef308f));
+                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#eb80b5', EndColorStr='#ef308f', GradientType=0);
+                /*background-color: #d4d1d2;
                 background: -moz-linear-gradient(top, #d4d1d2, #a7a6a7);
                 background: -webkit-gradient(linear, left top, left bottom, from(#d4d1d2), to(#a7a6a7));
-                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d4d1d2', EndColorStr='#a7a6a7', GradientType=0);
+                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d4d1d2', EndColorStr='#a7a6a7', GradientType=0);*/
                 -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
                 -moz-box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
                 -o-box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
@@ -266,6 +271,15 @@
             
             .cbtn.wait {float: right; width: 46px;}
                 .cbtn.wait .icn{float: right; margin-left: 3px; background-image: url(images/sml_loader.gif);}
+                
+            .btn.inactive, .cbtn.inactive {
+            	border: 1px solid #bbb;
+            	background-color: #d4d1d2;
+                background: -moz-linear-gradient(top, #d4d1d2, #a7a6a7);
+                background: -webkit-gradient(linear, left top, left bottom, from(#d4d1d2), to(#a7a6a7));
+                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d4d1d2', EndColorStr='#a7a6a7', GradientType=0);
+                cursor: default;
+            }
             
             /* Images */
             .showItem {
@@ -375,6 +389,7 @@
                     height: 30px; width: 10px;
                     position: absolute;
                     background: #efefef;
+                    z-index: 5;
                 }
                 .controlBar .queryHolder:before {left: 0;-webkit-box-shadow: 10px 0 10px #efefef;}
                 .controlBar .queryHolder:after {right: 0;-webkit-box-shadow: -10px 0 10px #efefef;}
