@@ -59,8 +59,6 @@ PageInfo.prototype.init = function() {
 
     $.history.init(function(hash){
         if(hash == "") {
-            var homePage = new HomePage();
-            homePage.init();
         } else {
             pageInfo.update(false,false,true);
         }
@@ -102,9 +100,6 @@ PageInfo.prototype.changePage = function(i) {
     // Change hash
     //pageInfo.changeHash(pageInfo.section[i].name);
     pageInfo.currentSection = i;
-    if(homePage.active != 1) {
-        homePage.init();
-    }
 }
 
 PageInfo.prototype.changeHash = function(n) {
@@ -117,16 +112,16 @@ PageInfo.prototype.changeHash = function(n) {
 var HomePage = function() {
     this.active = false;
     this.query = [
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        ''
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2',
+        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=2'
     ];
     this.activeQuery;
     this.timer;
@@ -143,7 +138,7 @@ HomePage.prototype.init = function() {
     // Do ajax request
     homePage.request();
     
-    homePage.active = 1;
+    homePage.active = true;
 }
 
 HomePage.prototype.request = function() {
@@ -151,6 +146,7 @@ HomePage.prototype.request = function() {
     // Clear timeout
     clearTimeout(homePage.timer);
     
+    console.log(homePage.query[homePage.activeQuery]);
     // Make request
     $.ajax({
         url: homePage.query[homePage.activeQuery],
@@ -160,29 +156,55 @@ HomePage.prototype.request = function() {
         success: function(data, textStatus, jqXHR){
             console.log('YAR', data, textStatus);
             
-            // Set activeQuery to next in list
-            if(homePage.activeQuery < homePage.query.length) {
-                homePage.activeQuery++;
-            } else {
-                homePage.activeQuery = 0;
-            }
+            data = JSON.parse(data);
             
             // Restart Countdown
             homePage.countdown();
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log('NAY', textStatus, errorThrown);
-            // Retry with next query
         },
         complete: function(jqXHR, textStatus){
             console.log(textStatus);
+            // Set activeQuery to next in list
+            if(homePage.activeQuery < homePage.query.length) {
+                homePage.activeQuery++;
+            } else {
+                homePage.activeQuery = 0;
+            }
+            // Restart Countdown
+            homePage.countdown();
         }
     });
 }
 
 HomePage.prototype.countdown = function() {
     var homePage = this;
-    homePage.timer = setTimeout(function() {homePage.request();}, homePage.time);
+    /*homePage.timer = setTimeout(function() {
+        homePage.request();
+        var timer = setInterval(function() {
+            for(i=20; i<0; i--){
+                console.log(i);
+            }
+            clearInterval(timer);
+        }, 1000);
+    }, homePage.time);*/
+    
+    var i = 20;
+    homePage.timer = setInterval(function() {
+        $('.controlBar .js_txt').html(i+'s').siblings('.icn').css('width','16px');
+        i--;
+        if(i== -1){
+            $('.controlBar .js_txt').html('Loading').siblings('.icn').css('width','0');
+            clearInterval(homePage.timer);
+            homePage.request();
+        }
+    }, 1000);
+    /*
+    } else {
+            clearInterval(homePage.timer);
+            homePage.request();
+        }*/
 }
 
 $(document).ready(function(){
@@ -194,6 +216,9 @@ $(document).ready(function(){
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
+    
+    var homePage = new HomePage();
+    homePage.init();
     
     
     $('input.date').datepicker({
