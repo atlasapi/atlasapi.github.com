@@ -151,6 +151,7 @@ HomePage.prototype.request = function() {
     $.ajax({
         url: homePage.query[homePage.activeQuery],
         dataType: 'jsonp',
+        jsonpCallback: 'jsonp',
         timeout: 5000,
         context: homePage.item,
         success: function(data, textStatus, jqXHR){
