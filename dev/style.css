@@ -167,12 +167,12 @@
             .socialList li {margin-bottom: 10px;}
             .socialList img {display: inline-block; vertical-align: middle; margin-right: 10px;}
             
-            .queries {float: right; width: 500%;}
+            .queries {float: right; width: 500%; position: relative;}
             .queries li {float: right; margin-left: 20px;}
             .queries li a {color: #ccc;}
-            .queries li:first-child a {color: #333;}
-            .queries li:nth-child(1) a {color: #666;}
-            .queries li:nth-child(2) a {color: #999;}
+            .queries li.current a {color: #333;}
+            .queries li.current+li a {color: #666;}
+            .queries li.current+li+li a {color: #999;}
 			
 			/* Buttons */
 			.btn {

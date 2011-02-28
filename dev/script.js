@@ -1,3 +1,9 @@
+var homePageTimer;
+
+var clearTimer = function() {
+    clearInterval(homePageTimer);
+}
+
 var Tabs = function() {
     this.tabHolder;
     this.count = 0;
@@ -94,7 +100,7 @@ PageInfo.prototype.update = function(width,height,offset) {
 
 PageInfo.prototype.changePage = function(i) {
     var pageInfo = this;
-    var homePage = new HomePage();
+    var homeDemo = new HomeDemo();
     $('header a.selected').removeClass('selected');
     $('header a[href="#'+pageInfo.section[i].name+'"]').addClass('selected');
     // Change hash
@@ -109,58 +115,119 @@ PageInfo.prototype.changeHash = function(n) {
     window.location.hash = n;
 }
 
-var HomePage = function() {
+var HomeDemo = function(item) {
     this.active = false;
     this.query = [
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2',
-        'http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama&limit=2'
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
+        'discover.json?publisher=bbc.co.uk&available=true',
+        'discover.json?publisher=bbc.co.uk&availableCountries=uk',
+        'discover.json?title=eastender',
+        'discover.json?title=Apprentice',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama'
     ];
     this.activeQuery;
-    this.timer;
     this.time = 20000;
+    this.timer;
+    
+    this.nav = item;
+    this.currentPosition = 0;
+    this.item = [];
+    this.width = 0;
 }
 
-HomePage.prototype.init = function() {
-    console.log('INIT');
-    var homePage = this;
+HomeDemo.prototype.init = function(){
+    var homeDemo = this;
     
-    // Get number of queries in list, pick one at random and start from there.
-    homePage.activeQuery = Math.floor(Math.random()*homePage.query.length);
+    // Select Random Query to start on
+    homeDemo.activeQuery = Math.floor(Math.random()*homeDemo.query.length);
     
-    // Do ajax request
-    homePage.request();
+    // Add queries to UL
+    $.each(homeDemo.query, function(i){
+        $('.controlBar .queryHolder .queries').append('<li><a href="#">'+homeDemo.query[i]+'</a></li>');
+    });
     
-    homePage.active = true;
+    // Add each query element to array
+    $('.controlBar .queryHolder .queries li').each(function(i){
+        homeDemo.width += $(this).outerWidth(true);
+        homeDemo.item[i] = {'item': $(this), 'width': $(this).outerWidth(true)};
+    });
+    
+    // Add current class to first query
+    homeDemo.item[0].item.addClass('current');
+    
+    // Set width of scroller
+    $('.queries').css('width', homeDemo.width);
+    
+    // Add onclick event to buttons
+    homeDemo.nav.find('.cbtn').click(function(){
+        if($(this).hasClass('previous')){
+            if(homeDemo.currentPosition != homeDemo.item.length){
+                homeDemo.currentPosition++;
+                if(homeDemo.currentPosition < 10){
+                    homeDemo.scrollIt(homeDemo.currentPosition,0);
+                }
+            }
+        } else if($(this).hasClass('next')) {
+            if(!$(this).hasClass('wait')){
+                if(homeDemo.currentPosition != 0){
+                    homeDemo.currentPosition--;
+                    if(homeDemo.currentPosition > 0){
+                        homeDemo.scrollIt(homeDemo.currentPosition,1);
+                    }
+                }
+            }
+        }
+    });
+    
+    // Make first request
+    homeDemo.request();
 }
 
-HomePage.prototype.request = function() {
-    var homePage = this;
+HomeDemo.prototype.scrollIt = function(pos,mod) {
+    var homeDemo = this;
+    console.log(pos);
+    if(pos > 0) {
+        homeDemo.countdown(1);
+        if(mod==0){
+            homeDemo.nav.find('.queries').animate({
+                right: '-='+homeDemo.item[pos-1].width
+            },500);
+            homeDemo.item[pos-1].item.removeClass('current');
+        } else {
+            homeDemo.nav.find('.queries').animate({
+                right: '+='+homeDemo.item[pos+1].width
+            },500);
+            homeDemo.item[pos+1].item.removeClass('current');
+        }
+    }
+
+    homeDemo.item[pos].item.addClass('current');
+}
+
+HomeDemo.prototype.request = function() {
+    var homeDemo = this;
     // Clear timeout
-    clearTimeout(homePage.timer);
+    clearTimeout(homeDemo.timer);
     
-    console.log(homePage.query[homePage.activeQuery]);
+    console.log(homeDemo.query[homeDemo.activeQuery]);
     // Make request
     $.ajax({
-        url: homePage.query[homePage.activeQuery],
+        url: 'http://otter.atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]+'&limit=2',
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
         timeout: 5000,
-        context: homePage.item,
+        context: homeDemo.item,
         success: function(data, textStatus, jqXHR){
             console.log('YAR', data, textStatus);
             
             data = JSON.parse(data);
             
             // Restart Countdown
-            homePage.countdown();
+            homeDemo.countdown();
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log('NAY', textStatus, errorThrown);
@@ -168,45 +235,39 @@ HomePage.prototype.request = function() {
         complete: function(jqXHR, textStatus){
             console.log(textStatus);
             // Set activeQuery to next in list
-            if(homePage.activeQuery < homePage.query.length) {
-                homePage.activeQuery++;
+            if(homeDemo.activeQuery < homeDemo.query.length) {
+                homeDemo.activeQuery++;
             } else {
-                homePage.activeQuery = 0;
+                homeDemo.activeQuery = 0;
             }
             // Restart Countdown
-            homePage.countdown();
+            homeDemo.countdown();
         }
     });
 }
 
-HomePage.prototype.countdown = function() {
-    var homePage = this;
-    /*homePage.timer = setTimeout(function() {
-        homePage.request();
-        var timer = setInterval(function() {
-            for(i=20; i<0; i--){
-                console.log(i);
-            }
-            clearInterval(timer);
-        }, 1000);
-    }, homePage.time);*/
+HomeDemo.prototype.countdown = function(stop) {
+    var homeDemo = this;   
+    clearInterval(homeDemo);
     
-    var i = 20;
-    homePage.timer = setInterval(function() {
-        $('.controlBar .js_txt').html(i+'s').siblings('.icn').css('width','16px');
-        i--;
-        if(i== -1){
-            $('.controlBar .js_txt').html('Loading').siblings('.icn').css('width','0');
-            clearInterval(homePage.timer);
-            homePage.request();
+    if(!stop){
+        var i = 20;
+        if(homeDemo.currentPosition == 0) {
+            homeDemo.timer = setInterval(function() {
+                homeDemo.nav.find('.js_txt').html(i+'s').siblings('.icn').css('width','16px');
+                i--;
+                if(i== -1){
+                    homeDemo.nav.find('.js_txt').html('Loading').siblings('.icn').css('width','0');
+                    clearTimer(homeDemo.timer);
+                    homeDemo.request();
+                }
+            }, 1000);
+        } else {
+            homeDemo.nav.find('.js_txt').html('Next').siblings('.icn').css('width','16px').parent('a').removeClass('wait');
         }
-    }, 1000);
-    /*
-    } else {
-            clearInterval(homePage.timer);
-            homePage.request();
-        }*/
+    }
 }
+
 
 $(document).ready(function(){
     var pageInfo = new PageInfo();
@@ -218,8 +279,8 @@ $(document).ready(function(){
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
     
-    var homePage = new HomePage();
-    homePage.init();
+    var homeDemo = new HomeDemo($('.controlBar'));
+    homeDemo.init();
     
     
     $('input.date').datepicker({
