@@ -42,9 +42,40 @@
 			section .marker {position: absolute; top: -80px; height: 0; width: 0;}
 			
 			.home {padding: 75px 0;}
+			.homepageInfo {
+                font-size: 11px;
+                color: #666;
+                background: #fff;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -o-border-radius: 3px;
+                -khtml-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+                text-align: center;
+                margin: 0 10px;
+                padding: 3px 0;
+                margin-bottom: 10px;
+            }
 			
 			article {padding: 0 10px;}
 			aside {margin-left: 20px;}
+			
+			.popOut {
+                background: #fff;
+                background-image: -moz-linear-gradient(-45deg, #fff, #ffe8f3);
+                background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0,#fff), color-stop(1,#ffe8f3));
+                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#fff', EndColorStr='#ffe8f3', GradientType=0);
+                border: 10px solid #fff;
+                -webkit-border-radius: 10px;
+                -moz-border-radius: 10px;
+                -o-border-radius: 10px;
+                -khtml-border-radius: 10px;
+                -ms-border-radius: 10px;
+                border-radius: 10px;
+                padding: 10px;
+                margin: 0 10px;
+            }
 			
 			h1,h2,h3,h4,h5,h6 {margin-bottom: 20px; text-shadow: 0 1px 0 #fff;}
 			h1 {font-size: 31px;}
@@ -53,9 +84,17 @@
 			h4 {font-size: 16px; color:#ef308f; font-style: italic;}
 			h5 {font-size: 14px; font-style: italic;}
 			h6 {font-size: 12px;}
+			
+			.popOut h3 {
+                font-style: normal;
+                color: #380b66;
+			}
+			
 			p {font-size: 12px; line-height: 18px; margin-bottom: 20px;}
 			a {text-decoration: none; color: #380b66; text-shadow: 0 1px 0 #fff;}
 			a:hover {text-decoration: underline;}
+			a.api {padding-right: 10px;}
+			a.api:hover {background: url(images/sml_mag.gif) right 70% no-repeat;}
 			
 			.query {text-transform: none;}
 			
@@ -266,7 +305,7 @@
             .cbtn:hover {text-decoration: none;}
             .cbtn.previous {}
                 .cbtn.previous .icn {float: left; margin-right: 3px; background-image: url(images/arrow_left.png);}
-            .cbtn.next {float: right;}
+            .cbtn.next {float: right; width: 46px;}
                 .cbtn.next .icn {float:right; margin-left: 3px; background-image: url(images/arrow_right.png);}
             
             .cbtn.wait {float: right; width: 46px;}
@@ -386,7 +425,7 @@
                 .controlBar .queryHolder:before,
                 .controlBar .queryHolder:after {
                     content: "\00a0";
-                    height: 30px; width: 10px;
+                    height: 30px; width: 12px;
                     position: absolute;
                     background: #efefef;
                     z-index: 5;
@@ -462,6 +501,8 @@
                 float: left;
             }
             
+            input.adv {width: 735px;}
+            
             .ui-datepicker-trigger {float: left; display: block; margin-top: 5px; margin-left: 5px;}
             
             input[type=checkbox] {
@@ -480,6 +521,7 @@
                 width: 90px;
                 margin-right: 10px;
             }
+            label.adv{width: 180px;}
             
             .select {
                 position: relative;
