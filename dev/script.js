@@ -247,7 +247,7 @@ HomeDemo.prototype.request = function() {
         url: 'http://otter.atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]+'&limit=2',
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
-        timeout: 15000,
+        /*timeout: 15000,*/
         context: homeDemo.item,
         success: function(data, textStatus, jqXHR){
             console.log('YAR', data, textStatus);
