@@ -1,5 +1,7 @@
 var homePageTimer;
 
+var queryBeg = 'http://otter.atlasapi.org/3.0/';
+
 var clearTimer = function() {
     clearInterval(homePageTimer);
 }
@@ -111,7 +113,6 @@ PageInfo.prototype.changePage = function(i) {
 PageInfo.prototype.changeHash = function(n) {
     var pageInfo = this;
     pageInfo.currentEvent.preventDefault();
-    console.log(pageInfo.currentEvent.isDefaultPrevented());
     window.location.hash = n;
 }
 
@@ -157,13 +158,11 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
     
     // Add queries to UL
-    console.log('add queries to dom');
     $.each(homeDemo.query, function(i){
-        $('.controlBar .queryHolder .queries').append('<li><a href="#" class="api">'+homeDemo.query[i]+'</a></li>');
+        $('.controlBar .queryHolder .queries').append('<li><a href="'+homeDemo.query[i]+'" class="api">'+homeDemo.query[i]+'</a></li>');
     });
     
     // Add each query element to array
-    console.log('create array of said elements');
     $('.controlBar .queryHolder .queries li').each(function(i){
         /*homeDemo.width += $(this).outerWidth(true);
         console.log('+'+$(this).outerWidth(true));*/
@@ -171,7 +170,6 @@ HomeDemo.prototype.init = function(){
     });
     
     // Add current class to first query
-    console.log('add current class to first item');
     homeDemo.item[0].item.addClass('current');
     
     // Set width of scroller
@@ -181,28 +179,23 @@ HomeDemo.prototype.init = function(){
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
     	if(!$(this).hasClass('inactive')) {
-    	   console.log('home demo marker='+homeDemo.marker);
 			if($(this).hasClass('previous')){
 				clearInterval(homeDemo.timer);
 				homeDemo.activeQuery++;
 				if(homeDemo.activeQuery == 10) {
 				    homeDemo.activeQuery = 0;
 				}
-				console.log(homeDemo.activeQuery);
 				if(homeDemo.activeQuery > homeDemo.marker && homeDemo.nextBtn.hasClass('wait')) {
-				    console.log('Active query is above 0');
 				    homeDemo.nextBtn.removeClass('inactive').removeClass('wait').find('.icn').css('width',16);
 				    homeDemo.nextBtn.find('.js_txt').html('Next');
 				}
 				if(homeDemo.activeQuery >= homeDemo.marker){
-				    console.log('greater');
 				    homeDemo.nextQuery();
 				    if(homeDemo.activeQuery == homeDemo.marker) {
                         homeDemo.nextBtn.addClass('inactive').addClass('wait');
 	       				homeDemo.countdown();
 				    }
                 } else if(homeDemo.activeQuery < homeDemo.marker) {
-                    console.log('less');
                     homeDemo.nextQuery();
                 }
 			} else if($(this).hasClass('next')) {
@@ -212,7 +205,6 @@ HomeDemo.prototype.init = function(){
 					if(homeDemo.activeQuery == -1) {
 					   homeDemo.activeQuery = 9;
 					}
-					console.log(homeDemo.activeQuery);
 					if(homeDemo.activeQuery >= homeDemo.marker){
 					   homeDemo.prevQuery();
 					   if(homeDemo.activeQuery == homeDemo.marker) {
@@ -229,30 +221,47 @@ HomeDemo.prototype.init = function(){
     });
     
     // Make first request
-    console.log('make first request');
     homeDemo.request();
 }
 
 HomeDemo.prototype.request = function() {
     var homeDemo = this;
     // Clear timeout
-    console.log('clear timeout');
     clearTimeout(homeDemo.timer);
     
     homeDemo.prevBtn.addClass('inactive');
     
-    console.log('active query='+homeDemo.activeQuery);
+    console.log('Active Query: '+homeDemo.activeQuery);
+    
+    console.log(homeDemo.query[homeDemo.activeQuery]+'&limit=2');
     // Make request
     $.ajax({
-        url: 'http://otter.atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]+'&limit=2',
+        url: queryBeg+homeDemo.query[homeDemo.activeQuery]+'&limit=2',
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
+        cache: true,
         timeout: 5000,
         context: homeDemo.item,
         success: function(data, textStatus, jqXHR){
             console.log('YAR', data, textStatus);
+            // Add Image
+            var firstShow = $('.slideShow .showItem:first-child');
+            var secondShow = $('.slideShow .showItem:last-child');
             
-            data = JSON.parse(data);
+            firstShow.addClass('loading').find('img').fadeOut('fast',function(){
+                firstShow.find('img').attr('src',''+data.contents[0].image+'').fadeIn('slow');
+                firstShow.find('.br').html(data.contents[0].title);
+                firstShow.find('.pub').html('('+data.contents[0].publisher.name+')');
+                firstShow.removeClass('loading');
+            });
+            
+            
+            secondShow.addClass('loading').find('img').fadeOut('fast', function(){
+                secondShow.find('img').attr('src',''+data.contents[1].image+'').fadeIn('slow');
+                secondShow.find('.br').html(data.contents[1].title);
+                secondShow.find('.pub').html('('+data.contents[1].publisher.name+')');
+                secondShow.removeClass('loading');
+            });
         },
         error: function(jqXHR, textStatus, errorThrown){
             console.log('NAY', textStatus, errorThrown);
@@ -263,15 +272,12 @@ HomeDemo.prototype.request = function() {
             if(homeDemo.activeQuery < homeDemo.query.length-1) {
                 homeDemo.activeQuery++;
                 homeDemo.marker++;
-                console.log('new active query='+homeDemo.activeQuery);
             } else {
-                console.log('new active query=0');
                 homeDemo.activeQuery = 0;
                 homeDemo.marker = 0;
             }
             
             // Scroll left 1. Remove the item from the list and add it to the end
-            console.log('next query');
             homeDemo.nextQuery();
             // Restart Countdown
             homeDemo.countdown();
@@ -339,6 +345,157 @@ HomeDemo.prototype.countdown = function() {
     }
 }
 
+var ApiExplorer = function(item) {
+    this.holder = item;
+    this.queryType;
+    this.query;
+    this.btn = $('.btn[value="Run"]');
+    this.queryBar = {'txt': $('.urlCopy').find('.urlTxt'), 'btn': $('.urlCopy').find('.btnCopy')};
+}
+
+ApiExplorer.prototype.buttonHandler = function(){
+    var apiExplorer = this;
+    $('a.btnCopy').click(function(){
+        var clip = new ZeroClipboard.Client();
+        clip.glue('queryCopyBtn');
+        clip.setHandCursor(true);
+        clip.setText(apiExplorer.query);
+        return false;
+    });
+    
+    $('input[value="Run"]').click(function(){
+        console.log('Run');
+        return false;
+    });
+}
+
+ApiExplorer.prototype.customQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'advanced';
+    apiExplorer.holder.find('#advanced_string').val(query);
+    apiExplorer.query = queryBeg+query;
+    apiExplorer.runQuery();
+}
+
+ApiExplorer.prototype.discoverQuery = function(){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'discover';
+}
+
+ApiExplorer.prototype.scheduleQuery = function(){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'schedule';
+}
+
+ApiExplorer.prototype.contentQuery = function(){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'content';
+}
+
+ApiExplorer.prototype.runQuery = function(){
+    var apiExplorer = this;
+    if(apiExplorer.btn.siblings('.msg:visible')){
+        apiExplorer.btn.siblings('.msg').fadeOut();
+    }
+    apiExplorer.btn.val('Please Wait').addClass('inactive');
+    
+    apiExplorer.queryBar.txt.html(apiExplorer.query);
+    
+    apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideUp().find('.showItem').hide();
+    
+    // Make request
+    $.ajax({
+        url: apiExplorer.query+'&limit=5',
+        dataType: 'jsonp',
+        jsonpCallback: 'jsonp',
+        cache: true,
+        timeout: 5000,
+        context: apiExplorer.holder,
+        success: function(data, textStatus, jqXHR){
+            console.log(data);
+            $.each(data.contents, function(i){
+                var child = i+1;
+                var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
+                console.log(item);
+                console.log(data.contents[i].image);
+                if(data.contents[i].image){
+                    item.removeClass('loading');
+                    item.find('img').attr('src',data.contents[i].image);
+                    item.find('.br').html(data.contents[i].title);
+                    item.find('.pub').html('('+data.contents[i].publisher.name+')');
+                    item.removeAttr('style');
+                }
+            });
+            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideDown();
+            
+            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
+            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideDown();
+            
+            $('.object .btn').click(function(e){
+                e.stopImmediatePropagation();
+                console.log($(this).parent());
+                if($(this).parent().hasClass('closed')){
+                    $(this).parent().removeClass('closed');
+                } else {
+                    $(this).parent().addClass('closed');
+                }
+                return false;
+            });
+            
+            $('.array .btn').click(function(e){
+                e.stopImmediatePropagation();
+                console.log($(this).parent());
+                if($(this).parent().hasClass('closed')){
+                    $(this).parent().removeClass('closed');
+                } else {
+                    $(this).parent().addClass('closed');
+                }
+                return false;
+            });
+        },
+        error: function(jqXHR, textStatus, errorThrown){
+            console.log('NAY', textStatus, errorThrown);
+            apiExplorer.msg('error','Sorry, the following error occured: '+errorThrown);
+        },
+        complete: function(jqXHR, textStatus){
+            console.log(textStatus);
+            apiExplorer.btn.val('Run').removeClass('inactive');
+        }
+    });
+}
+
+ApiExplorer.prototype.msg = function(type, message){
+    var apiExplorer = this;
+    console.log(apiExplorer.queryType, type, message);
+    var msgPane = $('#explore_'+apiExplorer.queryType).find('.msg');
+    msgPane.addClass(type).html(message).fadeIn();
+}
+
+ApiExplorer.prototype.prettyJson = function(json) {
+    var apiExplorer = this;
+    
+    var newJson = JSON.stringify(json)
+    /*newJson = newJson.replace(/\//g,"%2F");
+    newJson = newJson.replace(/\?/g,"%3F");
+    newJson = newJson.replace(/=/g,"%3D");
+    newJson = newJson.replace(/&/g,"%26");
+    newJson = newJson.replace(/@/g,"%40"); */
+    
+    // for each {, :, [ and , - new line after
+    newJson = newJson.replace(/</g, '&lt;');
+    newJson = newJson.replace(/>/g, '&gt;');
+    newJson = newJson.replace(/\{/g,'<span class="object"><a href="#" class="toggleBtn">-</a>{<br />');
+    newJson = newJson.replace(/\}/g,'}</span>');
+    newJson = newJson.replace(/\}\<\/span\>\,/g, '},</span>')
+    /*newJson = newJson.replace(/\:/g,':\n');*/
+    newJson = newJson.replace(/\[/g,'<span class="array"><a href="#" class="toggleBtn">-</a>[');
+    newJson = newJson.replace(/\]/g,']</span>');
+    newJson = newJson.replace(/\,/g,',<br />');
+    newJson = newJson.replace(/\:\"/g, ': ');
+    newJson = newJson.replace(/\"/g, '');
+    
+    return newJson;
+}
 
 $(document).ready(function(){
     var pageInfo = new PageInfo();
@@ -353,6 +510,15 @@ $(document).ready(function(){
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
     
+    var apiExplorer = new ApiExplorer($('#explorerWrapper'));
+    apiExplorer.buttonHandler();    
+    
+    $('a.api').click(function(){
+        tabs.changeTab(tabs.tab.length-1);
+        apiExplorer.customQuery($(this).attr('href'));
+        window.location.hash = 'apiExplorer';
+        return false;
+    });
     
     $('input.date').datepicker({
         showOn: "button",
@@ -364,6 +530,11 @@ $(document).ready(function(){
     $('.mainMenu a').click(function(){
         pageInfo.menuClick = true;
     });
+    
+    /* $('.hov').each(function(){
+        console.log('Found');
+        console.log($(this).position().left+$(this).width(), $(this).html());
+    }); */
     
     $(window).scroll(function(e){
         pageInfo.currentEvent = e;

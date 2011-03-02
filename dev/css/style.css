@@ -18,7 +18,7 @@
                         
 			body {color: #222; font-family: "Molengo", Arial, sans-serif; text-align: center; text-transform: lowercase;}
 			
-			.page {margin: 0 auto; text-align: left; width: 960px; padding: 0; background: #efefef; border-left: 1px solid #e7e5e5; border-right: 1px solid #e7e5e5;}
+			.page {margin: 0 auto; text-align: left; width: 960px; padding: 0; background: #efefef; border-left: 1px solid #e7e5e5; border-right: 1px solid #e7e5e5; position: relative;}
 			
 			header {
                 position: fixed;
@@ -94,14 +94,14 @@
 			a {text-decoration: none; color: #380b66; text-shadow: 0 1px 0 #fff;}
 			a:hover {text-decoration: underline;}
 			a.api {padding-right: 10px;}
-			a.api:hover {background: url(images/sml_mag.gif) right 70% no-repeat;}
+			a.api:hover {background: url(../images/sml_mag.gif) right 70% no-repeat;}
 			
 			.query {text-transform: none;}
 			
 			.faded {color: #666; font-style: italic;}
 			mark {color: #ef308f; background: 0 none;}
 			
-			pre {
+			.pre {
                 background: #fff;
                 margin-bottom: 20px;
                 padding: 20px;
@@ -119,12 +119,22 @@
                 color: #000;
                 overflow-x: auto;
             }
+            .object {display: block; padding-left: 20px; overflow: hidden; height: auto; position: relative;}
+            
+            .array {display: block; padding-left: 20px; overflow: hidden; height: auto; position: relative;}
+            
+            .object .toggleBtn,
+            .array .toggleBtn {
+                position: absolute; left: -10px; top: 0px; display: block; width: 10px; height: 10px;
+            }
+            
+            .closed {height: 5px;}
 			
-			.logo {text-indent: -9999px; background: url(images/logo.png) center no-repeat; width: 100px; height: 46px; float: left; margin: 2px 0 0;}
+			.logo {text-indent: -9999px; background: url(../images/logo.png) center no-repeat; width: 100px; height: 46px; float: left; margin: 2px 0 0;}
 			
 			/* Lists */
 			.list {list-style-type: none; font-size: 12px; line-height: 18px;}
-			.list li {margin-bottom: 10px;padding-left: 20px; background:url(images/bullet.gif) 0 7px no-repeat;}
+			.list li {margin-bottom: 10px;padding-left: 20px; background:url(../images/bullet.gif) 0 7px no-repeat;}
 			
 			nav {float: left; margin-left: 10px;}
 			.mainMenu {list-style-type: none; font-size: 18px; margin-top: 26px; line-height: 30px; float: left; }
@@ -133,7 +143,7 @@
 			.mainMenu li:last-child {border-right: 0 none;}
 			.mainMenu li a {color: #333; padding: 0 10px 5px;}
 			.mainMenu li a:hover {color: #ef308f; text-decoration: none;}
-			.mainMenu li a.selected {color: #ef308f; background: url(images/selected.gif) bottom center no-repeat;}
+			.mainMenu li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
 			
 			.tabs {background: #e2e2e2; float: left; -moz-border-radius: 5px 5px 0 0; -o-border-radius: 5px 5px 0 0; -khtml-border-radius: 5px 5px 0 0; -ms-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0; height: 40px;}
 			.tabs li {float: left;}
@@ -142,7 +152,7 @@
 			.tabs li:last-child a {-moz-border-radius: 0 5px 0 0; -o-border-radius: 0 5px 0 0; -khtml-border-radius: 0 5px 0 0; -ms-border-radius: 0 5px 0 0; border-radius: 0 5px 0 0;}
 			.tabs li a:hover {text-decoration: none; color: #ef308f;}
 			.tabs li.selected a {background: #fff; color: #ef308f; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-			     -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
                 -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
                 -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
                 -khtml-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
@@ -166,6 +176,16 @@
                 border-radius: 5px 5px 0 0;
                 margin-top: 10px;
             }
+            .tabExt.selected {
+                background: #fff; color: #ef308f; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+                -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+                -khtml-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+                -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+                box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+            }
+            .tabExt.selected:hover {text-decoration: none;}
 			
 			.tabArea {
                 clear: both;
@@ -304,12 +324,12 @@
                 .cbtn .icn {width: 16px; height: 16px; background-position: center; background-repeat: no-repeat; display: inline-block; vertical-align: middle;}
             .cbtn:hover {text-decoration: none;}
             .cbtn.previous {}
-                .cbtn.previous .icn {float: left; margin-right: 3px; background-image: url(images/arrow_left.png);}
+                .cbtn.previous .icn {float: left; margin-right: 3px; background-image: url(../images/arrow_left.png);}
             .cbtn.next {float: right; width: 46px;}
-                .cbtn.next .icn {float:right; margin-left: 3px; background-image: url(images/arrow_right.png);}
+                .cbtn.next .icn {float:right; margin-left: 3px; background-image: url(../images/arrow_right.png);}
             
             .cbtn.wait {float: right; width: 46px;}
-                .cbtn.wait .icn{float: right; margin-left: 3px; background-image: url(images/sml_loader.gif);}
+                .cbtn.wait .icn{float: right; margin-left: 3px; background-image: url(../images/sml_loader.gif);}
                 
             .btn.inactive, .cbtn.inactive {
             	border: 1px solid #bbb;
@@ -318,6 +338,29 @@
                 background: -webkit-gradient(linear, left top, left bottom, from(#d4d1d2), to(#a7a6a7));
                 filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d4d1d2', EndColorStr='#a7a6a7', GradientType=0);
                 cursor: default;
+            }
+            
+            /* Messages */
+            .msg {
+                float: right;
+                margin: 1px 0 0;
+                line-height: 100%;
+                padding: 8px 8px 9px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -o-border-radius: 3px;
+                -khtml-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+                text-shadow: 0 1px 0 #fff;
+            }
+            .msg.success {
+                border: 1px solid #c3e8c4;
+                background: #d5f5d6;
+            }
+            .msg.error {
+                border: 1px solid #e8c3c3;
+                background: #f5d5d5;
             }
             
             /* Images */
@@ -338,7 +381,7 @@
                 float: left;
                 overflow: hidden;
             }
-                .showItem img {display: block;}
+                .showItem img {display: block; width: 100%;}
                 .showItem .caption {
                     background: #fff;
                     background: rgba(255,255,255,0.8);
@@ -357,7 +400,7 @@
 
             .show_lrg {
                 width: 450px;
-                height: 254px;
+                height: 253px;
             }
                 .show_lrg .caption {line-height: 18px;}
                 .show_lrg .caption .br {font-size: 18px;}
@@ -435,6 +478,7 @@
             
             /* Hover */
             .hov {position: relative; color: #380b66;}
+            a.hov {text-decoration: none;}
             .hov .hover {
                 display: none;
                 background: #fff;
@@ -453,6 +497,8 @@
                 right: 50%;
                 margin-right: -75px;
                 bottom: 25px;
+                line-height:140%;
+                z-index: 9;
             }
                 .hov .hover:after {
                     width: 10px;
@@ -479,6 +525,39 @@
                 }
                 .hov .hover .title {text-decoration: none; display: block; color: #380b66; font-size: 14px;}
                 .hov .hover .body {}
+                
+            .hovDown .hover {
+                bottom: auto;
+                top: 30px;
+            }
+                .hovDown .hover:after {
+                    bottom: auto;
+                    top: -11px;
+                    border-bottom: 0 none;
+                    border-right: 0 none;
+                    border-top: 5px solid #ccc;
+                    border-left: 5px solid #ccc;
+                }
+            
+            .hovRight .hover {
+                right: -10px;
+                margin-right: 0;
+            }  
+                .hovRight .hover:after {
+                    left: auto;
+                    right: 10px;
+                }
+            
+            .hovLeft .hover {
+                right: auto;
+                left: -10px;
+                margin-right: 0;
+            }
+                .hovLeft .hover:after {
+                    left: 10px;
+                }
+            
+            
             .hov:hover {cursor: pointer;}
             .hov:hover .hover {display: block;}
             .hov.js:hover .hover {display: none;}
@@ -495,6 +574,10 @@
                 -khtml-border-radius: 3px;
                 -ms-border-radius: 3px;
                 border-radius: 3px;
+            }
+            input[type=text]:focus {
+                outline: none;
+                border: 1px solid #EF308F;
             }
             input.date {
                 width: 100px;
@@ -539,7 +622,7 @@
                 display: block;
                 float: right;
             }
-                .select .value {display: block; z-index: 9; position: relative; background: url(images/select.png) right bottom no-repeat;}
+                .select .value {display: block; z-index: 9; position: relative; background: url(../images/select.png) right bottom no-repeat;}
                 .select .options {
                     display: none; 
                     position: absolute;
@@ -579,8 +662,7 @@
                 
             .urlCopy {
                 position: relative;
-                width: 490px;
-                height: 28px;
+                width: 670px;
                 line-height: 30px;
                 padding: 0 5px;
                 background: #fff;
@@ -593,6 +675,25 @@
                 display: block;
                 float: right;
             }
+                .urlCopy .urlTxt {
+                    margin-right: 25px;
+                    display: block;
+                    white-space: pre;           /* CSS 2.0 */
+                    white-space: pre-wrap;      /* CSS 2.1 */
+                    white-space: pre-line;      /* CSS 3.0 */
+                    white-space: -pre-wrap;     /* Opera 4-6 */
+                    white-space: -o-pre-wrap;   /* Opera 7 */
+                    white-space: -moz-pre-wrap; /* Mozilla */
+                    white-space: -hp-pre-wrap;  /* HP Printers */
+                    word-wrap: break-word;      /* IE 5+ */
+                }
+                .urlCopy .btnCopy {
+                    display: block;
+                    float: right;
+                    margin-top: 5px;
+                    width: 21px; height: 21px;
+                    background: url(../images/copy.gif) center no-repeat;
+                }
             
             /* Datepicker */
             .ui-datepicker {
@@ -653,7 +754,7 @@
                     }
                         .ui-datepicker-current-day a {color: #fff; text-shadow: none;}
                         
-            .loading {background-image: url(images/loader.gif); background-position: center; background-repeat: no-repeat;}
+            .loading {background-image: url(../images/loader.gif); background-position: center; background-repeat: no-repeat;}
             
             .cb {clear:both;}
             .cl {clear: left;}

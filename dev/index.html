@@ -2,11 +2,12 @@
 	<head>
 		<title>AtlasAPI</title>
 		<link href='http://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'>
-		<link href="style.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
 		<script src="http://code.jquery.com/jquery-1.5.min.js"></script>
-		<script src="jquery-ui-1.8.9.custom.min.js"></script>
-		<script src="jquery.history.js"></script>
-		<script src="script.js"></script>
+		<script src="js/jquery-ui-1.8.9.custom.min.js"></script>
+		<script src="js/jquery.history.js"></script>
+		<script type="text/javascript" src="js/ZeroClipboard.js"></script>
+		<script src="js/script.js"></script>
 	</head>
 	<body>
 	   <header class="hr">
@@ -31,12 +32,12 @@
                 <div class="marker" id="home"></div>
                 <div class="slideShow clearfix">
                     <div class="showItem show_lrg loading">
-                        <img src="" />
-                        <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                        <img src="" style="display: none;" />
+                        <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     </div>
                     <div class="showItem show_lrg loading">
-                        <img src="" />
-                        <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                        <img src="" style="display: none;" />
+                        <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     </div>
                 </div>
                 <div class="controlBar clearfix">
@@ -91,7 +92,7 @@
                 <div class="line">
                     <div class="unit size2of3">
                         <h4 class="hr">Title Search</h4>
-                        <p>Search for a specific program or brand by it's title. The way content is filtered means that a title search does not play well when mixed with other parameters.<br /><a href="#" class="api">discover.json?title=eastenders</a></p>
+                        <p>Search for a specific program or brand by it's title. The way content is filtered means that a title search does not play well when mixed with other parameters.<br /><a href="discover.json?title=glee" class="api">discover.json?title=glee</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
@@ -104,7 +105,7 @@
                 <div class="line">
                     <div class="unit size2of3">
                         <h4 class="hr">Genre Search</h4>
-                        <p>Search for a particular genre of program or brand based on Atlas' list of genres.<br /><a href="#" class="api">discover.json?genre=http://ref.atlasapi.org/genres/atlas/factual</a></p>
+                        <p>Search for a particular genre of program or brand based on Atlas' list of drama.<br /><a href="discover.json?genre=http://ref.atlasapi.org/genres/atlas/drama" class="api">discover.json?genre=http://ref.atlasapi.org/genres/atlas/drama</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
@@ -460,8 +461,10 @@ locations: [
             
             <section class="apiExplorer">
                 <div class="marker" id="apiExplorer"></div>
-                <div class="urlCopy">http://atlasapi.org/2.0/<a href="#" class="btnCopy"></a></div>
-                <h2>API Explorer</h2>
+                <div class="line">
+                    <div class="urlCopy"><a href="#" id="queryCopyBtn" class="btnCopy hov hovDown hovRight"><span class="hover"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></span></span></a><span class="urlTxt">http://atlasapi.org/2.0/</span></div>
+                    <h2>API Explorer</h2>
+                </div>
                 <div class="explorerWrapper" id="explorerWrapper">
                     <ul class="tabs clearfix">
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_discover">Discover</a></li>
@@ -503,9 +506,10 @@ locations: [
                             </div>
                             <div class="unit size1of2 lastUnit">
                                 <input type="button" class="btn" value="Run" />
+                                <p class="msg" id="discover_msg" style="display: none;"></p>
                             </div>
                         </div>
-                        <div class="preview mlm clearfix">
+                        <div class="preview mlm clearfix" style="display: none;">
                            <div class="showItem">
                                 <img src="" />
                                 <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
@@ -527,7 +531,7 @@ locations: [
                                 <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
                 			</div>
                         </div>
-                        <div class="output">
+                        <div class="output" style="display: none;">
                             <ul class="smallTabs clearfix">
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
@@ -563,9 +567,10 @@ locations: [
                             </div>
                             <div class="unit size1of2 lastUnit">
                                 <input type="button" class="btn" value="Run" />
+                                <p class="msg" id="schedule_msg" style="display: none;"></p>
                             </div>
                         </div>
-                        <div class="preview mlm clearfix">
+                        <div class="preview mlm clearfix" style="display: none;">
                            <div class="showItem">
                                 <img src="" />
                                 <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
@@ -587,7 +592,7 @@ locations: [
                                 <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
                 			</div>
                         </div>
-                        <div class="output">
+                        <div class="output" style="display: none;">
                             <ul class="smallTabs clearfix">
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
@@ -596,16 +601,17 @@ locations: [
                         </div>
                     </div>
                     <div class="tabArea" id="explore_content" style="display: none;">
-                        <div class="line">
+                        <div class="line hr">
                             <div class="unit size1of2">
                                 <label for="content_uri" class="tr">URI:</label>
                                 <input type="text" id="content_uri" class="fr" />
                             </div>
-                                <div class="unit size1of2 lastUnit">
+                            <div class="unit size1of2 lastUnit">
                                 <input type="button" class="btn" value="Run" />
+                                <p class="msg" id="content_msg" style="display: none;"></p>
                             </div>
                         </div>
-                        <div class="preview mlm clearfix">
+                        <div class="preview mlm clearfix" style="display: none;">
                            <div class="showItem">
                                 <img src="" />
                                 <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
@@ -627,7 +633,7 @@ locations: [
                                 <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
                 			</div>
                         </div>
-                        <div class="output">
+                        <div class="output" style="display: none;">
                             <ul class="smallTabs clearfix">
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
@@ -640,37 +646,38 @@ locations: [
                             <label for="advanced_string" class="tr adv">http://atlasapi.org/2.0/</label>
                             <input type="text" id="advanced_string" class="fr adv" />
                          </div>
-                        <div class="line">
-                            <input type="button" class="btn" value="Run" />
+                        <div class="line hr">
+                            <input type="button" class="btn mbm" value="Run" />
+                            <p class="msg" id="content_msg" style="display: none;"></p>
                         </div>
-                        <div class="preview mlm clearfix">
-                           <div class="showItem">
+                        <div class="preview mlm clearfix" style="display: none;">
+                           <div class="showItem loading" style="display: none;">
                                 <img src="" />
-                                <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                 			</div> 
-                			<div class="showItem">
+                			<div class="showItem loading" style="display: none;">
                                 <img src="" />
-                                <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                 			</div>
-                			<div class="showItem">
+                			<div class="showItem loading" style="display: none;">
                                 <img src="" />
-                                <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                 			</div>
-                			<div class="showItem">
+                			<div class="showItem loading" style="display: none;">
                                 <img src="" />
-                                <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                 			</div>
-                			<div class="showItem">
+                			<div class="showItem loading" style="display: none;">
                                 <img src="" />
-                                <span class="caption"><span class="br">Being Human</span><span class="pub">(BBC)</span><span class="ep">Adam's Family</span></span>
+                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                 			</div>
                         </div>
-                        <div class="output">
+                        <div class="output" style="display: none;">
                             <ul class="smallTabs clearfix">
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
                             </ul>
-                            <pre></pre>
+                            <div class="pre"></div>
                         </div>
                     </div>
                 </div>
