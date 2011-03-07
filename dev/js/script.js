@@ -6,6 +6,8 @@ var clearTimer = function() {
     clearInterval(homePageTimer);
 }
 
+var apiFuncRun = false;
+
 var Tabs = function() {
     this.tabHolder;
     this.count = 0;
@@ -120,16 +122,16 @@ var HomeDemo = function(item) {
     this.active = false;
     
     var array0 = [
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
         'discover.json?publisher=bbc.co.uk&available=true',
         'discover.json?publisher=bbc.co.uk&availableCountries=uk',
-        'discover.json?title=eastender',
-        'discover.json?title=Apprentice',
+        'discover.json?title=east',
+        'discover.json?title=news',
         'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama'
+        'discover.json?publisher=channel4.com&genre=http://ref.atlasapi.org/genres/atlas/drama',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/comedy',
+        'discover.json?publisher=channel4.com&genre=http://ref.atlasapi.org/genres/atlas/comedy',
+        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/factual',
+        'discover.json?publisher=channel4.com&genre=http://ref.atlasapi.org/genres/atlas/factual'
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
@@ -148,75 +150,56 @@ var HomeDemo = function(item) {
     
     this.nav = item;
     this.item = [];
-    this.width = 0;
+    this.width = $('.queryHolder').width();
     
     this.prevBtn = item.find('.cbtn.previous');
     this.nextBtn = item.find('.cbtn.next');
+    this.scrolling = false;
 }
 
 HomeDemo.prototype.init = function(){
     var homeDemo = this;
     
-    // Add queries to UL
-    $.each(homeDemo.query, function(i){
-        $('.controlBar .queryHolder .queries').append('<li><a href="'+homeDemo.query[i]+'" class="api">'+homeDemo.query[i]+'</a></li>');
-    });
     
-    // Add each query element to array
-    $('.controlBar .queryHolder .queries li').each(function(i){
-        /*homeDemo.width += $(this).outerWidth(true);
-        console.log('+'+$(this).outerWidth(true));*/
-        homeDemo.item[i] = {'item': $(this), 'width': $(this).outerWidth(true)};
-    });
+    console.log(homeDemo.query);
     
-    // Add current class to first query
-    homeDemo.item[0].item.addClass('current');
-    
-    // Set width of scroller
-   /* console.log(homeDemo.width);
-    $('.queries').css('width', homeDemo.width);*/
+    var item = homeDemo.nav.find('.queries');
+    item.append('<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>');
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
     	if(!$(this).hasClass('inactive')) {
 			if($(this).hasClass('previous')){
-				clearInterval(homeDemo.timer);
-				homeDemo.activeQuery++;
-				if(homeDemo.activeQuery == 10) {
-				    homeDemo.activeQuery = 0;
-				}
-				if(homeDemo.activeQuery > homeDemo.marker && homeDemo.nextBtn.hasClass('wait')) {
-				    homeDemo.nextBtn.removeClass('inactive').removeClass('wait').find('.icn').css('width',16);
-				    homeDemo.nextBtn.find('.js_txt').html('Next');
-				}
-				if(homeDemo.activeQuery >= homeDemo.marker){
-				    homeDemo.nextQuery();
-				    if(homeDemo.activeQuery == homeDemo.marker) {
-                        homeDemo.nextBtn.addClass('inactive').addClass('wait');
-	       				homeDemo.countdown();
-				    }
-                } else if(homeDemo.activeQuery < homeDemo.marker) {
-                    homeDemo.nextQuery();
+				if(homeDemo.activeQuery > 1 && item.children().length > 1){
+				    homeDemo.scrolling = true;
+				    clearInterval(homeDemo.timer);
+				    homeDemo.activeQuery--;
+    				homeDemo.prevQuery();
+    				homeDemo.nextBtn.removeClass('inactive');
                 }
 			} else if($(this).hasClass('next')) {
-				if(!$(this).hasClass('wait')){
-					clearInterval(homeDemo.timer);
-					homeDemo.activeQuery--;
-					if(homeDemo.activeQuery == -1) {
-					   homeDemo.activeQuery = 9;
-					}
-					if(homeDemo.activeQuery >= homeDemo.marker){
-					   homeDemo.prevQuery();
+				if(!$(this).hasClass('wait')){			
+					if(homeDemo.activeQuery <= homeDemo.marker){
+					   homeDemo.scrolling = true;
+					   console.log('active is lower then or equal to marker');
+					   clearInterval(homeDemo.timer);
+					   homeDemo.activeQuery++;
+					   if(homeDemo.activeQuery == 10){
+    					   homeDemo.activequery = 0;
+    					}
+					   homeDemo.nextQuery();
 					   if(homeDemo.activeQuery == homeDemo.marker) {
-    					   homeDemo.nextBtn.addClass('inactive').addClass('wait');
-	       				   homeDemo.countdown();
-	       				}
-					} else if(homeDemo.activeQuery > homeDemo.marker){
-					   homeDemo.prevQuery();
+					       console.log('active is the same as marker');
+					       homeDemo.nextBtn.addClass('inactive');
+					       homeDemo.prevBtn.removeClass('inactive');
+					       homeDemo.countdown();
+					       homeDemo.scrolling = false;
+					   }
 					}
 				}
 			}
 		}
+		console.log(homeDemo.activeQuery, homeDemo.marker, item.children().length);
         return false;
     });
     
@@ -230,13 +213,14 @@ HomeDemo.prototype.request = function() {
     clearTimeout(homeDemo.timer);
     
     homeDemo.prevBtn.addClass('inactive');
+    homeDemo.nextBtn.addClass('inactive');
     
     console.log('Active Query: '+homeDemo.activeQuery);
     
-    console.log(homeDemo.query[homeDemo.activeQuery]+'&limit=2');
+    console.log(homeDemo.query[homeDemo.activeQuery]+'&limit=4');
     // Make request
     $.ajax({
-        url: queryBeg+homeDemo.query[homeDemo.activeQuery]+'&limit=2',
+        url: queryBeg+homeDemo.query[homeDemo.activeQuery]+'&limit=4',
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
         cache: true,
@@ -244,23 +228,56 @@ HomeDemo.prototype.request = function() {
         context: homeDemo.item,
         success: function(data, textStatus, jqXHR){
             console.log('YAR', data, textStatus);
+            
+            homeDemo.nav.find('.timer').fadeOut();
+            
             // Add Image
             var firstShow = $('.slideShow .showItem:first-child');
             var secondShow = $('.slideShow .showItem:last-child');
             
+            if(data.contents[0] != undefined && data.contents[0].image != undefined) {
+                var firstContent = data.contents[0];
+            }
+            if(data.contents[1] != undefined && data.contents[1].image != undefined) {
+                if(firstContent == undefined){
+                    var firstContent = data.contents[1];
+                } else {
+                    var secondContent = data.contents[1];
+                }
+            }
+            if(data.contents[2] != undefined && data.contents[2].image != undefined) {
+                if(firstContent == undefined){
+                    var firstContent = data.contents[2];
+                } else if(secondContent == undefined) {
+                    var secondContent = data.contents[2];
+                }
+            }
+            
+            if(data.contents[3] != undefined && data.contents[3].image != undefined) {
+                if(firstContent == undefined){
+                    var firstContent = data.contents[3];
+                } else if(secondContent == undefined) {
+                    var secondContent = data.contents[3];
+                }
+            }
+            
             firstShow.addClass('loading').find('img').fadeOut('fast',function(){
-                firstShow.find('img').attr('src',''+data.contents[0].image+'').fadeIn('slow');
-                firstShow.find('.br').html(data.contents[0].title);
-                firstShow.find('.pub').html('('+data.contents[0].publisher.name+')');
-                firstShow.removeClass('loading');
+                if(firstContent != undefined){
+                    firstShow.find('img').attr('src',''+firstContent.image+'').bind('load', function(){$(this).fadeIn('slow'); return false;});
+                    firstShow.find('.br').html(firstContent.title);
+                    firstShow.find('.pub').html('('+firstContent.publisher.name+')');
+                    firstShow.removeClass('loading');
+                }
             });
             
             
             secondShow.addClass('loading').find('img').fadeOut('fast', function(){
-                secondShow.find('img').attr('src',''+data.contents[1].image+'').fadeIn('slow');
-                secondShow.find('.br').html(data.contents[1].title);
-                secondShow.find('.pub').html('('+data.contents[1].publisher.name+')');
-                secondShow.removeClass('loading');
+                if(secondContent != undefined){
+                    secondShow.find('img').attr('src',''+secondContent.image+'').bind('load', function(){$(this).fadeIn('slow'); return false;});
+                    secondShow.find('.br').html(secondContent.title);
+                    secondShow.find('.pub').html('('+secondContent.publisher.name+')');
+                    secondShow.removeClass('loading');
+                }
             });
         },
         error: function(jqXHR, textStatus, errorThrown){
@@ -277,68 +294,85 @@ HomeDemo.prototype.request = function() {
                 homeDemo.marker = 0;
             }
             
-            // Scroll left 1. Remove the item from the list and add it to the end
-            homeDemo.nextQuery();
             // Restart Countdown
             homeDemo.countdown();
-            homeDemo.prevBtn.removeClass('inactive');
+            
+            if(homeDemo.marker > 1){
+                homeDemo.prevBtn.removeClass('inactive');
+            }
         }
     });
 }
 
 HomeDemo.prototype.nextQuery = function() {
     var homeDemo = this;
-    
-    if(homeDemo.activeQuery == 0){
-        var item = homeDemo.item[9].item;
+        
+    var item = homeDemo.nav.find('.queries');
+    if(homeDemo.activeQuery != 0) {
+        if(item.children().length < 10 && homeDemo.scrolling == false){
+            var clone = item.children('a:last-child').clone();
+            clone.attr('href',homeDemo.query[homeDemo.activeQuery]).html(homeDemo.query[homeDemo.activeQuery]);
+            clone.appendTo(item);
+            /*var href = '<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>';
+            item.append(href);
+            console.log(href);*/
+        }
+        item.animate({'left': '-='+homeDemo.width},1000);
     } else {
-        var item = homeDemo.item[homeDemo.activeQuery-1].item;
+        item.animate({'left': '0'},1000);
     }
     
-    item.removeClass('current').detach().appendTo('.queries');
-    homeDemo.item[homeDemo.activeQuery].item.addClass('current');
+    if(homeDemo.activeQuery <= homeDemo.marker && homeDemo.prevBtn.hasClass('inactive')){
+        homeDemo.prevBtn.removeClass('inactive');
+    }
 }
 
 HomeDemo.prototype.prevQuery = function() {
     var homeDemo = this;
-    if(homeDemo.activeQuery == 9){
-        var item = homeDemo.item[0].item;
-    } else {
-        var item = homeDemo.item[homeDemo.activeQuery+1].item;
+    
+    var item = homeDemo.nav.find('.queries');
+    
+    homeDemo.nav.find('.timer').fadeOut();
+    
+    if(homeDemo.activeQuery != 9) {
+        item.animate({'left': '+='+homeDemo.width}, 1000);
+    }  
+    if(homeDemo.activeQuery == 1) {
+        homeDemo.prevBtn.addClass('inactive');
     }
-    item.removeClass('current');
-    homeDemo.item[homeDemo.activeQuery].item.addClass('current').detach().prependTo('.queries');
 }
 
 HomeDemo.prototype.countdown = function() {
     var homeDemo = this;   
     clearInterval(homeDemo.timer); 
 	var i = 20;
-	var thisItem = homeDemo.nav.find('.js_txt');
+	var thisItem = homeDemo.nav.find('.timer');
 	if(homeDemo.buttonClicked) {
-    	if(homeDemo.activeQuery == 0) {
-    		if(!thisItem.hasClass('inactive')){
-    			thisItem.parent('a').addClass('inactive');
-    		}
+    	if(homeDemo.activeQuery == homeDemo.marker) {
+            thisItem.fadeIn();
     		homeDemo.timer = setInterval(function() {
-    			thisItem.html(i+'s').siblings('.icn').css('width','16px').parent('a').addClass('wait');
+    			thisItem.find('.js_txt').html(i+'s');
     			i--;
     			if(i== -1){
-    				thisItem.html('Loading').siblings('.icn').css('width','0');
+    				thisItem.find('.js_txt').html('Loading');
     				clearTimer(homeDemo.timer);
     				homeDemo.request();
     			}
     		}, 1000);
     	} else {
-    		thisItem.html('Next').siblings('.icn').css('width','16px').parent('a').removeClass('wait').removeClass('inactive');
+    		thisItem.fadeOut();
     	}
     } else {
         homeDemo.timer = setInterval(function() {
-            thisItem.html(i+'s').siblings('.icn').css('width','16px').parent('a').addClass('wait');
+            if(!thisItem.is(':visible')){
+                thisItem.fadeIn();
+            }
+            thisItem.find('.js_txt').html(i+'s');
 			i--;
 			if(i== -1){
-				thisItem.html('Loading').siblings('.icn').css('width','0');
+				thisItem.find('.js_txt').html('Loading');
 				clearTimer(homeDemo.timer);
+				homeDemo.nextQuery();
 				homeDemo.request();
 			}
         }, 1000);
@@ -351,6 +385,7 @@ var ApiExplorer = function(item) {
     this.query;
     this.btn = $('.btn[value="Run"]');
     this.queryBar = {'txt': $('.urlCopy').find('.urlTxt'), 'btn': $('.urlCopy').find('.btnCopy')};
+    this.timedOut = false;
 }
 
 ApiExplorer.prototype.buttonHandler = function(){
@@ -372,14 +407,27 @@ ApiExplorer.prototype.buttonHandler = function(){
 ApiExplorer.prototype.customQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'advanced';
-    apiExplorer.holder.find('#advanced_string').val(query);
-    apiExplorer.query = queryBeg+query;
-    apiExplorer.runQuery();
+    var queryHolder = apiExplorer.holder.find('#advanced_string');
+    if(queryHolder.val() != query){
+        queryHolder.val(query);
+        apiExplorer.query = queryBeg+query;
+        apiExplorer.runQuery();
+    }
 }
 
-ApiExplorer.prototype.discoverQuery = function(){
+ApiExplorer.prototype.discoverQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'discover';
+    var queryTitle = apiExplorer.getParamByName('title',query);
+    var queryGenre = apiExplorer.getParamByName('genre',query);
+    var queryPublisher = apiExplorer.getParamByName('publisher',query);
+    
+    $('#discover_title').val(queryTitle);
+    
+    /* if(apiExplorer.timedOut == true){*/
+        apiExplorer.query = queryBeg+query;
+        apiExplorer.runQuery();
+    /* } */
 }
 
 ApiExplorer.prototype.scheduleQuery = function(){
@@ -392,6 +440,17 @@ ApiExplorer.prototype.contentQuery = function(){
     apiExplorer.queryType = 'content';
 }
 
+ApiExplorer.prototype.getParamByName = function(name,string){
+    name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+    var regexS = "[\\?&]"+name+"=([^&#]*)";
+    var regex = new RegExp( regexS );
+    var results = regex.exec( string );
+    if( results == null )
+        return "";
+    else
+        return decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
 ApiExplorer.prototype.runQuery = function(){
     var apiExplorer = this;
     if(apiExplorer.btn.siblings('.msg:visible')){
@@ -402,6 +461,7 @@ ApiExplorer.prototype.runQuery = function(){
     apiExplorer.queryBar.txt.html(apiExplorer.query);
     
     apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideUp().find('.showItem').hide();
+    apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideUp();
     
     // Make request
     $.ajax({
@@ -429,6 +489,19 @@ ApiExplorer.prototype.runQuery = function(){
             apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideDown();
             
             apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
+            
+        	$('.preToggle').click(function(){
+                if(!$(this).parent().hasClass('shrunk')){
+                    $(this).html('+').parent().addClass('shrunk').animate({
+                        'height' : '15'
+                    });
+                } else {
+                    $(this).html('-').parent().removeClass('shrunk').css({
+                        'height' : 'auto'
+                    });
+                }
+                return false;
+            });
             apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideDown();
             
             $('.object .btn').click(function(e){
@@ -459,7 +532,11 @@ ApiExplorer.prototype.runQuery = function(){
         },
         complete: function(jqXHR, textStatus){
             console.log(textStatus);
+            if(textStatus == 'timeout') {
+                apiExplorer.timedOut = true;
+            }
             apiExplorer.btn.val('Run').removeClass('inactive');
+            apiFuncRun = false;
         }
     });
 }
@@ -474,7 +551,59 @@ ApiExplorer.prototype.msg = function(type, message){
 ApiExplorer.prototype.prettyJson = function(json) {
     var apiExplorer = this;
     
-    var newJson = JSON.stringify(json)
+    var p = [],
+		push = function( m ) { return '\\' + p.push( m ) + '\\'; };
+		pop = function( m, i ) { return p[i-1] };
+		tabs = function( count ) { return new Array( count + 1 ).join( '\t' ); };
+    
+    // Extract backslashes and strings
+    console.log(JSON.stringify(json));
+    json = JSON.stringify(json);
+    
+    p = [];
+		var out = "",
+			indent = 0;
+	json = json
+		.replace( /\\./g, push )
+		.replace( /(".*?"|'.*?')/g, push )
+		.replace( /\s+/, '' );		
+
+	// Indent and insert newlines
+	for( var i = 0; i < json.length; i++ ) {
+		var c = json.charAt(i);
+
+		switch(c) {
+			case '{':
+			case '[':
+				/*out += c + "\n<div class=\"content\"><a href=\"#\" class=\"preToggle\">-</a>" + tabs(++indent);*/
+				out += c + "\n" + tabs(++indent);
+				break;
+			case '}':
+			case ']':
+				/*out += "</div>\n" + tabs(--indent) + c;*/
+				out += "\n" + tabs(--indent) + c;
+				break;
+			case ',':
+				out += ",\n" + tabs(indent);
+				break;
+			case ':':
+				out += ": ";
+				break;
+			default:
+				out += c;
+				break;      
+		}					
+	}
+
+	// Strip whitespace from numeric arrays and put backslashes 
+	// and strings back in
+	out = out
+		.replace( /\[[\d,\s]+?\]/g, function(m){ return m.replace(/\s/g,''); } ) 
+		.replace( /\\(\d+)\\/g, pop );
+
+	return out;
+    
+    var newJson = JSON.stringify(json, null, '\t');
     /*newJson = newJson.replace(/\//g,"%2F");
     newJson = newJson.replace(/\?/g,"%3F");
     newJson = newJson.replace(/=/g,"%3D");
@@ -482,19 +611,25 @@ ApiExplorer.prototype.prettyJson = function(json) {
     newJson = newJson.replace(/@/g,"%40"); */
     
     // for each {, :, [ and , - new line after
-    newJson = newJson.replace(/</g, '&lt;');
+   /* newJson = newJson.replace(/</g, '&lt;');
     newJson = newJson.replace(/>/g, '&gt;');
     newJson = newJson.replace(/\{/g,'<span class="object"><a href="#" class="toggleBtn">-</a>{<br />');
     newJson = newJson.replace(/\}/g,'}</span>');
-    newJson = newJson.replace(/\}\<\/span\>\,/g, '},</span>')
+    newJson = newJson.replace(/\}\<\/span\>\,/g, '},</span>')*/
     /*newJson = newJson.replace(/\:/g,':\n');*/
-    newJson = newJson.replace(/\[/g,'<span class="array"><a href="#" class="toggleBtn">-</a>[');
+    /*newJson = newJson.replace(/\[/g,'<span class="array"><a href="#" class="toggleBtn">-</a>[');
     newJson = newJson.replace(/\]/g,']</span>');
     newJson = newJson.replace(/\,/g,',<br />');
     newJson = newJson.replace(/\:\"/g, ': ');
-    newJson = newJson.replace(/\"/g, '');
+    newJson = newJson.replace(/\"/g, ''); */
+    
+    console.log(newJson);
     
     return newJson;
+}
+
+ApiExplorer.prototype.selectBoxes = function() {
+    
 }
 
 $(document).ready(function(){
@@ -513,11 +648,34 @@ $(document).ready(function(){
     var apiExplorer = new ApiExplorer($('#explorerWrapper'));
     apiExplorer.buttonHandler();    
     
+    $('a.apiDiscover').click(function(){
+        if(apiFuncRun == false) {
+            tabs.changeTab(0);
+            apiExplorer.discoverQuery($(this).attr('href'));
+            window.location.hash = 'apiExplorer';
+            apiFuncRun = true;
+            return false;
+        }
+    });
+    
+    $('a.apiSchedule').click(function(){
+        if(apiFuncRun == false) {
+            tabs.changeTab(1);
+            apiExplorer.scheduleQuery($(this).attr('href'));
+            window.location.hash = 'apiExplorer';
+            apiFuncRun = true;
+            return false;
+        }
+    });
+    
     $('a.api').click(function(){
-        tabs.changeTab(tabs.tab.length-1);
-        apiExplorer.customQuery($(this).attr('href'));
-        window.location.hash = 'apiExplorer';
-        return false;
+        if(apiFuncRun == false) {
+            tabs.changeTab(tabs.tab.length-1);
+            apiExplorer.customQuery($(this).attr('href'));
+            window.location.hash = 'apiExplorer';
+            apiFuncRun = true;
+            return false;
+        }
     });
     
     $('input.date').datepicker({
@@ -539,5 +697,21 @@ $(document).ready(function(){
     $(window).scroll(function(e){
         pageInfo.currentEvent = e;
         pageInfo.update(false,false,true);
+    });
+    
+    var hoverTimer;
+    $('.hov').bind('mouseover',function() {
+        var that = $(this);
+        hoverTimer = setTimeout(function(){
+            if(that.find('.hover').length == 0) {
+                $('.hover[data-title="'+that.attr('data-title')+'"]').clone().appendTo(that).fadeIn('fast');
+            } else {
+                that.find('.hover').fadeIn('fast');
+            }
+        }, 1000);
+    $('.hov').bind('mouseout',function(){
+            clearTimeout(hoverTimer);
+            that.find('.hover').fadeOut('fast');
+        });
     });
 });

@@ -42,10 +42,12 @@
                 </div>
                 <div class="controlBar clearfix">
                     <a href="#" class="cbtn previous"><span class="icn"></span>Prev</a>
-                    <a href="#" class="cbtn next wait inactive"><span class="icn" style="width: 0;"></span><span class="js_txt">Loading</span></a>
+                    <a href="#" class="cbtn next"><span class="icn"></span>Next</a>
+                    <p class="timer wait" style="display: none;"><span class="icn"></span><span class="js_txt">Loading</span></p>
                     <div class="queryHolder">
-                        <ul class="queries">
-                        </ul>
+                        <div class="queries">
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="line">
@@ -58,17 +60,15 @@
                     <div class="unit size2of3">
                         <article class="popOut">
                             <h3>1. Find...</h3>
-                            <p>1</p>
-                            <p>2</p>
-                            <p>3</p>
-                            <p>4</p>
-                            <p>5</p>
+                            <p class="homeSpeech">I'd like something from the BBC that's a drama...</p>
                             <h3>2. Filter...</h3>
+                            <p class="homeSpeech">...BUT, I only want things that are available to watch now and in the Uk... Plus it has to be flash video and 30 minutes long. Please.</p>
                         </article>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <article class="popOut">
                             <h3>3. Feast...</h3>
+                            <p class="homeSpeech feast"></p>
                         </article>
                     </div>
                 </div>
@@ -91,58 +91,118 @@
                 <h3>Discover</h3>
                 <div class="line">
                     <div class="unit size2of3">
-                        <h4 class="hr">Title Search</h4>
-                        <p>Search for a specific program or brand by it's title. The way content is filtered means that a title search does not play well when mixed with other parameters.<br /><a href="discover.json?title=glee" class="api">discover.json?title=glee</a></p>
+                        <h4 class="hr">Title</h4>
+                        <p>Search for a specific program or brand by it's title.<br /><a href="discover.json?title=glee" class="api apiDiscover">discover.json?title=glee</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
-                            <ul class="list">
-                                <li><span class="hov">Title<span class="hover"><span class="title">Title</span><span class="body">Can only be used with <mark>Discover</mark> and should not be used with other parameters</span></span></span></li>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="title">Title</span></li>
                             </ul>
                         </aside>
                     </div>
                 </div>
                 <div class="line">
                     <div class="unit size2of3">
-                        <h4 class="hr">Genre Search</h4>
+                        <h4 class="hr">Publisher</h4>
+                        <p>Search for a particular publisher.<br /><a href="discover.json?publisher=bbc.co.uk" class="api apiDiscover">discover.json?publisher=bbc.co.uk</a></p>
+                    </div>
+                    <div class="unit size1of3 lastUnit">
+                        <aside>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="genre">Genre</span></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="unit size2of3">
+                        <h4 class="hr">Genre</h4>
                         <p>Search for a particular genre of program or brand based on Atlas' list of drama.<br /><a href="discover.json?genre=http://ref.atlasapi.org/genres/atlas/drama" class="api">discover.json?genre=http://ref.atlasapi.org/genres/atlas/drama</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
-                            <ul class="list">
-                                <li><span class="hov">Genres<span class="hover"><span class="title">Title</span><span class="body">Can be used with <mark>Items</mark> and <mark>Brands</mark></span></span></span></li>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="genre">Genre</span></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="unit size2of3">
+                        <h4 class="hr">Audio and availability</h4>
+                        <p>Search for audio and only return content that is available.<br /><a href="discover.json?mediaType=audio&available=true" class="api">discover.json?mediaType=audio&available=true</a></p>
+                    </div>
+                    <div class="unit size1of3 lastUnit">
+                        <aside>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="mediaType">Media Type</span></li>
+                                <li><span class="hov" data-title="available">Available</span></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="unit size2of3">
+                        <h4 class="hr">Publisher and Full Length </h4>
+                        <p>Search for full length content from a specific publisher.<br /><a href="discover.json?publisher=bbc.co.uk&isLongForm=true" class="api">discover.json?publisher=bbc.co.uk&isLongForm=true</a></p>
+                    </div>
+                    <div class="unit size1of3 lastUnit">
+                        <aside>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="publisher">Publisher</span></li>
+                                <li><span class="hov" data-title="isLongForm">Is Long Form</span></li>
+                            </ul>
+                        </aside>
+                    </div>
+                </div>
+                <div class="line">
+                    <div class="unit size2of3">
+                        <h4 class="hr">Duration, Available, Media Type and Transport Type</h4>
+                        <p>Search for 30 minute video content that is available in the UK and is embedded.<br /><a href="discover.json?duration=30&available=true&mediaType=video&transportType=link" class="api">discover.json?duration=30&available=true&mediaType=video&transportType=link</a></p>
+                    </div>
+                    <div class="unit size1of3 lastUnit">
+                        <aside>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="duration">Duration</span></li>
+                                <li><span class="hov" data-title="available">Available</span></li>
+                                <li><span class="hov" data-title="mediaType">Media Type</span></li>
+                                <li><span class="hov" data-title="transportType">Transport Type</span></li>
                             </ul>
                         </aside>
                     </div>
                 </div>
                 
-                <h3>Content</h3>
+                <!--<h3>Content</h3>
                 <div class="line">
                     <div class="unit size2of3">
+                        <h4 class="hr">URI search</h4>
                         <p>Genre query, limited by broadcaster for classic VoD style listings:<br />
                         <a href="#" class="api">http://atlasapi.org/2.0/items.json?genre=http://ref.atlasapi.org/genres/atlas/factual&publisher=bbc.co.uk</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
                             <ul class="list">
-                                <li><a href="#">Genre</a></li>
-                                <li><a href="#">Publisher</a></li>
+                                <li><span class="hov" data-title="genre">Genre</span></li>
+                                <li><span class="hov" data-title="publisher">Publisher</span></li>
                             </ul>
                         </aside>
                     </div>
-                </div>
+                </div> -->
                 
                 <h3>Schedule</h3>
                 <div class="line">
                     <div class="unit size2of3">
-                        <p>Genre query, limited by broadcaster for classic VoD style listings:<br />
-                        <a href="#" class="api">http://atlasapi.org/2.0/items.json?genre=http://ref.atlasapi.org/genres/atlas/factual&publisher=bbc.co.uk</a></p>
+                        <h4 class="hr">From, To and Channel</h4>
+                        <p>Search for everything between now and tomorrow on BBC One:<br />
+                        <a href="schedule.json?from=now&to=now.plus.24h&channel=bbcone" class="api apiSchedule">schedule.json?from=now&to=now.plus.24h&channel=bbcone</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
-                            <ul class="list">
-                                <li><a href="#">Genre</a></li>
-                                <li><a href="#">Publisher</a></li>
+                            <ul class="list mtl">
+                                <li><span class="hov" data-title="from">From</span></li>
+                                <li><span class="hov" data-title="to">To</span></li>
+                                <li><span class="hov" data-title="channel">Channel</span></li>
                             </ul>
                         </aside>
                     </div>
@@ -462,7 +522,7 @@ locations: [
             <section class="apiExplorer">
                 <div class="marker" id="apiExplorer"></div>
                 <div class="line">
-                    <div class="urlCopy"><a href="#" id="queryCopyBtn" class="btnCopy hov hovDown hovRight"><span class="hover"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></span></span></a><span class="urlTxt">http://atlasapi.org/2.0/</span></div>
+                    <div class="urlCopy mbm"><a href="#" id="queryCopyBtn" class="btnCopy hov hovDown hovRight"><span class="hover"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></span></span></a><span class="urlTxt">http://atlasapi.org/2.0/</span></div>
                     <h2>API Explorer</h2>
                 </div>
                 <div class="explorerWrapper" id="explorerWrapper">
@@ -481,11 +541,21 @@ locations: [
                             <div class="unit size1of2 lastUnit">
                                 <label class="tr">Genre:</label>
                                 <span class="select">
-                                    <span class="value">Option 1</span>
+                                    <span class="value">Comedy</span>
                                     <span class="options">
-                                        <span class="option selected" data-value="">Option 1</span>
-                                        <span class="option" data-value="">Option 2</span>
-                                        <span class="option" data-value="">Option 3</span>
+                                        <span class="option selected" data-value="">Comedy</span>
+                                        <span class="option" data-value="">Childrens</span>
+                                        <span class="option" data-value="">Drama</span>
+                                        <span class="option" data-value="">Learning</span>
+                                        <span class="option" data-value="">Music</span>
+                                        <span class="option" data-value="">News</span>
+                                        <span class="option" data-value="">Factual</span>
+                                        <span class="option" data-value="">Sport</span>
+                                        <span class="option" data-value="">Lifestyle</span>
+                                        <span class="option" data-value="">Animals</span>
+                                        <span class="option" data-value="">Entertainment</span>
+                                        <span class="option" data-value="">Film</span>
+                                        <span class="option" data-value="">Animation</span>
                                     </span>
                                 </span>
                                 <input type="hidden" id="discover_genre" class="fr" />
@@ -495,11 +565,14 @@ locations: [
                             <div class="unit size1of2">
                                 <label class="tr">Publisher:</label>
                                 <span class="select">
-                                    <span class="value">Option 1</span>
+                                    <span class="value">BBC</span>
                                     <span class="options">
-                                        <span class="option selected" data-value="">Option 1</span>
-                                        <span class="option" data-value="">Option 2</span>
-                                        <span class="option" data-value="">Option 3</span>
+                                        <span class="option selected" data-value="bbc.co.uk">BBC</span>
+                                        <span class="option" data-value="itv.com">ITV</span>
+                                        <span class="option" data-value="channel4.com">Channel 4</span>
+                                        <span class="option" data-value="five.tv">Five</span>
+                                        <span class="option" data-value="seesaw.com">SeeSaw</span>
+                                        <span class="option" data-value="hulu.com">Hulu</span>
                                     </span>
                                 </span>
                                 <input type="hidden" id="discover_publisher" class="fr" />
@@ -544,11 +617,21 @@ locations: [
                             <div class="unit size1of2">
                                 <label class="tr">Channel:</label>
                                 <span class="select">
-                                    <span class="value">Option 1</span>
+                                    <span class="value">Comedy</span>
                                     <span class="options">
-                                        <span class="option selected" data-value="">Option 1</span>
-                                        <span class="option" data-value="">Option 2</span>
-                                        <span class="option" data-value="">Option 3</span>
+                                        <span class="option selected" data-value="">Comedy</span>
+                                        <span class="option" data-value="">Childrens</span>
+                                        <span class="option" data-value="">Drama</span>
+                                        <span class="option" data-value="">Learning</span>
+                                        <span class="option" data-value="">Music</span>
+                                        <span class="option" data-value="">News</span>
+                                        <span class="option" data-value="">Factual</span>
+                                        <span class="option" data-value="">Sport</span>
+                                        <span class="option" data-value="">Lifestyle</span>
+                                        <span class="option" data-value="">Animals</span>
+                                        <span class="option" data-value="">Entertainment</span>
+                                        <span class="option" data-value="">Film</span>
+                                        <span class="option" data-value="">Animation</span>
                                     </span>
                                 </span>
                                 <input type="hidden" id="schedule_channel" class="fr" />
@@ -677,11 +760,27 @@ locations: [
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
                             </ul>
-                            <div class="pre"></div>
+                            <pre class="pre"></pre>
                         </div>
                     </div>
                 </div>
             </section>
 		</div>
+		<div class="hoverRef" style="display:none;">
+            <span class="hover" data-title="title"><span class="title">Title</span><span class="body">Search for brand, series and one-off pieces of content. Can't be used with genre</span></span>
+            <span class="hover" data-title="publisher"><span class="title">Publisher</span><span class="body">Your application will be restricted to certain publishers. You can further restrict the results to specific publishers.</span></span>
+            <span class="hover" data-title="genre"><span class="title">Genre</span><span class="body">Long format of http://ref.atlasapi.org/atlas/genres/[genre].</span></span>
+            <span class="hover" data-title="tag"><span class="title">Tag</span><span class="body">Your application will be restricted to search for certain publishers. You can further restrict the results to specific publishers.</span></span>
+            <span class="hover" data-title="available"><span class="title">Available</span><span class="body">True or false. 'any' will give you content that is either available or not.</span></span>
+            <span class="hover" data-title="availableCountries"><span class="title">Available Countries</span><span class="body">Country code eg. uk, us etc.</span></span>
+            <span class="hover" data-title="duration"><span class="title">Duration</span><span class="body">Length of the content</span></span>
+            <span class="hover" data-title="isLongForm"><span class="title">Is Long Form</span><span class="body">True or false. Only full length content?</span></span>
+            <span class="hover" data-title="dataContainerFormat"><span class="title">Data Container Format</span><span class="body">The format of the content eg. mp4, mp3 etc.</span></span>
+            <span class="hover" data-title="transportType"><span class="title">Transport Type</span><span class="body">How you get to the content. 'link' or 'embed' are common examples.</span></span>
+            <span class="hover" data-title="mediaType"><span class="title">Media Type</span><span class="body">Either 'audio' or 'video'.</span></span>
+            <span class="hover" data-title="from"><span class="title">From</span><span class="body">The beginning of a schedule period.</span></span>
+            <span class="hover" data-title="to"><span class="title">To</span><span class="body">The end of a schedule period.</span></span>
+            <span class="hover" data-title="channel"><span class="title">Channel</span><span class="body">The channel that the content was broadcast on eg. bbcone, bbctwo etc.</span></span>
+        </div>
 	</body>
 </html>

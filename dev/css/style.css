@@ -1,5 +1,8 @@
 /* reset */
             html{color:#000;background:#FFF;}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}table{border-collapse:collapse;border-spacing:0;}fieldset,img{border:0;}address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}li{list-style:none;}caption,th{text-align:left;}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}q:before,q:after{content:'';}abbr,acronym{border:0;font-variant:normal;}sup{vertical-align:text-top;}sub{vertical-align:text-bottom;}input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}input,textarea,select{*font-size:100%;}legend{color:#000;}
+            
+            ::-moz-selection {background: #f1d9e7; color: #000;}
+            ::selection {background: #f1d9e7; color: #000;}
 
             /* slightly enhanced, universal clearfix hack */
             .clearfix:after {
@@ -76,6 +79,55 @@
                 padding: 10px;
                 margin: 0 10px;
             }
+            
+            .popOut .homeSpeech {
+                background: #f1d9e7;
+                -webkit-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+                -moz-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+                -o-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+                -khtml-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+                -ms-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+                box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
+                -moz-border-radius: 5px;
+                -o-border-radius: 5px;
+                -khtml-border-radius: 5px;
+                -ms-border-radius: 5px;
+                border-radius: 5px;
+                font-size: 24px;
+                text-shadow: 0 1px 0px #fff;
+                line-height: 24px;
+                padding: 10px;
+                position: relative;
+            }
+            .popOut .homeSpeech:after {
+                content: "\00a0";
+                display: block;
+                width: 20px;
+                height: 20px;
+                background: green;
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                -khtml-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+                border-radius: 3px 0 10px 0;
+                position: absolute;
+                top: -8px;
+                left: 10px;
+                background: #f1d9e7;
+                -webkit-box-shadow: inset 5px 5px 5px rgba(0,0,0,0.08);
+                -moz-box-shadow: inset 5px 5px 5px rgba(0,0,0,0.08);
+                -o-box-shadow: inset 5px 5px 5px rgba(0,0,0,0.08);
+                -khtml-box-shadow: inset 5px 5px 5px rgba(0,0,0,0.08);
+                -ms-box-shadow: inset 5px 5px 5px rgba(0,0,0,0.08);
+                box-shadow: inset 5px 5px 5px rgba(0,0,0,0.08);
+            }
+            
+            .popOut .homeSpeech.feast {
+                background: #f1d9e7 url(../images/present.png) center 90% no-repeat;
+                height: 180px;
+            }
 			
 			h1,h2,h3,h4,h5,h6 {margin-bottom: 20px; text-shadow: 0 1px 0 #fff;}
 			h1 {font-size: 31px;}
@@ -101,7 +153,7 @@
 			.faded {color: #666; font-style: italic;}
 			mark {color: #ef308f; background: 0 none;}
 			
-			.pre {
+			.pre, pre {
                 background: #fff;
                 margin-bottom: 20px;
                 padding: 20px;
@@ -119,6 +171,11 @@
                 color: #000;
                 overflow-x: auto;
             }
+            
+            .pre .preToggle {}
+            
+            .pre .content {overflow: hidden;}
+            
             .object {display: block; padding-left: 20px; overflow: hidden; height: auto; position: relative;}
             
             .array {display: block; padding-left: 20px; overflow: hidden; height: auto; position: relative;}
@@ -226,12 +283,8 @@
             .socialList li {margin-bottom: 10px;}
             .socialList img {display: inline-block; vertical-align: middle; margin-right: 10px;}
             
-            .queries {float: right; width: 7750px; position: relative;}
-            .queries li {float: right; /*margin-left: 20px;*/ width: 775px; text-align:right;}
-            .queries li a {color: #ccc;}
-            .queries li.current a {color: #333;}
-            .queries li.current+li a {color: #666;}
-            .queries li.current+li+li a {color: #999;}
+            .queries {float: left; width: 7750px; position: relative;}
+            .queries .query {color: #333; position: relative; float: left; /*margin-left: 20px;*/ width: 755px; text-align:right;}
 			
 			/* Buttons */
 			.btn {
@@ -328,8 +381,9 @@
             .cbtn.next {float: right; width: 46px;}
                 .cbtn.next .icn {float:right; margin-left: 3px; background-image: url(../images/arrow_right.png);}
             
-            .cbtn.wait {float: right; width: 46px;}
-                .cbtn.wait .icn{float: right; margin-left: 3px; background-image: url(../images/sml_loader.gif);}
+            .timer {}
+            .wait {float: right; position: absolute; top: -8px; right: 12px; color: #666;}
+                .wait .icn{width: 16px; height: 16px; float: right; margin-left: 3px; background: url(../images/sml_loader.gif) center right no-repeat;}
                 
             .btn.inactive, .cbtn.inactive {
             	border: 1px solid #bbb;
@@ -459,7 +513,7 @@
                 box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
             }
             
-            .controlBar {padding: 0 10px;}
+            .controlBar {padding: 0 10px; position: relative;}
                 .controlBar .queryHolder {
                     padding: 12px 20px;
                     overflow: hidden;
@@ -479,7 +533,7 @@
             /* Hover */
             .hov {position: relative; color: #380b66;}
             a.hov {text-decoration: none;}
-            .hov .hover {
+            .hover {
                 display: none;
                 background: #fff;
                 border: 5px solid #ccc;
@@ -500,7 +554,7 @@
                 line-height:140%;
                 z-index: 9;
             }
-                .hov .hover:after {
+                .hover:after {
                     width: 10px;
                     height: 10px;
                     display: block;
@@ -523,8 +577,18 @@
                     -ms-border-radius: 5px;
                     border-radius: 0 0 5px 0;
                 }
-                .hov .hover .title {text-decoration: none; display: block; color: #380b66; font-size: 14px;}
-                .hov .hover .body {}
+                .hover .title {text-decoration: none; display: block; color: #380b66; font-size: 14px;}
+                .hover .body {
+                    display: block;
+                    white-space: pre;           /* CSS 2.0 */
+                    white-space: pre-wrap;      /* CSS 2.1 */
+                    white-space: pre-line;      /* CSS 3.0 */
+                    white-space: -pre-wrap;     /* Opera 4-6 */
+                    white-space: -o-pre-wrap;   /* Opera 7 */
+                    white-space: -moz-pre-wrap; /* Mozilla */
+                    white-space: -hp-pre-wrap;  /* HP Printers */
+                    word-wrap: break-word;      /* IE 5+ */
+                }
                 
             .hovDown .hover {
                 bottom: auto;
@@ -559,7 +623,7 @@
             
             
             .hov:hover {cursor: pointer;}
-            .hov:hover .hover {display: block;}
+            /*.hov:hover .hover {display: block;}*/
             .hov.js:hover .hover {display: none;}
             
             /* Forms */
