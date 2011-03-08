@@ -123,7 +123,7 @@ var HomeDemo = function(item) {
     
     var array0 = [
         'discover.json?publisher=bbc.co.uk&available=true',
-        'discover.json?publisher=bbc.co.uk&availableCountries=uk',
+        'discover.json?publisher=bbc.co.uk&availableCountries=uk&offset=10',
         'discover.json?title=east',
         'discover.json?title=Britain',
         'discover.json?publisher=bbc.co.uk&genre=drama',
@@ -252,7 +252,16 @@ HomeDemo.prototype.request = function() {
             
             firstShow.addClass('loading').find('img').fadeOut('fast',function(){
                 if(firstContent != undefined){
-                    firstShow.find('img').attr('src',''+firstContent.image+'').bind('load', function(){$(this).fadeIn('slow'); return false;});
+                    firstShow.find('img').attr('src',''+firstContent.image+'').bind('load', function(){
+                        console.log($(this).height());
+                        if($(this).height() > 0){
+                            $(this).fadeIn('slow');
+                        } else {
+                            // Retry
+                            console.log('Didnt work');
+                        }
+                        return false;
+                    });
                     firstShow.find('.br').html(firstContent.title);
                     firstShow.find('.pub').html('('+firstContent.publisher.name+')');
                     firstShow.removeClass('loading');
@@ -262,7 +271,16 @@ HomeDemo.prototype.request = function() {
             
             secondShow.addClass('loading').find('img').fadeOut('fast', function(){
                 if(secondContent != undefined){
-                    secondShow.find('img').attr('src',''+secondContent.image+'').bind('load', function(){$(this).fadeIn('slow'); return false;});
+                    secondShow.find('img').attr('src',''+secondContent.image+'').bind('load', function(){
+                        console.log($(this).height());
+                        if($(this).height() > 0){
+                            $(this).fadeIn('slow');
+                        } else {
+                            // Retry
+                            console.log('Didnt work');
+                        }
+                        return false;
+                    });
                     secondShow.find('.br').html(secondContent.title);
                     secondShow.find('.pub').html('('+secondContent.publisher.name+')');
                     secondShow.removeClass('loading');
@@ -543,18 +561,19 @@ ApiExplorer.prototype.runQuery = function(){
                 $.each(results, function(i){
                     var child = i+1;
                     var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
-                    item.find('img').attr('src',''+results[i].image+'').bind('load', function(){$(this).fadeIn('slow'); return false;});
+                    item.find('img').attr('src',''+results[i].image+'').bind('load', function(){
+                        console.log($(this).height());
+                        if($(this).height() > 0){
+                            $(this).fadeIn('slow');
+                        } else {
+                            console.log('Didnt work');
+                        }
+                        return false;
+                    });
                     item.find('.br').html(results[i].brand);
                     item.find('.pub').html('('+results[i].publisher+')');
                     item.find('.ep').html(results[i].episode);
                     item.removeAttr('style');
-                    
-                    item.hover(function(){
-                        $(this).find('.caption').animate({'height':'74px'},200);
-                    },
-                    function(){
-                        $(this).find('.caption').animate({'height': '27px'},200);
-                    });
                 });
             }
             

@@ -446,6 +446,11 @@
                     padding: 5px;
                     line-height: 14px;
                     height: 27px;
+                    -moz-transition: height ease-out 0.5s;
+                    -webkit-transition: height ease-out 0.5s;
+                }
+                .showItem:hover .caption {
+                    height: 74px;
                 }
                     .showItem.loading img,
                     .showItem.loading .caption {display: none;}
