@@ -125,13 +125,13 @@ var HomeDemo = function(item) {
         'discover.json?publisher=bbc.co.uk&available=true',
         'discover.json?publisher=bbc.co.uk&availableCountries=uk',
         'discover.json?title=east',
-        'discover.json?title=news',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/drama',
-        'discover.json?publisher=channel4.com&genre=http://ref.atlasapi.org/genres/atlas/drama',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/comedy',
-        'discover.json?publisher=channel4.com&genre=http://ref.atlasapi.org/genres/atlas/comedy',
-        'discover.json?publisher=bbc.co.uk&genre=http://ref.atlasapi.org/genres/atlas/factual',
-        'discover.json?publisher=channel4.com&genre=http://ref.atlasapi.org/genres/atlas/factual'
+        'discover.json?title=Britain',
+        'discover.json?publisher=bbc.co.uk&genre=drama',
+        'discover.json?publisher=seesaw.com',
+        'discover.json?publisher=bbc.co.uk&genre=comedy',
+        'discover.json?publisher=hulu.com',
+        'discover.json?publisher=bbc.co.uk&genre=factual',
+        'discover.json?publisher=archive.org'
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
@@ -159,12 +159,9 @@ var HomeDemo = function(item) {
 
 HomeDemo.prototype.init = function(){
     var homeDemo = this;
-    
-    
-    console.log(homeDemo.query);
-    
+        
     var item = homeDemo.nav.find('.queries');
-    item.append('<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>');
+    item.append('<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api apiDiscover">'+homeDemo.query[homeDemo.activeQuery]+'</a>');
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
@@ -181,7 +178,6 @@ HomeDemo.prototype.init = function(){
 				if(!$(this).hasClass('wait')){			
 					if(homeDemo.activeQuery <= homeDemo.marker){
 					   homeDemo.scrolling = true;
-					   console.log('active is lower then or equal to marker');
 					   clearInterval(homeDemo.timer);
 					   homeDemo.activeQuery++;
 					   if(homeDemo.activeQuery == 10){
@@ -189,7 +185,6 @@ HomeDemo.prototype.init = function(){
     					}
 					   homeDemo.nextQuery();
 					   if(homeDemo.activeQuery == homeDemo.marker) {
-					       console.log('active is the same as marker');
 					       homeDemo.nextBtn.addClass('inactive');
 					       homeDemo.prevBtn.removeClass('inactive');
 					       homeDemo.countdown();
@@ -199,7 +194,6 @@ HomeDemo.prototype.init = function(){
 				}
 			}
 		}
-		console.log(homeDemo.activeQuery, homeDemo.marker, item.children().length);
         return false;
     });
     
@@ -215,20 +209,15 @@ HomeDemo.prototype.request = function() {
     homeDemo.prevBtn.addClass('inactive');
     homeDemo.nextBtn.addClass('inactive');
     
-    console.log('Active Query: '+homeDemo.activeQuery);
-    
-    console.log(homeDemo.query[homeDemo.activeQuery]+'&limit=4');
     // Make request
     $.ajax({
-        url: queryBeg+homeDemo.query[homeDemo.activeQuery]+'&limit=4',
+        url: queryBeg+homeDemo.query[homeDemo.activeQuery]+'&limit=10',
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
         cache: true,
         timeout: 5000,
         context: homeDemo.item,
-        success: function(data, textStatus, jqXHR){
-            console.log('YAR', data, textStatus);
-            
+        success: function(data, textStatus, jqXHR){            
             homeDemo.nav.find('.timer').fadeOut();
             
             // Add Image
@@ -281,10 +270,8 @@ HomeDemo.prototype.request = function() {
             });
         },
         error: function(jqXHR, textStatus, errorThrown){
-            console.log('NAY', textStatus, errorThrown);
         },
         complete: function(jqXHR, textStatus){
-            console.log(textStatus);
             // Set activeQuery to next in list
             if(homeDemo.activeQuery < homeDemo.query.length-1) {
                 homeDemo.activeQuery++;
@@ -421,10 +408,8 @@ ApiExplorer.prototype.buttonHandler = function(){
                         var newDate = new Date(queryParam[i].val[2], queryParam[i].val[1]-1, queryParam[i].val[0], 0, 0, 0, 0);
                         newDate = newDate.getTime()/1000;
                         newDate = Math.round(newDate);
-                        console.log(newDate);
                         queryParam[i].val = newDate;
                         //queryParam[i].val = Math.round(queryParam[i].val);
-                        console.log(queryParam[i].val);
                     }
                     query += queryParam[i].title+'='+queryParam[i].val;
                     
@@ -493,12 +478,10 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     // Convert to and from queries into timestamps
     if(isNaN(parseFloat(queryFrom))) {
         queryFrom = timeConvertor(queryFrom);
-        console.log(queryFrom);
     }
     
     if(isNaN(parseFloat(queryTo))) {
         queryTo = timeConvertor(queryTo);
-        console.log(queryTo);
     }
         
     $('#schedule_channel').val(queryChannel).change();
@@ -542,7 +525,7 @@ ApiExplorer.prototype.runQuery = function(){
     // Make request
     var url = apiExplorer.query;
     if(apiExplorer.queryType != 'schedule'){
-        url += '&limit=5';
+        url += '&limit=20';
     }
     $.ajax({
         url: url,
@@ -552,39 +535,32 @@ ApiExplorer.prototype.runQuery = function(){
         timeout: 5000,
         context: apiExplorer.holder,
         success: function(data, textStatus, jqXHR){
-            console.log(data);
-            if(apiExplorer.queryType != 'schedule'){
-                $.each(data.contents, function(i){
+            var results = processTheJson(data);
+            
+            results.clean(undefined);
+            
+            if(results.length > 0 && results[0] != undefined){
+                $.each(results, function(i){
                     var child = i+1;
                     var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
-                    console.log(item);
-                    console.log(data.contents[i].image);
-                    if(data.contents[i].image){
-                        item.removeClass('loading');
-                        item.find('img').attr('src',data.contents[i].image);
-                        item.find('.br').html(data.contents[i].title);
-                        item.find('.pub').html('('+data.contents[i].publisher.name+')');
-                        item.removeAttr('style');
-                    }
+                    item.find('img').attr('src',''+results[i].image+'').bind('load', function(){$(this).fadeIn('slow'); return false;});
+                    item.find('.br').html(results[i].brand);
+                    item.find('.pub').html('('+results[i].publisher+')');
+                    item.find('.ep').html(results[i].episode);
+                    item.removeAttr('style');
+                    
+                    item.hover(function(){
+                        $(this).find('.caption').animate({'height':'74px'},200);
+                    },
+                    function(){
+                        $(this).find('.caption').animate({'height': '27px'},200);
+                    });
                 });
-            } else {
-               $.each(data.schedule, function(i){
-                    var child = i+1;
-                    var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
-                    console.log(item);
-                    console.log(data.schedule[i].image);
-                    if(data.schedule[i].image){
-                        item.removeClass('loading');
-                        item.find('img').attr('src',data.schedule[i].image);
-                        item.find('.br').html(data.schedule[i].title);
-                        item.find('.pub').html('('+data.schedule[i].publisher.name+')');
-                        item.removeAttr('style');
-                    }
-                }); 
             }
+            
             apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideDown();
             
-            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(JSON.stringify(data));
+            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(JSON.stringify(data, 'null', '&nbsp;'));
             //apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
             
         	$('.preToggle').click(function(){
@@ -603,7 +579,6 @@ ApiExplorer.prototype.runQuery = function(){
             
             $('.object .btn').click(function(e){
                 e.stopImmediatePropagation();
-                console.log($(this).parent());
                 if($(this).parent().hasClass('closed')){
                     $(this).parent().removeClass('closed');
                 } else {
@@ -614,7 +589,6 @@ ApiExplorer.prototype.runQuery = function(){
             
             $('.array .btn').click(function(e){
                 e.stopImmediatePropagation();
-                console.log($(this).parent());
                 if($(this).parent().hasClass('closed')){
                     $(this).parent().removeClass('closed');
                 } else {
@@ -624,11 +598,9 @@ ApiExplorer.prototype.runQuery = function(){
             });
         },
         error: function(jqXHR, textStatus, errorThrown){
-            console.log('NAY', textStatus, errorThrown);
             apiExplorer.msg('error','Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
-            console.log(textStatus);
             if(textStatus == 'timeout') {
                 apiExplorer.timedOut = true;
             }
@@ -640,7 +612,6 @@ ApiExplorer.prototype.runQuery = function(){
 
 ApiExplorer.prototype.msg = function(type, message){
     var apiExplorer = this;
-    console.log(apiExplorer.queryType, type, message);
     var msgPane = $('#explore_'+apiExplorer.queryType).find('.msg');
     msgPane.addClass(type).html(message).fadeIn();
 }
@@ -719,10 +690,19 @@ ApiExplorer.prototype.prettyJson = function(json) {
     newJson = newJson.replace(/\:\"/g, ': ');
     newJson = newJson.replace(/\"/g, ''); */
     
-    console.log(newJson);
     
     return newJson;
 }
+
+Array.prototype.clean = function(deleteValue) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == deleteValue) {         
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
 
 var timeConvertor = function(time){
     if(time == 'now') {
@@ -732,7 +712,6 @@ var timeConvertor = function(time){
         time = time.split('.');
         if(time.length == 3){
             var modifier = time[2].match(/\D/i);
-            console.log(modifier);
             switch(modifier[0]){
                 case 's':
                 case 'S':
@@ -766,7 +745,6 @@ var timeConvertor = function(time){
                     modifier = 0;
                 break;
             }
-            console.log(modifier);
             
             var modifierAmount = time[2].match(/\d*/i);
             
@@ -791,7 +769,6 @@ var SelectBox = function(item) {
     this.option = [];
     this.current;
     this.input = item.siblings('input[type="hidden"]');
-    console.log(this.input);
 }
 
 SelectBox.prototype.init = function() {
@@ -831,15 +808,83 @@ SelectBox.prototype.changeSelection = function() {
     selectBox.input.val(selectBox.current.val);
 }
 
+var processTheJson = function(json){
+    var item = [];
+    
+    // if 'contents' exists
+    if(json.contents != undefined){
+        if(json.contents.length > 0){
+            // for each contents item
+            $.each(json.contents, function(i){
+                if(json.contents[i].image != undefined && json.contents[i].image != ''){
+                    item[i] = {'brand': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
+                    
+                    if(json.contents[i].title != undefined){
+                        item[i].brand = json.contents[i].title;
+                    }
+                    if(json.contents[i].publisher.name != undefined) {
+                        item[i].publisher = json.contents[i].publisher.name;
+                    }
+                    if(json.contents[i].image != undefined){
+                        item[i].image = json.contents[i].image;
+                    }
+                    if(json.contents[i].content != undefined){
+                        if(json.contents[i].content[0].title != undefined && json.contents[i].content[0].title != json.contents[i].title){
+                            item[i].episode = json.contents[i].content[0].title;
+                        }
+                        if(json.contents[i].content[0].series_number != undefined){
+                            item[i].series = json.contents[i].content[0].series_number;
+                        }
+                        if(json.contents[i].content[0].image != undefined){
+                            item[i].image = json.contents[i].content[0].image;
+                        }
+                    }
+                }
+            });
+        }
+        
+    // Else if 'schedule' exists
+    } else if(json.schedule[0].items != undefined) {
+        $.each(json.schedule[0].items, function(i){
+            if(i <= 20 && json.schedule[0].items[i].image != undefined && json.schedule[0].items[i].image != ''){
+                item[i] = {'brand': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
+                
+                if(json.schedule[0].items[i].title != undefined){
+                    item[i].brand = json.schedule[0].items[i].title;
+                }
+                if(json.schedule[0].items[i].publisher.name != undefined) {
+                    item[i].publisher = json.schedule[0].items[i].publisher.name;
+                }
+                if(json.schedule[0].items[i].image != undefined){
+                    item[i].image = json.schedule[0].items[i].image;
+                }
+                if(json.schedule[0].items[i].episode_number != undefined){
+                    if(json.schedule[0].items[i].brand_summary != undefined && json.schedule[0].items[i].brand_summary.title != json.schedule[0].items[i].title){
+                        item[i].brand = json.schedule[0].items[i].brand_summary.title;
+                    }
+                    if(json.schedule[0].items[i].title != undefined){
+                        item[i].episode = json.schedule[0].items[i].title;
+                    }
+                }
+                if(json.schedule[0].items[i].series_number != undefined){
+                    item[i].series = json.schedule[0].items[i].series_number;
+                }
+                if(json.schedule[0].items[i].image != undefined){
+                    item[i].image = json.schedule[0].items[i].image;
+                }
+            }
+        });
+    }
+    
+    return item;
+}
+
 $(document).ready(function(){
     var pageInfo = new PageInfo();
     pageInfo.init();
     
     $('section:last-child').css('min-height', pageInfo.pageHeight);
-    
-    var homeDemo = new HomeDemo($('.controlBar'));
-    homeDemo.init();
-    
+        
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
@@ -854,8 +899,17 @@ $(document).ready(function(){
         $(this).find('.option').click(function(){
             selectBox[i].current = {'item': $(this), 'name': $(this).html(), 'val': $(this).attr('data-value')};
             selectBox[i].changeSelection();
+            selectBox[i].item.find('.options').hide();
+        });
+        $(this).hover(function(){
+            $(this).find('.options').show();
+        }, function() {
+            $(this).find('.options').hide();
         });
     });
+    
+    var homeDemo = new HomeDemo($('.controlBar'));
+    homeDemo.init();
     
     $('a.apiDiscover').click(function(){
         if(apiFuncRun == false) {

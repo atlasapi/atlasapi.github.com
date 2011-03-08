@@ -445,11 +445,12 @@
                     bottom: 0;
                     padding: 5px;
                     line-height: 14px;
+                    height: 27px;
                 }
                     .showItem.loading img,
                     .showItem.loading .caption {display: none;}
-                    .showItem .caption .br {font-size: 14px; color: #ef308f;}
-                    .showItem .caption .pub {font-style: italic; font-size: 12px; margin-left: 5px;}
+                    .showItem .caption .br {font-size: 14px; color: #ef308f; margin-right: 5px;}
+                    .showItem .caption .pub {font-style: italic; font-size: 12px;}
                     .showItem .caption .ep {font-style: italic; font-size: 12px; display: block;}
 
             .show_lrg {

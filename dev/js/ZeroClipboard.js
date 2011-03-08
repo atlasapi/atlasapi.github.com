@@ -258,7 +258,7 @@ ZeroClipboard.Client.prototype = {
 			
 			case 'mouseover':
 				if (this.domElement && this.cssEffects) {
-					this.domElement.addClass('hover');
+					this.domElement.addClass('btn_hover');
 					if (this.recoverActive) this.domElement.addClass('active');
 				}
 				break;
