@@ -399,7 +399,58 @@ ApiExplorer.prototype.buttonHandler = function(){
     });
     
     $('input[value="Run"]').click(function(){
-        console.log('Run');
+        var queryParent = {'item': $(this).parents('.tabArea'), 'name': $(this).parents('.tabArea').attr('id')};
+        queryParent.name = queryParent.name.split('_');
+        queryParent.name = queryParent.name[1];
+        
+        var query;
+        
+        if(queryParent.name != 'advanced'){
+            query = queryParent.name+'.json?';
+            // Gather query params from options
+            var queryParam = [];
+            var item1 = true;
+            queryParent.item.find('input[type!="submit"]').each(function(i){
+                if($(this).val()) {
+                    queryParam[i] = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+                    if(item1 != true){
+                        query += '&';
+                    }
+                    if(queryParam[i].title == 'to' || queryParam[i].title == 'from'){
+                        queryParam[i].val = queryParam[i].val.split('/');
+                        var newDate = new Date(queryParam[i].val[2], queryParam[i].val[1]-1, queryParam[i].val[0], 0, 0, 0, 0);
+                        newDate = newDate.getTime()/1000;
+                        newDate = Math.round(newDate);
+                        console.log(newDate);
+                        queryParam[i].val = newDate;
+                        //queryParam[i].val = Math.round(queryParam[i].val);
+                        console.log(queryParam[i].val);
+                    }
+                    query += queryParam[i].title+'='+queryParam[i].val;
+                    
+                    var item1 = false;
+                }
+            });
+        } else {
+        
+        }
+        
+        // Run query type
+        switch(queryParent.name) {
+            case 'advanced':
+                apiExplorer.customQuery(query);
+            break;
+            case 'discover':
+                apiExplorer.discoverQuery(query);
+            break;
+            case 'schedule':
+                apiExplorer.scheduleQuery(query);
+            break;
+            case 'content':
+                apiExplorer.contentQuery(query);
+            break;
+        }
+        
         return false;
     });
 }
@@ -422,7 +473,9 @@ ApiExplorer.prototype.discoverQuery = function(query){
     var queryGenre = apiExplorer.getParamByName('genre',query);
     var queryPublisher = apiExplorer.getParamByName('publisher',query);
     
-    $('#discover_title').val(queryTitle);
+    $('#discover_title').val(queryTitle).change();
+    $('#discover_genre').val(queryGenre).change();
+    $('#discover_publisher').val(queryPublisher).change();
     
     /* if(apiExplorer.timedOut == true){*/
         apiExplorer.query = queryBeg+query;
@@ -430,9 +483,32 @@ ApiExplorer.prototype.discoverQuery = function(query){
     /* } */
 }
 
-ApiExplorer.prototype.scheduleQuery = function(){
+ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
+    var queryChannel = apiExplorer.getParamByName('channel',query);
+    var queryFrom = apiExplorer.getParamByName('from',query);
+    var queryTo = apiExplorer.getParamByName('to',query);
+    
+    // Convert to and from queries into timestamps
+    if(isNaN(parseFloat(queryFrom))) {
+        queryFrom = timeConvertor(queryFrom);
+        console.log(queryFrom);
+    }
+    
+    if(isNaN(parseFloat(queryTo))) {
+        queryTo = timeConvertor(queryTo);
+        console.log(queryTo);
+    }
+        
+    $('#schedule_channel').val(queryChannel).change();
+    var d1 = new Date(queryFrom*1000);
+    var d2 = new Date(queryTo*1000);
+    $('#schedule_from').val(queryFrom).datepicker('setDate', d1);
+    $('#schedule_to').val(queryTo).datepicker('setDate', d2);
+    
+    apiExplorer.query = queryBeg+query;
+    apiExplorer.runQuery();
 }
 
 ApiExplorer.prototype.contentQuery = function(){
@@ -464,8 +540,12 @@ ApiExplorer.prototype.runQuery = function(){
     apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideUp();
     
     // Make request
+    var url = apiExplorer.query;
+    if(apiExplorer.queryType != 'schedule'){
+        url += '&limit=5';
+    }
     $.ajax({
-        url: apiExplorer.query+'&limit=5',
+        url: url,
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
         cache: true,
@@ -473,22 +553,39 @@ ApiExplorer.prototype.runQuery = function(){
         context: apiExplorer.holder,
         success: function(data, textStatus, jqXHR){
             console.log(data);
-            $.each(data.contents, function(i){
-                var child = i+1;
-                var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
-                console.log(item);
-                console.log(data.contents[i].image);
-                if(data.contents[i].image){
-                    item.removeClass('loading');
-                    item.find('img').attr('src',data.contents[i].image);
-                    item.find('.br').html(data.contents[i].title);
-                    item.find('.pub').html('('+data.contents[i].publisher.name+')');
-                    item.removeAttr('style');
-                }
-            });
+            if(apiExplorer.queryType != 'schedule'){
+                $.each(data.contents, function(i){
+                    var child = i+1;
+                    var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
+                    console.log(item);
+                    console.log(data.contents[i].image);
+                    if(data.contents[i].image){
+                        item.removeClass('loading');
+                        item.find('img').attr('src',data.contents[i].image);
+                        item.find('.br').html(data.contents[i].title);
+                        item.find('.pub').html('('+data.contents[i].publisher.name+')');
+                        item.removeAttr('style');
+                    }
+                });
+            } else {
+               $.each(data.schedule, function(i){
+                    var child = i+1;
+                    var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
+                    console.log(item);
+                    console.log(data.schedule[i].image);
+                    if(data.schedule[i].image){
+                        item.removeClass('loading');
+                        item.find('img').attr('src',data.schedule[i].image);
+                        item.find('.br').html(data.schedule[i].title);
+                        item.find('.pub').html('('+data.schedule[i].publisher.name+')');
+                        item.removeAttr('style');
+                    }
+                }); 
+            }
             apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideDown();
             
-            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
+            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(JSON.stringify(data));
+            //apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
             
         	$('.preToggle').click(function(){
                 if(!$(this).parent().hasClass('shrunk')){
@@ -557,7 +654,6 @@ ApiExplorer.prototype.prettyJson = function(json) {
 		tabs = function( count ) { return new Array( count + 1 ).join( '\t' ); };
     
     // Extract backslashes and strings
-    console.log(JSON.stringify(json));
     json = JSON.stringify(json);
     
     p = [];
@@ -628,8 +724,111 @@ ApiExplorer.prototype.prettyJson = function(json) {
     return newJson;
 }
 
-ApiExplorer.prototype.selectBoxes = function() {
+var timeConvertor = function(time){
+    if(time == 'now') {
+        var newTime = new Date().getTime()/1000;
+        return Math.round(newTime);
+    } else {
+        time = time.split('.');
+        if(time.length == 3){
+            var modifier = time[2].match(/\D/i);
+            console.log(modifier);
+            switch(modifier[0]){
+                case 's':
+                case 'S':
+                    modifier = 1;
+                break;
+                case 'm':
+                case 'M':
+                    modifier = 60;
+                break;
+                case 'h':
+                case 'H':
+                    modifier = 3600;
+                break;
+                case 'd':
+                case 'D':
+                    modifier = 86400;
+                break;
+                case 'w':
+                case 'W':
+                    modifier = 604800;
+                break;
+                case 'm':
+                case 'M':
+                    modifier = 2629743;
+                break;
+                case 'y':
+                case 'Y':
+                    modifier = 31556926;
+                break;
+                default:
+                    modifier = 0;
+                break;
+            }
+            console.log(modifier);
+            
+            var modifierAmount = time[2].match(/\d*/i);
+            
+            if(time[0] == 'now') {
+                var newTime = new Date().getTime()/1000;
+            }
+            if(modifier > 0){
+                if(time[1] == 'plus'){
+                    newTime += modifier*modifierAmount;
+                    return Math.round(newTime);
+                } else if(time[1] == 'minus'){
+                    newTime -= modifier*modifierAmount;
+                    return Math.round(newTime);
+                }
+            }
+        }
+    }
+}
+
+var SelectBox = function(item) {
+    this.item = item;
+    this.option = [];
+    this.current;
+    this.input = item.siblings('input[type="hidden"]');
+    console.log(this.input);
+}
+
+SelectBox.prototype.init = function() {
+    var selectBox = this;
     
+    // Get options
+    selectBox.item.find('.option').each(function(i){
+        selectBox.option[i] = {'item': $(this), 'name': $(this).html(), 'val': $(this).attr('data-value')};
+    });
+    
+    selectBox.input.change(function(){
+        var newValue = $(this).val();
+        // Find the selectBox who's val = the input change and set current to that Object
+        $.each(selectBox.option, function(i){
+            if(selectBox.option[i].val == newValue){
+                selectBox.current = selectBox.option[i];
+            }
+        });
+        
+        // changeSelection
+        selectBox.changeSelection();
+    });
+}
+
+SelectBox.prototype.changeSelection = function() {
+    var selectBox = this;
+    
+    selectBox.item.find('.option.selected').removeClass('selected');
+    
+    if(selectBox.current.name != '--'){
+        selectBox.item.find('.value').html(selectBox.current.name);
+        selectBox.current.item.addClass('selected');
+    } else {
+        selectBox.item.find('.value').html('-- Please Select');
+    }
+    
+    selectBox.input.val(selectBox.current.val);
 }
 
 $(document).ready(function(){
@@ -646,7 +845,17 @@ $(document).ready(function(){
     tabs.changeTab(0);
     
     var apiExplorer = new ApiExplorer($('#explorerWrapper'));
-    apiExplorer.buttonHandler();    
+    apiExplorer.buttonHandler();
+    
+    var selectBox = [];
+    $('.select').each(function(i){
+        selectBox[i] = new SelectBox($(this));
+        selectBox[i].init();
+        $(this).find('.option').click(function(){
+            selectBox[i].current = {'item': $(this), 'name': $(this).html(), 'val': $(this).attr('data-value')};
+            selectBox[i].changeSelection();
+        });
+    });
     
     $('a.apiDiscover').click(function(){
         if(apiFuncRun == false) {

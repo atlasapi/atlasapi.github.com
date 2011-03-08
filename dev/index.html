@@ -118,7 +118,7 @@
                 <div class="line">
                     <div class="unit size2of3">
                         <h4 class="hr">Genre</h4>
-                        <p>Search for a particular genre of program or brand based on Atlas' list of drama.<br /><a href="discover.json?genre=http://ref.atlasapi.org/genres/atlas/drama" class="api">discover.json?genre=http://ref.atlasapi.org/genres/atlas/drama</a></p>
+                        <p>Search for a particular genre of program or brand based on Atlas' list of drama.<br /><a href="discover.json?genre=drama" class="api">discover.json?genre=drama</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
@@ -178,7 +178,7 @@
                     <div class="unit size2of3">
                         <h4 class="hr">URI search</h4>
                         <p>Genre query, limited by broadcaster for classic VoD style listings:<br />
-                        <a href="#" class="api">http://atlasapi.org/2.0/items.json?genre=http://ref.atlasapi.org/genres/atlas/factual&publisher=bbc.co.uk</a></p>
+                        <a href="#" class="api">http://atlasapi.org/2.0/items.json?genre=factual&publisher=bbc.co.uk</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
@@ -289,8 +289,8 @@ thumbnail: "http://www.channel4.com/assets/programmes/.../200x113.jpg",
 genres:[
     "http://www.channel4.com/programmes/tags/comedy",
     "http://www.channel4.com/programmes/tags/entertainment",
-    "http://ref.atlasapi.org/genres/atlas/comedy",
-    "http://ref.atlasapi.org/genres/atlas/entertainment"
+    "comedy",
+    "entertainment"
 ],</pre>
 
                     </div>
@@ -383,7 +383,7 @@ locations: [
                     <li>By URI: <a href="#">/items.json?uri=http://www.bbc.co.uk/programmes/b00mqmpr</a></li>
                     <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
                     <li>By publisher: <a href="#">/items.json?publisher=bbc.co.uk</a></li>
-                    <li>By genre: <a href="#">/items.json?genre=http://ref.atlasapi.org/genres/atlas/factual</a></li>
+                    <li>By genre: <a href="#">/items.json?genre=factual</a></li>
                     <li>By tag: <a href="#">/items.json?tag=http://ref.atlasapi.org/tags/canterbury</a></li>
                     <li>By alias (the same as by URI): <a href="#">/items.json?uri=http://bbc.co.uk/i/mqmpr/</a></li>
                     <li>By availability (on by default): <a href="#">/items.json?available=true&limit=2</a></li>
@@ -533,55 +533,59 @@ locations: [
                     </ul>
                     <a href="#apiExplorer" data-tab="explore_advanced" class="tab tabExt">Complete control</a>
                     <div class="tabArea" id="explore_discover">
-                        <div class="line">
-                            <div class="unit size1of2">
-                                <label for="discover_title" class="tr">Title:</label>
-                                <input type="text" id="discover_title" class="fr" />
-                            </div>
-                            <div class="unit size1of2 lastUnit">
-                                <label class="tr">Genre:</label>
-                                <span class="select">
-                                    <span class="value">Comedy</span>
-                                    <span class="options">
-                                        <span class="option selected" data-value="">Comedy</span>
-                                        <span class="option" data-value="">Childrens</span>
-                                        <span class="option" data-value="">Drama</span>
-                                        <span class="option" data-value="">Learning</span>
-                                        <span class="option" data-value="">Music</span>
-                                        <span class="option" data-value="">News</span>
-                                        <span class="option" data-value="">Factual</span>
-                                        <span class="option" data-value="">Sport</span>
-                                        <span class="option" data-value="">Lifestyle</span>
-                                        <span class="option" data-value="">Animals</span>
-                                        <span class="option" data-value="">Entertainment</span>
-                                        <span class="option" data-value="">Film</span>
-                                        <span class="option" data-value="">Animation</span>
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label for="discover_title" class="tr">Title:</label>
+                                    <input type="text" id="discover_title" data-title="title" class="fr" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                    <label class="tr">Genre:</label>
+                                    <span class="select">
+                                        <span class="value">-- Please Select</span>
+                                        <span class="options">
+                                            <span class="option" data-value="comedy">Comedy</span>
+                                            <span class="option" data-value="childrens">Childrens</span>
+                                            <span class="option" data-value="drama">Drama</span>
+                                            <span class="option" data-value="learning">Learning</span>
+                                            <span class="option" data-value="music">Music</span>
+                                            <span class="option" data-value="news">News</span>
+                                            <span class="option" data-value="factual">Factual</span>
+                                            <span class="option" data-value="sports">Sport</span>
+                                            <span class="option" data-value="lifestyle">Lifestyle</span>
+                                            <span class="option" data-value="animals">Animals</span>
+                                            <span class="option" data-value="entertainment">Entertainment</span>
+                                            <span class="option" data-value="film">Film</span>
+                                            <span class="option" data-value="animation">Animation</span>
+                                            <span class="option" data-value="">--</span>
+                                        </span>
                                     </span>
-                                </span>
-                                <input type="hidden" id="discover_genre" class="fr" />
+                                    <input type="hidden" id="discover_genre" data-title="genre" class="fr" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="line hr">
-                            <div class="unit size1of2">
-                                <label class="tr">Publisher:</label>
-                                <span class="select">
-                                    <span class="value">BBC</span>
-                                    <span class="options">
-                                        <span class="option selected" data-value="bbc.co.uk">BBC</span>
-                                        <span class="option" data-value="itv.com">ITV</span>
-                                        <span class="option" data-value="channel4.com">Channel 4</span>
-                                        <span class="option" data-value="five.tv">Five</span>
-                                        <span class="option" data-value="seesaw.com">SeeSaw</span>
-                                        <span class="option" data-value="hulu.com">Hulu</span>
+                            <div class="line hr">
+                                <div class="unit size1of2">
+                                    <label class="tr">Publisher:</label>
+                                    <span class="select">
+                                        <span class="value">-- Please Select</span>
+                                        <span class="options">
+                                            <span class="option" data-value="bbc.co.uk">BBC</span>
+                                            <span class="option" data-value="itv.com">ITV</span>
+                                            <span class="option" data-value="channel4.com">Channel 4</span>
+                                            <span class="option" data-value="five.tv">Five</span>
+                                            <span class="option" data-value="seesaw.com">SeeSaw</span>
+                                            <span class="option" data-value="hulu.com">Hulu</span>
+                                            <span class="option" data-value="">--</span>
+                                        </span>
                                     </span>
-                                </span>
-                                <input type="hidden" id="discover_publisher" class="fr" />
+                                    <input type="hidden" id="discover_publisher" data-title="publisher" class="fr" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                    <p class="msg" id="discover_msg" style="display: none;"></p>
+                                </div>
                             </div>
-                            <div class="unit size1of2 lastUnit">
-                                <input type="button" class="btn" value="Run" />
-                                <p class="msg" id="discover_msg" style="display: none;"></p>
-                            </div>
-                        </div>
+                        </form>
                         <div class="preview mlm clearfix" style="display: none;">
                            <div class="showItem">
                                 <img src="" />
@@ -609,50 +613,47 @@ locations: [
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
                             </ul>
-                            <pre></pre>
+                            <pre class="pre"></pre>
                         </div>
                     </div>
                     <div class="tabArea" id="explore_schedule" style="display: none;">
-                        <div class="line">
-                            <div class="unit size1of2">
-                                <label class="tr">Channel:</label>
-                                <span class="select">
-                                    <span class="value">Comedy</span>
-                                    <span class="options">
-                                        <span class="option selected" data-value="">Comedy</span>
-                                        <span class="option" data-value="">Childrens</span>
-                                        <span class="option" data-value="">Drama</span>
-                                        <span class="option" data-value="">Learning</span>
-                                        <span class="option" data-value="">Music</span>
-                                        <span class="option" data-value="">News</span>
-                                        <span class="option" data-value="">Factual</span>
-                                        <span class="option" data-value="">Sport</span>
-                                        <span class="option" data-value="">Lifestyle</span>
-                                        <span class="option" data-value="">Animals</span>
-                                        <span class="option" data-value="">Entertainment</span>
-                                        <span class="option" data-value="">Film</span>
-                                        <span class="option" data-value="">Animation</span>
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label class="tr">Channel:</label>
+                                    <span class="select">
+                                        <span class="value">-- Please Select</span>
+                                        <span class="options">
+                                            <span class="option" data-value="bbcone">BBC One</span>
+                                            <span class="option" data-value="bbctwo">BBC Two</span>
+                                            <span class="option" data-value="bbchd">BBC HD</span>
+                                            <span class="option" data-value="itv1london">ITV1 London</span>
+                                            <span class="option" data-value="itv1hd">ITV1 HD</span>
+                                            <span class="option" data-value="http://channel4.com">Channel 4</span>
+                                            <span class="option" data-value="five">Five</span>
+                                            <span class="option" data-value="">--</span>
+                                        </span>
                                     </span>
-                                </span>
-                                <input type="hidden" id="schedule_channel" class="fr" />
+                                    <input type="hidden" id="schedule_channel" data-title="channel" class="fr" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                    <label class="tr date" for="schedule_from">From:</label>
+                                    <input type="text" class="date" data-title="from" id="schedule_from" />
+                                    <label class="tr date" for="schedule_to">To:</label>
+                                    <input type="text" class="date" data-title="to" id="schedule_to" />
+                                </div>
                             </div>
-                            <div class="unit size1of2 lastUnit">
-                                <label class="tr date" for="schedule_from">From:</label>
-                                <input type="text" class="date" id="schedule_from" />
-                                <label class="tr date" for="schedule_to">To:</label>
-                                <input type="text" class="date" id="schedule_to" />
+                            <div class="line hr">
+                                <div class="unit size1of2">
+                                    <!--<label for="schedule_live" class="tr">Broadcasting now:</label>
+                                    <input type="checkbox" id="schedule_live" checked="checked" class="fl" />-->
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                    <p class="msg" id="schedule_msg" style="display: none;"></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="line hr">
-                            <div class="unit size1of2">
-                                <label for="schedule_live" class="tr">Broadcasting now:</label>
-                                <input type="checkbox" id="schedule_live" checked="checked" class="fl" />
-                            </div>
-                            <div class="unit size1of2 lastUnit">
-                                <input type="button" class="btn" value="Run" />
-                                <p class="msg" id="schedule_msg" style="display: none;"></p>
-                            </div>
-                        </div>
+                        </form>
                         <div class="preview mlm clearfix" style="display: none;">
                            <div class="showItem">
                                 <img src="" />
@@ -680,17 +681,17 @@ locations: [
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
                             </ul>
-                            <pre></pre>
+                            <pre class="pre"></pre>
                         </div>
                     </div>
                     <div class="tabArea" id="explore_content" style="display: none;">
                         <div class="line hr">
                             <div class="unit size1of2">
                                 <label for="content_uri" class="tr">URI:</label>
-                                <input type="text" id="content_uri" class="fr" />
+                                <input type="text" id="content_uri" data-title="uri" class="fr" />
                             </div>
                             <div class="unit size1of2 lastUnit">
-                                <input type="button" class="btn" value="Run" />
+                                <input type="submit" class="btn" value="Run" />
                                 <p class="msg" id="content_msg" style="display: none;"></p>
                             </div>
                         </div>
@@ -721,18 +722,20 @@ locations: [
                                 <li class="selected"><a href="#">JSON</a></li>
                                 <li><a href="#">XML</a></li>
                             </ul>
-                            <pre></pre>
+                            <pre class="pre"></pre>
                         </div>
                     </div>
                     <div class="tabArea" id="explore_advanced" style="display: none;">
-                        <div class="line">
-                            <label for="advanced_string" class="tr adv">http://atlasapi.org/2.0/</label>
-                            <input type="text" id="advanced_string" class="fr adv" />
-                         </div>
-                        <div class="line hr">
-                            <input type="button" class="btn mbm" value="Run" />
-                            <p class="msg" id="content_msg" style="display: none;"></p>
-                        </div>
+                        <form>
+                            <div class="line">
+                                <label for="advanced_string" class="tr adv">http://atlasapi.org/2.0/</label>
+                                <input type="text" id="advanced_string" class="fr adv" />
+                             </div>
+                            <div class="line hr">
+                                <input type="submit" class="btn mbm" value="Run" />
+                                <p class="msg" id="content_msg" style="display: none;"></p>
+                            </div>
+                        </form>
                         <div class="preview mlm clearfix" style="display: none;">
                            <div class="showItem loading" style="display: none;">
                                 <img src="" />
