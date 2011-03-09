@@ -30,6 +30,9 @@
 		<div class="page">
             <section class="home">
                 <div class="marker" id="home"></div>
+                <div class="line">
+                    <p class="homepageInfo">Every 20 seconds the query below will change and load some more results from atlasapi. You can click backwards and forwards through the last 10 queries. A simple example of atlas at work.</p>
+                </div>
                 <div class="slideShow clearfix">
                     <div class="slideshowItem clearfix">
                         <div class="showItem show_lrg loading">
@@ -125,9 +128,6 @@
                     </div>
                 </div>
                 <div class="line">
-                    <p class="homepageInfo">Every 20 seconds the query above will change and load some more results from atlasapi. You can click backwards and forwards through the last 10 queries. A simple example of atlas at work.</p>
-                </div>
-                <div class="line">
                     <article>
                         <h2><mark>Atlas</mark> in 3 steps</h2>
                     </article>
@@ -154,82 +154,42 @@
                     <div class="unit size2of3">
                         <h2>Examples</h2>
                         <p>Here are a load of queries that you could make. Click the links to run them in the API Explorer.</p>
+                        
+                        <h3>Discover</h3>
+                        <h4 class="hr">Title</h4>
+                        <p>Search for a specific program or brand by it's title.<br /><a href="discover.json?title=glee" class="api apiDiscover">discover.json?title=glee</a></p>
+                        
+                        <h4 class="hr">Publisher</h4>
+                        <p>Search for a particular publisher.<br /><a href="discover.json?publisher=bbc.co.uk" class="api apiDiscover">discover.json?publisher=bbc.co.uk</a></p>
+                        
+                        <h4 class="hr">Genre</h4>
+                        <p>Search for a particular genre of program or brand based on Atlas' list of drama.<br /><a href="discover.json?genre=drama" class="api">discover.json?genre=drama</a></p>
+                        
+                        <h4 class="hr">Audio and availability</h4>
+                        <p>Search for audio and only return content that is available.<br /><a href="discover.json?mediaType=audio&available=true" class="api">discover.json?mediaType=audio&available=true</a></p>
+                        
+                        <h4 class="hr">Publisher and Full Length </h4>
+                        <p>Search for full length content from a specific publisher.<br /><a href="discover.json?publisher=bbc.co.uk&isLongForm=true" class="api">discover.json?publisher=bbc.co.uk&isLongForm=true</a></p>
+                        
+                        <h4 class="hr">Duration, Available, Media Type and Transport Type</h4>
+                        <p>Search for 30 minute video content that is available in the UK and is embedded.<br /><a href="discover.json?duration=30&available=true&mediaType=video&transportType=link" class="api">discover.json?duration=30&available=true&mediaType=video&transportType=link</a></p>
                     </div>
                     <div class="unit size1of3 lastUnit">
                         <aside>
                             <h3 class="hr mts">Parameters used</h3>
-                            <p>Quick links to parameters used in each query.</p>
-                        </aside>
-                    </div>
-                </div>
-                <h3>Discover</h3>
-                <div class="line">
-                    <div class="unit size2of3">
-                        <h4 class="hr">Title</h4>
-                        <p>Search for a specific program or brand by it's title.<br /><a href="discover.json?title=glee" class="api apiDiscover">discover.json?title=glee</a></p>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <aside>
-                            <ul class="list mtl">
+                            <p>Parameters used for these examples - with short explanations. See the Full API Reference for detailed information.</p>
+                             <ul class="list mtl">
                                 <li><span class="hov" data-title="title">Title</span></li>
-                            </ul>
-                        </aside>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="unit size2of3">
-                        <h4 class="hr">Publisher</h4>
-                        <p>Search for a particular publisher.<br /><a href="discover.json?publisher=bbc.co.uk" class="api apiDiscover">discover.json?publisher=bbc.co.uk</a></p>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <aside>
-                            <ul class="list mtl">
+                                <li><span class="hov" data-title="publisher">Publisher</span></li>
                                 <li><span class="hov" data-title="genre">Genre</span></li>
-                            </ul>
-                        </aside>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="unit size2of3">
-                        <h4 class="hr">Genre</h4>
-                        <p>Search for a particular genre of program or brand based on Atlas' list of drama.<br /><a href="discover.json?genre=drama" class="api">discover.json?genre=drama</a></p>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <aside>
-                            <ul class="list mtl">
-                                <li><span class="hov" data-title="genre">Genre</span></li>
-                            </ul>
-                        </aside>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="unit size2of3">
-                        <h4 class="hr">Audio and availability</h4>
-                        <p>Search for audio and only return content that is available.<br /><a href="discover.json?mediaType=audio&available=true" class="api">discover.json?mediaType=audio&available=true</a></p>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <aside>
-                            <ul class="list mtl">
                                 <li><span class="hov" data-title="mediaType">Media Type</span></li>
                                 <li><span class="hov" data-title="available">Available</span></li>
-                            </ul>
-                        </aside>
-                    </div>
-                </div>
-                <div class="line">
-                    <div class="unit size2of3">
-                        <h4 class="hr">Publisher and Full Length </h4>
-                        <p>Search for full length content from a specific publisher.<br /><a href="discover.json?publisher=bbc.co.uk&isLongForm=true" class="api">discover.json?publisher=bbc.co.uk&isLongForm=true</a></p>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <aside>
-                            <ul class="list mtl">
-                                <li><span class="hov" data-title="publisher">Publisher</span></li>
                                 <li><span class="hov" data-title="isLongForm">Is Long Form</span></li>
                             </ul>
                         </aside>
                     </div>
                 </div>
+                
                 <div class="line">
                     <div class="unit size2of3">
                         <h4 class="hr">Duration, Available, Media Type and Transport Type</h4>
@@ -526,7 +486,7 @@ locations: [
                 <div class="marker" id="about"></div>
                 <h2>About</h2>
                 <div class="line mbl">
-                    <div class="unit size1of2">
+                    <div class="unit size2of3">
                         <article>
                             <h3 class="hr">Atlas Does</h3>
                             <ul class="list">
@@ -541,7 +501,7 @@ locations: [
                             </ul>
                         </article>
                     </div>
-                    <div class="unit size1o2 lastUnit">
+                    <div class="unit size1of3 lastUnit">
                         <article>
                             <h3 class="hr">Atlas Is</h3>
                             <ul class="list mbl">
@@ -558,7 +518,7 @@ locations: [
                     </div>
                 </div>
                 <div class="line mbl">
-                    <div class="unit size1of2">
+                    <div class="unit size2of3">
                         <article>
                             <h3 class="hr">projects that use atlas</h3>
                             <div class="project">
@@ -579,7 +539,7 @@ locations: [
                             </div>
                         </article>
                     </div>
-                    <div class="unit size1o2 lastUnit">
+                    <div class="unit size1of3 lastUnit">
                         <article>
                             <h3 class="hr"><mark>Atlas</mark> is all over the internet</h3>
                             <ul class="socialList">
