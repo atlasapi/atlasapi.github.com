@@ -41,7 +41,7 @@
                 text-align: center;}
 			header .content {margin: 0 auto; text-align: left; width: 940px;}
 			
-			section {padding: 10px 10px 80px; position: relative;}
+			section {padding: 10px 10px 80px; position: relative; display: block;}
 			section .marker {position: absolute; top: -80px; height: 0; width: 0;}
 			
 			.home {padding: 75px 0;}
@@ -61,8 +61,8 @@
                 margin-bottom: 10px;
             }
 			
-			article {padding: 0 10px;}
-			aside {margin-left: 20px;}
+			article {padding: 0 10px; display:block;}
+			aside {margin-left: 20px; display:block;}
 			
 			.popOut {
                 background: #fff;
@@ -421,7 +421,7 @@
             .showItem {
                 width: 150px;
                 height: 84px;
-                background: #fff;
+                background: #fff url(../images/missingImage.png) center no-repeat;
                 display: block;
                 border: 5px solid #fff;
                 -moz-border-radius: 5px;
@@ -453,8 +453,8 @@
                     height: 74px;
                 }
                     .showItem.loading img,
-                    .showItem.loading .caption {display: none;}
-                    .showItem .caption .br {font-size: 14px; color: #ef308f; margin-right: 5px;}
+                    /*.showItem.loading .caption {display: none;} */
+                    .showItem .caption a.br {font-size: 14px; color: #ef308f; margin-right: 5px; text-shadow: none;}
                     .showItem .caption .pub {font-style: italic; font-size: 12px;}
                     .showItem .caption .ep {font-style: italic; font-size: 12px; display: block;}
 
@@ -462,8 +462,8 @@
                 width: 450px;
                 height: 253px;
             }
-                .show_lrg .caption {line-height: 18px;}
-                .show_lrg .caption .br {font-size: 18px;}
+                .show_lrg .caption {line-height: 27px;}
+                .show_lrg .caption a.br {font-size: 18px;}
                 .show_lrg .caption .pub {font-size: 14px;}
                 .show_lrg .caption .ep {font-size: 14px;}
                 
@@ -509,14 +509,24 @@
             /* Slideshow */
             .slideShow {
                 margin: 30px 0 10px;
-                background: #e7e7e7;
+                background: #e7e7e7 url(../images/slideBg.png);
                 padding: 10px 0;
+                height: 283px;
+                overflow: hidden;
+                position: relative;
                 -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -khtml-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+            }
+            
+            .slideShowItem {
+                position: absolute;
+                left: 0;
+                top: 10px;
+                width: 9600px;
             }
             
             .controlBar {padding: 0 10px; position: relative;}
