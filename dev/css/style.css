@@ -145,10 +145,10 @@
 			p {font-size: 12px; line-height: 18px; margin-bottom: 20px;}
 			a {text-decoration: none; color: #380b66; text-shadow: 0 1px 0 #fff;}
 			a:hover {text-decoration: underline;}
-			a.api {padding-right: 10px;}
+			a.api {padding-right: 10px; font-size: 14px;}
 			a.api:hover {background: url(../images/sml_mag.gif) right 70% no-repeat;}
 			
-			.query {text-transform: none;}
+			a.query {text-transform: none; font-size: 16px;}
 			
 			.faded {color: #666; font-style: italic;}
 			mark {color: #ef308f; background: 0 none;}
@@ -191,7 +191,7 @@
 			
 			/* Lists */
 			.list {list-style-type: none; font-size: 12px; line-height: 18px;}
-			.list li {margin-bottom: 10px;padding-left: 20px; background:url(../images/bullet.gif) 0 7px no-repeat;}
+			.list li {margin-bottom: 10px;padding-left: 20px; background:url(../images/bullet.gif) 0 7px no-repeat; font-size: 14px;}
 			
 			nav {float: left; margin-left: 10px;}
 			.mainMenu {list-style-type: none; font-size: 18px; margin-top: 26px; line-height: 30px; float: left; }
