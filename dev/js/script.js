@@ -207,7 +207,7 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
         
     var item = homeDemo.nav.find('.queries');
-    item.append('<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api apiDiscover">'+homeDemo.query[homeDemo.activeQuery]+'</a>');
+    item.append('<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api apiDiscover">http://atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]+'</a>');
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
@@ -366,7 +366,7 @@ HomeDemo.prototype.nextQuery = function() {
     if(homeDemo.activeQuery != 0) {
         if(item.children().length < 10 && homeDemo.scrolling == false){
             var clone = item.children('a:last-child').clone();
-            clone.attr('href',homeDemo.query[homeDemo.activeQuery]).html(homeDemo.query[homeDemo.activeQuery]);
+            clone.attr('href',homeDemo.query[homeDemo.activeQuery]).html('http://atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]);
             clone.appendTo(item);
             /*var href = '<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>';
             item.append(href);
