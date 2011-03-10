@@ -236,13 +236,121 @@
                 <section data-title="dataModel" class="subSection">
                     <div class="marker" id="reference_dataModel"></div>
                     <h3>Data Model</h3>
-                    <p></p>
+                    <p>The Atlas data model revolves around Items and Playlists. Simple.</p>
+                
+                    <h4 id="items">Items</h4>
+                    <p>Items represent individual pieces of content, including all the standard pieces of metadata that you’d expect. Here’s an annotated overview of the JSON returned by a request for an episode of Peep Show:</p>
+                    <div class="line mbl">
+                        <div class="unit size2of3">
+                            <pre class="mrl">uri: "http://www.channel4.com/programmes/peep-show/4od#2921979",
+    aliases: [
+        "http://bit.ly/28Nml"
+    ],
+    curie: "c4:peep-show_2921979",</pre>
+                        </div>
+                        <div class="unit size1of3 lastUnit">
+                            <h5>Identifiers</h5>
+                            <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="line mbl">
+                        <div class="unit size1of3">
+                            <h5>Description</h5>
+                            <p class="mrl">These attributes describe the item.</p>
+                        </div>
+                        <div class="unit size2of3 lastUnit">
+                            <pre>description: "Despite being bullied on the street..."
+    title: "Series 1 Episode 1",
+    publisher: "channel4.com",
+    image: "http://www.channel4.com/assets/programmes/.../625x352.jpg",
+    thumbnail: "http://www.channel4.com/assets/programmes/.../200x113.jpg",
+    genres:[
+        "http://www.channel4.com/programmes/tags/comedy",
+        "http://www.channel4.com/programmes/tags/entertainment",
+        "comedy",
+        "entertainment"
+    ],</pre>
+    
+                        </div>
+                    </div>
+                    
+                    <div class="line mbl">
+                        <div class="unit size2of3">
+                            <pre class="mrl">episode_number: 1,
+    series_number: 1,
+    brand: {
+      uri: "http://www.channel4.com/programmes/peep-show",
+      curie: "c4:peep-show",
+      title: "Peep Show"
+    },</pre>
+                        </div>
+                        <div class="unit size1of3 lastUnit">
+                            <h5>Episode attributes</h5>
+                            <p>This Item is also an Episode, which means it is part of a Brand. These attributes outlines this Episode’s position within its Brand. If the Item is not an Episode these attributes will not be present.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="line mbl">
+                        <div class="unit size1of3">
+                            <h5>Locations</h5>
+                            <p>Each location represents a way to play the content. In this example there is a simple ‘link’ location, which means you can link to this content at the URI given.</p>
+                        </div>
+                        <div class="unit size2of3 lastUnit">
+                            <pre class="mll">
+    locations: [
+      {
+         "duration":1436,
+         "rating":"http://ref.atlasapi.org/ratings/simple/adult",
+         "rating_text":"Strong language",
+         "availability_start":"Jun 24, 2009 12:00:00 AM",
+         "transport_type":"link",
+         "uri":"http://www.channel4.com/programmes/peep-show/4od#2921979",
+         "available":true
+      }
+    ],</pre>
+    
+                        </div>
+                    </div>
+                    
+                    <h4>Locations</h4>
+                    <p>Each Item contains the various different ways you can get your metaphorical hands on the media. These are called Locations and provide all the information about how to access the content, who can access it, where it is, and so on. This is an example Location (the full schema is quite large, but you get the idea):</p>
+                    <pre>
+    {
+        duration: 28*60,
+        publishedDuration: 30*60,
+        transmissionTime: DATETIME,
+        available: true,
+        availablityStart: DATETIME,
+        uri: "http://link.to/the/actual/media",
+        embedCode: "&lt;embed&gt;simple html for you to embed&lt;/embed&gt;",
+        transportType: "embed",
+        ...
+    }
+                    </pre>
+                    
+                    <h4>Playlists</h4>
+                    <p>Playlists represent collections of Items and Playlists. This could be anything, from a particular Brand (say, The Wire), to a broadcaster’s top picks (like Channel 4’s), or even currently trending Playlists and Items (such as currently hot on Twitter).</p>
+                    
+                    <p>Playlists, in-fact, look very similar to Items in their core attributes but differ in that Items contain the physical media Locations, while Playlists contain Items and other Playlists:</p>
+                    <pre>
+    {
+        title: "The Item's Title",
+        description: "A nice description about the Item",
+        uri: "http://canonical.uri/of/the/playlist",
+        curie: "namespaced:id",
+        aliases: ["http://different.uris", "http://that.the/item/is/known/as"],
+        publisher: "broadcaster.com",
+        items: [...],
+        playlists: [....]
+    }
+                    </pre>
                 </section>
                 
                 <section data-title="fullReference" class="subSection">
                     <div class="marker" id="reference_fullReference"></div>
                     <h3>Full Reference</h3>
-                    <p></p>
+                    
                 </section>
             </section>
             
@@ -514,6 +622,39 @@ locations: [
                 <section data-title="getInvolved" class="subSection">
                     <div class="marker" id="about_getInvolved"></div>
                     <h2>Get Involved</h2>
+                    <div class="line">
+                        <div class="unit size2of3">
+                            <h3>Calls for Help</h3>
+                            <p>There are a number of things that help would be hugely appreciated with. If you would like to contribute to the API core, please get in touch about:</p>
+                            <ul class="list">
+                                <li>Improving the ITV adapter</li>
+                                <li>Developing a Five adapter</li>
+                            </ul>
+                            
+                            <h3>Project Hosting</h3>
+                            <p>The <a href="http://github.com/atlasapi">source-code</a>, <a href="http://github.com/atlasapi/atlas/issues">issue tracking</a> and <a href="http://wiki.github.com/atlasapi/atlas/">wiki</a> are all hosted on <a href="http://github.com/">Github</a>.</p>
+                            <p>Additionally, communication is all handled through <a href="http://groups.google.com/group/atlasapi/">Google Groups</a>. If you’re interested in joining the project or just asking us something, the group is the best place to start.</p>
+                            <p>Alternatively, if you notice something is wrong, or just have a feature request, feel free to use our <a href="http://github.com/atlasapi/atlas/issues">Issue Tracker</a>.</p>
+                            
+                            <h3>License</h3>
+                            <p>Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></p>
+                            
+                            <h3>Client Libraries</h3>
+                            <p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br /><a href="">@micrypt</a> very kindly started a simple Python client library: <a href="http://github.com/micrypt/atlas-client/">http://github.com/micrypt/atlas-client/</a><br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
+                        </div>
+                        <div class="unit size1of3 lastUnit">
+                            <p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
+                            <ul class="list">
+                                <li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
+                                <li>Have a chat with us about the features and formats that you’d find useful</li>
+                                <li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
+                                <li>Provide a metadata endpoint for us to ingest</li>
+                                <li>Develop an adapter for a new source of content, current sources are listed >>here<<</li>
+                                <li>Help improve the core of the code</li>
+                                <li>Write client libraries for other languages</li>
+                            </ul>
+                        </div>
+                    </div>
                 </section>
             </section>
             

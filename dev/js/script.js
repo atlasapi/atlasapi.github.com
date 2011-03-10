@@ -77,9 +77,6 @@ PageInfo.prototype.init = function() {
         pageInfo.subSection[i] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top, 'parent': $(this).parent().attr('class')};
     });
     pageInfo.subSections = pageInfo.subSection.length;
-    
-    console.log(pageInfo.section);
-    console.log(pageInfo.sections);
 }
 
 PageInfo.prototype.update = function(width,height,offset) {
@@ -149,8 +146,6 @@ PageInfo.prototype.changePage = function(i) {
 
 PageInfo.prototype.changeSubSection = function(i){
     var pageInfo = this;
-    
-    console.log('ChangeSubSection: '+pageInfo.section[pageInfo.currentSection].subSection[i].name);
     
     $('.'+pageInfo.section[pageInfo.currentSection].name+' .subNav a.selected').removeClass('selected');
     $('.'+pageInfo.section[pageInfo.currentSection].name+' .subNav a[href="#'+pageInfo.section[pageInfo.currentSection].name+'_'+pageInfo.section[pageInfo.currentSection].subSection[i].name+'"]').addClass('selected');
@@ -292,7 +287,6 @@ HomeDemo.prototype.request = function() {
                     
                     
                     if(!item.find('img').attr('src') || item.find('img').height() == 0){
-                        console.log('Trying to load image');
                         item.find('img').attr('src',results[0].image).fadeIn(500, function(){
                                 item.removeClass('loading');
                             });
@@ -303,7 +297,6 @@ HomeDemo.prototype.request = function() {
                     item.find('.caption').fadeIn();
                     
                     if(!item2.find('img').attr('src') || item2.find('img').height() == 0){
-                        console.log('Trying to load image');
                         item2.find('img').load(function(){
                             $(this).fadeIn(500, function(){
                                 item2.removeClass('loading');
@@ -451,7 +444,6 @@ ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
     $('a.btnCopy').hover(function(){
         if($(this).attr('data-bound') != 'true'){
-            console.log('Binding');
             var clip = new ZeroClipboard.Client();
             clip.glue($(this).attr('id'));
             clip.setHandCursor(true);
@@ -463,7 +455,6 @@ ApiExplorer.prototype.buttonHandler = function(){
     $('.urlCopy').each(function(i){
         apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy')};
     });
-    console.log(apiExplorer.queryBar);
     
     $('input[value="Run"]').click(function(){
         var queryParent = {'item': $(this).parents('.tabArea'), 'name': $(this).parents('.tabArea').attr('id')};
@@ -612,9 +603,6 @@ ApiExplorer.prototype.runQuery = function(tab){
     
     url += '&available=true';
     
-    console.log(apiExplorer.queryType);
-    console.log(url);
-    
     $.ajax({
         url: url,
         dataType: 'jsonp',
@@ -635,11 +623,9 @@ ApiExplorer.prototype.runQuery = function(tab){
                         var child = i+1;
                         var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
                         item.find('img').attr('src',''+results[i].image+'').bind('load', function(){
-                            console.log($(this).height());
                             if($(this).height() > 0){
                                 $(this).fadeIn('slow');
                             } else {
-                                console.log('Didnt work');
                             }
                             return false;
                         });
@@ -798,9 +784,7 @@ Array.prototype.clean = function(deleteValue) {
 };
 
 var imageReplace = function(image,newUrl) {
-    console.log(image,newUrl);
     image.attr('src',newUrl).bind('load', function(){
-        console.log($(this).height());
         if($(this).height() > 0){
             $(this).fadeIn('slow');
         } else {
