@@ -41,10 +41,11 @@
                 text-align: center;}
 			header .content {margin: 0 auto; text-align: left; width: 940px;}
 			
-			section {padding: 10px 10px 80px; position: relative; display: block;}
-			section .marker {position: absolute; top: -80px; height: 0; width: 0;}
+			section {padding: 10px 10px 80px; position: relative; display: block; clear: both;}
+			section.subSection {padding: 10px 0;}
+			section .marker {position: absolute; top: -87px; height: 0; width: 0;}
 			
-			.home {padding: 75px 0;}
+			.home {padding: 90px 0;}
 			.homepageInfo {
                 font-size: 11px;
                 color: #666;
@@ -59,6 +60,38 @@
                 margin: 0 6px;
                 padding: 3px 0;
                 margin-bottom: 10px;
+            }
+            
+            .apiExplorer {padding: 0 0 70px;}
+            .explorerTitle {
+                margin-bottom: 0;
+                color: #fff;
+                line-height: 100%;
+                padding: 0 10px 10px;
+                border-top: 1px solid #684090;
+                border-botom: 1px solid #684090;
+                background-color: #8e5dbf;
+                background: -moz-linear-gradient(top, #8e5dbf, #3e126a);
+                background: -webkit-gradient(linear, left top, left bottom, from(#8e5dbf), to(#3e126a));
+                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#8e5dbf', EndColorStr='#3e126a', GradientType=0);
+                -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 10px rgba(0,0,0,0.3);
+                -moz-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 10px rgba(0,0,0,0.3);
+                -o-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 10px rgba(0,0,0,0.3);
+                -khtml-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 10px rgba(0,0,0,0.3);
+                -ms-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 10px rgba(0,0,0,0.3);
+                box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 10px rgba(0,0,0,0.3);
+                text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
+                font-size: 36px;
+            }
+            .explorerWrapper {
+                padding: 10px;
+                background: #e7e7e7 url(../images/slideBg.png);
+                -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -khtml-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
             }
 			
 			article {padding: 0 10px; display:block;}
@@ -131,11 +164,11 @@
 			
 			h1,h2,h3,h4,h5,h6 {margin-bottom: 20px; text-shadow: 0 1px 0 #fff;}
 			h1 {font-size: 31px;}
-			h2 {font-size: 24px; color: #380b66;}
-			h3 {font-size: 18px; font-style: italic;}
-			h4 {font-size: 16px; color:#ef308f; font-style: italic;}
-			h5 {font-size: 14px; font-style: italic;}
-			h6 {font-size: 12px;}
+			h2 {font-size: 40px; color: #380b66;}
+			h3 {font-size: 26px; font-style: italic;}
+			h4 {font-size: 20px; color:#ef308f; font-style: italic;}
+			h5 {font-size: 16px; font-style: italic;}
+			h6 {font-size: 14px;}
 			
 			.popOut h3 {
                 font-style: normal;
@@ -145,8 +178,8 @@
 			p {font-size: 12px; line-height: 18px; margin-bottom: 20px;}
 			a {text-decoration: none; color: #380b66; text-shadow: 0 1px 0 #fff;}
 			a:hover {text-decoration: underline;}
-			a.api {padding-right: 10px; font-size: 14px;}
-			a.api:hover {background: url(../images/sml_mag.gif) right 70% no-repeat;}
+			a.api {padding-right: 20px; font-size: 14px;}
+			a.api:hover {background: url(../images/sml_mag.gif) right 70% no-repeat; z-index: 6;}
 			
 			a.query {text-transform: none; font-size: 16px;}
 			
@@ -194,13 +227,38 @@
 			.list li {margin-bottom: 10px;padding-left: 20px; background:url(../images/bullet.gif) 0 7px no-repeat; font-size: 14px;}
 			
 			nav {float: left; margin-left: 10px;}
-			.mainMenu {list-style-type: none; font-size: 18px; margin-top: 26px; line-height: 30px; float: left; }
+			.mainMenu {list-style-type: none; font-size: 22px; margin-top: 23px; line-height: 28px; float: left; }
 			.mainMenu li {float: left; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
 			.mainMenu li:first-child {border-left: 0 none;}
 			.mainMenu li:last-child {border-right: 0 none;}
-			.mainMenu li a {color: #333; padding: 0 10px 5px;}
+			.mainMenu li a {color: #333; padding: 0 20px 5px; display: block; position: relative; bottom: -1px;}
 			.mainMenu li a:hover {color: #ef308f; text-decoration: none;}
 			.mainMenu li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
+			
+			.subNav {
+                font-size: 16px;
+                float: left;
+                position: fixed;
+                top: 68px;
+                background: rgba(239,239,239,0.95);
+                border-left: 1px solid #EF308F;
+                border-bottom: 1px solid #EF308F;
+                border-right: 1px solid #EF308F;
+                z-index: 20;
+                padding: 0 10px;
+                -moz-border-radius: 0 0 5px 5px;
+                -o-border-radius: 0 0 5px 5px;
+                -khtml-border-radius: 0 0 5px 5px;
+                -ms-border-radius: 0 0 5px 5px;
+                border-radius: 0 0 5px 5px;
+                -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+			}
+			.subNav li {float: left; padding: 0 10px; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
+			.subNav li:first-child {border-left: 0 none; padding-left: 0;}
+			.subNav li:last-child {border-right: 0 none; padding-right: 0;}
+			.subNav li:first-child{margin-left: 0;}
+			.subNav li a {float: left; display: block; padding: 5px 0; color: #333;}
+			.subNav li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
 			
 			.tabs {background: #e2e2e2; float: left; -moz-border-radius: 5px 5px 0 0; -o-border-radius: 5px 5px 0 0; -khtml-border-radius: 5px 5px 0 0; -ms-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0; height: 40px;}
 			.tabs li {float: left;}
@@ -284,7 +342,7 @@
             .socialList img {display: inline-block; vertical-align: middle; margin-right: 10px;}
             
             .queries {float: left; width: 7750px; position: relative;}
-            .queries .query {color: #333; position: relative; float: left; /*margin-left: 20px;*/ width: 755px; text-align:right;}
+            .queries .query {color: #333; position: relative; float: left; /*margin-left: 20px;*/ width: 745px; text-align:right;}
 			
 			/* Buttons */
 			.btn {
@@ -319,6 +377,8 @@
                 border: 1px solid #333;
             }
             
+            .btn[type="submit"] {margin-left: 5px;}
+            
             .btn_lrg {
                 margin-top: 5px;
                 -moz-border-radius: 5px;
@@ -327,7 +387,7 @@
                 -ms-border-radius: 5px;
                 border-radius: 5px;
                 font-size: 18px;
-                padding: 5px 15px;
+                padding: 5px 15px 8px;
                 border: 1px solid #684090;
                 background-color: #8e5dbf;
                 background: -moz-linear-gradient(top, #8e5dbf, #3e126a);
@@ -340,6 +400,13 @@
                 -ms-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 5px rgba(0,0,0,0.3);
                 box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 5px rgba(0,0,0,0.3);
                 line-height: 26px;
+            }
+            .btn_lrg .icn_mag {
+                width: 16px; height: 16px;
+                display: block;
+                float: left;
+                background: url(../images/apiMag.png) center no-repeat;
+                margin: 6px 10px 0 0;
             }
             
             .cbtn {
@@ -434,8 +501,9 @@
                 position: relative;
                 float: left;
                 overflow: hidden;
+                text-align: center;
             }
-                .showItem img {display: block; width: 100%;}
+                .showItem img {display: inline-block; height: 100%;}
                 .showItem .caption {
                     background: #fff;
                     background: rgba(255,255,255,0.8);
@@ -448,6 +516,7 @@
                     height: 27px;
                     -moz-transition: height ease-out 0.5s;
                     -webkit-transition: height ease-out 0.5s;
+                    text-align: left;
                 }
                 .showItem:hover .caption {
                     height: 74px;
@@ -508,12 +577,12 @@
             
             /* Slideshow */
             .slideShow {
-                margin: 0px 0 10px;
-                background: #e7e7e7 url(../images/slideBg.png);
+                margin: 30px 0 10px;
                 padding: 10px 0;
                 height: 283px;
                 overflow: hidden;
                 position: relative;
+                background: #e7e7e7 url(../images/slideBg.png);
                 -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
@@ -545,6 +614,123 @@
                 }
                 .controlBar .queryHolder:before {left: 0;-webkit-box-shadow: 10px 0 10px #efefef;}
                 .controlBar .queryHolder:after {right: 0;-webkit-box-shadow: -10px 0 10px #efefef;}
+                
+        
+            /* Example containers */
+            /* From Left */
+            .example {
+                position: relative;
+                left: -11px;
+                background: #fff;
+                border-top: 1px solid #E7E5E5;
+                border-right: 1px solid #E7E5E5;
+                border-bottom: 1px solid #E7E5E5;
+                display: block;
+                float: left;
+                padding: 10px 10px 0;
+                margin: 0 0 30px;
+                -webkit-border-radius: 0 5px 5px 0;
+                -moz-border-radius: 0 5px 5px 0;
+                -o-border-radius: 0 5px 5px 0;
+                -khtml-border-radius: 0 5px 5px 0;
+                -ms-border-radius: 0 5px 5px 0;
+                border-radius: 0 5px 5px 0;
+                -webkit-box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
+                -moz-box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
+                -o-box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
+                -khtml-box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
+                -ms-box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
+                box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
+            }
+                .example h3 mark {font-size: 1.2em;}
+                .example h3 {
+                    font-size: 24px;
+                    padding: 1px 10px 5px;
+                    margin: 20px 10px;
+                    line-height: 31px;
+                    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    -o-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    -khtml-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    -ms-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+                    -moz-border-radius: 5px;
+                    -o-border-radius: 5px;
+                    -khtml-border-radius: 5px;
+                    -ms-border-radius: 5px;
+                    border-radius: 5px;
+                    position: relative;
+                    background: #fff;
+                    background -moz-linear-gradient(top, #000000, #FFE8F3);
+                    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#FFE8F3));
+                    filter: progid:DXImageTransform.Microsoft.Gradient(
+                StartColorStr='#ffffff', EndColorStr='#FFE8F3', GradientType=0);
+                    text-align: center;
+                    color: #380B66;
+                }
+                    .example h3:after {
+                        width: 20px;
+                        height: 20px;
+                        display: block;
+                        background: #fff;
+                        position: absolute;
+                        top: -10px;
+                        right: 50%;
+                        -webkit-transform: rotate(45deg);
+                        -moz-transform: rotate(45deg);
+                        -o-transform: rotate(45deg);
+                        -khtml-transform: rotate(45deg);
+                        -ms-transform: rotate(45deg);
+                        transform: rotate(45deg);
+                        content: "\00a0";
+                        -webkit-box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+                        -moz-box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+                        -o-box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+                        -khtml-box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+                        -ms-box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+                        box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+                        -moz-border-radius: 5px 0 20px 0;
+                        -o-border-radius: 5px 0 20px 0;
+                        -khtml-border-radius: 5px 0 20px 0;
+                        -ms-border-radius: 5px 0 20px 0;
+                        border-radius: 5px 0 20px 0;
+                    }
+                    .example h3 .hov {color: #EF308F;}
+                .example a.api {font-size: 20px; text-shadow: 0 1px 1px rgba(0,0,0,0.2); margin: 0 20px; color: #EF308F;}
+                .example a:hover {text-decoration: none;}
+            
+            /* From Right */
+            .example.right {
+                float: right;
+                left: auto;
+                right: -11px;
+                border-top: 1px solid #E7E5E5;
+                border-left: 1px solid #E7E5E5;
+                border-right: 0 none;
+                border-bottom: 1px solid #E7E5E5;
+                padding: 10px 10px 0;
+                -webkit-border-radius: 5px 0 0 5px;
+                -moz-border-radius: 5px 0 0 5px;
+                -o-border-radius: 5px 0 0 5px;
+                -khtml-border-radius: 5px 0 0 5px;
+                -ms-border-radius: 5px 0 0 5px;
+                border-radius: 5px 0 0 5px;
+                -webkit-box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
+                -moz-box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
+                -o-box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
+                -khtml-box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
+                -ms-box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
+                box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
+            }
+                .example.right h3 {
+                    color: #EF308F;
+                    background: #fff;
+                    background -moz-linear-gradient(top, #000000, #e3d7f0);
+                    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e3d7f0));
+                    filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#e3d7f0', GradientType=0);
+                }
+                .example.right h3 .hov {color: #380B66;}
+                .example.right a.api {color: #380B66;}
             
             /* Hover */
             .hov {position: relative; color: #380b66;}
@@ -569,6 +755,7 @@
                 bottom: 25px;
                 line-height:140%;
                 z-index: 9;
+                text-align: left;
             }
                 .hover:after {
                     width: 10px;
@@ -742,7 +929,6 @@
                 
             .urlCopy {
                 position: relative;
-                width: 670px;
                 line-height: 30px;
                 padding: 0 5px;
                 background: #fff;
@@ -753,7 +939,7 @@
                 -ms-border-radius: 3px;
                 border-radius: 3px;
                 display: block;
-                float: right;
+                margin-bottom: 10px;
             }
                 .urlCopy .urlTxt {
                     margin-right: 25px;
