@@ -59,6 +59,7 @@ var PageInfo = function() {
     this.currentSection;
     this.menuClick = false;
     this.currentEvent;
+    this.changePageTimer = false;
 }
 
 PageInfo.prototype.init = function() {
@@ -128,12 +129,18 @@ PageInfo.prototype.update = function(width,height,offset) {
 
 PageInfo.prototype.changePage = function(i) {
     var pageInfo = this;
-    //var homeDemo = new HomeDemo();
+    if(pageInfo.changePageTimer != false){
+        clearTimeout(pageInfo.changePageTimer);
+    }
     $('header a.selected').removeClass('selected');
     $('header a[href="#'+pageInfo.section[i].name+'"]').addClass('selected');
     // Change hash
-    //pageInfo.changeHash(pageInfo.section[i].name);
+    if(Modernizr.history && pageInfo.section[i].subSections == 0){
+        pageInfo.changeHash(pageInfo.section[i].name);
+    }
+        
     pageInfo.currentSection = i;
+    
     if(pageInfo.section[i].subSections > 0){
         if(!$('.'+pageInfo.section[i].name).find('.subNav').is(':visible')){
             $('.subNav:visible').fadeOut();
@@ -146,17 +153,29 @@ PageInfo.prototype.changePage = function(i) {
 
 PageInfo.prototype.changeSubSection = function(i){
     var pageInfo = this;
+    if(pageInfo.changePageTimer != false){
+        clearTimeout(pageInfo.changePageTimer);
+    }
     
-    $('.'+pageInfo.section[pageInfo.currentSection].name+' .subNav a.selected').removeClass('selected');
-    $('.'+pageInfo.section[pageInfo.currentSection].name+' .subNav a[href="#'+pageInfo.section[pageInfo.currentSection].name+'_'+pageInfo.section[pageInfo.currentSection].subSection[i].name+'"]').addClass('selected');
+    var sectionParent = pageInfo.section[pageInfo.currentSection].name;
+    var sectionName = pageInfo.section[pageInfo.currentSection].subSection[i].name, sectionShortName = sectionName.substr(sectionName.indexOf('_'));
+    
+    $('.'+sectionParent+' .subNav a.selected').removeClass('selected');
+    $('.'+sectionParent+' .subNav a[href="#'+sectionName+'"]').addClass('selected');
+    
+    if(Modernizr.history && pageInfo.section[i].subSections == 0){
+        pageInfo.changeHash(sectionName);
+    }
     
     pageInfo.currentSubSection = i;
 }
 
 PageInfo.prototype.changeHash = function(n) {
     var pageInfo = this;
-    pageInfo.currentEvent.preventDefault();
-    window.location.hash = n;
+    pageInfo.changePageTimer = setTimeout(function(){
+        var url = location.href.substr(0,location.href.indexOf('#'))+'#'+n;
+        window.history.pushState(null,null,url);
+    }, 1000);
 }
 
 var HomeDemo = function(item) {
@@ -447,7 +466,7 @@ ApiExplorer.prototype.buttonHandler = function(){
             var clip = new ZeroClipboard.Client();
             clip.glue($(this).attr('id'));
             clip.setHandCursor(true);
-            clip.setText(apiExplorer.query);
+            clip.setText($('#currentQuery').val());
             $(this).attr('data-bound','true');
         }
     });
@@ -457,23 +476,20 @@ ApiExplorer.prototype.buttonHandler = function(){
     });
     
     $('input[value="Run"]').click(function(){
+        console.log('Run');
         var queryParent = {'item': $(this).parents('.tabArea'), 'name': $(this).parents('.tabArea').attr('id')};
         queryParent.name = queryParent.name.split('_');
         queryParent.name = queryParent.name[1];
         
         var query;
-        
+              
         if(queryParent.name != 'advanced'){
-            query = queryParent.name+'.json?';
             // Gather query params from options
             var queryParam = [];
-            var item1 = true;
             queryParent.item.find('input[type!="submit"]').each(function(i){
-                if($(this).val()) {
+                if($(this).val().length > 0) {
                     queryParam[i] = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-                    if(item1 != true){
-                        query += '&';
-                    }
+                    
                     if(queryParam[i].title == 'to' || queryParam[i].title == 'from'){
                         queryParam[i].val = queryParam[i].val.split('/');
                         var newDate = new Date(queryParam[i].val[2], queryParam[i].val[1]-1, queryParam[i].val[0], 0, 0, 0, 0);
@@ -482,14 +498,25 @@ ApiExplorer.prototype.buttonHandler = function(){
                         queryParam[i].val = newDate;
                         //queryParam[i].val = Math.round(queryParam[i].val);
                     }
+                }
+            });
+            query = queryParent.name+'.json?';
+                       
+            
+            queryParam.clean(undefined);
+            
+            $.each(queryParam, function(i){
+                if(i > 0){
+                    query += '&';
+                }
+                if(queryParam[i].val != ''){
                     query += queryParam[i].title+'='+queryParam[i].val;
-                    
-                    var item1 = false;
                 }
             });
         } else {
-        
+            query = queryParent.name+'.json?'+$('#advanced_string').val();
         }
+        
         
         // Run query type
         switch(queryParent.name) {
@@ -511,23 +538,25 @@ ApiExplorer.prototype.buttonHandler = function(){
     });
 }
 
-ApiExplorer.prototype.customQuery = function(query){
+ApiExplorer.prototype.customQuery = function(query,run){
     var apiExplorer = this;
     apiExplorer.queryType = 'advanced';
     var queryHolder = apiExplorer.holder.find('#advanced_string');
     if(queryHolder.val() != query){
         queryHolder.val(query);
         apiExplorer.query = queryBeg+query;
-        apiExplorer.runQuery(3);
+        if(run != false){
+            apiExplorer.runQuery(3);
+        }
     }
 }
 
 ApiExplorer.prototype.discoverQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'discover';
-    var queryTitle = apiExplorer.getParamByName('title',query);
-    var queryGenre = apiExplorer.getParamByName('genre',query);
-    var queryPublisher = apiExplorer.getParamByName('publisher',query);
+    var queryTitle = getParamByName('title',query);
+    var queryGenre = getParamByName('genre',query);
+    var queryPublisher = getParamByName('publisher',query);
     
     $('#discover_title').val(queryTitle).change();
     $('#discover_genre').val(queryGenre).change();
@@ -542,9 +571,9 @@ ApiExplorer.prototype.discoverQuery = function(query){
 ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
-    var queryChannel = apiExplorer.getParamByName('channel',query);
-    var queryFrom = apiExplorer.getParamByName('from',query);
-    var queryTo = apiExplorer.getParamByName('to',query);
+    var queryChannel = getParamByName('channel',query);
+    var queryFrom = getParamByName('from',query);
+    var queryTo = getParamByName('to',query);
     
     // Convert to and from queries into timestamps
     if(isNaN(parseFloat(queryFrom))) {
@@ -569,13 +598,13 @@ ApiExplorer.prototype.contentQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'content';
     
-    $('#content_uri').val(apiExplorer.getParamByName('uri',query)).change();
+    $('#content_uri').val(getParamByName('uri',query)).change();
     
     apiExplorer.query = queryBeg+query;
     apiExplorer.runQuery(2);
 }
 
-ApiExplorer.prototype.getParamByName = function(name,string){
+var getParamByName = function(name,string){
     name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
     var regexS = "[\\?&]"+name+"=([^&#]*)";
     var regex = new RegExp( regexS );
@@ -588,12 +617,17 @@ ApiExplorer.prototype.getParamByName = function(name,string){
 
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
+    console.log('Running Query');
     if(apiExplorer.btn.siblings('.msg:visible')){
         apiExplorer.btn.siblings('.msg').fadeOut();
     }
     apiExplorer.btn.val('Please Wait').addClass('inactive');
     
-    apiExplorer.queryBar[tab].txt.html(apiExplorer.query);
+    if(apiExplorer.queryType != 'advanced'){
+        apiExplorer.queryBar[tab].txt.html(apiExplorer.query);
+    }
+    console.log(apiExplorer.query);
+    $('#currentQuery').val(apiExplorer.query);
     
     // Make request
     var url = apiExplorer.query;
@@ -895,6 +929,8 @@ SelectBox.prototype.changeSelection = function() {
     }
     
     selectBox.input.val(selectBox.current.val);
+    
+    // Add to url string
 }
 
 var processTheJson = function(json){
@@ -976,6 +1012,82 @@ var processTheJson = function(json){
     return item;
 }
 
+var updatingString;
+var updateString = function(obj) {
+    /*
+        1. Get parent info
+        2. Get current query
+        3. Replace appropriate param
+    */
+    
+    // 1
+    var itemParent = {'item': obj.item.parents('.tabArea'), 'name': obj.item.parents('.tabArea').attr('id')};
+    itemParent.name = itemParent.name.split('_');
+    itemParent.name = itemParent.name[1];
+    
+    // 2
+    var updatingString = itemParent.item.find('.urlCopy .urlTxt');
+    var currentQuery = updatingString.html();
+    currentQuery = currentQuery.replace('&amp;','&');
+    var newQuery;
+    
+    // 3
+    /*
+        1. Does the param exist?
+        2. Remove it from the query.
+        3. Add it to the end
+    */
+    // 1
+    if(currentQuery.search(obj.title+'=') != -1){
+        console.log('Yes');
+        // Remove current info
+        // GETTING THIS WRONG AFTER REMOVE/ADDING TEXT WHEN MORE THEN ONE OTHER PARAMETER IS PRESENT
+        console.log(obj.title, currentQuery);
+        var currentParam = getParamByName(obj.title,currentQuery);
+        console.log(currentParam);
+       
+        var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
+        var fullLength = (obj.title.length+1)+currentParam.length;
+        var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
+       
+        if(currentEnd.substr(0,1) == '&'){
+            if(obj.val.length > 0){
+                currentEnd = currentEnd.substr(1)+'&';
+            }
+        }
+        
+        currentStart = currentStart.replace('&amp;','&');
+        currentEnd = currentEnd.replace('&amp;','&');
+       
+        newQuery = currentStart+currentEnd;
+    } else {
+        console.log('No');
+        // If a ? is present
+        if(currentQuery.search(/\?/g) != -1){
+            // Add a &
+            newQuery = currentQuery+'&';
+        } else {
+            // Add the entire thing including the type.
+            newQuery = queryBeg+itemParent.name+'.json?';
+        }
+    }
+    
+    if(obj.val.length > 0){
+        newQuery += obj.title+'='+obj.val;
+    }
+    
+    if(newQuery.substr(-1) == '&'){
+        newQuery = newQuery.substr(0, newQuery.length-1);
+    }
+    
+    currentQuery = currentQuery.replace('&amp;','&');
+    
+    updatingString.html(newQuery);
+    
+    /* ---------------- */
+    /* --------------- */
+}
+
 $(document).ready(function(){
     var pageInfo = new PageInfo();
     pageInfo.init();
@@ -1050,11 +1162,25 @@ $(document).ready(function(){
     
     $('.urlCopy .urlTxt').click(function(){
         var query = $(this).html();
+        query = query.substr(query.indexOf('0/')+2);
         query = query.replace(/\&amp\;/g,'&');
         query = query.replace(queryBeg, '');
         tabs.changeTab(3);
-        apiExplorer.customQuery(query);
+        apiExplorer.customQuery(query,false);
+        console.log(query);
         return false;
+    });
+    
+    $('.watchMe').keyup(function(){        
+        clearTimeout(updatingString);
+        var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+        
+        console.log($(this).val());
+        
+        // Add to url string
+        updatingString = setTimeout(function(){
+            updateString(item);
+        },500);
     });
     
     $('input.date').datepicker({
