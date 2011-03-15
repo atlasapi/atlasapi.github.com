@@ -57,6 +57,7 @@ var PageInfo = function() {
     this.subSection = [];
     this.subSections;
     this.currentSection;
+    this.currentSubSection;
     this.menuClick = false;
     this.currentEvent;
     this.changePageTimer = false;
@@ -78,6 +79,31 @@ PageInfo.prototype.init = function() {
         pageInfo.subSection[i] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top, 'parent': $(this).parent().attr('class')};
     });
     pageInfo.subSections = pageInfo.subSection.length;
+    
+    $('body').keyup(function(e){
+        if($(':focus').length == 0) {
+            console.log(e.keyCode);
+            switch(e.keyCode) {
+                case 74:
+                    if(pageInfo.currentSection < pageInfo.sections){
+                        pageInfo.currentSection++;
+                        window.location.hash = pageInfo.section[pageInfo.currentSection].name;
+                        pageInfo.changePage(pageInfo.currentSection);
+                    }
+                break;
+                case 75:
+                    if(pageInfo.currentSection > 0){
+                        pageInfo.currentSection--;
+                        window.location.hash = pageInfo.section[pageInfo.currentSection].name;
+                        pageInfo.changePage(pageInfo.currentSection);
+                    }
+                break;
+                default:
+                
+                break;
+            }
+        }
+    });
 }
 
 PageInfo.prototype.update = function(width,height,offset) {
@@ -310,7 +336,8 @@ HomeDemo.prototype.request = function() {
                                 item.removeClass('loading');
                             });
                     }
-                    item.find('.br').html(results[0].brand).attr('href','content.json?uri='+results[0].uri);
+                    item.attr('href','content.json?uri='+results[0].uri);
+                    item.find('.br').html(results[0].brand);
                     item.find('.pub').html('('+results[0].publisher+')');                       
                     item.find('.ep').html(results[0].episode);
                     item.find('.caption').fadeIn();
@@ -322,7 +349,8 @@ HomeDemo.prototype.request = function() {
                             });
                         }).attr('src',results[1].image);
                     }
-                    item2.find('.br').html(results[1].brand).attr('href','content.json?uri='+results[1].uri);
+                    item2.attr('href','content.json?uri='+results[1].uri);
+                    item2.find('.br').html(results[1].brand);
                     item2.find('.pub').html('('+results[1].publisher+')');
                     item2.find('.ep').html(results[1].episode);
                     item2.find('.caption').fadeIn();
@@ -663,7 +691,8 @@ ApiExplorer.prototype.runQuery = function(tab){
                             }
                             return false;
                         });
-                        item.find('.br').html(results[i].brand).attr('href','content.json?uri='+results[i].uri);
+                        item.attr('href','content.json?uri='+results[i].uri)
+                        item.find('.br').html(results[i].brand);
                         item.find('.pub').html('('+results[i].publisher+')');
                         item.find('.ep').html(results[i].episode);
                         item.removeAttr('style');
@@ -672,10 +701,10 @@ ApiExplorer.prototype.runQuery = function(tab){
                 
                 apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideDown();
                 
-                apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(JSON.stringify(data, 'null', '&nbsp;'));
+                apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output pre').html(apiExplorer.prettyJson(data));
                 //apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
                 
-            	$('.preToggle').click(function(){
+            	/*$('.preToggle').click(function(){
                     if(!$(this).parent().hasClass('shrunk')){
                         $(this).html('+').parent().addClass('shrunk').animate({
                             'height' : '15'
@@ -686,7 +715,7 @@ ApiExplorer.prototype.runQuery = function(tab){
                         });
                     }
                     return false;
-                });
+                });*/
                 apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideDown();
                 
                 $('.object .btn').click(function(e){
@@ -732,79 +761,22 @@ ApiExplorer.prototype.msg = function(type, message){
 ApiExplorer.prototype.prettyJson = function(json) {
     var apiExplorer = this;
     
-    var p = [],
-		push = function( m ) { return '\\' + p.push( m ) + '\\'; };
-		pop = function( m, i ) { return p[i-1] };
-		tabs = function( count ) { return new Array( count + 1 ).join( '\t' ); };
+    var length = json.contents.length;
     
-    // Extract backslashes and strings
-    json = JSON.stringify(json);
+    if(length < 5){
+        json.contents.slide(0,5);
+    }
     
-    p = [];
-		var out = "",
-			indent = 0;
-	json = json
-		.replace( /\\./g, push )
-		.replace( /(".*?"|'.*?')/g, push )
-		.replace( /\s+/, '' );		
+    var newJson = prettyPrintOne(JSON.stringify(json, 'null', '&nbsp;'));
 
-	// Indent and insert newlines
-	for( var i = 0; i < json.length; i++ ) {
-		var c = json.charAt(i);
-
-		switch(c) {
-			case '{':
-			case '[':
-				/*out += c + "\n<div class=\"content\"><a href=\"#\" class=\"preToggle\">-</a>" + tabs(++indent);*/
-				out += c + "\n" + tabs(++indent);
-				break;
-			case '}':
-			case ']':
-				/*out += "</div>\n" + tabs(--indent) + c;*/
-				out += "\n" + tabs(--indent) + c;
-				break;
-			case ',':
-				out += ",\n" + tabs(indent);
-				break;
-			case ':':
-				out += ": ";
-				break;
-			default:
-				out += c;
-				break;      
-		}					
-	}
-
-	// Strip whitespace from numeric arrays and put backslashes 
-	// and strings back in
-	out = out
-		.replace( /\[[\d,\s]+?\]/g, function(m){ return m.replace(/\s/g,''); } ) 
-		.replace( /\\(\d+)\\/g, pop );
-
-	return out;
-    
-    var newJson = JSON.stringify(json, null, '\t');
-    /*newJson = newJson.replace(/\//g,"%2F");
-    newJson = newJson.replace(/\?/g,"%3F");
-    newJson = newJson.replace(/=/g,"%3D");
-    newJson = newJson.replace(/&/g,"%26");
-    newJson = newJson.replace(/@/g,"%40"); */
-    
-    // for each {, :, [ and , - new line after
-   /* newJson = newJson.replace(/</g, '&lt;');
-    newJson = newJson.replace(/>/g, '&gt;');
-    newJson = newJson.replace(/\{/g,'<span class="object"><a href="#" class="toggleBtn">-</a>{<br />');
-    newJson = newJson.replace(/\}/g,'}</span>');
-    newJson = newJson.replace(/\}\<\/span\>\,/g, '},</span>')*/
-    /*newJson = newJson.replace(/\:/g,':\n');*/
-    /*newJson = newJson.replace(/\[/g,'<span class="array"><a href="#" class="toggleBtn">-</a>[');
-    newJson = newJson.replace(/\]/g,']</span>');
-    newJson = newJson.replace(/\,/g,',<br />');
-    newJson = newJson.replace(/\:\"/g, ': ');
-    newJson = newJson.replace(/\"/g, ''); */
-    
-    
     return newJson;
+    
+    /*var worker = new Worker('js/prettifyWorker.js');
+    worker.postMessage(json);
+    
+    worker.onmessage = function(evt) {
+        console.log(evt.data.data);
+    }*/
 }
 
 Array.prototype.clean = function(deleteValue) {
@@ -930,7 +902,12 @@ SelectBox.prototype.changeSelection = function() {
     
     selectBox.input.val(selectBox.current.val);
     
+    var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
+        
+    console.log(item.val);
+        
     // Add to url string
+    updateString(item);
 }
 
 var processTheJson = function(json){
@@ -1041,10 +1018,10 @@ var updateString = function(obj) {
     if(currentQuery.search(obj.title+'=') != -1){
         console.log('Yes');
         // Remove current info
-        // GETTING THIS WRONG AFTER REMOVE/ADDING TEXT WHEN MORE THEN ONE OTHER PARAMETER IS PRESENT
-        console.log(obj.title, currentQuery);
+        // GETTING THIS WRONG AFTER REMOVE/ADDING TEXT WHEN MORE THEN ONE OTHER PARAMETER IS PRESENT        
+        currentQuery = currentQuery.replace('&amp;','&');
+        
         var currentParam = getParamByName(obj.title,currentQuery);
-        console.log(currentParam);
        
         var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
         var fullLength = (obj.title.length+1)+currentParam.length;
@@ -1058,29 +1035,29 @@ var updateString = function(obj) {
         
         currentStart = currentStart.replace('&amp;','&');
         currentEnd = currentEnd.replace('&amp;','&');
-       
-        newQuery = currentStart+currentEnd;
+        
+        if(obj.val.length > 0){
+            newQuery = currentStart + obj.title+'='+obj.val+'&'+currentEnd;
+        }
     } else {
         console.log('No');
+        console.log(obj);
         // If a ? is present
         if(currentQuery.search(/\?/g) != -1){
+            console.log('Hello');
             // Add a &
-            newQuery = currentQuery+'&';
+            newQuery = currentQuery+'&'+obj.title+'='+obj.val;
         } else {
             // Add the entire thing including the type.
-            newQuery = queryBeg+itemParent.name+'.json?';
+            newQuery = queryBeg+itemParent.name+'.json?'+obj.title+'='+obj.val;
         }
-    }
-    
-    if(obj.val.length > 0){
-        newQuery += obj.title+'='+obj.val;
     }
     
     if(newQuery.substr(-1) == '&'){
         newQuery = newQuery.substr(0, newQuery.length-1);
     }
     
-    currentQuery = currentQuery.replace('&amp;','&');
+    newQuery = newQuery.replace('&amp;','&');
     
     updatingString.html(newQuery);
     

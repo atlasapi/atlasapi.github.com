@@ -520,6 +520,7 @@
                 overflow: hidden;
                 text-align: center;
             }
+            .showItem:hover {text-decoration: none;}
                 .showItem img {display: inline-block; height: 100%;}
                 .showItem .caption {
                     background: #fff;
@@ -540,16 +541,16 @@
                 }
                     .showItem.loading img,
                     /*.showItem.loading .caption {display: none;} */
-                    .showItem .caption a.br {font-size: 14px; color: #ef308f; margin-right: 5px; text-shadow: none;}
-                    .showItem .caption .pub {font-style: italic; font-size: 12px;}
-                    .showItem .caption .ep {font-style: italic; font-size: 12px; display: block;}
+                    .showItem .caption .br {font-size: 14px; color: #ef308f; margin-right: 5px; text-shadow: none;}
+                    .showItem .caption .pub {font-style: italic; font-size: 12px; color: #222;}
+                    .showItem .caption .ep {font-style: italic; font-size: 12px; display: block; color: #222;}
 
             .show_lrg {
                 width: 450px;
                 height: 253px;
             }
-                .show_lrg .caption {line-height: 27px;}
-                .show_lrg .caption a.br {font-size: 18px;}
+                .show_lrg .caption {}
+                .show_lrg .caption .br {font-size: 18px; line-height: 30px;}
                 .show_lrg .caption .pub {font-size: 14px;}
                 .show_lrg .caption .ep {font-size: 14px;}
                 
@@ -969,6 +970,7 @@
                     white-space: -moz-pre-wrap; /* Mozilla */
                     white-space: -hp-pre-wrap;  /* HP Printers */
                     word-wrap: break-word;      /* IE 5+ */
+                    text-transform: none;
                 }
                 .btnCopy {
                     display: block;
