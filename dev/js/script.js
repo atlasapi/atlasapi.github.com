@@ -8,6 +8,8 @@ var clearTimer = function() {
 
 var apiFuncRun = false;
 
+var message = false;
+
 var Tabs = function() {
     this.tabHolder;
     this.count = 0;
@@ -81,21 +83,53 @@ PageInfo.prototype.init = function() {
     pageInfo.subSections = pageInfo.subSection.length;
     
     $('body').keyup(function(e){
+        console.log(pageInfo.currentSubSection);
         if($(':focus').length == 0) {
-            console.log(e.keyCode);
+            if(pageInfo.currentSection == undefined){
+                pageInfo.currentSection = 0;
+            }
+            if(pageInfo.section[pageInfo.currentSection].subSections > 0) {
+                if(pageInfo.currentSubSection == undefined){
+                    pageInfo.currentSubSection = 0;
+                }
+            }
             switch(e.keyCode) {
-                case 74:
+                case 76:
+                    if(pageInfo.section[pageInfo.currentSection].subSections > 0) {
+                        if(pageInfo.currentSubSection < pageInfo.section[pageInfo.currentSection].subSections){
+                            pageInfo.currentSubSection++;
+                            window.location.hash = pageInfo.section[pageInfo.currentSection].subSection[pageInfo.currentSubSection].name;
+                            pageInfo.changeSubSection(pageInfo.currentSubSection);
+                        }
+                    }
+                break;
+                case 75:
                     if(pageInfo.currentSection < pageInfo.sections){
                         pageInfo.currentSection++;
                         window.location.hash = pageInfo.section[pageInfo.currentSection].name;
                         pageInfo.changePage(pageInfo.currentSection);
+                        if(pageInfo.section[pageInfo.currentSection].subSections > 0) {
+                            pageInfo.currentSubSection = 0;
+                        }
                     }
                 break;
-                case 75:
+                case 74:
                     if(pageInfo.currentSection > 0){
                         pageInfo.currentSection--;
                         window.location.hash = pageInfo.section[pageInfo.currentSection].name;
                         pageInfo.changePage(pageInfo.currentSection);
+                        if(pageInfo.section[pageInfo.currentSection].subSections > 0) {
+                            pageInfo.currentSubSection = 0;
+                        }
+                    }
+                break;
+                case 72:
+                    if(pageInfo.section[pageInfo.currentSection].subSections > 0) {
+                        if(pageInfo.currentSubSection > 0){
+                            pageInfo.currentSubSection--;
+                            window.location.hash = pageInfo.section[pageInfo.currentSection].subSection[pageInfo.currentSubSection].name;
+                            pageInfo.changeSubSection(pageInfo.currentSubSection);
+                        }
                     }
                 break;
                 default:
@@ -204,20 +238,25 @@ PageInfo.prototype.changeHash = function(n) {
     }, 1000);
 }
 
+function initialCap(field) {
+   field = field.substr(0, 1).toUpperCase() + field.substr(1);
+   return field;
+}
+
 var HomeDemo = function(item) {
     this.active = false;
     
     var array0 = [
-        'discover.json?publisher=bbc.co.uk&available=true',
-        'discover.json?publisher=bbc.co.uk&availableCountries=uk&offset=10',
-        'discover.json?title=east',
-        'discover.json?title=Britain',
-        'discover.json?publisher=bbc.co.uk&genre=drama',
-        'discover.json?publisher=seesaw.com',
-        'discover.json?publisher=bbc.co.uk&genre=comedy',
-        'discover.json?publisher=hulu.com',
-        'discover.json?publisher=bbc.co.uk&genre=factual',
-        'discover.json?publisher=archive.org'
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&availableCountries=uk&offset=10'},
+        {'type': 'Search', 'query':'search.json?title=east'},
+        {'type': 'Search', 'query':'search.json?title=Britain'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=drama'},
+        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy'},
+        {'type': 'Discover', 'query':'discover.json?publisher=hulu.com'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=factual'},
+        {'type': 'Discover', 'query':'discover.json?publisher=archive.org'}
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
@@ -247,7 +286,7 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
         
     var item = homeDemo.nav.find('.queries');
-    item.append('<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api apiDiscover">http://atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]+'</a>');
+    item.append('<a href="'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'&limit=20" class="query api api'+homeDemo.query[homeDemo.activeQuery].type+'">'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'</a>');
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
@@ -307,14 +346,14 @@ HomeDemo.prototype.request = function() {
     var item2 = (homeDemo.activeQuery*2)+2;
     
     
-    item = $('.showItem:nth-child('+item+')');
-    item2 = $('.showItem:nth-child('+item2+')');
+    item = $('.slideShow .showItem:nth-child('+item+')');
+    item2 = $('.slideShow .showItem:nth-child('+item2+')');
     
     if((!item.find('img').attr('src') || item.find('img').height() == 0) || (!item2.find('img').attr('src') || item2.find('img').height() == 0)){
     
         // Make request
         $.ajax({
-            url: queryBeg+homeDemo.query[homeDemo.activeQuery]+'&limit=5&available=true',
+            url: queryBeg+homeDemo.query[homeDemo.activeQuery].query+'&limit=5&available=true',
             dataType: 'jsonp',
             jsonpCallback: 'jsonp',
             cache: true,
@@ -336,7 +375,7 @@ HomeDemo.prototype.request = function() {
                                 item.removeClass('loading');
                             });
                     }
-                    item.attr('href','content.json?uri='+results[0].uri);
+                    item.attr('href',queryBeg+'content.json?uri='+results[0].uri);
                     item.find('.br').html(results[0].brand);
                     item.find('.pub').html('('+results[0].publisher+')');                       
                     item.find('.ep').html(results[0].episode);
@@ -349,7 +388,7 @@ HomeDemo.prototype.request = function() {
                             });
                         }).attr('src',results[1].image);
                     }
-                    item2.attr('href','content.json?uri='+results[1].uri);
+                    item2.attr('href',queryBeg+'content.json?uri='+results[1].uri);
                     item2.find('.br').html(results[1].brand);
                     item2.find('.pub').html('('+results[1].publisher+')');
                     item2.find('.ep').html(results[1].episode);
@@ -406,7 +445,8 @@ HomeDemo.prototype.nextQuery = function() {
     if(homeDemo.activeQuery != 0) {
         if(item.children().length < 10 && homeDemo.scrolling == false){
             var clone = item.children('a:last-child').clone();
-            clone.attr('href',homeDemo.query[homeDemo.activeQuery]).html('http://atlasapi.org/3.0/'+homeDemo.query[homeDemo.activeQuery]);
+            clone.removeAttr('class').attr('class','query api api'+homeDemo.query[homeDemo.activeQuery].type);
+            clone.attr('href',queryBeg+homeDemo.query[homeDemo.activeQuery].query+'&limit=20').html(queryBeg+homeDemo.query[homeDemo.activeQuery].query);
             clone.appendTo(item);
             /*var href = '<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>';
             item.append(href);
@@ -494,55 +534,32 @@ ApiExplorer.prototype.buttonHandler = function(){
             var clip = new ZeroClipboard.Client();
             clip.glue($(this).attr('id'));
             clip.setHandCursor(true);
-            clip.setText($('#currentQuery').val());
+            clip.setText($(this).siblings('input[type="text"]').val());
             $(this).attr('data-bound','true');
         }
     });
     
     $('.urlCopy').each(function(i){
-        apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy')};
+        apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.tabArea')};
+        var parentName = $(this).parents('.tabArea').attr('id')
+        parentName = parentName.split('_');
+        parentName = parentName[1];
+        if(parentName == 'search' || parentName == 'discover'){
+            apiExplorer.queryBar[i].txt.val(queryBeg+parentName+'.json?limit=20');
+        } else {
+            apiExplorer.queryBar[i].txt.val(queryBeg+parentName+'.json?');
+        }
     });
     
     $('input[value="Run"]').click(function(){
-        console.log('Run');
         var queryParent = {'item': $(this).parents('.tabArea'), 'name': $(this).parents('.tabArea').attr('id')};
         queryParent.name = queryParent.name.split('_');
         queryParent.name = queryParent.name[1];
         
-        var query;
-              
         if(queryParent.name != 'advanced'){
-            // Gather query params from options
-            var queryParam = [];
-            queryParent.item.find('input[type!="submit"]').each(function(i){
-                if($(this).val().length > 0) {
-                    queryParam[i] = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-                    
-                    if(queryParam[i].title == 'to' || queryParam[i].title == 'from'){
-                        queryParam[i].val = queryParam[i].val.split('/');
-                        var newDate = new Date(queryParam[i].val[2], queryParam[i].val[1]-1, queryParam[i].val[0], 0, 0, 0, 0);
-                        newDate = newDate.getTime()/1000;
-                        newDate = Math.round(newDate);
-                        queryParam[i].val = newDate;
-                        //queryParam[i].val = Math.round(queryParam[i].val);
-                    }
-                }
-            });
-            query = queryParent.name+'.json?';
-                       
-            
-            queryParam.clean(undefined);
-            
-            $.each(queryParam, function(i){
-                if(i > 0){
-                    query += '&';
-                }
-                if(queryParam[i].val != ''){
-                    query += queryParam[i].title+'='+queryParam[i].val;
-                }
-            });
+            var query = queryParent.item.find('.urlTxt').val();
         } else {
-            query = queryParent.name+'.json?'+$('#advanced_string').val();
+            var query = $('#'+queryParent.name+'_string').val();
         }
         
         
@@ -550,6 +567,9 @@ ApiExplorer.prototype.buttonHandler = function(){
         switch(queryParent.name) {
             case 'advanced':
                 apiExplorer.customQuery(query);
+            break;
+            case 'search':
+                apiExplorer.searchQuery(query);
             break;
             case 'discover':
                 apiExplorer.discoverQuery(query);
@@ -570,29 +590,42 @@ ApiExplorer.prototype.customQuery = function(query,run){
     var apiExplorer = this;
     apiExplorer.queryType = 'advanced';
     var queryHolder = apiExplorer.holder.find('#advanced_string');
-    if(queryHolder.val() != query){
-        queryHolder.val(query);
-        apiExplorer.query = queryBeg+query;
-        if(run != false){
-            apiExplorer.runQuery(3);
-        }
+    queryHolder.val(query);
+    apiExplorer.query = queryBeg+query;
+    if(run != false){
+        apiExplorer.runQuery(4);
+    } else {
+        queryHolder.focus();
     }
+}
+
+ApiExplorer.prototype.searchQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'search';
+    
+    var queryTitle = getParamByName('q',query);
+    var queryPublisher = getParamByName('publisher',query);
+    
+    $('#search_title').val(queryTitle).change();
+    $('#search_publisher').val(queryPublisher).change();
+    
+    apiExplorer.query = query;
+    apiExplorer.runQuery(0);
 }
 
 ApiExplorer.prototype.discoverQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'discover';
-    var queryTitle = getParamByName('title',query);
-    var queryGenre = getParamByName('genre',query);
-    var queryPublisher = getParamByName('publisher',query);
     
-    $('#discover_title').val(queryTitle).change();
+    var queryPublisher = getParamByName('publisher',query);
+    var queryGenre = getParamByName('genre',query);
+    
     $('#discover_genre').val(queryGenre).change();
     $('#discover_publisher').val(queryPublisher).change();
     
     /* if(apiExplorer.timedOut == true){*/
-        apiExplorer.query = queryBeg+query;
-        apiExplorer.runQuery(0);
+        apiExplorer.query = query;
+        apiExplorer.runQuery(1);
     /* } */
 }
 
@@ -618,8 +651,8 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     $('#schedule_from').val(queryFrom).datepicker('setDate', d1);
     $('#schedule_to').val(queryTo).datepicker('setDate', d2);
     
-    apiExplorer.query = queryBeg+query;
-    apiExplorer.runQuery(1);
+    apiExplorer.query = query;
+    apiExplorer.runQuery(2);
 }
 
 ApiExplorer.prototype.contentQuery = function(query){
@@ -628,8 +661,8 @@ ApiExplorer.prototype.contentQuery = function(query){
     
     $('#content_uri').val(getParamByName('uri',query)).change();
     
-    apiExplorer.query = queryBeg+query;
-    apiExplorer.runQuery(2);
+    apiExplorer.query = query;
+    apiExplorer.runQuery(3);
 }
 
 var getParamByName = function(name,string){
@@ -645,23 +678,18 @@ var getParamByName = function(name,string){
 
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
-    console.log('Running Query');
     if(apiExplorer.btn.siblings('.msg:visible')){
         apiExplorer.btn.siblings('.msg').fadeOut();
     }
     apiExplorer.btn.val('Please Wait').addClass('inactive');
     
     if(apiExplorer.queryType != 'advanced'){
-        apiExplorer.queryBar[tab].txt.html(apiExplorer.query);
+        apiExplorer.queryBar[tab].txt.val(apiExplorer.query);
     }
-    console.log(apiExplorer.query);
     $('#currentQuery').val(apiExplorer.query);
     
     // Make request
     var url = apiExplorer.query;
-    if(apiExplorer.queryType == 'discover'){
-        url += '&limit=20';
-    }
     
     url += '&available=true';
     
@@ -673,74 +701,87 @@ ApiExplorer.prototype.runQuery = function(tab){
         timeout: 5000,
         context: apiExplorer.holder,
         success: function(data, textStatus, jqXHR){
-            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideUp();
-    
-            apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideUp().find('.showItem').fadeOut(100,function(){
-                var results = processTheJson(data);
+            /*
+                1. Go through data removing any item that does not have an image
+                2. Clean returned data to remove any undefined items
+                3. For each showItem - add loading class, fadeout image and text, change everything, fade it all back in, remove loading class
+                4. Deal with Json
+            */
+                
+            // 1
+            var results = processTheJson(data);
             
-                results.clean(undefined);
-                
-                if(results.length > 0 && results[0] != undefined){
-                    $.each(results, function(i){
-                        var child = i+1;
-                        var item = apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview .showItem:nth-child('+child+')');
-                        item.find('img').attr('src',''+results[i].image+'').bind('load', function(){
-                            if($(this).height() > 0){
-                                $(this).fadeIn('slow');
-                            } else {
-                            }
-                            return false;
-                        });
-                        item.attr('href','content.json?uri='+results[i].uri)
-                        item.find('.br').html(results[i].brand);
-                        item.find('.pub').html('('+results[i].publisher+')');
-                        item.find('.ep').html(results[i].episode);
-                        item.removeAttr('style');
-                    });
+            // 2
+            results.clean(undefined);
+            if(results.length > 5){
+                results = results.slice(0,5);
+            }
+            
+            // 3
+            apiExplorer.queryBar[tab].parent.find('.resultsArea .preview .showItem').each(function(i){
+                var item = $(this);
+                var itemImage = $(this).find('img');
+                var itemCaption = $(this).find('.caption');
+                item.addClass('loading');
+                itemImage.fadeOut();
+                itemCaption.fadeOut();
+                if(results[i] != undefined){
+                    itemImage.attr('src',''+results[i].image+'');
+                    itemCaption.find('.br').html(results[i].brand);
+                    itemCaption.find('.pub').html('('+results[i].publisher+')');
+                    itemCaption.find('.ep').html(results[i].episode);
+                    item.attr('href', queryBeg+'content.json?uri='+results[i].uri).addClass('apiContent');
+                    itemCaption.fadeIn();
+                    itemImage.fadeIn();
+                    
+                } else {
+                    item.fadeOut();
                 }
-                
-                apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .preview').slideDown();
-                
-                apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output pre').html(apiExplorer.prettyJson(data));
-                //apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output .pre').html(apiExplorer.prettyJson(data));
-                
-            	/*$('.preToggle').click(function(){
-                    if(!$(this).parent().hasClass('shrunk')){
-                        $(this).html('+').parent().addClass('shrunk').animate({
-                            'height' : '15'
-                        });
-                    } else {
-                        $(this).html('-').parent().removeClass('shrunk').css({
-                            'height' : 'auto'
-                        });
-                    }
-                    return false;
-                });*/
-                apiExplorer.holder.find('#explore_'+apiExplorer.queryType+' .output').slideDown();
-                
-                $('.object .btn').click(function(e){
-                    e.stopImmediatePropagation();
-                    if($(this).parent().hasClass('closed')){
-                        $(this).parent().removeClass('closed');
-                    } else {
-                        $(this).parent().addClass('closed');
-                    }
-                    return false;
-                });
-                
-                $('.array .btn').click(function(e){
-                    e.stopImmediatePropagation();
-                    if($(this).parent().hasClass('closed')){
-                        $(this).parent().removeClass('closed');
-                    } else {
-                        $(this).parent().addClass('closed');
-                    }
-                    return false;
-                });
+                item.removeClass('loading');
+            });
+            
+            if(data.contents.length > 2){
+                data.contents = data.contents.slice(0,2);
+            }
+            
+            var oldPre = apiExplorer.queryBar[tab].parent.find('.resultsArea .output pre');
+            var newPre = oldPre.clone();
+            
+            apiExplorer.queryBar[tab].parent.find('.resultsArea .output').append(newPre)
+            
+            newPre.hide().html(apiExplorer.prettyJson(data));
+            
+            oldPre.fadeOut('fast', function(){
+                $(this).remove();
+                newPre.fadeIn();
+            });
+            
+            if(apiExplorer.queryBar[tab].parent.find('.resultsArea:hidden')){
+                apiExplorer.queryBar[tab].parent.find('.resultsArea').slideDown();
+            }
+            
+            $('.object .btn').click(function(e){
+                e.stopImmediatePropagation();
+                if($(this).parent().hasClass('closed')){
+                    $(this).parent().removeClass('closed');
+                } else {
+                    $(this).parent().addClass('closed');
+                }
+                return false;
+            });
+            
+            $('.array .btn').click(function(e){
+                e.stopImmediatePropagation();
+                if($(this).parent().hasClass('closed')){
+                    $(this).parent().removeClass('closed');
+                } else {
+                    $(this).parent().addClass('closed');
+                }
+                return false;
             });
         },
         error: function(jqXHR, textStatus, errorThrown){
-            apiExplorer.msg('error','Sorry, the following error occured: '+errorThrown);
+            sendMsg('error','Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
             if(textStatus == 'timeout') {
@@ -752,31 +793,17 @@ ApiExplorer.prototype.runQuery = function(tab){
     });
 }
 
-ApiExplorer.prototype.msg = function(type, message){
-    var apiExplorer = this;
-    var msgPane = $('#explore_'+apiExplorer.queryType).find('.msg');
-    msgPane.addClass(type).html(message).fadeIn();
-}
-
 ApiExplorer.prototype.prettyJson = function(json) {
     var apiExplorer = this;
     
-    var length = json.contents.length;
+    var newJson = JSON.stringify(json, 'null', '&nbsp;');
     
-    if(length < 5){
-        json.contents.slide(0,5);
-    }
+    newJson = newJson.replace(/\</g, '&lt;');
+    newJson = newJson.replace(/\>/g, '&gt;');
     
-    var newJson = prettyPrintOne(JSON.stringify(json, 'null', '&nbsp;'));
+    newJson = prettyPrintOne(newJson);
 
     return newJson;
-    
-    /*var worker = new Worker('js/prettifyWorker.js');
-    worker.postMessage(json);
-    
-    worker.onmessage = function(evt) {
-        console.log(evt.data.data);
-    }*/
 }
 
 Array.prototype.clean = function(deleteValue) {
@@ -788,6 +815,18 @@ Array.prototype.clean = function(deleteValue) {
   }
   return this;
 };
+
+var sendMsg = function(type, message){
+    if(message != false){
+        clearTimeout(message);
+    }
+    var apiExplorer = this;
+    var msgPane = $('#msgs');
+    msgPane.addClass(type).html(message).slideDown();
+    message = setTimeout(function(){
+        msgPane.slideUp();
+    }, 5000);
+}
 
 var imageReplace = function(image,newUrl) {
     image.attr('src',newUrl).bind('load', function(){
@@ -904,8 +943,6 @@ SelectBox.prototype.changeSelection = function() {
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
         
-    console.log(item.val);
-        
     // Add to url string
     updateString(item);
 }
@@ -946,6 +983,8 @@ var processTheJson = function(json){
                             item[i].image = json.contents[i].content[0].image;
                         }
                     }
+                } else {
+                    item[i] = undefined;
                 }
             });
         }
@@ -982,6 +1021,8 @@ var processTheJson = function(json){
                 if(json.schedule[0].items[i].image != undefined){
                     item[i].image = json.schedule[0].items[i].image;
                 }
+            } else {
+                item[i] == undefined;
             }
         });
     }
@@ -1002,10 +1043,36 @@ var updateString = function(obj) {
     itemParent.name = itemParent.name.split('_');
     itemParent.name = itemParent.name[1];
     
+    if(itemParent.name == 'search' && obj.title == 'title'){
+        obj.title = 'q';
+    }
+    
+    if(obj.title == 'limit'){
+        var v = parseInt(obj.val);
+        if(v > 50){
+            obj.val = '50';
+            obj.item.val('50');
+        }
+        if(v == 0){
+            obj.val = '1'
+            obj.item.val('1');
+        }
+    }
+    
+    if(obj.title == 'from' || obj.title == 'to'){
+        var theDate = obj.val.match(/(.*?)\//g);
+        var theYear = obj.val.match(/\d{4}/g);
+        obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
+    }
+    
     // 2
     var updatingString = itemParent.item.find('.urlCopy .urlTxt');
-    var currentQuery = updatingString.html();
-    currentQuery = currentQuery.replace('&amp;','&');
+    var currentQuery = updatingString.val();
+    if(currentQuery != null){
+        currentQuery = currentQuery.replace('&amp;','&');
+    } else {
+        currentQuery = ' ';
+    }
     var newQuery;
     
     // 3
@@ -1016,7 +1083,6 @@ var updateString = function(obj) {
     */
     // 1
     if(currentQuery.search(obj.title+'=') != -1){
-        console.log('Yes');
         // Remove current info
         // GETTING THIS WRONG AFTER REMOVE/ADDING TEXT WHEN MORE THEN ONE OTHER PARAMETER IS PRESENT        
         currentQuery = currentQuery.replace('&amp;','&');
@@ -1038,31 +1104,50 @@ var updateString = function(obj) {
         
         if(obj.val.length > 0){
             newQuery = currentStart + obj.title+'='+obj.val+'&'+currentEnd;
+        } else {
+            if(currentEnd.substr(0,1) == '&'){
+                currentEnd = currentEnd.substr(1);
+            }
+            newQuery = currentStart+currentEnd;
         }
     } else {
-        console.log('No');
-        console.log(obj);
         // If a ? is present
         if(currentQuery.search(/\?/g) != -1){
-            console.log('Hello');
-            // Add a &
-            newQuery = currentQuery+'&'+obj.title+'='+obj.val;
+            // If it's not the first param add a &
+            if(currentQuery.substr(currentQuery.search(/\?/g)+1).length != 0) {
+                newQuery = currentQuery+'&'+obj.title+'='+obj.val;
+            } else {
+                newQuery = currentQuery+obj.title+'='+obj.val;
+            }
         } else {
             // Add the entire thing including the type.
-            newQuery = queryBeg+itemParent.name+'.json?'+obj.title+'='+obj.val;
+            newQuery = queryBeg;
+            if(itemParent.name != 'advanced'){
+                newQuery += itemParent.name;
+            } else {
+                newQuery += 'discover';
+            }
+            newQuery += '.json?'+obj.title+'='+obj.val;
         }
     }
-    
     if(newQuery.substr(-1) == '&'){
         newQuery = newQuery.substr(0, newQuery.length-1);
     }
     
     newQuery = newQuery.replace('&amp;','&');
     
-    updatingString.html(newQuery);
+    updatingString.val(newQuery);
     
     /* ---------------- */
     /* --------------- */
+}
+
+function jsonp() {
+}
+
+function toTimestamp(year,month,day,hour,minute,second){
+    var datum = new Date(Date.UTC(year,month-1,day,hour,minute,second));
+    return datum.getTime()/1000;
 }
 
 $(document).ready(function(){
@@ -1097,9 +1182,19 @@ $(document).ready(function(){
     var homeDemo = new HomeDemo($('.controlBar'));
     homeDemo.init();
     
-    $('a.apiDiscover').click(function(){
+    $('a.apiSearch').click(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(0);
+            apiExplorer.searchQuery($(this).attr('href'));
+            window.location.hash = 'apiExplorer';
+            apiFuncRun = true;
+            return false;
+        }
+    });
+    
+    $('a.apiDiscover').click(function(){
+        if(apiFuncRun == false) {
+            tabs.changeTab(1);
             apiExplorer.discoverQuery($(this).attr('href'));
             window.location.hash = 'apiExplorer';
             apiFuncRun = true;
@@ -1109,7 +1204,7 @@ $(document).ready(function(){
     
     $('a.apiSchedule').click(function(){
         if(apiFuncRun == false) {
-            tabs.changeTab(1);
+            tabs.changeTab(2);
             apiExplorer.scheduleQuery($(this).attr('href'));
             window.location.hash = 'apiExplorer';
             apiFuncRun = true;
@@ -1119,7 +1214,7 @@ $(document).ready(function(){
     
     $('a.apiContent').click(function(){
         if(apiFuncRun == false) {
-            tabs.changeTab(2);
+            tabs.changeTab(3);
             apiExplorer.contentQuery($(this).attr('href'));
             window.location.hash = 'apiExplorer';
             apiFuncRun = true;
@@ -1138,22 +1233,38 @@ $(document).ready(function(){
     });
     
     $('.urlCopy .urlTxt').click(function(){
-        var query = $(this).html();
-        query = query.substr(query.indexOf('0/')+2);
-        query = query.replace(/\&amp\;/g,'&');
-        query = query.replace(queryBeg, '');
-        tabs.changeTab(3);
-        apiExplorer.customQuery(query,false);
-        console.log(query);
+        $(this).select();
         return false;
     });
     
-    $('.watchMe').keyup(function(){        
+    $('.urlCopy .urlTxt').keyup(function(e){
+        var query = $(this).val();
+        if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) {
+            query = query.substr(query.indexOf('0/')+2);
+            query = query.replace(/\&amp\;/g,'&');
+            query = query.replace(queryBeg, '');
+            tabs.changeTab(3);
+            apiExplorer.customQuery(query,false);
+        }
+        return false;
+    });
+    
+    $('.watchMe').keyup(function(e){
+        if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
+            clearTimeout(updatingString);
+            var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+        
+            // Add to url string
+            updatingString = setTimeout(function(){
+                updateString(item);
+            },500);
+        }
+    });
+    
+    $('.watchMe').change(function(e){
         clearTimeout(updatingString);
         var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-        
-        console.log($(this).val());
-        
+    
         // Add to url string
         updatingString = setTimeout(function(){
             updateString(item);

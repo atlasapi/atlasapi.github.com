@@ -14,7 +14,7 @@
 	</head>
 	<body>
 	   <header class="hr">
-            <div class="content">
+            <div class="content clearfix">
                 <h1 class="fl mbn"><a href="#home" class="logo">Atlas, The video and audio index</a></h1>
                 <a href="#apiExplorer" class="btn btn_lrg"><span class="icn_mag"></span>API Explorer</a>
                 <nav>
@@ -25,6 +25,7 @@
                         <li><a href="#about">About</a></li>
                     </ul>
                 </nav>
+                <div id="msgs" style="display:none;">Sorry, the following error occured: timeout</div>
             </div>
         </header>
 		<div class="page">
@@ -227,6 +228,8 @@
                     <li><a href="#reference_overview">Overview</a></li>
                     <li><a href="#reference_dataModel">Data Model</a></li>
                     <li><a href="#reference_fullReference">Full Reference</a></li>
+                    <li><a href="#reference_sources">Sources</a></li>
+                    <li><a href="#reference_feeds">Feeds</a></li>
                 </ul>
                 <h2>Reference</h2>
                 
@@ -353,7 +356,204 @@
                 <section data-title="reference_fullReference" class="subSection">
                     <div class="marker" id="reference_fullReference"></div>
                     <h3>Full Reference</h3>
+                    <p>This is an attempt to fully document all the functions, objects and attributes of the Atlas API. Shout if we’ve missed anything.</p>
                     
+                    <p>In a Atlas API call: <a href="#">http://atlasapi.org/2.0/brands.json?brand.uri=http://www.bbc.co.uk/programmes/b00jnwlc</a></p>
+                    <p>The brands part of the URL determines what collection of information you are filtering over. These can either be items, playlists or brands.</p>
+                    
+                    <h4>Items</h4>
+                    <p>Searching against /items encapsulates both episodes and items, including both episodic pieces of content and one-offs. Episodes will also contain a summary of the its parent Brand.</p>
+                    <h5>Queries</h5>
+                    <ul class="list mbl">
+                        <li>By URI: <a href="#">/items.json?uri=http://www.bbc.co.uk/programmes/b00mqmpr</a></li>
+                        <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
+                        <li>By publisher: <a href="#">/items.json?publisher=bbc.co.uk</a></li>
+                        <li>By genre: <a href="#">/items.json?genre=factual</a></li>
+                        <li>By tag: <a href="#">/items.json?tag=http://ref.atlasapi.org/tags/canterbury</a></li>
+                        <li>By alias (the same as by URI): <a href="#">/items.json?uri=http://bbc.co.uk/i/mqmpr/</a></li>
+                        <li>By availability (on by default): <a href="#">/items.json?available=true&limit=2</a></li>
+                        <li>By transport type: <a href="#">/items.json?transportType=download&limit=2</a></li>
+                        <li>By the actual location of some media (same as by URI): <a href="#">/items.json?uri=http://www.youtube.com/watch?v=f2dDpzNbJ-Q</a></li>
+                        <li>By brand: <a href="#">/items.json?brand.uri=c4:peep-show</a></li>
+                        <li>By season position: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1</a></li>
+                        <li>By episode position: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position=5</a></li>
+                    </ul>
+                    
+                    <h4>Playlists</h4>
+                    <p>Searching against /playlists encapsulates both playlists and brands, including both established series of episodes, and randomly constructed lists.</p>
+                    <h5>Queries</h5>
+                    <ul class="list mbl">
+                        <li>By URI: <a href="#">/playlists.json?uri=http://www.channel4.com/programmes/peep-show</a></li>
+                        <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
+                        <li>By publisher: <a href="#">/playlists.json?publisher=bbc.co.uk</a></li>
+                        <li>By alias (the same as by URI): <a href="#">/playlists.json?uri=http://www.channel4.com/programmes/peep-show/4od</a></li>
+                    </ul>
+    
+                    <h4>Brands</h4>
+                    <p>Brands are a specialisations of Playlists and contain only Episodes. All of the queries available for Playlists apply to Brands, plus some more interesting ones, but will only return Brands that match.</p>
+                    <h5>Queries</h5>
+                    <ul class="list mbl">
+                        <li>By URI: <a href="#">/brands.json?uri=http://www.channel4.com/programmes/peep-show</a></li>
+                        <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
+                        <li>By publisher: <a href="#">/brands.json?publisher=bbc.co.uk</a></li>
+                        <li>By alias (the same as by URI): <a href="#">/brands.json?uri=http://www.channel4.com/programmes/peep-show/4od</a></li>
+                        <li>By title search: <a href="#">/brands.json?title=east</a></li>
+                    </ul>
+                    
+                    <h4>Common Query Parameters</h4>
+                    <p>Additionally, there are query parameters that can be applied to all queries.</p>
+                    
+                    <h5>Limit and Offest</h5>
+                    <p>limit and offset can be applied to any query to help paginate through the results. Take title searches, for example, can result in rather a lot of results. Here is how you’d paginate through them:</p>
+                    <ul class="list">
+                        <li>First 2: <a href="#">/brands.json?title=east&limit=2</a></li>
+                        <li>Next 2: <a href="#">/brands.json?title=east&limit=2&offset=2</a></li>
+                        <li>And so on: <a href="#">/brands.json?title=east&limit=2&offset=4</li></a>
+                    </ul>
+                    
+                    <h5>Integer Operators</h5>
+                    <p>There are common filter operators that can be applied to any integer queries:</p>
+                    <ul class="list">
+                        <li>Less than: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position-lessThan=5</a></li>
+                        <li>Greater than: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position-greaterThan=5</a></li>
+                    </ul>
+                    
+                    <h5>Date Operators</h5>
+                    <p>There are common filter operators that can be applied to any date queries:</p>
+                    <ul class="list">
+                        <li>get what’s on now: <a href="#">/items.json?transmissionTime=now</a></li>
+                        <li>get what’s on at a specific time (unix timestamp): <a href="#">/items.json?transmissionTime=1234567890</a></li>
+                        <li>get what was on an hour ago <a href="#">/items.json?transmissionTime=now.minus.1H</a></li>
+                        <li>get everything that started in the last 5 hours <a href="#">/items.json?transmissionTime-after=now.minus.5H&transmissionTime-before=now</a></li>
+                    </ul>
+                </section>
+                
+                <section data-title="reference_sources" class="subSection">
+                    <div class="marker" id="reference_sources"></div>
+                    <h3>Sources</h3>
+                    <p>Atlas works with data from the following sources:</p>
+                    
+                    <h4>International Long-form</h4>
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Access</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>iTunes</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Pay on-demand shows</td>
+                            </tr>
+                             <tr>
+                                <td>Hulu</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Free on-demand shows</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <h4>UK Long-form</h4>
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Access</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BBC</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Free on-demand shows, EPG, Clips</td>
+                            </tr>
+                             <tr>
+                                <td>ITV</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Free on-demand shows</td>
+                            </tr>
+                            <tr>
+                                <td>C4</td>
+                                <td>Restricted</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Free on-demand shows, EPG, Clips</td>
+                            </tr>
+                            <tr>
+                                <td>Five</td>
+                                <td>Restricted</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Free on-demand shows</td>
+                            </tr>
+                            <tr>
+                                <td>Press Association</td>
+                                <td>Restricted</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>EPG</td>
+                            </tr>
+                            <tr>
+                                <td>SeeSaw</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Free on-demand shows, Pay on-demand shows</td>
+                            </tr>
+                            <tr>
+                                <td>MSN Video</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>free on-demand shows</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Please contact MetaBroadcast if you are interested in using restricted sources.</p>
+                </section>
+                
+                <section data-title="reference_feeds" class="subSection">
+                    <div class="marker" id="reference_feeds"></div>
+                    <h3>Feeds</h3>
+                    <p>In addition to the RESTful API, Atlas also provides data in a variety of feed formats</p>
+                    
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Format</th>
+                                <th>Base Type</th>
+                                <th>Status</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Google Video Sitemaps</td>
+                                <td>MRSS</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Data to feed Google Video Search</td>
+                            </tr>
+                            <tr>
+                                <td>BBC Interlinking</td>
+                                <td>MRSS</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Data to feed broadcast data into BBC iPlayer</td>
+                            </tr>
+                            <tr>
+                                <td>UK Radio Player</td>
+                                <td>DAB-EPG</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>Data to feed UK Radio Player Search</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <p>Contact MetaBroadcast for help producing data in these formats</p>
                 </section>
             </section>
             
@@ -471,81 +671,6 @@ locations: [
                 </pre>
             </section> -->
             
-            <!-- <section class="fullApi">
-                <div class="marker" id="fullApi"></div>
-                <h2>Full API Reference</h2>
-                <p>This is an attempt to fully document all the functions, objects and attributes of the Atlas API. Shout if we’ve missed anything.</p>
-                
-                <p>In a Atlas API call: <a href="#">http://atlasapi.org/2.0/brands.json?brand.uri=http://www.bbc.co.uk/programmes/b00jnwlc</a></p>
-                <p>The brands part of the URL determines what collection of information you are filtering over. These can either be items, playlists or brands.</p>
-                
-                <h3>Items</h3>
-                <p>Searching against /items encapsulates both episodes and items, including both episodic pieces of content and one-offs. Episodes will also contain a summary of the its parent Brand.</p>
-                <h4>Queries</h4>
-                <ul class="list mbl">
-                    <li>By URI: <a href="#">/items.json?uri=http://www.bbc.co.uk/programmes/b00mqmpr</a></li>
-                    <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
-                    <li>By publisher: <a href="#">/items.json?publisher=bbc.co.uk</a></li>
-                    <li>By genre: <a href="#">/items.json?genre=factual</a></li>
-                    <li>By tag: <a href="#">/items.json?tag=http://ref.atlasapi.org/tags/canterbury</a></li>
-                    <li>By alias (the same as by URI): <a href="#">/items.json?uri=http://bbc.co.uk/i/mqmpr/</a></li>
-                    <li>By availability (on by default): <a href="#">/items.json?available=true&limit=2</a></li>
-                    <li>By transport type: <a href="#">/items.json?transportType=download&limit=2</a></li>
-                    <li>By the actual location of some media (same as by URI): <a href="#">/items.json?uri=http://www.youtube.com/watch?v=f2dDpzNbJ-Q</a></li>
-                    <li>By brand: <a href="#">/items.json?brand.uri=c4:peep-show</a></li>
-                    <li>By season position: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1</a></li>
-                    <li>By episode position: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position=5</a></li>
-                </ul>
-                
-                <h3>Playlists</h3>
-                <p>Searching against /playlists encapsulates both playlists and brands, including both established series of episodes, and randomly constructed lists.</p>
-                <h4>Queries</h4>
-                <ul class="list mbl">
-                    <li>By URI: <a href="#">/playlists.json?uri=http://www.channel4.com/programmes/peep-show</a></li>
-                    <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
-                    <li>By publisher: <a href="#">/playlists.json?publisher=bbc.co.uk</a></li>
-                    <li>By alias (the same as by URI): <a href="#">/playlists.json?uri=http://www.channel4.com/programmes/peep-show/4od</a></li>
-                </ul>
-
-                <h3>Brands</h3>
-                <p>Brands are a specialisations of Playlists and contain only Episodes. All of the queries available for Playlists apply to Brands, plus some more interesting ones, but will only return Brands that match.</p>
-                <h4>Queries</h4>
-                <ul class="list mbl">
-                    <li>By URI: <a href="#">/brands.json?uri=http://www.channel4.com/programmes/peep-show</a></li>
-                    <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
-                    <li>By publisher: <a href="#">/brands.json?publisher=bbc.co.uk</a></li>
-                    <li>By alias (the same as by URI): <a href="#">/brands.json?uri=http://www.channel4.com/programmes/peep-show/4od</a></li>
-                    <li>By title search: <a href="#">/brands.json?title=east</a></li>
-                </ul>
-                
-                <h3>Common Query Parameters</h3>
-                <p>Additionally, there are query parameters that can be applied to all queries.</p>
-                
-                <h4>Limit and Offest</h4>
-                <p>limit and offset can be applied to any query to help paginate through the results. Take title searches, for example, can result in rather a lot of results. Here is how you’d paginate through them:</p>
-                <ul class="list">
-                    <li>First 2: <a href="#">/brands.json?title=east&limit=2</a></li>
-                    <li>Next 2: <a href="#">/brands.json?title=east&limit=2&offset=2</a></li>
-                    <li>And so on: <a href="#">/brands.json?title=east&limit=2&offset=4</li></a>
-                </ul>
-                
-                <h4>Integer Operators</h4>
-                <p>There are common filter operators that can be applied to any integer queries:</p>
-                <ul class="list">
-                    <li>Less than: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position-lessThan=5</a></li>
-                    <li>Greater than: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position-greaterThan=5</a></li>
-                </ul>
-                
-                <h4>Date Operators</h4>
-                <p>There are common filter operators that can be applied to any date queries:</p>
-                <ul class="list">
-                    <li>get what’s on now: <a href="#">/items.json?transmissionTime=now</a></li>
-                    <li>get what’s on at a specific time (unix timestamp): <a href="#">/items.json?transmissionTime=1234567890</a></li>
-                    <li>get what was on an hour ago <a href="#">/items.json?transmissionTime=now.minus.1H</a></li>
-                    <li>get everything that started in the last 5 hours <a href="#">/items.json?transmissionTime-after=now.minus.5H&transmissionTime-before=now</a></li>
-                </ul>
-            </section> -->
-            
             <section class="about">
                 <div class="marker" id="about"></div>
                 <ul class="subNav" style="display: none;">
@@ -555,12 +680,18 @@ locations: [
                 <h2>About</h2>
                 <section data-title="about_overview" class="subSection">
                     <div class="marker" id="about_overview"></div>  
-                    <h3>Overview</h3>              
+                    <h3>Overview</h3>
                     <div class="line mbl">
                         <div class="unit size2of3">
                             <article>
+                                <h4 class="hr">Atlas Is</h4>
+                                <ul class="list mbl">
+                                    <li>The open-source, open-API index that gathers and stores video & audio information from <a href="#">10+ sources</a>, so that you can build cool apps swiftly</li>
+                                    <li>The way to learn all about a content link, or to find the content link itself</li>
+                                </ul>  
+                                
                                 <h4 class="hr">Atlas Does</h4>
-                                <ul class="list">
+                                <ul class="list mbl">
                                     <li>Runs sophisticated title searches</li>
                                     <li>Helps you get to content you can actually watch, like "<a href="#">I want to watch Glee and I am in the US</a>"</li>
                                     <li>Automatically produces all the content lists needed for an online video service, from episodes in a brand to a-to-z lists and the current highlights</li>
@@ -569,26 +700,23 @@ locations: [
                                     <li>Next to web, finds mobile and TV friendly content</li>
                                     <li>Lets you ask for content by time, like "<a href="#">What's on the BBC right now?</a>"</li>
                                     <li>Outputs information in <a href="#">many different formats</a></li>
+                                    <li>Figure equivalent content from fifferent sources</li>
                                 </ul>
                             </article>
                         </div>
                         <div class="unit size1of3 lastUnit">
                             <article>
-                                <h4 class="hr">Atlas Is</h4>
-                                <ul class="list mbl">
-                                    <li>The open-source, open-API index that gathers and stores video & audio information from <a href="#">10+ sources</a>, so that you can build cool apps swiftly</li>
-                                    <li>The way to learn all about a content link, of to find the content link itself</li>
-                                </ul>
-                                <h4 class="hr">Atlas Will</h4>
-                                <ul class="list">
-                                    <li>Figure equivalent content from different sources</li>
-                                    <li>Search across title, description, tags and genres</li>
-                                    <li>Add more and more sources, and improve and augment the data from the current ones</li>
+                                <h4 class="hr"><mark>Atlas</mark> is all over the web</h4>
+                                <ul class="socialList">
+                                    <li><a href="#"><img src="images/twitter.png" /><mark>@atlasapi</mark></a></li>
+                                    <li><a href="#"><img src="images/github.png" /><mark>source-code, wiki and issue tracker</mark></a></li>
+                                    <li><a href="#"><img src="images/google.png" /><mark>discussion</mark></a></li>
+                                    <li><a href="#"><img src="images/metabroadcast.png" /><mark>metabroadcast</mark></a></li>
                                 </ul>
                             </article>
                         </div>
                     </div>
-                    <div class="line mbl">
+                    <!-- <div class="line mbl">
                         <div class="unit size2of3">
                             <article>
                                 <h4 class="hr">projects that use atlas</h4>
@@ -611,54 +739,37 @@ locations: [
                             </article>
                         </div>
                         <div class="unit size1of3 lastUnit">
-                            <article>
-                                <h4 class="hr"><mark>Atlas</mark> is all over the web</h4>
-                                <ul class="socialList">
-                                    <li><a href="#"><img src="images/twitter.png" /><mark>@atlasapi</mark></a></li>
-                                    <li><a href="#"><img src="images/github.png" /><mark>source-code, wiki and issue tracker</mark></a></li>
-                                    <li><a href="#"><img src="images/google.png" /><mark>communication (groups)</mark></a></li>
-                                    <li><a href="#"><img src="images/metabroadcast.png" /><mark>metabroadcast</mark></a></li>
-                                </ul>
-                            </article>
+                            <article> -->
+                                
+                            <!-- </article>
                         </div>
-                    </div>
+                    </div>-->
                 </section>
                 <section data-title="about_getInvolved" class="subSection">
                     <div class="marker" id="about_getInvolved"></div>
                     <h3>Get Involved</h3>
-                    <div class="line">
-                        <div class="unit size2of3">
-                            <h4>Calls for Help</h4>
-                            <p>There are a number of things that help would be hugely appreciated with. If you would like to contribute to the API core, please get in touch about:</p>
-                            <ul class="list">
-                                <li>Improving the ITV adapter</li>
-                                <li>Developing a Five adapter</li>
-                            </ul>
-                            
-                            <h4>Project Hosting</h4>
-                            <p>The <a href="http://github.com/atlasapi">source-code</a>, <a href="http://github.com/atlasapi/atlas/issues">issue tracking</a> and <a href="http://wiki.github.com/atlasapi/atlas/">wiki</a> are all hosted on <a href="http://github.com/">Github</a>.</p>
-                            <p>Additionally, communication is all handled through <a href="http://groups.google.com/group/atlasapi/">Google Groups</a>. If you’re interested in joining the project or just asking us something, the group is the best place to start.</p>
-                            <p>Alternatively, if you notice something is wrong, or just have a feature request, feel free to use our <a href="http://github.com/atlasapi/atlas/issues">Issue Tracker</a>.</p>
-                            
-                            <h4>License</h4>
-                            <p>Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></p>
-                            
-                            <h4>Client Libraries</h4>
-                            <p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br /><a href="">@micrypt</a> very kindly started a simple Python client library: <a href="http://github.com/micrypt/atlas-client/">http://github.com/micrypt/atlas-client/</a><br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
-                        </div>
-                        <div class="unit size1of3 lastUnit">
-                            <p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
-                            <ul class="list">
-                                <li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
-                                <li>Have a chat with us about the features and formats that you’d find useful</li>
-                                <li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
-                                <li>Provide a metadata endpoint for us to ingest</li>
-                                <li>Develop an adapter for a new source of content, current sources are listed >>here<<</li>
-                                <li>Help improve the core of the code</li>
-                                <li>Write client libraries for other languages</li>
-                            </ul>
-                        </div>
-                    </div>
+                    
+                    <p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
+                    <ul class="list">
+                        <li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
+                        <li>Have a chat with us about the features and formats that you’d find useful</li>
+                        <li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
+                        <li>Provide a metadata endpoint for us to ingest</li>
+                        <li>Develop an adapter for a new source of content, current sources are listed >>here<<</li>
+                        <li>Help improve the core of the code</li>
+                        <li>Write client libraries for other languages</li>
+                    </ul>
+                    
+                    <h4>Project Hosting</h4>
+                    <p>The <a href="http://github.com/atlasapi">source-code</a>, <a href="http://github.com/atlasapi/atlas/issues">issue tracking</a> and <a href="http://wiki.github.com/atlasapi/atlas/">wiki</a> are all hosted on <a href="http://github.com/">Github</a>.<br />
+                    Additionally, communication is all handled through <a href="http://groups.google.com/group/atlasapi/">Google Groups</a>. If you’re interested in joining the project or just asking us something, the group is the best place to start.<br />
+                    Alternatively, if you notice something is wrong, or just have a feature request, feel free to use our <a href="http://github.com/atlasapi/atlas/issues">Issue Tracker</a>.</p>
+                    
+                    <h4>License</h4>
+                    <p>Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></p>
+                    
+                    <h4>Client Libraries</h4>
+                    <p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br /><a href="">@micrypt</a> very kindly started a simple Python client library: <a href="http://github.com/micrypt/atlas-client/">http://github.com/micrypt/atlas-client/</a><br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
                 </section>
             </section>
             
@@ -667,17 +778,105 @@ locations: [
                 <h2 class="explorerTitle">API Explorer</h2>
                 <div class="explorerWrapper" id="explorerWrapper">
                     <ul class="tabs clearfix">
+                        <li class="tab"><a href="#apiExplorer" data-tab="explorer_search">Search</a></li>
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_discover">Discover</a></li>
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_schedule">Schedule</a></li>
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_content">Content</a></li>
                     </ul>
                     <a href="#apiExplorer" data-tab="explore_advanced" class="tab tabExt">Complete control</a>
+                    <div class="tabArea" id="explore_search">
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label for="search_title" class="tr">Title:</label>
+                                    <input type="text" id="search_title" data-title="title" class="fr watchMe" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                    <label class="tr">Publisher:</label>
+                                    <span class="select">
+                                        <span class="value">-- Please Select</span>
+                                        <span class="options">
+                                            <span class="option" data-value="bbc.co.uk">BBC</span>
+                                            <span class="option" data-value="itv.com">ITV</span>
+                                            <span class="option" data-value="channel4.com">Channel 4</span>
+                                            <span class="option" data-value="five.tv">Five</span>
+                                            <span class="option" data-value="seesaw.com">SeeSaw</span>
+                                            <span class="option" data-value="hulu.com">Hulu</span>
+                                            <span class="option" data-value="">--</span>
+                                        </span>
+                                    </span>
+                                    <input type="hidden" id="search_publisher" data-title="publisher" class="fr watchMe" />
+                                </div>
+                            </div>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label for="search_limit" class="tr">Limit:</label>
+                                    <input type="number" id="search_limit" data-title="limit" min="1" max="50" step="1" value="20" class="fr watchMe" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                
+                                </div>
+                            </div>
+                            <div class="line hr mtm">
+                                <div class="unit size4of5">
+                                    <div class="urlCopy"><a href="#" id="search_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/search.json?" /></div>
+                                </div>
+                                <div class="unit size1of5 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="selected"><a href="#">JSON</a></li>
+                                    <!--<li><a href="#">XML</a></li>-->
+                                </ul>
+                                <pre>
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
                     <div class="tabArea" id="explore_discover">
                         <form>
                             <div class="line">
                                 <div class="unit size1of2">
-                                    <label for="discover_title" class="tr">Title:</label>
-                                    <input type="text" id="discover_title" data-title="title" class="fr watchMe" />
+                                   <label class="tr">Publisher:</label>
+                                    <span class="select">
+                                        <span class="value">-- Please Select</span>
+                                        <span class="options">
+                                            <span class="option" data-value="bbc.co.uk">BBC</span>
+                                            <span class="option" data-value="itv.com">ITV</span>
+                                            <span class="option" data-value="channel4.com">Channel 4</span>
+                                            <span class="option" data-value="five.tv">Five</span>
+                                            <span class="option" data-value="seesaw.com">SeeSaw</span>
+                                            <span class="option" data-value="hulu.com">Hulu</span>
+                                            <span class="option" data-value="">--</span>
+                                        </span>
+                                    </span>
+                                    <input type="hidden" id="discover_publisher" data-title="publisher" class="fr watchMe" />
                                 </div>
                                 <div class="unit size1of2 lastUnit">
                                     <label class="tr">Genre:</label>
@@ -703,65 +902,55 @@ locations: [
                                     <input type="hidden" id="discover_genre" data-title="genre" class="fr watchMe" />
                                 </div>
                             </div>
-                            <div class="line">
+                             <div class="line">
                                 <div class="unit size1of2">
-                                    <label class="tr">Publisher:</label>
-                                    <span class="select">
-                                        <span class="value">-- Please Select</span>
-                                        <span class="options">
-                                            <span class="option" data-value="bbc.co.uk">BBC</span>
-                                            <span class="option" data-value="itv.com">ITV</span>
-                                            <span class="option" data-value="channel4.com">Channel 4</span>
-                                            <span class="option" data-value="five.tv">Five</span>
-                                            <span class="option" data-value="seesaw.com">SeeSaw</span>
-                                            <span class="option" data-value="hulu.com">Hulu</span>
-                                            <span class="option" data-value="">--</span>
-                                        </span>
-                                    </span>
-                                    <input type="hidden" id="discover_publisher" data-title="publisher" class="fr watchMe" />
+                                    <label for="discover_limit" class="tr">Limit:</label>
+                                    <input type="number" id="discover_limit" data-title="limit" min="1" max="50" step="1" value="20" class="fr watchMe" />
                                 </div>
                                 <div class="unit size1of2 lastUnit">
+                                
                                 </div>
                             </div>
                             <div class="line hr mtm">
-                                <div class="unit size2of3">
-                                    <div class="urlCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><span class="urlTxt">http://atlasapi.org/3.0/</span></div>
+                                <div class="unit size4of5">
+                                    <div class="urlCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/discover.json?" /></div>
                                 </div>
-                                <div class="unit size1of3 lastUnit">
+                                <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
-                                    <p class="msg" id="discover_msg" style="display: none;"></p>
                                 </div>
                             </div>
                         </form>
-                        <div class="preview mlm clearfix" style="display: none;">
-                           <a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a> 
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                        </div>
-                        <div class="output" style="display: none;">
-                            <ul class="smallTabs clearfix">
-                                <li class="selected"><a href="#">JSON</a></li>
-                                <!--<li><a href="#">XML</a></li>-->
-                            </ul>
-                            <pre>
-                            </pre>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="selected"><a href="#">JSON</a></li>
+                                    <!--<li><a href="#">XML</a></li>-->
+                                </ul>
+                                <pre>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                     <div class="tabArea" id="explore_schedule" style="display: none;">
@@ -792,44 +981,45 @@ locations: [
                                 </div>
                             </div>
                             <div class="line hr">
-                                <div class="unit size2of3">
-                                    <div class="urlCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><span class="urlTxt">http://atlasapi.org/3.0/</span></div>
+                                <div class="unit size4of5">
+                                    <div class="urlCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/schedule.json?" /></div>
                                 </div>
-                                <div class="unit size1of3 lastUnit">
+                                <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
-                                    <p class="msg" id="schedule_msg" style="display: none;"></p>
                                 </div>
                             </div>
                         </form>
-                        <div class="preview mlm clearfix" style="display: none;">
-                           <a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a> 
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                        </div>
-                        <div class="output" style="display: none;">
-                            <ul class="smallTabs clearfix">
-                                <li class="selected"><a href="#">JSON</a></li>
-                                <!--<li><a href="#">XML</a></li>-->
-                            </ul>
-                            <pre>
-                            </pre>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="selected"><a href="#">JSON</a></li>
+                                    <!--<li><a href="#">XML</a></li>-->
+                                </ul>
+                                <pre>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                     <div class="tabArea" id="explore_content" style="display: none;">
@@ -842,43 +1032,44 @@ locations: [
                             </div>
                         </div>
                         <div class="line hr mtm">
-                            <div class="unit size2of3">
-                                <div class="urlCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><span class="urlTxt">http://atlasapi.org/3.0/</span></div>
+                            <div class="unit size4of5">
+                                <div class="urlCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/content.json?" /></div>
                             </div>
-                            <div class="unit size1of3 lastUnit">
+                            <div class="unit size1of5 lastUnit">
                                 <input type="submit" class="btn" value="Run" />
-                                <p class="msg" id="content_msg" style="display: none;"></p>
                             </div>
                         </div>
-                        <div class="preview mlm clearfix" style="display: none;">
-                           <a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a> 
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem apiContent">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                        </div>
-                        <div class="output" style="display: none;">
-                            <ul class="smallTabs clearfix">
-                                <li class="selected"><a href="#">JSON</a></li>
-                                <!--<li><a href="#">XML</a></li>-->
-                            </ul>
-                            <pre>
-                            </pre>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="selected"><a href="#">JSON</a></li>
+                                    <!--<li><a href="#">XML</a></li>-->
+                                </ul>
+                                <pre>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                     <div class="tabArea" id="explore_advanced" style="display: none;">
@@ -889,38 +1080,39 @@ locations: [
                              </div>
                             <div class="line hr mtm">
                                 <input type="submit" class="btn mbm" value="Run" />
-                                <p class="msg" id="content_msg" style="display: none;"></p>
                             </div>
                         </form>
-                        <div class="preview mlm clearfix" style="display: none;">
-                           <a class="showItem loading apiContent" style="display: none;">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a> 
-                			<a class="showItem loading apiContent" style="display: none;">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem loading apiContent" style="display: none;">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem loading apiContent" style="display: none;">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                			<a class="showItem loading apiContent" style="display: none;">
-                                <img src="" />
-                                <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                			</a>
-                        </div>
-                        <div class="output" style="display: none;">
-                            <ul class="smallTabs clearfix">
-                                <li class="selected"><a href="#">JSON</a></li>
-                                <!--<li><a href="#">XML</a></li>-->
-                            </ul>
-                            <pre>
-                            </pre>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="selected"><a href="#">JSON</a></li>
+                                    <!--<li><a href="#">XML</a></li>-->
+                                </ul>
+                                <pre>
+                                </pre>
+                            </div>
                         </div>
                     </div>
                 </div>
