@@ -23,6 +23,8 @@
 			
 			.page {margin: 0 auto; text-align: left; width: 960px; padding: 0; background: #efefef; border-left: 1px solid #e7e5e5; border-right: 1px solid #e7e5e5; position: relative;}
 			
+			code {text-transform: none; color: #000;}
+			
 			header {
                 position: fixed;
                 top:0;
@@ -1047,6 +1049,8 @@
                     width: 21px; height: 21px;
                     background: url(../images/copy.gif) center no-repeat;
                 }
+            
+            .line.urlCopy {background: none; border: 0 none; padding: 0; margin: 0;}
             
             /* Datepicker */
             .ui-datepicker {

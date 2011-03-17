@@ -83,7 +83,6 @@ PageInfo.prototype.init = function() {
     pageInfo.subSections = pageInfo.subSection.length;
     
     $('body').keyup(function(e){
-        console.log(pageInfo.currentSubSection);
         if($(':focus').length == 0) {
             if(pageInfo.currentSection == undefined){
                 pageInfo.currentSection = 0;
@@ -248,15 +247,15 @@ var HomeDemo = function(item) {
     
     var array0 = [
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&availableCountries=uk&offset=10'},
+        {'type': 'Discover', 'query':'discover.json?genre=comedy&availableCountries=uk&mediaType=video'},
         {'type': 'Search', 'query':'search.json?title=east'},
-        {'type': 'Search', 'query':'search.json?title=Britain'},
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=drama'},
         {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com'},
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy'},
         {'type': 'Discover', 'query':'discover.json?publisher=hulu.com'},
+        {'type': 'Search', 'query':'search.json?title=Britain'},
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=factual'},
-        {'type': 'Discover', 'query':'discover.json?publisher=archive.org'}
+        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com'}
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
@@ -932,11 +931,11 @@ SelectBox.prototype.changeSelection = function() {
     
     selectBox.item.find('.option.selected').removeClass('selected');
     
-    if(selectBox.current.name != '--'){
+    if(selectBox.current.name != 'none'){
         selectBox.item.find('.value').html(selectBox.current.name);
         selectBox.current.item.addClass('selected');
     } else {
-        selectBox.item.find('.value').html('-- Please Select');
+        selectBox.item.find('.value').html('Please Select');
     }
     
     selectBox.input.val(selectBox.current.val);
@@ -1071,7 +1070,7 @@ var updateString = function(obj) {
     if(currentQuery != null){
         currentQuery = currentQuery.replace('&amp;','&');
     } else {
-        currentQuery = ' ';
+        currentQuery = '';
     }
     var newQuery;
     
@@ -1243,7 +1242,7 @@ $(document).ready(function(){
             query = query.substr(query.indexOf('0/')+2);
             query = query.replace(/\&amp\;/g,'&');
             query = query.replace(queryBeg, '');
-            tabs.changeTab(3);
+            tabs.changeTab(4);
             apiExplorer.customQuery(query,false);
         }
         return false;

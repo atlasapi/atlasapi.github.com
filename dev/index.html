@@ -176,52 +176,7 @@
                     </div>
                 </div>
             </section>
-            
-            <!--<section class="apiGuide">
-                <div class="marker" id="apiGuide"></div>
-                <div class="line">
-                    <div class="unit size2of3">
-                        <h2>API Guide</h2>
-                        <p>Atlas is an open source, open API that gathers metadata on audio and video from across the web and makes it accessible through a powerful and rich query interface. Basically, Atlas does the legwork needed so that you can quickly and simply build cool stuff with content.</p>
-                        <p>Have a look at the <a href="#examples">API Examples</a> for an idea of the kind of queries you can make, and at <a href="#">Sources</a> for a list of the 10 or so content sources currently indexed.</p>
                         
-                        <p class="block">http://atlasapi.org/2.0/<a href="#">:type</a>.<a href="#">:format</a>?<a href="#">:query</a></p>
-                        
-                        <h4>What you get back</h4>
-                        <p>Items contain all the important information about a piece of media. Episodes extend Items as episodic content containing series and episode number, along with a specific Brand.</p>
-                        
-                        <p>Playlists contain lists of Items and other Playlists. Brands are Playlists but represent established brands by the broadcasters. For example, The Wire or Spaced are Brands that contain episodes while the current BBC Hotlist is a Playlist.</p>
-                        
-                        <h4>The format</h4>
-                        <p>We support loads of output formats. Chances are, you’ll want to go with the JSONP or XML output, but the HTML output is useful for playing about with the API. You might also be interested in the ATOM feeds or the super simple OEMBED format.</p>
-                        
-                        <p>For the linked-data minded, we have an illustrious RDF history with a fully linked up RDF output and published ontology.</p>
-                        
-                        <h4>Query parameters</h4>
-                        <p>Atlas supports a rich set of potential query parameters to help you filter your results down to what you actually want. You can filter by pretty much anything in the data-model but there are a number of short-cuts and defaults that will make your life easier. The basic format of a parameter entityName.attributeName-operator=value. To make this clearer a here are a few examples:</p>
-                        
-                        <ul class="list">
-                            <li>Find ‘Eastenders’ by URI: <a href="#">uri=http://bit.ly/8abiYZ</a></li>
-                            <li>Find ‘Peep Show’ on Channel4 by title: <a href="#">title=peepshow&publisher=channel4.com</a></li>
-                            <li>The first 5 episodes of Peep Show: <a href="#">brand.uri=c4:peep-show&seasonPosition=1&position-lessThan=5</a></li>
-                            <li>Downloadable items from blip.tv: <a href="#">publisher=blip.tv&transportType=download&limit=2</a></li>
-                        </ul>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <aside>
-                            <h3 class="hr mts">Shortcuts and Defaults</h3>
-                            <p>Rather than always asking for <mark>/brands.json?brand.uri=...</mark> when you want a brand, and <mark>/items.json?item.uri=...</mark> when you want a specific item, you can just ask for <mark>/brands.json?uri=...</mark> and it will work out what you’re after. If, however, you are filtering based on an attribute in a different data type then you will have to be more specific. This would be the case when asking for a brand’s episodes: <mark>/items.json?brand.uri=...</mark></p>
-                            <p>Similarly, <mark>/items.json?location.available=true</mark> can simply be shortened to <mark>/items.json?available=true</mark>. However, as we figured you’d usually be after media that you could actually use, this filter is on by default.</p>
-                            <p>We generally expect you to be looking for information on content that is available and in a webby format, if you’re looking for media for an iPhone, you’ll want to explicitly specify <mark>/items.json?dataContainerFormat=video/mp4</mark>.</p>
-                            
-                            <h3 class="hr">Title Searches</h3>
-                            <p>The title parameter works in a similar way to <mark>/items.json?item.uri=...</mark> However, title is a bit special as it actually performs a search so you don’t have to get it exactly right (if you know exactly what you’re looking for ask for then it’s best to ask for it it by URI or CURIE).</p>
-                            <p>So, <mark>/brands.json?title=east</mark> will return Eastenders, but it will also return Eastbound and Down. Which is nice.</p>
-                        </aside>
-                    </div>
-                </div>
-            </section>-->
-            
             <section class="reference">
                 <div class="marker" id="reference"></div>
                 <ul class="subNav" style="display: none;">
@@ -356,76 +311,154 @@
                 <section data-title="reference_fullReference" class="subSection">
                     <div class="marker" id="reference_fullReference"></div>
                     <h3>Full Reference</h3>
-                    <p>This is an attempt to fully document all the functions, objects and attributes of the Atlas API. Shout if we’ve missed anything.</p>
                     
-                    <p>In a Atlas API call: <a href="#">http://atlasapi.org/2.0/brands.json?brand.uri=http://www.bbc.co.uk/programmes/b00jnwlc</a></p>
-                    <p>The brands part of the URL determines what collection of information you are filtering over. These can either be items, playlists or brands.</p>
+                    <p>This is an attempt to fully document all the functions, objects and attributes of the Atlas API.</p>
                     
-                    <h4>Items</h4>
-                    <p>Searching against /items encapsulates both episodes and items, including both episodic pieces of content and one-offs. Episodes will also contain a summary of the its parent Brand.</p>
-                    <h5>Queries</h5>
-                    <ul class="list mbl">
-                        <li>By URI: <a href="#">/items.json?uri=http://www.bbc.co.uk/programmes/b00mqmpr</a></li>
-                        <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
-                        <li>By publisher: <a href="#">/items.json?publisher=bbc.co.uk</a></li>
-                        <li>By genre: <a href="#">/items.json?genre=factual</a></li>
-                        <li>By tag: <a href="#">/items.json?tag=http://ref.atlasapi.org/tags/canterbury</a></li>
-                        <li>By alias (the same as by URI): <a href="#">/items.json?uri=http://bbc.co.uk/i/mqmpr/</a></li>
-                        <li>By availability (on by default): <a href="#">/items.json?available=true&limit=2</a></li>
-                        <li>By transport type: <a href="#">/items.json?transportType=download&limit=2</a></li>
-                        <li>By the actual location of some media (same as by URI): <a href="#">/items.json?uri=http://www.youtube.com/watch?v=f2dDpzNbJ-Q</a></li>
-                        <li>By brand: <a href="#">/items.json?brand.uri=c4:peep-show</a></li>
-                        <li>By season position: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1</a></li>
-                        <li>By episode position: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position=5</a></li>
-                    </ul>
+                    <h4>Search</h4>
+                    <!--<p>Search intro</p>-->
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>q</code></td>
+                                <td>The title of the item you're searching for</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td><code>publisher</code></td>
+                                <td>The publisher of the content</td>
+                                <td>String from a list of available publishers</td>
+                            </tr>
+                            <tr>
+                                <td><code>limit</code> (required)</td>
+                                <td>The number of items to return (max 50)</td>
+                                <td>Integer</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     
-                    <h4>Playlists</h4>
-                    <p>Searching against /playlists encapsulates both playlists and brands, including both established series of episodes, and randomly constructed lists.</p>
-                    <h5>Queries</h5>
-                    <ul class="list mbl">
-                        <li>By URI: <a href="#">/playlists.json?uri=http://www.channel4.com/programmes/peep-show</a></li>
-                        <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
-                        <li>By publisher: <a href="#">/playlists.json?publisher=bbc.co.uk</a></li>
-                        <li>By alias (the same as by URI): <a href="#">/playlists.json?uri=http://www.channel4.com/programmes/peep-show/4od</a></li>
-                    </ul>
-    
-                    <h4>Brands</h4>
-                    <p>Brands are a specialisations of Playlists and contain only Episodes. All of the queries available for Playlists apply to Brands, plus some more interesting ones, but will only return Brands that match.</p>
-                    <h5>Queries</h5>
-                    <ul class="list mbl">
-                        <li>By URI: <a href="#">/brands.json?uri=http://www.channel4.com/programmes/peep-show</a></li>
-                        <li>By shortened id: <a href="#">/items.json?uri=bbc:b00mqmpr</a></li>
-                        <li>By publisher: <a href="#">/brands.json?publisher=bbc.co.uk</a></li>
-                        <li>By alias (the same as by URI): <a href="#">/brands.json?uri=http://www.channel4.com/programmes/peep-show/4od</a></li>
-                        <li>By title search: <a href="#">/brands.json?title=east</a></li>
-                    </ul>
+                    <h4>Discover</h4>
+                    <!--<p>Discover intro</p>-->
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>publisher</code></td>
+                                <td>The publisher of the content</td>
+                                <td>String from a list of available publishers</td>
+                            </tr>
+                            <tr>
+                                <td><code>genre</code></td>
+                                <td>The genre of the content</td>
+                                <td>String from a list of available genres</td>
+                            </tr>
+                            <tr>
+                                <td><code>tags</code></td>
+                                <td>A tag associated with the content</td>
+                                <td>String from a list of available tags</td>
+                            </tr>
+                            <tr>
+                                <td><code>available</code></td>
+                                <td>Whether the content is availaible ('<code>any</code>' will return content that is both not available and available)</td>
+                                <td><code>true</code>, <code>false</code>, <code>any</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>availableCountries</code></td>
+                                <td>Content available in a specific country</td>
+                                <td>String from a list of available countries</td>
+                            </tr>
+                            <tr>
+                                <td><code>duration</code></td>
+                                <td>The length of the content in seconds</td>
+                                <td>Integer</td>
+                            </tr>
+                            <tr>
+                                <td><code>isLongForm</code></td>
+                                <td>Content that is 'full length' eg. a full episode</td>
+                                <td><code>true</code> or <code>false</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>dataCountainerFormat</code></td>
+                                <td>The container format for the content (mp3, mp4 etc.)</td>
+                                <td>String from a list of available container formats</td>
+                            </tr>
+                            <tr>
+                                <td><code>transportType</code></td>
+                                <td>How the content is presented</td>
+                                <td><code>link</code>, <code>embed</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>mediaType</code></td>
+                                <td>The type of media</td>
+                                <td><code>audio</code> or <code>video</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>limit</code> (required)</td>
+                                <td>The number of items to return (max 50)</td>
+                                <td>Integer</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     
-                    <h4>Common Query Parameters</h4>
-                    <p>Additionally, there are query parameters that can be applied to all queries.</p>
+                    <h4>Schedule</h4>
+                    <!--<p>Schedule intro</p>-->
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>channel</code></td>
+                                <td>The channel of the content</td>
+                                <td>String from a list of available channels</td>
+                            </tr>
+                            <tr>
+                                <td><code>from</code></td>
+                                <td>The beginning of a schedule period</td>
+                                <td>Timestamp (seconds since 1/1/1970) or as a short hand <code>now.minus.24h</code> (based on <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank">ISO8601 Durations</a>)</td>
+                            </tr>
+                            <tr>
+                                <td><code>to</code></td>
+                                <td>The end of a schedule period</td>
+                                <td>Timestamp (seconds since 1/1/1970) or as a short hand <code>now.minus.24h</code> (based on <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank">ISO8601 Durations</a>)</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     
-                    <h5>Limit and Offest</h5>
-                    <p>limit and offset can be applied to any query to help paginate through the results. Take title searches, for example, can result in rather a lot of results. Here is how you’d paginate through them:</p>
-                    <ul class="list">
-                        <li>First 2: <a href="#">/brands.json?title=east&limit=2</a></li>
-                        <li>Next 2: <a href="#">/brands.json?title=east&limit=2&offset=2</a></li>
-                        <li>And so on: <a href="#">/brands.json?title=east&limit=2&offset=4</li></a>
-                    </ul>
-                    
-                    <h5>Integer Operators</h5>
-                    <p>There are common filter operators that can be applied to any integer queries:</p>
-                    <ul class="list">
-                        <li>Less than: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position-lessThan=5</a></li>
-                        <li>Greater than: <a href="#">/items.json?brand.uri=c4:peep-show&seasonPosition=1&position-greaterThan=5</a></li>
-                    </ul>
-                    
-                    <h5>Date Operators</h5>
-                    <p>There are common filter operators that can be applied to any date queries:</p>
-                    <ul class="list">
-                        <li>get what’s on now: <a href="#">/items.json?transmissionTime=now</a></li>
-                        <li>get what’s on at a specific time (unix timestamp): <a href="#">/items.json?transmissionTime=1234567890</a></li>
-                        <li>get what was on an hour ago <a href="#">/items.json?transmissionTime=now.minus.1H</a></li>
-                        <li>get everything that started in the last 5 hours <a href="#">/items.json?transmissionTime-after=now.minus.5H&transmissionTime-before=now</a></li>
-                    </ul>
+                    <h4>Content</h4>
+                    <!--<p>Content intro</p>-->
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>uri</code></td>
+                                <td>The URI of a specific piece of content</td>
+                                <td>The URI of a piece of content</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
                 
                 <section data-title="reference_sources" class="subSection">
@@ -556,121 +589,7 @@
                     <p>Contact MetaBroadcast for help producing data in these formats</p>
                 </section>
             </section>
-            
-            <!--<section class="dataModel">
-                <div class="marker" id="dataModel"></div>
-                <h2>Data Model</h2>
-                <p>The Atlas data model revolves around Items and Playlists. Simple.</p>
-                
-                <h3 id="items">Items</h3>
-                <p>Items represent individual pieces of content, including all the standard pieces of metadata that you’d expect. Here’s an annotated overview of the JSON returned by a request for an episode of Peep Show:</p>
-                <div class="line mbl">
-                    <div class="unit size2of3">
-                        <pre class="mrl">uri: "http://www.channel4.com/programmes/peep-show/4od#2921979",
-aliases: [
-    "http://bit.ly/28Nml"
-],
-curie: "c4:peep-show_2921979",</pre>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <h4>Identifiers</h4>
-                        <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
-                    </div>
-                </div>
-                
-                <div class="line mbl">
-                    <div class="unit size1of3">
-                        <h4>Description</h4>
-                        <p class="mrl">These attributes describe the item.</p>
-                    </div>
-                    <div class="unit size2of3 lastUnit">
-                        <pre>description: "Despite being bullied on the street..."
-title: "Series 1 Episode 1",
-publisher: "channel4.com",
-image: "http://www.channel4.com/assets/programmes/.../625x352.jpg",
-thumbnail: "http://www.channel4.com/assets/programmes/.../200x113.jpg",
-genres:[
-    "http://www.channel4.com/programmes/tags/comedy",
-    "http://www.channel4.com/programmes/tags/entertainment",
-    "comedy",
-    "entertainment"
-],</pre>
 
-                    </div>
-                </div>
-                
-                <div class="line mbl">
-                    <div class="unit size2of3">
-                        <pre class="mrl">episode_number: 1,
-series_number: 1,
-brand: {
-  uri: "http://www.channel4.com/programmes/peep-show",
-  curie: "c4:peep-show",
-  title: "Peep Show"
-},</pre>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <h4>Episode attributes</h4>
-                        <p>This Item is also an Episode, which means it is part of a Brand. These attributes outlines this Episode’s position within its Brand. If the Item is not an Episode these attributes will not be present.</p>
-                    </div>
-                </div>
-                
-                <div class="line mbl">
-                    <div class="unit size1of3">
-                        <h4>Locations</h4>
-                        <p>Each location represents a way to play the content. In this example there is a simple ‘link’ location, which means you can link to this content at the URI given.</p>
-                    </div>
-                    <div class="unit size2of3 lastUnit">
-                        <pre class="mll">
-locations: [
-  {
-     "duration":1436,
-     "rating":"http://ref.atlasapi.org/ratings/simple/adult",
-     "rating_text":"Strong language",
-     "availability_start":"Jun 24, 2009 12:00:00 AM",
-     "transport_type":"link",
-     "uri":"http://www.channel4.com/programmes/peep-show/4od#2921979",
-     "available":true
-  }
-],</pre>
-
-                    </div>
-                </div>
-                
-                <h3>Locations</h3>
-                <p>Each Item contains the various different ways you can get your metaphorical hands on the media. These are called Locations and provide all the information about how to access the content, who can access it, where it is, and so on. This is an example Location (the full schema is quite large, but you get the idea):</p>
-                <pre>
-{
-    duration: 28*60,
-    publishedDuration: 30*60,
-    transmissionTime: DATETIME,
-    available: true,
-    availablityStart: DATETIME,
-    uri: "http://link.to/the/actual/media",
-    embedCode: "&lt;embed&gt;simple html for you to embed&lt;/embed&gt;",
-    transportType: "embed",
-    ...
-}
-                </pre>
-                
-                <h3>Playlists</h3>
-                <p>Playlists represent collections of Items and Playlists. This could be anything, from a particular Brand (say, The Wire), to a broadcaster’s top picks (like Channel 4’s), or even currently trending Playlists and Items (such as currently hot on Twitter).</p>
-                
-                <p>Playlists, in-fact, look very similar to Items in their core attributes but differ in that Items contain the physical media Locations, while Playlists contain Items and other Playlists:</p>
-                <pre>
-{
-    title: "The Item's Title",
-    description: "A nice description about the Item",
-    uri: "http://canonical.uri/of/the/playlist",
-    curie: "namespaced:id",
-    aliases: ["http://different.uris", "http://that.the/item/is/known/as"],
-    publisher: "broadcaster.com",
-    items: [...],
-    playlists: [....]
-}
-                </pre>
-            </section> -->
-            
             <section class="about">
                 <div class="marker" id="about"></div>
                 <ul class="subNav" style="display: none;">
@@ -794,15 +713,15 @@ locations: [
                                 <div class="unit size1of2 lastUnit">
                                     <label class="tr">Publisher:</label>
                                     <span class="select">
-                                        <span class="value">-- Please Select</span>
+                                        <span class="value">Please Select</span>
                                         <span class="options">
                                             <span class="option" data-value="bbc.co.uk">BBC</span>
                                             <span class="option" data-value="itv.com">ITV</span>
-                                            <span class="option" data-value="channel4.com">Channel 4</span>
-                                            <span class="option" data-value="five.tv">Five</span>
+                                            <span class="option" data-calue="itunes.com">iTunes</span>
                                             <span class="option" data-value="seesaw.com">SeeSaw</span>
                                             <span class="option" data-value="hulu.com">Hulu</span>
-                                            <span class="option" data-value="">--</span>
+                                            <span class="option" data-value="video.uk.msn.com">MSN Video</span>
+                                            <span class="option" data-value="">None</span>
                                         </span>
                                     </span>
                                     <input type="hidden" id="search_publisher" data-title="publisher" class="fr watchMe" />
@@ -865,15 +784,15 @@ locations: [
                                 <div class="unit size1of2">
                                    <label class="tr">Publisher:</label>
                                     <span class="select">
-                                        <span class="value">-- Please Select</span>
+                                        <span class="value">Please Select</span>
                                         <span class="options">
                                             <span class="option" data-value="bbc.co.uk">BBC</span>
                                             <span class="option" data-value="itv.com">ITV</span>
-                                            <span class="option" data-value="channel4.com">Channel 4</span>
-                                            <span class="option" data-value="five.tv">Five</span>
+                                            <span class="option" data-calue="itunes.com">iTunes</span>
                                             <span class="option" data-value="seesaw.com">SeeSaw</span>
                                             <span class="option" data-value="hulu.com">Hulu</span>
-                                            <span class="option" data-value="">--</span>
+                                            <span class="option" data-value="video.uk.msn.com">MSN Video</span>
+                                            <span class="option" data-value="">None</span>
                                         </span>
                                     </span>
                                     <input type="hidden" id="discover_publisher" data-title="publisher" class="fr watchMe" />
@@ -881,7 +800,7 @@ locations: [
                                 <div class="unit size1of2 lastUnit">
                                     <label class="tr">Genre:</label>
                                     <span class="select">
-                                        <span class="value">-- Please Select</span>
+                                        <span class="value">Please Select</span>
                                         <span class="options">
                                             <span class="option" data-value="comedy">Comedy</span>
                                             <span class="option" data-value="childrens">Childrens</span>
@@ -896,7 +815,7 @@ locations: [
                                             <span class="option" data-value="entertainment">Entertainment</span>
                                             <span class="option" data-value="film">Film</span>
                                             <span class="option" data-value="animation">Animation</span>
-                                            <span class="option" data-value="">--</span>
+                                            <span class="option" data-value="">None</span>
                                         </span>
                                     </span>
                                     <input type="hidden" id="discover_genre" data-title="genre" class="fr watchMe" />
@@ -959,16 +878,16 @@ locations: [
                                 <div class="unit size1of2">
                                     <label class="tr">Channel:</label>
                                     <span class="select">
-                                        <span class="value">-- Please Select</span>
+                                        <span class="value">Please Select</span>
                                         <span class="options">
                                             <span class="option" data-value="bbcone">BBC One</span>
                                             <span class="option" data-value="bbctwo">BBC Two</span>
+                                            <span class="option" data-value="bbcthree">BBC Three</span>
+                                            <span class="option" data-value="bbcfour">BBC Four</span>
                                             <span class="option" data-value="bbchd">BBC HD</span>
-                                            <span class="option" data-value="itv1london">ITV1 London</span>
-                                            <span class="option" data-value="itv1hd">ITV1 HD</span>
-                                            <span class="option" data-value="http://www.channel4.com">Channel 4</span>
-                                            <span class="option" data-value="five">Five</span>
-                                            <span class="option" data-value="">--</span>
+                                            <span class="option" data-value="cbbc">CBBC</span>
+                                            <span class="option" data-value="radio1">BBC Radio 1</span>
+                                            <span class="option" data-value="">None</span>
                                         </span>
                                     </span>
                                     <input type="hidden" id="schedule_channel" data-title="channel" class="fr watchMe" />
@@ -1074,7 +993,7 @@ locations: [
                     </div>
                     <div class="tabArea" id="explore_advanced" style="display: none;">
                         <form>
-                            <div class="line">
+                            <div class="line urlCopy">
                                 <label for="advanced_string" class="tr adv">http://atlasapi.org/3.0/</label>
                                 <div class="clearfix"><a href="#" id="advanced_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" id="advanced_string" class="fr adv watchMe" /></div>
                              </div>
