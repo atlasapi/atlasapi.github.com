@@ -151,27 +151,27 @@
                 <h2>Examples</h2>
                 <div class="clearfix">
                     <div class="example clearfix">
-                        <a href="discover.json?title=glee" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?title=glee</a>
+                        <a href="http://otter.atlasapi.org/3.0/search.json?q=glee&limit=2" class="api apiSearch">http://atlasapi.org/3.0/search.json?q=glee&limit=2</a>
                         <h3>Search for a the <mark class="hov hovDown" data-title="title">title</mark> of some content</h3>
                     </div>
                     
                     <div class="example right clearfix">
-                        <a href="discover.json?publisher=bbc.co.uk" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?publisher=bbc.co.uk</a>
-                        <h3>Search for a the <mark class="hov hovDown" data-title="publisher">publisher</mark> of some content</h3>
+                        <a href="http://otter.atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=10" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=10</a>
+                        <h3>Discover content from a certain <mark class="hov hovDown" data-title="publisher">publisher</mark> </h3>
                     </div>
                     
                     <div class="example clearfix">
-                        <a href="discover.json?genre=drama" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?genre=drama</a>
-                        <h3>Search for a particular <mark class="hov hovDown" data-title="genre">genre</mark> of program or brand</h3>
+                        <a href="http://otter.atlasapi.org/3.0/discover.json?genre=drama&limit=5" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?genre=drama&limit=5</a>
+                        <h3>Discover content for a particular <mark class="hov hovDown" data-title="genre">genre</mark> of program or brand</h3>
                     </div>
                     
                     <div class="example right clearfix">
-                        <a href="discover.json?mediaType=audio&available=true" class="api apiDiscover">discover.json?mediaType=audio&available=true</a>
-                        <h3>Search for <mark class="hov hovDown" data-title="mediaType">audio</mark> and only return content that is <mark class="hov hovDown" data-title="available">available</mark></h3>
+                        <a href="http://otter.atlasapi.org/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6" class="api apiContent">http://atlasapi.org/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6</a>
+                        <h3>Get information about a certain piece of content</h3>
                     </div>
                     
                     <div class="example clearfix">
-                        <a href="schedule.json?from=now&to=now.plus.24h&channel=bbcone" class="api apiSchedule">schedule.json?from=now&to=now.plus.24h&channel=bbcone</a>
+                        <a href="http://otter.atlasapi.org/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone" class="api apiSchedule">http://atlasapi.org/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone</a>
                         <h3>Search for everything <mark class="hov hovDown" data-title="from">from</mark> now <mark class="hov hovDown" data-title="to">to</mark> tomorrow on <mark class="hov hovDown" data-title="channel">BBC One</mark></h3>
                     </div>
                 </div>
@@ -196,63 +196,82 @@
                 
                 <section data-title="reference_dataModel" class="subSection">
                     <div class="marker" id="reference_dataModel"></div>
-                    <h3>Data Model</h3>
-                    <p>The Atlas data model revolves around Items and Playlists. Simple.</p>
+                    <h3>Data Model</h3>           
+                    <p>The Atlas API model has two key concepts: Containers and Items.</p>
+                    
+                    <h4>Containers</h4>
+                    <p>Videos are often part of a set, for example "all episodes of Eastenders". Containers represent a collection of items within the Atlas data model.<br />Where possible we return matching Items within their containers. Some items do not have containers such as films, specials and user generated clips.</p>
+                    
+                    <p>Below is an example of a container, in this case Merlin (a popular BBC 1 programme):</p>
+                    <pre><code>
+content: [
+    { episode 1 json },
+    { episode 2 json }
+],
+title: "Merlin",
+description: "Fantasy drama based...",
+same_as: [
+    "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTVShow?id=323369381&uo=4",
+    "http://www.hulu.com/merlin",
+],
+media_type: "video",
+aliases: [
+    "http://en.wikipedia.org/wiki/Merlin_(BBC)",
+],
+uri: "http://www.bbc.co.uk/programmes/b00mjlxv",
+curie: "bbc:b00mjlxv"</code>
+                    </pre>
                 
                     <h4 id="items">Items</h4>
-                    <p>Items represent individual pieces of content, including all the standard pieces of metadata that you’d expect. Here’s an annotated overview of the JSON returned by a request for an episode of Peep Show:</p>
-                    <div class="line mbl">
-                        <div class="unit size2of3">
-                            <pre class="mrl">uri: "http://www.channel4.com/programmes/peep-show/4od#2921979",
-    aliases: [
-        "http://bit.ly/28Nml"
-    ],
-    curie: "c4:peep-show_2921979",</pre>
-                        </div>
-                        <div class="unit size1of3 lastUnit">
-                            <h5>Identifiers</h5>
-                            <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
-                        </div>
-                    </div>
+                    <p>Items represent individual pieces of content, including all the standard pieces of metadata that you’d expect. Here’s an annotated overview of the JSON returned by a request for an episode of Merlin:</p>
+
+                    <h5>Identifiers</h5>
+                    <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
+                    <pre class="mrl">
+                        <code>
+uri: "http://www.bbc.co.uk/programmes/b00wlncb",
+aliases: [
+    "http://bbc.co.uk/i/wlncb/"
+    "http://www.bbc.co.uk/iplayer/episode/b00wlncb"
+],
+curie: "bbc:b00wlncb"</code>
+                    </pre>
+
                     
-                    <div class="line mbl">
-                        <div class="unit size1of3">
-                            <h5>Description</h5>
-                            <p class="mrl">These attributes describe the item.</p>
-                        </div>
-                        <div class="unit size2of3 lastUnit">
-                            <pre>description: "Despite being bullied on the street..."
-    title: "Series 1 Episode 1",
-    publisher: "channel4.com",
-    image: "http://www.channel4.com/assets/programmes/.../625x352.jpg",
-    thumbnail: "http://www.channel4.com/assets/programmes/.../200x113.jpg",
-    genres:[
-        "http://www.channel4.com/programmes/tags/comedy",
-        "http://www.channel4.com/programmes/tags/entertainment",
-        "comedy",
-        "entertainment"
-    ],</pre>
-    
-                        </div>
-                    </div>
+                    <h5>Description</h5>
+                    <p class="mrl">These attributes describe the item.</p>
+                    <pre>
+                        <code>
+description: "Queen Morgana begins a reign of terrible evil over the innocent...",
+title: "The Coming of Arthur - Part 2",
+publisher: {
+    key: "bbc.co.uk",
+    name: "BBC",
+    country: "GB"
+},
+image: "http://www.bbc.co.uk/iplayer/images/episode/b00wlncb_640_360.jpg",
+thumbnail: "http://www.bbc.co.uk/iplayer/images/episode/b00wlncb_150_84.jpg",
+genres:[
+    "http://ref.atlasapi.org/genres/atlas/drama",
+    "http://www.bbc.co.uk/programmes/genres/drama/scifiandfantasy"
+]</code>
+                    </pre>
                     
-                    <div class="line mbl">
-                        <div class="unit size2of3">
-                            <pre class="mrl">episode_number: 1,
-    series_number: 1,
-    brand: {
-      uri: "http://www.channel4.com/programmes/peep-show",
-      curie: "c4:peep-show",
-      title: "Peep Show"
-    },</pre>
-                        </div>
-                        <div class="unit size1of3 lastUnit">
-                            <h5>Episode attributes</h5>
-                            <p>This Item is also an Episode, which means it is part of a Brand. These attributes outlines this Episode’s position within its Brand. If the Item is not an Episode these attributes will not be present.</p>
-                        </div>
-                    </div>
+                    <h5>Episode attributes</h5>
+                    <p>This Item is also an Episode, which means it is part of a <mark class="hov" data-title="brand">Brand</mark>. These attributes outlines this Episode’s position within its <mark class="hov" data-title="brand">Brand</mark>. If the Item is not an Episode these attributes will not be present.</p>
+                    <pre class="mrl">
+                        <code>
+episode_number: 13,
+series_number: 3,
+brand_summary: {
+    title: "Merlin"
+    description: "Fantasy drama based on the legend of King Arthur and Merlin"
+    uri: "http://www.bbc.co.uk/programmes/b00mjlxv"
+    curie: "bbc:b00mjlxv"
+}</code>
+                    </pre>
                     
-                    <div class="line mbl">
+                    <!--<div class="line mbl">
                         <div class="unit size1of3">
                             <h5>Locations</h5>
                             <p>Each location represents a way to play the content. In this example there is a simple ‘link’ location, which means you can link to this content at the URI given.</p>
@@ -260,51 +279,43 @@
                         <div class="unit size2of3 lastUnit">
                             <pre class="mll">
     locations: [
-      {
-         "duration":1436,
-         "rating":"http://ref.atlasapi.org/ratings/simple/adult",
-         "rating_text":"Strong language",
-         "availability_start":"Jun 24, 2009 12:00:00 AM",
-         "transport_type":"link",
-         "uri":"http://www.channel4.com/programmes/peep-show/4od#2921979",
-         "available":true
+      { 
+        data_container_format: "application/x-shockwave-flash",
+        video_coding: "video/H264",
+        availability_start: "05-Dec-2010 02:39:02",
+        availability_end: "11-Dec-2010 20:24:00",
+        available_countries: [
+            "GB"
+        ],
+        revenue_contract: "free_to_view",
+        transport_type: "link",
+        uri: "http://www.bbc.co.uk/iplayer/episode/b00wlncb",
+        available: false,
+        duration: 2700,
       }
     ],</pre>
     
                         </div>
-                    </div>
+                    </div>-->
                     
                     <h4>Locations</h4>
                     <p>Each Item contains the various different ways you can get your metaphorical hands on the media. These are called Locations and provide all the information about how to access the content, who can access it, where it is, and so on. This is an example Location (the full schema is quite large, but you get the idea):</p>
                     <pre>
-    {
-        duration: 28*60,
-        publishedDuration: 30*60,
-        transmissionTime: DATETIME,
-        available: true,
-        availablityStart: DATETIME,
-        uri: "http://link.to/the/actual/media",
-        embedCode: "&lt;embed&gt;simple html for you to embed&lt;/embed&gt;",
-        transportType: "embed",
-        ...
-    }
-                    </pre>
-                    
-                    <h4>Playlists</h4>
-                    <p>Playlists represent collections of Items and Playlists. This could be anything, from a particular Brand (say, The Wire), to a broadcaster’s top picks (like Channel 4’s), or even currently trending Playlists and Items (such as currently hot on Twitter).</p>
-                    
-                    <p>Playlists, in-fact, look very similar to Items in their core attributes but differ in that Items contain the physical media Locations, while Playlists contain Items and other Playlists:</p>
-                    <pre>
-    {
-        title: "The Item's Title",
-        description: "A nice description about the Item",
-        uri: "http://canonical.uri/of/the/playlist",
-        curie: "namespaced:id",
-        aliases: ["http://different.uris", "http://that.the/item/is/known/as"],
-        publisher: "broadcaster.com",
-        items: [...],
-        playlists: [....]
-    }
+                    <code>
+    { 
+        data_container_format: "application/x-shockwave-flash",
+        video_coding: "video/H264",
+        availability_start: "05-Dec-2010 02:39:02",
+        availability_end: "11-Dec-2010 20:24:00",
+        available_countries: [
+            "GB"
+        ],
+        revenue_contract: "free_to_view",
+        transport_type: "link",
+        uri: "http://www.bbc.co.uk/iplayer/episode/b00wlncb",
+        available: false,
+        duration: 2700,
+      }</code>
                     </pre>
                 </section>
                 
@@ -365,11 +376,6 @@
                                 <td>String from a list of available genres</td>
                             </tr>
                             <tr>
-                                <td><code>tags</code></td>
-                                <td>A tag associated with the content</td>
-                                <td>String from a list of available tags</td>
-                            </tr>
-                            <tr>
                                 <td><code>available</code></td>
                                 <td>Whether the content is availaible ('<code>any</code>' will return content that is both not available and available)</td>
                                 <td><code>true</code>, <code>false</code>, <code>any</code></td>
@@ -377,7 +383,7 @@
                             <tr>
                                 <td><code>availableCountries</code></td>
                                 <td>Content available in a specific country</td>
-                                <td>String from a list of available countries</td>
+                                <td>String from a list of available countries (based on <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="_blank">ISO3166</a>)</td>
                             </tr>
                             <tr>
                                 <td><code>duration</code></td>
@@ -396,8 +402,8 @@
                             </tr>
                             <tr>
                                 <td><code>transportType</code></td>
-                                <td>How the content is presented</td>
-                                <td><code>link</code>, <code>embed</code></td>
+                                <td>How to access the content</td>
+                                <td><code>link</code>, <code>download</code> or <code>embed</code></td>
                             </tr>
                             <tr>
                                 <td><code>mediaType</code></td>
@@ -547,6 +553,26 @@
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <h4>Italy Long-form</h4>
+                    <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th>Access</th>
+                                <th>Status</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>TV Blob</td>
+                                <td>Public</td>
+                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td>EPG</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <p>Please contact MetaBroadcast if you are interested in using restricted sources.</p>
                 </section>
                 
@@ -674,7 +700,7 @@
                         <li>Have a chat with us about the features and formats that you’d find useful</li>
                         <li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
                         <li>Provide a metadata endpoint for us to ingest</li>
-                        <li>Develop an adapter for a new source of content, current sources are listed >>here<<</li>
+                        <li>Develop an adapter for a new source of content, current sources are listed <a href="#reference_sources">here</a></li>
                         <li>Help improve the core of the code</li>
                         <li>Write client libraries for other languages</li>
                     </ul>
@@ -747,23 +773,23 @@
                         </form>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
-                               <a class="showItem apiContent">
+                               <a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a> 
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
@@ -841,23 +867,23 @@
                         </form>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
-                               <a class="showItem apiContent">
+                               <a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a> 
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
@@ -910,23 +936,23 @@
                         </form>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
-                               <a class="showItem apiContent">
+                               <a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a> 
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
@@ -960,23 +986,23 @@
                         </div>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
-                               <a class="showItem apiContent">
+                               <a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a> 
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
@@ -1003,23 +1029,23 @@
                         </form>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
-                               <a class="showItem apiContent">
+                               <a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a> 
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
-                    			<a class="showItem apiContent">
+                    			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
                                     <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
@@ -1054,6 +1080,7 @@
             <div class="hover" data-title="to"><span class="title">To</span><span class="body">The end of a schedule period.</span></div>
             <div class="hover" data-title="channel"><span class="title">Channel</span><span class="body">The channel that the content was broadcast on eg. bbcone, bbctwo etc.</span></div>
             <div class="hover" data-title="copy"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></span></div>
+            <div class="hover" data-title="brand"><span class="title">brand</span><span class="body">A special type of container that can only contain episodes</span></span></div>
         </div>
 	</body>
 </html>

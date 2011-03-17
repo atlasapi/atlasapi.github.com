@@ -449,7 +449,7 @@ HomeDemo.prototype.nextQuery = function() {
             clone.appendTo(item);
             /*var href = '<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>';
             item.append(href);
-            console.log(href);*/
+            (href);*/
         }
         item.animate({'left': '-='+homeDemo.width},1000);
         imageHolder.animate({'left': '-=960'}, 1000);
@@ -605,8 +605,12 @@ ApiExplorer.prototype.searchQuery = function(query){
     var queryTitle = getParamByName('q',query);
     var queryPublisher = getParamByName('publisher',query);
     
-    $('#search_title').val(queryTitle).change();
-    $('#search_publisher').val(queryPublisher).change();
+    if(queryTitle.length > 0){
+        $('#search_title').val(queryTitle).change();
+    }
+    if(queryPublisher.length > 0){
+        $('#search_publisher').val(queryPublisher).change();
+    }
     
     apiExplorer.query = query;
     apiExplorer.runQuery(0);
@@ -619,8 +623,12 @@ ApiExplorer.prototype.discoverQuery = function(query){
     var queryPublisher = getParamByName('publisher',query);
     var queryGenre = getParamByName('genre',query);
     
-    $('#discover_genre').val(queryGenre).change();
-    $('#discover_publisher').val(queryPublisher).change();
+    if(queryGenre.length > 0){
+        $('#discover_genre').val(queryGenre).change();
+    }
+    if(queryPublisher.length > 0){
+        $('#discover_publisher').val(queryPublisher).change();
+    }
     
     /* if(apiExplorer.timedOut == true){*/
         apiExplorer.query = query;
@@ -650,7 +658,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     $('#schedule_from').val(queryFrom).datepicker('setDate', d1);
     $('#schedule_to').val(queryTo).datepicker('setDate', d2);
     
-    apiExplorer.query = query;
+    apiExplorer.query = query+'&publisher=bbc.co.uk,itv.com';
     apiExplorer.runQuery(2);
 }
 
@@ -690,8 +698,6 @@ ApiExplorer.prototype.runQuery = function(tab){
     // Make request
     var url = apiExplorer.query;
     
-    url += '&available=true';
-    
     $.ajax({
         url: url,
         dataType: 'jsonp',
@@ -706,6 +712,13 @@ ApiExplorer.prototype.runQuery = function(tab){
                 3. For each showItem - add loading class, fadeout image and text, change everything, fade it all back in, remove loading class
                 4. Deal with Json
             */
+            
+            var theData;
+            if(data.contents != undefined) {
+                theData = data.contents;
+            } else {
+                theData = data.schedule[0].items;
+            }
                 
             // 1
             var results = processTheJson(data);
@@ -732,23 +745,28 @@ ApiExplorer.prototype.runQuery = function(tab){
                     item.attr('href', queryBeg+'content.json?uri='+results[i].uri).addClass('apiContent');
                     itemCaption.fadeIn();
                     itemImage.fadeIn();
-                    
+                    item.fadeIn();
                 } else {
                     item.fadeOut();
                 }
                 item.removeClass('loading');
             });
             
-            if(data.contents.length > 2){
-                data.contents = data.contents.slice(0,2);
-            }
+            var theData;
             
+            if(data.contents != undefined) {
+                if(data.contents.length > 2){
+                    data.contents = data.contents.slice(0,2);
+                }
+                theData = data.contents;
+            }
+                        
             var oldPre = apiExplorer.queryBar[tab].parent.find('.resultsArea .output pre');
             var newPre = oldPre.clone();
             
             apiExplorer.queryBar[tab].parent.find('.resultsArea .output').append(newPre)
             
-            newPre.hide().html(apiExplorer.prettyJson(data));
+            newPre.hide().html(apiExplorer.prettyJson(theData));
             
             oldPre.fadeOut('fast', function(){
                 $(this).remove();
@@ -1223,7 +1241,7 @@ $(document).ready(function(){
     
     $('a.api').click(function(){
         if(apiFuncRun == false) {
-            tabs.changeTab(tabs.tab.length-1);
+            tabs.changeTab(4);
             apiExplorer.customQuery($(this).attr('href'));
             window.location.hash = 'apiExplorer';
             apiFuncRun = true;
