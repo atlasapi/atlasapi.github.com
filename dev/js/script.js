@@ -21,6 +21,8 @@ var Tabs = function() {
 Tabs.prototype.init = function(e) {
     var tabs = this;
     tabs.tabHolder = e;
+    
+    var tempTab = [];
     e.find('.tab').each(function(i){
         if($(this).hasClass('tabExt')) {
             tabs.tab[i] = {'id': $(this).attr('data-tab'), 'li': $(this), 'a': $(this)};
@@ -50,6 +52,50 @@ Tabs.prototype.changeTab = function(id) {
     tabs.active = id;
 }
 
+var SubTabs = function() {
+    this.tabHolder;
+    this.count = 0;
+    this.active;
+    this.tab = [];
+    this.page = [];
+}
+
+SubTabs.prototype.init = function(e) {
+    var tabs = this;
+    tabs.tabHolder = e;
+    
+    var tempTab = [];
+    e.find('.subTab').each(function(i){
+        if($(this).hasClass('subTabExt')) {
+            tabs.tab[i] = {'id': $(this).attr('data-tab'), 'li': $(this), 'a': $(this)};
+        } else {
+            tabs.tab[i] = {'id': $(this).find('a').attr('data-tab'), 'li': $(this), 'a': $(this).find('a')};
+        }
+        tabs.tab[i].a.click(function(){
+            tabs.changeTab(i);
+            //jQuery.history.load("apiExplorer");
+            window.location.hash = 'apiExplorer';
+            return false;
+        });
+        tabs.count++;
+    });
+    
+    e.find('.subTabArea').each(function(i){
+        tabs.page[i] = {'index': i, 'item': $(this)};
+        tabs.page[i].item.hide();
+    });
+}
+
+SubTabs.prototype.changeTab = function(id) {
+    var tabs = this;
+    tabs.tabHolder.find('.subTab.selected').removeClass('selected');
+    tabs.tabHolder.find('.subTabArea:visible').hide();
+    tabs.tab[id].li.addClass('selected');
+    tabs.page[id].item.show();
+    
+    tabs.active = id;
+}
+
 var PageInfo = function() {
     this.pageWidth;
     this.pageHeight;
@@ -69,9 +115,13 @@ PageInfo.prototype.init = function() {
     var pageInfo = this;
     pageInfo.update(true,true,true);
     $('section:not(.subSection)').each(function(i) {
-        pageInfo.section[i] = {'name': $(this).attr('class'), 'position': $(this).find('.marker').offset().top, 'subSection': [], 'subSections': ''};
+        pageInfo.section[i] = {'item': $(this), 'name': $(this).attr('class'), 'position': $(this).find('.marker').offset().top, 'subSection': [], 'subSections': ''};
         $(this).find('.subSection').each(function(ii) {
-            pageInfo.section[i].subSection[ii] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top};
+            pageInfo.section[i].subSection[ii] = {'item': $(this), 'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top};
+            var leftPos = $('.mainMenu a[href="#'+pageInfo.section[i].name+'"]').offset().left;
+            pageInfo.section[i].item.find('.subNav').css({
+                'left': leftPos-2
+            });
         });
         pageInfo.section[i].subSections = pageInfo.section[i].subSection.length;
     });
@@ -193,9 +243,16 @@ PageInfo.prototype.changePage = function(i) {
     }
     $('header a.selected').removeClass('selected');
     $('header a[href="#'+pageInfo.section[i].name+'"]').addClass('selected');
+    
     // Change hash
     if(Modernizr.history && pageInfo.section[i].subSections == 0){
         pageInfo.changeHash(pageInfo.section[i].name);
+    }
+    
+    if(i == 0 && !$('a.logo').hasClass('defaultCursor')){
+        $('a.logo').addClass('defaultCursor');
+    } else if(i > 0 && $('a.logo').hasClass('defaultCursor')){
+        $('a.logo').removeClass('defaultCursor');
     }
         
     pageInfo.currentSection = i;
@@ -760,18 +817,8 @@ ApiExplorer.prototype.runQuery = function(tab){
                 }
                 theData = data.contents;
             }
-                        
-            var oldPre = apiExplorer.queryBar[tab].parent.find('.resultsArea .output pre');
-            var newPre = oldPre.clone();
-            
-            apiExplorer.queryBar[tab].parent.find('.resultsArea .output').append(newPre)
-            
-            newPre.hide().html(apiExplorer.prettyJson(theData));
-            
-            oldPre.fadeOut('fast', function(){
-                $(this).remove();
-                newPre.fadeIn();
-            });
+                             
+            $('#'+apiExplorer.queryType+'_json').html(apiExplorer.prettyJson(theData));
             
             if(apiExplorer.queryBar[tab].parent.find('.resultsArea:hidden')){
                 apiExplorer.queryBar[tab].parent.find('.resultsArea').slideDown();
@@ -806,6 +853,28 @@ ApiExplorer.prototype.runQuery = function(tab){
             }
             apiExplorer.btn.val('Run').removeClass('inactive');
             apiFuncRun = false;
+            
+            $.ajax({
+                url: url.replace('json','xml'),
+                dataType: 'xml',
+                cache: true,
+                timeout: 5000,
+                success: function(data, textStatus, jqXHR){                           
+                    $('#'+apiExplorer.queryType+'_xml').html(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    sendMsg('error','Sorry, the following error occured: '+errorThrown);
+                },
+                complete: function(jqXHR, textStatus){
+                    if(textStatus == 'timeout') {
+                        apiExplorer.timedOut = true;
+                    }
+                    apiExplorer.btn.val('Run').removeClass('inactive');
+                    apiFuncRun = false;
+                    
+                    
+                }
+            });
         }
     });
 }
@@ -1176,6 +1245,14 @@ $(document).ready(function(){
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
+    
+    searchTabs = new SubTabs();
+    searchTabs.init($('#search_output'));
+    searchTabs.changeTab(0);
+    
+    discoverTabs = new SubTabs();
+    discoverTabs.init($('#discover_output'));
+    discoverTabs.changeTab(0);
     
     var apiExplorer = new ApiExplorer($('#explorerWrapper'));
     apiExplorer.buttonHandler();

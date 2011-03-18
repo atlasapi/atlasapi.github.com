@@ -168,16 +168,16 @@
 			h1 {font-size: 31px;}
 			h2 {font-size: 40px; color: #380b66;}
 			h3 {font-size: 26px; font-style: italic;}
-			h4 {font-size: 20px; color:#ef308f; font-style: italic;}
-			h5 {font-size: 16px; font-style: italic;}
-			h6 {font-size: 14px;}
+			h4 {font-size: 22px; color:#ef308f; font-style: italic;}
+			h5 {font-size: 18px; font-style: italic;}
+			h6 {font-size: 16px;}
 			
 			.popOut h3 {
                 font-style: normal;
                 color: #380b66;
 			}
 			
-			p {font-size: 12px; line-height: 18px; margin-bottom: 20px;}
+			p {font-size: 14px; line-height: 18px; margin-bottom: 20px; text-transform: none;}
 			a {text-decoration: none; color: #380b66; text-shadow: 0 1px 0 #fff;}
 			a:hover {text-decoration: underline;}
 			a.api {padding-right: 20px; font-size: 14px;}
@@ -220,6 +220,23 @@
                 position: absolute; left: -10px; top: 0px; display: block; width: 10px; height: 10px;
             }
             
+            .info {
+                border: 1px solid #feef97;
+                background-color: #fdf8da;
+                background: -moz-linear-gradient(top, #fdf8da, #fdf2b4);
+                background: -webkit-gradient(linear, left top, left bottom, from(#fdf8da), to(#fdf2b4));
+                filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#fdf8da', EndColorStr='#fdf2b4', GradientType=0);
+                padding: 5px;
+                text-shadow: 0 1px 1px #fff;
+                -moz-border-radius: 3px;
+                -o-border-radius: 3px;
+                -khtml-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+            }
+            
+            .defaultCursor {cursor: default;}
+            
             .closed {height: 5px;}
 			
 			.logo {text-indent: -9999px; background: url(../images/logo.png) center no-repeat; width: 100px; height: 46px; float: left; margin: 2px 0 0; display: block;}
@@ -257,9 +274,10 @@
                 font-size: 16px;
                 border-right: 1px solid #8e5dbf;
                 border-left: 1px solid #684090;
+                width: 25%;
             }
 			.tbl tbody {border-bottom: 1px solid #684090;}
-			.tbl tbody td {padding: 5px 5px; font-size: 14px; border-left: 1px solid #ddd; border-right: 1px solid #8e5dbf; border-left: 1px solid #684090;}
+			.tbl tbody td {padding: 5px 5px; font-size: 14px; border-left: 1px solid #ddd; border-right: 1px solid #8e5dbf; border-left: 1px solid #684090; width: 25%;}
 			.tbl tbody tr:hover {background: #efefef;}
 			
 			/* Lists */
@@ -595,7 +613,7 @@
                     bottom: 0;
                     padding: 5px;
                     line-height: 14px;
-                    height: 27px;
+                    height: 12px;
                     -moz-transition: height ease-out 0.5s;
                     -webkit-transition: height ease-out 0.5s;
                     text-align: left;
@@ -613,7 +631,7 @@
                 width: 450px;
                 height: 253px;
             }
-                .show_lrg .caption {}
+                .show_lrg .caption { height: 27px;}
                 .show_lrg .caption .br {font-size: 18px; line-height: 30px;}
                 .show_lrg .caption .pub {font-size: 14px;}
                 .show_lrg .caption .ep {font-size: 14px;}
@@ -805,14 +823,11 @@
                 box-shadow: inset 5px 0 5px rgba(0,0,0,0.1);
             }
                 .example.right h3 {
-                    color: #EF308F;
                     background: #fff;
                     background -moz-linear-gradient(top, #000000, #e3d7f0);
                     background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e3d7f0));
                     filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#e3d7f0', GradientType=0);
                 }
-                .example.right h3 .hov {color: #380B66;}
-                .example.right a.api {color: #380B66;}
             
             /* Hover */
             .hov {position: relative; color: #380b66;}
