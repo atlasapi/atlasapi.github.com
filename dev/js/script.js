@@ -303,16 +303,16 @@ var HomeDemo = function(item) {
     this.active = false;
     
     var array0 = [
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true'},
-        {'type': 'Discover', 'query':'discover.json?genre=comedy&availableCountries=uk&mediaType=video'},
-        {'type': 'Search', 'query':'search.json?title=east'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=drama'},
-        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy'},
-        {'type': 'Discover', 'query':'discover.json?publisher=hulu.com'},
-        {'type': 'Search', 'query':'search.json?title=Britain'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=factual'},
-        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com'}
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},
+        {'type': 'Search', 'query':'search.json?q=east&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=itv.com&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=hulu.com&limit=5'},
+        {'type': 'Search', 'query':'search.json?q=Britain&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=factual&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5'}
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
@@ -409,7 +409,7 @@ HomeDemo.prototype.request = function() {
     
         // Make request
         $.ajax({
-            url: queryBeg+homeDemo.query[homeDemo.activeQuery].query+'&limit=5&available=true',
+            url: queryBeg+homeDemo.query[homeDemo.activeQuery].query,
             dataType: 'jsonp',
             jsonpCallback: 'jsonp',
             cache: true,
@@ -419,36 +419,38 @@ HomeDemo.prototype.request = function() {
                 homeDemo.nav.find('.timer').fadeOut();
             
                 var results = processTheJson(data);
-                
+                                
                 results.clean(undefined);
+                                
+                if(results.length > 0){
                 
-                if(results.length > 0 && results[0] != undefined){
-                    // Multiply current query by 2
+                    if(results[0] != undefined){
+                        if(!item.find('img').attr('src') || item.find('img').height() == 0){
+                            item.find('img').attr('src',results[0].image).fadeIn(500, function(){
+                                    item.removeClass('loading');
+                                });
+                        }
+                        item.attr('href',queryBeg+'content.json?uri='+results[0].uri);
+                        item.find('.br').html(results[0].brand);
+                        item.find('.pub').html('('+results[0].publisher+')');                       
+                        item.find('.ep').html(results[0].episode);
+                        item.find('.caption').fadeIn();
+                    }
                     
-                    
-                    if(!item.find('img').attr('src') || item.find('img').height() == 0){
-                        item.find('img').attr('src',results[0].image).fadeIn(500, function(){
+                    if(results[1] != undefined){
+                        if(!item2.find('img').attr('src') || item2.find('img').height() == 0){
+                            item2.find('img').attr('src',results[1].image).fadeIn(500, function(){
                                 item.removeClass('loading');
                             });
+                        }
+                        item2.attr('href',queryBeg+'content.json?uri='+results[1].uri);
+                        item2.find('.br').html(results[1].brand);
+                        item2.find('.pub').html('('+results[1].publisher+')');
+                        item2.find('.ep').html(results[1].episode);
+                        item2.find('.caption').fadeIn();
+                    } else {
+                        item2.removeClass('loading');
                     }
-                    item.attr('href',queryBeg+'content.json?uri='+results[0].uri);
-                    item.find('.br').html(results[0].brand);
-                    item.find('.pub').html('('+results[0].publisher+')');                       
-                    item.find('.ep').html(results[0].episode);
-                    item.find('.caption').fadeIn();
-                    
-                    if(!item2.find('img').attr('src') || item2.find('img').height() == 0){
-                        item2.find('img').load(function(){
-                            $(this).fadeIn(500, function(){
-                                item2.removeClass('loading');
-                            });
-                        }).attr('src',results[1].image);
-                    }
-                    item2.attr('href',queryBeg+'content.json?uri='+results[1].uri);
-                    item2.find('.br').html(results[1].brand);
-                    item2.find('.pub').html('('+results[1].publisher+')');
-                    item2.find('.ep').html(results[1].episode);
-                    item2.find('.caption').fadeIn();
                 }         
             },
             error: function(jqXHR, textStatus, errorThrown){
@@ -607,37 +609,47 @@ ApiExplorer.prototype.buttonHandler = function(){
         }
     });
     
-    $('input[value="Run"]').click(function(){
-        var queryParent = {'item': $(this).parents('.tabArea'), 'name': $(this).parents('.tabArea').attr('id')};
-        queryParent.name = queryParent.name.split('_');
-        queryParent.name = queryParent.name[1];
-        
-        if(queryParent.name != 'advanced'){
-            var query = queryParent.item.find('.urlTxt').val();
+    $('input[value="Run"]').parents('form').submit(function(){
+        var that = $(this);
+        if(updateString == undefined){
+            doStuff();
         } else {
-            var query = $('#'+queryParent.name+'_string').val();
+            setTimeout(function(){
+                doStuff();
+            }, 750);
         }
         
-        
-        // Run query type
-        switch(queryParent.name) {
-            case 'advanced':
-                apiExplorer.customQuery(query);
-            break;
-            case 'search':
-                apiExplorer.searchQuery(query);
-            break;
-            case 'discover':
-                apiExplorer.discoverQuery(query);
-            break;
-            case 'schedule':
-                apiExplorer.scheduleQuery(query);
-            break;
-            case 'content':
-                apiExplorer.contentQuery(query);
-            break;
+        var doStuff = function() {
+            var queryParent = {'item': that.parents('.tabArea'), 'name': that.parents('.tabArea').attr('id')};
+            queryParent.name = queryParent.name.split('_');
+            queryParent.name = queryParent.name[1];
+            
+            if(queryParent.name != 'advanced'){
+                var query = queryParent.item.find('.urlTxt').val();
+            } else {
+                var query = $('#'+queryParent.name+'_string').val();
+            }
+            
+            
+            // Run query type
+            switch(queryParent.name) {
+                case 'advanced':
+                    apiExplorer.customQuery(query);
+                break;
+                case 'search':
+                    apiExplorer.searchQuery(query);
+                break;
+                case 'discover':
+                    apiExplorer.discoverQuery(query);
+                break;
+                case 'schedule':
+                    apiExplorer.scheduleQuery(query);
+                break;
+                case 'content':
+                    apiExplorer.contentQuery(query);
+                break;
+            }
         }
-        
         return false;
     });
 }
@@ -817,6 +829,14 @@ ApiExplorer.prototype.runQuery = function(tab){
                 }
                 theData = data.contents;
             }
+            
+            var xmlUrl = url.replace('json','xml');
+            var htmlUrl = url.replace('json', 'html');
+            var rdfUrl = url.replace('json', 'rdf.xml');
+            
+            $('a[data-tab="'+apiExplorer.queryType+'_xml"]').attr('href', xmlUrl);
+            $('a[data-tab="'+apiExplorer.queryType+'_html"]').attr('href', htmlUrl);
+            $('a[data-tab="'+apiExplorer.queryType+'_rdf"]').attr('href', rdfUrl);
                              
             $('#'+apiExplorer.queryType+'_json').html(apiExplorer.prettyJson(theData));
             
@@ -853,28 +873,6 @@ ApiExplorer.prototype.runQuery = function(tab){
             }
             apiExplorer.btn.val('Run').removeClass('inactive');
             apiFuncRun = false;
-            
-            $.ajax({
-                url: url.replace('json','xml'),
-                dataType: 'xml',
-                cache: true,
-                timeout: 5000,
-                success: function(data, textStatus, jqXHR){                           
-                    $('#'+apiExplorer.queryType+'_xml').html(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown){
-                    sendMsg('error','Sorry, the following error occured: '+errorThrown);
-                },
-                complete: function(jqXHR, textStatus){
-                    if(textStatus == 'timeout') {
-                        apiExplorer.timedOut = true;
-                    }
-                    apiExplorer.btn.val('Run').removeClass('inactive');
-                    apiFuncRun = false;
-                    
-                    
-                }
-            });
         }
     });
 }
@@ -1245,15 +1243,7 @@ $(document).ready(function(){
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
-    
-    searchTabs = new SubTabs();
-    searchTabs.init($('#search_output'));
-    searchTabs.changeTab(0);
-    
-    discoverTabs = new SubTabs();
-    discoverTabs.init($('#discover_output'));
-    discoverTabs.changeTab(0);
-    
+       
     var apiExplorer = new ApiExplorer($('#explorerWrapper'));
     apiExplorer.buttonHandler();
     
@@ -1275,6 +1265,10 @@ $(document).ready(function(){
     
     var homeDemo = new HomeDemo($('.controlBar'));
     homeDemo.init();
+    
+    $('.subTab a').click(function(){
+        return false;
+    });
     
     $('a.apiSearch').click(function(){
         if(apiFuncRun == false) {

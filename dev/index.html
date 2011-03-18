@@ -201,7 +201,7 @@
                     <p>The Atlas API model has two key concepts: Containers and Items.</p>
                     
                     <h4>Containers</h4>
-                    <p>Videos are often part of a set, for example "all episodes of Eastenders". Containers represent a collection of items within the Atlas data model.<br />Where possible we return matching Items within their containers. Some items do not have containers such as films, specials and user generated clips.</p>
+                    <p>Videos are often part of a set, for example "all episodes of Eastenders". Containers represent a collection of items within the Atlas data model.<br />Where possible we return matching Items within their containers. Some items do not have containers such as films, <mark class="hov" data-title="special">specials</mark> and user generated clips.</p>
                     
                     <p>Below is an example of a container, in this case Merlin (a popular BBC 1 programme):</p>
                     <pre><code>
@@ -339,7 +339,7 @@ brand_summary: {
                         <tbody>
                             <tr>
                                 <td><code>q</code></td>
-                                <td>The title of the item you're searching for</td>
+                                <td>The title of a Brand, Item (if a <mark class="hov" data-title="special">special</mark>) or a person</td>
                                 <td>String</td>
                             </tr>
                             <tr>
@@ -786,7 +786,7 @@ brand_summary: {
                                         <span class="options">
                                             <span class="option" data-value="bbc.co.uk">BBC</span>
                                             <span class="option" data-value="itv.com">ITV</span>
-                                            <span class="option" data-calue="itunes.com">iTunes</span>
+                                            <span class="option" data-value="itunes.com">iTunes</span>
                                             <span class="option" data-value="seesaw.com">SeeSaw</span>
                                             <span class="option" data-value="hulu.com">Hulu</span>
                                             <span class="option" data-value="video.uk.msn.com">MSN Video</span>
@@ -840,11 +840,12 @@ brand_summary: {
                             <div class="output" id="search_output">
                                 <ul class="smallTabs clearfix">
                                     <li class="subTab selected"><a href="#search_json" data-tab="search_json">JSON</a></li>
-                                    <li class="subTab"><a href="#search_xml" data-tab="search_xml">XML</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="search_xml">XML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="search_html">HTML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="search_rdf">RDF</a></li>
                                 </ul>
                                 <pre class="subTabArea" id="search_json">
-                                </pre>
-                                <pre class="subTabArea" id="search_xml">
                                 </pre>
                             </div>
                         </div>
@@ -859,7 +860,7 @@ brand_summary: {
                                         <span class="options">
                                             <span class="option" data-value="bbc.co.uk">BBC</span>
                                             <span class="option" data-value="itv.com">ITV</span>
-                                            <span class="option" data-calue="itunes.com">iTunes</span>
+                                            <span class="option" data-value="itunes.com">iTunes</span>
                                             <span class="option" data-value="seesaw.com">SeeSaw</span>
                                             <span class="option" data-value="hulu.com">Hulu</span>
                                             <span class="option" data-value="video.uk.msn.com">MSN Video</span>
@@ -936,11 +937,12 @@ brand_summary: {
                             <div class="output" id="discover_output">
                                 <ul class="smallTabs clearfix">
                                     <li class="subTab selected"><a href="#discover_json" data-tab="discover_json">JSON</a></li>
-                                    <li class="subTab"><a href="#discover_xml" data-tab="discover_xml">XML</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="discover_xml">XML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="discover_html">HTML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="discover_rdf">RDF</a></li>
                                 </ul>
                                 <pre class="subTabArea" id="discover_json">
-                                </pre>
-                                <pre class="subTabArea" id="discover_xml">
                                 </pre>
                             </div>
                         </div>
@@ -1007,11 +1009,12 @@ brand_summary: {
                             <div class="output" id="schedule_output">
                                 <ul class="smallTabs clearfix">
                                     <li class="subTab selected"><a href="#schedule_json" data-tab="schedule_json">JSON</a></li>
-                                    <li class="subTab"><a href="#schedule_xml" data-tab="schedule_xml">XML</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_xml">XML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_rdf">RDF</a></li>
                                 </ul>
                                 <pre class="subTabArea" id="schedule_json">
-                                </pre>
-                                <pre class="subTabArea" id="schedule_xml">
                                 </pre>
                             </div>
                         </div>
@@ -1059,11 +1062,12 @@ brand_summary: {
                             <div class="output" id="content_output">
                                 <ul class="smallTabs clearfix">
                                     <li class="subTab selected"><a href="#content_json" data-tab="content_json">JSON</a></li>
-                                    <li class="subTab"><a href="#content_xml" data-tab="content_xml">XML</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="content_xml">XML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="content_rdf">RDF</a></li>
                                 </ul>
                                 <pre class="subTabArea" id="content_json">
-                                </pre>
-                                <pre class="subTabArea" id="content_xml">
                                 </pre>
                             </div>
                         </div>
@@ -1104,11 +1108,12 @@ brand_summary: {
                             <div class="output" id="advanced_output">
                                 <ul class="smallTabs clearfix">
                                     <li class="subTab selected"><a href="#advanced_json" data-tab="advanced_json">JSON</a></li>
-                                    <li class="subTab"><a href="#advanced_xml" data-tab="advanced_xml">XML</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="advanced_xml">XML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="advanced_html">HTML</a></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="advanced_rdf">RDF</a></li>
                                 </ul>
                                 <pre class="subTabArea" id="advanced_json">
-                                </pre>
-                                <pre class="subTabArea" id="advanced_xml">
                                 </pre>
                             </div>
                         </div>
@@ -1134,6 +1139,7 @@ brand_summary: {
             <div class="hover" data-title="channel"><span class="title">Channel</span><span class="body">The channel that the content was broadcast on eg. bbcone, bbctwo etc.</span></div>
             <div class="hover" data-title="copy"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></span></div>
             <div class="hover" data-title="brand"><span class="title">brand</span><span class="body">A special type of container that can only contain episodes</span></span></div>
+            <div class="hover" data-title="special"><span class="title">Special</span><span class="body">A one off item that does not have a container</span></span></div>
         </div>
 	</body>
 </html>

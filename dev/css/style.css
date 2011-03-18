@@ -161,7 +161,7 @@
             
             .popOut .homeSpeech.feast {
                 background: #f1d9e7 url(../images/present.png) center 90% no-repeat;
-                height: 180px;
+                height: 190px;
             }
 			
 			h1,h2,h3,h4,h5,h6 {margin-bottom: 20px; text-shadow: 0 1px 0 #fff;}
@@ -418,6 +418,7 @@
             .smallTabs li {float: right;}
             .smallTabs a {font-size: 14px; color: #222; padding: 3px 10px; display: block; text-decoration: underline;}
             .smallTabs a:hover {text-decoration: none;}
+            .smallTabs .subTab a {cursor: default;}
             .smallTabs .selected a {
                 background: #8366a0;
                 color: #fff;
@@ -429,6 +430,7 @@
                 -ms-border-radius: 5px 5px 0 0;
                 border-radius: 5px 5px 0 0;
             }
+            .smallTabs .other {margin-top: 3px;}
             
             
             .socialList li {margin-bottom: 10px;}
@@ -1134,9 +1136,9 @@
             .tr {text-align: right;}
             .tc {text-align: center;}
             
-            .fl {float: left;}
-            .fn {float: none;}
-            .fr {float: right;}
+            .fl {float: left !important;}
+            .fn {float: none !important;}
+            .fr {float: right !important;}
             
             .mtn {margin-top: 0;}
             .mts {margin-top: 5px;}
@@ -1154,3 +1156,20 @@
             .mls {margin-left: 5px;}
             .mlm {margin-left: 10px;}
             .mll {margin-left: 20px;}
+            
+            .ptn {padding-top: 0;}
+            .pts {padding-top: 5px;}
+            .ptm {padding-top: 10px;}
+            .ptl {padding-top: 20px;}
+            .prn {padding-right: 0;}
+            .prs {padding-right: 5px;}
+            .prm {padding-right: 10px;}
+            .prl {padding-right: 20px;}
+            .pbn {padding-bottom: 0;}
+            .pbs {padding-bottom: 5px;}
+            .pbm {padding-bottom: 10px;}
+            .pbl {padding-bottom: 20px;}
+            .pln {padding-left: 0;}
+            .pls {padding-left: 5px;}
+            .plm {padding-left: 10px;}
+            .pll {padding-left: 20px;}
