@@ -34,7 +34,7 @@
                 <div class="marker" id="home"></div>
                 <h3 class="mlm mrm homeSpeech">It's never been so easy to build advanced video and audio services.</h3>
                 <div class="line">
-                    <div class="unit size1of3">
+                    <div class="unit">
                         <div class="mlm mrm">
                             <h4>1 API</h4>
                             <ul class="list">
@@ -46,24 +46,27 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="unit size1of3">
-                        <div class="mlm mrm">
-                            <h4>15+ International sources</h4>
-                            <ul class="list">
-                                <li>long-form and short-form: archive.org, blip.tv, BBC, Channel 4, dailymotion, Five, HBO, Hulu, iTunes, ITV, MSN Video, Press Association, SeeSaw, ted.com, TVBLOB, Vimeo, YouTube and podcasts</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="unit size1of3 lastUnit">
-                        <div class="mlm mrm">
-                            <h4>5+ output formats</h4>
-                            <ul class="list">
-                                <li>RESTful API with XML and JSON</li>
-                                <li>Specialist feeds for Google, BBC iPlayer, UK Radioplayer</li>
-                                <li>RDF for linked data</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="unit lastUnit">
+                    	<div class="line">
+						<div class="unit size1of2">
+							<div class="mlm mrm">
+								<h4>15+ International sources</h4>
+								<ul class="list">
+									<li>long-form and short-form: archive.org, blip.tv, BBC, Channel 4, dailymotion, Five, HBO, Hulu, iTunes, ITV, MSN Video, Press Association, SeeSaw, ted.com, TVBLOB, Vimeo, YouTube and podcasts</li>
+								</ul>
+							</div>
+						</div>
+						<div class="unit size1of2 lastUnit">
+							<div class="mlm mrm">
+								<h4>5+ output formats</h4>
+								<ul class="list">
+									<li>RESTful API with XML and JSON</li>
+									<li>Specialist feeds for Google, BBC iPlayer, UK Radioplayer</li>
+									<li>RDF for linked data</li>
+								</ul>
+							</div>
+						</div>
+					</div>
                 </div>
                 <!--<div class="line">
                     <article>
@@ -225,8 +228,7 @@
                 <section data-title="reference_overview" class="subSection">
                     <div class="marker" id="reference_overview"></div>
                     <h3>Overview</h3>
-                    <p>Atlas ingests data from <a href="#reference_sources">15+ sources</a>, indexes them, matches equivilent items, then provides simple RESTful APIs for <a href="#reference_fullReference">Search</a>, <a href="#reference_fullReference">Discovery</a>, <a href="#reference_fullReference">Content</a> descriptions and channel <a href="#reference_fullReference">Schedules</a>.</p>
-                    <p>Data can also be provided in a range of common <a href="#reference_feeds">feed formats</a>.</p>
+                    <p>Atlas ingests data from <a href="#reference_sources">15+ sources</a>, indexes them, matches equivalent items, then provides simple RESTful APIs for <a href="#reference_fullReference">Search</a>, <a href="#reference_fullReference">Discovery</a>, <a href="#reference_fullReference">Content</a> descriptions and channel <a href="#reference_fullReference">Schedules</a>. Data can also be provided in a range of common <a href="#reference_feeds">feed formats</a>.</p>
                 </section>
                 
                 <section data-title="reference_dataModel" class="subSection">
@@ -365,26 +367,26 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Usage</th>
+                                <th class="first">Name</th>
+                                <th class="second">Description</th>
+                                <th class="third">Usage</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><code>q</code></td>
-                                <td>The title of a Brand, Item (if a <mark class="hov" data-title="special">special</mark>) or a person</td>
-                                <td>String</td>
+                        	<tr>
+                                <td class="first"><code>limit</code> (required)</td>
+                                <td class="second">The number of items to return (max 50)</td>
+                                <td class="third">Integer</td>
                             </tr>
                             <tr>
-                                <td><code>publisher</code></td>
-                                <td>The publisher of the content</td>
-                                <td>String from a list of available publishers</td>
+                                <td class="first"><code>publisher</code></td>
+                                <td class="second">The publisher of the content</td>
+                                <td class="third">String from a list of available publishers</td>
                             </tr>
                             <tr>
-                                <td><code>limit</code> (required)</td>
-                                <td>The number of items to return (max 50)</td>
-                                <td>Integer</td>
+                                <td class="first"><code>q</code></td>
+                                <td class="second">The title of a Brand, Item (if a <mark class="hov" data-title="special">special</mark>) or a person</td>
+                                <td class="third">String</td>
                             </tr>
                         </tbody>
                     </table>
@@ -394,62 +396,62 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Usage</th>
+                                <th class="first">Name</th>
+                                <th class="second">Description</th>
+                                <th class="third">Usage</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><code>publisher</code></td>
-                                <td>The publisher of the content</td>
-                                <td>String from a list of available publishers</td>
+                        	<tr>
+                                <td class="first"><code>available</code></td>
+                                <td class="second">Whether the content is availaible ('<code>any</code>' will return content that is both not available and available)</td>
+                                <td class="third"><code>true</code>, <code>false</code>, <code>any</code></td>
                             </tr>
                             <tr>
-                                <td><code>genre</code></td>
-                                <td>The genre of the content</td>
-                                <td>String from a list of available genres</td>
+                                <td class="first"><code>availableCountries</code></td>
+                                <td class="second">Content available in a specific country</td>
+                                <td class="third">String from a list of available countries (based on <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="_blank">ISO3166</a>)</td>
                             </tr>
                             <tr>
-                                <td><code>available</code></td>
-                                <td>Whether the content is availaible ('<code>any</code>' will return content that is both not available and available)</td>
-                                <td><code>true</code>, <code>false</code>, <code>any</code></td>
+                                <td class="first"><code>dataCountainerFormat</code></td>
+                                <td class="second">The container format for the content (mp3, mp4 etc.)</td>
+                                <td class="third">String from a list of available container formats</td>
                             </tr>
                             <tr>
-                                <td><code>availableCountries</code></td>
-                                <td>Content available in a specific country</td>
-                                <td>String from a list of available countries (based on <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements" target="_blank">ISO3166</a>)</td>
+                                <td class="first"><code>duration</code></td>
+                                <td class="second">The length of the content in seconds</td>
+                                <td class="third">Integer</td>
                             </tr>
                             <tr>
-                                <td><code>duration</code></td>
-                                <td>The length of the content in seconds</td>
-                                <td>Integer</td>
+                                <td class="first"><code>genre</code></td>
+                                <td class="second">The genre of the content</td>
+                                <td class="third">String from a list of available genres</td>
                             </tr>
                             <tr>
-                                <td><code>isLongForm</code></td>
-                                <td>Content that is 'full length' eg. a full episode</td>
-                                <td><code>true</code> or <code>false</code></td>
+                                <td class="first"><code>isLongForm</code></td>
+                                <td class="second">Content that is 'full length' eg. a full episode</td>
+                                <td class="third"><code>true</code> or <code>false</code></td>
                             </tr>
                             <tr>
-                                <td><code>dataCountainerFormat</code></td>
-                                <td>The container format for the content (mp3, mp4 etc.)</td>
-                                <td>String from a list of available container formats</td>
+                                <td class="first"><code>limit</code> (required)</td>
+                                <td class="second">The number of items to return (max 50)</td>
+                                <td class="third">Integer</td>
                             </tr>
                             <tr>
-                                <td><code>transportType</code></td>
-                                <td>How to access the content</td>
-                                <td><code>link</code>, <code>download</code> or <code>embed</code></td>
+                                <td class="first"><code>mediaType</code></td>
+                                <td class="second">The type of media</td>
+                                <td class="third"><code>audio</code> or <code>video</code></td>
                             </tr>
                             <tr>
-                                <td><code>mediaType</code></td>
-                                <td>The type of media</td>
-                                <td><code>audio</code> or <code>video</code></td>
+                                <td class="first"><code>publisher</code></td>
+                                <td class="second">The publisher of the content</td>
+                                <td class="third">String from a list of available publishers</td>
                             </tr>
                             <tr>
-                                <td><code>limit</code> (required)</td>
-                                <td>The number of items to return (max 50)</td>
-                                <td>Integer</td>
-                            </tr>
+                                <td class="first"><code>transportType</code></td>
+                                <td class="second">How to access the content</td>
+                                <td class="third"><code>link</code>, <code>download</code> or <code>embed</code></td>
+                            </tr>  
                         </tbody>
                     </table>
                     
@@ -458,26 +460,26 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Usage</th>
+                                <th class="first">Name</th>
+                                <th class="second">Description</th>
+                                <th class="third">Usage</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>channel</code></td>
-                                <td>The channel of the content</td>
-                                <td>String from a list of available channels</td>
+                                <td class="first"><code>channel</code></td>
+                                <td class="second">The channel of the content</td>
+                                <td class="third">String from a list of available channels</td>
                             </tr>
                             <tr>
-                                <td><code>from</code></td>
-                                <td>The beginning of a schedule period</td>
-                                <td>Timestamp (seconds since 1/1/1970) or as a short hand <code>now.minus.24h</code> (based on <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank">ISO8601 Durations</a>)</td>
+                                <td class="first"><code>from</code></td>
+                                <td class="second">The beginning of a schedule period</td>
+                                <td class="third">Timestamp (seconds since 1/1/1970) or as a short hand <code>now.minus.24h</code> (based on <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank">ISO8601 Durations</a>)</td>
                             </tr>
                             <tr>
-                                <td><code>to</code></td>
-                                <td>The end of a schedule period</td>
-                                <td>Timestamp (seconds since 1/1/1970) or as a short hand <code>now.minus.24h</code> (based on <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank">ISO8601 Durations</a>)</td>
+                                <td class="first"><code>to</code></td>
+                                <td class="second">The end of a schedule period</td>
+                                <td class="third">Timestamp (seconds since 1/1/1970) or as a short hand <code>now.minus.24h</code> (based on <a href="http://en.wikipedia.org/wiki/ISO_8601#Durations" target="_blank">ISO8601 Durations</a>)</td>
                             </tr>
                         </tbody>
                     </table>
@@ -487,16 +489,16 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Usage</th>
+                                <th class="first">Name</th>
+                                <th class="second">Description</th>
+                                <th class="third">Usage</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><code>uri</code></td>
-                                <td>The URI of a specific piece of content</td>
-                                <td>The URI of a piece of content</td>
+                                <td class="first"><code>uri</code></td>
+                                <td class="second">The URI of a specific piece of content</td>
+                                <td class="third">The URI of a piece of content</td>
                             </tr>
                         </tbody>
                     </table>
@@ -511,30 +513,30 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Source</th>
-                                <th>Access</th>
-                                <th>Status</th>
-                                <th>Type</th>
+                                <th class="first">Source</th>
+                                <th class="second">Access</th>
+                                <th class="third">Status</th>
+                                <th class="fourth">Type</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>iTunes</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Pay on-demand shows</td>
-                            </tr>
-                             <tr>
-                                <td>Hulu</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Free on-demand shows</td>
+                        	<tr>
+                                <td class="first">Hulu</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Free on-demand shows</td>
                             </tr>
                             <tr>
-                                <td>TV Blob</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>EPG</td>
+                                <td class="first">iTunes</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Pay on-demand shows</td>
+                            </tr>
+                            <tr>
+                                <td class="first">TV Blob</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">EPG</td>
                             </tr>
                         </tbody>
                     </table>
@@ -543,54 +545,54 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Source</th>
-                                <th>Access</th>
-                                <th>Status</th>
-                                <th>Type</th>
+                                <th class="first">Source</th>
+                                <th class="second">Access</th>
+                                <th class="third">Status</th>
+                                <th class="fourth">Type</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>BBC</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Free on-demand shows, EPG, Clips</td>
-                            </tr>
-                             <tr>
-                                <td>ITV</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Free on-demand shows</td>
+                                <td class="first">BBC</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Free on-demand shows, EPG, Clips</td>
                             </tr>
                             <tr>
-                                <td>C4</td>
-                                <td>Restricted</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Free on-demand shows, EPG, Clips</td>
+                                <td class="first">Channel 4</td>
+                                <td class="second">Restricted</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Free on-demand shows, EPG, Clips</td>
                             </tr>
                             <tr>
-                                <td>Five</td>
-                                <td>Restricted</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Free on-demand shows</td>
+                                <td class="first">Five</td>
+                                <td class="second">Restricted</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Free on-demand shows</td>
                             </tr>
                             <tr>
-                                <td>Press Association</td>
-                                <td>Restricted</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>EPG</td>
+                                <td class="first">ITV</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Free on-demand shows</td>
                             </tr>
                             <tr>
-                                <td>SeeSaw</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Free on-demand shows, Pay on-demand shows</td>
+                                <td class="first">MSN Video</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">free on-demand shows</td>
                             </tr>
                             <tr>
-                                <td>MSN Video</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>free on-demand shows</td>
+                                <td class="first">Press Association</td>
+                                <td class="second">Restricted</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">EPG</td>
+                            </tr>
+                            <tr>
+                                <td class="first">SeeSaw</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Free on-demand shows, Pay on-demand shows</td>
                             </tr>
                         </tbody>
                     </table>
@@ -599,58 +601,58 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Source</th>
-                                <th>Access</th>
-                                <th>Status</th>
-                                <th>Type</th>
+                                <th class="first">Source</th>
+                                <th class="second">Access</th>
+                                <th class="third">Status</th>
+                                <th class="fourth">Type</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>YouTube</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                        	<tr>
+                                <td class="first">archive.org</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                             <tr>
-                                <td>Vimeo</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                                <td class="first">blip.tv</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                             <tr>
-                                <td>Daily Motion</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                                <td class="first">Daily Motion</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                             <tr>
-                                <td>blip.tv</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                                <td class="first">Podcasts</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                             <tr>
-                                <td>Podcasts</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                                <td class="first">TED.com</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                             <tr>
-                                <td>archive.org</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                                <td class="first">Vimeo</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                             <tr>
-                                <td>TED.com</td>
-                                <td>Public</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Clips</td>
+                                <td class="first">YouTube</td>
+                                <td class="second">Public</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Clips</td>
                             </tr>
                         </tbody>
                     </table>
-                    <p class="info">Please contact MetaBroadcast if you are interested in using restricted sources.</p>
+                    <p class="info">Please <a href="mailto:atlas@metabroadcast.com">contact MetaBroadcast</a> if you are interested in using restricted sources.</p>
                 </section>
                 
                 <section data-title="reference_feeds" class="subSection">
@@ -661,138 +663,71 @@ brand_summary: {
                     <table class="tbl">
                         <thead>
                             <tr>
-                                <th>Format</th>
-                                <th>Base Type</th>
-                                <th>Status</th>
-                                <th>Description</th>
+                                <th class="first">Format</th>
+                                <th class="second">Base Type</th>
+                                <th class="third">Status</th>
+                                <th class="fourth">Description</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Google Video Sitemaps</td>
-                                <td>MRSS</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Data to feed Google Video Search</td>
+                                <td class="first">BBC Interlinking</td>
+                                <td class="second">MRSS</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Data to feed broadcast data into BBC iPlayer</td>
                             </tr>
                             <tr>
-                                <td>BBC Interlinking</td>
-                                <td>MRSS</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Data to feed broadcast data into BBC iPlayer</td>
+                                <td class="first">Google Video Sitemaps</td>
+                                <td class="second">MRSS</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Data to feed Google Video Search</td>
                             </tr>
                             <tr>
-                                <td>UK Radio Player</td>
-                                <td>DAB-EPG</td>
-                                <td class="tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
-                                <td>Data to feed UK Radio Player Search</td>
+                                <td class="first">UK Radio Player</td>
+                                <td class="second">DAB-EPG</td>
+                                <td class="third tc"><img src="images/green.png" width="24" height="24" title="green" /></td>
+                                <td class="fourth">Data to feed UK Radio Player Search</td>
                             </tr>
                         </tbody>
                     </table>
                     
-                    <p class="info">Contact MetaBroadcast for help producing data in these formats</p>
+                    <p class="info"><a href="mailto:atlas@metabroadcast.com">Contact MetaBroadcast</a> for help producing data in these formats</p>
                 </section>
             </section>
 
             <section class="about">
                 <div class="marker" id="about"></div>
-                <ul class="subNav" style="display: none;">
-                    <li><a href="#about_overview">Overview</a></li>
-                    <li><a href="#about_getInvolved">Get Involved</a></li>
-                </ul>
                 <h2>About</h2>
-                <section data-title="about_overview" class="subSection">
-                    <div class="marker" id="about_overview"></div>  
-                    <h3>Overview</h3>
-                    <div class="line mbl">
-                        <div class="unit size2of3">
-                            <article>
-                                <h4 class="hr">Atlas Is</h4>
-                                <ul class="list mbl">
-                                    <li>The open-source, open-API index that gathers and stores video & audio information from <a href="#reference_sources">10+ sources</a>, so that you can build cool apps swiftly</li>
-                                    <li>The way to learn all about a content link, or to find the content link itself</li>
-                                </ul>  
-                                
-                                <h4 class="hr">Atlas Does</h4>
-                                <ul class="list mbl">
-                                    <li>Runs sophisticated title searches</li>
-                                    <li>Helps you get to content you can actually watch, like "<a href="#">I want to watch Glee and I am in the US</a>"</li>
-                                    <li>Automatically produces all the content lists needed for an online video service, from episodes in a brand to a-to-z lists and the current highlights</li>
-                                    <li>Stores all you expect: title, description, image, thumbnail, genres, tags and many ways to play it</li>
-                                    <li>Keeps an eye on <a href="http://twitter.com">Twitter</a>, indexing all content mentions and <a href="#">what's currently hot</a></li>
-                                    <li>Next to web, finds mobile and TV friendly content</li>
-                                    <li>Lets you ask for content by time, like "<a href="#">What's on the BBC right now?</a>"</li>
-                                    <li>Outputs information in <a href="#">many different formats</a></li>
-                                    <li>Figure equivalent content from fifferent sources</li>
-                                </ul>
-                            </article>
-                        </div>
-                        <div class="unit size1of3 lastUnit">
-                            <article>
-                                <h4 class="hr"><mark>Atlas</mark> is all over the web</h4>
-                                <ul class="socialList">
-                                    <li><a href="#"><img src="images/twitter.png" /><mark>@atlasapi</mark></a></li>
-                                    <li><a href="#"><img src="images/github.png" /><mark>source-code, wiki and issue tracker</mark></a></li>
-                                    <li><a href="#"><img src="images/google.png" /><mark>discussion</mark></a></li>
-                                    <li><a href="#"><img src="images/metabroadcast.png" /><mark>metabroadcast</mark></a></li>
-                                </ul>
-                            </article>
-                        </div>
-                    </div>
-                    <!-- <div class="line mbl">
-                        <div class="unit size2of3">
-                            <article>
-                                <h4 class="hr">projects that use atlas</h4>
-                                <div class="project">
-                                    <img src="" />
-                                    <h5>Watch Something and something</h5>
-                                </div>
-                                <div class="project">
-                                    <img src="" />
-                                    <h5>Watch Something and something and something</h5>
-                                </div>
-                                <div class="project">
-                                    <img src="" />
-                                    <h5>Watch Something</h5>
-                                </div>
-                                <div class="project">
-                                    <img src="" />
-                                    <h5>Watch Something</h5>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="unit size1of3 lastUnit">
-                            <article> -->
-                                
-                            <!-- </article>
-                        </div>
-                    </div>-->
-                </section>
-                <section data-title="about_getInvolved" class="subSection">
-                    <div class="marker" id="about_getInvolved"></div>
-                    <h3>Get Involved</h3>
                     
-                    <p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
-                    <ul class="list">
-                        <li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
-                        <li>Have a chat with us about the features and formats that you’d find useful</li>
-                        <li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
-                        <li>Provide a metadata endpoint for us to ingest</li>
-                        <li>Develop an adapter for a new source of content, current sources are listed <a href="#reference_sources">here</a></li>
-                        <li>Help improve the core of the code</li>
-                        <li>Write client libraries for other languages</li>
-                    </ul>
-                    
-                    <h4>Project Hosting</h4>
-                    <p>The <a href="http://github.com/atlasapi">source-code</a>, <a href="http://github.com/atlasapi/atlas/issues">issue tracking</a> and <a href="http://wiki.github.com/atlasapi/atlas/">wiki</a> are all hosted on <a href="http://github.com/">Github</a>.<br />
-                    Additionally, communication is all handled through <a href="http://groups.google.com/group/atlasapi/">Google Groups</a>. If you’re interested in joining the project or just asking us something, the group is the best place to start.<br />
-                    Alternatively, if you notice something is wrong, or just have a feature request, feel free to use our <a href="http://github.com/atlasapi/atlas/issues">Issue Tracker</a>.</p>
-                    
-                    <h4>License</h4>
-                    <p>Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></p>
-                    
-                    <h4>Client Libraries</h4>
-                    <p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br /><a href="">@micrypt</a> very kindly started a simple Python client library: <a href="http://github.com/micrypt/atlas-client/">http://github.com/micrypt/atlas-client/</a><br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
-                </section>
+				<h4>License<h4>
+				<p>Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></p>
+				
+				<h4>Project Hosting</h4>
+				<p>The <a href="http://github.com/atlasapi">source-code</a>, <a href="http://github.com/atlasapi/atlas/issues">issue tracking</a> and <a href="http://wiki.github.com/atlasapi/atlas/">wiki</a> are all hosted on <a href="http://github.com/">Github</a>.<br />
+				Additionally, communication is all handled through <a href="http://groups.google.com/group/atlasapi/">Google Groups</a>. If you’re interested in joining the project or just asking us something, the group is the best place to start.<br />
+				Alternatively, if you notice something is wrong, or just have a feature request, feel free to use our <a href="http://github.com/atlasapi/atlas/issues">Issue Tracker</a>.</p>
+				
+				<h4>Client Libraries</h4>
+				<p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br /><a href="">@micrypt</a> very kindly started a simple Python client library: <a href="http://github.com/micrypt/atlas-client/">http://github.com/micrypt/atlas-client/</a><br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
+				
+				<h4>Get Involved</h4>
+				<p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
+				<ul class="list">
+					<li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
+					<li>Have a chat with us about the features and formats that you’d find useful</li>
+					<li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
+					<li>Provide a metadata endpoint for us to ingest</li>
+					<li>Develop an adapter for a new source of content, current sources are listed <a href="#reference_sources">here</a></li>
+					<li>Help improve the core of the code</li>
+					<li>Write client libraries for other languages</li>
+				</ul>
+
+				<ul class="socialList clearfix">
+					<li><a href="http://github.com/atlasapi/atlas/"><img src="images/github.png" /><mark>source-code, wiki and issue tracker</mark></a></li>
+					<li><a href="http://groups.google.com/group/atlasapi/"><img src="images/google.png" /><mark>discussion</mark></a></li>
+					<li><a href="http://twitter.com/atlasapi"><img src="images/twitter.png" /><mark>@atlasapi</mark></a></li>
+					<li><a href="http://metabroadcast.com"><img src="images/metabroadcast.png" /><mark>metabroadcast</mark></a></li>
+				</ul>
             </section>
             
             <section class="apiExplorer">
