@@ -133,7 +133,7 @@ PageInfo.prototype.init = function() {
     pageInfo.subSections = pageInfo.subSection.length;
     
     $('body').keyup(function(e){
-        if($(':focus').length == 0) {
+        /*if($(':focus').length == 0) {
             if(pageInfo.currentSection == undefined){
                 pageInfo.currentSection = 0;
             }
@@ -185,7 +185,7 @@ PageInfo.prototype.init = function() {
                 
                 break;
             }
-        }
+        }*/
     });
 }
 
@@ -245,7 +245,7 @@ PageInfo.prototype.changePage = function(i) {
     $('header a[href="#'+pageInfo.section[i].name+'"]').addClass('selected');
     
     // Change hash
-    if(Modernizr.history && pageInfo.section[i].subSections == 0){
+    if(pageInfo.section[i].subSections == 0){
         pageInfo.changeHash(pageInfo.section[i].name);
     }
     
@@ -279,7 +279,7 @@ PageInfo.prototype.changeSubSection = function(i){
     $('.'+sectionParent+' .subNav a.selected').removeClass('selected');
     $('.'+sectionParent+' .subNav a[href="#'+sectionName+'"]').addClass('selected');
     
-    if(Modernizr.history && pageInfo.section[i].subSections == 0){
+    if(pageInfo.section[i].subSections == 0){
         pageInfo.changeHash(sectionName);
     }
     
@@ -290,7 +290,9 @@ PageInfo.prototype.changeHash = function(n) {
     var pageInfo = this;
     pageInfo.changePageTimer = setTimeout(function(){
         var url = location.href.substr(0,location.href.indexOf('#'))+'#'+n;
-        window.history.pushState(null,null,url);
+        if(Modernizr.history){
+            window.history.pushState(null,null,url);
+        }
     }, 1000);
 }
 
@@ -342,7 +344,7 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
         
     var item = homeDemo.nav.find('.queries');
-    item.append('<a href="'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'&limit=20" class="query api api'+homeDemo.query[homeDemo.activeQuery].type+'">'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'</a>');
+    item.append('<a href="'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'" class="query api api'+homeDemo.query[homeDemo.activeQuery].type+'">'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'</a>');
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
@@ -1238,7 +1240,7 @@ $(document).ready(function(){
     var pageInfo = new PageInfo();
     pageInfo.init();
     
-    $('section:not(.subSection):last-child').css('min-height', pageInfo.pageHeight-161);
+    $('section:not(.subSection):last-child').css('min-height', pageInfo.pageHeight-148);
         
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
@@ -1274,7 +1276,7 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(0);
             apiExplorer.searchQuery($(this).attr('href'));
-            window.location.hash = 'apiExplorer';
+            $('a[href="#apiExplorer"]').click();
             apiFuncRun = true;
             return false;
         }
@@ -1284,7 +1286,7 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(1);
             apiExplorer.discoverQuery($(this).attr('href'));
-            window.location.hash = 'apiExplorer';
+            $('a[href="#apiExplorer"]').click();
             apiFuncRun = true;
             return false;
         }
@@ -1294,7 +1296,7 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(2);
             apiExplorer.scheduleQuery($(this).attr('href'));
-            window.location.hash = 'apiExplorer';
+            $('a[href="#apiExplorer"]').click();
             apiFuncRun = true;
             return false;
         }
@@ -1304,7 +1306,7 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(3);
             apiExplorer.contentQuery($(this).attr('href'));
-            window.location.hash = 'apiExplorer';
+            $('a[href="#apiExplorer"]').click();
             apiFuncRun = true;
             return false;
         }
@@ -1314,7 +1316,7 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(4);
             apiExplorer.customQuery($(this).attr('href'));
-            window.location.hash = 'apiExplorer';
+            $('a[href="#apiExplorer"]').click();
             apiFuncRun = true;
             return false;
         }
@@ -1368,6 +1370,24 @@ $(document).ready(function(){
     
     $('.mainMenu a').click(function(){
         pageInfo.menuClick = true;
+        var index = $(this).parent().index();
+        if(index >= 0){
+            $(document).scrollTop(pageInfo.section[index].position);
+            pageInfo.changePage(index);
+        }
+    });
+    
+    $('.subNav a').click(function(){
+        var index = $(this).parent().index();
+        if(index >= 0){
+            $(document).scrollTop(pageInfo.section[pageInfo.currentSection].subSection[index].position);
+            pageInfo.changeSubSection(index);
+        }
+    });
+    
+    $('a[href="#apiExplorer"]').click(function(){
+        $(document).scrollTop(pageInfo.section[pageInfo.sections].position);
+        pageInfo.changeSubSection(pageInfo.sections);
     });
     
     $(window).scroll(function(e){

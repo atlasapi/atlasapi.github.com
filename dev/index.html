@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+﻿<!DOCTYPE html>
 <html>
 	<head>
 		<title>AtlasAPI</title>
@@ -26,13 +26,46 @@
                         <li><a href="#about">About</a></li>
                     </ul>
                 </nav>
-                <div id="msgs" style="display:none;">Sorry, the following error occured: timeout</div>
+                <div id="msgs" class="info" style="display:none;">You are using an old browser - for a better experience and to use some of the advanced features of this website please consider upgrading.</div>
             </div>
         </header>
 		<div class="page">
             <section class="home">
                 <div class="marker" id="home"></div>
+                <h3 class="mlm mrm homeSpeech">It's never been so easy to build advanced video and audio services.</h3>
                 <div class="line">
+                    <div class="unit size1of3">
+                        <div class="mlm mrm">
+                            <h4>1 API</h4>
+                            <ul class="list">
+                                <li>Find through <a href="">search</a>, <a href="">genres</a>, sources</li>
+                                <li>Display <a href="">schedules</a> and <a href="">content</a> details</li>
+                                <li>Aggregate links to all services for the same show</li>
+                                <li>Work across web, mobile and TV</li>
+                                <li>Smoothly handle rights restrictions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="unit size1of3">
+                        <div class="mlm mrm">
+                            <h4>15+ International sources</h4>
+                            <ul class="list">
+                                <li>long-form and short-form: archive.org, blip.tv, BBC, Channel 4, dailymotion, Five, HBO, Hulu, iTunes, ITV, MSN Video, Press Association, SeeSaw, ted.com, TVBLOB, Vimeo, YouTube and podcasts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="unit size1of3 lastUnit">
+                        <div class="mlm mrm">
+                            <h4>5+ output formats</h4>
+                            <ul class="list">
+                                <li>RESTful API with XML and JSON</li>
+                                <li>Specialist feeds for Google, BBC iPlayer, UK Radioplayer</li>
+                                <li>RDF for linked data</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="line">
                     <article>
                         <h2><mark>Atlas</mark> in 3 steps</h2>
                     </article>
@@ -50,7 +83,7 @@
                             <p class="homeSpeech feast"></p>
                         </article>
                     </div>
-                </div>
+                </div>-->
                 <div class="slideShow clearfix">
                     <div class="slideshowItem clearfix">
                         <a class="showItem show_lrg loading apiContent">
@@ -823,7 +856,7 @@ brand_summary: {
                     			</a> 
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
@@ -920,7 +953,7 @@ brand_summary: {
                     			</a> 
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
@@ -992,7 +1025,7 @@ brand_summary: {
                     			</a> 
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
@@ -1045,7 +1078,7 @@ brand_summary: {
                     			</a> 
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
@@ -1091,7 +1124,7 @@ brand_summary: {
                     			</a> 
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span></span><span class="ep"></span></span>
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
                     			</a>
                     			<a class="showItem apiContent" style="display: none;">
                                     <img src="" />
@@ -1138,9 +1171,9 @@ brand_summary: {
             <div class="hover" data-title="from"><span class="title">From</span><span class="body">The beginning of a schedule period.</span></div>
             <div class="hover" data-title="to"><span class="title">To</span><span class="body">The end of a schedule period.</span></div>
             <div class="hover" data-title="channel"><span class="title">Channel</span><span class="body">The channel that the content was broadcast on eg. bbcone, bbctwo etc.</span></div>
-            <div class="hover" data-title="copy"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></span></div>
-            <div class="hover" data-title="brand"><span class="title">brand</span><span class="body">A special type of container that can only contain episodes</span></span></div>
-            <div class="hover" data-title="special"><span class="title">Special</span><span class="body">A one off item that does not have a container</span></span></div>
+            <div class="hover" data-title="copy"><span class="title">copy</span><span class="body">Click to copy the query to your clipboard</span></div>
+            <div class="hover" data-title="brand"><span class="title">brand</span><span class="body">A special type of container that can only contain episodes</span></div>
+            <div class="hover" data-title="special"><span class="title">Special</span><span class="body">A one off item that does not have a container</span></div>
         </div>
 	</body>
 </html>

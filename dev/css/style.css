@@ -23,6 +23,8 @@
 			
 			.page {margin: 0 auto; text-align: left; width: 960px; padding: 0; background: #efefef; border-left: 1px solid #e7e5e5; border-right: 1px solid #e7e5e5; position: relative;}
 			
+			*html .page {overflow: hidden;}
+			
 			code {text-transform: none; color: #000;}
 			
 			header {
@@ -45,11 +47,13 @@
                 text-align: center;}
 			header .content {margin: 0 auto; text-align: left; width: 940px; position: relative;}
 			
-			section {padding: 10px 10px 80px; position: relative; display: block; clear: both;}
-			section.subSection {padding: 30px 0 10px; border-bottom: 1px dashed rgba(0,0,0,0.1);}
-			section .marker {position: absolute; top: -87px; height: 0; width: 0;}
+			*html header {position: absolute;}
 			
-			.home {padding: 90px 0;}
+			section {padding: 10px 10px 40px; position: relative; display: block; clear: both; border-bottom: 1px solid #e0e0e0;}
+			section.subSection {padding: 30px 0 10px; border-bottom: 1px dashed rgba(0,0,0,0.1);}
+			section .marker {position: absolute; top: -68px;}
+			
+			.home {padding: 90px 0 40px;}
 			.homepageInfo {
                 font-size: 11px;
                 color: #666;
@@ -67,6 +71,7 @@
             }
             
             .apiExplorer {padding: 0 0 70px;}
+            *html .apiExplorer {display: none;}
             .explorerTitle {
                 margin-bottom: 0;
                 color: #fff;
@@ -116,7 +121,7 @@
                 margin: 0 10px;
             }
             
-            .popOut .homeSpeech {
+            .homeSpeech {
                 background: #f1d9e7;
                 -webkit-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
                 -moz-box-shadow: inset 0 5px 10px rgba(0,0,0,0.1);
@@ -134,8 +139,9 @@
                 line-height: 24px;
                 padding: 10px;
                 position: relative;
+                display: inline-block;
             }
-            .csstransforms .popOut .homeSpeech:after {
+            .csstransforms .homeSpeech:after {
                 content: "\00a0";
                 display: block;
                 width: 20px;
@@ -288,8 +294,8 @@
 			.tbl tbody tr:hover {background: #efefef;}
 			
 			/* Lists */
-			.list {list-style-type: none; font-size: 12px; line-height: 18px;}
-			.list li {margin-bottom: 10px;padding-left: 20px; background:url(../images/bullet.gif) 0 7px no-repeat; font-size: 14px;}
+			.list {list-style-type: none; font-size: 12px; line-height: 18px; margin-bottom: 10px;}
+			.list li {padding-left: 20px; background:url(../images/bullet.gif) 0 10px no-repeat; font-size: 14px; line-height: 24px;}
 			
 			nav {float: left; margin-left: 10px;}
 			.mainMenu {list-style-type: none; font-size: 22px; margin-top: 23px; line-height: 28px; float: left; }
@@ -319,7 +325,11 @@
                 border-radius: 0 0 5px 5px;
                 -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 			}
+			*:first-child+html .subNav {top: 67px;}
+			*html .subNav {top: 67px;}
 			.subNav li {float: left; padding: 0 10px; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
+			*:first-child+html .subNav li {border-right: 0 none;}
+			*html .suvNav li {border-right: 0 none;}
 			.subNav li:first-child {border-left: 0 none; padding-left: 0;}
 			.subNav li:last-child {border-right: 0 none; padding-right: 0;}
 			.subNav li:first-child{margin-left: 0;}
@@ -584,11 +594,13 @@
                 -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
                 text-shadow: 0 1px 0 #fff;
             }
-            #msgs.success {
+            *:first-child+html #msgs {top: 57px;}
+            *html #msgs {top: 57px; display: block !important;}
+            .success {
                 border-color: #c3e8c4;
                 background: #d5f5d6;
             }
-            #msgs.error {
+            .error {
                 border-color: #e8c3c3;
                 background: #f5d5d5;
             }
@@ -696,6 +708,15 @@
                 height: 283px;
                 overflow: hidden;
                 position: relative;
+                background: #e7e7e7;
+                border-top: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+            }
+            
+            *html .slideShow {display: none;}
+            
+            .boxshadow .slideShow {
+                border: 0 none;
                 background: #e7e7e7 url(../images/slideBg.png);
                 -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
@@ -705,7 +726,7 @@
                 box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
             }
             
-            .slideShowItem {
+            .slideshowItem {
                 position: absolute;
                 left: 0;
                 top: 10px;
@@ -713,6 +734,7 @@
             }
             
             .controlBar {padding: 0 10px; position: relative;}
+            *html .controlBar {display: none;}
                 .controlBar .queryHolder {
                     padding: 12px 20px;
                     overflow: hidden;
@@ -756,6 +778,9 @@
                 -ms-box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
                 box-shadow: inset -5px 0 5px rgba(0,0,0,0.1);
             }
+            *:first-child+html .example {width: 70%;}
+            *html .example {width: 70%;}
+            
                 .example h3 mark {font-size: 1.2em;}
                 .example h3 {
                     font-size: 24px;
@@ -810,7 +835,7 @@
                         border-radius: 5px 0 20px 0;
                     }
                     .example h3 .hov {color: #EF308F;}
-                .example a.api {font-size: 20px; text-shadow: 0 1px 1px rgba(0,0,0,0.2); margin: 0 20px; color: #EF308F;}
+                .example a.api {font-size: 20px; text-shadow: 0 1px 1px rgba(0,0,0,0.2); margin: 0 20px; color: #EF308F; display: inline-block;}
                 .example a:hover {text-decoration: none;}
             
             /* From Right */
@@ -941,9 +966,10 @@
             .hov.js:hover .hover {display: none;}
             
             /* Forms */
+            *:first-child+html form .line {margin-bottom: 10px;}
             input[type=text],
             input[type=number] {
-                width: 300px;
+                width: 290px;
                 height: 30px;
                 padding: 0 5px;
                 background: #f2f2f2;
@@ -954,6 +980,7 @@
                 -ms-border-radius: 3px;
                 border-radius: 3px;
             }
+            
             input[type=text]:focus {
                 outline: none;
                 border: 1px solid #EF308F;
@@ -979,10 +1006,12 @@
                 width: 150px;
                 float: left;
             }
+            *:first-child+html label {width: 140px;}
             label.date {
-                width: 90px;
+                width: 70px;
                 margin-right: 10px;
             }
+            *:first-child+html label.date {width: 60px;}
             label.adv{width: 180px;}
             
             .select {
@@ -1053,6 +1082,7 @@
                 display: block;
                 margin-bottom: 10px;
             }
+            *:first-child+html .urlCopy {z-index: -1;}
                 .urlCopy .urlTxt {
                     margin-right: 25px;
                     display: block;
