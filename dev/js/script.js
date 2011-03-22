@@ -506,7 +506,7 @@ HomeDemo.prototype.nextQuery = function() {
         if(item.children().length < 10 && homeDemo.scrolling == false){
             var clone = item.children('a:last-child').clone();
             clone.removeAttr('class').attr('class','query api api'+homeDemo.query[homeDemo.activeQuery].type);
-            clone.attr('href',queryBeg+homeDemo.query[homeDemo.activeQuery].query+'&limit=20').html(queryBeg+homeDemo.query[homeDemo.activeQuery].query);
+            clone.attr('href',queryBeg+homeDemo.query[homeDemo.activeQuery].query).html(queryBeg+homeDemo.query[homeDemo.activeQuery].query);
             clone.appendTo(item);
             /*var href = '<a href="'+homeDemo.query[homeDemo.activeQuery]+'" class="query api">'+homeDemo.query[homeDemo.activeQuery]+'</a>';
             item.append(href);
@@ -1276,7 +1276,11 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(0);
             apiExplorer.searchQuery($(this).attr('href'));
-            $('a[href="#apiExplorer"]').click();
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'apiExplorer';
+            }
             apiFuncRun = true;
             return false;
         }
@@ -1286,7 +1290,11 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(1);
             apiExplorer.discoverQuery($(this).attr('href'));
-            $('a[href="#apiExplorer"]').click();
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'apiExplorer';
+            }
             apiFuncRun = true;
             return false;
         }
@@ -1296,7 +1304,11 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(2);
             apiExplorer.scheduleQuery($(this).attr('href'));
-            $('a[href="#apiExplorer"]').click();
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'apiExplorer';
+            }
             apiFuncRun = true;
             return false;
         }
@@ -1306,7 +1318,11 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(3);
             apiExplorer.contentQuery($(this).attr('href'));
-            $('a[href="#apiExplorer"]').click();
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'apiExplorer';
+            }
             apiFuncRun = true;
             return false;
         }
@@ -1316,7 +1332,11 @@ $(document).ready(function(){
         if(apiFuncRun == false) {
             tabs.changeTab(4);
             apiExplorer.customQuery($(this).attr('href'));
-            $('a[href="#apiExplorer"]').click();
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'apiExplorer';
+            }
             apiFuncRun = true;
             return false;
         }
