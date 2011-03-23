@@ -413,7 +413,7 @@ HomeDemo.prototype.request = function() {
         $.ajax({
             url: queryBeg+homeDemo.query[homeDemo.activeQuery].query,
             dataType: 'jsonp',
-            jsonpCallback: '?',
+            jsonpCallback: 'jsonp',
             cache: true,
             timeout: 5000,
             context: homeDemo.item,
@@ -772,7 +772,7 @@ ApiExplorer.prototype.runQuery = function(tab){
     $.ajax({
         url: url,
         dataType: 'jsonp',
-        jsonpCallback: '?',
+        jsonpCallback: 'jsonp',
         cache: true,
         timeout: 5000,
         context: apiExplorer.holder,
