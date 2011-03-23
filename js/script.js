@@ -413,7 +413,7 @@ HomeDemo.prototype.request = function() {
         $.ajax({
             url: queryBeg+homeDemo.query[homeDemo.activeQuery].query,
             dataType: 'jsonp',
-            jsonpCallback: 'jsonp',
+            jsonpCallback: '?',
             cache: true,
             timeout: 5000,
             context: homeDemo.item,
@@ -772,7 +772,7 @@ ApiExplorer.prototype.runQuery = function(tab){
     $.ajax({
         url: url,
         dataType: 'jsonp',
-        jsonpCallback: 'jsonp',
+        jsonpCallback: '?',
         cache: true,
         timeout: 5000,
         context: apiExplorer.holder,
@@ -1273,7 +1273,7 @@ $(document).ready(function(){
     });
     
     $('a.apiSearch').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href').length > 0) {
             tabs.changeTab(0);
             apiExplorer.searchQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1282,12 +1282,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.apiDiscover').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href').length > 0) {
             tabs.changeTab(1);
             apiExplorer.discoverQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1296,12 +1296,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.apiSchedule').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href').length > 0) {
             tabs.changeTab(2);
             apiExplorer.scheduleQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1310,12 +1310,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.apiContent').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href').length > 0) {
             tabs.changeTab(3);
             apiExplorer.contentQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1324,12 +1324,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.api').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href').length > 0) {
             tabs.changeTab(4);
             apiExplorer.customQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1338,8 +1338,8 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('.urlCopy .urlTxt').click(function(){
