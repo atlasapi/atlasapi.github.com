@@ -1273,7 +1273,7 @@ $(document).ready(function(){
     });
     
     $('a.apiSearch').click(function(){
-        if(apiFuncRun == false && $(this).attr('href').length > 0) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(0);
             apiExplorer.searchQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1287,7 +1287,7 @@ $(document).ready(function(){
     });
     
     $('a.apiDiscover').click(function(){
-        if(apiFuncRun == false && $(this).attr('href').length > 0) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(1);
             apiExplorer.discoverQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1301,7 +1301,7 @@ $(document).ready(function(){
     });
     
     $('a.apiSchedule').click(function(){
-        if(apiFuncRun == false && $(this).attr('href').length > 0) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(2);
             apiExplorer.scheduleQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1315,7 +1315,7 @@ $(document).ready(function(){
     });
     
     $('a.apiContent').click(function(){
-        if(apiFuncRun == false && $(this).attr('href').length > 0) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(3);
             apiExplorer.contentQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1329,7 +1329,7 @@ $(document).ready(function(){
     });
     
     $('a.api').click(function(){
-        if(apiFuncRun == false && $(this).attr('href').length > 0) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(4);
             apiExplorer.customQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
