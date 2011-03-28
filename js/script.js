@@ -269,21 +269,25 @@ PageInfo.prototype.changePage = function(i) {
 
 PageInfo.prototype.changeSubSection = function(i){
     var pageInfo = this;
-    if(pageInfo.changePageTimer != false){
-        clearTimeout(pageInfo.changePageTimer);
+    if(pageInfo.section[pageInfo.currentSection] != undefined) {
+        if(pageInfo.section[pageInfo.currentSection].subSection[i] != undefined){
+            if(pageInfo.changePageTimer != false){
+                clearTimeout(pageInfo.changePageTimer);
+            }
+            
+            var sectionParent = pageInfo.section[pageInfo.currentSection].name;
+            var sectionName = pageInfo.section[pageInfo.currentSection].subSection[i].name, sectionShortName = sectionName.substr(sectionName.indexOf('_'));
+            
+            $('.'+sectionParent+' .subNav a.selected').removeClass('selected');
+            $('.'+sectionParent+' .subNav a[href="#'+sectionName+'"]').addClass('selected');
+            
+            if(pageInfo.section[i].subSections == 0){
+                pageInfo.changeHash(sectionName);
+            }
+            
+            pageInfo.currentSubSection = i;
+        }
     }
-    
-    var sectionParent = pageInfo.section[pageInfo.currentSection].name;
-    var sectionName = pageInfo.section[pageInfo.currentSection].subSection[i].name, sectionShortName = sectionName.substr(sectionName.indexOf('_'));
-    
-    $('.'+sectionParent+' .subNav a.selected').removeClass('selected');
-    $('.'+sectionParent+' .subNav a[href="#'+sectionName+'"]').addClass('selected');
-    
-    if(pageInfo.section[i].subSections == 0){
-        pageInfo.changeHash(sectionName);
-    }
-    
-    pageInfo.currentSubSection = i;
 }
 
 PageInfo.prototype.changeHash = function(n) {
@@ -307,7 +311,7 @@ var HomeDemo = function(item) {
     var array0 = [
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},
         {'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},
-        {'type': 'Search', 'query':'search.json?q=east&limit=5'},
+        {'type': 'Search', 'query':'search.json?q=green&limit=5'},
         {'type': 'Discover', 'query':'discover.json?publisher=itv.com&limit=5'},
         {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5'},
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&limit=5'},
@@ -589,14 +593,17 @@ var ApiExplorer = function(item) {
 
 ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
-    $('a.btnCopy').hover(function(){
-        if($(this).attr('data-bound') != 'true'){
+    $('a.btnCopy').each(function(){
+        $(this).hover(function(){
             var clip = new ZeroClipboard.Client();
             clip.glue($(this).attr('id'));
             clip.setHandCursor(true);
             clip.setText($(this).siblings('input[type="text"]').val());
-            $(this).attr('data-bound','true');
-        }
+        });
+    });
+    
+    $('a.btnCopy').click(function(){
+        return false;
     });
     
     $('.urlCopy').each(function(i){
