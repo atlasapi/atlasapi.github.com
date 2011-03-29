@@ -1155,7 +1155,11 @@ var updateString = function(obj) {
     if(obj.title == 'from' || obj.title == 'to'){
         var theDate = obj.val.match(/(.*?)\//g);
         var theYear = obj.val.match(/\d{4}/g);
-        obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
+        if(theDate && theYear){
+            obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
+        } else {
+            return false;
+        }
     }
     
     // 2
@@ -1370,10 +1374,6 @@ $(document).ready(function(){
         if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
             clearTimeout(updatingString);
             var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-            
-            if($(this).hasClass('date')){
-                
-            }
         
             // Add to url string
             updatingString = setTimeout(function(){
@@ -1383,13 +1383,15 @@ $(document).ready(function(){
     });
     
     $('.watchMe').change(function(e){
-        clearTimeout(updatingString);
-        var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-    
-        // Add to url string
-        updatingString = setTimeout(function(){
-            updateString(item);
-        },500);
+        if(!$(this).hasClass('date')){
+            clearTimeout(updatingString);
+            var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+        
+            // Add to url string
+            updatingString = setTimeout(function(){
+                updateString(item);
+            },500);
+        }
     });
     
     $('input.date').datepicker({
