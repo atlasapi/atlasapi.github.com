@@ -50,6 +50,13 @@ Tabs.prototype.changeTab = function(id) {
     tabs.page[id].item.show();
     
     tabs.active = id;
+    
+    var clip = new ZeroClipboard.Client();
+    clip.glue(tabs.page[tabs.active].item.find('.urlCopy .btnCopy').attr('id'), tabs.page[tabs.active].item.find('.urlCopy').attr('id'));
+    
+    clip.addEventListener('mouseDown', function(){
+        clip.setText(tabs.page[tabs.active].item.find('.urlCopy .urlTxt').val());
+    });
 }
 
 var SubTabs = function() {
@@ -593,18 +600,6 @@ var ApiExplorer = function(item) {
 
 ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
-    $('a.btnCopy').each(function(){
-        $(this).hover(function(){
-            var clip = new ZeroClipboard.Client();
-            clip.glue($(this).attr('id'));
-            clip.setHandCursor(true);
-            clip.setText($(this).siblings('input[type="text"]').val());
-        });
-    });
-    
-    $('a.btnCopy').click(function(){
-        return false;
-    });
     
     $('.urlCopy').each(function(i){
         apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.tabArea')};
@@ -1410,6 +1405,10 @@ $(document).ready(function(){
             $(document).scrollTop(pageInfo.section[pageInfo.currentSection].subSection[index].position);
             pageInfo.changeSubSection(index);
         }
+    });
+    
+    $('a.btnCopy').click(function(){
+        return false;
     });
     
     $('a[href="#apiExplorer"]').click(function(){

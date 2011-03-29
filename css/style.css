@@ -1184,6 +1184,8 @@
                     width: 21px; height: 21px;
                     background: url(../images/copy.gif) center no-repeat;
                 }
+                
+                .urlCopy embed {position: absolute; top: 0;}
             
             .line.urlCopy {background: none; border: 0 none; padding: 0; margin: 0;}
             
