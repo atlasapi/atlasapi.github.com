@@ -1,6 +1,6 @@
 var homePageTimer;
 
-var queryBeg = 'http://otter.atlasapi.org/3.0/';
+var queryBeg = 'http://atlasapi.org/3.0/';
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
