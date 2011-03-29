@@ -731,7 +731,11 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     $('#schedule_from').val(queryFrom).datepicker('setDate', d1);
     $('#schedule_to').val(queryTo).datepicker('setDate', d2);
     
-    apiExplorer.query = query+'&publisher=bbc.co.uk,itv.com';
+    var queryPublisher = getParamByName('publisher', query);
+    
+    if(!queryPublisher){ 
+        apiExplorer.query = query+'&publisher=bbc.co.uk,itv.com';
+    }
     apiExplorer.runQuery(2);
 }
 
@@ -1365,6 +1369,10 @@ $(document).ready(function(){
         if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
             clearTimeout(updatingString);
             var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+            
+            if($(this).hasClass('date')){
+                
+            }
         
             // Add to url string
             updatingString = setTimeout(function(){
@@ -1384,7 +1392,7 @@ $(document).ready(function(){
     });
     
     $('input.date').datepicker({
-        showOn: "button",
+        showOn: "both",
         buttonImage: "images/date.gif",
         buttonImageOnly: true,
         dateFormat: 'dd/mm/yy'
