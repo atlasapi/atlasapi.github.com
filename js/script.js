@@ -736,6 +736,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     if(!queryPublisher){ 
         apiExplorer.query = query+'&publisher=bbc.co.uk,itv.com';
     }
+
     apiExplorer.runQuery(2);
 }
 
@@ -1394,11 +1395,28 @@ $(document).ready(function(){
         }
     });
     
-    $('input.date').datepicker({
-        showOn: "both",
-        buttonImage: "images/date.gif",
-        buttonImageOnly: true,
-        dateFormat: 'dd/mm/yy'
+    $('input.date').each(function(i){
+        var d = new Date();
+        var month = new String(d.getMonth()+1);
+        if(month.length < 2){
+            month = '0'+month;
+        }
+        var year = d.getFullYear();
+        $(this).datepicker({
+            showOn: "both",
+            buttonImage: "images/date.gif",
+            buttonImageOnly: true,
+            dateFormat: 'dd/mm/yy'
+        });
+        if(i == 0){
+            var day = d.getDate();
+            $(this).val(day+'/'+month+'/'+year);
+        } else {
+            var day = d.getDate()+1;
+            $(this).val(day+'/'+month+'/'+year);
+        }
+        var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+        updateString(item);
     });
     
     $('.mainMenu a').click(function(){
