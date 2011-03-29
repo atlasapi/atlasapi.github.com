@@ -1099,14 +1099,15 @@ var processTheJson = function(json){
                 if(json.schedule[0].items[i].image != undefined){
                     item[i].image = json.schedule[0].items[i].image;
                 }
-                if(json.schedule[0].items[i].episode_number != undefined){
-                    if(json.schedule[0].items[i].brand_summary != undefined && json.schedule[0].items[i].brand_summary.title != json.schedule[0].items[i].title){
-                        item[i].brand = json.schedule[0].items[i].brand_summary.title;
-                    }
-                    if(json.schedule[0].items[i].title != undefined){
+                if(json.schedule[0].items[i].brand_summary != undefined && json.schedule[0].items[i].brand_summary.title != json.schedule[0].items[i].title){
+                    item[i].brand = json.schedule[0].items[i].brand_summary.title;
+                }
+                if(json.schedule[0].items[i].title != undefined){
+                    if(json.schedule[0].items[i].title != item[i].brand){
                         item[i].episode = json.schedule[0].items[i].title;
                     }
                 }
+                    
                 if(json.schedule[0].items[i].series_number != undefined){
                     item[i].series = json.schedule[0].items[i].series_number;
                 }
