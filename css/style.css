@@ -334,9 +334,13 @@
 			
 			th.fourth,
 			td.fourth {
-				width: 260px;
+				width: 290px;
 			}
-			.tbl tbody tr:hover {background: #efefef;}
+			/*.tbl tbody tr:hover {background: #efefef;}*/
+			
+			tr:nth-child(even){
+                background: #F2EDF8;
+			}
 			
 			/* Lists */
 			.list {list-style-type: none; font-size: 12px; line-height: 18px; margin-bottom: 10px;}
