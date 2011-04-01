@@ -315,27 +315,53 @@ function initialCap(field) {
 var HomeDemo = function(item) {
     this.active = false;
     
+    var newDate = new Date();
+    var now = newDate.getTime();
+    now = Math.round(now/1000);
+    var twoHours = now+14400;
+    
+    var offset = Math.floor(Math.random()*10);
+    if(offset == 0){
+        offset = 5;
+    }
+    var offset2 = Math.floor(Math.random()*10);
+    if(offset2 == 0){
+        offset = 3;
+    }
+    
     var array0 = [
+        {'type': 'Search', 'query':'search.json?q=cars&limit=5'},
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&available=true&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5&offset='+offset+'&available=true'},
         {'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},
-        {'type': 'Search', 'query':'search.json?q=green&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=itv.com&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=hulu.com&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=world&publisher=itv.com&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?genre=lifestyle&publisher=bbc.co.uk&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=Jane Eyre&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?genre=learning&availableCountries=uk&mediaType=video&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=green&limit=5'},       
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&transportType=link&limit=5'},
+        {'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5&available=true'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=music&mediaType=video&limit=5'},
         {'type': 'Search', 'query':'search.json?q=Britain&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=factual&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5'}
+        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5&available=true&offset='+offset2},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&limit=5'},
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
     var randomQuery = Math.floor(Math.random()*array0.length);
+    //var randomQuery = 0;
     
     // Shift the query order
     var array1 = array0.slice(0,randomQuery);
     var array2 = array0.slice(randomQuery);
     this.query = array2.concat(array1);
-    
+        
     this.activeQuery = 0;
     this.marker = 0;
     
@@ -355,7 +381,14 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
         
     var item = homeDemo.nav.find('.queries');
-    item.append('<a href="'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'" class="query api api'+homeDemo.query[homeDemo.activeQuery].type+'">'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'</a>');
+    for(i=0; i < homeDemo.query.length-1; i++){
+        item.append('<a href="'+queryBeg+homeDemo.query[i].query+'" class="query api api'+homeDemo.query[i].type+'">'+queryBeg+homeDemo.query[i].query+'</a>');
+    }
+    
+    for(i=0; i < (homeDemo.query.length-1)*2; i++){
+        var newItem = $('.slideshowItem .showItem:first-child').clone();
+        $('.slideshowItem').append(newItem);
+    }
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
@@ -374,7 +407,7 @@ HomeDemo.prototype.init = function(){
 					   homeDemo.scrolling = true;
 					   clearInterval(homeDemo.timer);
 					   homeDemo.activeQuery++;
-					   if(homeDemo.activeQuery == 10){
+					   if(homeDemo.activeQuery == homeDemo.query.length-1){
     					   homeDemo.activequery = 0;
     					}
 					   homeDemo.nextQuery();
@@ -385,7 +418,7 @@ HomeDemo.prototype.init = function(){
 					   }
 					} else {
 					   clearInterval(homeDemo.timer);
-					   if(homeDemo.activeQuery == 10){
+					   if(homeDemo.activeQuery == homeDemo.query.length-1){
 					       homeDemo.activeQuery = 0;
 					   }
 					   homeDemo.nextQuery();
@@ -403,6 +436,8 @@ HomeDemo.prototype.init = function(){
 
 HomeDemo.prototype.request = function() {
     var homeDemo = this;
+    
+    homeDemo.marker = homeDemo.activeQuery;
     // Clear timeout
     clearTimeout(homeDemo.timer);
     
@@ -413,7 +448,6 @@ HomeDemo.prototype.request = function() {
     
     var item = (homeDemo.activeQuery*2)+1;
     var item2 = (homeDemo.activeQuery*2)+2;
-    
     
     item = $('.slideShow .showItem:nth-child('+item+')');
     item2 = $('.slideShow .showItem:nth-child('+item2+')');
@@ -514,7 +548,7 @@ HomeDemo.prototype.nextQuery = function() {
     var item = homeDemo.nav.find('.queries');
     var imageHolder = $('.slideShow .slideshowItem');
     if(homeDemo.activeQuery != 0) {
-        if(item.children().length < 10 && homeDemo.scrolling == false){
+        if(item.children().length < homeDemo.query.length-1 && homeDemo.scrolling == false){
             var clone = item.children('a:last-child').clone();
             clone.removeAttr('class').attr('class','query api api'+homeDemo.query[homeDemo.activeQuery].type);
             clone.attr('href',queryBeg+homeDemo.query[homeDemo.activeQuery].query).html(queryBeg+homeDemo.query[homeDemo.activeQuery].query);
@@ -523,11 +557,20 @@ HomeDemo.prototype.nextQuery = function() {
             item.append(href);
             (href);*/
         }
-        item.animate({'left': '-='+homeDemo.width},1000);
+        item.animate({'left': '-=763'},1000);
         imageHolder.animate({'left': '-=960'}, 1000);
     } else {
-        item.animate({'left': '0'},1000);
-        imageHolder.animate({'left': '0'}, 1000);
+        var first = $('.slideShow .showItem:first-child').clone();
+        var second = $('.slideShow .showItem:nth-child(1)').clone();
+        imageHolder.append(first).append(second);
+        var newItem = item.find('.query:first-child').clone();
+        item.append(newItem);
+        item.animate({'left': '-=763'},1000, function(){
+            item.css({'left': 0});
+        });
+        imageHolder.animate({'left': '-=960'}, 1000, function(){
+            imageHolder.css({'left': 0});
+        });
     }
     
     if(homeDemo.activeQuery <= homeDemo.marker && homeDemo.prevBtn.hasClass('inactive')){
@@ -543,7 +586,7 @@ HomeDemo.prototype.prevQuery = function() {
     
     homeDemo.nav.find('.timer').fadeOut();
     
-    if(homeDemo.activeQuery != 9) {
+    if(homeDemo.activeQuery != homeDemo.query.length-2) {
         item.animate({'left': '+='+homeDemo.width}, 1000);
         imageHolder.animate({'left': '+=960'}, 1000);
     }  
@@ -712,6 +755,7 @@ ApiExplorer.prototype.discoverQuery = function(query){
 ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
+    
     var queryChannel = getParamByName('channel',query);
     var queryFrom = getParamByName('from',query);
     var queryTo = getParamByName('to',query);
@@ -734,8 +778,10 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     var queryPublisher = getParamByName('publisher', query);
     
     if(!queryPublisher){ 
-        apiExplorer.query = query+'&publisher=bbc.co.uk,itv.com';
+        query = query+'&publisher=bbc.co.uk,itv.com';
     }
+    
+    apiExplorer.query = query;
 
     apiExplorer.runQuery(2);
 }
@@ -763,6 +809,7 @@ var getParamByName = function(name,string){
 
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
+    
     if(apiExplorer.btn.siblings('.msg:visible')){
         apiExplorer.btn.siblings('.msg').fadeOut();
     }
@@ -1018,13 +1065,14 @@ SelectBox.prototype.init = function() {
         // changeSelection
         selectBox.changeSelection();
     });
+    
 }
 
 SelectBox.prototype.changeSelection = function() {
     var selectBox = this;
     
     selectBox.item.find('.option.selected').removeClass('selected');
-    
+
     if(selectBox.current.name != 'none'){
         selectBox.item.find('.value').html(selectBox.current.name);
         selectBox.current.item.addClass('selected');
@@ -1035,7 +1083,6 @@ SelectBox.prototype.changeSelection = function() {
     selectBox.input.val(selectBox.current.val);
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
-        
     // Add to url string
     updateString(item);
 }
@@ -1182,7 +1229,6 @@ var updateString = function(obj) {
     // 1
     if(currentQuery.search(obj.title+'=') != -1){
         // Remove current info
-        // GETTING THIS WRONG AFTER REMOVE/ADDING TEXT WHEN MORE THEN ONE OTHER PARAMETER IS PRESENT        
         currentQuery = currentQuery.replace('&amp;','&');
         
         var currentParam = getParamByName(obj.title,currentQuery);
