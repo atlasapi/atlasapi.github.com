@@ -1,6 +1,6 @@
 var homePageTimer;
 
-var queryBeg = 'http://otter.atlasapi.org/3.0/';
+var queryBeg = 'http://atlasapi.org/3.0/';
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
@@ -50,6 +50,13 @@ Tabs.prototype.changeTab = function(id) {
     tabs.page[id].item.show();
     
     tabs.active = id;
+    
+    var clip = new ZeroClipboard.Client();
+    clip.glue(tabs.page[tabs.active].item.find('.urlCopy .btnCopy').attr('id'), tabs.page[tabs.active].item.find('.urlCopy').attr('id'));
+    
+    clip.addEventListener('mouseDown', function(){
+        clip.setText(tabs.page[tabs.active].item.find('.urlCopy .urlTxt').val());
+    });
 }
 
 var SubTabs = function() {
@@ -269,21 +276,25 @@ PageInfo.prototype.changePage = function(i) {
 
 PageInfo.prototype.changeSubSection = function(i){
     var pageInfo = this;
-    if(pageInfo.changePageTimer != false){
-        clearTimeout(pageInfo.changePageTimer);
+    if(pageInfo.section[pageInfo.currentSection] != undefined) {
+        if(pageInfo.section[pageInfo.currentSection].subSection[i] != undefined){
+            if(pageInfo.changePageTimer != false){
+                clearTimeout(pageInfo.changePageTimer);
+            }
+            
+            var sectionParent = pageInfo.section[pageInfo.currentSection].name;
+            var sectionName = pageInfo.section[pageInfo.currentSection].subSection[i].name, sectionShortName = sectionName.substr(sectionName.indexOf('_'));
+            
+            $('.'+sectionParent+' .subNav a.selected').removeClass('selected');
+            $('.'+sectionParent+' .subNav a[href="#'+sectionName+'"]').addClass('selected');
+            
+            if(pageInfo.section[i].subSections == 0){
+                pageInfo.changeHash(sectionName);
+            }
+            
+            pageInfo.currentSubSection = i;
+        }
     }
-    
-    var sectionParent = pageInfo.section[pageInfo.currentSection].name;
-    var sectionName = pageInfo.section[pageInfo.currentSection].subSection[i].name, sectionShortName = sectionName.substr(sectionName.indexOf('_'));
-    
-    $('.'+sectionParent+' .subNav a.selected').removeClass('selected');
-    $('.'+sectionParent+' .subNav a[href="#'+sectionName+'"]').addClass('selected');
-    
-    if(pageInfo.section[i].subSections == 0){
-        pageInfo.changeHash(sectionName);
-    }
-    
-    pageInfo.currentSubSection = i;
 }
 
 PageInfo.prototype.changeHash = function(n) {
@@ -304,27 +315,53 @@ function initialCap(field) {
 var HomeDemo = function(item) {
     this.active = false;
     
+    var newDate = new Date();
+    var now = newDate.getTime();
+    now = Math.round(now/1000);
+    var twoHours = now+14400;
+    
+    var offset = Math.floor(Math.random()*10);
+    if(offset == 0){
+        offset = 5;
+    }
+    var offset2 = Math.floor(Math.random()*10);
+    if(offset2 == 0){
+        offset = 3;
+    }
+    
     var array0 = [
+        {'type': 'Search', 'query':'search.json?q=cars&limit=5'},
         {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&available=true&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5&offset='+offset+'&available=true'},
         {'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},
-        {'type': 'Search', 'query':'search.json?q=east&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=itv.com&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=hulu.com&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=world&publisher=itv.com&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?genre=lifestyle&publisher=bbc.co.uk&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=Jane Eyre&limit=5'},
+        {'type': 'Discover', 'query':'discover.json?genre=learning&availableCountries=uk&mediaType=video&limit=5'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk'},
+        {'type': 'Search', 'query':'search.json?q=green&limit=5'},       
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&transportType=link&limit=5'},
+        {'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5&available=true'},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=music&mediaType=video&limit=5'},
         {'type': 'Search', 'query':'search.json?q=Britain&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=factual&limit=5'},
-        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5'}
+        {'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5&available=true&offset='+offset2},
+        {'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&limit=5'},
         /* '1','2','3','4','5','6','7','8','9','10' */
     ];
     // Select Random Query to start on
     var randomQuery = Math.floor(Math.random()*array0.length);
+    //var randomQuery = 0;
     
     // Shift the query order
     var array1 = array0.slice(0,randomQuery);
     var array2 = array0.slice(randomQuery);
     this.query = array2.concat(array1);
-    
+        
     this.activeQuery = 0;
     this.marker = 0;
     
@@ -344,7 +381,14 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
         
     var item = homeDemo.nav.find('.queries');
-    item.append('<a href="'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'" class="query api api'+homeDemo.query[homeDemo.activeQuery].type+'">'+queryBeg+homeDemo.query[homeDemo.activeQuery].query+'</a>');
+    for(i=0; i < homeDemo.query.length-1; i++){
+        item.append('<a href="'+queryBeg+homeDemo.query[i].query+'" class="query api api'+homeDemo.query[i].type+'">'+queryBeg+homeDemo.query[i].query+'</a>');
+    }
+    
+    for(i=0; i < (homeDemo.query.length-1)*2; i++){
+        var newItem = $('.slideshowItem .showItem:first-child').clone();
+        $('.slideshowItem').append(newItem);
+    }
     
     // Add onclick event to buttons
     homeDemo.nav.find('.cbtn').click(function(){
@@ -363,7 +407,7 @@ HomeDemo.prototype.init = function(){
 					   homeDemo.scrolling = true;
 					   clearInterval(homeDemo.timer);
 					   homeDemo.activeQuery++;
-					   if(homeDemo.activeQuery == 10){
+					   if(homeDemo.activeQuery == homeDemo.query.length-1){
     					   homeDemo.activequery = 0;
     					}
 					   homeDemo.nextQuery();
@@ -374,7 +418,7 @@ HomeDemo.prototype.init = function(){
 					   }
 					} else {
 					   clearInterval(homeDemo.timer);
-					   if(homeDemo.activeQuery == 10){
+					   if(homeDemo.activeQuery == homeDemo.query.length-1){
 					       homeDemo.activeQuery = 0;
 					   }
 					   homeDemo.nextQuery();
@@ -392,6 +436,8 @@ HomeDemo.prototype.init = function(){
 
 HomeDemo.prototype.request = function() {
     var homeDemo = this;
+    
+    homeDemo.marker = homeDemo.activeQuery;
     // Clear timeout
     clearTimeout(homeDemo.timer);
     
@@ -402,7 +448,6 @@ HomeDemo.prototype.request = function() {
     
     var item = (homeDemo.activeQuery*2)+1;
     var item2 = (homeDemo.activeQuery*2)+2;
-    
     
     item = $('.slideShow .showItem:nth-child('+item+')');
     item2 = $('.slideShow .showItem:nth-child('+item2+')');
@@ -503,7 +548,7 @@ HomeDemo.prototype.nextQuery = function() {
     var item = homeDemo.nav.find('.queries');
     var imageHolder = $('.slideShow .slideshowItem');
     if(homeDemo.activeQuery != 0) {
-        if(item.children().length < 10 && homeDemo.scrolling == false){
+        if(item.children().length < homeDemo.query.length-1 && homeDemo.scrolling == false){
             var clone = item.children('a:last-child').clone();
             clone.removeAttr('class').attr('class','query api api'+homeDemo.query[homeDemo.activeQuery].type);
             clone.attr('href',queryBeg+homeDemo.query[homeDemo.activeQuery].query).html(queryBeg+homeDemo.query[homeDemo.activeQuery].query);
@@ -512,11 +557,20 @@ HomeDemo.prototype.nextQuery = function() {
             item.append(href);
             (href);*/
         }
-        item.animate({'left': '-='+homeDemo.width},1000);
+        item.animate({'left': '-=763'},1000);
         imageHolder.animate({'left': '-=960'}, 1000);
     } else {
-        item.animate({'left': '0'},1000);
-        imageHolder.animate({'left': '0'}, 1000);
+        var first = $('.slideShow .showItem:first-child').clone();
+        var second = $('.slideShow .showItem:nth-child(1)').clone();
+        imageHolder.append(first).append(second);
+        var newItem = item.find('.query:first-child').clone();
+        item.append(newItem);
+        item.animate({'left': '-=763'},1000, function(){
+            item.css({'left': 0});
+        });
+        imageHolder.animate({'left': '-=960'}, 1000, function(){
+            imageHolder.css({'left': 0});
+        });
     }
     
     if(homeDemo.activeQuery <= homeDemo.marker && homeDemo.prevBtn.hasClass('inactive')){
@@ -532,7 +586,7 @@ HomeDemo.prototype.prevQuery = function() {
     
     homeDemo.nav.find('.timer').fadeOut();
     
-    if(homeDemo.activeQuery != 9) {
+    if(homeDemo.activeQuery != homeDemo.query.length-2) {
         item.animate({'left': '+='+homeDemo.width}, 1000);
         imageHolder.animate({'left': '+=960'}, 1000);
     }  
@@ -589,15 +643,6 @@ var ApiExplorer = function(item) {
 
 ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
-    $('a.btnCopy').hover(function(){
-        if($(this).attr('data-bound') != 'true'){
-            var clip = new ZeroClipboard.Client();
-            clip.glue($(this).attr('id'));
-            clip.setHandCursor(true);
-            clip.setText($(this).siblings('input[type="text"]').val());
-            $(this).attr('data-bound','true');
-        }
-    });
     
     $('.urlCopy').each(function(i){
         apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.tabArea')};
@@ -710,6 +755,7 @@ ApiExplorer.prototype.discoverQuery = function(query){
 ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
+    
     var queryChannel = getParamByName('channel',query);
     var queryFrom = getParamByName('from',query);
     var queryTo = getParamByName('to',query);
@@ -729,7 +775,14 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     $('#schedule_from').val(queryFrom).datepicker('setDate', d1);
     $('#schedule_to').val(queryTo).datepicker('setDate', d2);
     
-    apiExplorer.query = query+'&publisher=bbc.co.uk,itv.com';
+    var queryPublisher = getParamByName('publisher', query);
+    
+    if(!queryPublisher){ 
+        query = query+'&publisher=bbc.co.uk,itv.com';
+    }
+    
+    apiExplorer.query = query;
+
     apiExplorer.runQuery(2);
 }
 
@@ -756,6 +809,7 @@ var getParamByName = function(name,string){
 
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
+    
     if(apiExplorer.btn.siblings('.msg:visible')){
         apiExplorer.btn.siblings('.msg').fadeOut();
     }
@@ -1011,13 +1065,14 @@ SelectBox.prototype.init = function() {
         // changeSelection
         selectBox.changeSelection();
     });
+    
 }
 
 SelectBox.prototype.changeSelection = function() {
     var selectBox = this;
     
     selectBox.item.find('.option.selected').removeClass('selected');
-    
+
     if(selectBox.current.name != 'none'){
         selectBox.item.find('.value').html(selectBox.current.name);
         selectBox.current.item.addClass('selected');
@@ -1028,7 +1083,6 @@ SelectBox.prototype.changeSelection = function() {
     selectBox.input.val(selectBox.current.val);
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
-        
     // Add to url string
     updateString(item);
 }
@@ -1093,14 +1147,15 @@ var processTheJson = function(json){
                 if(json.schedule[0].items[i].image != undefined){
                     item[i].image = json.schedule[0].items[i].image;
                 }
-                if(json.schedule[0].items[i].episode_number != undefined){
-                    if(json.schedule[0].items[i].brand_summary != undefined && json.schedule[0].items[i].brand_summary.title != json.schedule[0].items[i].title){
-                        item[i].brand = json.schedule[0].items[i].brand_summary.title;
-                    }
-                    if(json.schedule[0].items[i].title != undefined){
+                if(json.schedule[0].items[i].brand_summary != undefined && json.schedule[0].items[i].brand_summary.title != json.schedule[0].items[i].title){
+                    item[i].brand = json.schedule[0].items[i].brand_summary.title;
+                }
+                if(json.schedule[0].items[i].title != undefined){
+                    if(json.schedule[0].items[i].title != item[i].brand){
                         item[i].episode = json.schedule[0].items[i].title;
                     }
                 }
+                    
                 if(json.schedule[0].items[i].series_number != undefined){
                     item[i].series = json.schedule[0].items[i].series_number;
                 }
@@ -1148,7 +1203,11 @@ var updateString = function(obj) {
     if(obj.title == 'from' || obj.title == 'to'){
         var theDate = obj.val.match(/(.*?)\//g);
         var theYear = obj.val.match(/\d{4}/g);
-        obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
+        if(theDate && theYear){
+            obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
+        } else {
+            return false;
+        }
     }
     
     // 2
@@ -1170,7 +1229,6 @@ var updateString = function(obj) {
     // 1
     if(currentQuery.search(obj.title+'=') != -1){
         // Remove current info
-        // GETTING THIS WRONG AFTER REMOVE/ADDING TEXT WHEN MORE THEN ONE OTHER PARAMETER IS PRESENT        
         currentQuery = currentQuery.replace('&amp;','&');
         
         var currentParam = getParamByName(obj.title,currentQuery);
@@ -1273,7 +1331,7 @@ $(document).ready(function(){
     });
     
     $('a.apiSearch').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(0);
             apiExplorer.searchQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1282,12 +1340,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.apiDiscover').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(1);
             apiExplorer.discoverQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1296,12 +1354,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.apiSchedule').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(2);
             apiExplorer.scheduleQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1310,12 +1368,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.apiContent').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(3);
             apiExplorer.contentQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1324,12 +1382,12 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('a.api').click(function(){
-        if(apiFuncRun == false) {
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(4);
             apiExplorer.customQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
@@ -1338,8 +1396,8 @@ $(document).ready(function(){
                 window.location.hash = 'apiExplorer';
             }
             apiFuncRun = true;
-            return false;
         }
+        return false;
     });
     
     $('.urlCopy .urlTxt').click(function(){
@@ -1372,20 +1430,39 @@ $(document).ready(function(){
     });
     
     $('.watchMe').change(function(e){
-        clearTimeout(updatingString);
-        var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-    
-        // Add to url string
-        updatingString = setTimeout(function(){
-            updateString(item);
-        },500);
+        if(!$(this).hasClass('date')){
+            clearTimeout(updatingString);
+            var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+        
+            // Add to url string
+            updatingString = setTimeout(function(){
+                updateString(item);
+            },500);
+        }
     });
     
-    $('input.date').datepicker({
-        showOn: "button",
-        buttonImage: "images/date.gif",
-        buttonImageOnly: true,
-        dateFormat: 'dd/mm/yy'
+    $('input.date').each(function(i){
+        var d = new Date();
+        var month = new String(d.getMonth()+1);
+        if(month.length < 2){
+            month = '0'+month;
+        }
+        var year = d.getFullYear();
+        $(this).datepicker({
+            showOn: "both",
+            buttonImage: "images/date.gif",
+            buttonImageOnly: true,
+            dateFormat: 'dd/mm/yy'
+        });
+        if(i == 0){
+            var day = d.getDate();
+            $(this).val(day+'/'+month+'/'+year);
+        } else {
+            var day = d.getDate()+1;
+            $(this).val(day+'/'+month+'/'+year);
+        }
+        var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+        updateString(item);
     });
     
     $('.mainMenu a').click(function(){
@@ -1403,6 +1480,10 @@ $(document).ready(function(){
             $(document).scrollTop(pageInfo.section[pageInfo.currentSection].subSection[index].position);
             pageInfo.changeSubSection(index);
         }
+    });
+    
+    $('a.btnCopy').click(function(){
+        return false;
     });
     
     $('a[href="#apiExplorer"]').click(function(){
