@@ -975,9 +975,6 @@ ApiExplorer.prototype.runQuery = function(tab){
             var theData;
             
             if(data.contents != undefined) {
-                if(data.contents.length > 2){
-                    data.contents = data.contents.slice(0,2);
-                }
                 theData = data.contents;
             }
             
