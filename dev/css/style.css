@@ -489,6 +489,24 @@
                 padding: 0 10px 10px;
                 position: relative;
                 top: -10px;*/
+                position: relative;
+                overflow-x: hidden;
+            }
+            
+            .resultsArea .preview {
+                max-height: 114px;
+                overflow-y: hidden;
+                position: relative;
+            }
+            
+            .resultsArea .pageNumber {
+                float: right;
+                width: 80px;
+                text-align: center;
+                margin: 0;
+                padding-top: 15px;
+                font-size: 12px;
+                color: #666;
             }
             
             *:first-child+html .resultsArea {position: relative; display: block; overflow: hidden;}
@@ -641,6 +659,10 @@
                 .cbtn.previous .icn {float: left; margin-right: 3px; background-image: url(../images/arrow_left.png);}
             .cbtn.next {float: right; width: 46px;}
                 .cbtn.next .icn {float:right; margin-left: 3px; background-image: url(../images/arrow_right.png);}
+                
+            .cbtn.previewNext {width: auto;}
+            *:first-child+html .cbtn.previewNext {width: 20px;}
+            .cbtn.previewPrev {float: right;}
             
             .timer {}
             .wait {float: right; position: absolute; top: -8px; right: 12px; color: #666;}
@@ -653,6 +675,7 @@
                 background: -webkit-gradient(linear, left top, left bottom, from(#d4d1d2), to(#a7a6a7));
                 filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#d4d1d2', EndColorStr='#a7a6a7', GradientType=0);
                 cursor: default;
+                position: relative;
             }
             
             /* Messages */
@@ -695,7 +718,7 @@
             .showItem {
                 width: 150px;
                 height: 84px;
-                background: #fff url(../images/missingImage.png) center no-repeat;
+                background: #fff;
                 display: block;
                 border: 5px solid #ccc;
                 -moz-border-radius: 5px;
@@ -747,6 +770,7 @@
             .show_lrg {
                 width: 450px;
                 height: 253px;
+                background: #fff url(../images/missingImage.png) center no-repeat;
             }
                 .show_lrg .caption { height: 27px;}
                 .show_lrg .caption .br {font-size: 18px; line-height: 30px;}
@@ -1073,6 +1097,16 @@
                 -khtml-border-radius: 3px;
                 -ms-border-radius: 3px;
                 border-radius: 3px;
+            }
+            
+            *:first-child+html input {
+                height: 30px;
+                line-height: 30px;
+            }
+            
+            *:first-child+html .btn {
+                height: 30px;
+                line-height: 20px;
             }
             
             input[type=text]:focus {

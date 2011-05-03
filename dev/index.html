@@ -12,9 +12,7 @@
 		<script src="js/modernizr-1.7.min.js"></script>
 		<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
 		<script src="js/prettify/prettify.js"></script>
-        <!--
-        <script src="js/min/minscript.js"></script>
-        -->
+        <!--<script src="js/min/minscript.js"></script>-->
         <script src="js/script.js"></script>
 	</head>
 	<body>
@@ -932,22 +930,24 @@ brand_summary: {
                         </div>
                     </div>
                     <div class="tabArea" id="explore_content" style="display: none;">
-                        <div class="line">
-                            <div class="unit size1of2">
-                                <label for="content_uri" class="tr">URI:</label>
-                                <input type="text" id="content_uri" data-title="uri" class="fr watchMe" />
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label for="content_uri" class="tr">URI:</label>
+                                    <input type="text" id="content_uri" data-title="uri" class="fr watchMe" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                </div>
                             </div>
-                            <div class="unit size1of2 lastUnit">
+                            <div class="line hr mtm">
+                                <div class="unit size4of5">
+                                    <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/content.json?" /></div>
+                                </div>
+                                <div class="unit size1of5 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="line hr mtm">
-                            <div class="unit size4of5">
-                                <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/content.json?" /></div>
-                            </div>
-                            <div class="unit size1of5 lastUnit">
-                                <input type="submit" class="btn" value="Run" />
-                            </div>
-                        </div>
+                        </form>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
                                <a class="showItem apiContent" style="display: none;">
