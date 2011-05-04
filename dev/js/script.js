@@ -637,13 +637,14 @@ HomeDemo.prototype.countdown = function() {
     }
 }
 
-var ApiExplorer = function(item) {
+var ApiExplorer = function(item, tabs) {
     this.holder = item;
     this.queryType;
     this.query;
     this.btn = $('.btn[value="Run"]');
     this.queryBar = [];
     this.timedOut = false;
+    this.tabs = tabs;
 }
 
 ApiExplorer.prototype.buttonHandler = function(){
@@ -722,12 +723,17 @@ ApiExplorer.prototype.customQuery = function(query,run){
 
 ApiExplorer.prototype.searchQuery = function(query){
     var apiExplorer = this;
+    
     apiExplorer.queryType = 'search';
+    
+    if(apiExplorer.textAltered(query, ['q', 'publisher', 'limit'])){
+        return false;
+    };
     
     var queryTitle = getParamByName('q',query);
     
     if(!queryTitle){
-        sendMsg('error', 'Error: Please enter a title to search for');
+        sendMsg('error', 'Error: Please define a title');
         apiExplorer.cancelQuery();
         return false;
     };
@@ -749,6 +755,10 @@ ApiExplorer.prototype.discoverQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'discover';
     
+    if(apiExplorer.textAltered(query, ['publisher', 'genre', 'limit'])){
+        return false;
+    };
+    
     var queryPublisher = getParamByName('publisher',query);
     var queryGenre = getParamByName('genre',query);
     
@@ -769,6 +779,10 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
     
+    if(apiExplorer.textAltered(query, ['channel', 'from', 'to'])){
+        return false;
+    };
+    
     var queryChannel = getParamByName('channel',query);
     
     if(!queryChannel){
@@ -785,8 +799,26 @@ ApiExplorer.prototype.scheduleQuery = function(query){
         queryFrom = timeConvertor(queryFrom)*1000;
     };
     
+    if(!queryFrom){
+        sendMsg('error', 'Error: Please specify a \'from\' date');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
     if(isNaN(parseFloat(queryTo)) && queryTo.length > 0) {
         queryTo = timeConvertor(queryTo)*1000;
+    };
+    
+    if(!queryFrom){
+        sendMsg('error', 'Error: Please specify a \'to\' date');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
+    if(queryFrom >= queryTo){
+        sendMsg('error', 'Error: Please ensure the \'to\' date is later then the \'from\' date');
+        apiExplorer.cancelQuery();
+        return false;
     };
     
     var queryPublisher = getParamByName('publisher', query);
@@ -804,11 +836,53 @@ ApiExplorer.prototype.contentQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'content';
     
-    $('#content_uri').val(getParamByName('uri',query)).change();
+    if(apiExplorer.textAltered(query, ['uri'])){
+        return false;
+    };
     
+    var queryUri = getParamByName('uri',query);
+    
+    if(!queryUri){
+        sendMsg('error', 'Error: Please specify a URI');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
+    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(3);
 }
+
+ApiExplorer.prototype.textAltered = function(query, params){
+    var apiExplorer = this;
+    var queryType = apiExplorer.queryType;
+    if($('#explore_'+queryType+' #'+queryType+'_altered').val() == 'true'){
+        query = query.substr(query.indexOf('0/')+2);
+        query = query.replace(/\&amp\;/g,'&');
+        query = query.replace(queryBeg, '');
+        
+        var params = query.match(/\?(.*)/g);
+        var fail = false;
+        params = params[0].substr(1).split('&');
+        for(var i=0; i<params.length; i++){
+            params[i] = params[i].split('=');
+            if(queryType == 'search' && params[i][0] == 'q'){
+                params[i][0] = 'title';
+            };
+            if($('#'+queryType+'_'+params[i][0]).length < 1){
+                fail = true;
+            };
+        };
+        if(fail){
+            apiExplorer.tabs.changeTab(4);
+            apiExplorer.customQuery(query);
+            $('#explore_'+queryType+' #'+queryType+'_altered').val('false');
+            return true;
+        };
+    };
+    
+    return false;
+};
 
 var getParamByName = function(name,string){
     name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -824,6 +898,10 @@ var getParamByName = function(name,string){
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
     
+    if(!apiExplorer.btn.hasClass('inactive')){
+        apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
+    };
+    
     if(apiExplorer.btn.siblings('.msg:visible')){
         apiExplorer.btn.siblings('.msg').fadeOut();
     }
@@ -835,7 +913,6 @@ ApiExplorer.prototype.runQuery = function(tab){
     
     // Make request
     var url = apiExplorer.query;
-    
     $.ajax({
         url: url,
         dataType: 'jsonp',
@@ -843,6 +920,11 @@ ApiExplorer.prototype.runQuery = function(tab){
         cache: true,
         timeout: 5000,
         context: apiExplorer.holder,
+        statusCode: {
+            0: function(a,b,c){
+                sendMsg('error', 'Sorry, either that end point can\'t be reached or there\'s required parameter missing');
+            }
+        },
         success: function(data, textStatus, jqXHR){
             /*
                 1. Go through data removing any item that does not have an image
@@ -854,8 +936,10 @@ ApiExplorer.prototype.runQuery = function(tab){
             var theData;
             if(data.contents != undefined) {
                 theData = data.contents;
-            } else {
+            } else if(data.schedule[0] != undefined) {
                 theData = data.schedule[0].items;
+            } else if(data.error) {
+                apiExplorer.ajaxError('Sorry, '+data.error.message);
             }
                 
             // 1
@@ -1013,17 +1097,18 @@ ApiExplorer.prototype.runQuery = function(tab){
             });
         },
         error: function(jqXHR, textStatus, errorThrown){
-            sendMsg('error','Sorry, the following error occured: '+errorThrown);
+            apiExplorer.ajaxError('Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
-            if(textStatus == 'timeout') {
-                apiExplorer.timedOut = true;
-            }
             apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
         }
     });
 }
+
+ApiExplorer.prototype.ajaxError = function(error){
+    sendMsg('error',error);
+};
 
 ApiExplorer.prototype.cancelQuery = function(){
     var apiExplorer = this;
@@ -1195,11 +1280,16 @@ var processTheJson = function(json){
             for(var i = 0; i<json.contents.length; i++){
                 item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
                 
-                if(json.contents[i].title != undefined){
+                if(json.contents[i].brand_summary != undefined && json.contents[i].brand_summary.title != undefined){
+                    item[i].brand = json.contents[i].brand_summary.title;
+                    if(json.contents[i].title != item[i].brand){
+                        item[i].episode = json.contents[i].title;
+                    };
+                } else if(json.contents[i].title != undefined){
                     item[i].brand = json.contents[i].title;
                 };
                 if(json.contents[i].uri != undefined){
-                    item[i].uri = json.contents[i].uri;
+                    item[i].uri = encodeURIComponent(json.contents[i].uri);
                 };
                 if(json.contents[i].publisher.name != undefined) {
                     item[i].publisher = json.contents[i].publisher.name;
@@ -1303,8 +1393,12 @@ var updateString = function(obj) {
             obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
         } else {
             return false;
-        }
-    }
+        };
+    };
+    
+    if(obj.title == 'uri'){
+        obj.val = encodeURIComponent(obj.val);
+    };
     
     // 2
     var updatingString = itemParent.item.find('.urlCopy .urlTxt');
@@ -1332,7 +1426,11 @@ var updateString = function(obj) {
         var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
         var fullLength = (obj.title.length+1)+currentParam.length;
         var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
-       
+        
+        if(obj.title == 'uri'){
+            currentEnd = '';
+        };
+        
         if(currentEnd.substr(0,1) == '&'){
             if(obj.val.length > 0){
                 currentEnd = currentEnd.substr(1)+'&';
@@ -1378,6 +1476,7 @@ var updateString = function(obj) {
             newQuery += '.json?'+obj.title+'='+obj.val;
         }
     }
+    
     if(newQuery.substr(-1) == '&'){
         newQuery = newQuery.substr(0, newQuery.length-1);
     }
@@ -1398,6 +1497,30 @@ function toTimestamp(year,month,day,hour,minute,second){
     return datum.getTime()/1000;
 }
 
+function getCaretPosition(editableDiv) {
+    var caretPos = 0, containerEl = null, sel, range;
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            if (range.commonAncestorContainer.parentNode == editableDiv) {
+                caretPos = range.endOffset;
+            }
+        }
+    } else if (document.selection && document.selection.createRange) {
+        range = document.selection.createRange();
+        if (range.parentElement() == editableDiv) {
+            var tempEl = document.createElement("span");
+            editableDiv.insertBefore(tempEl, editableDiv.firstChild);
+            var tempRange = range.duplicate();
+            tempRange.moveToElementText(tempEl);
+            tempRange.setEndPoint("EndToEnd", range);
+            caretPos = tempRange.text.length;
+        }
+    }
+    return caretPos;
+}
+
 $(document).ready(function(){
     var pageInfo = new PageInfo();
     pageInfo.init();
@@ -1408,7 +1531,7 @@ $(document).ready(function(){
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
        
-    var apiExplorer = new ApiExplorer($('#explorerWrapper'));
+    var apiExplorer = new ApiExplorer($('#explorerWrapper'), tabs);
     apiExplorer.buttonHandler();
     
     var selectBox = [];
@@ -1512,11 +1635,7 @@ $(document).ready(function(){
     $('.urlCopy .urlTxt').keyup(function(e){
         var query = $(this).val();
         if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) {
-            query = query.substr(query.indexOf('0/')+2);
-            query = query.replace(/\&amp\;/g,'&');
-            query = query.replace(queryBeg, '');
-            tabs.changeTab(4);
-            apiExplorer.customQuery(query,false);
+            $(this).siblings('input[type="hidden"]').val('true');
         }
         return false;
     });
