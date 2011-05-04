@@ -922,7 +922,7 @@ ApiExplorer.prototype.runQuery = function(tab){
         context: apiExplorer.holder,
         statusCode: {
             0: function(a,b,c){
-                sendMsg('error', 'Sorry, either that end point can\'t be reached or there\'s required parameter missing');
+                sendMsg('error', 'Sorry, either that end point can\'t be reached or a required parameter is missing');
             }
         },
         success: function(data, textStatus, jqXHR){
