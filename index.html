@@ -12,7 +12,7 @@
 		<script src="js/modernizr-1.7.min.js"></script>
 		<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
 		<script src="js/prettify/prettify.js"></script>
-        <script src="js/min/minscript.js"></script>
+        	<script src="js/min/minscript.js"></script>
 	</head>
 	<body>
 	   <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
@@ -716,7 +716,7 @@ brand_summary: {
                             </div>
                             <div class="line hr mtm">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="search_queryCopy"><a href="#" id="search_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/search.json?" /></div>
+                                    <div class="urlCopy" id="search_queryCopy"><a href="#" id="search_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/search.json?" /><input type="hidden" id="search_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -813,7 +813,7 @@ brand_summary: {
                             </div>
                             <div class="line hr mtm">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="discover_queryCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/discover.json?" /></div>
+                                    <div class="urlCopy" id="discover_queryCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/discover.json?" /><input type="hidden" id="discover_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -885,7 +885,7 @@ brand_summary: {
                             </div>
                             <div class="line hr">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="schedule_queryCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/schedule.json?" /></div>
+                                    <div class="urlCopy" id="schedule_queryCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/schedule.json?" /><input type="hidden" id="schedule_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -929,22 +929,24 @@ brand_summary: {
                         </div>
                     </div>
                     <div class="tabArea" id="explore_content" style="display: none;">
-                        <div class="line">
-                            <div class="unit size1of2">
-                                <label for="content_uri" class="tr">URI:</label>
-                                <input type="text" id="content_uri" data-title="uri" class="fr watchMe" />
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label for="content_uri" class="tr">URI:</label>
+                                    <input type="text" id="content_uri" data-title="uri" class="fr watchMe" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                </div>
                             </div>
-                            <div class="unit size1of2 lastUnit">
+                            <div class="line hr mtm">
+                                <div class="unit size4of5">
+                                    <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/content.json?" /><input type="hidden" id="content_altered" /></div>
+                                </div>
+                                <div class="unit size1of5 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="line hr mtm">
-                            <div class="unit size4of5">
-                                <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/content.json?" /></div>
-                            </div>
-                            <div class="unit size1of5 lastUnit">
-                                <input type="submit" class="btn" value="Run" />
-                            </div>
-                        </div>
+                        </form>
                         <div class="resultsArea" style="display: none;">
                             <div class="preview mlm clearfix">
                                <a class="showItem apiContent" style="display: none;">

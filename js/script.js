@@ -55,7 +55,11 @@ Tabs.prototype.changeTab = function(id) {
     clip.glue(tabs.page[tabs.active].item.find('.urlCopy .btnCopy').attr('id'), tabs.page[tabs.active].item.find('.urlCopy').attr('id'));
     
     clip.addEventListener('mouseDown', function(){
-        clip.setText(tabs.page[tabs.active].item.find('.urlCopy .urlTxt').val());
+        var text = tabs.page[tabs.active].item.find('.urlCopy .urlTxt').val();
+        if(!text){
+            text = queryBeg+tabs.page[tabs.active].item.find('.urlCopy input.adv').val();
+        };
+        clip.setText(text);
     });
 }
 
@@ -381,9 +385,10 @@ HomeDemo.prototype.init = function(){
     var homeDemo = this;
         
     var item = homeDemo.nav.find('.queries');
+    homeDemo.query.clean(undefined);
     for(i=0; i < homeDemo.query.length-1; i++){
         item.append('<a href="'+queryBeg+homeDemo.query[i].query+'" class="query api api'+homeDemo.query[i].type+'">'+queryBeg+homeDemo.query[i].query+'</a>');
-    }
+    };
     
     for(i=0; i < (homeDemo.query.length-1)*2; i++){
         var newItem = $('.slideshowItem .showItem:first-child').clone();
@@ -632,13 +637,14 @@ HomeDemo.prototype.countdown = function() {
     }
 }
 
-var ApiExplorer = function(item) {
+var ApiExplorer = function(item, tabs) {
     this.holder = item;
     this.queryType;
     this.query;
     this.btn = $('.btn[value="Run"]');
     this.queryBar = [];
     this.timedOut = false;
+    this.tabs = tabs;
 }
 
 ApiExplorer.prototype.buttonHandler = function(){
@@ -657,6 +663,7 @@ ApiExplorer.prototype.buttonHandler = function(){
     });
     
     $('input[value="Run"]').parents('form').submit(function(){
+        apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
         var that = $(this);
         if(updateString == undefined){
             doStuff();
@@ -716,9 +723,21 @@ ApiExplorer.prototype.customQuery = function(query,run){
 
 ApiExplorer.prototype.searchQuery = function(query){
     var apiExplorer = this;
+    
     apiExplorer.queryType = 'search';
     
+    if(apiExplorer.textAltered(query, ['q', 'publisher', 'limit'])){
+        return false;
+    };
+    
     var queryTitle = getParamByName('q',query);
+    
+    if(!queryTitle){
+        sendMsg('error', 'Error: Please define a title');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
     var queryPublisher = getParamByName('publisher',query);
     
     if(queryTitle.length > 0){
@@ -735,6 +754,10 @@ ApiExplorer.prototype.searchQuery = function(query){
 ApiExplorer.prototype.discoverQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'discover';
+    
+    if(apiExplorer.textAltered(query, ['publisher', 'genre', 'limit'])){
+        return false;
+    };
     
     var queryPublisher = getParamByName('publisher',query);
     var queryGenre = getParamByName('genre',query);
@@ -756,24 +779,47 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
     
+    if(apiExplorer.textAltered(query, ['channel', 'from', 'to'])){
+        return false;
+    };
+    
     var queryChannel = getParamByName('channel',query);
+    
+    if(!queryChannel){
+        sendMsg('error', 'Error: Please specify a channel from the drop down');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
     var queryFrom = getParamByName('from',query);
     var queryTo = getParamByName('to',query);
     
     // Convert to and from queries into timestamps
-    if(isNaN(parseFloat(queryFrom))) {
-        queryFrom = timeConvertor(queryFrom);
-    }
+    if(isNaN(parseFloat(queryFrom)) && queryFrom.length > 0) {
+        queryFrom = timeConvertor(queryFrom)*1000;
+    };
     
-    if(isNaN(parseFloat(queryTo))) {
-        queryTo = timeConvertor(queryTo);
-    }
-        
-    $('#schedule_channel').val(queryChannel).change();
-    var d1 = new Date(queryFrom*1000);
-    var d2 = new Date(queryTo*1000);
-    $('#schedule_from').val(queryFrom).datepicker('setDate', d1);
-    $('#schedule_to').val(queryTo).datepicker('setDate', d2);
+    if(!queryFrom){
+        sendMsg('error', 'Error: Please specify a \'from\' date');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
+    if(isNaN(parseFloat(queryTo)) && queryTo.length > 0) {
+        queryTo = timeConvertor(queryTo)*1000;
+    };
+    
+    if(!queryFrom){
+        sendMsg('error', 'Error: Please specify a \'to\' date');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
+    if(queryFrom >= queryTo){
+        sendMsg('error', 'Error: Please ensure the \'to\' date is later then the \'from\' date');
+        apiExplorer.cancelQuery();
+        return false;
+    };
     
     var queryPublisher = getParamByName('publisher', query);
     
@@ -790,11 +836,53 @@ ApiExplorer.prototype.contentQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'content';
     
-    $('#content_uri').val(getParamByName('uri',query)).change();
+    if(apiExplorer.textAltered(query, ['uri'])){
+        return false;
+    };
     
+    var queryUri = getParamByName('uri',query);
+    
+    if(!queryUri){
+        sendMsg('error', 'Error: Please specify a URI');
+        apiExplorer.cancelQuery();
+        return false;
+    };
+    
+    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(3);
 }
+
+ApiExplorer.prototype.textAltered = function(query, params){
+    var apiExplorer = this;
+    var queryType = apiExplorer.queryType;
+    if($('#explore_'+queryType+' #'+queryType+'_altered').val() == 'true'){
+        query = query.substr(query.indexOf('0/')+2);
+        query = query.replace(/\&amp\;/g,'&');
+        query = query.replace(queryBeg, '');
+        
+        var params = query.match(/\?(.*)/g);
+        var fail = false;
+        params = params[0].substr(1).split('&');
+        for(var i=0; i<params.length; i++){
+            params[i] = params[i].split('=');
+            if(queryType == 'search' && params[i][0] == 'q'){
+                params[i][0] = 'title';
+            };
+            if($('#'+queryType+'_'+params[i][0]).length < 1){
+                fail = true;
+            };
+        };
+        if(fail){
+            apiExplorer.tabs.changeTab(4);
+            apiExplorer.customQuery(query);
+            $('#explore_'+queryType+' #'+queryType+'_altered').val('false');
+            return true;
+        };
+    };
+    
+    return false;
+};
 
 var getParamByName = function(name,string){
     name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -810,10 +898,13 @@ var getParamByName = function(name,string){
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
     
+    if(!apiExplorer.btn.hasClass('inactive')){
+        apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
+    };
+    
     if(apiExplorer.btn.siblings('.msg:visible')){
         apiExplorer.btn.siblings('.msg').fadeOut();
     }
-    apiExplorer.btn.val('Please Wait').addClass('inactive');
     
     if(apiExplorer.queryType != 'advanced'){
         apiExplorer.queryBar[tab].txt.val(apiExplorer.query);
@@ -822,7 +913,6 @@ ApiExplorer.prototype.runQuery = function(tab){
     
     // Make request
     var url = apiExplorer.query;
-    
     $.ajax({
         url: url,
         dataType: 'jsonp',
@@ -830,6 +920,11 @@ ApiExplorer.prototype.runQuery = function(tab){
         cache: true,
         timeout: 5000,
         context: apiExplorer.holder,
+        statusCode: {
+            0: function(a,b,c){
+                sendMsg('error', 'Sorry, either that end point can\'t be reached or a required parameter is missing');
+            }
+        },
         success: function(data, textStatus, jqXHR){
             /*
                 1. Go through data removing any item that does not have an image
@@ -841,8 +936,10 @@ ApiExplorer.prototype.runQuery = function(tab){
             var theData;
             if(data.contents != undefined) {
                 theData = data.contents;
-            } else {
+            } else if(data.schedule[0] != undefined) {
                 theData = data.schedule[0].items;
+            } else if(data.error) {
+                apiExplorer.ajaxError('Sorry, '+data.error.message);
             }
                 
             // 1
@@ -850,9 +947,91 @@ ApiExplorer.prototype.runQuery = function(tab){
             
             // 2
             results.clean(undefined);
-            if(results.length > 5){
-                results = results.slice(0,5);
-            }
+            var previewPane = apiExplorer.queryBar[tab].parent.find('.resultsArea .preview');
+            
+            for(var i = 0; i<previewPane.children().length; i++){
+                if(i >= 5){
+                    previewPane.find('.showItem:nth-child('+i+')').remove();
+                };
+            };
+            
+            var noSlots = previewPane.children().length;
+            
+            // Remove arrows if present
+            if(apiExplorer.queryBar[tab].parent.find('.resultsArea .previewPrev').length > 0){
+                apiExplorer.queryBar[tab].parent.find('.resultsArea .previewPrev').remove();
+                apiExplorer.queryBar[tab].parent.find('.resultsArea .previewNext').remove();
+                apiExplorer.queryBar[tab].parent.find('.resultsArea .pageNumber').remove();
+                previewPane.css({
+                    'left': 0
+                });
+            };
+            if(results.length > noSlots){
+                var diff = results.length - noSlots;
+                
+                var newWidth = (previewPane.find('.showItem:first-child').width()+30)*(noSlots + diff)+(10*((noSlots+diff)/5));
+                previewPane.css('width', newWidth+'px');
+                //results = results.slice(0,5);
+                var copy = previewPane.find('.showItem:first-child');
+                for(var i = 0; i < diff; i++){
+                    var newCopy = copy.clone(true);
+                    previewPane.append(newCopy);
+                    noSlots++;
+                };
+                
+                for(var i = 0; i < results.length; i++){
+                    var item = previewPane.find('.showItem:nth-child('+(i+1)+')');
+                    item.css('margin-right', 10);
+                    if((i+1)%5 == 0){
+                        item.css('margin-right', 20);
+                    };
+                };
+                
+                if(noSlots > 5){
+                    var sizeOfPage = 910;
+                    var noPages = Math.ceil(noSlots/5);
+                    var currentPage = 1;
+                    previewPane.before('<a href="#" class="cbtn next previewNext"><span class="icn"></span></a><p class="pageNumber">Page: <span class="pageNo">1</span> of '+noPages+'</p><a href="#" class="cbtn previous previewPrev"><span class="icn"></span></a>');
+                    apiExplorer.queryBar[tab].parent.find('.resultsArea .previewNext').click(function(){
+                        if(!$(this).hasClass('inactive')){
+                            $(this).addClass('inactive');
+                            var that = $(this);
+                            if(previewPane.position().left-sizeOfPage >= -sizeOfPage*(noPages-1)){
+                                currentPage++;
+                                apiExplorer.queryBar[tab].parent.find('.resultsArea .pageNo').html(currentPage);
+                                previewPane.animate({
+                                    'left': '-='+sizeOfPage
+                                }, 1000, function(){
+                                    that.removeClass('inactive');
+                                });
+                                if(apiExplorer.queryBar[tab].parent.find('.resultsArea .previewPrev').hasClass('inactive')){
+                                    apiExplorer.queryBar[tab].parent.find('.resultsArea .previewPrev').removeClass('inactive');
+                                };
+                            };
+                        };
+                        return false;
+                    });
+                    apiExplorer.queryBar[tab].parent.find('.resultsArea .previewPrev').click(function(){
+                        if(!$(this).hasClass('inactive')){
+                            $(this).addClass('inactive');
+                            var that = $(this);
+                            if(previewPane.position().left < 0){
+                                currentPage--;
+                                apiExplorer.queryBar[tab].parent.find('.resultsArea .pageNo').html(currentPage);
+                                previewPane.animate({
+                                    'left': '+='+sizeOfPage
+                                }, 1000, function(){
+                                    that.removeClass('inactive');
+                                });
+                            };
+                            if(apiExplorer.queryBar[tab].parent.find('.resultsArea .previewNext').hasClass('inactive')){
+                                apiExplorer.queryBar[tab].parent.find('.resultsArea .previewNext').removeClass('inactive');
+                            };
+                        };
+                        return false;
+                    });
+                };
+            };
             
             // 3
             apiExplorer.queryBar[tab].parent.find('.resultsArea .preview .showItem').each(function(i){
@@ -880,9 +1059,6 @@ ApiExplorer.prototype.runQuery = function(tab){
             var theData;
             
             if(data.contents != undefined) {
-                if(data.contents.length > 2){
-                    data.contents = data.contents.slice(0,2);
-                }
                 theData = data.contents;
             }
             
@@ -921,16 +1097,23 @@ ApiExplorer.prototype.runQuery = function(tab){
             });
         },
         error: function(jqXHR, textStatus, errorThrown){
-            sendMsg('error','Sorry, the following error occured: '+errorThrown);
+            apiExplorer.ajaxError('Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
-            if(textStatus == 'timeout') {
-                apiExplorer.timedOut = true;
-            }
-            apiExplorer.btn.val('Run').removeClass('inactive');
+            apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
         }
     });
+}
+
+ApiExplorer.prototype.ajaxError = function(error){
+    sendMsg('error',error);
+};
+
+ApiExplorer.prototype.cancelQuery = function(){
+    var apiExplorer = this;
+    apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+    apiFuncRun = false;
 }
 
 ApiExplorer.prototype.prettyJson = function(json) {
@@ -1094,44 +1277,47 @@ var processTheJson = function(json){
     if(json.contents != undefined){
         if(json.contents.length > 0){
             // for each contents item
-            $.each(json.contents, function(i){
-                if(json.contents[i].image != undefined && json.contents[i].image != ''){
-                    item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
-                    
-                    if(json.contents[i].title != undefined){
-                        item[i].brand = json.contents[i].title;
-                    }
-                    if(json.contents[i].uri != undefined){
-                        item[i].uri = json.contents[i].uri;
-                    }
-                    if(json.contents[i].publisher.name != undefined) {
-                        item[i].publisher = json.contents[i].publisher.name;
-                    }
-                    if(json.contents[i].image != undefined){
-                        item[i].image = json.contents[i].image;
-                    }
-                    if(json.contents[i].content != undefined && json.contents[i].content.length != 0){
-                        if(json.contents[i].content[0].title != undefined) {
-                            if(json.contents[i].content[0].title != json.contents[i].title){
-                                item[i].episode = json.contents[i].content[0].title;
-                            }
-                        }
-                        if(json.contents[i].content[0].series_number != undefined){
-                            item[i].series = json.contents[i].content[0].series_number;
-                        }
-                        if(json.contents[i].content[0].image != undefined){
-                            item[i].image = json.contents[i].content[0].image;
-                        }
-                    }
+            for(var i = 0; i<json.contents.length; i++){
+                item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
+                
+                if(json.contents[i].brand_summary != undefined && json.contents[i].brand_summary.title != undefined){
+                    item[i].brand = json.contents[i].brand_summary.title;
+                    if(json.contents[i].title != item[i].brand){
+                        item[i].episode = json.contents[i].title;
+                    };
+                } else if(json.contents[i].title != undefined){
+                    item[i].brand = json.contents[i].title;
+                };
+                if(json.contents[i].uri != undefined){
+                    item[i].uri = encodeURIComponent(json.contents[i].uri);
+                };
+                if(json.contents[i].publisher.name != undefined) {
+                    item[i].publisher = json.contents[i].publisher.name;
+                };
+                if(json.contents[i].image != undefined){
+                    item[i].image = json.contents[i].image;
                 } else {
-                    item[i] = undefined;
-                }
-            });
-        }
+                    item[i].image = 'images/missingImage.png';
+                };
+                if(json.contents[i].content != undefined && json.contents[i].content.length != 0){
+                    if(json.contents[i].content[0].title != undefined) {
+                        if(json.contents[i].content[0].title != json.contents[i].title){
+                            item[i].episode = json.contents[i].content[0].title;
+                        }
+                    };
+                    if(json.contents[i].content[0].series_number != undefined){
+                        item[i].series = json.contents[i].content[0].series_number;
+                    };
+                    if(json.contents[i].content[0].image != undefined){
+                        item[i].image = json.contents[i].content[0].image;
+                    };
+                };
+            };
+        };
         
     // Else if 'schedule' exists
     } else if(json.schedule[0].items != undefined) {
-        $.each(json.schedule[0].items, function(i){
+        for(var i = 0; i<json.schedule[0].items.length; i++){
             if(i <= 20 && json.schedule[0].items[i].image != undefined && json.schedule[0].items[i].image != ''){
                 item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
                 
@@ -1165,7 +1351,7 @@ var processTheJson = function(json){
             } else {
                 item[i] == undefined;
             }
-        });
+        };
     }
     
     return item;
@@ -1207,8 +1393,12 @@ var updateString = function(obj) {
             obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
         } else {
             return false;
-        }
-    }
+        };
+    };
+    
+    if(obj.title == 'uri'){
+        obj.val = encodeURIComponent(obj.val);
+    };
     
     // 2
     var updatingString = itemParent.item.find('.urlCopy .urlTxt');
@@ -1236,7 +1426,11 @@ var updateString = function(obj) {
         var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
         var fullLength = (obj.title.length+1)+currentParam.length;
         var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
-       
+        
+        if(obj.title == 'uri'){
+            currentEnd = '';
+        };
+        
         if(currentEnd.substr(0,1) == '&'){
             if(obj.val.length > 0){
                 currentEnd = currentEnd.substr(1)+'&';
@@ -1246,8 +1440,16 @@ var updateString = function(obj) {
         currentStart = currentStart.replace('&amp;','&');
         currentEnd = currentEnd.replace('&amp;','&');
         
+        if(obj.val > 0){
+            obj.val = new String(obj.val);
+        };
         if(obj.val.length > 0){
-            newQuery = currentStart + obj.title+'='+obj.val+'&'+currentEnd;
+            newQuery = currentStart + obj.title+'='+obj.val;
+            if(currentEnd.length > 0 && currentEnd.substr(0,1) == '&'){
+                newQuery += currentEnd;
+            } else if (currentEnd.length > 0 && currentEnd.substr(0,1) != '&'){
+                newQuery += '&'+currentEnd;
+            };
         } else {
             if(currentEnd.substr(0,1) == '&'){
                 currentEnd = currentEnd.substr(1);
@@ -1274,6 +1476,7 @@ var updateString = function(obj) {
             newQuery += '.json?'+obj.title+'='+obj.val;
         }
     }
+    
     if(newQuery.substr(-1) == '&'){
         newQuery = newQuery.substr(0, newQuery.length-1);
     }
@@ -1287,11 +1490,35 @@ var updateString = function(obj) {
 }
 
 function jsonp() {
-}
+};
 
 function toTimestamp(year,month,day,hour,minute,second){
     var datum = new Date(Date.UTC(year,month-1,day,hour,minute,second));
     return datum.getTime()/1000;
+}
+
+function getCaretPosition(editableDiv) {
+    var caretPos = 0, containerEl = null, sel, range;
+    if (window.getSelection) {
+        sel = window.getSelection();
+        if (sel.rangeCount) {
+            range = sel.getRangeAt(0);
+            if (range.commonAncestorContainer.parentNode == editableDiv) {
+                caretPos = range.endOffset;
+            }
+        }
+    } else if (document.selection && document.selection.createRange) {
+        range = document.selection.createRange();
+        if (range.parentElement() == editableDiv) {
+            var tempEl = document.createElement("span");
+            editableDiv.insertBefore(tempEl, editableDiv.firstChild);
+            var tempRange = range.duplicate();
+            tempRange.moveToElementText(tempEl);
+            tempRange.setEndPoint("EndToEnd", range);
+            caretPos = tempRange.text.length;
+        }
+    }
+    return caretPos;
 }
 
 $(document).ready(function(){
@@ -1304,7 +1531,7 @@ $(document).ready(function(){
     tabs.init($('#explorerWrapper'));
     tabs.changeTab(0);
        
-    var apiExplorer = new ApiExplorer($('#explorerWrapper'));
+    var apiExplorer = new ApiExplorer($('#explorerWrapper'), tabs);
     apiExplorer.buttonHandler();
     
     var selectBox = [];
@@ -1408,11 +1635,7 @@ $(document).ready(function(){
     $('.urlCopy .urlTxt').keyup(function(e){
         var query = $(this).val();
         if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40) {
-            query = query.substr(query.indexOf('0/')+2);
-            query = query.replace(/\&amp\;/g,'&');
-            query = query.replace(queryBeg, '');
-            tabs.changeTab(4);
-            apiExplorer.customQuery(query,false);
+            $(this).siblings('input[type="hidden"]').val('true');
         }
         return false;
     });
@@ -1442,27 +1665,31 @@ $(document).ready(function(){
     });
     
     $('input.date').each(function(i){
-        var d = new Date();
-        var month = new String(d.getMonth()+1);
-        if(month.length < 2){
+        var today = new Date();
+        if(i > 0){
+            today.setDate(today.getDate()+1);
+        };
+        var day = today.getDate(),
+            month = today.getMonth()+1,
+            year = today.getFullYear();
+        if(day < 10){
+            day = '0'+day;
+        };
+        if(month < 10){
             month = '0'+month;
-        }
-        var year = d.getFullYear();
+        };
         $(this).datepicker({
             showOn: "both",
             buttonImage: "images/date.gif",
             buttonImageOnly: true,
-            dateFormat: 'dd/mm/yy'
+            dateFormat: 'dd/mm/yy',
+            onClose: function(dateText, inst){
+                updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': dateText});
+            }
         });
-        if(i == 0){
-            var day = d.getDate();
-            $(this).val(day+'/'+month+'/'+year);
-        } else {
-            var day = d.getDate()+1;
-            $(this).val(day+'/'+month+'/'+year);
-        }
-        var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-        updateString(item);
+        $(this).datepicker('setDate', day+'/'+month+'/'+year);
+        updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
+        $('#ui-datepicker-div').hide();
     });
     
     $('.mainMenu a').click(function(){
