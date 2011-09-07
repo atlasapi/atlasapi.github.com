@@ -12,8 +12,7 @@
 		<script src="js/modernizr-1.7.min.js"></script>
 		<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
 		<script src="js/prettify/prettify.js"></script>
-        <!--<script src="js/min/minscript.js"></script>-->
-        <script src="js/script.js"></script>
+        	<script src="js/min/minscript.js"></script>
 	</head>
 	<body>
 	   <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
@@ -125,7 +124,7 @@
                         <h3>Search for the <mark class="hov hovDown" data-title="title">title</mark> of some content</h3>
                     </div>
                     
-                    <div class="example right clearfix">
+                    <!--<div class="example right clearfix">
                         <a href="http://atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=10" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=10</a>
                         <h3>Discover content from a certain <mark class="hov hovDown" data-title="publisher">publisher</mark> </h3>
                     </div>
@@ -133,7 +132,7 @@
                     <div class="example clearfix">
                         <a href="http://atlasapi.org/3.0/discover.json?genre=drama&limit=5" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?genre=drama&limit=5</a>
                         <h3>Discover content for a particular <mark class="hov hovDown" data-title="genre">genre</mark> of program or brand</h3>
-                    </div>
+                    </div>-->
                     
                     <div class="example right clearfix">
                         <a href="http://atlasapi.org/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6" class="api apiContent">http://atlasapi.org/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6</a>
@@ -161,7 +160,7 @@
                 <section data-title="reference_overview" class="subSection">
                     <div class="marker" id="reference_overview"></div>
                     <h3>Overview</h3>
-                    <p>Atlas ingests data from <a href="#reference_sources">15+ sources</a>, indexes them, matches equivalent items, then provides simple RESTful APIs for <a href="#reference_queryParameters">Search</a>, <a href="#reference_queryParameters">Discovery</a>, <a href="#reference_queryParameters">Content</a> descriptions and channel <a href="#reference_queryParameters">Schedules</a>. Data can also be provided in a range of common <a href="#reference_feeds">feed formats</a>.</p>
+                    <p>Atlas ingests data from <a href="#reference_sources">15+ sources</a>, indexes them, matches equivalent items, then provides simple RESTful APIs for <a href="#reference_queryParameters">Search</a>,<!-- <a href="#reference_queryParameters">Discovery</a>,--> <a href="#reference_queryParameters">Content</a> descriptions and channel <a href="#reference_queryParameters">Schedules</a>. Data can also be provided in a range of common <a href="#reference_feeds">feed formats</a>.</p>
                 </section>
                 
                 <section data-title="reference_dataModel" class="subSection">
@@ -324,9 +323,9 @@ brand_summary: {
                         </tbody>
                     </table>
                     
-                    <h4>Discover</h4>
+                    <!--<h4>Discover</h4>-->
                     <!--<p>Discover intro</p>-->
-                    <table class="tbl">
+                    <!--<table class="tbl">
                         <thead>
                             <tr>
                                 <th class="first">Name</th>
@@ -386,7 +385,7 @@ brand_summary: {
                                 <td class="third"><code>link</code>, <code>download</code> or <code>embed</code></td>
                             </tr>  
                         </tbody>
-                    </table>
+                    </table>-->
                     
                     <h4>Schedule</h4>
                     <!--<p>Schedule intro</p>-->
@@ -632,43 +631,45 @@ brand_summary: {
                 <div class="marker" id="about"></div>
                 <h2>About</h2>
                     
-				<h4>License</h4>
-				<p>Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a></p>
-				
-				<h4>Project Hosting</h4>
-				<p>The <a href="http://github.com/atlasapi">source-code</a>, <a href="http://github.com/atlasapi/atlas/issues">issue tracking</a> and <a href="http://wiki.github.com/atlasapi/atlas/">wiki</a> are all hosted on <a href="http://github.com/">Github</a>.<br />
-				Additionally, communication is all handled through <a href="http://groups.google.com/group/atlasapi/">Google Groups</a>. If you’re interested in joining the project or just asking us something, the group is the best place to start.<br />
-				Alternatively, if you notice something is wrong, or just have a feature request, feel free to use our <a href="http://github.com/atlasapi/atlas/issues">Issue Tracker</a>.</p>
-				
-				<h4>Client Libraries</h4>
-				<p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
-				
-				<h4>Get Involved</h4>
-				<p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
-				<div class="line">
-				    <div class="unit size1of2">
-				        <ul class="list mrm mbl">
-        					<li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
-        					<li>Have a chat with us about the features and formats that you’d find useful</li>
-        					<li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
-        					<li>Provide a metadata endpoint for us to ingest</li>
-                        </ul>
-				    </div>
-				    <div class="unit size1o2 lastUnit">
-				        <ul class="list mlm mbl">
-        					<li>Develop an adapter for a new source of content, current sources are <a href="#reference_sources">here</a></li>
-        					<li>Help improve the core of the code</li>
-        					<li>Write client libraries for other languages</li>
-        				</ul>
-				    </div>
-				</div>
+                <div class="line">
+                    <div class="unit size3of4">
+                        <div class="mrl">            				
+            				<h4>Get Involved</h4>
+            				<p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
+            				<div class="line">
+            				    <div class="unit size1of2">
+            				        <ul class="list mrm mbl">
+                    					<li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
+                    					<li>Have a chat with us about the features and formats that you’d find useful</li>
+                    					<li>Tell us when something doesn’t quite work the way you’d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
+                    					<li>Provide a metadata endpoint for us to ingest</li>
+                                    </ul>
+            				    </div>
+            				    <div class="unit size1of2 lastUnit">
+            				        <ul class="list mlm mbl">
+                    					<li>Develop an adapter for a new source of content, current sources are <a href="#reference_sources">here</a></li>
+                    					<li>Help improve the core of the code</li>
+                    					<li>Write client libraries for other languages</li>
+                    				</ul>
+            				    </div>
+            				</div>
+            				<h4>Client Libraries</h4>
+            				<p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
+                        </div>
+                    </div>
+                    <div class="unit size1of4 lastUnit">
+                        <div class="badge">
+    				        Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>
+    				    </div>
 
-				<ul class="socialList clearfix mtm">
-					<li><a href="http://github.com/atlasapi/atlas/"><img src="images/github.png" /><mark>source-code, wiki and issue tracker</mark></a></li>
-					<li><a href="http://groups.google.com/group/atlasapi/"><img src="images/google.png" /><mark>discussion</mark></a></li>
-					<li><a href="http://twitter.com/atlasapi"><img src="images/twitter.png" /><mark>@atlasapi</mark></a></li>
-					<li><a href="http://metabroadcast.com"><img src="images/metabroadcast.png" /><mark>metabroadcast</mark></a></li>
-				</ul>
+				        <ul class="socialList clearfix mtm">
+        					<li><a href="http://github.com/atlasapi/atlas/" class="media"><img src="images/github.png" class="img" /><mark class="bd">source-code, wiki &amp; issues</mark></a></li>
+        					<li><a href="http://groups.google.com/group/atlasapi/" class="media"><img src="images/google.png" class="img" /><mark class="bd">discussion</mark></a></li>
+        					<li><a href="http://twitter.com/atlasapi" class="media"><img src="images/twitter.png" class="img" /><mark class="bd">@atlasapi</mark></a></li>
+        					<li><a href="http://metabroadcast.com" class="media"><img src="images/metabroadcast.png" class="img" /><mark class="bd">metabroadcast</mark></a></li>
+        				</ul>
+                    </div>
+                </div>
             </section>
             
             <section class="apiExplorer">
@@ -677,7 +678,7 @@ brand_summary: {
                 <div class="explorerWrapper" id="explorerWrapper">
                     <ul class="tabs clearfix">
                         <li class="tab"><a href="#apiExplorer" data-tab="explorer_search">Search</a></li>
-                        <li class="tab"><a href="#apiExplorer" data-tab="explore_discover">Discover</a></li>
+                        <!--<li class="tab"><a href="#apiExplorer" data-tab="explore_discover">Discover</a></li>-->
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_schedule">Schedule</a></li>
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_content">Content</a></li>
                     </ul>
@@ -760,7 +761,7 @@ brand_summary: {
                             </div>
                         </div>
                     </div>
-                    <div class="tabArea" id="explore_discover">
+                    <!--<div class="tabArea" id="explore_discover">
                         <form>
                             <div class="line">
                                 <div class="unit size1of2">
@@ -849,14 +850,13 @@ brand_summary: {
                                     <li class="subTab selected"><a href="#discover_json" data-tab="discover_json">JSON</a></li>
                                     <li class="fl"><p class="mbn other">Other available formats:</p></li>
                                     <li class="fl"><a href="" target="_blank" data-tab="discover_xml">XML</a></li>
-                                    <!--<li class="fl"><a href="" target="_blank" data-tab="discover_html">HTML</a></li>-->
                                     <li class="fl"><a href="" target="_blank" data-tab="discover_rdf">RDF</a></li>
                                 </ul>
                                 <pre class="subTabArea" id="discover_json">
                                 </pre>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="tabArea" id="explore_schedule" style="display: none;">
                         <form>
                             <div class="line">
