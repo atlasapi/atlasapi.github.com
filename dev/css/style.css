@@ -574,8 +574,8 @@
             
             
             .socialList li {margin: 0 20px 10px 0; float: left;}
-            a.media img {opacity: 0.8;}
-            a.media:hover img {opacity: 1;}
+            /*a.media img {opacity: 0.8;}
+            a.media:hover img {opacity: 1;}*/
             .media {display: block;}
             .media .img {display: block; float: left; margin-right: 10px;}
             .media .bd {display: table-cell; line-height: 32px; font-size: 15px;}
