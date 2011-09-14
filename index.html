@@ -12,7 +12,7 @@
 		<script src="js/modernizr-1.7.min.js"></script>
 		<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
 		<script src="js/prettify/prettify.js"></script>
-        	<script src="js/min/minscript.js"></script>
+        <script src="js/script.js"></script>
 	</head>
 	<body>
 	   <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
@@ -120,27 +120,27 @@
                 <h2>Examples</h2>
                 <div class="clearfix">
                     <div class="example clearfix">
-                        <a href="http://atlasapi.org/3.0/search.json?q=glee&limit=2" class="api apiSearch">http://atlasapi.org/3.0/search.json?q=glee&limit=2</a>
+                        <a href="http://atlas.metabroadcast.com/3.0/search.json?q=glee&limit=2" class="api apiSearch">http://atlas.metabroadcast.com/3.0/search.json?q=glee&limit=2</a>
                         <h3>Search for the <mark class="hov hovDown" data-title="title">title</mark> of some content</h3>
                     </div>
                     
                     <!--<div class="example right clearfix">
-                        <a href="http://atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=10" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?publisher=bbc.co.uk&limit=10</a>
+                        <a href="http://atlas.metabroadcast.com/3.0/discover.json?publisher=bbc.co.uk&limit=10" class="api apiDiscover">http://atlas.metabroadcast.com/3.0/discover.json?publisher=bbc.co.uk&limit=10</a>
                         <h3>Discover content from a certain <mark class="hov hovDown" data-title="publisher">publisher</mark> </h3>
                     </div>
                     
                     <div class="example clearfix">
-                        <a href="http://atlasapi.org/3.0/discover.json?genre=drama&limit=5" class="api apiDiscover">http://atlasapi.org/3.0/discover.json?genre=drama&limit=5</a>
+                        <a href="http://atlas.metabroadcast.com/3.0/discover.json?genre=drama&limit=5" class="api apiDiscover">http://atlas.metabroadcast.com/3.0/discover.json?genre=drama&limit=5</a>
                         <h3>Discover content for a particular <mark class="hov hovDown" data-title="genre">genre</mark> of program or brand</h3>
                     </div>-->
                     
                     <div class="example right clearfix">
-                        <a href="http://atlasapi.org/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6" class="api apiContent">http://atlasapi.org/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6</a>
+                        <a href="http://atlas.metabroadcast.com/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6" class="api apiContent">http://atlas.metabroadcast.com/3.0/content.json?uri=http://www.bbc.co.uk/programmes/b00zf9j6</a>
                         <h3>Get information about a certain piece of content</h3>
                     </div>
                     
                     <div class="example clearfix">
-                        <a href="http://atlasapi.org/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone" class="api apiSchedule">http://atlasapi.org/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone</a>
+                        <a href="http://atlas.metabroadcast.com/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone" class="api apiSchedule">http://atlas.metabroadcast.com/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone</a>
                         <h3>Search for everything <mark class="hov hovDown" data-title="from">from</mark> now <mark class="hov hovDown" data-title="to">to</mark> tomorrow on <mark class="hov hovDown" data-title="channel">BBC One</mark></h3>
                     </div>
                 </div>
@@ -221,7 +221,7 @@ publisher: {
 image: "http://www.bbc.co.uk/iplayer/images/episode/b00wlncb_640_360.jpg",
 thumbnail: "http://www.bbc.co.uk/iplayer/images/episode/b00wlncb_150_84.jpg",
 genres:[
-    "http://ref.atlasapi.org/genres/atlas/drama",
+    "http://ref.atlas.metabroadcast.com/genres/atlas/drama",
     "http://www.bbc.co.uk/programmes/genres/drama/scifiandfantasy"
 ]</code>
                     </pre>
@@ -634,7 +634,7 @@ brand_summary: {
                 <div class="line">
                     <div class="unit size3of4">
                         <div class="mrl">            				
-            				<h4>Get Involved</h4>
+            				<h4>Atlas is open source</h4>
             				<p>Atlas is an open-source project and we’d love for you to get involved. Below are a all the resources that will help you join in. Participation comes in many forms:</p>
             				<div class="line">
             				    <div class="unit size1of2">
@@ -653,21 +653,33 @@ brand_summary: {
                     				</ul>
             				    </div>
             				</div>
-            				<h4>Client Libraries</h4>
-            				<p>The Java client library can be found at <a href="http://github.com/atlasapi/atlas-client">http://github.com/atlasapi/atlas-client</a> along with how to use it.<br />Please contact us if you’d like to write libraries in other languages, that would be amazing!</p>
+            				
+            				<h4 class="mbs">Atlas is used by</h4>
+            				<ul class="socialList clearfix mbl">
+            					<li class="mrl"><a href="http://bbc.co.uk" class="media" title="BBC"><img src="images/clients/bbc.png" class="img mrn" /></a></li>
+            					<li class="mrl"><a href="http://radiotimes.com" class="media" title="RadioTimes"><img src="images/clients/rt.png" class="img mrn" /></a></li>
+            					<li class="mrl"><a href="http://channel4.com" class="media" title="Channel 4"><img src="images/clients/c4.png" class="img mrn" /></a></li>
+            				</ul>
                         </div>
                     </div>
                     <div class="unit size1of4 lastUnit">
-                        <div class="badge">
+                        <h4>Get Involved</h4>
+    				        <ul class="socialList clearfix mbm">
+            					<li><a href="http://github.com/atlasapi/atlas/" class="media"><img src="images/github.png" class="img" /><mark class="bd">source-code, wiki &amp; issues</mark></a></li>
+            					<li><a href="http://groups.google.com/group/atlasapi/" class="media"><img src="images/google.png" class="img" /><mark class="bd">discussion</mark></a></li>
+            					<li><a href="http://twitter.com/atlasapi" class="media"><img src="images/twitter.png" class="img" /><mark class="bd">@atlasapi</mark></a></li>
+            					<li><a href="http://metabroadcast.com" class="media"><img src="images/metabroadcast.png" class="img" /><mark class="bd">metabroadcast</mark></a></li>
+            				</ul>
+        				
+        				<h4>Client Libraries</h4>
+        				    <ul class="socialList clearfix mbm">
+        				        <li class="fn"><a href="http://github.com/atlasapi/atlas-client" class="media"><img src="images/java.png" class="img" /><mark class="bd">Java</mark></a></li>
+        				        <li class="fn"><a href="https://github.com/danielcooper/ratlas" class="media"><img src="images/ruby.png" class="img" /><mark class="bd">Ruby</mark></a></li>
+        				    </ul>
+        				
+        				<!--<div class="badge">
     				        Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>
-    				    </div>
-
-				        <ul class="socialList clearfix mtm">
-        					<li><a href="http://github.com/atlasapi/atlas/" class="media"><img src="images/github.png" class="img" /><mark class="bd">source-code, wiki &amp; issues</mark></a></li>
-        					<li><a href="http://groups.google.com/group/atlasapi/" class="media"><img src="images/google.png" class="img" /><mark class="bd">discussion</mark></a></li>
-        					<li><a href="http://twitter.com/atlasapi" class="media"><img src="images/twitter.png" class="img" /><mark class="bd">@atlasapi</mark></a></li>
-        					<li><a href="http://metabroadcast.com" class="media"><img src="images/metabroadcast.png" class="img" /><mark class="bd">metabroadcast</mark></a></li>
-        				</ul>
+    				    </div>-->
                     </div>
                 </div>
             </section>
@@ -718,7 +730,7 @@ brand_summary: {
                             </div>
                             <div class="line hr mtm">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="search_queryCopy"><a href="#" id="search_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/search.json?" /><input type="hidden" id="search_altered" /></div>
+                                    <div class="urlCopy" id="search_queryCopy"><a href="#" id="search_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/search.json?" /><input type="hidden" id="search_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -815,7 +827,7 @@ brand_summary: {
                             </div>
                             <div class="line hr mtm">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="discover_queryCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/discover.json?" /><input type="hidden" id="discover_altered" /></div>
+                                    <div class="urlCopy" id="discover_queryCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/discover.json?" /><input type="hidden" id="discover_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -886,7 +898,7 @@ brand_summary: {
                             </div>
                             <div class="line hr">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="schedule_queryCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/schedule.json?" /><input type="hidden" id="schedule_altered" /></div>
+                                    <div class="urlCopy" id="schedule_queryCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/schedule.json?" /><input type="hidden" id="schedule_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -941,7 +953,7 @@ brand_summary: {
                             </div>
                             <div class="line hr mtm">
                                 <div class="unit size4of5">
-                                    <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlasapi.org/3.0/content.json?" /><input type="hidden" id="content_altered" /></div>
+                                    <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/content.json?" /><input type="hidden" id="content_altered" /></div>
                                 </div>
                                 <div class="unit size1of5 lastUnit">
                                     <input type="submit" class="btn" value="Run" />
@@ -987,7 +999,7 @@ brand_summary: {
                     <div class="tabArea" id="explore_advanced" style="display: none;">
                         <form>
                             <div class="line urlCopy" id="advanced_queryCopy">
-                                <label for="advanced_string" class="tr adv">http://atlasapi.org/3.0/</label>
+                                <label for="advanced_string" class="tr adv">http://atlas.metabroadcast.com/3.0/</label>
                                 <div class="clearfix"><a href="#" id="advanced_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" id="advanced_string" class="fr adv watchMe" /></div>
                              </div>
                             <div class="line hr mtm">
