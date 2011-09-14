@@ -1,6 +1,6 @@
 var homePageTimer;
 
-var queryBeg = 'http://atlasapi.org/3.0/';
+var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
