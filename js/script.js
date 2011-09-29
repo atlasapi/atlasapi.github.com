@@ -337,7 +337,7 @@ var HomeDemo = function(item) {
         {'type': 'Search', 'query':'search.json?q=cars&limit=5'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk'},
-        {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&available=true&limit=5'},
+        {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&limit=5'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5&offset='+offset+'&available=true'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk'},
@@ -350,7 +350,7 @@ var HomeDemo = function(item) {
         {'type': 'Search', 'query':'search.json?q=green&limit=5'},       
         {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&transportType=link&limit=5'},*/
-        {'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5&available=true'},
+        {'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=music&mediaType=video&limit=5'},*/
         {'type': 'Search', 'query':'search.json?q=Britain&limit=5'}
         /*{'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5&available=true&offset='+offset2},
@@ -467,7 +467,7 @@ HomeDemo.prototype.request = function() {
             cache: true,
             timeout: 5000,
             context: homeDemo.item,
-            success: function(data, textStatus, jqXHR){            
+            success: function(data, textStatus, jqXHR){  
                 homeDemo.nav.find('.timer').fadeOut();
             
                 var results = processTheJson(data);
@@ -715,7 +715,7 @@ ApiExplorer.prototype.customQuery = function(query,run){
     queryHolder.val(query);
     apiExplorer.query = queryBeg+query;
     if(run != false){
-        apiExplorer.runQuery(4);
+        apiExplorer.runQuery(3);
     } else {
         queryHolder.focus();
     }
@@ -829,7 +829,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     
     apiExplorer.query = query;
 
-    apiExplorer.runQuery(2);
+    apiExplorer.runQuery(1);
 }
 
 ApiExplorer.prototype.contentQuery = function(query){
@@ -850,7 +850,7 @@ ApiExplorer.prototype.contentQuery = function(query){
     
     $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
-    apiExplorer.runQuery(3);
+    apiExplorer.runQuery(2);
 }
 
 ApiExplorer.prototype.textAltered = function(query, params){
@@ -874,7 +874,7 @@ ApiExplorer.prototype.textAltered = function(query, params){
             };
         };
         if(fail){
-            apiExplorer.tabs.changeTab(4);
+            apiExplorer.tabs.changeTab(3);
             apiExplorer.customQuery(query);
             $('#explore_'+queryType+' #'+queryType+'_altered').val('false');
             return true;
@@ -944,7 +944,7 @@ ApiExplorer.prototype.runQuery = function(tab){
                 
             // 1
             var results = processTheJson(data);
-            
+
             // 2
             results.clean(undefined);
             var previewPane = apiExplorer.queryBar[tab].parent.find('.resultsArea .preview');
@@ -1390,6 +1390,14 @@ var updateString = function(obj) {
         var theDate = obj.val.match(/(.*?)\//g);
         var theYear = obj.val.match(/\d{4}/g);
         if(theDate && theYear){
+			theDate[0] = theDate[0].substring(0, theDate[0].length-1);
+			theDate[1] = theDate[1].substring(0, theDate[1].length-1);
+			if(theDate[0].substring(0,1) === '0'){
+				theDate[0] = theDate[0].substr(1);
+			}
+			if(theDate[1].substring(0,1) === '0'){
+				theDate[1] = theDate[1].substr(1);
+			}
             obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
         } else {
             return false;
@@ -1493,7 +1501,7 @@ function jsonp() {
 };
 
 function toTimestamp(year,month,day,hour,minute,second){
-    var datum = new Date(Date.UTC(year,month-1,day,hour,minute,second));
+    var datum = new Date(year,month-1,day,hour,minute,second,0);
     return datum.getTime()/1000;
 }
 
@@ -1587,7 +1595,7 @@ $(document).ready(function(){
     
     $('a.apiSchedule').click(function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
-            tabs.changeTab(2);
+            tabs.changeTab(1);
             apiExplorer.scheduleQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
                 $('a[href="#apiExplorer"]').click();
@@ -1601,7 +1609,7 @@ $(document).ready(function(){
     
     $('a.apiContent').click(function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
-            tabs.changeTab(3);
+            tabs.changeTab(2);
             apiExplorer.contentQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
                 $('a[href="#apiExplorer"]').click();
