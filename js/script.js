@@ -412,7 +412,7 @@ HomeDemo.prototype.init = function(){
 					   homeDemo.scrolling = true;
 					   clearInterval(homeDemo.timer);
 					   homeDemo.activeQuery++;
-					   if(homeDemo.activeQuery == homeDemo.query.length-1){
+					   if(homeDemo.activeQuery == homeDemo.query.length+1){
     					   homeDemo.activequery = 0;
     					}
 					   homeDemo.nextQuery();
@@ -423,7 +423,7 @@ HomeDemo.prototype.init = function(){
 					   }
 					} else {
 					   clearInterval(homeDemo.timer);
-					   if(homeDemo.activeQuery == homeDemo.query.length-1){
+					   if(homeDemo.activeQuery == homeDemo.query.length+1){
 					       homeDemo.activeQuery = 0;
 					   }
 					   homeDemo.nextQuery();
@@ -436,10 +436,10 @@ HomeDemo.prototype.init = function(){
     });
     
     // Make first request
-    homeDemo.request();
+    homeDemo.request(true);
 }
 
-HomeDemo.prototype.request = function() {
+HomeDemo.prototype.request = function(first) {
     var homeDemo = this;
     
     homeDemo.marker = homeDemo.activeQuery;
@@ -477,7 +477,7 @@ HomeDemo.prototype.request = function() {
                 if(results.length > 0){
                 
                     if(results[0] != undefined){
-                        if(!item.find('img').attr('src') || item.find('img').height() == 0){
+                        if(!item.find('img').attr('src') || item.find('img').height() === 0){
                             item.find('img').attr('src',results[0].image).fadeIn(500, function(){
                                     item.removeClass('loading');
                                 });
@@ -517,14 +517,18 @@ HomeDemo.prototype.request = function() {
                     homeDemo.marker = 0;
                 }
                 
-                // Restart Countdown
-                homeDemo.countdown();
-                
-                if(homeDemo.marker > 1){
-                    homeDemo.prevBtn.removeClass('inactive');
+                if(first){
+                    homeDemo.request();
+                } else {
+                    // Restart Countdown
+                    homeDemo.countdown();
+                    
+                    if(homeDemo.marker > 1){
+                        homeDemo.prevBtn.removeClass('inactive');
+                    }
+                    
+                    homeDemo.nextBtn.removeClass('inactive');
                 }
-                
-                homeDemo.nextBtn.removeClass('inactive');
             }
         });
     } else {
@@ -536,14 +540,18 @@ HomeDemo.prototype.request = function() {
             homeDemo.marker = 0;
         }
         
-        // Restart Countdown
-        homeDemo.countdown();
-        
-        if(homeDemo.marker > 1){
-            homeDemo.prevBtn.removeClass('inactive');
+        if(first){
+            homeDemo.request();
+        } else {
+            // Restart Countdown
+            homeDemo.countdown();
+            
+            if(homeDemo.marker > 1){
+                homeDemo.prevBtn.removeClass('inactive');
+            }
+            
+            homeDemo.nextBtn.removeClass('inactive');
         }
-        
-        homeDemo.nextBtn.removeClass('inactive');
     }
 }
 
@@ -603,38 +611,22 @@ HomeDemo.prototype.prevQuery = function() {
 HomeDemo.prototype.countdown = function() {
     var homeDemo = this;   
     clearInterval(homeDemo.timer); 
-	var i = 20;
+	var i = homeDemo.query.length;
 	var thisItem = homeDemo.nav.find('.timer');
-	if(homeDemo.buttonClicked) {
-    	if(homeDemo.activeQuery == homeDemo.marker) {
+
+    homeDemo.timer = setInterval(function() {
+        if(!thisItem.is(':visible')){
             thisItem.fadeIn();
-    		homeDemo.timer = setInterval(function() {
-    			thisItem.find('.js_txt').html(i+'s');
-    			i--;
-    			if(i== -1){
-    				thisItem.find('.js_txt').html('Loading');
-    				clearTimer(homeDemo.timer);
-    				homeDemo.request();
-    			}
-    		}, 1000);
-    	} else {
-    		thisItem.fadeOut();
-    	}
-    } else {
-        homeDemo.timer = setInterval(function() {
-            if(!thisItem.is(':visible')){
-                thisItem.fadeIn();
-            }
-            thisItem.find('.js_txt').html(i+'s');
-			i--;
-			if(i== -1){
-				thisItem.find('.js_txt').html('Loading');
-				clearTimer(homeDemo.timer);
-				homeDemo.nextQuery();
-				homeDemo.request();
-			}
-        }, 1000);
-    }
+        }
+        thisItem.find('.js_txt').html(i+'s');
+		i--;
+		if(i== -1){
+			thisItem.find('.js_txt').html('Loading');
+			clearTimer(homeDemo.timer);
+			homeDemo.nextQuery();
+			homeDemo.request();
+		}
+    }, 1000);
 }
 
 var ApiExplorer = function(item, tabs) {
