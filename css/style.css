@@ -1164,7 +1164,7 @@
                 float: left;
             }
             
-            input.adv {width: 613px; margin-right: 10px;}
+            input.adv {width: 693px; margin-right: 10px;}
             
             .ui-datepicker-trigger {float: left; display: block; margin-top: 5px; margin-left: 5px;}
             
@@ -1186,7 +1186,7 @@
                 margin-right: 10px;
             }
             *:first-child+html label.date {width: 60px;}
-            label.adv{width: 260px;}
+            label.adv{width: 180px;}
             
             .select {
                 position: relative;

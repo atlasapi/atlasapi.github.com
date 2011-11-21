@@ -334,23 +334,23 @@ var HomeDemo = function(item) {
     }
     
     var array0 = [
-        {'type': 'Search', 'query':'search.json?q=cars&limit=5'},
+        /*{'type': 'Search', 'query':'search.json?q=cars&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk'},
         {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&limit=5'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5&offset='+offset+'&available=true'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk'},
-        {'type': 'Search', 'query':'search.json?q=world&publisher=itv.com&limit=5'},
+        /*{'type': 'Search', 'query':'search.json?q=world&publisher=itv.com&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=lifestyle&publisher=bbc.co.uk&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk'},
-        {'type': 'Search', 'query':'search.json?q=Jane Eyre&limit=5'},
+        /*{'type': 'Search', 'query':'search.json?q=Jane Eyre&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=learning&availableCountries=uk&mediaType=video&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk'},
-        {'type': 'Search', 'query':'search.json?q=green&limit=5'},       
+        /*{'type': 'Search', 'query':'search.json?q=green&limit=5'},*/
         {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&transportType=link&limit=5'},*/
-        {'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5'},
+        /*{'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=music&mediaType=video&limit=5'},*/
         {'type': 'Search', 'query':'search.json?q=Britain&limit=5'}
         /*{'type': 'Discover', 'query':'discover.json?publisher=video.uk.msn.com&limit=5&available=true&offset='+offset2},
