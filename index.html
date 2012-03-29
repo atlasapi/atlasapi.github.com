@@ -702,13 +702,633 @@ brand_summary: {
                 <h2 class="explorerTitle">API Explorer</h2>
                 <div class="explorerWrapper" id="explorerWrapper">
                     <ul class="tabs clearfix">
-                        <li class="tab"><a href="#apiExplorer" data-tab="explorer_search">Search</a></li>
-                        <!--<li class="tab"><a href="#apiExplorer" data-tab="explore_discover">Discover</a></li>-->
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_schedule">Schedule</a></li>
+                        <li class="tab"><a href="#apiExplorer" data-tab="explore_channels">Channels</a></li>
                         <li class="tab"><a href="#apiExplorer" data-tab="explore_content">Content</a></li>
+                        <li class="tab"><a href="#apiExplorer" data-tab="explore_content_groups">Content Groups</a></li>
+                        <li class="tab"><a href="#apiExplorer" data-tab="explore_topics">Topics</a></li>
+                        <li class="tab"><a href="#apiExplorer" data-tab="explore_products">Products</a></li>
+                        <li class="tab"><a href="#apiExplorer" data-tab="explorer_search">Search</a></li>
                     </ul>
                     <a href="#apiExplorer" data-tab="explore_advanced" class="tab tabExt">Complete control</a>
-                    <div class="tabArea" id="explore_search">
+                        <div class="tabArea" id="explore_schedule">
+                        <h2>Schedule</h2>
+                        <h3>GET /schedule.json</h3>
+                        <p>Returns a schedule for the specified channel and period.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">channel_id</td>
+                                <td class="second">cbbh</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The id of the required channel. Available from /channels.json</td>
+                            </tr>
+                            <tr>
+                                <td class="first">from</td>
+                                <td class="second">now</td>
+                                <td class="third">multiple</td>
+                                <td class="fourth">The beginning of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration.</td>
+                            </tr>
+                            <tr>
+                                <td class="first">to</td>
+                                <td class="second">now.plus.6h</td>
+                                <td class="third">multiple</td>
+                                <td class="fourth">The end of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration.</td>
+                            </tr>
+                            <tr>
+                                <td class="fist">publisher</td>
+                                <td class="second">bbc.co.uk</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The publisher of the schedule</td>
+                            </tr>
+                            <tr>
+                                <td class="fist">annotations</td>
+                                <td class="second">channel,description,broadcasts</td>
+                                <td class="third">list</td>
+                                <td class="fourth">List of annotations that describe the data to be output</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: all content annotations, plus channel</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label class="tr">Channel:</label>
+                                    <span class="select">
+                                        <span class="value">Please Select</span>
+                                        <span class="options">
+                                            <span class="option" data-value="bbcone">BBC One</span>
+                                            <span class="option" data-value="bbctwo">BBC Two</span>
+                                            <span class="option" data-value="bbcthree">BBC Three</span>
+                                            <span class="option" data-value="bbcfour">BBC Four</span>
+                                            <span class="option" data-value="bbchd">BBC HD</span>
+                                            <span class="option" data-value="cbbc">CBBC</span>
+                                            <span class="option" data-value="radio1">BBC Radio 1</span>
+                                            <span class="option" data-value="">None</span>
+                                        </span>
+                                    </span>
+                                    <input type="hidden" id="schedule_channel" data-title="channel" class="fr watchMe" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                    <label class="tr date" for="schedule_from">From:</label>
+                                    <input type="text" class="date watchMe" data-title="from" id="schedule_from" />
+                                    <label class="tr date" for="schedule_to">To:</label>
+                                    <input type="text" class="date watchMe" data-title="to" id="schedule_to" />
+                                </div>
+                            </div>
+                            <div class="line hr">
+                                <div class="unit size4of5">
+                                    <div class="urlCopy" id="schedule_queryCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/schedule.json?" /><input type="hidden" id="schedule_altered" /></div>
+                                </div>
+                                <div class="unit size1of5 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output" id="schedule_output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="subTab selected"><a href="#schedule_json" data-tab="schedule_json">JSON</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_xml">XML</a></li>
+                                    <!--<li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>-->
+                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_rdf">RDF</a></li>
+                                </ul>
+                                <pre class="subTabArea" id="schedule_json">
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tabArea" id="explore_channels" style="display: none;">
+                     <h2>Channels</h2>
+                     <h3>GET /channels.json</h3>
+                     <p>Returns a paginated list of all channels.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of channels to return per page</td>
+                            </tr>
+                            <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    <div class="tabArea" id="explore_content" style="display: none;">
+                    <h2>Content</h2>
+                     <h3>GET /content.json</h3>
+                     <p>Returns a list of content that matches the supplied uri. Used to look up content.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">uri</td>
+                                <td class="second">http://www.bbc.co.uk/programmes/b007rsj5</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The uri of a specific piece of content</td>
+                            </tr>
+                            <tr>
+                                <td class="first">annotations</td>
+                                <td class="second">description,brand_summary,series_summary</td>
+                                <td class="third">list</td>
+                                <td class="fourth">List of annotations that describe the data to be output.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: description, extended_description, brand_summary, series_summary, people, topics, products, related_links, key_phrases, broadcasts, locations, first_broadcasts, next_broadcasts, available_locations, upcoming, sub_items</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                        <form>
+                            <div class="line">
+                                <div class="unit size1of2">
+                                    <label for="content_uri" class="tr">URI:</label>
+                                    <input type="text" id="content_uri" data-title="uri" class="fr watchMe" />
+                                </div>
+                                <div class="unit size1of2 lastUnit">
+                                </div>
+                            </div>
+                            <div class="line hr mtm">
+                                <div class="unit size4of5">
+                                    <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/content.json?" /><input type="hidden" id="content_altered" /></div>
+                                </div>
+                                <div class="unit size1of5 lastUnit">
+                                    <input type="submit" class="btn" value="Run" />
+                                </div>
+                            </div>
+                        </form>
+                        <div class="resultsArea" style="display: none;">
+                            <div class="preview mlm clearfix">
+                               <a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a> 
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                    			<a class="showItem apiContent" style="display: none;">
+                                    <img src="" />
+                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
+                    			</a>
+                            </div>
+                            <div class="output" id="content_output">
+                                <ul class="smallTabs clearfix">
+                                    <li class="subTab selected"><a href="#content_json" data-tab="content_json">JSON</a></li>
+                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
+                                    <li class="fl"><a href="" target="_blank" data-tab="content_xml">XML</a></li>
+                                    <!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+                                    <li class="fl"><a href="" target="_blank" data-tab="content_rdf">RDF</a></li>
+                                </ul>
+                                <pre class="subTabArea" id="content_json">
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tabArea" id="explore_content_groups" style="display: none;">
+                     <h2>Content Groups</h2>
+                     <h3>GET /content_groups.json</h3>
+                     <p>Returns a paginated list of all content groups.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of content groups to return per page</td>
+                            </tr>
+                            <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <h3>GET /content_groups/:id.json</h3>
+                     <p>Returns the data for a particular content group.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">:id</td>
+                                <td class="second"></td>
+                                <td class="third">string</td>
+                                <td class="fourth">The id of the content group</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <h3>GET /content_groups/:id/content.json</h3>
+                     <p>Returns a paginated list of the content for a content group.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">:id</td>
+                                <td class="second"></td>
+                                <td class="third">string</td>
+                                <td class="fourth">The id of the content group</td>
+                            </tr>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of pieces of content to return per page</td>
+                            </tr>
+                            <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list</td>
+                            </tr>
+                            <tr>
+                                <td class="first">annotations</td>
+                                <td class="second">description</td>
+                                <td class="third">list</td>
+                                <td class="fourth">List of annotations that describe the data to be output</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: all content annotations, plus filtering_resource</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    <div class="tabArea" id="explore_topics" style="display: none;">
+                    <h2>Topics</h2>
+                     <h3>GET /topics.json</h3>
+                     <p>Returns a paginated list of all topics.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">namespace</td>
+                                <td class="second">dbpedia</td>
+                                <td class="third">string</td>
+                                <td class="fourth">Optionally filter by the specified topic namespace</td>
+                            </tr>
+                            <tr>
+                                <td class="first">value</td>
+                                <td class="second">http://dbpedia.org/resource/London</td>
+                                <td class="third">string</td>
+                                <td class="fourth">Optionally filter by the specified topic value.</td>
+                            </tr>
+                             <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of topics to return per page.</td>
+                            </tr>
+                             <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <h3>GET /topics/:id.json</h3>
+                     <p>Returns the data for a particular topic.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">:id</td>
+                                <td class="second">ccBY</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The id of the topic</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                     <h3>GET /topics.json</h3>
+                     <p>Returns a paginated list of all topics.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">namespace</td>
+                                <td class="second">dbpedia</td>
+                                <td class="third">string</td>
+                                <td class="fourth">Optionally filter by the specified topic namespace</td>
+                            </tr>
+                            <tr>
+                                <td class="first">value</td>
+                                <td class="second">http://dbpedia.org/resource/London</td>
+                                <td class="third">string</td>
+                                <td class="fourth">Optionally filter by the specified topic value.</td>
+                            </tr>
+                             <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of topics to return per page.</td>
+                            </tr>
+                             <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <h3>GET /topics/:id/content.json</h3>
+                     <p>Returns a paginated list of the content for a topic.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">:id</td>
+                                <td class="second">ccBY</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The id of the topic</td>
+                            </tr>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of pieces of content to return per page </td>
+                            </tr>
+                            <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list </td>
+                            </tr>
+                            <tr>
+                                <td class="first">annotations</td>
+                                <td class="second">description</td>
+                                <td class="third">list</td>
+                                <td class="fourth">List of annotations that describe the data to be output</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: all content annotations, plus filtering_resource</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    <div class="tabArea" id="explore_products" style="display: none;">
+                     <h2>Products</h2>
+                     <h3>GET /products.json</h3>
+                     <p>Returns a paginated list of all products.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of products to return per page</td>
+                            </tr>
+                            <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    <h3>GET /products/:id/content.json</h3>
+                     <p>Returns a paginated list of the content related to a product.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">id</td>
+                                <td class="second"></td>
+                                <td class="third">string</td>
+                                <td class="fourth">The id of the product</td>
+                            </tr>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of products to return per page</td>
+                            </tr>
+                            <tr>
+                                <td class="first">offset</td>
+                                <td class="second">0</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The offset from the start of the list.</td>
+                            </tr>
+                            <tr>
+                                <td class="first">annotations</td>
+                                <td class="second">description</td>
+                                <td class="third">list</td>
+                                <td class="fourth">List of annotations that describe the data to be output.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: all content annotations, plus filtering_resource</td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                    </div>
+                    <div class="tabArea" id="explore_search" style="display: none;">
+                       <h2>Search</h2>
+                     <h3>GET /search.json</h3>
+                     <p>Returns a list of content that matches the specified search criteria.</p>
+                        <table class="tbl">
+                        <thead>
+                            <tr>
+                                <th class="first">Parameter</th>
+                                <th class="second">Value</th>
+                                <th class="third">Type</th>
+                                <th class="fourth">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="first">q</td>
+                                <td class="second">Doctor Who</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The title of a container or item</td>
+                            </tr>
+                            <tr>
+                                <td class="first">limit</td>
+                                <td class="second">5</td>
+                                <td class="third">integer</td>
+                                <td class="fourth">The number of items to return (max 50).</td>
+                            </tr>
+                             <tr>
+                                <td class="first">publisher</td>
+                                <td class="second">bbc.co.uk</td>
+                                <td class="third">string</td>
+                                <td class="fourth">The publisher of the content.</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                        <td colspan="4">Valid annotations: none</td>
+                        </tr>
+                        </tfoot>
+                    </table>
                         <form>
                             <div class="line">
                                 <div class="unit size1of2">
@@ -785,228 +1405,7 @@ brand_summary: {
                             </div>
                         </div>
                     </div>
-                    <!--<div class="tabArea" id="explore_discover">
-                        <form>
-                            <div class="line">
-                                <div class="unit size1of2">
-                                   <label class="tr">Publisher:</label>
-                                    <span class="select">
-                                        <span class="value">Please Select</span>
-                                        <span class="options">
-                                            <span class="option" data-value="bbc.co.uk">BBC</span>
-                                            <span class="option" data-value="itv.com">ITV</span>
-                                            <span class="option" data-value="itunes.com">iTunes</span>
-                                            <span class="option" data-value="hulu.com">Hulu</span>
-                                            <span class="option" data-value="video.uk.msn.com">MSN Video</span>
-                                            <span class="option" data-value="">None</span>
-                                        </span>
-                                    </span>
-                                    <input type="hidden" id="discover_publisher" data-title="publisher" class="fr watchMe" />
-                                </div>
-                                <div class="unit size1of2 lastUnit">
-                                    <label class="tr">Genre:</label>
-                                    <span class="select">
-                                        <span class="value">Please Select</span>
-                                        <span class="options">
-                                            <span class="option" data-value="comedy">Comedy</span>
-                                            <span class="option" data-value="childrens">Childrens</span>
-                                            <span class="option" data-value="drama">Drama</span>
-                                            <span class="option" data-value="learning">Learning</span>
-                                            <span class="option" data-value="music">Music</span>
-                                            <span class="option" data-value="news">News</span>
-                                            <span class="option" data-value="factual">Factual</span>
-                                            <span class="option" data-value="sports">Sport</span>
-                                            <span class="option" data-value="lifestyle">Lifestyle</span>
-                                            <span class="option" data-value="animals">Animals</span>
-                                            <span class="option" data-value="entertainment">Entertainment</span>
-                                            <span class="option" data-value="film">Film</span>
-                                            <span class="option" data-value="animation">Animation</span>
-                                            <span class="option" data-value="">None</span>
-                                        </span>
-                                    </span>
-                                    <input type="hidden" id="discover_genre" data-title="genre" class="fr watchMe" />
-                                </div>
-                            </div>
-                             <div class="line">
-                                <div class="unit size1of2">
-                                    <label for="discover_limit" class="tr">Limit:</label>
-                                    <input type="number" id="discover_limit" data-title="limit" min="1" max="50" step="1" value="20" class="fr watchMe" />
-                                </div>
-                                <div class="unit size1of2 lastUnit">
-                                
-                                </div>
-                            </div>
-                            <div class="line hr mtm">
-                                <div class="unit size4of5">
-                                    <div class="urlCopy" id="discover_queryCopy"><a href="#" id="discover_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/discover.json?" /><input type="hidden" id="discover_altered" /></div>
-                                </div>
-                                <div class="unit size1of5 lastUnit">
-                                    <input type="submit" class="btn" value="Run" />
-                                </div>
-                            </div>
-                        </form>
-                        <div class="resultsArea" style="display: none;">
-                            <div class="preview mlm clearfix">
-                               <a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a> 
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                            </div>
-                            <div class="output" id="discover_output">
-                                <ul class="smallTabs clearfix">
-                                    <li class="subTab selected"><a href="#discover_json" data-tab="discover_json">JSON</a></li>
-                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
-                                    <li class="fl"><a href="" target="_blank" data-tab="discover_xml">XML</a></li>
-                                    <li class="fl"><a href="" target="_blank" data-tab="discover_rdf">RDF</a></li>
-                                </ul>
-                                <pre class="subTabArea" id="discover_json">
-                                </pre>
-                            </div>
-                        </div>
-                    </div>-->
-                    <div class="tabArea" id="explore_schedule" style="display: none;">
-                        <form>
-                            <div class="line">
-                                <div class="unit size1of2">
-                                    <label class="tr">Channel:</label>
-                                    <span class="select">
-                                        <span class="value">Please Select</span>
-                                        <span class="options">
-                                            <span class="option" data-value="bbcone">BBC One</span>
-                                            <span class="option" data-value="bbctwo">BBC Two</span>
-                                            <span class="option" data-value="bbcthree">BBC Three</span>
-                                            <span class="option" data-value="bbcfour">BBC Four</span>
-                                            <span class="option" data-value="bbchd">BBC HD</span>
-                                            <span class="option" data-value="cbbc">CBBC</span>
-                                            <span class="option" data-value="radio1">BBC Radio 1</span>
-                                            <span class="option" data-value="">None</span>
-                                        </span>
-                                    </span>
-                                    <input type="hidden" id="schedule_channel" data-title="channel" class="fr watchMe" />
-                                </div>
-                                <div class="unit size1of2 lastUnit">
-                                    <label class="tr date" for="schedule_from">From:</label>
-                                    <input type="text" class="date watchMe" data-title="from" id="schedule_from" />
-                                    <label class="tr date" for="schedule_to">To:</label>
-                                    <input type="text" class="date watchMe" data-title="to" id="schedule_to" />
-                                </div>
-                            </div>
-                            <div class="line hr">
-                                <div class="unit size4of5">
-                                    <div class="urlCopy" id="schedule_queryCopy"><a href="#" id="schedule_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/schedule.json?" /><input type="hidden" id="schedule_altered" /></div>
-                                </div>
-                                <div class="unit size1of5 lastUnit">
-                                    <input type="submit" class="btn" value="Run" />
-                                </div>
-                            </div>
-                        </form>
-                        <div class="resultsArea" style="display: none;">
-                            <div class="preview mlm clearfix">
-                               <a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a> 
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                            </div>
-                            <div class="output" id="schedule_output">
-                                <ul class="smallTabs clearfix">
-                                    <li class="subTab selected"><a href="#schedule_json" data-tab="schedule_json">JSON</a></li>
-                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
-                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_xml">XML</a></li>
-                                    <!--<li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>-->
-                                    <li class="fl"><a href="" target="_blank" data-tab="schedule_rdf">RDF</a></li>
-                                </ul>
-                                <pre class="subTabArea" id="schedule_json">
-                                </pre>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tabArea" id="explore_content" style="display: none;">
-                        <form>
-                            <div class="line">
-                                <div class="unit size1of2">
-                                    <label for="content_uri" class="tr">URI:</label>
-                                    <input type="text" id="content_uri" data-title="uri" class="fr watchMe" />
-                                </div>
-                                <div class="unit size1of2 lastUnit">
-                                </div>
-                            </div>
-                            <div class="line hr mtm">
-                                <div class="unit size4of5">
-                                    <div class="urlCopy" id="content_queryCopy"><a href="#" id="content_queryCopyBtn" class="btnCopy hov hovDown hovRight" data-title="copy"></a><input type="text" class="urlTxt" value="http://atlas.metabroadcast.com/3.0/content.json?" /><input type="hidden" id="content_altered" /></div>
-                                </div>
-                                <div class="unit size1of5 lastUnit">
-                                    <input type="submit" class="btn" value="Run" />
-                                </div>
-                            </div>
-                        </form>
-                        <div class="resultsArea" style="display: none;">
-                            <div class="preview mlm clearfix">
-                               <a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a> 
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                    			<a class="showItem apiContent" style="display: none;">
-                                    <img src="" />
-                                    <span class="caption"><span class="br"></span><span class="pub"></span><span class="ep"></span></span>
-                    			</a>
-                            </div>
-                            <div class="output" id="content_output">
-                                <ul class="smallTabs clearfix">
-                                    <li class="subTab selected"><a href="#content_json" data-tab="content_json">JSON</a></li>
-                                    <li class="fl"><p class="mbn other">Other available formats:</p></li>
-                                    <li class="fl"><a href="" target="_blank" data-tab="content_xml">XML</a></li>
-                                    <!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
-                                    <li class="fl"><a href="" target="_blank" data-tab="content_rdf">RDF</a></li>
-                                </ul>
-                                <pre class="subTabArea" id="content_json">
-                                </pre>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="tabArea" id="explore_advanced" style="display: none;">
                         <form>
                             <div class="line urlCopy" id="advanced_queryCopy">
