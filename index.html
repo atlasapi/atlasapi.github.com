@@ -1,4 +1,4 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>atlas - the global video &amp; audio index</title>
@@ -159,18 +159,19 @@
                 <section data-title="reference_overview" class="subSection">
                     <div class="marker" id="reference_overview"></div>
                     <h3>Overview</h3>
-                    <p>Atlas ingests data from <a href="#reference_sources">15+ sources</a>, indexes them, matches equivalent items, then provides simple RESTful APIs for <a href="#reference_queryParameters">Search</a>,<!-- <a href="#reference_queryParameters">Discovery</a>,--> <a href="#reference_queryParameters">Content</a> descriptions and channel <a href="#reference_queryParameters">Schedules</a>. Data can also be provided in a range of common <a href="#reference_feeds">feed formats</a>.</p>
+                    <p>Atlas is a metadata aggregator built for multiple data sets. It ingests data from many different sources, indexes it, matches equivalent items and then makes the data available through a simple RESTful API as well as several standard feed formats.</p>
+                    <p>Users of the API can control how data from different sources is merged to create a single output, or choose to view equivalent items as separate linked resources. Underlying everything is a common data model that all sources are mapped to.</p>
                 </section>
                 
                 <section data-title="reference_dataModel" class="subSection">
                     <div class="marker" id="reference_dataModel"></div>
                     <h3>Data Model</h3>           
-                    <p>The Atlas API model has two key concepts: Containers and Items.</p>
+                    <p>The Atlas data model has a number of key resource types. They are containers and items (collectively know as content), content groups, topics, products and channels.</p>
                     
                     <h4>Containers</h4>
-                    <p>Videos are often part of a set, for example "all episodes of Eastenders". Containers represent a collection of items within the Atlas data model.<br />Where possible we return matching Items within their containers. Some items do not have containers such as films, <mark class="hov" data-title="special">specials</mark> and user generated clips.</p>
+                    <p>Containers represent a collection of items within a programme hierarchy. They can be either brands or series. This is used to model programme hierarchies like Doctor Who (brand), Series 1 (series). Containers are returned with a list of the items they contain, but note that not all items are in a container (e.g. one-off items and films).</p>
                     
-                    <p>Below is an example of a container, in this case Merlin (a popular BBC 1 programme):</p>
+                    <!-- <p>Below is an example of a container, in this case Merlin (a popular BBC 1 programme):</p>
                     <pre><code>
 content: [
     { episode 1 json },
@@ -188,12 +189,23 @@ aliases: [
 ],
 uri: "http://www.bbc.co.uk/programmes/b00mjlxv",
 curie: "bbc:b00mjlxv"</code>
-                    </pre>
+                    </pre> -->
                 
                     <h4 id="items">Items</h4>
-                    <p>Items represent individual pieces of content, including all the standard pieces of metadata that youâ€™d expect. Hereâ€™s an annotated overview of the JSON returned by a request for an episode of Merlin:</p>
+                    <p>Items represent individual pieces of content. They can be episodes, one-off items, films or clips. Items that are episodes are also in a container.</p>
+                    <p>In addition to descriptive metadata such as titles, descriptions, genres and people, items also list the different places in which the content is available to watch or listen to. Broadcasts describe when the item is available on air, while locations list the places the content is available to watch on demand.</p>
+                    <h4>Content groups</h4>
+                    <p>Content groups are arbitrary collections of items outside the normal programme hierarchy. They can be used to group together any content, including containers and items. Content groups are used to model broadcast seasons, related brands and flexible playlists of items.</p>
 
-                    <h5>Identifiers</h5>
+                    <h4>Topics</h4>
+                    <p>Topics are the things that a programme is about. Topics can be music artists, people, places, events, products, artistic works or just general subjects. They have a many to many relationship with content, so a piece of content can have many topics and you can ask for the content for a topic.</p>
+
+                    <h4>Products</h4>
+                    <p>Products represent physical products, such a CDs and DVDs. They have a many to many relationship with content, so a single piece of content can have many related products and a product can be related to many pieces of content. Products also have availability information that links to the places where the product can be purchased.</p>
+
+                    <h4>Channels</h4>
+                    <p>Broadcast channels are also modelled as resources in Atlas. When asking for a schedule, you will have to provide the correct channel id, which is available from the API.</p>
+                    <!--<h5>Identifiers</h5>
                     <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
                     <pre>
                         <code>
@@ -203,10 +215,10 @@ aliases: [
     "http://www.bbc.co.uk/iplayer/episode/b00wlncb"
 ],
 curie: "bbc:b00wlncb"</code>
-                    </pre>
+                    </pre> -->
 
                     
-                    <h5>Description</h5>
+                    <!-- <h5>Description</h5>
                     <p class="mrl">These attributes describe the item.</p>
                     <pre>
                         <code>
@@ -226,7 +238,7 @@ genres:[
                     </pre>
                     
                     <h5>Episode attributes</h5>
-                    <p>This Item is also an Episode, which means it is part of a <mark class="hov" data-title="brand">Brand</mark>. These attributes outlines this Episodeâ€™s position within its <mark class="hov" data-title="brand">Brand</mark>. If the Item is not an Episode these attributes will not be present.</p>
+                    <p>This Item is also an Episode, which means it is part of a <mark class="hov" data-title="brand">Brand</mark>. These attributes outlines this EpisodeÕs position within its <mark class="hov" data-title="brand">Brand</mark>. If the Item is not an Episode these attributes will not be present.</p>
                     <pre>
                         <code>
 episode_number: 13,
@@ -237,12 +249,12 @@ brand_summary: {
     uri: "http://www.bbc.co.uk/programmes/b00mjlxv"
     curie: "bbc:b00mjlxv"
 }</code>
-                    </pre>
+                    </pre>-->
                     
                     <!--<div class="line mbl">
                         <div class="unit size1of3">
                             <h5>Locations</h5>
-                            <p>Each location represents a way to play the content. In this example there is a simple â€˜linkâ€™ location, which means you can link to this content at the URI given.</p>
+                            <p>Each location represents a way to play the content. In this example there is a simple ÔlinkÕ location, which means you can link to this content at the URI given.</p>
                         </div>
                         <div class="unit size2of3 lastUnit">
                             <pre class="mll">
@@ -266,7 +278,7 @@ brand_summary: {
                         </div>
                     </div>-->
                     
-                    <h4>Locations</h4>
+                    <!-- <h4>Locations</h4>
                     <p>Each Item contains the various different ways you can get your metaphorical hands on the media. These are called Locations and provide all the information about how to access the content, who can access it, where it is, and so on. This is an example Location (the full schema is quite large, but you get the idea):</p>
                     <pre>
                     <code>
@@ -284,7 +296,7 @@ brand_summary: {
         available: false,
         duration: 2700,
       }</code>
-                    </pre>
+                    </pre>-->
                 </section>
                 
                 <section data-title="reference_queryParameters" class="subSection">
@@ -639,8 +651,8 @@ brand_summary: {
             				    <div class="unit size1of2">
             				        <ul class="list mrm mbl">
                     					<li>Hack something up using the Atlas API, blog about it and get us to link to it</li>
-                    					<li>Have a chat with us about the features and formats that youâ€™d find useful</li>
-                    					<li>Tell us when something doesnâ€™t quite work the way youâ€™d expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
+                    					<li>Have a chat with us about the features and formats that youÕd find useful</li>
+                    					<li>Tell us when something doesnÕt quite work the way youÕd expect it to <a href="http://github.com/atlasapi/atlas/issue">here</a></li>
                                     </ul>
             				    </div>
             				    <div class="unit size1of2 lastUnit">
