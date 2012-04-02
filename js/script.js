@@ -40,9 +40,15 @@ Tabs.prototype.init = function(e) {
         tabs.page[i] = {'index': i, 'item': $(this)};
         tabs.page[i].item.hide();
     });
-}
+};
 
 Tabs.prototype.changeTab = function(id) {
+	console.log("Tab changed: " + id);
+	// include API key in URL if set
+	if ($("#apiKey").val() != "") {
+	  updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
+	}
+	
     var tabs = this;
     tabs.tabHolder.find('.tab.selected').removeClass('selected');
     tabs.tabHolder.find('.tabArea:visible').hide();
@@ -641,7 +647,6 @@ var ApiExplorer = function(item, tabs) {
 
 ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
-    
     $('.urlCopy').each(function(i){
         apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.tabArea')};
         var parentName = $(this).parents('.tabArea').attr('id')
@@ -655,6 +660,7 @@ ApiExplorer.prototype.buttonHandler = function(){
     });
     
     $('input[value="Run"]').parents('form').submit(function(){
+    	
         apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
         var that = $(this);
         if(updateString == undefined){
@@ -679,20 +685,32 @@ ApiExplorer.prototype.buttonHandler = function(){
             
             // Run query type
             switch(queryParent.name) {
-                case 'advanced':
-                    apiExplorer.customQuery(query);
-                break;
-                case 'search':
-                    apiExplorer.searchQuery(query);
-                break;
-                case 'discover':
-                    apiExplorer.discoverQuery(query);
-                break;
                 case 'schedule':
                     apiExplorer.scheduleQuery(query);
                 break;
+                case 'channels':
+                    apiExplorer.channelsQuery(query);
+                break;
                 case 'content':
                     apiExplorer.contentQuery(query);
+                break;
+                case 'content_groups':
+                    apiExplorer.contentGroupsQuery(query);
+                break;
+                case 'topics':
+                    apiExplorer.topicsQuery(query);
+                break;
+                case 'products':
+                    apiExplorer.productsQuery(query);
+                break; 
+                case 'search':
+                    apiExplorer.searchQuery(query);
+                break;
+                case 'advanced':
+                    apiExplorer.customQuery(query);
+                break;
+                case 'discover':
+                    apiExplorer.discoverQuery(query);
                 break;
             }
         }
@@ -707,7 +725,7 @@ ApiExplorer.prototype.customQuery = function(query,run){
     queryHolder.val(query);
     apiExplorer.query = queryBeg+query;
     if(run != false){
-        apiExplorer.runQuery(3);
+        apiExplorer.runQuery(7);
     } else {
         queryHolder.focus();
     }
@@ -740,7 +758,7 @@ ApiExplorer.prototype.searchQuery = function(query){
     }
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(0);
+    apiExplorer.runQuery(6);
 }
 
 ApiExplorer.prototype.discoverQuery = function(query){
@@ -821,6 +839,18 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     
     apiExplorer.query = query;
 
+    apiExplorer.runQuery(0);
+}
+
+ApiExplorer.prototype.channelsQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'channels';
+    
+    if(apiExplorer.textAltered(query, ['uri'])){
+        return false;
+    };
+   
+    apiExplorer.query = query;
     apiExplorer.runQuery(1);
 }
 
@@ -899,12 +929,13 @@ ApiExplorer.prototype.runQuery = function(tab){
     }
     
     if(apiExplorer.queryType != 'advanced'){
-        apiExplorer.queryBar[tab].txt.val(apiExplorer.query);
+       apiExplorer.queryBar[tab].txt.val(apiExplorer.query);
     }
     $('#currentQuery').val(apiExplorer.query);
     
     // Make request
     var url = apiExplorer.query;
+  
     $.ajax({
         url: url,
         dataType: 'jsonp',
@@ -936,11 +967,11 @@ ApiExplorer.prototype.runQuery = function(tab){
                 
             // 1
             var results = processTheJson(data);
-
+           
             // 2
             results.clean(undefined);
             var previewPane = apiExplorer.queryBar[tab].parent.find('.resultsArea .preview');
-            
+
             for(var i = 0; i<previewPane.children().length; i++){
                 if(i >= 5){
                     previewPane.find('.showItem:nth-child('+i+')').remove();
@@ -1351,14 +1382,22 @@ var processTheJson = function(json){
 
 var updatingString;
 var updateString = function(obj) {
+	
     /*
         1. Get parent info
         2. Get current query
         3. Replace appropriate param
     */
-    
+  
     // 1
-    var itemParent = {'item': obj.item.parents('.tabArea'), 'name': obj.item.parents('.tabArea').attr('id')};
+    var itemParent;
+    if (obj.title == "apiKey") {
+    	itemParent = {'item': $("#explorerWrapper").find('.tabArea:visible'), 'name': $("#explorerWrapper").find('.tabArea:visible').attr('id')};   	
+    }
+    else {
+    	itemParent = {'item': obj.item.parents('.tabArea'), 'name': obj.item.parents('.tabArea').attr('id')};
+    }
+
     itemParent.name = itemParent.name.split('_');
     itemParent.name = itemParent.name[1];
     

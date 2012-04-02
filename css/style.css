@@ -1202,7 +1202,6 @@
                 -ms-border-radius: 3px;
                 border-radius: 3px;
                 display: block;
-                float: right;
             }
                 .select .value {display: block; z-index: 9; position: relative; background: url(../images/select.png) right bottom no-repeat;}
                 .select .options {
