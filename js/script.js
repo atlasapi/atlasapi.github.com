@@ -681,7 +681,7 @@ ApiExplorer.prototype.buttonHandler = function(){
     
     $('input[value="Run"]').parents('form').submit(function(){
     	
-        apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
+        //apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
         var that = $(this);
         if(updateString == undefined){
             doStuff();
@@ -693,8 +693,12 @@ ApiExplorer.prototype.buttonHandler = function(){
         
         var doStuff = function() {
             var queryParent = {'item': that.parents('.tabArea'), 'name': that.parents('.tabArea').attr('id')};
+            if (that.parents('.subArea') && that.parents('.subArea').attr('id') != undefined) {
+            	queryParent = {'item': that.parents('.subArea'), 'name': that.parents('.subArea').attr('id')};
+            }
             queryParent.name = queryParent.name.split('_');
-            queryParent.name = queryParent.name[1];
+            queryParent.name.shift()
+            queryParent.name = queryParent.name.join("_");
             
             if(queryParent.name != 'advanced'){
                 var query = queryParent.item.find('.urlTxt').val();
@@ -717,12 +721,27 @@ ApiExplorer.prototype.buttonHandler = function(){
                 case 'content_groups':
                     apiExplorer.contentGroupsQuery(query);
                 break;
+                case 'content_groups/:id':
+                	apiExplorer.contentGroupsIdQuery(query);
+                break;
+                case 'content_groups/:id/content':
+                	apiExplorer.contentGroupsIdContentQuery(query);
+                break;
                 case 'topics':
                     apiExplorer.topicsQuery(query);
+                break;
+                case 'topics/:id':
+                	apiExplorer.topicsIdQuery(query);
+                break;
+                case 'topics/:id/content':
+                	apiExplorer.topicsIdContentQuery(query);
                 break;
                 case 'products':
                     apiExplorer.productsQuery(query);
                 break; 
+                case 'products/:id/content':
+                	apiExplorer.productsIdContentQuery(query);
+                break;
                 case 'search':
                     apiExplorer.searchQuery(query);
                 break;
@@ -732,6 +751,8 @@ ApiExplorer.prototype.buttonHandler = function(){
                 case 'discover':
                     apiExplorer.discoverQuery(query);
                 break;
+                default:
+                	alert(queryParent.name);
             }
         }
         return false;
@@ -778,7 +799,7 @@ ApiExplorer.prototype.searchQuery = function(query){
     }
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(6);
+    apiExplorer.runQuery(11);
 }
 
 ApiExplorer.prototype.discoverQuery = function(query){
@@ -895,6 +916,174 @@ ApiExplorer.prototype.contentQuery = function(query){
     apiExplorer.runQuery(2);
 }
 
+ApiExplorer.prototype.contentGroupsQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'content_groups';
+    
+    if(apiExplorer.textAltered(query, ['limit', 'offset'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(3);
+}
+
+ApiExplorer.prototype.contentGroupsIdQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'content_groups\\/\\:id';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(4);
+}
+
+ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'content_groups\\/\\:id\\/content';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(5);
+}
+
+ApiExplorer.prototype.topicsQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'topics';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(6);
+}
+
+ApiExplorer.prototype.topicsIdQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'topics\\/\\:id';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(7);
+}
+
+ApiExplorer.prototype.topicsIdContentQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'topics\\/\\:id\\/content';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(8);
+}
+
+ApiExplorer.prototype.productsQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'products';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(9);
+}
+
+ApiExplorer.prototype.productsIdContentQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'products\\/\\:id\\/content';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    
+//    var queryUri = getParamByName('uri',query);
+//    
+//    if(!queryUri){
+//        sendMsg('error', 'Error: Please specify a URI');
+//        apiExplorer.cancelQuery();
+//        return false;
+//    };
+//    
+//    $('#content_uri').val(queryUri).change();
+    apiExplorer.query = query;
+    apiExplorer.runQuery(10);
+}
+
 ApiExplorer.prototype.textAltered = function(query, params){
     var apiExplorer = this;
     var queryType = apiExplorer.queryType;
@@ -941,7 +1130,7 @@ ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
     
     if(!apiExplorer.btn.hasClass('inactive')){
-        apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
+        //('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
     };
     
     if(apiExplorer.btn.siblings('.msg:visible')){
@@ -977,13 +1166,19 @@ ApiExplorer.prototype.runQuery = function(tab){
             */
             
             var theData;
-            
+
             if(data.contents) {
                 theData = data.contents;
             } else if(data.channels) {
             	 theData = data.channels;
             } else if(data.schedule) {
                 theData = data.schedule[0].items;
+            } else if (data.groups) {
+            	theData = data.groups;
+            } else if (data.topics) {
+            	theData = data.topics;
+            } else if (data.products) {
+            	theData = data.products;
             } else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             }
@@ -1111,11 +1306,11 @@ ApiExplorer.prototype.runQuery = function(tab){
             var xmlUrl = url.replace('json','xml');
             var htmlUrl = url.replace('json', 'html');
             var rdfUrl = url.replace('json', 'rdf.xml');
-            
+
             $('a[data-tab="'+apiExplorer.queryType+'_xml"]').attr('href', xmlUrl);
             $('a[data-tab="'+apiExplorer.queryType+'_html"]').attr('href', htmlUrl);
             $('a[data-tab="'+apiExplorer.queryType+'_rdf"]').attr('href', rdfUrl);
-                             
+            
             $('#'+apiExplorer.queryType+'_json').html(apiExplorer.prettyJson(theData));
             
             if(apiExplorer.queryBar[tab].parent.find('.resultsArea:hidden')){
@@ -1146,7 +1341,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             apiExplorer.ajaxError('Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
-            apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+           // apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
         }
     });
@@ -1158,7 +1353,7 @@ ApiExplorer.prototype.ajaxError = function(error){
 
 ApiExplorer.prototype.cancelQuery = function(){
     var apiExplorer = this;
-    apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+    //('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
     apiFuncRun = false;
 }
 
@@ -1406,7 +1601,6 @@ var processTheJson = function(json){
 
 var updatingString;
 var updateString = function(obj) {
-	console.log(obj.title);
     /*
         1. Get parent info
         2. Get current query

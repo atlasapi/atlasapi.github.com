@@ -1062,7 +1062,7 @@ brand_summary: {
 				<div class="tabArea" id="explore_content_groups"
 					style="display: none;">
 					<h2>Content Groups</h2>
-					<div class="subArea" id="explore_content_groups_1">
+					<div class="subArea" id="explore_content_groups">
 					<h3>GET /content_groups.json</h3>
 					<p>Returns a paginated list of all content groups.</p>
 					<form>
@@ -1138,17 +1138,16 @@ brand_summary: {
 						</div>
 						<div class="output" id="content_groups_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#content_groups_json"
+									data-tab="content_groups_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="content_groups_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="content_groups_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="content_groups_json">
                                 </pre>
 						</div>
 					</div>
@@ -1185,8 +1184,8 @@ brand_summary: {
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
-								<div class="urlCopy" id="content_groups_id_queryCopy">
-									<a href="#" id="content_groups_id_queryCopyBtn"
+								<div class="urlCopy" id="content_groups/:id_queryCopy">
+									<a href="#" id="content_groups/:id_queryCopyBtn"
 										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
 										type="text" class="urlTxt"
 										value="" /><input
@@ -1218,20 +1217,19 @@ brand_summary: {
 									class="pub"></span><span class="ep"></span></span>
 							</a>
 						</div>
-						<div class="output" id="content_groups_id_output">
+						<div class="output" id="content_groups/:id_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#content_groups/:id_json"
+									data-tab="content_groups/:id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="content_groups/:id_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="content_groups/:id_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
-                                </pre>
+							<pre class="subTabArea" id="content_groups/:id_json">
+                            </pre>
 						</div>
 					</div>
 					</div>
@@ -1277,7 +1275,7 @@ brand_summary: {
 							<tr>
 								<td class="first">annotations</td>
 								<td class="second"><input type="text"
-										class="annotations watchMe" data-title="id"
+										class="annotations watchMe" data-title="annotations"
 										id="annotations" value="description" /></td>
 								<td class="third">list</td>
 								<td class="fourth">List of annotations that describe the
@@ -1327,19 +1325,18 @@ brand_summary: {
 									class="pub"></span><span class="ep"></span></span>
 							</a>
 						</div>
-						<div class="output" id="content_groups_id_content_output">
+						<div class="output" id="content_groups/:id/content_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#content_groups/:id/content_json"
+									data-tab="content_groups/:id/content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="content_groups/:id/content_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="content_groups/:id/content_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="content_groups/:id/content_json">
                                 </pre>
 						</div>
 					</div>
@@ -1350,7 +1347,7 @@ brand_summary: {
 				<!--  TOPICS -->
 				<div class="tabArea" id="explore_topics" style="display: none;">
 					<h2>Topics</h2>
-					<div class="subArea" id="explore_topics_1">
+					<div class="subArea" id="explore_topics">
 					<h3>GET /topics.json</h3>
 					<form>
 					<p>Returns a paginated list of all topics.</p>
@@ -1443,22 +1440,21 @@ brand_summary: {
 						</div>
 						<div class="output" id="topics_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#topics_json"
+									data-tab="topics_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="topics_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="topics_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="topics_json">
                                 </pre>
 						</div>
 					</div>
 					</div>
-					<div class="subArea" id="explore_topics_2">
+					<div class="subArea" id="explore_topics/:id">
 					<h3>GET /topics/:id.json</h3>
 					<p>Returns the data for a particular topic.</p>
 					<form>
@@ -1475,7 +1471,7 @@ brand_summary: {
 							<tr>
 								<td class="first">:id</td>
 								<td class="second"><input type="text"
-										class="id watchMe" data-title="id"
+										class="id watchMe" data-title=":id"
 										id="id" value="ccBY" /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the topic</td>
@@ -1490,12 +1486,12 @@ brand_summary: {
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
-								<div class="urlCopy" id="topics_id_queryCopy">
-									<a href="#" id="topics_id_queryCopyBtn"
+								<div class="urlCopy" id="topics/:id_queryCopy">
+									<a href="#" id="topics/:id_queryCopyBtn"
 										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
 										type="text" class="urlTxt"
 										value="" /><input
-										type="hidden" id="topics_id_altered" />
+										type="hidden" id="topics/:id_altered" />
 								</div>
 							</div>
 							<div class="unit size1of5 lastUnit">
@@ -1523,24 +1519,23 @@ brand_summary: {
 									class="pub"></span><span class="ep"></span></span>
 							</a>
 						</div>
-						<div class="output" id="topics_id_output">
+						<div class="output" id="topics/:id_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#topics/:id_json"
+									data-tab="topics/:id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="topics/:id_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="topics/:id_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="topics/:id_json">
                                 </pre>
 						</div>
 					</div>		
 						</div>
-					<div class="subArea" id="explore_topics_3">		
+					<div class="subArea" id="explore_topics/:id/content">		
 					<h3>GET /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
@@ -1557,7 +1552,7 @@ brand_summary: {
 							<tr>
 								<td class="first">:id</td>
 								<td class="second"><input type="text"
-										class="id watchMe" data-title="id"
+										class="id watchMe" data-title=":id"
 										id="id" value="ccBY" /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the topic</td>
@@ -1630,19 +1625,18 @@ brand_summary: {
 									class="pub"></span><span class="ep"></span></span>
 							</a>
 						</div>
-						<div class="output" id="topics_id_content_output">
+						<div class="output" id="topics/:id/content_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#topics/:id/content_json"
+									data-tab="topics/:id/content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="topics/:id/content_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="topics/:id/content_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="topics/:id/content_json">
                                 </pre>
 						</div>
 					</div>
@@ -1653,7 +1647,7 @@ brand_summary: {
 				<!--  PRODUCTS  -->
 				<div class="tabArea" id="explore_products" style="display: none;">
 					<h2>Products</h2>
-					<div class="subArea" id="explore_products_1">
+					<div class="subArea" id="explore_products">
 					<h3>GET /products.json</h3>
 					<p>Returns a paginated list of all products.</p>
 					<form>
@@ -1729,22 +1723,21 @@ brand_summary: {
 						</div>
 						<div class="output" id="products_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#products_json"
+									data-tab="products_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="products_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="products_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="products_json">
                                 </pre>
 						</div>
 					</div>
 					</div>
-					<div class="subArea" id="explore_products_2">
+					<div class="subArea" id="explore_products/:id/content">
 					<h3>GET /products/:id/content.json</h3>
 					<p>Returns a paginated list of the content related to a
 						product.</p>
@@ -1762,7 +1755,7 @@ brand_summary: {
 							<tr>
 								<td class="first">id</td>
 								<td class="second"><input type="text"
-										class="id watchMe" data-title="id"
+										class="id watchMe" data-title=":id"
 										id="id"  /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the product</td>
@@ -1804,12 +1797,12 @@ brand_summary: {
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
-								<div class="urlCopy" id="products_id_content_queryCopy">
-									<a href="#" id="products_id_content_queryCopyBtn"
+								<div class="urlCopy" id="products/:id/content_queryCopy">
+									<a href="#" id="products/:id/content_queryCopyBtn"
 										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
 										type="text" class="urlTxt"
 										value="" /><input
-										type="hidden" id="products_id_content_altered" />
+										type="hidden" id="products/:id/content_altered" />
 								</div>
 							</div>
 							<div class="unit size1of5 lastUnit">
@@ -1837,19 +1830,18 @@ brand_summary: {
 									class="pub"></span><span class="ep"></span></span>
 							</a>
 						</div>
-						<div class="output" id="products_id_content_output">
+						<div class="output" id="products/:id/content_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#content_json"
-									data-tab="content_json">JSON</a></li>
+								<li class="subTab selected"><a href="#products/:id/content_json"
+									data-tab="products/:id/content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
 										formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+									data-tab="products/:id/content_xml">XML</a></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
+									data-tab="products/:id/content_rdf">RDF</a></li>
 							</ul>
-							<pre class="subTabArea" id="content_json">
+							<pre class="subTabArea" id="products/:id/content_json">
                                 </pre>
 						</div>
 						</div>
