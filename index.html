@@ -689,6 +689,8 @@ brand_summary: {
 			</div>
 		</section>
 
+
+        <!-- *** API EXPLORER SECTION *** -->
 		<section class="apiExplorer">
 			<div class="marker" id="apiExplorer"></div>
 			<h2 class="explorerTitle">API Explorer</h2>
@@ -719,6 +721,8 @@ brand_summary: {
 				<a href="#apiExplorer" data-tab="explore_advanced"
 					class="tab tabExt">Complete control</a>
 
+
+                <!-- SCHEDULE -->
 				<div class="tabArea" id="explore_schedule">
 					<h2>Schedule</h2>
 
@@ -859,6 +863,9 @@ brand_summary: {
 						</div>
 					</div>
 				</div>
+				
+				
+				<!--  CHANNELS -->
 				<div class="tabArea" id="explore_channels" style="display: none;">
 					<h2>Channels</h2>
 					<h3>GET /channels.json</h3>
@@ -943,15 +950,15 @@ brand_summary: {
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channels_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>-->
-								<li class="fl"><a href="" target="_blank"
-									data-tab="channels_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="channels_json">
                                 </pre>
 						</div>
 					</div>
-					
 				</div>
+				
+				
+				<!--  CONTENT  -->
 				<div class="tabArea" id="explore_content" style="display: none;">
 					<h2>Content</h2>
 					<h3>GET /content.json</h3>
@@ -1049,9 +1056,13 @@ brand_summary: {
 						</div>
 					</div>
 				</div>
+				
+				
+				<!--  CONTENT GROUPS -->
 				<div class="tabArea" id="explore_content_groups"
 					style="display: none;">
 					<h2>Content Groups</h2>
+					<div class="subArea" id="explore_content_groups_1">
 					<h3>GET /content_groups.json</h3>
 					<p>Returns a paginated list of all content groups.</p>
 					<form>
@@ -1089,7 +1100,60 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="content_groups_queryCopy">
+									<a href="#" id="content_groups_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="http://atlas.metabroadcast.com/3.0/content_groups.json?" /><input
+										type="hidden" id="content_groups_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+						<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_groups_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+					<div class="subArea" id="explore_content_groups/:id">
 					<h3>GET /content_groups/:id.json</h3>
 					<p>Returns the data for a particular content group.</p>
 					<form>
@@ -1106,7 +1170,7 @@ brand_summary: {
 							<tr>
 								<td class="first">:id</td>
 								<td class="second"><input type="text"
-										class="id watchMe" data-title="id"
+										class="id watchMe" data-title=":id"
 										id="id" value="" /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the content group</td>
@@ -1118,7 +1182,60 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="content_groups_id_queryCopy">
+									<a href="#" id="content_groups_id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="content_groups_id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+										<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_groups_id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+					<div class="subArea" id="explore_content_groups/:id/content">
 					<h3>GET /content_groups/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a content group.</p>
 					<form>
@@ -1135,7 +1252,7 @@ brand_summary: {
 							<tr>
 								<td class="first">:id</td>
 								<td class="second"><input type="text"
-										class="id watchMe" data-title="id"
+										class="id watchMe" data-title=":id"
 										id="id" value="" /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the content group</td>
@@ -1174,10 +1291,66 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="content_groups_id_content_queryCopy">
+									<a href="#" id="content_groups_id_content_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="content_groups_id_content_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+										<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_groups_id_content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
 				</div>
+				
+				
+				<!--  TOPICS -->
 				<div class="tabArea" id="explore_topics" style="display: none;">
 					<h2>Topics</h2>
+					<div class="subArea" id="explore_topics_1">
 					<h3>GET /topics.json</h3>
 					<form>
 					<p>Returns a paginated list of all topics.</p>
@@ -1232,7 +1405,60 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="topics_queryCopy">
+									<a href="#" id="topics_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="topics_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+						<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="topics_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+					<div class="subArea" id="explore_topics_2">
 					<h3>GET /topics/:id.json</h3>
 					<p>Returns the data for a particular topic.</p>
 					<form>
@@ -1261,7 +1487,60 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
-					</form>					
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="topics_id_queryCopy">
+									<a href="#" id="topics_id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="topics_id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>	
+										<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="topics_id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>		
+						</div>
+					<div class="subArea" id="explore_topics_3">		
 					<h3>GET /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
@@ -1315,10 +1594,66 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="topics_id_content_queryCopy">
+									<a href="#" id="topics_id_content_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="topics_id_content_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+										<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="topics_id_content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
 				</div>
+				
+				
+				<!--  PRODUCTS  -->
 				<div class="tabArea" id="explore_products" style="display: none;">
 					<h2>Products</h2>
+					<div class="subArea" id="explore_products_1">
 					<h3>GET /products.json</h3>
 					<p>Returns a paginated list of all products.</p>
 					<form>
@@ -1356,7 +1691,60 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="products_queryCopy">
+									<a href="#" id="products_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="products_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+										<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="products_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+					<div class="subArea" id="explore_products_2">
 					<h3>GET /products/:id/content.json</h3>
 					<p>Returns a paginated list of the content related to a
 						product.</p>
@@ -1413,8 +1801,63 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="products_id_content_queryCopy">
+									<a href="#" id="products_id_content_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="products_id_content_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
 					</form>
+										<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="products_id_content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+						</div>
+					</div>
 				</div>
+				
+				
+				<!-- SEARCH -->
 				<div class="tabArea" id="explore_search" style="display: none;">
 					<h2>Search</h2>
 					<h3>GET /search.json</h3>

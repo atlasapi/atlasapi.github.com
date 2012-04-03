@@ -24,7 +24,6 @@ var Tabs = function() {
 }
 
 Tabs.prototype.init = function(e) {
-	console.log("init tab");
     var tabs = this;
     tabs.tabHolder = e;
     
@@ -74,13 +73,11 @@ Tabs.prototype.changeTab = function(id) {
     
     // update query strings with any values already set in input boxes
     tabs.page[tabs.active].item.find(':input.watchMe').each(function(index) {
-    	console.log("updating active item with values")
     	updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
     });
     // include API key in URL if set
 	if ($("#apiKey").val() != "") {
-		console.log("setting api key");
-	  updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
+	    updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
 	}
 }
 
@@ -663,14 +660,22 @@ var ApiExplorer = function(item, tabs) {
 ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
     $('.urlCopy').each(function(i){
-        apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.tabArea')};
-        var parentName = $(this).parents('.tabArea').attr('id')
+        var parentName;
+        if ($(this).parents('.subArea') && $(this).parents('.subArea').attr('id') != undefined) {
+        	parentName = $(this).parents('.subArea').attr('id');
+        	apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.subArea')};
+        }
+        else {
+        	parentName = $(this).parents('.tabArea').attr('id');
+        	apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.tabArea')};
+        }
         parentName = parentName.split('_');
-        parentName = parentName[1];
+        parentName.shift();
+        parentName = parentName.join("_");
         if(parentName == 'search' || parentName == 'discover'){
-            apiExplorer.queryBar[i].txt.val(queryBeg+parentName+'.json?limit=20');
+            apiExplorer.queryBar[i].txt.val(queryBeg+parentName +'.json?limit=20');
         } else {
-            apiExplorer.queryBar[i].txt.val(queryBeg+parentName+'.json?');
+            apiExplorer.queryBar[i].txt.val(queryBeg+parentName + '.json?');
         }
     });
     
@@ -983,7 +988,6 @@ ApiExplorer.prototype.runQuery = function(tab){
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             }
 
-            console.log(theData);
             // 1
             var results = processTheJson(data);
            
@@ -1310,7 +1314,6 @@ SelectBox.prototype.changeSelection = function() {
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
     // Add to url string
-    console.log("change selection");
     updateString(item);
 }
 
@@ -1403,7 +1406,7 @@ var processTheJson = function(json){
 
 var updatingString;
 var updateString = function(obj) {
-	
+	console.log(obj.title);
     /*
         1. Get parent info
         2. Get current query
@@ -1415,12 +1418,16 @@ var updateString = function(obj) {
     if (obj.title == "apiKey") {
     	itemParent = {'item': $("#explorerWrapper").find('.tabArea:visible'), 'name': $("#explorerWrapper").find('.tabArea:visible').attr('id')};   	
     }
+    else if (obj.item.parents('.subArea') && obj.item.parents('.subArea').attr('id') != undefined){
+    	itemParent = {'item': obj.item.parents('.subArea'), 'name': obj.item.parents('.subArea').attr('id')};
+    } 
     else {
     	itemParent = {'item': obj.item.parents('.tabArea'), 'name': obj.item.parents('.tabArea').attr('id')};
     }
 
     itemParent.name = itemParent.name.split('_');
-    itemParent.name = itemParent.name[1];
+    itemParent.name.shift();
+    itemParent.name = itemParent.name.join("_");
     
     if(itemParent.name == 'search' && obj.title == 'title'){
         obj.title = 'q';
@@ -1516,7 +1523,7 @@ var updateString = function(obj) {
             }
             newQuery = currentStart+currentEnd;
         }
-    } else {
+    } else if (obj.title != ":id") {
         // If a ? is present
         if(currentQuery.search(/\?/g) != -1){
             // If it's not the first param add a &
@@ -1537,14 +1544,29 @@ var updateString = function(obj) {
         }
     }
     
+    if (obj.title == ":id") {
+    	if (obj.val == "") {
+    		obj.val = ":id";
+    	}
+   	    newQuery = queryBeg;
+   	    
+        newQuery += itemParent.name.replace(":id", obj.val) + ".json";
+        
+        // add on any other params
+        if (currentQuery.indexOf("?") != -1) {
+        	newQuery += currentQuery.substring(currentQuery.indexOf("?"));
+        };
+   }
+   
+    
     if(newQuery.substr(-1) == '&'){
         newQuery = newQuery.substr(0, newQuery.length-1);
     }
     
     newQuery = newQuery.replace('&amp;','&');
     
+  
     updatingString.val(newQuery);
-    console.log(newQuery);
     /* ---------------- */
     /* --------------- */
 }
@@ -1707,7 +1729,6 @@ $(document).ready(function(){
         
             // Add to url string
             updatingString = setTimeout(function(){
-            	console.log("watchme keyup");
                 updateString(item);
             },500);
         }
@@ -1720,7 +1741,6 @@ $(document).ready(function(){
         
             // Add to url string
             updatingString = setTimeout(function(){
-            	console.log("watchme change");
                 updateString(item);
             },500);
         }
@@ -1746,12 +1766,10 @@ $(document).ready(function(){
             buttonImageOnly: true,
             dateFormat: 'dd/mm/yy',
             onClose: function(dateText, inst){
-            	console.log("datepicker close");
                 updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': dateText});
             }
         });
         $(this).datepicker('setDate', day+'/'+month+'/'+year);
-        console.log("input date each");
         updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
         $('#ui-datepicker-div').hide();
     });
