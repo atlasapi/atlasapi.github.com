@@ -680,8 +680,6 @@ ApiExplorer.prototype.buttonHandler = function(){
     });
     
     $('input[value="Run"]').parents('form').submit(function(){
-    	
-        //apiExplorer.btn.val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
         var that = $(this);
         if(updateString == undefined){
             doStuff();
@@ -699,6 +697,8 @@ ApiExplorer.prototype.buttonHandler = function(){
             queryParent.name = queryParent.name.split('_');
             queryParent.name.shift()
             queryParent.name = queryParent.name.join("_");
+            
+            queryParent.item.find(".btn").val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
             
             if(queryParent.name != 'advanced'){
                 var query = queryParent.item.find('.urlTxt').val();
@@ -751,8 +751,6 @@ ApiExplorer.prototype.buttonHandler = function(){
                 case 'discover':
                     apiExplorer.discoverQuery(query);
                 break;
-                default:
-                	alert(queryParent.name);
             }
         }
         return false;
@@ -1341,7 +1339,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             apiExplorer.ajaxError('Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
-           // apiExplorer.btn.val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+        	apiExplorer.queryBar[tab].item.find(".btn").val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
         }
     });
