@@ -1828,7 +1828,7 @@ $(document).ready(function(){
     
     var homeDemo = new HomeDemo($('.controlBar'));
     homeDemo.init();
-    
+    tabs.changeTab(0);
     $('.subTab a').click(function(){
         return false;
     });
