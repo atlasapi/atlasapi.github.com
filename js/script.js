@@ -1,6 +1,11 @@
 var homePageTimer;
 
-var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
+// TODO Change back before production
+//var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
+
+var queryBeg = 'http://stage.atlas.metabroadcast.com/3.0/';
+
+
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
@@ -19,6 +24,7 @@ var Tabs = function() {
 }
 
 Tabs.prototype.init = function(e) {
+	console.log("init tab");
     var tabs = this;
     tabs.tabHolder = e;
     
@@ -33,6 +39,9 @@ Tabs.prototype.init = function(e) {
             tabs.changeTab(i);
             //jQuery.history.load("apiExplorer");
         });
+
+     
+       
         tabs.count++;
     });
     
@@ -43,11 +52,6 @@ Tabs.prototype.init = function(e) {
 };
 
 Tabs.prototype.changeTab = function(id) {
-	console.log("Tab changed: " + id);
-	// include API key in URL if set
-	if ($("#apiKey").val() != "") {
-	  updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
-	}
 	
     var tabs = this;
     tabs.tabHolder.find('.tab.selected').removeClass('selected');
@@ -56,7 +60,7 @@ Tabs.prototype.changeTab = function(id) {
     tabs.page[id].item.show();
     
     tabs.active = id;
-    
+  
     var clip = new ZeroClipboard.Client();
     clip.glue(tabs.page[tabs.active].item.find('.urlCopy .btnCopy').attr('id'), tabs.page[tabs.active].item.find('.urlCopy').attr('id'));
     
@@ -67,6 +71,17 @@ Tabs.prototype.changeTab = function(id) {
         };
         clip.setText(text);
     });
+    
+    // update query strings with any values already set in input boxes
+    tabs.page[tabs.active].item.find(':input.watchMe').each(function(index) {
+    	console.log("updating active item with values")
+    	updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
+    });
+    // include API key in URL if set
+	if ($("#apiKey").val() != "") {
+		console.log("setting api key");
+	  updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
+	}
 }
 
 var SubTabs = function() {
@@ -793,7 +808,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
         return false;
     };
     
-    var queryChannel = getParamByName('channel',query);
+    var queryChannel = getParamByName('channel_id',query);
     
     if(!queryChannel){
         sendMsg('error', 'Error: Please specify a channel from the drop down');
@@ -957,14 +972,18 @@ ApiExplorer.prototype.runQuery = function(tab){
             */
             
             var theData;
-            if(data.contents != undefined) {
+            
+            if(data.contents) {
                 theData = data.contents;
-            } else if(data.schedule[0] != undefined) {
+            } else if(data.channels) {
+            	 theData = data.channels;
+            } else if(data.schedule) {
                 theData = data.schedule[0].items;
             } else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             }
-                
+
+            console.log(theData);
             // 1
             var results = processTheJson(data);
            
@@ -1258,7 +1277,7 @@ SelectBox.prototype.init = function() {
     selectBox.item.find('.option').each(function(i){
         selectBox.option[i] = {'item': $(this), 'name': $(this).html(), 'val': $(this).attr('data-value')};
     });
-    
+
     selectBox.input.change(function(){
         var newValue = $(this).val();
         // Find the selectBox who's val = the input change and set current to that Object
@@ -1271,7 +1290,8 @@ SelectBox.prototype.init = function() {
         // changeSelection
         selectBox.changeSelection();
     });
-    
+    // Make sure initial values are set
+    selectBox.input.change();
 }
 
 SelectBox.prototype.changeSelection = function() {
@@ -1290,6 +1310,7 @@ SelectBox.prototype.changeSelection = function() {
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
     // Add to url string
+    console.log("change selection");
     updateString(item);
 }
 
@@ -1339,7 +1360,7 @@ var processTheJson = function(json){
         };
         
     // Else if 'schedule' exists
-    } else if(json.schedule[0].items != undefined) {
+    } else if(json.schedule && json.schedule[0].items != undefined) {
         for(var i = 0; i<json.schedule[0].items.length; i++){
             if(i <= 20 && json.schedule[0].items[i].image != undefined && json.schedule[0].items[i].image != ''){
                 item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
@@ -1523,7 +1544,7 @@ var updateString = function(obj) {
     newQuery = newQuery.replace('&amp;','&');
     
     updatingString.val(newQuery);
-    
+    console.log(newQuery);
     /* ---------------- */
     /* --------------- */
 }
@@ -1686,6 +1707,7 @@ $(document).ready(function(){
         
             // Add to url string
             updatingString = setTimeout(function(){
+            	console.log("watchme keyup");
                 updateString(item);
             },500);
         }
@@ -1698,6 +1720,7 @@ $(document).ready(function(){
         
             // Add to url string
             updatingString = setTimeout(function(){
+            	console.log("watchme change");
                 updateString(item);
             },500);
         }
@@ -1723,10 +1746,12 @@ $(document).ready(function(){
             buttonImageOnly: true,
             dateFormat: 'dd/mm/yy',
             onClose: function(dateText, inst){
+            	console.log("datepicker close");
                 updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': dateText});
             }
         });
         $(this).datepicker('setDate', day+'/'+month+'/'+year);
+        console.log("input date each");
         updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
         $('#ui-datepicker-div').hide();
     });
@@ -1782,6 +1807,7 @@ $(document).ready(function(){
             that.find('.hover').fadeOut('fast');
         });
     });
+  
 });
 
 /*

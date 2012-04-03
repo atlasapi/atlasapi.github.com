@@ -739,17 +739,17 @@ brand_summary: {
 									<td class="first">channel_id</td>
 									<td class="second"><span class="select"> <span
 											class="value">Please Select</span> <span class="options">
-												<span class="option" data-value="bbcone">BBC One</span> <span
-												class="option" data-value="bbctwo">BBC Two</span> <span
-												class="option" data-value="bbcthree">BBC Three</span> <span
-												class="option" data-value="bbcfour">BBC Four</span> <span
-												class="option" data-value="bbchd">BBC HD</span> <span
-												class="option" data-value="cbbc">CBBC</span> <span
-												class="option" data-value="radio1">BBC Radio 1</span> <span
+												<span class="option" data-value="cbbh">cbbh (BBC One)</span> <span
+												class="option" data-value="cbbG">cbbG (BBC Two)</span> <span
+												class="option" data-value="cbbP">cbbP (BBC Three)</span> <span
+												class="option" data-value="cbbQ">cbbQ (BBC Four)</span> <span
+												class="option" data-value="cbbV">cbbV (BBC HD)</span> <span
+												class="option" data-value="cbbW">cbbW (CBBC)</span> <span
+												class="option" data-value="cbcQ">cbcQ (BBC Radio 1)</span> <span
 												class="option" data-value="">None</span>
 										</span>
 									</span> <input type="hidden" id="schedule_channel"
-										data-title="channel" class="watchMe" /> cbbh</td>
+										data-title="channel_id" class="watchMe" value="cbbh" /></td>
 									<td class="third">string</td>
 									<td class="fourth">The id of the required channel.
 										Available from /channels.json</td>
@@ -784,7 +784,7 @@ brand_summary: {
 													Video</span> <span class="option" data-value="">None</span>
 										</span>
 									</span> <input type="hidden" id="search_publisher"
-										data-title="publisher" class="watchMe" /></td>
+										data-title="publisher" class="watchMe" value="bbc.co.uk" /></td>
 									<td class="third">string</td>
 									<td class="fourth">The publisher of the schedule</td>
 								</tr>
@@ -807,6 +807,7 @@ brand_summary: {
 						</table>
 
 						<div class="line hr">
+						    <h4>Request</h4>
 							<div class="unit size4of5">
 								<div class="urlCopy" id="schedule_queryCopy">
 									<a href="#" id="schedule_queryCopyBtn"
@@ -822,6 +823,7 @@ brand_summary: {
 						</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
 								src="" /> <span class="caption"><span class="br"></span><span
@@ -885,7 +887,7 @@ brand_summary: {
 									<td class="first">offset</td>
 									<td class="second"><input
 									type="number" id="search_offset" data-title="offset" min="0"
-									max="100" step="10" value="0" class="watchMe" /></td>
+									max="100" step="1" value="0" class="watchMe" /></td>
 									<td class="third">integer</td>
 									<td class="fourth">The offset from the start of the list.</td>
 								</tr>
@@ -897,6 +899,7 @@ brand_summary: {
 							</tfoot>
 						</table>
 						<div class="line hr">
+						    <h4>Request</h4>
 							<div class="unit size4of5">
 								<div class="urlCopy" id="channels_queryCopy">
 									<a href="#" id="schedule_channelsCopyBtn"
@@ -912,6 +915,7 @@ brand_summary: {
 						</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
 								src="" /> <span class="caption"><span class="br"></span><span
@@ -992,13 +996,8 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
-						<div class="line">
-							<div class="unit size1of2">
-								<label for="content_uri" class="tr">URI:</label> 
-							</div>
-							<div class="unit size1of2 lastUnit"></div>
-						</div>
 						<div class="line hr mtm">
+						    <h4>Request</h4>
 							<div class="unit size4of5">
 								<div class="urlCopy" id="content_queryCopy">
 									<a href="#" id="content_queryCopyBtn"
@@ -1014,6 +1013,7 @@ brand_summary: {
 						</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
 								src="" /> <span class="caption"><span class="br"></span><span
@@ -1261,62 +1261,7 @@ brand_summary: {
 							</tr>
 						</tfoot>
 					</table>
-					</form>
-					<h3>GET /topics.json</h3>
-					<p>Returns a paginated list of all topics.</p>
-					<form>
-					<table class="tbl">
-						<thead>
-							<tr>
-								<th class="first">Parameter</th>
-								<th class="second">Value</th>
-								<th class="third">Type</th>
-								<th class="fourth">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="first">namespace</td>
-								<td class="second"><input type="text"
-										class="namespace watchMe" data-title="namespace"
-										id="namespace" value="dbpedia" /></td>
-								<td class="third">string</td>
-								<td class="fourth">Optionally filter by the specified topic
-									namespace</td>
-							</tr>
-							<tr>
-								<td class="first">value</td>
-								<td class="second"><input type="text"
-										class="value watchMe" data-title="value"
-										id="value" value="http://dbpedia.org/resource/London" /></td>
-								<td class="third">string</td>
-								<td class="fourth">Optionally filter by the specified topic
-									value.</td>
-							</tr>
-							<tr>
-								<td class="first">limit</td>
-								<td class="second"><input
-									type="number" id="search_limit" data-title="limit" min="0"
-									max="50" step="1" value="5" class="watchMe" /></td>
-								<td class="third">integer</td>
-								<td class="fourth">The number of topics to return per page.</td>
-							</tr>
-							<tr>
-								<td class="first">offset</td>
-								<td class="second"><input
-									type="number" id="search_offset" data-title="offset" min="0"
-									max="100" step="10" value="0" class="watchMe" /></td>
-								<td class="third">integer</td>
-								<td class="fourth">The offset from the start of the list.</td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4">Valid annotations: none</td>
-							</tr>
-						</tfoot>
-					</table>
-					</form>
+					</form>					
 					<h3>GET /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
@@ -1527,6 +1472,7 @@ brand_summary: {
 					</table>
 					
 						<div class="line hr mtm">
+						    <h4>Request</h4>
 							<div class="unit size4of5">
 								<div class="urlCopy" id="search_queryCopy">
 									<a href="#" id="search_queryCopyBtn"
@@ -1542,6 +1488,7 @@ brand_summary: {
 						</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
 								src="" /> <span class="caption"><span class="br"></span><span
@@ -1593,6 +1540,7 @@ brand_summary: {
 						</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
 								src="" /> <span class="caption"><span class="br"></span><span
