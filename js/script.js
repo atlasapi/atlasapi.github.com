@@ -354,19 +354,19 @@ var HomeDemo = function(item) {
     var array0 = [
         /*{'type': 'Search', 'query':'search.json?q=cars&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&available=true&limit=5'},*/
-        {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk'},
+        {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk&annotations=brand_summary,description'},
         {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&limit=5'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=seesaw.com&limit=5&offset='+offset+'&available=true'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=drama&availableCountries=uk&mediaType=audio&limit=5'},*/
-        {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk'},
+        {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk&annotations=brand_summary,description'},
         /*{'type': 'Search', 'query':'search.json?q=world&publisher=itv.com&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=lifestyle&publisher=bbc.co.uk&limit=5'},*/
-        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk&annotations=brand_summary,description'},
         /*{'type': 'Search', 'query':'search.json?q=Jane Eyre&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?genre=learning&availableCountries=uk&mediaType=video&limit=5'},*/
-        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk&annotations=brand_summary,description'},
         /*{'type': 'Search', 'query':'search.json?q=green&limit=5'},*/
-        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk'},
+        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk&annotations=brand_summary,description'},
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=comedy&transportType=link&limit=5'},*/
         /*{'type': 'Search', 'query':'search.json?q=Brave&publisher=hulu.com&limit=5'},*/
         /*{'type': 'Discover', 'query':'discover.json?publisher=bbc.co.uk&genre=music&mediaType=video&limit=5'},*/
@@ -1512,86 +1512,43 @@ SelectBox.prototype.changeSelection = function() {
 
 var processTheJson = function(json){
     var item = [];
-        
-    // if 'contents' exists
-    if(json.contents != undefined){
-        if(json.contents.length > 0){
-            // for each contents item
-            for(var i = 0; i<json.contents.length; i++){
-                item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
-                
-                if(json.contents[i].brand_summary != undefined && json.contents[i].brand_summary.title != undefined){
-                    item[i].brand = json.contents[i].brand_summary.title;
-                    if(json.contents[i].title != item[i].brand){
-                        item[i].episode = json.contents[i].title;
-                    };
-                } else if(json.contents[i].title != undefined){
-                    item[i].brand = json.contents[i].title;
-                };
-                if(json.contents[i].uri != undefined){
-                    item[i].uri = encodeURIComponent(json.contents[i].uri);
-                };
-                if(json.contents[i].publisher.name != undefined) {
-                    item[i].publisher = json.contents[i].publisher.name;
-                };
-                if(json.contents[i].image != undefined){
-                    item[i].image = json.contents[i].image;
-                } else {
-                    item[i].image = 'images/missingImage.png';
-                };
-                if(json.contents[i].content != undefined && json.contents[i].content.length != 0){
-                    if(json.contents[i].content[0].title != undefined) {
-                        if(json.contents[i].content[0].title != json.contents[i].title){
-                            item[i].episode = json.contents[i].content[0].title;
-                        }
-                    };
-                    if(json.contents[i].content[0].series_number != undefined){
-                        item[i].series = json.contents[i].content[0].series_number;
-                    };
-                    if(json.contents[i].content[0].image != undefined){
-                        item[i].image = json.contents[i].content[0].image;
-                    };
-                };
-            };
-        };
-        
-    // Else if 'schedule' exists
-    } else if(json.schedule && json.schedule[0].items != undefined) {
-        for(var i = 0; i<json.schedule[0].items.length; i++){
-            if(i <= 20 && json.schedule[0].items[i].image != undefined && json.schedule[0].items[i].image != ''){
-                item[i] = {'brand': '', 'uri': '', 'publisher': '', 'episode': '', 'series':'', 'image': ''};
-                
-                if(json.schedule[0].items[i].title != undefined){
-                    item[i].brand = json.schedule[0].items[i].title;
-                }
-                if(json.schedule[0].items[i].uri != undefined){
-                    item[i].uri = json.schedule[0].items[i].uri;
-                }
-                if(json.schedule[0].items[i].publisher.name != undefined) {
-                    item[i].publisher = json.schedule[0].items[i].publisher.name;
-                }
-                if(json.schedule[0].items[i].image != undefined){
-                    item[i].image = json.schedule[0].items[i].image;
-                }
-                if(json.schedule[0].items[i].brand_summary != undefined && json.schedule[0].items[i].brand_summary.title != json.schedule[0].items[i].title){
-                    item[i].brand = json.schedule[0].items[i].brand_summary.title;
-                }
-                if(json.schedule[0].items[i].title != undefined){
-                    if(json.schedule[0].items[i].title != item[i].brand){
-                        item[i].episode = json.schedule[0].items[i].title;
-                    }
-                }
-                    
-                if(json.schedule[0].items[i].series_number != undefined){
-                    item[i].series = json.schedule[0].items[i].series_number;
-                }
-                if(json.schedule[0].items[i].image != undefined){
-                    item[i].image = json.schedule[0].items[i].image;
-                }
-            } else {
-                item[i] == undefined;
-            }
-        };
+    
+    var content = json.contents ? json.contents : json.schedule[0].items;
+    
+    for(var i = 0, ii = content.length; i<ii; i++){
+    	var obj = {
+    		brand: null,
+    		uri: null,
+    		publisher: null,
+    		episode: null,
+    		series: null,
+    		image: null
+    	};
+    	
+    	if(content[i].title){
+    		obj.brand = content[i].title;
+    	}
+    	
+    	if(content[i].container && content[i].container.title){
+    		obj.episode = obj.brand;
+    		obj.brand = content[i].container.title;
+    	}
+    	
+    	if(content[i].uri){
+    		obj.uri = encodeURIComponent(content[i].uri);
+    	}
+    	
+    	if(content[i].publisher && content[i].publisher.name){
+    		obj.publisher = content[i].publisher.name;
+    	}
+    	
+    	if(content[i].image){
+    		obj.image = content[i].image;
+    	} else {
+    		obj.image = 'images/missingImage.png';
+    	}
+    	
+    	item.push(obj);
     }
     
     return item;
