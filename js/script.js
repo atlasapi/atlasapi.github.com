@@ -921,16 +921,7 @@ ApiExplorer.prototype.contentGroupsQuery = function(query){
     if(apiExplorer.textAltered(query, ['limit', 'offset'])){
         return false;
     };
-    
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
+ 
     apiExplorer.query = query;
     apiExplorer.runQuery(3);
 }
@@ -942,16 +933,7 @@ ApiExplorer.prototype.contentGroupsIdQuery = function(query){
     if(apiExplorer.textAltered(query, [':id'])){
         return false;
     };
-    
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
+ 
     apiExplorer.query = query;
     apiExplorer.runQuery(4);
 }
@@ -964,15 +946,6 @@ ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
         return false;
     };
     
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(5);
 }
@@ -981,19 +954,10 @@ ApiExplorer.prototype.topicsQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'topics';
     
-    if(apiExplorer.textAltered(query, [':id'])){
+    if(apiExplorer.textAltered(query, ['namespace', 'value'])){
         return false;
     };
     
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(6);
 }
@@ -1006,15 +970,6 @@ ApiExplorer.prototype.topicsIdQuery = function(query){
         return false;
     };
     
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(7);
 }
@@ -1027,15 +982,6 @@ ApiExplorer.prototype.topicsIdContentQuery = function(query){
         return false;
     };
     
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(8);
 }
@@ -1048,15 +994,6 @@ ApiExplorer.prototype.productsQuery = function(query){
         return false;
     };
     
-//    var queryUri = getParamByName('uri',query);
-//    
-//    if(!queryUri){
-//        sendMsg('error', 'Error: Please specify a URI');
-//        apiExplorer.cancelQuery();
-//        return false;
-//    };
-//    
-//    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(9);
 }
@@ -1339,7 +1276,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             apiExplorer.ajaxError('Sorry, the following error occured: '+errorThrown);
         },
         complete: function(jqXHR, textStatus){
-        	apiExplorer.queryBar[tab].item.find(".btn").val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+        	apiExplorer.queryBar[tab].parent.find(".btn").val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
         }
     });
