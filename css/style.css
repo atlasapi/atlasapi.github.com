@@ -19,7 +19,7 @@
             .clearfix { display: block; }
             /* close commented backslash hack */
                         
-			body {color: #222; font-family: "Molengo", Arial, sans-serif; text-align: center; }
+			body {color: #222; font-family: "Molengo", Arial, sans-serif; text-align: center; text-transform: lowercase;}
 			
 			.page {margin: 0 auto; text-align: left; width: 960px; padding: 0; position: relative;}
 			
@@ -1434,4 +1434,4 @@
             
             .pink {color: #ef308f;}
             
-           
+.upper { text-transform: uppercase !important;}           

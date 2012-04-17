@@ -171,7 +171,7 @@
 
 				<div class="example clearfix">
 					<a
-						class="api apiSchedule">http://atlas.metabroadcast.com/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone</a>
+						class="api apiSchedule">http://atlas.metabroadcast.com/3.0/schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk</a>
 					<h3>
 						Search for everything
 						<mark class="hov hovDown" data-title="from">from</mark>
@@ -734,7 +734,7 @@ brand_summary: {
 				<div class="tabArea" id="explore_schedule">
 					<h2>Schedule</h2>
 
-					<h3>GET /schedule.json</h3>
+					<h3><span class="upper">GET</span> /schedule.json</h3>
 					<p>Returns a schedule for the specified channel and period.</p>
 					<form>
 						<table class="tbl">
@@ -863,7 +863,7 @@ brand_summary: {
 				<!--  CHANNELS -->
 				<div class="tabArea" id="explore_channels" style="display: none;">
 					<h2>Channels</h2>
-					<h3>GET /channels.json</h3>
+					<h3><span class="upper">GET</span> /channels.json</h3>
 					<p>Returns a paginated list of all channels.</p>
 					<form>
 						<table class="tbl">
@@ -956,7 +956,7 @@ brand_summary: {
 				<!--  CONTENT  -->
 				<div class="tabArea" id="explore_content" style="display: none;">
 					<h2>Content</h2>
-					<h3>GET /content.json</h3>
+					<h3><span class="upper">GET</span> /content.json</h3>
 					<p>Returns a list of content that matches the supplied uri.
 						Used to look up content.</p>
 						<form>
@@ -1058,7 +1058,7 @@ brand_summary: {
 					style="display: none;">
 					<h2>Content Groups</h2>
 					<div class="subArea" id="explore_content_groups">
-					<h3>GET /content_groups.json</h3>
+					<h3><span class="upper">GET</span> /content_groups.json</h3>
 					<p>Returns a paginated list of all content groups.</p>
 					<form>
 					<table class="tbl">
@@ -1148,7 +1148,7 @@ brand_summary: {
 					</div>
 					</div>
 					<div class="subArea spacer" id="explore_content_groups/:id">
-					<h3>GET /content_groups/:id.json</h3>
+					<h3><span class="upper">GET</span> /content_groups/:id.json</h3>
 					<p>Returns the data for a particular content group.</p>
 					<form>
 					<table class="tbl">
@@ -1229,7 +1229,7 @@ brand_summary: {
 					</div>
 					</div>
 					<div class="subArea spacer" id="explore_content_groups/:id/content">
-					<h3>GET /content_groups/:id/content.json</h3>
+					<h3><span class="upper">GET</span> /content_groups/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a content group.</p>
 					<form>
 					<table class="tbl">
@@ -1343,7 +1343,7 @@ brand_summary: {
 				<div class="tabArea" id="explore_topics" style="display: none;">
 					<h2>Topics</h2>
 					<div class="subArea" id="explore_topics">
-					<h3>GET /topics.json</h3>
+					<h3><span class="upper">GET</span> /topics.json</h3>
 					<form>
 					<p>Returns a paginated list of all topics.</p>
 					<table class="tbl">
@@ -1450,7 +1450,7 @@ brand_summary: {
 					</div>
 					</div>
 					<div class="subArea spacer" id="explore_topics/:id">
-					<h3>GET /topics/:id.json</h3>
+					<h3><span class="upper">GET</span> /topics/:id.json</h3>
 					<p>Returns the data for a particular topic.</p>
 					<form>
 					<table class="tbl">
@@ -1531,7 +1531,7 @@ brand_summary: {
 					</div>		
 						</div>
 					<div class="subArea spacer" id="explore_topics/:id/content">		
-					<h3>GET /topics/:id/content.json</h3>
+					<h3><span class="upper">GET</span> /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
 					<table class="tbl">
@@ -1645,7 +1645,7 @@ brand_summary: {
 				<div class="tabArea" id="explore_products" style="display: none;">
 					<h2>Products</h2>
 					<div class="subArea" id="explore_products">
-					<h3>GET /products.json</h3>
+					<h3><span class="upper">GET</span> /products.json</h3>
 					<p>Returns a paginated list of all products.</p>
 					<form>
 					<table class="tbl">
@@ -1735,7 +1735,7 @@ brand_summary: {
 					</div>
 					</div>
 					<div class="subArea spacer" id="explore_products/:id/content">
-					<h3>GET /products/:id/content.json</h3>
+					<h3><span class="upper">GET</span> /products/:id/content.json</h3>
 					<p>Returns a paginated list of the content related to a
 						product.</p>
 				    <form>
@@ -1849,7 +1849,7 @@ brand_summary: {
 				<!-- SEARCH -->
 				<div class="tabArea" id="explore_search" style="display: none;">
 					<h2>Search</h2>
-					<h3>GET /search.json</h3>
+					<h3><span class="upper">GET</span> /search.json</h3>
 					<p>Returns a list of content that matches the specified search
 						criteria.</p>
 					<form>	
@@ -1881,14 +1881,7 @@ brand_summary: {
 							</tr>
 							<tr>
 								<td class="first">publisher</td>
-								<td class="second"><span class="select">
-									<span class="value">Please Select</span> <span class="options">
-										<span class="option" data-value="bbc.co.uk">BBC</span>
-										<span class="option" data-value="itunes.com">iTunes</span>
-										<span class="option" data-value="hulu.com">Hulu</span>
-										<span class="option" data-value="video.uk.msn.com">MSN Video</span>
-								   </span>
-								</span><input type="hidden" id="search_publisher"
+								<td class="second"><input type="text" id="search_publisher"
 										data-title="publisher" class="watchMe" value="bbc.co.uk" /> </td>
 								<td class="third">string</td>
 								<td class="fourth">The publisher of the content.</td>
