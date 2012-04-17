@@ -1447,8 +1447,6 @@ SelectBox.prototype.changeSelection = function() {
     selectBox.input.val(selectBox.current.val);
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
-    console.log("select box item");
-    console.log(selectBox.input);
     // Add to url string
     updateString(item);
 }
