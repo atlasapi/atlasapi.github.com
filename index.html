@@ -446,7 +446,7 @@ brand_summary: {
 						</tr>
 						<tr>
 							<td class="first">ITV</td>
-							<td class="second">Public</td>
+							<td class="second">Restricted</td>
 							<td class="third tc"><img src="images/green.png" width="24"
 								height="24" title="green" /></td>
 							<td class="fourth">Free on-demand shows</td>
@@ -693,13 +693,21 @@ brand_summary: {
         <!-- *** API EXPLORER SECTION *** -->
 		<section class="apiExplorer">
 			<div class="marker" id="apiExplorer"></div>
-			<h2 class="explorerTitle">API Explorer</h2>
-			<div class="explorerWrapper" id="explorerWrapper">
-				<div class="line">
-                    <form>
-                    <label for="apiKey">Have an API key? Put it here: </label><input type="text" class="apiKey watchMe" name="apiKey" data-title="apiKey" id="apiKey" />
+			<div class="explorerTitle">
+			<div class="line">
+			  <div class="unit size1of2 explorerTitleContainer1">
+			  API Explorer
+			  </div>
+			   <div class="unit size1of2 explorerTitleContainer2">
+			   <form>
+                    <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label><input type="text" class="apiKey watchMe" name="apiKey" data-title="apiKey" id="apiKey" />
                     </form>
-                     </div> 
+			  </div>
+			 </div> 
+			
+			</div>
+			<div class="explorerWrapper" id="explorerWrapper">
+				
 				<ul class="tabs clearfix">
 					<li class="tab"><a href="#apiExplorer"
 						data-tab="explore_schedule">Schedule</a></li>
@@ -750,7 +758,7 @@ brand_summary: {
 												class="option" data-value="cjvw">cjvw (BBC HD)</span> <span
 												class="option" data-value="cjvx">cjvx (CBBC)</span> <span
 												class="option" data-value="cjwr">cjwr (BBC Radio 1)</span> <span
-												class="option" data-value="">None</span>
+												class="option" data-value="cjwt">cjwt (BBC Radio 2)</span>
 										</span><input type="hidden" id="schedule_channel"
 										data-title="channel_id" class="watchMe" value="cjtS" />
 									</td>
@@ -761,33 +769,20 @@ brand_summary: {
 								<tr>
 									<td class="first">from</td>
 									<td class="second"><input type="text" class="date watchMe"
-										data-title="from" id="schedule_from" />now</td>
+										data-title="from" id="schedule_from" /></td>
 									<td class="third">multiple</td>
-									<td class="fourth">The beginning of the schedule period.
-										Can be an ISO date, number of seconds since 1 Jan 1970 or a
-										relative duration.</td>
+									<td class="fourth">The beginning of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration, e.g. 'now'.</td>
 								</tr>
 								<tr>
 									<td class="first">to</td>
 									<td class="second"><input type="text" class="date watchMe"
-										data-title="to" id="schedule_to" />now.plus.6h</td>
+										data-title="to" id="schedule_to" /></td>
 									<td class="third">multiple</td>
-									<td class="fourth">The end of the schedule period. Can be
-										an ISO date, number of seconds since 1 Jan 1970 or a relative
-										duration.</td>
+									<td class="fourth">The end of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration., e.g. 'now.plus.6h'.</td>
 								</tr>
 								<tr>
 									<td class="fist">publisher</td>
-									<td class="second"><span class="select"> <span
-											class="value">Please Select</span> <span class="options">
-												<span class="option" data-value="bbc.co.uk">BBC</span> <span
-												class="option" data-value="itv.com">ITV</span> <span
-												class="option" data-value="itunes.com">iTunes</span> <span
-												class="option" data-value="hulu.com">Hulu</span> <span
-												class="option" data-value="video.uk.msn.com">MSN
-													Video</span> <span class="option" data-value="">None</span>
-										</span>
-									</span> <input type="hidden" id="search_publisher"
+									<td class="second"><input type="text" id="search_publisher"
 										data-title="publisher" class="watchMe" value="bbc.co.uk" /></td>
 									<td class="third">string</td>
 									<td class="fourth">The publisher of the schedule</td>
@@ -804,7 +799,7 @@ brand_summary: {
 							</tbody>
 							<tfoot>
 								<tr>
-									<td colspan="4">Valid annotations: all content
+									<td colspan="4" class="annotations_notes">Valid annotations: all content
 										annotations, plus channel</td>
 								</tr>
 							</tfoot>
@@ -901,7 +896,7 @@ brand_summary: {
 							</tbody>
 							<tfoot>
 								<tr>
-									<td colspan="4">Valid annotations: none</td>
+									<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 								</tr>
 							</tfoot>
 						</table>
@@ -995,7 +990,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: description,
+								<td colspan="4" class="annotations_notes">Valid annotations: description,
 									extended_description, brand_summary, series_summary, people,
 									topics, products, related_links, key_phrases, broadcasts,
 									locations, first_broadcasts, next_broadcasts,
@@ -1096,7 +1091,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: none</td>
+								<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -1116,7 +1111,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-						<div class="resultsArea" style="display: none;">
+						<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1152,7 +1147,7 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
-					<div class="subArea" id="explore_content_groups/:id">
+					<div class="subArea spacer" id="explore_content_groups/:id">
 					<h3>GET /content_groups/:id.json</h3>
 					<p>Returns the data for a particular content group.</p>
 					<form>
@@ -1167,7 +1162,7 @@ brand_summary: {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="first">:id</td>
+								<td class="first">id</td>
 								<td class="second"><input type="text"
 										class="id watchMe" data-title=":id"
 										id="id" value="" /></td>
@@ -1177,7 +1172,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: none</td>
+								<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -1197,7 +1192,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-										<div class="resultsArea" style="display: none;">
+										<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1233,7 +1228,7 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
-					<div class="subArea" id="explore_content_groups/:id/content">
+					<div class="subArea spacer" id="explore_content_groups/:id/content">
 					<h3>GET /content_groups/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a content group.</p>
 					<form>
@@ -1248,7 +1243,7 @@ brand_summary: {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="first">:id</td>
+								<td class="first">id</td>
 								<td class="second"><input type="text"
 										class="id watchMe" data-title=":id"
 										id="id" value="" /></td>
@@ -1284,7 +1279,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: all content annotations,
+								<td colspan="4" class="annotations_notes">Valid annotations: all content annotations,
 									plus filtering_resource</td>
 							</tr>
 						</tfoot>
@@ -1305,7 +1300,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-										<div class="resultsArea" style="display: none;">
+										<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1398,7 +1393,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: none</td>
+								<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -1418,7 +1413,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-						<div class="resultsArea" style="display: none;">
+						<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1454,7 +1449,7 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
-					<div class="subArea" id="explore_topics/:id">
+					<div class="subArea spacer" id="explore_topics/:id">
 					<h3>GET /topics/:id.json</h3>
 					<p>Returns the data for a particular topic.</p>
 					<form>
@@ -1469,7 +1464,7 @@ brand_summary: {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="first">:id</td>
+								<td class="first">id</td>
 								<td class="second"><input type="text"
 										class="id watchMe" data-title=":id"
 										id="id" value="crjv" /></td>
@@ -1479,7 +1474,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: none</td>
+								<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -1499,7 +1494,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>	
-										<div class="resultsArea" style="display: none;">
+										<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1535,7 +1530,7 @@ brand_summary: {
 						</div>
 					</div>		
 						</div>
-					<div class="subArea" id="explore_topics/:id/content">		
+					<div class="subArea spacer" id="explore_topics/:id/content">		
 					<h3>GET /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
@@ -1550,7 +1545,7 @@ brand_summary: {
 						</thead>
 						<tbody>
 							<tr>
-								<td class="first">:id</td>
+								<td class="first">id</td>
 								<td class="second"><input type="text"
 										class="id watchMe" data-title=":id"
 										id="id" value="ccBY" /></td>
@@ -1576,7 +1571,9 @@ brand_summary: {
 							</tr>
 							<tr>
 								<td class="first">annotations</td>
-								<td class="second">description</td>
+								<td class="second"><input type="text"
+										class="watchMe" data-title="annotations"
+										id="annotations" value="description" /></td>
 								<td class="third">list</td>
 								<td class="fourth">List of annotations that describe the
 									data to be output</td>
@@ -1584,7 +1581,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: all content annotations,
+								<td colspan="4" class="annotations_notes">Valid annotations: all content annotations,
 									plus filtering_resource</td>
 							</tr>
 						</tfoot>
@@ -1605,7 +1602,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-										<div class="resultsArea" style="display: none;">
+										<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1681,7 +1678,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: none</td>
+								<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -1701,7 +1698,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-										<div class="resultsArea" style="display: none;">
+										<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1737,7 +1734,7 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
-					<div class="subArea" id="explore_products/:id/content">
+					<div class="subArea spacer" id="explore_products/:id/content">
 					<h3>GET /products/:id/content.json</h3>
 					<p>Returns a paginated list of the content related to a
 						product.</p>
@@ -1789,7 +1786,7 @@ brand_summary: {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: all content annotations,
+								<td colspan="4" class="annotations_notes">Valid annotations: all content annotations,
 									plus filtering_resource</td>
 							</tr>
 						</tfoot>
@@ -1810,7 +1807,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>
-										<div class="resultsArea" style="display: none;">
+										<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1886,22 +1883,19 @@ brand_summary: {
 								<td class="first">publisher</td>
 								<td class="second"><span class="select">
 									<span class="value">Please Select</span> <span class="options">
-										<span class="option" data-value="bbc.co.uk">BBC</span> <span
-										class="option" data-value="itv.com">ITV</span> <span
-										class="option" data-value="itunes.com">iTunes</span> <span
-										class="option" data-value="hulu.com">Hulu</span> <span
-										class="option" data-value="video.uk.msn.com">MSN Video</span>
-										<span class="option" data-value="">None</span>
-								</span>
-								</span> <input type="hidden" id="search_publisher"
-									data-title="publisher" class="watchMe"  value="bbc.co.uk" /></td>
+										<span class="option" data-value="bbc.co.uk">BBC</span>
+										<span class="option" data-value="itunes.com">iTunes</span>
+										<span class="option" data-value="hulu.com">Hulu</span>
+										<span class="option" data-value="video.uk.msn.com">MSN Video</span>
+								   </span>
+								</span> </td>
 								<td class="third">string</td>
 								<td class="fourth">The publisher of the content.</td>
 							</tr>
 						</tbody>
 						<tfoot>
 							<tr>
-								<td colspan="4">Valid annotations: none</td>
+								<td colspan="4" class="annotations_notes">Valid annotations: none</td>
 							</tr>
 						</tfoot>
 					</table>

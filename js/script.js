@@ -672,11 +672,16 @@ ApiExplorer.prototype.buttonHandler = function(){
         parentName = parentName.split('_');
         parentName.shift();
         parentName = parentName.join("_");
+        var queryUrl = queryBeg+parentName;
         if(parentName == 'search' || parentName == 'discover'){
-            apiExplorer.queryBar[i].txt.val(queryBeg+parentName +'.json?limit=20');
+            queryUrl += '.json?limit=20';
         } else {
-            apiExplorer.queryBar[i].txt.val(queryBeg+parentName + '.json?');
+        	queryUrl += '.json';
+        	if (parentName != "topics/:id") {
+        		queryUrl += '?';
+        	}
         }
+        apiExplorer.queryBar[i].txt.val(queryUrl);
     });
     
     $('input[value="Run"]').parents('form').submit(function(){
@@ -1541,7 +1546,6 @@ var updateString = function(obj) {
         2. Get current query
         3. Replace appropriate param
     */
-  
     // 1
     var itemParent;
     if (obj.title == "apiKey") {

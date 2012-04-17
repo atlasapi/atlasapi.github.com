@@ -19,7 +19,7 @@
             .clearfix { display: block; }
             /* close commented backslash hack */
                         
-			body {color: #222; font-family: "Molengo", Arial, sans-serif; text-align: center; text-transform: lowercase;}
+			body {color: #222; font-family: "Molengo", Arial, sans-serif; text-align: center; }
 			
 			.page {margin: 0 auto; text-align: left; width: 960px; padding: 0; position: relative;}
 			
@@ -103,6 +103,9 @@
             }
             
             .apiExplorer {padding: 0 0 70px; margin: 0;}
+            
+          
+            
             *html .apiExplorer {display: none;}
             .explorerTitle {
                 margin-bottom: 0;
@@ -124,6 +127,29 @@
                 text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
                 font-size: 36px;
             }
+            
+            .explorerTitleContainer1 {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+            
+            .explorerTitleContainer2 {
+                padding-top: 15px;
+                padding-bottom: 5px;
+            }
+            
+            .apiKeyLabel { color: white !important;
+               font-size: 14px; 
+               width: 200px !important;
+               text-align: right;
+             }
+            .apiKey {float: right;
+               font-size: 14px;
+               width: 250px !important;
+               height: 25px !important;
+            }
+            
+            
             .explorerWrapper {
                 padding: 10px;
                 background: #e7e7e7 url(../images/slideBg.png);
@@ -134,6 +160,8 @@
                 -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
             }
+            
+          
 			
 			article {padding: 0 10px; display:block;}
 			aside {margin-left: 20px; display:block;}
@@ -384,6 +412,15 @@
                 background: #F2EDF8;
 			}
 			
+			tfoot {
+			    font-weight: bold;
+			}
+			
+			.annotations_notes {
+			    padding-top: 5px;
+			    padding-bottom: 5px;
+			}
+			
 			/* Lists */
 			.list {list-style-type: none; font-size: 12px; line-height: 18px; margin-bottom: 10px;}
 			.list li {padding-left: 20px; background:url(../images/bullet.gif) 0 10px no-repeat; font-size: 14px; line-height: 24px;}
@@ -453,7 +490,7 @@
                 font-size: 18px;
                 line-height: 40px;
                 height: 40px;
-                padding: 0 30px;
+                padding: 0 15px;
                 color: #333;
                 display: block;
             }
@@ -869,6 +906,10 @@
             }
 			h1.hr, h2.hr, h3.hr, h4.hr, h5.hr, h6.hr {
                 padding-bottom: 10px;
+            }
+            
+            .spacer {
+                padding-top: 15px;
             }
             
             /* Slideshow */
@@ -1392,3 +1433,5 @@
             .pll {padding-left: 20px;}
             
             .pink {color: #ef308f;}
+            
+           
