@@ -1,10 +1,9 @@
 var homePageTimer;
 
-// TODO Change back before production
-//var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
-
-var queryBeg = 'http://stage.atlas.metabroadcast.com/3.0/';
-
+var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
+if (window.location.host == "stage.atlas.metabroadcast" || window.location.host == "dev.mbst.tv") {
+	queryBeg = 'http://stage.atlas.metabroadcast.com/3.0/';
+}
 
 
 var clearTimer = function() {
@@ -1400,14 +1399,14 @@ var timeConvertor = function(time){
             }
         }
     }
-}
+};
 
 var SelectBox = function(item) {
     this.item = item;
     this.option = [];
     this.current;
     this.input = item.siblings('input[type="hidden"]');
-}
+};
 
 SelectBox.prototype.init = function() {
     var selectBox = this;
@@ -1431,7 +1430,7 @@ SelectBox.prototype.init = function() {
     });
     // Make sure initial values are set
     selectBox.input.change();
-}
+};
 
 SelectBox.prototype.changeSelection = function() {
     var selectBox = this;
@@ -1448,6 +1447,8 @@ SelectBox.prototype.changeSelection = function() {
     selectBox.input.val(selectBox.current.val);
     
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
+    console.log("select box item");
+    console.log(selectBox.input);
     // Add to url string
     updateString(item);
 }
@@ -1547,7 +1548,16 @@ var updateString = function(obj) {
 			if(theDate[1].substring(0,1) === '0'){
 				theDate[1] = theDate[1].substr(1);
 			}
-            obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
+			var objDate = new Date();
+			objDate.setUTCFullYear(parseInt(theYear[0]));
+			objDate.setUTCMonth(parseInt(theDate[1])-1);
+			objDate.setUTCDate(parseInt(theDate[0]));
+			objDate.setUTCHours(0);
+			objDate.setUTCMinutes(0);
+			objDate.setUTCSeconds(0);
+			objDate.setUTCMilliseconds(0);
+			obj.val = objDate.toISOString();
+            //obj.val = toTimestamp(parseInt(theYear[0]), parseInt(theDate[1]), parseInt(theDate[0]), 0, 0, 0);
         } else {
             return false;
         };
@@ -1668,6 +1678,8 @@ function toTimestamp(year,month,day,hour,minute,second){
     var datum = new Date(year,month-1,day,hour,minute,second,0);
     return datum.getTime()/1000;
 }
+
+
 
 function getCaretPosition(editableDiv) {
     var caretPos = 0, containerEl = null, sel, range;
