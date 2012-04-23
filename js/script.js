@@ -12,6 +12,8 @@ var clearTimer = function() {
 
 var apiFuncRun = false;
 
+var lockRunBtn = false;
+
 var message = false;
 
 var Tabs = function() {
@@ -685,12 +687,15 @@ ApiExplorer.prototype.buttonHandler = function(){
     
     $('input[value="Run"]').parents('form').submit(function(){
         var that = $(this);
-        if(updateString == undefined){
-            doStuff();
-        } else {
-            setTimeout(function(){
-                doStuff();
-            }, 750);
+        if (!lockRunBtn) {
+          lockRunBtn = true;
+          if(updateString == undefined){
+              doStuff();
+          } else {
+              setTimeout(function(){
+                  doStuff();
+              }, 750);
+          }
         }
         
         var doStuff = function() {
@@ -1282,6 +1287,7 @@ ApiExplorer.prototype.runQuery = function(tab){
         complete: function(jqXHR, textStatus){
         	apiExplorer.queryBar[tab].parent.find(".btn").val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
+            lockRunBtn = false;
         }
     });
 }
@@ -1454,7 +1460,25 @@ SelectBox.prototype.changeSelection = function() {
 var processTheJson = function(json){
     var item = [];
     
-    var content = json.contents ? json.contents : json.schedule[0].items;
+    var content;
+    if(json.contents) {
+    	content = json.contents;
+    }
+    else if (json.channels) {
+    	content = json.channels;
+    }
+    else if (json.groups) {
+    	content = json.groups;
+    }
+    else if (json.topics) {
+    	content = json.topics;
+    }
+    else if (json.products) {
+    	content = json.products;
+    }
+    else {
+       content = json.schedule[0].items;
+    }
     
     for(var i = 0, ii = content.length; i<ii; i++){
     	var obj = {
