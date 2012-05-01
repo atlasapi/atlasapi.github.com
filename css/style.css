@@ -1342,6 +1342,7 @@
                 -khtml-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
                 -ms-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
                 box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+                z-index: 100 !important;
             }
                 .ui-datepicker-header {
                      -moz-border-radius: 5px 5px 0 0;

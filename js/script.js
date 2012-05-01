@@ -1298,7 +1298,9 @@ ApiExplorer.prototype.ajaxError = function(error){
 
 ApiExplorer.prototype.cancelQuery = function(){
     var apiExplorer = this;
-    //('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+    lockRunBtn = false;
+    
+    $('.apiExplorer').find('.inactive').val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
     apiFuncRun = false;
 }
 
