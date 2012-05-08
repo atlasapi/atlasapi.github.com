@@ -1,10 +1,6 @@
 var homePageTimer;
 
 var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
-//if (window.location.host == "stage.atlas.metabroadcast" || window.location.host == "dev.mbst.tv") {
-//	queryBeg = 'http://stage.atlas.metabroadcast.com/3.0/';
-//}
-
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
@@ -773,7 +769,7 @@ ApiExplorer.prototype.customQuery = function(query,run){
     queryHolder.val(query);
     apiExplorer.query = queryBeg+query;
     if(run != false){
-        apiExplorer.runQuery(7);
+        apiExplorer.runQuery(12);
     } else {
         queryHolder.focus();
     }
@@ -1037,23 +1033,26 @@ ApiExplorer.prototype.textAltered = function(query, params){
         query = query.replace(queryBeg, '');
         
         var params = query.match(/\?(.*)/g);
-        var fail = false;
-        params = params[0].substr(1).split('&');
-        for(var i=0; i<params.length; i++){
-            params[i] = params[i].split('=');
-            if(queryType == 'search' && params[i][0] == 'q'){
-                params[i][0] = 'title';
+        if (params) {
+            var fail = false;
+            params = params[0].substr(1).split('&');
+            for(var i=0; i<params.length; i++){
+                params[i] = params[i].split('=');
+                if(queryType == 'search' && params[i][0] == 'q'){
+                    params[i][0] = 'title';
+                };
+                if($('#'+queryType+'_'+params[i][0]).length < 1){
+                    fail = true;
+                };
             };
-            if($('#'+queryType+'_'+params[i][0]).length < 1){
-                fail = true;
+            if(fail){
+                apiExplorer.tabs.changeTab(7);
+                apiExplorer.customQuery(query);
+                $('#explore_'+queryType+' #'+queryType+'_altered').val('false');
+                return true;
             };
-        };
-        if(fail){
-            apiExplorer.tabs.changeTab(3);
-            apiExplorer.customQuery(query);
-            $('#explore_'+queryType+' #'+queryType+'_altered').val('false');
-            return true;
-        };
+        }
+        
     };
     
     return false;

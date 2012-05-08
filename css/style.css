@@ -111,7 +111,7 @@
                 margin-bottom: 0;
                 color: #fff;
                 line-height: 100%;
-                padding: 0 10px 10px;
+                padding: 0 10px 7px;
                 border-top: 1px solid #684090;
                 border-botom: 1px solid #684090;
                 background-color: #8e5dbf;
@@ -129,24 +129,24 @@
             }
             
             .explorerTitleContainer1 {
-                padding-top: 5px;
-                padding-bottom: 5px;
             }
             
             .explorerTitleContainer2 {
-                padding-top: 15px;
-                padding-bottom: 5px;
+                padding-top: 0px;
+                padding-bottom: 0px;
             }
             
             .apiKeyLabel { color: white !important;
                font-size: 14px; 
                width: 200px !important;
                text-align: right;
+               margin-top: 6px;
              }
             .apiKey {float: right;
+               margin-top: 10px;
                font-size: 14px;
                width: 250px !important;
-               height: 25px !important;
+               height: 20px !important;
             }
             
             
@@ -413,12 +413,17 @@
 			}
 			
 			tfoot {
+			}
+			
+			.annotation_b {
 			    font-weight: bold;
+			    font-size: 12px;
 			}
 			
 			.annotations_notes {
 			    padding-top: 5px;
 			    padding-bottom: 5px;
+			    font-size: 14px;
 			}
 			
 			/* Lists */
