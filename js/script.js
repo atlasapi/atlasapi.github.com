@@ -1,14 +1,14 @@
 var homePageTimer;
 
 var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
-if (window.location.host == "stage.atlas.metabroadcast" || window.location.host == "dev.mbst.tv") {
-	queryBeg = 'http://stage.atlas.metabroadcast.com/3.0/';
-}
+//if (window.location.host == "stage.atlas.metabroadcast" || window.location.host == "dev.mbst.tv") {
+//	queryBeg = 'http://stage.atlas.metabroadcast.com/3.0/';
+//}
 
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
-}
+};
 
 var apiFuncRun = false;
 
@@ -22,7 +22,7 @@ var Tabs = function() {
     this.active;
     this.tab = [];
     this.page = [];
-}
+};
 
 Tabs.prototype.init = function(e) {
     var tabs = this;
@@ -80,7 +80,7 @@ Tabs.prototype.changeTab = function(id) {
 	if ($("#apiKey").val() != "") {
 	    updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
 	}
-}
+};
 
 var SubTabs = function() {
     this.tabHolder;
@@ -88,7 +88,7 @@ var SubTabs = function() {
     this.active;
     this.tab = [];
     this.page = [];
-}
+};
 
 SubTabs.prototype.init = function(e) {
     var tabs = this;
@@ -114,7 +114,7 @@ SubTabs.prototype.init = function(e) {
         tabs.page[i] = {'index': i, 'item': $(this)};
         tabs.page[i].item.hide();
     });
-}
+};
 
 SubTabs.prototype.changeTab = function(id) {
     var tabs = this;
@@ -124,7 +124,7 @@ SubTabs.prototype.changeTab = function(id) {
     tabs.page[id].item.show();
     
     tabs.active = id;
-}
+};
 
 var PageInfo = function() {
     this.pageWidth;
@@ -139,7 +139,7 @@ var PageInfo = function() {
     this.menuClick = false;
     this.currentEvent;
     this.changePageTimer = false;
-}
+};
 
 PageInfo.prototype.init = function() {
     var pageInfo = this;
@@ -217,7 +217,7 @@ PageInfo.prototype.init = function() {
             }
         }*/
     });
-}
+};
 
 PageInfo.prototype.update = function(width,height,offset) {
     var pageInfo = this;
@@ -264,7 +264,7 @@ PageInfo.prototype.update = function(width,height,offset) {
             }
         }
     }
-}
+};
 
 PageInfo.prototype.changePage = function(i) {
     var pageInfo = this;
@@ -295,7 +295,7 @@ PageInfo.prototype.changePage = function(i) {
     } else {
         $('.subNav:visible').fadeOut();
     }
-}
+};
 
 PageInfo.prototype.changeSubSection = function(i){
     var pageInfo = this;
@@ -318,7 +318,7 @@ PageInfo.prototype.changeSubSection = function(i){
             pageInfo.currentSubSection = i;
         }
     }
-}
+};
 
 PageInfo.prototype.changeHash = function(n) {
     var pageInfo = this;
@@ -328,7 +328,7 @@ PageInfo.prototype.changeHash = function(n) {
             window.history.pushState(null,null,url);
         }
     }, 1000);
-}
+};
 
 function initialCap(field) {
    field = field.substr(0, 1).toUpperCase() + field.substr(1);
@@ -398,7 +398,7 @@ var HomeDemo = function(item) {
     this.prevBtn = item.find('.cbtn.previous');
     this.nextBtn = item.find('.cbtn.next');
     this.scrolling = false;
-}
+};
 
 HomeDemo.prototype.init = function(){
     var homeDemo = this;
@@ -456,7 +456,7 @@ HomeDemo.prototype.init = function(){
     
     // Make first request
     homeDemo.request(true);
-}
+};
 
 HomeDemo.prototype.request = function(first) {
     var homeDemo = this;
@@ -572,7 +572,7 @@ HomeDemo.prototype.request = function(first) {
             homeDemo.nextBtn.removeClass('inactive');
         }
     }
-}
+};
 
 HomeDemo.prototype.nextQuery = function() {
     var homeDemo = this;
@@ -608,7 +608,7 @@ HomeDemo.prototype.nextQuery = function() {
     if(homeDemo.activeQuery <= homeDemo.marker && homeDemo.prevBtn.hasClass('inactive')){
         homeDemo.prevBtn.removeClass('inactive');
     }
-}
+};
 
 HomeDemo.prototype.prevQuery = function() {
     var homeDemo = this;
@@ -625,7 +625,7 @@ HomeDemo.prototype.prevQuery = function() {
     if(homeDemo.activeQuery == 1) {
         homeDemo.prevBtn.addClass('inactive');
     }
-}
+};
 
 HomeDemo.prototype.countdown = function() {
     var homeDemo = this;   
@@ -646,7 +646,7 @@ HomeDemo.prototype.countdown = function() {
 			homeDemo.request();
 		}
     }, 1000);
-}
+};
 
 var ApiExplorer = function(item, tabs) {
     this.holder = item;
@@ -656,7 +656,7 @@ var ApiExplorer = function(item, tabs) {
     this.queryBar = [];
     this.timedOut = false;
     this.tabs = tabs;
-}
+};
 
 ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
@@ -764,7 +764,7 @@ ApiExplorer.prototype.buttonHandler = function(){
         }
         return false;
     });
-}
+};
 
 ApiExplorer.prototype.customQuery = function(query,run){
     var apiExplorer = this;
@@ -777,7 +777,7 @@ ApiExplorer.prototype.customQuery = function(query,run){
     } else {
         queryHolder.focus();
     }
-}
+};
 
 ApiExplorer.prototype.searchQuery = function(query){
     var apiExplorer = this;
@@ -807,7 +807,7 @@ ApiExplorer.prototype.searchQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(11);
-}
+};
 
 ApiExplorer.prototype.discoverQuery = function(query){
     var apiExplorer = this;
@@ -831,7 +831,7 @@ ApiExplorer.prototype.discoverQuery = function(query){
         apiExplorer.query = query;
         apiExplorer.runQuery(1);
     /* } */
-}
+};
 
 ApiExplorer.prototype.scheduleQuery = function(query){
     var apiExplorer = this;
@@ -888,7 +888,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     apiExplorer.query = query;
 
     apiExplorer.runQuery(0);
-}
+};
 
 ApiExplorer.prototype.channelsQuery = function(query){
     var apiExplorer = this;
@@ -900,7 +900,7 @@ ApiExplorer.prototype.channelsQuery = function(query){
    
     apiExplorer.query = query;
     apiExplorer.runQuery(1);
-}
+};
 
 ApiExplorer.prototype.contentQuery = function(query){
     var apiExplorer = this;
@@ -921,7 +921,7 @@ ApiExplorer.prototype.contentQuery = function(query){
     $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(2);
-}
+};
 
 ApiExplorer.prototype.contentGroupsQuery = function(query){
     var apiExplorer = this;
@@ -933,7 +933,7 @@ ApiExplorer.prototype.contentGroupsQuery = function(query){
  
     apiExplorer.query = query;
     apiExplorer.runQuery(3);
-}
+};
 
 ApiExplorer.prototype.contentGroupsIdQuery = function(query){
     var apiExplorer = this;
@@ -945,7 +945,7 @@ ApiExplorer.prototype.contentGroupsIdQuery = function(query){
  
     apiExplorer.query = query;
     apiExplorer.runQuery(4);
-}
+};
 
 ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
     var apiExplorer = this;
@@ -957,7 +957,7 @@ ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(5);
-}
+};
 
 ApiExplorer.prototype.topicsQuery = function(query){
     var apiExplorer = this;
@@ -969,7 +969,7 @@ ApiExplorer.prototype.topicsQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(6);
-}
+};
 
 ApiExplorer.prototype.topicsIdQuery = function(query){
     var apiExplorer = this;
@@ -981,7 +981,7 @@ ApiExplorer.prototype.topicsIdQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(7);
-}
+};
 
 ApiExplorer.prototype.topicsIdContentQuery = function(query){
     var apiExplorer = this;
@@ -993,7 +993,7 @@ ApiExplorer.prototype.topicsIdContentQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(8);
-}
+};
 
 ApiExplorer.prototype.productsQuery = function(query){
     var apiExplorer = this;
@@ -1005,7 +1005,7 @@ ApiExplorer.prototype.productsQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(9);
-}
+};
 
 ApiExplorer.prototype.productsIdContentQuery = function(query){
     var apiExplorer = this;
@@ -1026,7 +1026,7 @@ ApiExplorer.prototype.productsIdContentQuery = function(query){
 //    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(10);
-}
+};
 
 ApiExplorer.prototype.textAltered = function(query, params){
     var apiExplorer = this;
@@ -1068,7 +1068,7 @@ var getParamByName = function(name,string){
         return "";
     else
         return decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+};
 
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
@@ -1290,7 +1290,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             lockRunBtn = false;
         }
     });
-}
+};
 
 ApiExplorer.prototype.ajaxError = function(error){
     sendMsg('error',error);
@@ -1302,7 +1302,7 @@ ApiExplorer.prototype.cancelQuery = function(){
     
     $('.apiExplorer').find('.inactive').val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
     apiFuncRun = false;
-}
+};
 
 ApiExplorer.prototype.prettyJson = function(json) {
     var apiExplorer = this;
@@ -1315,7 +1315,7 @@ ApiExplorer.prototype.prettyJson = function(json) {
     newJson = prettyPrintOne(newJson);
 
     return newJson;
-}
+};
 
 Array.prototype.clean = function(deleteValue) {
   for (var i = 0; i < this.length; i++) {
@@ -1337,7 +1337,7 @@ var sendMsg = function(type, message){
     message = setTimeout(function(){
         msgPane.slideUp();
     }, 5000);
-}
+};
 
 var imageReplace = function(image,newUrl) {
     image.attr('src',newUrl).bind('load', function(){
@@ -1347,7 +1347,7 @@ var imageReplace = function(image,newUrl) {
             return false;
         }
     });
-}
+};
 
 var timeConvertor = function(time){
     if(time == 'now') {
@@ -1457,7 +1457,7 @@ SelectBox.prototype.changeSelection = function() {
     var item = {'item': selectBox.input, 'title': selectBox.input.attr('data-title'), 'val': selectBox.input.val()};
     // Add to url string
     updateString(item);
-}
+};
 
 var processTheJson = function(json){
     var item = [];
@@ -1519,7 +1519,7 @@ var processTheJson = function(json){
     }
     
     return item;
-}
+};
 
 var updatingString;
 var updateString = function(obj) {
@@ -1693,7 +1693,7 @@ var updateString = function(obj) {
     updatingString.val(newQuery);
     /* ---------------- */
     /* --------------- */
-}
+};
 
 function jsonp() {
 };
