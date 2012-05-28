@@ -21,6 +21,22 @@ var Tabs = function() {
     this.page = [];
 };
 
+var TabCodes = {
+	SCHEDULE: 0,
+	CHANNELS: 1,
+	CONTENT: 2,
+	CONTENT_GROUPS: 3,
+	CONTENT_GROUPS_ID: 4,
+	CONTENT_GROUPS_ID_CONTENT: 5,
+	TOPICS: 6,
+	TOPICS_ID: 7,
+	TOPICS_ID_CONTENT: 8,
+	PRODUCTS: 9,
+	PRODUCTS_ID_CONTENT: 10,
+	SEARCH:11,
+	CUSTOM: 12
+};
+
 Tabs.prototype.init = function(e) {
     var tabs = this;
     tabs.tabHolder = e;
@@ -770,7 +786,7 @@ ApiExplorer.prototype.customQuery = function(query,run){
     queryHolder.val(query);
     apiExplorer.query = queryBeg+query;
     if(run != false){
-        apiExplorer.runQuery(12);
+        apiExplorer.runQuery(TabCodes.CUSTOM);
     } else {
         queryHolder.focus();
     }
@@ -803,7 +819,7 @@ ApiExplorer.prototype.searchQuery = function(query){
     }
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(11);
+    apiExplorer.runQuery(TabCodes.SEARCH);
 };
 
 ApiExplorer.prototype.discoverQuery = function(query){
@@ -826,7 +842,7 @@ ApiExplorer.prototype.discoverQuery = function(query){
     
     /* if(apiExplorer.timedOut == true){*/
         apiExplorer.query = query;
-        apiExplorer.runQuery(1);
+        apiExplorer.runQuery(TabCodes.CHANNELS);
     /* } */
 };
 
@@ -884,7 +900,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     
     apiExplorer.query = query;
 
-    apiExplorer.runQuery(0);
+    apiExplorer.runQuery(TabCodes.SCHEDULE);
 };
 
 ApiExplorer.prototype.channelsQuery = function(query){
@@ -896,7 +912,7 @@ ApiExplorer.prototype.channelsQuery = function(query){
     };
    
     apiExplorer.query = query;
-    apiExplorer.runQuery(1);
+    apiExplorer.runQuery(TabCode.CHANNELS);
 };
 
 ApiExplorer.prototype.contentQuery = function(query){
@@ -917,7 +933,7 @@ ApiExplorer.prototype.contentQuery = function(query){
     
     $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
-    apiExplorer.runQuery(2);
+    apiExplorer.runQuery(TabCodes.CONTENT);
 };
 
 ApiExplorer.prototype.contentGroupsQuery = function(query){
@@ -929,7 +945,7 @@ ApiExplorer.prototype.contentGroupsQuery = function(query){
     };
  
     apiExplorer.query = query;
-    apiExplorer.runQuery(3);
+    apiExplorer.runQuery(TabCodes.CONTENT_GROUPS);
 };
 
 ApiExplorer.prototype.contentGroupsIdQuery = function(query){
@@ -941,7 +957,7 @@ ApiExplorer.prototype.contentGroupsIdQuery = function(query){
     };
  
     apiExplorer.query = query;
-    apiExplorer.runQuery(4);
+    apiExplorer.runQuery(TabCodes.CONTENT_GROUPS_ID);
 };
 
 ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
@@ -953,7 +969,7 @@ ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(5);
+    apiExplorer.runQuery(TabCodes.CONTENT_GROUPS_ID_CONTENT);
 };
 
 ApiExplorer.prototype.topicsQuery = function(query){
@@ -965,7 +981,7 @@ ApiExplorer.prototype.topicsQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(6);
+    apiExplorer.runQuery(TabCodes.TOPICS);
 };
 
 ApiExplorer.prototype.topicsIdQuery = function(query){
@@ -977,7 +993,7 @@ ApiExplorer.prototype.topicsIdQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(7);
+    apiExplorer.runQuery(TabCodes.TOPICS_ID);
 };
 
 ApiExplorer.prototype.topicsIdContentQuery = function(query){
@@ -989,7 +1005,7 @@ ApiExplorer.prototype.topicsIdContentQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(8);
+    apiExplorer.runQuery(TabCodes.TOPICS_ID_CONTENT);
 };
 
 ApiExplorer.prototype.productsQuery = function(query){
@@ -1001,7 +1017,7 @@ ApiExplorer.prototype.productsQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(9);
+    apiExplorer.runQuery(TabCodes.PRODUCTS);
 };
 
 ApiExplorer.prototype.productsIdContentQuery = function(query){
@@ -1022,7 +1038,7 @@ ApiExplorer.prototype.productsIdContentQuery = function(query){
 //    
 //    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
-    apiExplorer.runQuery(10);
+    apiExplorer.runQuery(TabCodes.PRODUCTS_ID_CONTENT);
 };
 
 ApiExplorer.prototype.textAltered = function(query, params){
@@ -1072,7 +1088,14 @@ var getParamByName = function(name,string){
 
 ApiExplorer.prototype.runQuery = function(tab){
     var apiExplorer = this;
-    
+
+    if (apiExplorer.query.indexOf(":id") != -1) {
+    	apiExplorer.ajaxError('Please specify an id');
+    	apiExplorer.queryBar[tab].parent.find(".btn").val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
+        apiFuncRun = false;
+        lockRunBtn = false;
+    	return null;
+    }
     if(!apiExplorer.btn.hasClass('inactive')){
         //('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
     };
@@ -1084,6 +1107,7 @@ ApiExplorer.prototype.runQuery = function(tab){
     if(apiExplorer.queryType != 'advanced'){
        apiExplorer.queryBar[tab].txt.val(apiExplorer.query);
     }
+    
     $('#currentQuery').val(apiExplorer.query);
     
     // Make request
