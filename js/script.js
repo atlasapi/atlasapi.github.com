@@ -86,15 +86,14 @@ Tabs.prototype.changeTab = function(id) {
         };
         clip.setText(text);
     });
-    
     // update query strings with any values already set in input boxes
     tabs.page[tabs.active].item.find(':input.watchMe').each(function(index) {
     	updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
+    	if ($("#apiKey").val() != "") {
+    	   updateString({'item': $(this), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
+           apiKeySet = true;
+    	}
     });
-    // include API key in URL if set
-	if ($("#apiKey").val() != "") {
-	    updateString({'item': $("#apiKey"), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
-	}
 };
 
 var SubTabs = function() {
@@ -694,7 +693,7 @@ ApiExplorer.prototype.buttonHandler = function(){
             queryUrl += '.json?limit=20';
         } else {
         	queryUrl += '.json';
-        	if (parentName != "topics/:id") {
+        	if (parentName.substr(parentName.length-4) != "/:id") {
         		queryUrl += '?';
         	}
         }
@@ -1784,7 +1783,7 @@ $(document).ready(function(){
         
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
-    tabs.changeTab(0);
+    tabs.changeTab(TabCodes.SCHEDULE);
        
     var apiExplorer = new ApiExplorer($('#explorerWrapper'), tabs);
     apiExplorer.buttonHandler();
