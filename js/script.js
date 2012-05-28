@@ -1,6 +1,7 @@
 var homePageTimer;
 
 var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
+var DEFAULT_TIMEOUT = 15000;
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
@@ -480,7 +481,7 @@ HomeDemo.prototype.request = function(first) {
             dataType: 'jsonp',
             jsonpCallback: 'jsonp',
             cache: true,
-            timeout: 5000,
+            timeout: DEFAULT_TIMEOUT,
             context: homeDemo.item,
             success: function(data, textStatus, jqXHR){  
                 homeDemo.nav.find('.timer').fadeOut();
@@ -1093,7 +1094,7 @@ ApiExplorer.prototype.runQuery = function(tab){
         dataType: 'jsonp',
         jsonpCallback: 'jsonp',
         cache: true,
-        timeout: 5000,
+        timeout: DEFAULT_TIMEOUT,
         context: apiExplorer.holder,
         statusCode: {
             0: function(a,b,c){
@@ -1122,10 +1123,13 @@ ApiExplorer.prototype.runQuery = function(tab){
             	theData = data.topics;
             } else if (data.products) {
             	theData = data.products;
+            } else if (data.content_groups) {
+                theData = data.content_groups;
             } else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
+            } else {
+            	apiExplorer.ajaxError('Sorry, could not understand the data returned.');
             }
-
             // 1
             var results = processTheJson(data);
            
@@ -1245,7 +1249,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             if(data.contents != undefined) {
                 theData = data.contents;
             }
-            
+          
             var xmlUrl = url.replace('json','xml');
             var htmlUrl = url.replace('json', 'html');
             var rdfUrl = url.replace('json', 'rdf.xml');
@@ -1305,7 +1309,9 @@ ApiExplorer.prototype.cancelQuery = function(){
 
 ApiExplorer.prototype.prettyJson = function(json) {
     var apiExplorer = this;
-    
+    if (json == null) {
+    	return "null";
+    }
     var newJson = JSON.stringify(json, null, '&nbsp;');
     
     newJson = newJson.replace(/\</g, '&lt;');
@@ -1477,10 +1483,15 @@ var processTheJson = function(json){
     else if (json.products) {
     	content = json.products;
     }
-    else {
+    else if (json.schedule){
        content = json.schedule[0].items;
     }
-    
+    else if (json.content_groups) {
+    	content = json.content_groups
+    }
+    else {
+    	console.log("Error: unrecognised content");
+    }
     for(var i = 0, ii = content.length; i<ii; i++){
     	var obj = {
     		brand: null,
@@ -1516,7 +1527,6 @@ var processTheJson = function(json){
     	
     	item.push(obj);
     }
-    
     return item;
 };
 
