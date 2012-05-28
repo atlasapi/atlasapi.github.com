@@ -1,3 +1,4 @@
+// V
 var homePageTimer;
 
 var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
@@ -32,9 +33,10 @@ var TabCodes = {
 	TOPICS_ID: 7,
 	TOPICS_ID_CONTENT: 8,
 	PRODUCTS: 9,
-	PRODUCTS_ID_CONTENT: 10,
-	SEARCH:11,
-	CUSTOM: 12
+	PRODUCTS_ID: 10,
+	PRODUCTS_ID_CONTENT: 11,
+	SEARCH:12,
+	CUSTOM: 13
 };
 
 Tabs.prototype.init = function(e) {
@@ -675,6 +677,7 @@ ApiExplorer.prototype.buttonHandler = function(){
     var apiExplorer = this;
     $('.urlCopy').each(function(i){
         var parentName;
+        
         if ($(this).parents('.subArea') && $(this).parents('.subArea').attr('id') != undefined) {
         	parentName = $(this).parents('.subArea').attr('id');
         	apiExplorer.queryBar[i] = {'txt': $(this).find('.urlTxt'), 'btn': $(this).find('.btnCopy'), 'parent': $(this).parents('.subArea')};
@@ -760,7 +763,10 @@ ApiExplorer.prototype.buttonHandler = function(){
                 break;
                 case 'products':
                     apiExplorer.productsQuery(query);
-                break; 
+                break;
+                case 'products/:id':
+                	apiExplorer.productsIdQuery(query);
+                	break;
                 case 'products/:id/content':
                 	apiExplorer.productsIdContentQuery(query);
                 break;
@@ -1018,6 +1024,17 @@ ApiExplorer.prototype.productsQuery = function(query){
     
     apiExplorer.query = query;
     apiExplorer.runQuery(TabCodes.PRODUCTS);
+};
+
+ApiExplorer.prototype.productsIdQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'products\\/\\:id';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+    apiExplorer.query = query;
+    apiExplorer.runQuery(TabCodes.PRODUCTS_ID);
 };
 
 ApiExplorer.prototype.productsIdContentQuery = function(query){
@@ -1563,10 +1580,7 @@ var updateString = function(obj) {
     */
     // 1
     var itemParent;
-    if (obj.title == "apiKey") {
-    	itemParent = {'item': $("#explorerWrapper").find('.tabArea:visible'), 'name': $("#explorerWrapper").find('.tabArea:visible').attr('id')};   	
-    }
-    else if (obj.item.parents('.subArea') && obj.item.parents('.subArea').attr('id') != undefined){
+    if (obj.item.parents('.subArea') && obj.item.parents('.subArea').attr('id') != undefined){
     	itemParent = {'item': obj.item.parents('.subArea'), 'name': obj.item.parents('.subArea').attr('id')};
     } 
     else {
@@ -1883,25 +1897,72 @@ $(document).ready(function(){
     
     $('.watchMe').keyup(function(e){
         if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
-            clearTimeout(updatingString);
-            var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-        
-            // Add to url string
-            updatingString = setTimeout(function(){
-                updateString(item);
-            },500);
+        	 clearTimeout(updatingString);
+             
+             if ($(this).attr('data-title') != 'apiKey') {
+             	  var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+                   
+                   // Add to url string
+                   updatingString = setTimeout(function(){
+                       updateString(item);
+                   },500);
+             }
+             else {
+             	if ($('#explorerWrapper').find('.tabArea:visible').find('.subArea:visible').length > 0) {
+             		$('#explorerWrapper').find('.tabArea:visible').find('.subArea:visible').each(function(i) {
+             			 var item = {'item': $(this).find('.urlTxt'), 'title': $('#apiKey').attr('data-title'), 'val': $('#apiKey').val()};
+                     
+                          // Add to url string
+                          updatingString = setTimeout(function(){
+                             updateString(item);
+                          },500);
+             		});
+             	}
+             	else {
+             		 var item = {'item': $('#explorerWrapper').find('.tabArea:visible').find('.urlTxt'), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+                     
+                      // Add to url string
+                      updatingString = setTimeout(function(){
+                         updateString(item);
+                      },500);
+             	}
+             } 
         }
     });
     
     $('.watchMe').change(function(e){
+    	
         if(!$(this).hasClass('date')){
             clearTimeout(updatingString);
-            var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
-        
-            // Add to url string
-            updatingString = setTimeout(function(){
-                updateString(item);
-            },500);
+            
+            if ($(this).attr('data-title') != 'apiKey') {
+            	  var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+                  
+                  // Add to url string
+                  updatingString = setTimeout(function(){
+                      updateString(item);
+                  },500);
+            }
+            else {
+            	if ($('#explorerWrapper').find('.tabArea:visible').find('.subArea:visible').length > 0) {
+            		$('#explorerWrapper').find('.tabArea:visible').find('.subArea:visible').each(function(i) {
+            			 var item = {'item': $(this).find('.urlTxt'), 'title': $('#apiKey').attr('data-title'), 'val': $('#apiKey').val()};
+                    
+                         // Add to url string
+                         updatingString = setTimeout(function(){
+                            updateString(item);
+                         },500);
+            		});
+            	}
+            	else {
+            		 var item = {'item': $('#explorerWrapper').find('.tabArea:visible').find('.urlTxt'), 'title': $(this).attr('data-title'), 'val': $(this).val()};
+                    
+                     // Add to url string
+                     updatingString = setTimeout(function(){
+                        updateString(item);
+                     },500);
+            	}
+            } 
         }
     });
     

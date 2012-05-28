@@ -1735,6 +1735,90 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
+					
+					<div class="subArea spacer" id="explore_products/:id">
+						<h3><span class="upper">GET</span> /products/:id.json</h3>
+					    <p>Returns a paginated list of the content related to a
+						product.</p>
+					   			    <form>
+					<table class="tbl">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id" value="" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the product</td>
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
+							</tr>
+						</tfoot>
+					</table>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="products/:id_queryCopy">
+									<a href="#" id="products/:id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="products/:id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+									<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="products/:id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#products/:id_json"
+									data-tab="products/:id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="products/:id_xml">XML</a></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="products/:id_rdf">RDF</a></li>
+							</ul>
+							<pre class="subTabArea" id="products/:id_json">
+                                </pre>
+						</div>
+						</div>
+					</div>
+					
 					<div class="subArea spacer" id="explore_products/:id/content">
 					<h3><span class="upper">GET</span> /products/:id/content.json</h3>
 					<p>Returns a paginated list of the content related to a
