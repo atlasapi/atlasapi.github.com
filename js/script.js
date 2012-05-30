@@ -22,7 +22,7 @@ var Tabs = function() {
     this.page = [];
 };
 
-var TabCodes = {
+var QueryArea = {
 	SCHEDULE: 0,
 	CHANNELS: 1,
 	CONTENT: 2,
@@ -791,7 +791,7 @@ ApiExplorer.prototype.customQuery = function(query,run){
     queryHolder.val(query);
     apiExplorer.query = queryBeg+query;
     if(run != false){
-        apiExplorer.runQuery(TabCodes.CUSTOM);
+        apiExplorer.runQuery(QueryArea.CUSTOM);
     } else {
         queryHolder.focus();
     }
@@ -824,7 +824,7 @@ ApiExplorer.prototype.searchQuery = function(query){
     }
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.SEARCH);
+    apiExplorer.runQuery(QueryArea.SEARCH);
 };
 
 ApiExplorer.prototype.discoverQuery = function(query){
@@ -847,7 +847,7 @@ ApiExplorer.prototype.discoverQuery = function(query){
     
     /* if(apiExplorer.timedOut == true){*/
         apiExplorer.query = query;
-        apiExplorer.runQuery(TabCodes.CHANNELS);
+        apiExplorer.runQuery(QueryArea.CHANNELS);
     /* } */
 };
 
@@ -905,7 +905,7 @@ ApiExplorer.prototype.scheduleQuery = function(query){
     
     apiExplorer.query = query;
 
-    apiExplorer.runQuery(TabCodes.SCHEDULE);
+    apiExplorer.runQuery(QueryArea.SCHEDULE);
 };
 
 ApiExplorer.prototype.channelsQuery = function(query){
@@ -938,7 +938,7 @@ ApiExplorer.prototype.contentQuery = function(query){
     
     $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.CONTENT);
+    apiExplorer.runQuery(QueryArea.CONTENT);
 };
 
 ApiExplorer.prototype.contentGroupsQuery = function(query){
@@ -950,7 +950,7 @@ ApiExplorer.prototype.contentGroupsQuery = function(query){
     };
  
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.CONTENT_GROUPS);
+    apiExplorer.runQuery(QueryArea.CONTENT_GROUPS);
 };
 
 ApiExplorer.prototype.contentGroupsIdQuery = function(query){
@@ -962,7 +962,7 @@ ApiExplorer.prototype.contentGroupsIdQuery = function(query){
     };
  
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.CONTENT_GROUPS_ID);
+    apiExplorer.runQuery(QueryArea.CONTENT_GROUPS_ID);
 };
 
 ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
@@ -974,7 +974,7 @@ ApiExplorer.prototype.contentGroupsIdContentQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.CONTENT_GROUPS_ID_CONTENT);
+    apiExplorer.runQuery(QueryArea.CONTENT_GROUPS_ID_CONTENT);
 };
 
 ApiExplorer.prototype.topicsQuery = function(query){
@@ -986,7 +986,7 @@ ApiExplorer.prototype.topicsQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.TOPICS);
+    apiExplorer.runQuery(QueryArea.TOPICS);
 };
 
 ApiExplorer.prototype.topicsIdQuery = function(query){
@@ -998,7 +998,7 @@ ApiExplorer.prototype.topicsIdQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.TOPICS_ID);
+    apiExplorer.runQuery(QueryArea.TOPICS_ID);
 };
 
 ApiExplorer.prototype.topicsIdContentQuery = function(query){
@@ -1010,7 +1010,7 @@ ApiExplorer.prototype.topicsIdContentQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.TOPICS_ID_CONTENT);
+    apiExplorer.runQuery(QueryArea.TOPICS_ID_CONTENT);
 };
 
 ApiExplorer.prototype.productsQuery = function(query){
@@ -1022,7 +1022,7 @@ ApiExplorer.prototype.productsQuery = function(query){
     };
     
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.PRODUCTS);
+    apiExplorer.runQuery(QueryArea.PRODUCTS);
 };
 
 ApiExplorer.prototype.productsIdQuery = function(query){
@@ -1033,7 +1033,7 @@ ApiExplorer.prototype.productsIdQuery = function(query){
         return false;
     };
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.PRODUCTS_ID);
+    apiExplorer.runQuery(QueryArea.PRODUCTS_ID);
 };
 
 ApiExplorer.prototype.productsIdContentQuery = function(query){
@@ -1054,7 +1054,7 @@ ApiExplorer.prototype.productsIdContentQuery = function(query){
 //    
 //    $('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCodes.PRODUCTS_ID_CONTENT);
+    apiExplorer.runQuery(QueryArea.PRODUCTS_ID_CONTENT);
 };
 
 ApiExplorer.prototype.textAltered = function(query, params){
@@ -1151,6 +1151,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             
             var theData;
             var endpoint = 'content.json?uri=%uri';
+            var apiClass = 'apiContent';
 
             if(data.contents) {
                 theData = data.contents;
@@ -1163,12 +1164,15 @@ ApiExplorer.prototype.runQuery = function(tab){
             } else if (data.topics) {
             	theData = data.topics;
             	endpoint = 'topics/%id.json';
+            	apiClass = 'apiTopicsId';
             } else if (data.products) {
             	theData = data.products;
             	endpoint = 'products/%id.json';
+            	apiClass = 'apiProductsId';
             } else if (data.content_groups) {
                 theData = data.content_groups;
                 endpoint = "content_groups/%id.json";
+                apiClass = 'apiContentGroupsId';
             } else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             } else {
@@ -1285,7 +1289,7 @@ ApiExplorer.prototype.runQuery = function(tab){
                     if (results[i].id) {
                     	attr = attr.replace('%id', results[i].id);
                     }
-                    item.attr('href', queryBeg+attr).addClass('apiContent');
+                    item.attr('href', queryBeg+attr);//.addClass(apiClass);
                     itemCaption.fadeIn();
                     itemImage.fadeIn();
                     item.fadeIn();
@@ -1799,7 +1803,7 @@ $(document).ready(function(){
         
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
-    tabs.changeTab(TabCodes.SCHEDULE);
+    tabs.changeTab(0);
        
     var apiExplorer = new ApiExplorer($('#explorerWrapper'), tabs);
     apiExplorer.buttonHandler();
@@ -1829,7 +1833,7 @@ $(document).ready(function(){
     
     $('a.apiSearch').click(function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
-            tabs.changeTab(0);
+            tabs.changeTab(6);
             apiExplorer.searchQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
                 $('a[href="#apiExplorer"]').click();
@@ -1841,23 +1845,23 @@ $(document).ready(function(){
         return false;
     });
     
-    $('a.apiDiscover').click(function(){
-        if(apiFuncRun == false && $(this).attr('href')!= '') {
-            tabs.changeTab(1);
-            apiExplorer.discoverQuery($(this).attr('href'));
-            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
-                $('a[href="#apiExplorer"]').click();
-            } else {
-                window.location.hash = 'apiExplorer';
-            }
-            apiFuncRun = true;
-        }
-        return false;
-    });
+//    $('a.apiDiscover').click(function(){
+//        if(apiFuncRun == false && $(this).attr('href')!= '') {
+//            tabs.changeTab(1);
+//            apiExplorer.discoverQuery($(this).attr('href'));
+//            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+//                $('a[href="#apiExplorer"]').click();
+//            } else {
+//                window.location.hash = 'apiExplorer';
+//            }
+//            apiFuncRun = true;
+//        }
+//        return false;
+//    });
     
     $('a.apiSchedule').click(function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
-            tabs.changeTab(1);
+            tabs.changeTab(0);
             apiExplorer.scheduleQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
                 $('a[href="#apiExplorer"]').click();
@@ -1883,9 +1887,51 @@ $(document).ready(function(){
         return false;
     });
     
-    $('a.api').click(function(){
+    $('a.apiContentGroupsId').click(function(){
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
+            tabs.changeTab(3);
+            apiExplorer.contentGroupsIdQuery($(this).attr('href'));
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'explore_content_groups-id';
+            }
+            apiFuncRun = true;
+        }
+        return false;
+    });
+    
+    $('a.apiProductsId').click(function(){
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
+            tabs.changeTab(5);
+            apiExplorer.productsIdQuery($(this).attr('href'));
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'explore_products-id';
+            }
+            apiFuncRun = true;
+        }
+        return false;
+    });
+    
+    $('a.apiTopicsId').click(function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(4);
+            apiExplorer.topicsIdQuery($(this).attr('href'));
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'explore_topics-id';
+            }
+            apiFuncRun = true;
+        }
+        return false;
+    });
+    
+    $('a.api').click(function(){
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
+            tabs.changeTab(7);
             apiExplorer.customQuery($(this).attr('href'));
             if($.browser.msie && $.browser.version.substr(0,1)<=7) {
                 $('a[href="#apiExplorer"]').click();
