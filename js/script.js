@@ -852,6 +852,8 @@ ApiExplorer.prototype.discoverQuery = function(query){
 };
 
 ApiExplorer.prototype.scheduleQuery = function(query){
+	console.log("Schedule query received");
+	console.log(query);
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
     
