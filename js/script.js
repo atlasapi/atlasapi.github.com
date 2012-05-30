@@ -1150,21 +1150,25 @@ ApiExplorer.prototype.runQuery = function(tab){
             */
             
             var theData;
+            var endpoint = 'content.json?uri=%uri';
 
             if(data.contents) {
                 theData = data.contents;
             } else if(data.channels) {
-            	 theData = data.channels;
+            	theData = data.channels;
             } else if(data.schedule) {
                 theData = data.schedule[0].items;
             } else if (data.groups) {
             	theData = data.groups;
             } else if (data.topics) {
             	theData = data.topics;
+            	endpoint = 'topics/%id.json';
             } else if (data.products) {
             	theData = data.products;
+            	endpoint = 'products/%id.json';
             } else if (data.content_groups) {
                 theData = data.content_groups;
+                endpoint = "content_groups/%id.json";
             } else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             } else {
@@ -1274,7 +1278,14 @@ ApiExplorer.prototype.runQuery = function(tab){
                     itemCaption.find('.br').html(results[i].brand);
                     itemCaption.find('.pub').html('('+results[i].publisher+')');
                     itemCaption.find('.ep').html(results[i].episode);
-                    item.attr('href', queryBeg+'content.json?uri='+results[i].uri).addClass('apiContent');
+                    var attr = endpoint;
+                    if (results[i].uri) {
+                    	attr = attr.replace('%uri', results[i].uri);
+                    }
+                    if (results[i].id) {
+                    	attr = attr.replace('%id', results[i].id);
+                    }
+                    item.attr('href', queryBeg+attr).addClass('apiContent');
                     itemCaption.fadeIn();
                     itemImage.fadeIn();
                     item.fadeIn();
@@ -1534,6 +1545,7 @@ var processTheJson = function(json){
     }
     for(var i = 0, ii = content.length; i<ii; i++){
     	var obj = {
+    		id: null,
     		brand: null,
     		uri: null,
     		publisher: null,
@@ -1541,6 +1553,10 @@ var processTheJson = function(json){
     		series: null,
     		image: null
     	};
+    	
+    	if (content[i].id) {
+    		obj.id = content[i].id;
+    	}
     	
     	if(content[i].title){
     		obj.brand = content[i].title;
