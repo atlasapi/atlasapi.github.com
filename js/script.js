@@ -919,7 +919,7 @@ ApiExplorer.prototype.channelsQuery = function(query){
     };
    
     apiExplorer.query = query;
-    apiExplorer.runQuery(TabCode.CHANNELS);
+    apiExplorer.runQuery(QueryArea.CHANNELS);
 };
 
 ApiExplorer.prototype.contentQuery = function(query){
