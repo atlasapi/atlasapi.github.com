@@ -278,6 +278,13 @@ curie: "bbc:b00mjlxv"</code>
 				<p>Broadcast channels are also modelled as resources in Atlas.
 					When asking for a schedule, you will have to provide the correct
 					channel id, which is available from the API.</p>
+					
+				<h4>Channel groups</h4>
+				<p>Channel groups are sets of channels that represent broadcast platforms 
+				   and regions, such as Freeview and BBC Scotland. By combining channel 
+				   groups you can get a list of all of the channels available on a certain 
+				   platform in a particular region.</p>
+				   
 				<!--<h5>Identifiers</h5>
                     <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
                     <pre>
@@ -877,10 +884,52 @@ brand_summary: {
 								</tr>
 							</thead>
 							<tbody>
+							     <tr>
+									<td class="fist">broadcaster</td>
+									<td class="second"><input type="text" id="channels_broadcaster"
+										data-title="broadcaster" class="watchMe" value="bbc.co.uk" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally filter by the broadcaster that owns the channel</td>
+							    </tr>
+						        <tr>
+									<td class="fist">media_type</td>
+									<td class="second"><input type="text" id="channels_media_type"
+										data-title="media_type" class="watchMe" value="video" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally filter by the type of channel (audio or video)</td>
+							    </tr>								
+						        <tr>
+									<td class="fist">available_from</td>
+									<td class="second"><input type="text" id="channels_available_from"
+										data-title="available_from" class="watchMe" value="bbc.co.uk" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally filter by a publisher that publishes data for the channel</td>
+							    </tr>									 	
+						        <tr>
+									<td class="fist">platforms</td>
+									<td class="second"><input type="text" id="channels_platforms"
+										data-title="platforms" class="watchMe" value="cbbb" /></td>
+									<td class="third">list</td>
+									<td class="fourth">Optionally filter by channel groups that represent broadcast platforms</td>
+							    </tr>				
+						        <tr>
+									<td class="fist">regions</td>
+									<td class="second"><input type="text" id="channels_regions"
+										data-title="regions" class="watchMe" value="cbbm" /></td>
+									<td class="third">list</td>
+									<td class="fourth">Optionally filter by channel groups that represent broadcast regions</td>
+							    </tr>		  
+						        <tr>
+									<td class="fist">order_by</td>
+									<td class="second"><input type="text" id="channels_order_by"
+										data-title="order_by" class="watchMe" value="title.reverse" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally order the list of channels</td>
+							    </tr>		
 								<tr>
 									<td class="first">limit</td>
 									<td class="second"><input
-									type="number" id="search_limit" data-title="limit" min="0"
+									type="number" id="channels_limit" data-title="limit" min="0"
 									max="50" step="1" value="5" class="watchMe" /></td>
 									<td class="third">integer</td>
 									<td class="fourth">The number of channels to return per
@@ -889,7 +938,7 @@ brand_summary: {
 								<tr>
 									<td class="first">offset</td>
 									<td class="second"><input
-									type="number" id="search_offset" data-title="offset" min="0"
+									type="number" id="channels_offset" data-title="offset" min="0"
 									max="100" step="1" value="0" class="watchMe" /></td>
 									<td class="third">integer</td>
 									<td class="fourth">The offset from the start of the list.</td>
