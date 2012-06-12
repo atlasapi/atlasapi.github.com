@@ -25,18 +25,19 @@ var Tabs = function() {
 var QueryArea = {
 	SCHEDULE: 0,
 	CHANNELS: 1,
-	CONTENT: 2,
-	CONTENT_GROUPS: 3,
-	CONTENT_GROUPS_ID: 4,
-	CONTENT_GROUPS_ID_CONTENT: 5,
-	TOPICS: 6,
-	TOPICS_ID: 7,
-	TOPICS_ID_CONTENT: 8,
-	PRODUCTS: 9,
-	PRODUCTS_ID: 10,
-	PRODUCTS_ID_CONTENT: 11,
-	SEARCH:12,
-	CUSTOM: 13
+	CHANNELS_ID: 2,
+	CONTENT: 3,
+	CONTENT_GROUPS: 4,
+	CONTENT_GROUPS_ID: 5,
+	CONTENT_GROUPS_ID_CONTENT: 6,
+	TOPICS: 7,
+	TOPICS_ID: 8,
+	TOPICS_ID_CONTENT: 9,
+	PRODUCTS: 10,
+	PRODUCTS_ID: 11,
+	PRODUCTS_ID_CONTENT: 12,
+	SEARCH:13,
+	CUSTOM: 14
 };
 
 Tabs.prototype.init = function(e) {
@@ -739,6 +740,9 @@ ApiExplorer.prototype.buttonHandler = function(){
                 case 'channels':
                     apiExplorer.channelsQuery(query);
                 break;
+                case 'channels/:id':
+                    apiExplorer.channelsIdQuery(query);
+                break;
                 case 'content':
                     apiExplorer.contentQuery(query);
                 break;
@@ -914,12 +918,24 @@ ApiExplorer.prototype.channelsQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'channels';
     
-    if(apiExplorer.textAltered(query, ['uri'])){
+    if(apiExplorer.textAltered(query, ['limit'])){
         return false;
     };
    
     apiExplorer.query = query;
     apiExplorer.runQuery(QueryArea.CHANNELS);
+};
+
+ApiExplorer.prototype.channelsIdQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'channels\\/\\:id';
+    
+    if(apiExplorer.textAltered(query, ['id'])){
+        return false;
+    };
+   
+    apiExplorer.query = query;
+    apiExplorer.runQuery(QueryArea.CHANNELS_ID);
 };
 
 ApiExplorer.prototype.contentQuery = function(query){
@@ -1159,6 +1175,8 @@ ApiExplorer.prototype.runQuery = function(tab){
                 theData = data.contents;
             } else if(data.channels) {
             	theData = data.channels;
+            	endpoint = 'channels/%id.json';
+            	apiClass = 'apiChannel';
             } else if(data.schedule) {
                 theData = data.schedule[0].items;
             } else if (data.groups) {
@@ -1314,7 +1332,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             $('a[data-tab="'+apiExplorer.queryType+'_xml"]').attr('href', xmlUrl);
             $('a[data-tab="'+apiExplorer.queryType+'_html"]').attr('href', htmlUrl);
             $('a[data-tab="'+apiExplorer.queryType+'_rdf"]').attr('href', rdfUrl);
-            
+           
             $('#'+apiExplorer.queryType+'_json').html(apiExplorer.prettyJson(theData));
             
             if(apiExplorer.queryBar[tab].parent.find('.resultsArea:hidden')){
@@ -1869,6 +1887,20 @@ $(document).ready(function(){
                 $('a[href="#apiExplorer"]').click();
             } else {
                 window.location.hash = 'apiExplorer';
+            }
+            apiFuncRun = true;
+        }
+        return false;
+    });
+    
+    $('a.apiChannel').click(function(){
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
+            tabs.changeTab(1);
+            apiExplorer.channelsIdQuery($(this).attr('href'));
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'explore_channels-id';
             }
             apiFuncRun = true;
         }
