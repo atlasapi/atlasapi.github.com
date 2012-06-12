@@ -25,18 +25,20 @@ var Tabs = function() {
 var QueryArea = {
 	SCHEDULE: 0,
 	CHANNELS: 1,
-	CONTENT: 2,
-	CONTENT_GROUPS: 3,
-	CONTENT_GROUPS_ID: 4,
-	CONTENT_GROUPS_ID_CONTENT: 5,
-	TOPICS: 6,
-	TOPICS_ID: 7,
-	TOPICS_ID_CONTENT: 8,
-	PRODUCTS: 9,
-	PRODUCTS_ID: 10,
-	PRODUCTS_ID_CONTENT: 11,
-	SEARCH:12,
-	CUSTOM: 13
+	CHANNEL_GROUPS: 2,
+	CHANNEL_GROUPS_ID: 3,
+	CONTENT: 4,
+	CONTENT_GROUPS: 5,
+	CONTENT_GROUPS_ID: 6,
+	CONTENT_GROUPS_ID_CONTENT: 7,
+	TOPICS: 8,
+	TOPICS_ID: 9,
+	TOPICS_ID_CONTENT: 10,
+	PRODUCTS: 11,
+	PRODUCTS_ID: 12,
+	PRODUCTS_ID_CONTENT: 13,
+	SEARCH:14,
+	CUSTOM: 15
 };
 
 Tabs.prototype.init = function(e) {
@@ -88,6 +90,7 @@ Tabs.prototype.changeTab = function(id) {
     });
     // update query strings with any values already set in input boxes
     tabs.page[tabs.active].item.find(':input.watchMe').each(function(index) {
+    	console.log($(this).attr('data-title'));
     	updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
     	if ($("#apiKey").val() != "") {
     	   updateString({'item': $(this), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
@@ -739,6 +742,12 @@ ApiExplorer.prototype.buttonHandler = function(){
                 case 'channels':
                     apiExplorer.channelsQuery(query);
                 break;
+                case 'channel_groups':
+                    apiExplorer.channelGroupsQuery(query);
+                break;
+                case 'channel_groups/:id':
+                    apiExplorer.channelGroupsIdQuery(query);
+                break;
                 case 'content':
                     apiExplorer.contentQuery(query);
                 break;
@@ -920,6 +929,30 @@ ApiExplorer.prototype.channelsQuery = function(query){
    
     apiExplorer.query = query;
     apiExplorer.runQuery(QueryArea.CHANNELS);
+};
+
+ApiExplorer.prototype.channelGroupsQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'channel_groups';
+    
+    if(apiExplorer.textAltered(query, ['limit'])){
+        return false;
+    };
+   
+    apiExplorer.query = query;
+    apiExplorer.runQuery(QueryArea.CHANNEL_GROUPS);
+};
+
+ApiExplorer.prototype.channelGroupsIdQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'channel_groups_id';
+    
+    if(apiExplorer.textAltered(query, [':id'])){
+        return false;
+    };
+   
+    apiExplorer.query = query;
+    apiExplorer.runQuery(QueryArea.CHANNEL_GROUPS_ID);
 };
 
 ApiExplorer.prototype.contentQuery = function(query){

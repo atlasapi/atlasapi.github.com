@@ -867,10 +867,10 @@ brand_summary: {
 					</div>
 				</div>
 				
-				
 				<!--  CHANNELS -->
 				<div class="tabArea" id="explore_channels" style="display: none;">
 					<h2>Channels</h2>
+					<div class="subArea" id="explore_channels">
 					<h3><span class="upper">GET</span> /channels.json</h3>
 					<p>Returns a paginated list of all channels.</p>
 					<form>
@@ -946,7 +946,7 @@ brand_summary: {
 							</tbody>
 							<tfoot>
 								<tr>
-									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
+									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: channel_groups</td>
 								</tr>
 							</tfoot>
 						</table>
@@ -959,6 +959,97 @@ brand_summary: {
 										type="text" class="urlTxt"
 										value="http://atlas.metabroadcast.com/3.0/channels.json?" /><input
 										type="hidden" id="channels_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+						</div>
+					</form>
+				    <div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="channels_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#channels_json"
+									data-tab="channels_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="channels_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="channels_html">HTML</a></li>-->
+							</ul>
+							<pre class="subTabArea" id="channels_json">
+                                </pre>
+						</div>
+					</div>
+				    
+				</div>
+				    <!--  CHANNEL GROUPS -->
+				    <div class="subArea spacer" id="explore_channel_groups">
+					<h2>Channel groups</h2>
+					<h3><span class="upper">GET</span> /channel_groups.json</h3>
+					<p>Returns a paginated list of all channel groups.</p>
+					<form>
+						<table class="tbl">
+							<thead>
+								<tr>
+									<th class="first">Parameter</th>
+									<th class="second">Value</th>
+									<th class="third">Type</th>
+									<th class="fourth">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="first">limit</td>
+									<td class="second"><input
+									type="number" id="channel_groups_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+									<td class="third">integer</td>
+									<td class="fourth">The number of channel groups to return per page</td>
+								</tr>
+								<tr>
+									<td class="first">offset</td>
+									<td class="second"><input
+									type="number" id="channel_groups_offset" data-title="offset" min="0"
+									max="100" step="1" value="0" class="watchMe" /></td>
+									<td class="third">integer</td>
+									<td class="fourth">The offset from the start of the list.</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: channels</td>
+								</tr>
+							</tfoot>
+						</table>
+						<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="channel_groups_queryCopy">
+									<a href="#" id="channel_groupsCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="http://atlas.metabroadcast.com/3.0/channel_groups.json?" /><input
+										type="hidden" id="channels_groups_altered" />
 								</div>
 							</div>
 							<div class="unit size1of5 lastUnit">
@@ -986,23 +1077,103 @@ brand_summary: {
 									class="pub"></span><span class="ep"></span></span>
 							</a>
 						</div>
-						<div class="output" id="schedule_output">
+						<div class="output" id="channel_groups_output">
 							<ul class="smallTabs clearfix">
-								<li class="subTab selected"><a href="#channels_json"
-									data-tab="channels_json">JSON</a></li>
-								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+								<li class="subTab selected"><a href="#channel_groups_json"
+									data-tab="channel_groups_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available	formats:</p></li>
 								<li class="fl"><a href="" target="_blank"
-									data-tab="channels_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>-->
+									data-tab="channel_groups_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="channel_groups_html">HTML</a></li>-->
 							</ul>
-							<pre class="subTabArea" id="channels_json">
+							<pre class="subTabArea" id="channel_groups_json">
                                 </pre>
 						</div>
 					</div>
 				</div>
-				
-				
+				    <a name="explore_topics-id"></a>
+				     <!--  CHANNEL GROUPS ID -->
+				    <div class="subArea spacer" id="explore_channel_groups/:id">
+					<h3><span class="upper">GET</span> /channel_groups/:id.json</h3>
+					<p>Returns the data for a particular channel group.</p>
+					<form>
+						<table class="tbl">
+							<thead>
+								<tr>
+									<th class="first">Parameter</th>
+									<th class="second">Value</th>
+									<th class="third">Type</th>
+									<th class="fourth">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+							     <tr>
+									<td class="fist">id</td>
+									<td class="second"><input type="text" id="channel_groups_id_id"
+										data-title=":id" class="watchMe" value="" /></td>
+									<td class="third">string</td>
+									<td class="fourth">The id of the channel group</td>
+							    </tr>	
+							</tbody>
+							<tfoot>
+								<tr>
+									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: channels</td>
+								</tr>
+							</tfoot>
+						</table>
+						<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="channel_groups_id_queryCopy">
+									<a href="#" id="channel_groups_idCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="http://atlas.metabroadcast.com/3.0/channel_groups/:id.json" /><input
+										type="hidden" id="channel_groups_id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+						</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="channel_groups_id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#channel_groups_id_json"
+									data-tab="channel_groups_id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										formats:</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="channel_groups_id_xml">XML</a></li>
+								<!--<li class="fl"><a href="" target="_blank" data-tab="channel_groups_id_html">HTML</a></li>-->
+							</ul>
+							<pre class="subTabArea" id="channel_groups_id_json">
+                                </pre>
+						</div>
+					</div>
+				</div>
+				</div>
+								
 				<!--  CONTENT  -->
 				<div class="tabArea" id="explore_content" style="display: none;">
 					<h2>Content</h2>
