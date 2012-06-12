@@ -25,20 +25,21 @@ var Tabs = function() {
 var QueryArea = {
 	SCHEDULE: 0,
 	CHANNELS: 1,
-	CHANNEL_GROUPS: 2,
-	CHANNEL_GROUPS_ID: 3,
-	CONTENT: 4,
-	CONTENT_GROUPS: 5,
-	CONTENT_GROUPS_ID: 6,
-	CONTENT_GROUPS_ID_CONTENT: 7,
-	TOPICS: 8,
-	TOPICS_ID: 9,
-	TOPICS_ID_CONTENT: 10,
-	PRODUCTS: 11,
-	PRODUCTS_ID: 12,
-	PRODUCTS_ID_CONTENT: 13,
-	SEARCH:14,
-	CUSTOM: 15
+	CHANNELS_ID: 2,
+	CHANNEL_GROUPS: 3,
+	CHANNEL_GROUPS_ID: 4,
+	CONTENT: 5,
+	CONTENT_GROUPS: 6,
+	CONTENT_GROUPS_ID: 7,
+	CONTENT_GROUPS_ID_CONTENT: 8,
+	TOPICS: 9,
+	TOPICS_ID: 10,
+	TOPICS_ID_CONTENT: 11,
+	PRODUCTS: 12,
+	PRODUCTS_ID: 13,
+	PRODUCTS_ID_CONTENT: 14,
+	SEARCH:15,
+	CUSTOM: 16,
 };
 
 Tabs.prototype.init = function(e) {
@@ -742,6 +743,9 @@ ApiExplorer.prototype.buttonHandler = function(){
                 case 'channels':
                     apiExplorer.channelsQuery(query);
                 break;
+                case 'channels/:id':
+                    apiExplorer.channelsIdQuery(query);
+                break;
                 case 'channel_groups':
                     apiExplorer.channelGroupsQuery(query);
                 break;
@@ -923,13 +927,26 @@ ApiExplorer.prototype.channelsQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'channels';
     
-    if(apiExplorer.textAltered(query, ['uri'])){
+    if(apiExplorer.textAltered(query, ['limit'])){
         return false;
     };
    
     apiExplorer.query = query;
     apiExplorer.runQuery(QueryArea.CHANNELS);
 };
+
+ApiExplorer.prototype.channelsIdQuery = function(query){
+    var apiExplorer = this;
+    apiExplorer.queryType = 'channels\\/\\:id';
+    
+    if(apiExplorer.textAltered(query, ['id'])){
+        return false;
+    };
+   
+    apiExplorer.query = query;
+    apiExplorer.runQuery(QueryArea.CHANNELS_ID);
+};
+
 
 ApiExplorer.prototype.channelGroupsQuery = function(query){
     var apiExplorer = this;
@@ -1192,6 +1209,8 @@ ApiExplorer.prototype.runQuery = function(tab){
                 theData = data.contents;
             } else if(data.channels) {
             	theData = data.channels;
+            	endpoint = 'channels/%id.json';
+            	apiClass = 'apiChannel';
             } else if(data.schedule) {
                 theData = data.schedule[0].items;
             } else if (data.groups) {
@@ -1347,7 +1366,7 @@ ApiExplorer.prototype.runQuery = function(tab){
             $('a[data-tab="'+apiExplorer.queryType+'_xml"]').attr('href', xmlUrl);
             $('a[data-tab="'+apiExplorer.queryType+'_html"]').attr('href', htmlUrl);
             $('a[data-tab="'+apiExplorer.queryType+'_rdf"]').attr('href', rdfUrl);
-            
+           
             $('#'+apiExplorer.queryType+'_json').html(apiExplorer.prettyJson(theData));
             
             if(apiExplorer.queryBar[tab].parent.find('.resultsArea:hidden')){
@@ -1902,6 +1921,20 @@ $(document).ready(function(){
                 $('a[href="#apiExplorer"]').click();
             } else {
                 window.location.hash = 'apiExplorer';
+            }
+            apiFuncRun = true;
+        }
+        return false;
+    });
+    
+    $('a.apiChannel').click(function(){
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
+            tabs.changeTab(1);
+            apiExplorer.channelsIdQuery($(this).attr('href'));
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'explore_channels-id';
             }
             apiFuncRun = true;
         }
