@@ -799,7 +799,7 @@ brand_summary: {
 									<td class="fist">annotations</td>
 									<td class="second"><input type="text"
 										class="annotations watchMe" data-title="annotations"
-										id="annotations" value="channel,description,broadcasts" /></td>
+										id="annotations" value="channel,description,broadcasts,brand_summary" /></td>
 									<td class="third">list</td>
 									<td class="fourth">List of annotations that describe the
 										data to be output</td>
@@ -1001,6 +1001,8 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
+					
+					<!-- CHANNELS ID -->
 					<a name="explore_channels-id"></a>
 					<div class="subArea spacer" id="explore_channels/:id">
 					<h3><span class="upper">GET</span> /channels/:id.json</h3>
@@ -1047,7 +1049,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>	
-										<div class="resultsArea line hr" style="display: none;">
+					  <div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiChannel" style="display: none;"> <img
@@ -1083,6 +1085,8 @@ brand_summary: {
 						</div>
 					</div>		
 					</div>
+					
+					
 				    <!--  CHANNEL GROUPS -->
 				    <div class="subArea spacer" id="explore_channel_groups">
 					<h2>Channel groups</h2>
@@ -1172,8 +1176,9 @@ brand_summary: {
 						</div>
 					</div>
 				</div>
-				    <a name="explore_topics-id"></a>
-				     <!--  CHANNEL GROUPS ID -->
+				    
+				    <!--  CHANNEL GROUPS ID -->
+				    <a name="explore_groups-id"></a>
 				    <div class="subArea spacer" id="explore_channel_groups/:id">
 					<h3><span class="upper">GET</span> /channel_groups/:id.json</h3>
 					<p>Returns the data for a particular channel group.</p>
@@ -1531,6 +1536,8 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
+					
+					<!--  CONTENT GROUPS ID CONTENT -->
 					<div class="subArea spacer" id="explore_content_groups/:id/content">
 					<h3><span class="upper">GET</span> /content_groups/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a content group.</p>
@@ -1574,7 +1581,7 @@ brand_summary: {
 								<td class="first">annotations</td>
 								<td class="second"><input type="text"
 										class="annotations watchMe" data-title="annotations"
-										id="annotations" value="description" /></td>
+										id="annotations" value="description,brand_summary" /></td>
 								<td class="third">list</td>
 								<td class="fourth">List of annotations that describe the
 									data to be output</td>
@@ -1752,6 +1759,8 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
+					
+					<!-- TOPICS ID -->
 					<a name="explore_topics-id"></a>
 					<div class="subArea spacer" id="explore_topics/:id">
 					<h3><span class="upper">GET</span> /topics/:id.json</h3>
@@ -1798,7 +1807,7 @@ brand_summary: {
 							</div>
 					</div>
 					</form>	
-										<div class="resultsArea line hr" style="display: none;">
+						<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
 							<a class="showItem apiContent" style="display: none;"> <img
@@ -1834,6 +1843,8 @@ brand_summary: {
 						</div>
 					</div>		
 						</div>
+						
+					<!-- TOPICS ID CONTENT -->
 					<div class="subArea spacer" id="explore_topics/:id/content">		
 					<h3><span class="upper">GET</span> /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
@@ -1877,7 +1888,7 @@ brand_summary: {
 								<td class="first">annotations</td>
 								<td class="second"><input type="text"
 										class="watchMe" data-title="annotations"
-										id="annotations" value="description" /></td>
+										id="annotations" value="description,brand_summary" /></td>
 								<td class="third">list</td>
 								<td class="fourth">List of annotations that describe the
 									data to be output</td>
@@ -2039,6 +2050,8 @@ brand_summary: {
 						</div>
 					</div>
 					</div>
+					
+					<!-- PRODUCTS ID -->
 					<a name="explore_products-id" ></a>
 					<div class="subArea spacer" id="explore_products/:id">
 						<h3><span class="upper">GET</span> /products/:id.json</h3>
@@ -2123,6 +2136,7 @@ brand_summary: {
 						</div>
 					</div>
 					
+					<!-- PRODUCTS ID CONTENT -->
 					<div class="subArea spacer" id="explore_products/:id/content">
 					<h3><span class="upper">GET</span> /products/:id/content.json</h3>
 					<p>Returns a paginated list of the content related to a
@@ -2336,6 +2350,7 @@ brand_summary: {
 					</div>
 				</div>
 
+                <!-- COMPLETE CONTROL -->
 				<div class="tabArea" id="explore_advanced" style="display: none;">
 					<form>
 						<div class="line urlCopy" id="advanced_queryCopy">
