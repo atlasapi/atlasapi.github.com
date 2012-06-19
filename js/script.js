@@ -91,7 +91,6 @@ Tabs.prototype.changeTab = function(id) {
     });
     // update query strings with any values already set in input boxes
     tabs.page[tabs.active].item.find(':input.watchMe').each(function(index) {
-    	console.log($(this).attr('data-title'));
     	updateString({'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()});
     	if ($("#apiKey").val() != "") {
     	   updateString({'item': $(this), 'title': $("#apiKey").attr('data-title'), 'val': $("#apiKey").val()});
@@ -865,8 +864,6 @@ ApiExplorer.prototype.discoverQuery = function(query){
 };
 
 ApiExplorer.prototype.scheduleQuery = function(query){
-	console.log("Schedule query received");
-	console.log(query);
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
     
