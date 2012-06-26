@@ -1850,7 +1850,9 @@ $(document).ready(function(){
     var pageInfo = new PageInfo();
     pageInfo.init();
     
-    $('section:not(.subSection):last-child').css('min-height', pageInfo.pageHeight-148);
+    var longestTab = $('#explore_topics').height();
+    var height = longestTab+178;
+    $('section:not(.subSection):last-child').css('min-height', height);
         
     var tabs = new Tabs();
     tabs.init($('#explorerWrapper'));
