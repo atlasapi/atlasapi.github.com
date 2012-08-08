@@ -873,8 +873,8 @@ ApiExplorer.prototype.discoverQuery = function(query){
 };
 
 ApiExplorer.prototype.scheduleQuery = function(query){
-	console.log("Schedule query received");
-	console.log(query);
+	//console.log("Schedule query received");
+	//console.log(query);
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
     
@@ -1582,7 +1582,7 @@ var processTheJson = function(json){
     	content = json.content_groups
     }
     else {
-    	console.log("Error: unrecognised content");
+    	//console.log("Error: unrecognised content");
     }
     for(var i = 0, ii = content.length; i<ii; i++){
     	var obj = {
