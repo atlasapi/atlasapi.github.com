@@ -944,7 +944,6 @@ ApiExplorer.prototype.channelsIdQuery = function(query){
     apiExplorer.runQuery(QueryArea.CHANNELS_ID);
 };
 
-
 ApiExplorer.prototype.channelGroupsQuery = function(query){
     var apiExplorer = this;
     apiExplorer.queryType = 'channel_groups';
