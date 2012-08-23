@@ -1219,16 +1219,15 @@ ApiExplorer.prototype.runQuery = function(tab){
             var theData;
             var endpoint = 'content.json?uri=%uri';
             var apiClass = 'apiContent';
-
             if(data.contents) {
                 theData = data.contents;
             } else if(data.channels) {
         		theData = data.channels;
-            	if (tab == QueryArea.CHANNEL_GROUPS_ID) {
-                	endpoint = 'channel_groups/%id.json';
-                	apiClass = 'apiChannelGroupsId';
-            	} else {
-            		endpoint = 'channels/%id.json';
+            	if (url.indexOf("channel_groups") != -1) {
+            		endpoint = 'channel_groups/%id.json';
+                    apiClass = 'apiChannelGroupsId';
+                } else {
+           		    endpoint = 'channels/%id.json';
             		apiClass = 'apiChannel';
             	}
             } else if(data.schedule) {
