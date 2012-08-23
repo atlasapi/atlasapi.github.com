@@ -1223,9 +1223,14 @@ ApiExplorer.prototype.runQuery = function(tab){
             if(data.contents) {
                 theData = data.contents;
             } else if(data.channels) {
-            	theData = data.channels;
-            	endpoint = 'channels/%id.json';
-            	apiClass = 'apiChannel';
+        		theData = data.channels;
+            	if (tab == QueryArea.CHANNEL_GROUPS_ID) {
+                	endpoint = 'channel_groups/%id.json';
+                	apiClass = 'apiChannelGroupsId';
+            	} else {
+            		endpoint = 'channels/%id.json';
+            		apiClass = 'apiChannel';
+            	}
             } else if(data.schedule) {
                 theData = data.schedule[0].items;
             } else if (data.groups) {
@@ -1952,6 +1957,20 @@ $(document).ready(function(){
                 $('a[href="#apiExplorer"]').click();
             } else {
                 window.location.hash = 'explore_channels-id';
+            }
+            apiFuncRun = true;
+        }
+        return false;
+    });
+    
+    $('a.apiChannelGroupsId').click(function(){
+        if(apiFuncRun == false && $(this).attr('href')!= '') {
+            tabs.changeTab(1);
+            apiExplorer.channelGroupsIdQuery($(this).attr('href'));
+            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
+                $('a[href="#apiExplorer"]').click();
+            } else {
+                window.location.hash = 'explore_groups-id';
             }
             apiFuncRun = true;
         }
