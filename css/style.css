@@ -1250,7 +1250,14 @@
                 border-radius: 3px;
                 display: block;
             }
-                .select .value {display: block; z-index: 9; position: relative; background: url(../images/select.png) right bottom no-repeat;}
+            .select:hover {
+                z-index: 15;
+            }
+            .select .value {display: block; 
+                z-index: 9; 
+                position: relative; 
+                background: url(../images/select.png) right bottom no-repeat;
+                }
                 .select .options {
                     display: none; 
                     position: absolute;
