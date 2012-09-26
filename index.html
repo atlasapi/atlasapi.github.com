@@ -191,6 +191,7 @@
 				<li><a href="#reference_dataModel">Data Model</a></li>
 				<li><a href="#reference_sources">Sources</a></li>
 				<li><a href="#reference_feeds">Feeds</a></li>
+				<!--<li><a href="#reference_annotations">Annotations</a></li>-->
 			</ul>
 			<h2>Reference</h2>
 
@@ -596,6 +597,116 @@ brand_summary: {
 					for help producing data in these formats
 				</p>
 			</section>
+			
+			<!--<section data-title="reference_annotations" class="subSection">
+				<div class="marker" id="reference_annotations"></div>
+				<h3>Annotations</h3>
+				<p>Below is a list of available annotations to use when accessing the various endpoints in atlas.</p>
+				
+				<h4>Content</h4>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th class="first">Annotation</th>
+							<th class="second">Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="first">description</td>
+							<td class="second">id, type, title, description, image, thumbnail, media_type, specialization</td>						</tr>
+						<tr>
+							<td class="first">extended_description</td>
+							<td class="second">everything else that's not a related object</td>
+						</tr>
+						<tr>
+							<td class="first">brand_summary</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">series_summary</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">people</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">topics</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">segment_events</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">related_links</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">key_phrases</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">broadcasts</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">locations</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">first_broadcast</td>
+							<td class="second">only include the first broadcast</td>
+						</tr>
+						<tr>
+							<td class="fist">next_broadcast</td>
+							<td class="second">only include the next broadcast</td>
+						</tr>
+						<tr>
+							<td class="fist">available_locations</td>
+							<td class="second">only include locations with current availability</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>In addition, content endpoints that return content based on another resource, such as /topics/:id/content, respone to an additional annotation:</p>
+				
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th class="first">Annotation</th>
+							<th class="second">Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="first">filtering_resource</td>
+							<td class="second">this includes the resource whose content is being returned (e.g. the topic)</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<h4>Topic</h4>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th class="first">Annotation</th>
+							<th class="second">Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="first">description</td>
+							<td class="second">all fields except publisher</td>
+						</tr>
+						<tr>
+							<td class="first">extended_description</td>
+							<td class="second">everything else (only publisher info at the moment)</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>-->
 		</section>
 
 		<section class="about">
@@ -655,20 +766,23 @@ brand_summary: {
 				<div class="unit size1of4 lastUnit">
 					<h4>Get Involved</h4>
 					<ul class="socialList clearfix mbm">
-						<li><a href="http://github.com/atlasapi/atlas/" class="media"><img
+						<li style="clear: both;"><a href="http://github.com/atlasapi/atlas/" class="media"><img
 								src="images/github.png" class="img" />
-							<mark class="bd">source-code &amp; wiki</mark></a></li>
-						<li><a href="http://groups.google.com/group/atlasapi/"
+							<mark class="bd">source-code</mark></a></li>
+						<li style="clear: both;"><a href="http://docs.metabroadcast.com//display/ATLAS/Home" class="media"><img
+								src="images/confluence_32.png" class="img" />
+							<mark class="bd">wiki</mark></a></li>
+						<li style="clear: both;"><a href="http://groups.google.com/group/atlasapi/"
 							class="media"><img src="images/google.png" class="img" />
 							<mark class="bd">discussion</mark></a></li>
-						<li><a href="http://issues.atlas.metabroadcast.com/"
+						<li style="clear: both;"><a href="http://issues.atlas.metabroadcast.com/"
 							class="media" style="width: 190px;"><img
 								src="images/issues.png" class="img" />
 							<mark class="bd">issues</mark></a></li>
-						<li><a href="http://twitter.com/mb_atlas" class="media"><img
+						<li style="clear: both;"><a href="http://twitter.com/mb_atlas" class="media"><img
 								src="images/twitter.png" class="img" />
 							<mark class="bd">@mb_atlas</mark></a></li>
-						<li><a href="http://metabroadcast.com" class="media"><img
+						<li style="clear: both;"><a href="http://metabroadcast.com" class="media"><img
 								src="images/metabroadcast.png" class="img" />
 							<mark class="bd">metabroadcast</mark></a></li>
 					</ul>
@@ -805,13 +919,11 @@ brand_summary: {
 										data to be output</td>
 								</tr>
 							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: all content
-										annotations, plus channel</td>
-								</tr>
-							</tfoot>
 						</table>
+						
+						<div class="line">
+							<b>Valid Annotations:</b> <a href="#" class="js_addAnnotation" title="description">description</a>, <a href="#" class="js_addAnnotation" title="extended_description">extended_description</a>, <a href="#" class="js_addAnnotation" title="brand_summary">brand_summary</a>, <a href="#" class="js_addAnnotation" title="series_summary">series_summary</a>, <a href="#" class="js_addAnnotation" title="people">people</a>, <a href="#" class="js_addAnnotation" title="topics">topics</a>, <a href="#" class="js_addAnnotation" title="segment_events">segment_events</a>, <a href="#" class="js_addAnnotation" title="related_links">related_links</a>, <a href="#" class="js_addAnnotation" title="key_phrases">key_phrases</a>, <a href="#" class="js_addAnnotation" title="broadcasts">broadcasts</a>, <a href="#" class="js_addAnnotation" title="locations">locations</a>, <a href="#" class="js_addAnnotation" title="first_broadcast">first_broadcast</a>, <a href="#" class="js_addAnnotation" title="next_broadcast">next_broadcast</a>, <a href="#" class="js_addAnnotation" title="available_locations">available_locations</a>, plus <a href="#" class="js_addAnnotation" title="channel">channel</a>.
+						</div>
 
 						<div class="line hr">
 						    <h4>Request</h4>
