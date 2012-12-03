@@ -191,6 +191,7 @@
 				<li><a href="#reference_dataModel">Data Model</a></li>
 				<li><a href="#reference_sources">Sources</a></li>
 				<li><a href="#reference_feeds">Feeds</a></li>
+				<!--<li><a href="#reference_annotations">Annotations</a></li>-->
 			</ul>
 			<h2>Reference</h2>
 
@@ -596,6 +597,116 @@ brand_summary: {
 					for help producing data in these formats
 				</p>
 			</section>
+			
+			<!--<section data-title="reference_annotations" class="subSection">
+				<div class="marker" id="reference_annotations"></div>
+				<h3>Annotations</h3>
+				<p>Below is a list of available annotations to use when accessing the various endpoints in atlas.</p>
+				
+				<h4>Content</h4>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th class="first">Annotation</th>
+							<th class="second">Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="first">description</td>
+							<td class="second">id, type, title, description, image, thumbnail, media_type, specialization</td>						</tr>
+						<tr>
+							<td class="first">extended_description</td>
+							<td class="second">everything else that's not a related object</td>
+						</tr>
+						<tr>
+							<td class="first">brand_summary</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">series_summary</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">people</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">topics</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">segment_events</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">related_links</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">key_phrases</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">broadcasts</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">locations</td>
+							<td class="second">&nbsp;</td>
+						</tr>
+						<tr>
+							<td class="fist">first_broadcast</td>
+							<td class="second">only include the first broadcast</td>
+						</tr>
+						<tr>
+							<td class="fist">next_broadcast</td>
+							<td class="second">only include the next broadcast</td>
+						</tr>
+						<tr>
+							<td class="fist">available_locations</td>
+							<td class="second">only include locations with current availability</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<p>In addition, content endpoints that return content based on another resource, such as /topics/:id/content, respone to an additional annotation:</p>
+				
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th class="first">Annotation</th>
+							<th class="second">Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="first">filtering_resource</td>
+							<td class="second">this includes the resource whose content is being returned (e.g. the topic)</td>
+						</tr>
+					</tbody>
+				</table>
+				
+				<h4>Topic</h4>
+				<table class="tbl">
+					<thead>
+						<tr>
+							<th class="first">Annotation</th>
+							<th class="second">Notes</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="first">description</td>
+							<td class="second">all fields except publisher</td>
+						</tr>
+						<tr>
+							<td class="first">extended_description</td>
+							<td class="second">everything else (only publisher info at the moment)</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>-->
 		</section>
 
 		<section class="about">
@@ -655,20 +766,23 @@ brand_summary: {
 				<div class="unit size1of4 lastUnit">
 					<h4>Get Involved</h4>
 					<ul class="socialList clearfix mbm">
-						<li><a href="http://github.com/atlasapi/atlas/" class="media"><img
+						<li style="clear: both;"><a href="http://github.com/atlasapi/atlas/" class="media"><img
 								src="images/github.png" class="img" />
-							<mark class="bd">source-code &amp; wiki</mark></a></li>
-						<li><a href="http://groups.google.com/group/atlasapi/"
+							<mark class="bd">source-code</mark></a></li>
+						<li style="clear: both;"><a href="http://docs.metabroadcast.com/display/ATLAS/Home" class="media"><img
+								src="images/confluence_32.png" class="img" />
+							<mark class="bd">wiki</mark></a></li>
+						<li style="clear: both;"><a href="http://groups.google.com/group/atlasapi/"
 							class="media"><img src="images/google.png" class="img" />
 							<mark class="bd">discussion</mark></a></li>
-						<li><a href="http://issues.atlas.metabroadcast.com/"
+						<li style="clear: both;"><a href="http://issues.atlas.metabroadcast.com/"
 							class="media" style="width: 190px;"><img
 								src="images/issues.png" class="img" />
 							<mark class="bd">issues</mark></a></li>
-						<li><a href="http://twitter.com/mb_atlas" class="media"><img
+						<li style="clear: both;"><a href="http://twitter.com/mb_atlas" class="media"><img
 								src="images/twitter.png" class="img" />
 							<mark class="bd">@mb_atlas</mark></a></li>
-						<li><a href="http://metabroadcast.com" class="media"><img
+						<li style="clear: both;"><a href="http://metabroadcast.com" class="media"><img
 								src="images/metabroadcast.png" class="img" />
 							<mark class="bd">metabroadcast</mark></a></li>
 					</ul>
@@ -744,7 +858,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /schedule.json</h3>
 					<p>Returns a schedule for the specified channel and period.</p>
 					<form>
-						<table class="tbl">
+						<table class="tbl mbm">
 							<thead>
 								<tr>
 									<th class="first">Parameter</th>
@@ -805,13 +919,12 @@ brand_summary: {
 										data to be output</td>
 								</tr>
 							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: all content
-										annotations, plus channel</td>
-								</tr>
-							</tfoot>
 						</table>
+						
+						<div class="line mbm">
+							<small>
+							<b>Valid Annotations:</b> description, extended_description, brand_summary, series_summary, people, topics, segment_events, related_links, key_phrases, broadcasts, locations, first_broadcast, next_broadcast, available_locations, plus channel.</small>
+						</div>
 
 						<div class="line hr">
 						    <h4>Request</h4>
@@ -874,7 +987,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /channels.json</h3>
 					<p>Returns a paginated list of all channels.</p>
 					<form>
-						<table class="tbl">
+						<table class="tbl mbm">
 							<thead>
 								<tr>
 									<th class="first">Parameter</th>
@@ -979,13 +1092,24 @@ brand_summary: {
 									<td class="third">integer</td>
 									<td class="fourth">The offset from the start of the list.</td>
 								</tr>
-							</tbody>
-							<tfoot>
 								<tr>
-									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: channel_groups</td>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
 								</tr>
-							</tfoot>
+							</tbody>
 						</table>
+						
+						<div class="line mbm">
+							<small>
+								<b>Valid annotations</b>: channel_groups
+							</small>
+						</div>
+						
 						<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1044,7 +1168,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /channels/:id.json</h3>
 					<p>Returns the data for a particular channel.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1063,12 +1187,13 @@ brand_summary: {
 								<td class="fourth">The id of the channel</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: channel_groups
+						</small>
+					</div>
+					
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1128,7 +1253,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /channel_groups.json</h3>
 					<p>Returns a paginated list of all channel groups.</p>
 					<form>
-						<table class="tbl">
+						<table class="tbl mbm">
 							<thead>
 								<tr>
 									<th class="first">Parameter</th>
@@ -1154,13 +1279,22 @@ brand_summary: {
 									<td class="third">integer</td>
 									<td class="fourth">The offset from the start of the list.</td>
 								</tr>
-							</tbody>
-							<tfoot>
 								<tr>
-									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: channels</td>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
 								</tr>
-							</tfoot>
+							</tbody>
 						</table>
+						<div class="line mbm">
+							<small>
+								<b>Valid annotations</b>: channels
+							</small>
+						</div>
 						<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1218,7 +1352,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /channel_groups/:id.json</h3>
 					<p>Returns the data for a particular channel group.</p>
 					<form>
-						<table class="tbl">
+						<table class="tbl mbm">
 							<thead>
 								<tr>
 									<th class="first">Parameter</th>
@@ -1235,13 +1369,22 @@ brand_summary: {
 									<td class="third">string</td>
 									<td class="fourth">The id of the channel group</td>
 							    </tr>	
-							</tbody>
-							<tfoot>
-								<tr>
-									<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: channels</td>
+							    <tr>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
 								</tr>
-							</tfoot>
+							</tbody>
 						</table>
+						<div class="line mbm">
+							<small>
+								<b>Valid annotations</b>: channels
+							</small>
+						</div>
 						<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1303,7 +1446,7 @@ brand_summary: {
 					<p>Returns a list of content that matches the supplied uri.
 						Used to look up content.</p>
 						<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1331,31 +1474,32 @@ brand_summary: {
 									data to be output.</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: description,
+					</table>
+					
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: description,
 									extended_description, brand_summary, series_summary, people,
 									topics, products, related_links, key_phrases, broadcasts,
 									locations, first_broadcasts, next_broadcasts,
-									available_locations, upcoming, sub_items</td>
-							</tr>
-						</tfoot>
-					</table>
-						<div class="line hr mtm">
-						    <h4>Request</h4>
-							<div class="unit size4of5">
-								<div class="urlCopy" id="content_queryCopy">
-									<a href="#" id="content_queryCopyBtn"
-										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
-										type="text" class="urlTxt"
-										value="http://atlas.metabroadcast.com/3.0/content.json?" /><input
-										type="hidden" id="content_altered" />
-								</div>
-							</div>
-							<div class="unit size1of5 lastUnit">
-								<input type="submit" class="btn" value="Run" />
+									available_locations, upcoming, sub_items
+						</small>
+					</div>
+					<div class="line hr mtm">
+					    <h4>Request</h4>
+						<div class="unit size4of5">
+							<div class="urlCopy" id="content_queryCopy">
+								<a href="#" id="content_queryCopyBtn"
+									class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+									type="text" class="urlTxt"
+									value="http://atlas.metabroadcast.com/3.0/content.json?" /><input
+									type="hidden" id="content_altered" />
 							</div>
 						</div>
+						<div class="unit size1of5 lastUnit">
+							<input type="submit" class="btn" value="Run" />
+						</div>
+					</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
 					    <h4>Response</h4>
@@ -1404,7 +1548,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /content_groups.json</h3>
 					<p>Returns a paginated list of all content groups.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1432,12 +1576,12 @@ brand_summary: {
 								<td class="fourth">The offset from the start of the list.</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1495,7 +1639,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /content_groups/:id.json</h3>
 					<p>Returns the data for a particular content group.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1514,12 +1658,13 @@ brand_summary: {
 								<td class="fourth">The id of the content group</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1578,7 +1723,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /content_groups/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a content group.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1623,13 +1768,13 @@ brand_summary: {
 									data to be output</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: all content annotations,
-									plus filtering_resource</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: all content annotations,
+								plus filtering_resource
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1692,7 +1837,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /topics.json</h3>
 					<form>
 					<p>Returns a paginated list of all topics.</p>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1737,12 +1882,12 @@ brand_summary: {
 								<td class="fourth">The offset from the start of the list.</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1802,7 +1947,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /topics/:id.json</h3>
 					<p>Returns the data for a particular topic.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1821,12 +1966,12 @@ brand_summary: {
 								<td class="fourth">The id of the topic</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -1885,7 +2030,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -1930,13 +2075,13 @@ brand_summary: {
 									data to be output</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: all content annotations,
-									plus filtering_resource</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: all content annotations,
+									plus filtering_resource
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -2000,7 +2145,7 @@ brand_summary: {
 					<h3><span class="upper">GET</span> /products.json</h3>
 					<p>Returns a paginated list of all products.</p>
 					<form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -2028,12 +2173,12 @@ brand_summary: {
 								<td class="fourth">The offset from the start of the list.</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -2094,7 +2239,7 @@ brand_summary: {
 					    <p>Returns a paginated list of the content related to a
 						product.</p>
 					   			    <form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -2113,12 +2258,12 @@ brand_summary: {
 								<td class="fourth">The id of the product</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+								<b>Valid annotations</b>: none
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -2178,7 +2323,7 @@ brand_summary: {
 					<p>Returns a paginated list of the content related to a
 						product.</p>
 				    <form>
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -2223,13 +2368,13 @@ brand_summary: {
 									data to be output.</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: all content annotations,
-									plus filtering_resource</td>
-							</tr>
-						</tfoot>
 					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: all content annotations,
+									plus filtering_resource
+						</small>
+					</div>
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -2292,7 +2437,7 @@ brand_summary: {
 					<p>Returns a list of content that matches the specified search
 						criteria.</p>
 					<form>	
-					<table class="tbl">
+					<table class="tbl mbm">
 						<thead>
 							<tr>
 								<th class="first">Parameter</th>
@@ -2326,28 +2471,27 @@ brand_summary: {
 								<td class="fourth">The publisher of the content.</td>
 							</tr>
 						</tbody>
-						<tfoot>
-							<tr>
-								<td colspan="4" class="annotations_notes"><span class="annotation_b">Valid annotations</span>: none</td>
-							</tr>
-						</tfoot>
 					</table>
-					
-						<div class="line hr mtm">
-						    <h4>Request</h4>
-							<div class="unit size4of5">
-								<div class="urlCopy" id="search_queryCopy">
-									<a href="#" id="search_queryCopyBtn"
-										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
-										type="text" class="urlTxt"
-										value="http://atlas.metabroadcast.com/3.0/search.json?" /><input
-										type="hidden" id="search_altered" />
-								</div>
-							</div>
-							<div class="unit size1of5 lastUnit">
-								<input type="submit" class="btn" value="Run" />
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>					
+					<div class="line hr mtm">
+					    <h4>Request</h4>
+						<div class="unit size4of5">
+							<div class="urlCopy" id="search_queryCopy">
+								<a href="#" id="search_queryCopyBtn"
+									class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+									type="text" class="urlTxt"
+									value="http://atlas.metabroadcast.com/3.0/search.json?" /><input
+									type="hidden" id="search_altered" />
 							</div>
 						</div>
+						<div class="unit size1of5 lastUnit">
+							<input type="submit" class="btn" value="Run" />
+						</div>
+					</div>
 					</form>
 					<div class="resultsArea" style="display: none;">
 					    <h4>Response</h4>
