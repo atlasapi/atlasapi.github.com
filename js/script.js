@@ -734,12 +734,14 @@ ApiExplorer.prototype.buttonHandler = function(){
         }
         
         var doStuff = function() {
+        	
+		
             var queryParent = {'item': that.parents('.tabArea'), 'name': that.parents('.tabArea').attr('id')};
             if (that.parents('.subArea') && that.parents('.subArea').attr('id') != undefined) {
             	queryParent = {'item': that.parents('.subArea'), 'name': that.parents('.subArea').attr('id')};
             }
             queryParent.name = queryParent.name.split('_');
-            queryParent.name.shift()
+            queryParent.name.shift();
             queryParent.name = queryParent.name.join("_");
             
             queryParent.item.find(".btn").val('Please Wait').addClass('inactive').after('<img src="images/loader.gif" class="fr" />');
@@ -881,8 +883,6 @@ ApiExplorer.prototype.discoverQuery = function(query){
 };
 
 ApiExplorer.prototype.scheduleQuery = function(query){
-	//console.log("Schedule query received");
-	//console.log(query);
     var apiExplorer = this;
     apiExplorer.queryType = 'schedule';
     
@@ -1003,7 +1003,7 @@ ApiExplorer.prototype.contentQuery = function(query){
         return false;
     };
     
-    $('#content_uri').val(queryUri).change();
+    //$('#content_uri').val(queryUri).change();
     apiExplorer.query = query;
     apiExplorer.runQuery(QueryArea.CONTENT);
 };
@@ -1419,6 +1419,7 @@ ApiExplorer.prototype.runQuery = function(tab){
         	apiExplorer.queryBar[tab].parent.find(".btn").val('Run').removeClass('inactive').siblings('img').fadeOut('fast', function(){$(this).remove();});
             apiFuncRun = false;
             lockRunBtn = false;
+            apiExplorer.queryBar[tab].parent.find(".urlText").val(url);
         }
     });
 };
@@ -2062,7 +2063,6 @@ $(document).ready(function(){
     $('.watchMe').keyup(function(e){
         if(e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40){
         	 clearTimeout(updatingString);
-             
              if ($(this).attr('data-title') != 'apiKey') {
              	  var item = {'item': $(this), 'title': $(this).attr('data-title'), 'val': $(this).val()};
                    
@@ -2095,7 +2095,6 @@ $(document).ready(function(){
     });
     
     $('.watchMe').change(function(e){
-    	
         if(!$(this).hasClass('date')){
             clearTimeout(updatingString);
             
