@@ -1244,7 +1244,13 @@ ApiExplorer.prototype.runQuery = function(tab){
                 theData = data.content_groups;
                 endpoint = "content_groups/%id.json";
                 apiClass = 'apiContentGroupsId';
-            } else if(data.error) {
+            } else if (data.channel_groups) {
+            	theData = data.channel_groups;
+            	endpoint = "channel_groups/%id.json";
+                apiClass = 'apiChannelGroupsId';
+            }
+            
+            else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             } else {
             	apiExplorer.ajaxError('Sorry, could not understand the data returned.');
@@ -1613,7 +1619,10 @@ var processTheJson = function(json){
        content = json.schedule[0].items;
     }
     else if (json.content_groups) {
-    	content = json.content_groups
+    	content = json.content_groups;
+    }
+    else if (json.channel_groups) {
+    	content = json.channel_groups;
     }
     else {
     	//console.log("Error: unrecognised content");
@@ -1628,7 +1637,6 @@ var processTheJson = function(json){
     		series: null,
     		image: null
     	};
-    	
     	if (content[i].id) {
     		obj.id = content[i].id;
     	}
@@ -1655,7 +1663,6 @@ var processTheJson = function(json){
     	} else {
     		obj.image = 'images/missingImage.png';
     	}
-    	
     	item.push(obj);
     }
     return item;
