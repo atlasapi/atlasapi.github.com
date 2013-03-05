@@ -1053,7 +1053,7 @@ brand_summary: {
 						
 						<div class="line mbm">
 							<small>
-								<b>Valid annotations</b>: channel_groups
+								<b>Valid annotations</b>: channel_groups, history, parent, variations
 							</small>
 						</div>
 						
@@ -1129,15 +1129,24 @@ brand_summary: {
 								<td class="first">id</td>
 								<td class="second"><input type="text"
 										class="id watchMe" data-title=":id"
-										id="id" value="cbbh" /></td>
+										id="channels_id_id" value="" /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the channel</td>
+							</tr>
+							<tr>
+								<td class="fist">annotations</td>
+								<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="channels_id_annotations" value="" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+										data to be output</td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="line mbm">
 						<small>
-							<b>Valid annotations</b>: channel_groups
+							<b>Valid annotations</b>: channel_groups, history, parent, variations
 						</small>
 					</div>
 					
@@ -1244,7 +1253,7 @@ brand_summary: {
 									<td class="fist">annotations</td>
 									<td class="second"><input type="text"
 										class="annotations watchMe" data-title="annotations"
-										id="annotations" value="" /></td>
+										id="channel_groups_annotations" value="" /></td>
 									<td class="third">list</td>
 									<td class="fourth">List of annotations that describe the
 										data to be output</td>
@@ -1253,7 +1262,7 @@ brand_summary: {
 						</table>
 						<div class="line mbm">
 							<small>
-								<b>Valid annotations</b>: channels
+								<b>Valid annotations</b>: channels, history
 							</small>
 						</div>
 						<div class="line hr">

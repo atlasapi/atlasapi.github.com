@@ -1699,7 +1699,7 @@ var updateString = function(obj) {
             obj.item.val('50');
         }
         if(v == 0){
-            obj.val = '1'
+            obj.val = '1';
             obj.item.val('1');
         }
     }
@@ -1752,65 +1752,68 @@ var updateString = function(obj) {
         3. Add it to the end
     */
     // 1
-    if(currentQuery.search(obj.title+'=') != -1){
-        // Remove current info
-        currentQuery = currentQuery.replace('&amp;','&');
-        
-        var currentParam = getParamByName(obj.title,currentQuery);
-       
-        var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
-        var fullLength = (obj.title.length+1)+currentParam.length;
-        var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
-        
-        if(obj.title == 'uri'){
-            currentEnd = '';
-        };
-        
-        if(currentEnd.substr(0,1) == '&'){
-            if(obj.val.length > 0){
-                currentEnd = currentEnd.substr(1)+'&';
-            }
-        }
-        
-        currentStart = currentStart.replace('&amp;','&');
-        currentEnd = currentEnd.replace('&amp;','&');
-        
-        if(obj.val > 0){
-            obj.val = new String(obj.val);
-        };
-        if(obj.val.length > 0){
-            newQuery = currentStart + obj.title+'='+obj.val;
-            if(currentEnd.length > 0 && currentEnd.substr(0,1) == '&'){
-                newQuery += currentEnd;
-            } else if (currentEnd.length > 0 && currentEnd.substr(0,1) != '&'){
-                newQuery += '&'+currentEnd;
+    if(obj.title != ":id") {
+    	if (currentQuery.search(obj.title+'=') != -1){
+    		// Remove current info
+            currentQuery = currentQuery.replace('&amp;','&');
+            
+            var currentParam = getParamByName(obj.title,currentQuery);
+           
+            var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
+            var fullLength = (obj.title.length+1)+currentParam.length;
+            var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
+            
+            if(obj.title == 'uri'){
+                currentEnd = '';
             };
-        } else {
+            
             if(currentEnd.substr(0,1) == '&'){
-                currentEnd = currentEnd.substr(1);
+                if(obj.val.length > 0){
+                    currentEnd = currentEnd.substr(1)+'&';
+                }
             }
-            newQuery = currentStart+currentEnd;
-        }
-    } else if (obj.title != ":id") {
-        // If a ? is present
-        if(currentQuery.search(/\?/g) != -1){
-            // If it's not the first param add a &
-            if(currentQuery.substr(currentQuery.search(/\?/g)+1).length != 0) {
-                newQuery = currentQuery+'&'+obj.title+'='+obj.val;
+            
+            currentStart = currentStart.replace('&amp;','&');
+            currentEnd = currentEnd.replace('&amp;','&');
+            
+            if(obj.val > 0){
+                obj.val = new String(obj.val);
+            };
+            if(obj.val.length > 0){
+                newQuery = currentStart + obj.title+'='+obj.val;
+                if(currentEnd.length > 0 && currentEnd.substr(0,1) == '&'){
+                    newQuery += currentEnd;
+                } else if (currentEnd.length > 0 && currentEnd.substr(0,1) != '&'){
+                    newQuery += '&'+currentEnd;
+                };
             } else {
-                newQuery = currentQuery+obj.title+'='+obj.val;
+                if(currentEnd.substr(0,1) == '&'){
+                    currentEnd = currentEnd.substr(1);
+                }
+                newQuery = currentStart+currentEnd;
             }
         } else {
-            // Add the entire thing including the type.
-            newQuery = queryBeg;
-            if(itemParent.name != 'advanced'){
-                newQuery += itemParent.name;
+            // If a ? is present
+            if(currentQuery.search(/\?/g) != -1){
+                // If it's not the first param add a &
+                if(currentQuery.substr(currentQuery.search(/\?/g)+1).length != 0) {
+                    newQuery = currentQuery+'&'+obj.title+'='+obj.val;
+                } else {
+                    newQuery = currentQuery+obj.title+'='+obj.val;
+                }
             } else {
-                newQuery += 'discover';
+                // Add the entire thing including the type.
+                newQuery = queryBeg;
+                if(itemParent.name != 'advanced'){
+                    newQuery += itemParent.name;
+                } else {
+                    newQuery += 'discover';
+                }
+                newQuery += '.json?'+obj.title+'='+obj.val;
             }
-            newQuery += '.json?'+obj.title+'='+obj.val;
         }
     }
+        
     
     if (obj.title == ":id") {
     	if (obj.val == "") {
