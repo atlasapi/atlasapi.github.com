@@ -76,7 +76,7 @@
 						</div>
 						<div class="unit size1of2 lastUnit">
 							<div class="mlm mrm">
-								<h4>5+ output formats</h4>
+								<h4>4+ output formats</h4>
 								<ul class="list">
 									<li>RESTful <a href="#apiExplorer">API</a> with XML and
 										JSON
@@ -84,7 +84,6 @@
 									<li>Specialist <a href="#reference_feeds">feeds</a> for
 										Google, BBC iPlayer, UK Radioplayer and Xbox
 									</li>
-									<li>RDF for linked data</li>
 								</ul>
 							</div>
 						</div>
@@ -967,12 +966,10 @@ brand_summary: {
 								<li class="subTab selected"><a href="#schedule_json"
 									data-tab="schedule_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="schedule_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>-->
-								<li class="fl"><a href="" target="_blank"
-									data-tab="schedule_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="schedule_json">
                                 </pre>
@@ -1017,57 +1014,7 @@ brand_summary: {
 										data-title="available_from" class="watchMe" value="bbc.co.uk" /></td>
 									<td class="third">string</td>
 									<td class="fourth">Optionally filter by a publisher that publishes data for the channel</td>
-							    </tr>									 	
-						        <tr>
-									<td class="fist">platforms</td>
-									<td class="second">
-									  <span class="select">
-							            <span class="value">Please Select</span>  
-							            <span class="options">
-										  <span class="option" data-value="cbbb">Freeview</span>
-										  <span class="option" data-value="cbbc">Freesat</span>
-										  <span class="option" data-value="cbbf">Sky</span>
-										  <span class="option" data-value="cbbd">Virgin Media</span>
-									    </span>
-									   </span>
-									<input type="hidden" id="channels_platforms"
-										data-title="platforms" class="fr watchMe" value="cbbb" />
-									</td>
-									<td class="third">list</td>
-									<td class="fourth">Optionally filter by channel groups that represent broadcast platforms</td>
-							    </tr>	
-						        <tr>
-									<td class="fist">regions</td>
-									<td class="second">
-									 <span class="select">
-							            <span class="value">Please Select</span>  
-							            <span class="options">
-										  <span class="option" data-value="cbbg">BBC Cambridgeshire</span>
-										  <span class="option" data-value="cbbh">BBC Channel Islands</span>
-										  <span class="option" data-value="cbbj">BBC East</span>
-										  <span class="option" data-value="cbbk">BBC East Midlands</span>
-										  <span class="option" data-value="cbbm">BBC London</span>
-										  <span class="option" data-value="cbbn">BBC NE &amp; Cumbria</span>
-									      <span class="option" data-value="cbbp">BBC North West</span>
-									      <span class="option" data-value="cbbq">BBC Northern Ireland</span>
-									      <span class="option" data-value="cbbr">BBC Oxfordshire</span>
-									      <span class="option" data-value="cbbs">BBC Scotland</span>
-									      <span class="option" data-value="cbbt">BBC South</span>
-									      <span class="option" data-value="cbbv">BBC South East</span>
-									      <span class="option" data-value="cbbw">BBC South West</span>
-									      <span class="option" data-value="cbbx">BBC Wales</span>
-									      <span class="option" data-value="cbby">BBC West</span>
-									      <span class="option" data-value="cbbz">BBC West Midlands</span>
-									      <span class="option" data-value="cbbB">BBC Yorks &amp; Lincs</span>
-									      <span class="option" data-value="cbbC">BBC Yorkshire</span>
-									    </span>
-									   </span>
-									   <input type="hidden" id="channels_regions"
-										data-title="regions" class="fr watchMe" value="cbbm" />
-									</td>
-									<td class="third">list</td>
-									<td class="fourth">Optionally filter by channel groups that represent broadcast regions</td>
-							    </tr>		  
+							    </tr>
 						        <tr>
 									<td class="fist">order_by</td>
 									<td class="second"><input type="text" id="channels_order_by"
@@ -1106,7 +1053,7 @@ brand_summary: {
 						
 						<div class="line mbm">
 							<small>
-								<b>Valid annotations</b>: channel_groups
+								<b>Valid annotations</b>: channel_groups, history, parent, variations
 							</small>
 						</div>
 						
@@ -1151,7 +1098,7 @@ brand_summary: {
 								<li class="subTab selected"><a href="#channels_json"
 									data-tab="channels_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channels_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="channels_html">HTML</a></li>-->
@@ -1182,15 +1129,24 @@ brand_summary: {
 								<td class="first">id</td>
 								<td class="second"><input type="text"
 										class="id watchMe" data-title=":id"
-										id="id" value="cbbh" /></td>
+										id="channels_id_id" value="" /></td>
 								<td class="third">string</td>
 								<td class="fourth">The id of the channel</td>
+							</tr>
+							<tr>
+								<td class="fist">annotations</td>
+								<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="channels_id_annotations" value="" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+										data to be output</td>
 							</tr>
 						</tbody>
 					</table>
 					<div class="line mbm">
 						<small>
-							<b>Valid annotations</b>: channel_groups
+							<b>Valid annotations</b>: channel_groups, history, parent, variations
 						</small>
 					</div>
 					
@@ -1235,11 +1191,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#channels/:id_json"
 									data-tab="channels/:id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channels/:id_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="channels/:id_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="channels/:id_json">
                             </pre>
@@ -1263,6 +1217,22 @@ brand_summary: {
 								</tr>
 							</thead>
 							<tbody>
+							    <tr>
+									<td class="first">type</td>
+									<td class="second">
+									   <span class="select">
+									     <span class="value">Please Select</span>
+									     <span class="options">
+									       <span class="option" data-value="">(Not set)</span>
+										   <span class="option" data-value="region">region</span>
+										   <span class="option" data-value="platform">platform</span>
+									     </span>
+									   </span>
+									   <input type="hidden" id="channel_groups_type" data-title="type" class="fr watchMe" value="" />
+									</td>
+									<td class="third">string</td>
+									<td class="fourth">Optional filter for regions or television platforms</td>
+								</tr>
 								<tr>
 									<td class="first">limit</td>
 									<td class="second"><input
@@ -1283,7 +1253,7 @@ brand_summary: {
 									<td class="fist">annotations</td>
 									<td class="second"><input type="text"
 										class="annotations watchMe" data-title="annotations"
-										id="annotations" value="" /></td>
+										id="channel_groups_annotations" value="" /></td>
 									<td class="third">list</td>
 									<td class="fourth">List of annotations that describe the
 										data to be output</td>
@@ -1292,7 +1262,7 @@ brand_summary: {
 						</table>
 						<div class="line mbm">
 							<small>
-								<b>Valid annotations</b>: channels
+								<b>Valid annotations</b>: channels, history
 							</small>
 						</div>
 						<div class="line hr">
@@ -1335,7 +1305,7 @@ brand_summary: {
 							<ul class="smallTabs clearfix">
 								<li class="subTab selected"><a href="#channel_groups_json"
 									data-tab="channel_groups_json">JSON</a></li>
-								<li class="fl"><p class="mbn other">Other available	formats:</p></li>
+								<li class="fl"><p class="mbn other">Other available	format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channel_groups_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="channel_groups_html">HTML</a></li>-->
@@ -1426,7 +1396,7 @@ brand_summary: {
 								<li class="subTab selected"><a href="#channel_groups_id_json"
 									data-tab="channel_groups_id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channel_groups_id_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="channel_groups_id_html">HTML</a></li>-->
@@ -1526,12 +1496,10 @@ brand_summary: {
 								<li class="subTab selected"><a href="#content_json"
 									data-tab="content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="content_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
-								<li class="fl"><a href="" target="_blank"
-									data-tab="content_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="content_json">
                                 </pre>
@@ -1623,11 +1591,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#content_groups_json"
 									data-tab="content_groups_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="content_groups_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="content_groups_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="content_groups_json">
                                 </pre>
@@ -1706,11 +1672,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#content_groups/:id_json"
 									data-tab="content_groups/:id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="content_groups/:id_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="content_groups/:id_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="content_groups/:id_json">
                             </pre>
@@ -1816,11 +1780,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#content_groups/:id/content_json"
 									data-tab="content_groups/:id/content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="content_groups/:id/content_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="content_groups/:id/content_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="content_groups/:id/content_json">
                                 </pre>
@@ -1929,11 +1891,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#topics_json"
 									data-tab="topics_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="topics_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="topics_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="topics_json">
                                 </pre>
@@ -2013,11 +1973,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#topics/:id_json"
 									data-tab="topics/:id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="topics/:id_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="topics/:id_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="topics/:id_json">
                                 </pre>
@@ -2123,11 +2081,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#topics/:id/content_json"
 									data-tab="topics/:id/content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="topics/:id/content_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="topics/:id/content_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="topics/:id/content_json">
                                 </pre>
@@ -2220,11 +2176,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#products_json"
 									data-tab="products_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="products_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="products_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="products_json">
                                 </pre>
@@ -2305,11 +2259,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#products/:id_json"
 									data-tab="products/:id_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="products/:id_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="products/:id_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="products/:id_json">
                                 </pre>
@@ -2416,11 +2368,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#products/:id/content_json"
 									data-tab="products/:id/content_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="products/:id/content_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="products/:id/content_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="products/:id/content_json">
                                 </pre>
@@ -2518,11 +2468,9 @@ brand_summary: {
 								<li class="subTab selected"><a href="#search_json"
 									data-tab="search_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="search_xml">XML</a></li>
-								<li class="fl"><a href="" target="_blank"
-									data-tab="search_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="search_json">
                                 </pre>
@@ -2570,12 +2518,10 @@ brand_summary: {
 								<li class="subTab selected"><a href="#advanced_json"
 									data-tab="advanced_json">JSON</a></li>
 								<li class="fl"><p class="mbn other">Other available
-										formats:</p></li>
+										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="advanced_xml">XML</a></li>
 								<!--<li class="fl"><a href="" target="_blank" data-tab="advanced_html">HTML</a></li>-->
-								<li class="fl"><a href="" target="_blank"
-									data-tab="advanced_rdf">RDF</a></li>
 							</ul>
 							<pre class="subTabArea" id="advanced_json">
                                 </pre>

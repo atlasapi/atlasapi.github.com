@@ -1246,7 +1246,13 @@ ApiExplorer.prototype.runQuery = function(tab){
                 theData = data.content_groups;
                 endpoint = "content_groups/%id.json";
                 apiClass = 'apiContentGroupsId';
-            } else if(data.error) {
+            } else if (data.channel_groups) {
+            	theData = data.channel_groups;
+            	endpoint = "channel_groups/%id.json";
+                apiClass = 'apiChannelGroupsId';
+            }
+            
+            else if(data.error) {
                 apiExplorer.ajaxError('Sorry, '+data.error.message);
             } else {
             	apiExplorer.ajaxError('Sorry, could not understand the data returned.');
@@ -1616,7 +1622,10 @@ var processTheJson = function(json){
        content = json.schedule[0].items;
     }
     else if (json.content_groups) {
-    	content = json.content_groups
+    	content = json.content_groups;
+    }
+    else if (json.channel_groups) {
+    	content = json.channel_groups;
     }
     else {
     	//console.log("Error: unrecognised content");
@@ -1631,7 +1640,6 @@ var processTheJson = function(json){
     		series: null,
     		image: null
     	};
-    	
     	if (content[i].id) {
     		obj.id = content[i].id;
     	}
@@ -1658,7 +1666,6 @@ var processTheJson = function(json){
     	} else {
     		obj.image = 'images/missingImage.png';
     	}
-    	
     	item.push(obj);
     }
     return item;
@@ -1695,7 +1702,7 @@ var updateString = function(obj) {
             obj.item.val('50');
         }
         if(v == 0){
-            obj.val = '1'
+            obj.val = '1';
             obj.item.val('1');
         }
     }
@@ -1748,65 +1755,68 @@ var updateString = function(obj) {
         3. Add it to the end
     */
     // 1
-    if(currentQuery.search(obj.title+'=') != -1){
-        // Remove current info
-        currentQuery = currentQuery.replace('&amp;','&');
-        
-        var currentParam = getParamByName(obj.title,currentQuery);
-       
-        var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
-        var fullLength = (obj.title.length+1)+currentParam.length;
-        var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
-        
-        if(obj.title == 'uri'){
-            currentEnd = '';
-        };
-        
-        if(currentEnd.substr(0,1) == '&'){
-            if(obj.val.length > 0){
-                currentEnd = currentEnd.substr(1)+'&';
-            }
-        }
-        
-        currentStart = currentStart.replace('&amp;','&');
-        currentEnd = currentEnd.replace('&amp;','&');
-        
-        if(obj.val > 0){
-            obj.val = new String(obj.val);
-        };
-        if(obj.val.length > 0){
-            newQuery = currentStart + obj.title+'='+obj.val;
-            if(currentEnd.length > 0 && currentEnd.substr(0,1) == '&'){
-                newQuery += currentEnd;
-            } else if (currentEnd.length > 0 && currentEnd.substr(0,1) != '&'){
-                newQuery += '&'+currentEnd;
+    if(obj.title != ":id") {
+    	if (currentQuery.search(obj.title+'=') != -1){
+    		// Remove current info
+            currentQuery = currentQuery.replace('&amp;','&');
+            
+            var currentParam = getParamByName(obj.title,currentQuery);
+           
+            var currentStart = currentQuery.substr(0,currentQuery.search(obj.title));
+            var fullLength = (obj.title.length+1)+currentParam.length;
+            var currentEnd = currentQuery.substr(currentQuery.search(obj.title)+fullLength);
+            
+            if(obj.title == 'uri'){
+                currentEnd = '';
             };
-        } else {
+            
             if(currentEnd.substr(0,1) == '&'){
-                currentEnd = currentEnd.substr(1);
+                if(obj.val.length > 0){
+                    currentEnd = currentEnd.substr(1)+'&';
+                }
             }
-            newQuery = currentStart+currentEnd;
-        }
-    } else if (obj.title != ":id") {
-        // If a ? is present
-        if(currentQuery.search(/\?/g) != -1){
-            // If it's not the first param add a &
-            if(currentQuery.substr(currentQuery.search(/\?/g)+1).length != 0) {
-                newQuery = currentQuery+'&'+obj.title+'='+obj.val;
+            
+            currentStart = currentStart.replace('&amp;','&');
+            currentEnd = currentEnd.replace('&amp;','&');
+            
+            if(obj.val > 0){
+                obj.val = new String(obj.val);
+            };
+            if(obj.val.length > 0){
+                newQuery = currentStart + obj.title+'='+obj.val;
+                if(currentEnd.length > 0 && currentEnd.substr(0,1) == '&'){
+                    newQuery += currentEnd;
+                } else if (currentEnd.length > 0 && currentEnd.substr(0,1) != '&'){
+                    newQuery += '&'+currentEnd;
+                };
             } else {
-                newQuery = currentQuery+obj.title+'='+obj.val;
+                if(currentEnd.substr(0,1) == '&'){
+                    currentEnd = currentEnd.substr(1);
+                }
+                newQuery = currentStart+currentEnd;
             }
         } else {
-            // Add the entire thing including the type.
-            newQuery = queryBeg;
-            if(itemParent.name != 'advanced'){
-                newQuery += itemParent.name;
+            // If a ? is present
+            if(currentQuery.search(/\?/g) != -1){
+                // If it's not the first param add a &
+                if(currentQuery.substr(currentQuery.search(/\?/g)+1).length != 0) {
+                    newQuery = currentQuery+'&'+obj.title+'='+obj.val;
+                } else {
+                    newQuery = currentQuery+obj.title+'='+obj.val;
+                }
             } else {
-                newQuery += 'discover';
+                // Add the entire thing including the type.
+                newQuery = queryBeg;
+                if(itemParent.name != 'advanced'){
+                    newQuery += itemParent.name;
+                } else {
+                    newQuery += 'discover';
+                }
+                newQuery += '.json?'+obj.title+'='+obj.val;
             }
-            newQuery += '.json?'+obj.title+'='+obj.val;
         }
     }
+        
     
     if (obj.title == ":id") {
     	if (obj.val == "") {
