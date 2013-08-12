@@ -1,6 +1,6 @@
 var homePageTimer;
 
-var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
+var queryBeg = 'https://atlas.metabroadcast.com/3.0/';
 
 var clearTimer = function() {
     clearInterval(homePageTimer);
