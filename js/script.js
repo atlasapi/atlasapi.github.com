@@ -18,7 +18,7 @@ if (!Date.prototype.toISOString) {
 
 var homePageTimer;
 
-var queryBeg = 'http://atlas.metabroadcast.com/3.0/';
+var queryBeg = 'https://atlas.metabroadcast.com/3.0/';
 var DEFAULT_TIMEOUT = 15000;
 
 var clearTimer = function() {
