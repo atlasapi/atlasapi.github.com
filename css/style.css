@@ -1419,6 +1419,10 @@
                         
             .loading {background-image: url(../images/loader.gif); background-position: center; background-repeat: no-repeat;}
             
+            .apiKeyHolder {
+	            margin-bottom: 30px;
+            }
+            
             .getApiKey {
 	            height: 305px;
 	            padding-top: 30px;
@@ -1449,6 +1453,7 @@
             .slideHolder {
 				position: relative;
 				transition: left ease 1s;
+				left: 0%;
             }
             
             .slide {

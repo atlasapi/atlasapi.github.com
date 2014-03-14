@@ -178,7 +178,7 @@ var PageInfo = function() {
 PageInfo.prototype.init = function() {
     var pageInfo = this;
     pageInfo.update(true,true,true);
-    $('section:not(.subSection)').each(function(i) {
+    $('section[class]:not(.subSection)').each(function(i) {
         pageInfo.section[i] = {'item': $(this), 'name': $(this).attr('class'), 'position': $(this).find('.marker').offset().top, 'subSection': [], 'subSections': ''};
         $(this).find('.subSection').each(function(ii) {
             pageInfo.section[i].subSection[ii] = {'item': $(this), 'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top};
