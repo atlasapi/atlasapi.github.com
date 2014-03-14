@@ -71,12 +71,13 @@
 						<h4>1 API</h4>
 						<ul class="list">
 							<li><a href="#reference_queryParameters">Search</a> for
-								programmes by title</li>
-							<li>Display <a href="#reference_queryParameters">schedules</a>
+								shows and people</li>
+							<li>Display <a href="#reference_queryParameters">channels</a>, <a href="#reference_queryParameters">schedules</a>
 								and <a href="#reference_queryParameters">content</a> details
 							</li>
+							<li>Power advanced content discovery features</li>
 							<li>Aggregate links to all services for the same show</li>
-							<li>Work across web, mobile and TV</li>
+							<li>Work across mobile, TV and the web</li>
 							<li>Smoothly handle rights restrictions</li>
 						</ul>
 					</div>
@@ -86,14 +87,12 @@
 						<div class="unit size1of2">
 							<div class="mlm mrm">
 								<h4>
-									<a href="#reference_sources" class="pink">15+ International
+									<a href="#reference_sources" class="pink">20+ International
 										sources</a>
 								</h4>
 								<ul class="list">
-									<li>long-form and short-form: archive.org, blip.tv, BBC,
-										Channel 4, dailymotion, Five, HBO, Hulu, iTunes, ITV, MSN
-										Video, Press Association, ted.com, TVBLOB, Vimeo, YouTube and
-										podcasts</li>
+									<li>long-form and short-form: archive.org, BBC, BT, 
+										Channel 4, Channel 5, HBO, Hulu, iTunes, ITV, IVA, Press Association, Rightster, TalkTalk, ted.com, TMS, Vimeo, YouTube, podcasts and wikipedia</li>
 								</ul>
 							</div>
 						</div>
@@ -101,11 +100,10 @@
 							<div class="mlm mrm">
 								<h4>4+ output formats</h4>
 								<ul class="list">
-									<li>RESTful <a href="#apiExplorer">API</a> with XML and
-										JSON
+									<li>RESTful <a href="#apiExplorer">API</a> with JSON and XML
 									</li>
 									<li>Specialist <a href="#reference_feeds">feeds</a> for
-										Google, BBC iPlayer, UK Radioplayer and Xbox
+										Google, BBC iPlayer, UK Radioplayer, Xbox and YouView
 									</li>
 								</ul>
 							</div>
@@ -113,30 +111,6 @@
 					</div>
 				</div>
 			</div>
-			<!--<h4 class="cb mlm mbm mtl">Atlas at work</h4>
-			<div class="slideShow clearfix">
-				<div class="slideshowItem clearfix">
-					<a class="showItem show_lrg loading apiContent"> <img src=""
-						style="display: none;" /> <span class="caption"
-						style="display: none;"><span class="br"></span><span
-							class="pub"></span><span class="ep"></span></span>
-					</a> <a class="showItem show_lrg loading apiContent"> <img src=""
-						style="display: none;" /> <span class="caption"
-						style="display: none;"><span class="br"></span><span
-							class="pub"></span><span class="ep"></span></span>
-					</a>
-				</div>
-			</div>
-			<div class="controlBar clearfix">
-				<a href="#" class="cbtn previous"><span class="icn"></span>Prev</a>
-				<a href="#" class="cbtn next"><span class="icn"></span>Next</a>
-				<p class="timer wait" style="display: none;">
-					<span class="js_txt">Loading</span>
-				</p>
-				<div class="queryHolder">
-					<div class="queries"></div>
-				</div>
-			</div>-->
 		</section>
 
 		<section class="examples">
@@ -154,16 +128,6 @@
 						of some content
 					</h3>
 				</div>
-
-				<!--<div class="example right clearfix">
-                        <a href="http://atlas.metabroadcast.com/3.0/discover.json?publisher=bbc.co.uk&limit=10" class="api apiDiscover">http://atlas.metabroadcast.com/3.0/discover.json?publisher=bbc.co.uk&limit=10</a>
-                        <h3>Discover content from a certain <mark class="hov hovDown" data-title="publisher">publisher</mark> </h3>
-                    </div>
-                    
-                    <div class="example clearfix">
-                        <a href="http://atlas.metabroadcast.com/3.0/discover.json?genre=drama&limit=5" class="api apiDiscover">http://atlas.metabroadcast.com/3.0/discover.json?genre=drama&limit=5</a>
-                        <h3>Discover content for a particular <mark class="hov hovDown" data-title="genre">genre</mark> of program or brand</h3>
-                    </div>-->
 
 				<div class="example right clearfix">
 					<a
@@ -194,7 +158,6 @@
 				<li><a href="#reference_dataModel">Data Model</a></li>
 				<li><a href="#reference_sources">Sources</a></li>
 				<li><a href="#reference_feeds">Feeds</a></li>
-				<!--<li><a href="#reference_annotations">Annotations</a></li>-->
 			</ul>
 			<h2>Reference</h2>
 
@@ -225,26 +188,6 @@
 					(series). Containers are returned with a list of the items they
 					contain, but note that not all items are in a container (e.g.
 					one-off items and films).</p>
-
-				<!-- <p>Below is an example of a container, in this case Merlin (a popular BBC 1 programme):</p>
-                    <pre><code>
-content: [
-    { episode 1 json },
-    { episode 2 json }
-],
-title: "Merlin",
-description: "Fantasy drama based...",
-same_as: [
-    "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewTVShow?id=323369381&uo=4",
-    "http://www.hulu.com/merlin",
-],
-media_type: "video",
-aliases: [
-    "http://en.wikipedia.org/wiki/Merlin_(BBC)",
-],
-uri: "http://www.bbc.co.uk/programmes/b00mjlxv",
-curie: "bbc:b00mjlxv"</code>
-                    </pre> -->
 
 				<h4 id="items">Items</h4>
 				<p>Items represent individual pieces of content. They can be
@@ -288,99 +231,6 @@ curie: "bbc:b00mjlxv"</code>
 				   and regions, such as Freeview and BBC Scotland. By combining channel 
 				   groups you can get a list of all of the channels available on a certain 
 				   platform in a particular region.</p>
-				   
-				<!--<h5>Identifiers</h5>
-                    <p>Use these attributes to identify the content, the URI is our best guess at the canonical identifier of the content, this is the only value that should be persisted as all others are liable to change.</p>
-                    <pre>
-                        <code>
-uri: "http://www.bbc.co.uk/programmes/b00wlncb",
-aliases: [
-    "http://bbc.co.uk/i/wlncb/"
-    "http://www.bbc.co.uk/iplayer/episode/b00wlncb"
-],
-curie: "bbc:b00wlncb"</code>
-                    </pre> -->
-
-
-				<!-- <h5>Description</h5>
-                    <p class="mrl">These attributes describe the item.</p>
-                    <pre>
-                        <code>
-description: "Queen Morgana begins a reign of terrible evil over the innocent...",
-title: "The Coming of Arthur - Part 2",
-publisher: {
-    key: "bbc.co.uk",
-    name: "BBC",
-    country: "GB"
-},
-image: "http://www.bbc.co.uk/iplayer/images/episode/b00wlncb_640_360.jpg",
-thumbnail: "http://www.bbc.co.uk/iplayer/images/episode/b00wlncb_150_84.jpg",
-genres:[
-    "http://ref.atlas.metabroadcast.com/genres/atlas/drama",
-    "http://www.bbc.co.uk/programmes/genres/drama/scifiandfantasy"
-]</code>
-                    </pre>
-                    
-                    <h5>Episode attributes</h5>
-                    <p>This Item is also an Episode, which means it is part of a <mark class="hov" data-title="brand">Brand</mark>. These attributes outlines this Episode’s position within its <mark class="hov" data-title="brand">Brand</mark>. If the Item is not an Episode these attributes will not be present.</p>
-                    <pre>
-                        <code>
-episode_number: 13,
-series_number: 3,
-brand_summary: {
-    title: "Merlin"
-    description: "Fantasy drama based on the legend of King Arthur and Merlin"
-    uri: "http://www.bbc.co.uk/programmes/b00mjlxv"
-    curie: "bbc:b00mjlxv"
-}</code>
-                    </pre>-->
-
-				<!--<div class="line mbl">
-                        <div class="unit size1of3">
-                            <h5>Locations</h5>
-                            <p>Each location represents a way to play the content. In this example there is a simple ‘link’ location, which means you can link to this content at the URI given.</p>
-                        </div>
-                        <div class="unit size2of3 lastUnit">
-                            <pre class="mll">
-    locations: [
-      { 
-        data_container_format: "application/x-shockwave-flash",
-        video_coding: "video/H264",
-        availability_start: "05-Dec-2010 02:39:02",
-        availability_end: "11-Dec-2010 20:24:00",
-        available_countries: [
-            "GB"
-        ],
-        revenue_contract: "free_to_view",
-        transport_type: "link",
-        uri: "http://www.bbc.co.uk/iplayer/episode/b00wlncb",
-        available: false,
-        duration: 2700,
-      }
-    ],</pre>
-    
-                        </div>
-                    </div>-->
-
-				<!-- <h4>Locations</h4>
-                    <p>Each Item contains the various different ways you can get your metaphorical hands on the media. These are called Locations and provide all the information about how to access the content, who can access it, where it is, and so on. This is an example Location (the full schema is quite large, but you get the idea):</p>
-                    <pre>
-                    <code>
-    { 
-        data_container_format: "application/x-shockwave-flash",
-        video_coding: "video/H264",
-        availability_start: "05-Dec-2010 02:39:02",
-        availability_end: "11-Dec-2010 20:24:00",
-        available_countries: [
-            "GB"
-        ],
-        revenue_contract: "free_to_view",
-        transport_type: "link",
-        uri: "http://www.bbc.co.uk/iplayer/episode/b00wlncb",
-        available: false,
-        duration: 2700,
-      }</code>
-                    </pre>-->
 			</section>
 
 			<section data-title="reference_sources" class="subSection">
@@ -600,116 +450,6 @@ brand_summary: {
 					for help producing data in these formats
 				</p>
 			</section>
-			
-			<!--<section data-title="reference_annotations" class="subSection">
-				<div class="marker" id="reference_annotations"></div>
-				<h3>Annotations</h3>
-				<p>Below is a list of available annotations to use when accessing the various endpoints in atlas.</p>
-				
-				<h4>Content</h4>
-				<table class="tbl">
-					<thead>
-						<tr>
-							<th class="first">Annotation</th>
-							<th class="second">Notes</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="first">description</td>
-							<td class="second">id, type, title, description, image, thumbnail, media_type, specialization</td>						</tr>
-						<tr>
-							<td class="first">extended_description</td>
-							<td class="second">everything else that's not a related object</td>
-						</tr>
-						<tr>
-							<td class="first">brand_summary</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">series_summary</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">people</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">topics</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">segment_events</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">related_links</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">key_phrases</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">broadcasts</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">locations</td>
-							<td class="second">&nbsp;</td>
-						</tr>
-						<tr>
-							<td class="fist">first_broadcast</td>
-							<td class="second">only include the first broadcast</td>
-						</tr>
-						<tr>
-							<td class="fist">next_broadcast</td>
-							<td class="second">only include the next broadcast</td>
-						</tr>
-						<tr>
-							<td class="fist">available_locations</td>
-							<td class="second">only include locations with current availability</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<p>In addition, content endpoints that return content based on another resource, such as /topics/:id/content, respone to an additional annotation:</p>
-				
-				<table class="tbl">
-					<thead>
-						<tr>
-							<th class="first">Annotation</th>
-							<th class="second">Notes</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="first">filtering_resource</td>
-							<td class="second">this includes the resource whose content is being returned (e.g. the topic)</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<h4>Topic</h4>
-				<table class="tbl">
-					<thead>
-						<tr>
-							<th class="first">Annotation</th>
-							<th class="second">Notes</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td class="first">description</td>
-							<td class="second">all fields except publisher</td>
-						</tr>
-						<tr>
-							<td class="first">extended_description</td>
-							<td class="second">everything else (only publisher info at the moment)</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>-->
 		</section>
 
 		<section class="about">
@@ -805,10 +545,6 @@ brand_summary: {
 								src="images/python.png" class="img" />
 							<mark class="bd">Python</mark></a></li>
 					</ul>
-
-					<!--<div class="badge">
-    				        Atlas is licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache License, Version 2.0</a>
-    				    </div>-->
 				</div>
 			</div>
 		</section>
@@ -973,7 +709,6 @@ brand_summary: {
 										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="schedule_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="schedule_html">HTML</a></li>-->
 							</ul>
 							<pre class="subTabArea" id="schedule_json">
                                 </pre>
@@ -1105,7 +840,6 @@ brand_summary: {
 										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channels_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="channels_html">HTML</a></li>-->
 							</ul>
 							<pre class="subTabArea" id="channels_json">
                                 </pre>
@@ -1312,7 +1046,6 @@ brand_summary: {
 								<li class="fl"><p class="mbn other">Other available	format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channel_groups_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="channel_groups_html">HTML</a></li>-->
 							</ul>
 							<pre class="subTabArea" id="channel_groups_json">
                                 </pre>
@@ -1403,7 +1136,6 @@ brand_summary: {
 										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="channel_groups_id_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="channel_groups_id_html">HTML</a></li>-->
 							</ul>
 							<pre class="subTabArea" id="channel_groups_id_json">
                                 </pre>
@@ -1503,7 +1235,6 @@ brand_summary: {
 										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="content_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="content_html">HTML</a></li>-->
 							</ul>
 							<pre class="subTabArea" id="content_json">
                                 </pre>
@@ -2525,7 +2256,6 @@ brand_summary: {
 										format(s):</p></li>
 								<li class="fl"><a href="" target="_blank"
 									data-tab="advanced_xml">XML</a></li>
-								<!--<li class="fl"><a href="" target="_blank" data-tab="advanced_html">HTML</a></li>-->
 							</ul>
 							<pre class="subTabArea" id="advanced_json">
                                 </pre>
