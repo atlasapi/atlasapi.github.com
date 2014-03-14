@@ -1922,7 +1922,7 @@ $(document).ready(function(){
 				
 				if (data.auth_providers && data.auth_providers.length > 0) {
 					for (i = 0, ii = data.auth_providers.length; i < ii; i += 1) {
-						str += '<a href="http://atlas.metabroadcast.com/admin#/login/' + data.auth_providers[i].namespace + '" class="signInBtn btn-'+ data.auth_providers[i].namespace +'"><span class="fa fa-bitbucket"></span>Sign In with '+ data.auth_providers[i].namespace +'</a>';
+						str += '<a href="http://atlas.metabroadcast.com/admin#/login/' + data.auth_providers[i].namespace + '" class="signInBtn btn-'+ data.auth_providers[i].namespace +'"><span class="fa fa-'+ data.auth_providers[i].namespace +'"></span>Sign In with '+ data.auth_providers[i].namespace +'</a>';
 					}
 				}
 				
