@@ -1681,3 +1681,28 @@
             .pink {color: #ef308f;}
             
 .upper { text-transform: uppercase !important;}           
+
+
+@media screen and (max-width: 1360px){
+	.homeSpeech {
+		left: 550px;
+		font-size: 13px;
+		width: 195px;
+		top: 0;
+		padding: 10px;
+	}
+	
+	.csstransforms .homeSpeech:after {
+		-webkit-transform: rotate(45deg);
+		-moz-transform: rotate(45deg);
+		-o-transform: rotate(45deg);
+		-khtml-transform: rotate(45deg);
+		-ms-transform: rotate(45deg);
+		transform: rotate(45deg);
+		top: 18px;
+		right: -7px;
+		left: auto;
+		border-left: 0 none;
+		border-right: 1px solid #EF308F;
+	}
+}
