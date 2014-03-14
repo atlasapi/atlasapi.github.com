@@ -1916,7 +1916,7 @@ $(document).ready(function(){
 	    $.ajax({
 		    url: 'http://atlas.metabroadcast.com/4.0/auth/providers.json',
 			success: function (data) {
-				var str = '<h3>Select your oauth login method</h3>',
+				var str = '<div style="font-size: 16px; text-align: left;" class="mbl">Login using oauth with one of the services below</div>',
 					i,
 					ii;
 				
