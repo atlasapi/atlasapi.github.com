@@ -351,7 +351,7 @@
             
             .closed {height: 5px;}
 			
-			.logo {text-indent: -9999px; background: url(../images/logo.png) center no-repeat; width: 100px; height: 46px; float: left; margin: 2px 0 0; display: block;}
+			.logo {text-indent: -9999px; background: url(../images/logo.png) center no-repeat; width: 100px; height: 36px; float: left; margin: 9px 0 0; display: block;}
 			
 			/* Tables */
 			.tbl {
