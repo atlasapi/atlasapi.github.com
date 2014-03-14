@@ -738,7 +738,7 @@
                 -khtml-box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
                 -ms-box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
                 box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
-                line-height: 13px;
+                line-height: 17px;
                 float: left;
                 margin-top: 10px;
             }
@@ -916,6 +916,23 @@
             
             .spacer {
                 padding-top: 15px;
+            }
+            
+            .inset {
+	            margin: 0 0 10px;
+                padding: 0;
+                height: 283px;
+                overflow: hidden;
+                position: relative;
+                border-top: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;
+                background: #e7e7e7 url(../images/slideBg.png);
+                -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -khtml-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+                box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
             }
             
             /* Slideshow */
@@ -1402,6 +1419,220 @@
                         
             .loading {background-image: url(../images/loader.gif); background-position: center; background-repeat: no-repeat;}
             
+            .apiKeyHolder {
+	            margin-bottom: 30px;
+            }
+            
+            .getApiKey {
+	            height: 305px;
+	            padding-top: 30px;
+            }
+            
+            .getApiKeyInner {
+	            display: inline-block;
+	            line-height: 30px;
+	            font-size: 16px;
+            }
+            
+            .getApiKeyBtnHolder {
+	            text-align: center;
+            }
+            
+            .getApiKeyBtn {
+	            margin: 0 auto;
+	            float: none;
+	            font-size: 20px;
+	            line-height: 30px;
+            }
+            
+            #newCarousel {
+	            overflow: hidden;
+	            width: 479px;
+	            height: 287px;
+            }
+            .slideHolder {
+				position: relative;
+				transition: left ease 1s;
+				left: 0%;
+            }
+            
+            .slide {
+	            display: block;
+	            width: 439px;
+	            height: 247px;
+	            margin: 10px;
+	            overflow: hidden;
+	            float: left;
+	            border: 10px solid #fff;
+	            border-radius: 5px;
+	            position: relative;
+            }
+            
+            .slide .slideImg {
+	            width: 100%;
+	            display: block;
+            }
+            
+            .slide .slideBottom {
+	            position: absolute;
+	            left: 0;
+	            bottom: 0;
+	            right: 0;
+	            padding: 5px;
+	            background: rgba(255,255,255,0.8);
+	            line-height: 30px;
+	            transition: height ease-out 0.3s;
+	            text-align: left;
+	            height: 30px;
+            }
+            
+            .slide:hover .slideBottom {
+	            height: 60px;
+            }
+            
+            .slide .slideBottom .slideTitle {
+	            font-size: 18px;
+	            color: #ef408f;
+	            margin-right: 5px;
+	            text-shadow: none;
+	            display: block;
+	            float: left;
+            }
+            
+            .slide .slideBottom .slidePublisher {
+	            font-size: 14px;
+	            font-style: italic;
+	            color: #222;
+	            display: block;
+	            float: left;
+	            line-height: 30px;
+            }
+            
+            .slide .slideBottom .slideEpisode {
+	            font-size: 14x;
+	            font-style: italic;
+	            display: block;
+	            color: #222;
+	            clear: left;
+            }
+            
+            .nav .call {
+	            margin: 0 90px;
+	            text-align: center;
+	            max-width: 290px;
+	            overflow: hidden;
+	            text-overflow: ellipsis;
+	            padding-top: 5px;
+            }
+            
+            .loginWrapper {
+	            position: fixed;
+	            top: 0;
+	            left: 0;
+	            right: 0;
+	            bottom: 0;
+	            background: rgba(0,0,0,0.8);
+	            z-index: 500;
+            }
+            
+            .loginHolder {
+	            width: 520px;
+	            height: auto;
+	            position: absolute;
+	            top: 25%;
+	            left: 50%;
+	            margin-top: -150px;
+	            margin-left: -275px;
+	            background: #fff;
+	            border-radius: 6px;
+	            padding: 30px;
+	            text-align: center;
+            }
+            
+            .signInBtn {
+            	border-radius: 6px;
+            	color: #fff;
+            	cursor: pointer;
+            	display: block;
+            	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            	font-size: 18px;
+            	line-height: 24px;
+            	overflow: hidden;
+				padding: 10px 0px 10px 61px;
+				position: relative;
+				text-align: left;
+				text-decroation: none;
+				text-overflow: ellipsis;
+				vertical-align: middle;
+				white-space: nowrap;
+				text-shadow: none;
+				width: 200px;
+				margin: 0 auto 20px;
+            }
+            
+            .signInBtn:hover {
+	            text-decoration: none;
+            }
+            
+            .unit .signInBtn {
+	            margin-right: 10px;
+            }
+            
+            .lastUnit .signInBtn {
+	            margin-right: 0;
+	            margin-left: 10px;
+            }
+            
+            .signInBtn .fa {
+	            border-right: 1px solid rgba(0,0,0,0.2);
+	            text-align: center;
+	            bottom: 0;
+	            top: 0;
+	            left: 0;
+	            position: absolute;
+	            font-size: 32px;
+	            width: 45px;
+	            line-height: 45px;
+            }
+            
+            .btn-bitbucket {
+				background-color: #205081;
+            }
+            .btn-dropbox {
+				background-color: #1087dd;
+            }
+            .btn-facebook {
+				background-color: #3B5998;
+            }
+            .btn-flickr {
+				background-color: #2BA9E1;
+            }
+            .btn-foursquare {
+				background-color: #0072B1;
+            }
+            .btn-github {
+				background-color: #444;
+            }
+            .btn-google {
+				background-color: #DD4B39;
+            }
+            .btn-instagram {
+				background-color: #3F729B;
+            }
+            .btn-linkedin {
+				background-color: #007BB6;
+            }
+            .btn-tumblr {
+				background-color: #CB2027;
+            }
+            .btn-twitter {
+				background-color: #55ACEE;
+            }
+            .btn-vk {
+				background-color: #587EA3;
+            }
+            
+            
             .cb {clear:both;}
             .cl {clear: left;}
             .cr {clear: right;}
@@ -1412,6 +1643,10 @@
             .fn {float: none !important;}
             .fr {float: right !important;}
             
+            .mn {margin: 0;}
+            .ms {margin: 5px;}
+            .mm {margin: 10px;}
+            .ml {margin: 20px;}
             .mtn {margin-top: 0;}
             .mts {margin-top: 5px;}
             .mtm {margin-top: 10px;}

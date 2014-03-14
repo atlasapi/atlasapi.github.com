@@ -178,7 +178,7 @@ var PageInfo = function() {
 PageInfo.prototype.init = function() {
     var pageInfo = this;
     pageInfo.update(true,true,true);
-    $('section:not(.subSection)').each(function(i) {
+    $('section[class]:not(.subSection)').each(function(i) {
         pageInfo.section[i] = {'item': $(this), 'name': $(this).attr('class'), 'position': $(this).find('.marker').offset().top, 'subSection': [], 'subSections': ''};
         $(this).find('.subSection').each(function(ii) {
             pageInfo.section[i].subSection[ii] = {'item': $(this), 'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top};
@@ -1910,8 +1910,56 @@ $(document).ready(function(){
         });
     });
     
-    var homeDemo = new HomeDemo($('.controlBar'));
-    homeDemo.init();
+    //var homeDemo = new HomeDemo($('.controlBar'));
+    //homeDemo.init();
+    
+    $('.getApiKeyBtn').click(function (e) {
+    	e.preventDefault();
+    	
+	    $.ajax({
+		    url: 'http://atlas.metabroadcast.com/4.0/auth/providers.json',
+			success: function (data) {
+				var str = '<div style="font-size: 16px; text-align: left;" class="mbl">Login using oauth with one of the services below</div>',
+					i,
+					ii;
+				
+				if (data.auth_providers && data.auth_providers.length > 0) {
+					for (i = 0, ii = data.auth_providers.length; i < ii; i += 1) {
+						str += '<a href="http://atlas.metabroadcast.com/admin#/login/' + data.auth_providers[i].namespace + '" class="signInBtn btn-'+ data.auth_providers[i].namespace +'"><span class="fa fa-bitbucket"></span>Sign In with '+ data.auth_providers[i].namespace +'</a>';
+					}
+				}
+				
+				str += '';
+				
+				$('.loginHolder').html(str);
+				
+				$('.loginWrapper').show().click(function () {
+					$('.loginWrapper').hide();
+				});
+			}
+	    });
+    });
+    
+    var newDate = new Date();
+    var now = newDate.getTime();
+    now = Math.round(now/1000);
+    var twoHours = now+14400;
+    
+    var carousel = new Carousel({
+    	api: queryBeg,
+    	holder: $('#newCarousel'),
+	    requestList: [
+	        {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk&annotations=brand_summary,description'},
+	        {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&limit=5'},
+	        {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk&annotations=brand_summary,description'},
+	        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk&annotations=brand_summary,description'},
+	        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk&annotations=brand_summary,description'},
+	        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk&annotations=brand_summary,description'},
+	        {'type': 'Search', 'query':'search.json?q=Britain&limit=5'}
+	    ],
+	    time: 10000
+    });
+    
     tabs.changeTab(0);
     $('.subTab a').click(function(){
         return false;
