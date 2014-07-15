@@ -1706,3 +1706,22 @@
 		border-right: 1px solid #EF308F;
 	}
 }
+
+.client-logos {
+    margin: 0 0 20px;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.client-logos li {
+    float: left;
+    width: 23%;
+    height: 64px;
+    margin: 0 1% 10px;
+}
+
+.client-logos img {
+    max-width: 100%;
+    vertical-align: middle;
+}
