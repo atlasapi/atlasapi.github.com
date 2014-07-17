@@ -35,7 +35,7 @@
                 background: #efefef;
                 border-bottom: 1px solid #EF308F;
                 background: rgba(239,239,239,0.95);
-                z-index: 10;
+                z-index: 110;
                 padding: 10px 10px 0;
                 display: block;
                 -webkit-box-shadow: 0 1px #EF308F, 0 5px 10px rgba(0,0,0,0.2) !important;
