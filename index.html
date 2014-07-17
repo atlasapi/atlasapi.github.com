@@ -15,6 +15,24 @@
 <script src="js/prettify/prettify.js"></script>
 <script src="js/Carousel.js"></script>
 <script src="js/script.js"></script>
+<script src="http://widgets.metabroadcast.com/loader/1/load.js"></script>
+<script>
+	MBST = MBST || {};
+	MBST.load({
+		client: 'bt',
+		widgets: [
+			{
+				name: 'epg',
+				version: '1',
+				modules: {
+					grid: {
+						holder: '.epg-widget'
+					}
+				}
+			}
+		]
+	});
+</script>
 </head>
 <body>
 	<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
@@ -42,7 +60,7 @@
 	</header>
 	<div class="loginWrapper" style="display: none;">
 		<div class="loginHolder">
-			
+
 		</div>
 	</div>
 	<div class="page">
@@ -98,6 +116,11 @@
 			<li><img src="images/clients/daily-mail-logo.png" alt="Daily Mail"></li>
 			<li><img src="images/clients/pagesuite-logo-bw.png" alt="PageSuite"></li>
 		</ol>
+
+		<section class="widgets">
+			<h2>Widgets</h2>
+			<div class="epg-widget"></div>
+		</section>
 
 		<section class="examples">
 			<div class="marker" id="examples"></div>
@@ -211,11 +234,11 @@
 				<p>Broadcast channels are also modelled as resources in Atlas.
 					When asking for a schedule, you will have to provide the correct
 					channel id, which is available from the API.</p>
-					
+
 			    <h4>Channel groups</h4>
-				<p>Channel groups are sets of channels that represent broadcast platforms 
-				   and regions, such as Freeview and BBC Scotland. By combining channel 
-				   groups you can get a list of all of the channels available on a certain 
+				<p>Channel groups are sets of channels that represent broadcast platforms
+				   and regions, such as Freeview and BBC Scotland. By combining channel
+				   groups you can get a list of all of the channels available on a certain
 				   platform in a particular region.</p>
 			</section>
 
@@ -549,11 +572,11 @@
                     <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label><input type="text" class="apiKey watchMe" name="apiKey" data-title="apiKey" id="apiKey" />
                     </form>
 			  </div>
-			 </div> 
-			
+			 </div>
+
 			</div>
 			<div class="explorerWrapper" id="explorerWrapper">
-				
+
 				<ul class="tabs clearfix">
 					<li class="tab"><a href="#apiExplorer"
 						data-tab="explore_schedule">Schedule</a></li>
@@ -645,7 +668,7 @@
 								</tr>
 							</tbody>
 						</table>
-						
+
 						<div class="line mbm">
 							<small>
 							<b>Valid Annotations:</b> description, extended_description, brand_summary, series_summary, people, topics, segment_events, related_links, key_phrases, broadcasts, locations, first_broadcast, next_broadcast, available_locations, plus channel.</small>
@@ -701,7 +724,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<!--  CHANNELS -->
 				<div class="tabArea" id="explore_channels" style="display: none;">
 					<h2>Channels and Channel groups</h2>
@@ -732,7 +755,7 @@
 										data-title="media_type" class="watchMe" value="video" /></td>
 									<td class="third">string</td>
 									<td class="fourth">Optionally filter by the type of channel (audio or video)</td>
-							    </tr>								
+							    </tr>
 						        <tr>
 									<td class="fist">available_from</td>
 									<td class="second"><input type="text" id="channels_available_from"
@@ -746,7 +769,7 @@
 										data-title="order_by" class="watchMe" value="title.reverse" /></td>
 									<td class="third">string</td>
 									<td class="fourth">Optionally order the list of channels</td>
-							    </tr>		
+							    </tr>
 								<tr>
 									<td class="first">limit</td>
 									<td class="second"><input
@@ -775,13 +798,13 @@
 								</tr>
 							</tbody>
 						</table>
-						
+
 						<div class="line mbm">
 							<small>
 								<b>Valid annotations</b>: channel_groups, history, parent, variations
 							</small>
 						</div>
-						
+
 						<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -832,7 +855,7 @@
 						</div>
 					</div>
 					</div>
-					
+
 					<!-- CHANNELS ID -->
 					<a name="explore_channels-id"></a>
 					<div class="subArea spacer" id="explore_channels/:id">
@@ -873,7 +896,7 @@
 							<b>Valid annotations</b>: channel_groups, history, parent, variations
 						</small>
 					</div>
-					
+
 					<div class="line hr">
 						    <h4>Request</h4>
 							<div class="unit size4of5">
@@ -889,7 +912,7 @@
 								<input type="submit" class="btn" value="Run" />
 							</div>
 					</div>
-					</form>	
+					</form>
 					  <div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
@@ -922,10 +945,10 @@
 							<pre class="subTabArea" id="channels/:id_json">
                             </pre>
 						</div>
-					</div>		
 					</div>
-					
-					
+					</div>
+
+
 				    <!--  CHANNEL GROUPS -->
 				    <div class="subArea spacer" id="explore_channel_groups">
 					<h3><span class="upper">GET</span> /channel_groups.json</h3>
@@ -1038,7 +1061,7 @@
 						</div>
 					</div>
 				</div>
-				    
+
 				    <!--  CHANNEL GROUPS ID -->
 				    <a name="explore_groups-id"></a>
 				    <div class="subArea spacer" id="explore_channel_groups/:id">
@@ -1061,7 +1084,7 @@
 										data-title=":id" class="watchMe" value="" /></td>
 									<td class="third">string</td>
 									<td class="fourth">The id of the channel group</td>
-							    </tr>	
+							    </tr>
 							    <tr>
 									<td class="fist">annotations</td>
 									<td class="second"><input type="text"
@@ -1128,9 +1151,9 @@
 						</div>
 					</div>
 					</div>
-					
+
 				</div>
-							
+
 				<!--  CONTENT  -->
 				<div class="tabArea" id="explore_content" style="display: none;">
 					<h2>Content</h2>
@@ -1167,7 +1190,7 @@
 							</tr>
 						</tbody>
 					</table>
-					
+
 					<div class="line mbm">
 						<small>
 							<b>Valid annotations</b>: description,
@@ -1227,8 +1250,8 @@
 						</div>
 					</div>
 				</div>
-				
-				
+
+
 				<!--  CONTENT GROUPS -->
 				<div class="tabArea" id="explore_content_groups"
 					style="display: none;">
@@ -1346,7 +1369,7 @@
 							</tr>
 						</tbody>
 					</table>
-					
+
 					<div class="line mbm">
 						<small>
 							<b>Valid annotations</b>: none
@@ -1402,7 +1425,7 @@
 						</div>
 					</div>
 					</div>
-					
+
 					<!--  CONTENT GROUPS ID CONTENT -->
 					<div class="subArea spacer" id="explore_content_groups/:id/content">
 					<h3><span class="upper">GET</span> /content_groups/:id/content.json</h3>
@@ -1511,8 +1534,8 @@
 					</div>
 					</div>
 				</div>
-				
-				
+
+
 				<!--  TOPICS -->
 				<div class="tabArea" id="explore_topics" style="display: none;">
 					<h2>Topics</h2>
@@ -1621,7 +1644,7 @@
 						</div>
 					</div>
 					</div>
-					
+
 					<!-- TOPICS ID -->
 					<a name="explore_topics-id"></a>
 					<div class="subArea spacer" id="explore_topics/:id">
@@ -1668,7 +1691,7 @@
 								<input type="submit" class="btn" value="Run" />
 							</div>
 					</div>
-					</form>	
+					</form>
 						<div class="resultsArea line hr" style="display: none;">
 					    <h4>Response</h4>
 						<div class="preview mlm clearfix">
@@ -1701,11 +1724,11 @@
 							<pre class="subTabArea" id="topics/:id_json">
                                 </pre>
 						</div>
-					</div>		
+					</div>
 						</div>
-						
+
 					<!-- TOPICS ID CONTENT -->
-					<div class="subArea spacer" id="explore_topics/:id/content">		
+					<div class="subArea spacer" id="explore_topics/:id/content">
 					<h3><span class="upper">GET</span> /topics/:id/content.json</h3>
 					<p>Returns a paginated list of the content for a topic.</p>
 					<form>
@@ -1812,8 +1835,8 @@
 					</div>
 					</div>
 				</div>
-				
-				
+
+
 				<!--  PRODUCTS  -->
 				<div class="tabArea" id="explore_products" style="display: none;">
 					<h2>Products</h2>
@@ -1906,7 +1929,7 @@
 						</div>
 					</div>
 					</div>
-					
+
 					<!-- PRODUCTS ID -->
 					<a name="explore_products-id" ></a>
 					<div class="subArea spacer" id="explore_products/:id">
@@ -1989,7 +2012,7 @@
 						</div>
 						</div>
 					</div>
-					
+
 					<!-- PRODUCTS ID CONTENT -->
 					<div class="subArea spacer" id="explore_products/:id/content">
 					<h3><span class="upper">GET</span> /products/:id/content.json</h3>
@@ -2099,15 +2122,15 @@
 						</div>
 					</div>
 				</div>
-				
-				
+
+
 				<!-- SEARCH -->
 				<div class="tabArea" id="explore_search" style="display: none;">
 					<h2>Search</h2>
 					<h3><span class="upper">GET</span> /search.json</h3>
 					<p>Returns a list of content that matches the specified search
 						criteria.</p>
-					<form>	
+					<form>
 					<table class="tbl mbm">
 						<thead>
 							<tr>
@@ -2147,7 +2170,7 @@
 						<small>
 							<b>Valid annotations</b>: none
 						</small>
-					</div>					
+					</div>
 					<div class="line hr mtm">
 					    <h4>Request</h4>
 						<div class="unit size4of5">

@@ -1726,3 +1726,8 @@
     max-width: 100%;
     vertical-align: middle;
 }
+
+/* EPG widget */
+.epg-widget {
+    height: 400px;
+}
