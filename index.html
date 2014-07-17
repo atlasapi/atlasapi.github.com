@@ -117,9 +117,29 @@
 			<li><img src="images/clients/pagesuite-logo-bw.png" alt="PageSuite"></li>
 		</ol>
 
-		<section class="widgets pbm">
+		<section class="examples widgets">
 			<h2>Widgets</h2>
-			<div class="epg-widget"></div>
+			<h3>epg</h3>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis facilis deserunt cumque blanditiis labore suscipit officia ipsam aliquid quisquam, esse ipsa perspiciatis est provident soluta, quidem nemo quis illo placeat.</p>
+			<div class="mbl">
+				<div class="epg-widget"></div>
+			</div>
+			<h3>How to use</h3>
+<pre><code>MBST = MBST || {};
+MBST.load({
+  client: 'atlas',
+  widgets: [
+    {
+      name: 'epg',
+      version: '1',
+      modules: {
+        grid: {
+          holder: '.epg-widget'
+        }
+      }
+    }
+  ]
+});</code></pre>
 		</section>
 
 		<section class="examples">
