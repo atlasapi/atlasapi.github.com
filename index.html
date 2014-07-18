@@ -584,26 +584,24 @@ MBST.load({
 		<section class="apiExplorer">
 			<div class="marker" id="apiExplorer"></div>
 			<div class="explorerTitle">
-			<div class="line">
-			  <div class="unit size1of2 explorerTitleContainer1">
-			  API Explorer
-			  </div>
-			  <div class="unit size1of2 explorerTitleContainer2">
-			  	<form>
-          	<label for="apiKey" class=" apiKeyLabel">
-          		Have an API key? Put it here:<br>
-          		<a href="#" class="getApiKeyBtn">Need an API Key</a>
-          	</label>
-          	<input type="text" class="apiKey watchMe" name="apiKey" data-title="apiKey" id="apiKey" />
-        	</form>
-         	<!-- <div class="getApiKeyBtnHolder mtl">
-          	<a href="#" class="getApiKeyBtn btn btn_lrg">Get Your Free API Key</a>
-          </div> -->
-			  </div>
-			</div>
-
+				<div class="line">
+				  <div class="unit size1of2 explorerTitleContainer1">
+				  API Explorer
+				  </div>
+				</div>
 			</div>
 			<div class="explorerWrapper" id="explorerWrapper">
+
+				<div class="clearfix mbl">
+			  	<form class="unit size1of2">
+          	<label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+          	<input type="text" class="apiKey watchMe" name="apiKey" data-title="apiKey" id="apiKey" />
+        	</form>
+         	<div class="unit size1of2 getApiKeyBtnHolder">
+        		Need an API key?
+          	<a href="#" class="getApiKeyBtn btn">Get Your Free API Key</a>
+          </div>
+			  </div>
 
 				<ul class="tabs clearfix">
 					<li class="tab"><a href="#apiExplorer"

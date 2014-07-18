@@ -136,13 +136,17 @@
                 padding-bottom: 0px;
             }
 
-            .apiKeyLabel { color: white !important;
+            .apiKeyLabel {
                font-size: 14px;
-               width: 200px !important;
-               text-align: right;
+               width: auto;
+               float: none;
+               display: inline-block;
+               /*width: 200px !important;*/
+               /*text-align: right;*/
                margin-top: 6px;
              }
-            .apiKey {float: right;
+            .apiKey {
+                /*float: left;*/
                margin-top: 10px;
                font-size: 14px;
                width: 250px !important;
@@ -1432,7 +1436,7 @@
             }
 
             .getApiKeyBtnHolder {
-	            text-align: center;
+	            text-align: right;
             }
 
             .getApiKeyBtn {
