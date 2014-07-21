@@ -192,7 +192,7 @@ PageInfo.prototype.init = function() {
     pageInfo.sections = pageInfo.section.length-1;
 
     $('section.subSection').each(function(i) {
-        pageInfo.subSection[i] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top, 'parent': $(this).parent().attr('class')};
+        pageInfo.subSection[i] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top - 97, 'parent': $(this).parent().attr('class')};
     });
     pageInfo.subSections = pageInfo.subSection.length;
 
