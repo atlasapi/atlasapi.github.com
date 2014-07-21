@@ -181,7 +181,7 @@ PageInfo.prototype.init = function() {
     $('section[class]:not(.subSection)').each(function(i) {
         pageInfo.section[i] = {'item': $(this), 'name': $(this).attr('class'), 'position': $(this).find('.marker').offset().top - 67, 'subSection': [], 'subSections': ''};
         $(this).find('.subSection').each(function(ii) {
-            pageInfo.section[i].subSection[ii] = {'item': $(this), 'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top};
+            pageInfo.section[i].subSection[ii] = {'item': $(this), 'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top - 67};
             var leftPos = $('.mainMenu a[href="#'+pageInfo.section[i].name+'"]').offset().left;
             pageInfo.section[i].item.find('.subNav').css({
                 'left': leftPos-2
@@ -192,7 +192,7 @@ PageInfo.prototype.init = function() {
     pageInfo.sections = pageInfo.section.length-1;
 
     $('section.subSection').each(function(i) {
-        pageInfo.subSection[i] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top - 97, 'parent': $(this).parent().attr('class')};
+        pageInfo.subSection[i] = {'name': $(this).attr('data-title'), 'position': $(this).find('.marker').offset().top, 'parent': $(this).parent().attr('class')};
     });
     pageInfo.subSections = pageInfo.subSection.length;
 
