@@ -1,0 +1,111 @@
+/* Grids */
+.line:after,.lastUnit:after {
+  clear: both;
+  display: block;
+  visibility: hidden;
+  overflow: hidden;
+  height: 0 !important;
+  line-height: 0;
+  font-size: xx-large;
+  content: " - - - - - M E T A B R O A D C A S T - - A T L A S A P I - - - - M E T A B R O A D C A S T - - A T L A S A P I - - - - M E T A B R O A D C A S T - - A T L A S A P I - - - - - ";
+}
+
+.line {
+  *zoom: 1;
+}
+
+.unit {
+  float: left;
+}
+
+.size1of1 {
+  float: none;
+}
+
+.size1of2 {
+  width: 50%;
+}
+
+.size1of3 {
+  width: 33.33333%;
+}
+
+.size2of3 {
+  width: 66.66666%;
+}
+
+.size1of4 {
+  width: 25%;
+}
+
+.size3of4 {
+  width: 75%;
+}
+
+.size1of5 {
+  width: 20%;
+}
+
+.size2of5 {
+  width: 40%;
+}
+
+.size3of5 {
+  width: 60%;
+}
+
+.size4of5 {
+  width: 80%;
+}
+
+.lastUnit {
+  display: table-cell;
+  float: none;
+  width: auto;
+  *display: block;
+  *zoom: 1;
+  _position: relative;
+  _left: -3px;
+  _margin-right: -3px;
+}
+
+.hr {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0 1px 0 #fff;
+  -moz-box-shadow: 0 1px 0 #fff;
+  -o-box-shadow: 0 1px 0 #fff;
+  -khtml-box-shadow: 0 1px 0 #fff;
+  -ms-box-shadow: 0 1px 0 #fff;
+  box-shadow: 0 1px 0 #fff;
+}
+
+h1.hr, h2.hr, h3.hr, h4.hr, h5.hr, h6.hr {
+  padding-bottom: 10px;
+}
+
+.spacer {
+  padding-top: 15px;
+}
+
+.inset {
+  margin: 0 0 10px;
+  padding: 0;
+  height: 287px;
+  overflow: hidden;
+  position: relative;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: #e7e7e7 url(../images/slideBg.png);
+  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -khtml-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.inset,
+.inset * {
+  box-sizing: content-box;
+}

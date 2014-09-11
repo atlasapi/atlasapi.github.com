@@ -1,0 +1,110 @@
+/* Hover */
+.hov {
+  position: relative;
+  color: #380b66;
+}
+
+a.hov {
+  text-decoration: none;
+}
+
+.hover {
+  display: none;
+  background: #fff;
+  border: 5px solid #ccc;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 5px;
+  position: absolute;
+  width: 150px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #222;
+  padding: 3px;
+  right: 50%;
+  margin-right: -75px;
+  bottom: 25px;
+  line-height: 140%;
+  z-index: 9;
+  text-align: left;
+}
+
+.csstransforms .hover:after {
+  width: 10px;
+  height: 10px;
+  display: block;
+  background: #fff;
+  position: absolute;
+  bottom: -11px;
+  left: 75px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -khtml-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  content: "\00a0";
+  border-bottom: 5px solid #ccc;
+  border-right: 5px solid #ccc;
+  -moz-border-radius: 0 0 5px 0;
+  -o-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  -ms-border-radius: 5px;
+  border-radius: 0 0 5px 0;
+}
+
+.hover .title {
+  text-decoration: none;
+  display: block;
+  color: #380b66;
+  font-size: 14px;
+}
+
+.hover .body {
+  display: block;
+  white-space: pre;
+}
+
+.hovDown .hover {
+  bottom: auto;
+  top: 30px;
+}
+
+.csstransforms .hovDown .hover:after {
+  bottom: auto;
+  top: -11px;
+  border-bottom: 0 none;
+  border-right: 0 none;
+  border-top: 5px solid #ccc;
+  border-left: 5px solid #ccc;
+}
+
+.hovRight .hover {
+  right: -10px;
+  margin-right: 0;
+}
+
+.csstransforms .hovRight .hover:after {
+  left: auto;
+  right: 10px;
+}
+
+.hovLeft .hover {
+  right: auto;
+  left: -10px;
+  margin-right: 0;
+}
+
+.csstransforms .hovLeft .hover:after {
+  left: 10px;
+}
+
+.hov:hover {
+  cursor: pointer;
+}
+
+.hov.js:hover .hover {
+  display: none;
+}

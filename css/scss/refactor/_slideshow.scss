@@ -1,0 +1,70 @@
+/* Slideshow */
+.slideShow {
+  margin: 0 0 10px;
+  padding: 10px 0;
+  height: 283px;
+  overflow: hidden;
+  position: relative;
+  background: #e7e7e7;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.boxshadow .slideShow {
+  border: 0 none;
+  background: #e7e7e7 url(../images/slideBg.png);
+  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -khtml-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.slideshowItem {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 48000px;
+}
+
+.controlBar {
+  padding: 0 10px;
+  position: relative;
+}
+
+.controlBar .queryHolder {
+  padding: 12px 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.controlBar .queryHolder:before,
+.controlBar .queryHolder:after {
+  content: "\00a0";
+  height: 30px;
+  width: 20px;
+  position: absolute;
+  background: #efefef;
+  z-index: 5;
+}
+
+.controlBar .queryHolder:before {
+  left: 0;
+  -webkit-box-shadow: 10px 0 10px #efefef;
+  -moz-box-shadow: 10px 0 10px #efefef;
+  -o-box-shadow: 10px 0 10px #efefef;
+  -khtml-box-shadow: 10px 0 10px #efefef;
+  -ms-box-shadow: 10px 0 10px #efefef;
+  box-shadow: 10px 0 10px #efefef;
+}
+
+.controlBar .queryHolder:after {
+  right: 0;
+  -webkit-box-shadow: -10px 0 10px #efefef;
+  -moz-box-shadow: -10px 0 10px #efefef;
+  -o-box-shadow: -10px 0 10px #efefef;
+  -khtml-box-shadow: -10px 0 10px #efefef;
+  -ms-box-shadow: -10px 0 10px #efefef;
+  box-shadow: -10px 0 10px #efefef;
+}
