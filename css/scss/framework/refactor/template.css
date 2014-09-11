@@ -1,0 +1,10 @@
+/*-----------
+	Template
+------------*/
+body{text-align:center;}
+.body{overflow:hidden; _overflow:visible; _zoom:1;}
+.page{margin: 0 auto; width: auto;text-align: left;}
+/* ====== Columns ====== */
+.main{overflow: hidden;_overflow:visible;_zoom:1;}
+.leftCol{float:left; _margin-right:-3px;}
+.rightCol{float:right;_margin-left:-3px;}

@@ -1,0 +1,20 @@
+$primary-color: #fc0088 !default;
+$secondary-color: #250053 !default;
+
+$primary-bg-color: #fff !default;
+$secondary-bg-color: $secondary-color !default;
+
+$font-family: Helvetica, san-serif !default;
+$header-font-family: Molengo, Helvetica, san-serif !default;
+
+$base-font-size: 0.9em !default;
+$h1-size: $base-font-size * 2.25 !default;
+$h2-size: $base-font-size * 2 !default;
+$h3-size: $base-font-size * 1.75 !default;
+$h4-size: $base-font-size * 1.5 !default;
+$h5-size: $base-font-size * 1.25 !default;
+$h6-size: $base-font-size !default;
+
+$line-height: 1.5 !default;
+
+$border-radius: 5px !default;
