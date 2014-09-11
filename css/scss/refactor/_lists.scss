@@ -33,11 +33,11 @@ nav {
 }
 
 .mainMenu li:first-child {
-  border-left: 0 none;
+  border-left: 0;
 }
 
 .mainMenu li:last-child {
-  border-right: 0 none;
+  border-right: 0;
 }
 
 .mainMenu li a {
@@ -70,21 +70,8 @@ nav {
   border-right: 1px solid #EF308F;
   z-index: 20;
   padding: 0 10px;
-  -moz-border-radius: 0 0 5px 5px;
-  -o-border-radius: 0 0 5px 5px;
-  -khtml-border-radius: 0 0 5px 5px;
-  -ms-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
-  -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  -o-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  -khtml-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-  -ms-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-}
-
-*:first-child+html .subNav {
-  top: 67px;
 }
 
 .subNav li {
@@ -94,17 +81,13 @@ nav {
   border-left: 1px solid #fff;
 }
 
-*:first-child+html .subNav li {
-  border-right: 0 none;
-}
-
 .subNav li:first-child {
-  border-left: 0 none;
+  border-left: 0;
   padding-left: 0;
 }
 
 .subNav li:last-child {
-  border-right: 0 none;
+  border-right: 0;
   padding-right: 0;
 }
 
@@ -126,18 +109,10 @@ nav {
 
 .tabs {
   background: #e2e2e2;
+  list-style: none;
   float: left;
-  -moz-border-radius: 5px 5px 0 0;
-  -o-border-radius: 5px 5px 0 0;
-  -khtml-border-radius: 5px 5px 0 0;
-  -ms-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
   height: 40px;
-  -webkit-box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
-  -moz-box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
-  -o-box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
-  -khtml-box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
-  -ms-box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
   box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
 }
 
@@ -155,18 +130,10 @@ nav {
 }
 
 .tabs li:first-child a {
-  -moz-border-radius: 5px 0 0 0;
-  -o-border-radius: 5px 0 0 0;
-  -khtml-border-radius: 5px 0 0 0;
-  -ms-border-radius: 5px 0 0 0;
   border-radius: 5px 0 0 0;
 }
 
 .tabs li:last-child a {
-  -moz-border-radius: 0 5px 0 0;
-  -o-border-radius: 0 5px 0 0;
-  -khtml-border-radius: 0 5px 0 0;
-  -ms-border-radius: 0 5px 0 0;
   border-radius: 0 5px 0 0;
 }
 
@@ -179,11 +146,6 @@ nav {
   background: #fff;
   color: #ef308f;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -khtml-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
   box-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
@@ -197,10 +159,6 @@ nav {
   display: block;
   font-size: 14px;
   padding: 5px 15px;
-  -moz-border-radius: 5px 5px 0 0;
-  -o-border-radius: 5px 5px 0 0;
-  -khtml-border-radius: 5px 5px 0 0;
-  -ms-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
   margin-top: 10px;
 }
@@ -209,11 +167,6 @@ nav {
   background: #fff;
   color: #ef308f;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -khtml-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
   box-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
@@ -224,16 +177,7 @@ nav {
 .tabArea {
   clear: both;
   background: #fff;
-  -moz-border-radius: 0 0 5px 5px;
-  -o-border-radius: 0 0 5px 5px;
-  -khtml-border-radius: 0 0 5px 5px;
-  -ms-border-radius: 0 0 5px 5px;
   border-radius: 0 0 5px 5px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -o-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -khtml-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-  -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.4);
   box-shadow: 0 1px 2px rgba(0,0,0,0.4);
   padding: 10px;
   position: relative;
@@ -301,15 +245,15 @@ nav {
   color: #fff;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   text-decoration: none;
-  -moz-border-radius: 5px 5px 0 0;
-  -o-border-radius: 5px 5px 0 0;
-  -khtml-border-radius: 5px 5px 0 0;
-  -ms-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
 }
 
 .smallTabs .other {
   margin-top: 3px;
+}
+
+.socialList {
+  list-style: none;
 }
 
 .socialList li {

@@ -1,8 +1,4 @@
 /* Forms */
-*:first-child+html form .line {
-  margin-bottom: 10px;
-}
-
 input[type=text],
 input[type=number] {
   width: 290px;
@@ -10,21 +6,7 @@ input[type=number] {
   padding: 0 5px;
   background: #f2f2f2;
   border: 1px solid #afafaf;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
-}
-
-*:first-child+html input {
-  height: 30px;
-  line-height: 30px;
-}
-
-*:first-child+html .btn {
-  height: 30px;
-  line-height: 20px;
 }
 
 input[type=text]:focus {
@@ -62,17 +44,9 @@ label {
   float: left;
 }
 
-*:first-child+html label {
-  width: 140px;
-}
-
 label.date {
   width: 70px;
   margin-right: 10px;
-}
-
-*:first-child+html label.date {
-  width: 60px;
 }
 
 label.adv {
@@ -87,10 +61,6 @@ label.adv {
   padding: 0 5px;
   background: #f2f2f2;
   border: 1px solid #afafaf;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   display: block;
 }
@@ -116,16 +86,7 @@ label.adv {
   padding: 28px 0 0;
   background: #f2f2f2;
   border: 1px solid #afafaf;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -o-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -khtml-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -ms-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   z-index: 8;
 }
@@ -163,47 +124,31 @@ label.adv {
   padding: 0 5px;
   background: #fff;
   border: 1px solid #afafaf;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
   display: block;
   margin-bottom: 10px;
 }
 
-*:first-child+html .urlCopy {
-  z-index: -1;
-}
-
 .urlCopy .urlTxt {
   margin-right: 25px;
   display: block;
-  white-space: pre;
-           /* CSS 2.0 */
-  white-space: pre-wrap;
-      /* CSS 2.1 */
-  white-space: pre-line;
-      /* CSS 3.0 */
-  white-space: -pre-wrap;
-     /* Opera 4-6 */
-  white-space: -o-pre-wrap;
-   /* Opera 7 */
-  white-space: -moz-pre-wrap;
- /* Mozilla */
-  white-space: -hp-pre-wrap;
-  /* HP Printers */
-  word-wrap: break-word;
-      /* IE 5+ */
+  white-space: pre; /* CSS 2.0 */
+  white-space: pre-wrap; /* CSS 2.1 */
+  white-space: pre-line; /* CSS 3.0 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap; /* HP Printers */
+  word-wrap: break-word; /* IE 5+ */
   text-transform: none;
   background: #fff;
-  border: 0 none;
-  padding: 0 none;
+  border: 0;
+  padding: 0;
   width: 95%;
 }
 
 .urlCopy .urlTxt:focus {
-  border: 0 none;
+  border: 0;
 }
 
 .btnCopy {
@@ -222,7 +167,7 @@ label.adv {
 
 .line.urlCopy {
   background: none;
-  border: 0 none;
+  border: 0;
   padding: 0;
   margin: 0;
 }

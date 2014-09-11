@@ -71,7 +71,7 @@
 			}
 			section.subSection {
 				padding: 30px 0 10px;
-				border: 0 none;
+				border: 0;
 				margin-bottom: 0;
 				border-bottom: 1px dashed rgba(0,0,0,0.1);
 				-webkit-box-shadow: none;
@@ -81,7 +81,7 @@
 				-ms-box-shadow: none;
 				box-shadow: none;
 			}
-			section.subSection:last-child {border-bottom: 0 none;}
+			section.subSection:last-child {border-bottom: 0;}
 			section .marker {position: absolute; top: -68px;}
 
 			.home {padding: 90px 0 10px;}
@@ -251,7 +251,7 @@
 			a.query {text-transform: none; font-size: 15px; margin-top: 1px;}
 
 			.faded {color: #666; font-style: italic;}
-			mark {color: #ef308f; background: 0 none;}
+			mark {color: #ef308f; background: 0;}
 
 			.pre, pre {
                 background: #fff;
@@ -269,7 +269,7 @@
 
             .boxshadow .pre,
             .boxshadow pre {
-                border: 0 none;
+                border: 0;
                 -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
@@ -431,8 +431,8 @@
 			nav {float: left; margin-left: 10px;}
 			.mainMenu {list-style-type: none; font-size: 22px; margin-top: 23px; line-height: 28px; float: left; }
 			.mainMenu li {float: left; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
-			.mainMenu li:first-child {border-left: 0 none;}
-			.mainMenu li:last-child {border-right: 0 none;}
+			.mainMenu li:first-child {border-left: 0;}
+			.mainMenu li:last-child {border-right: 0;}
 			.mainMenu li a {color: #333; padding: 0 20px 5px; display: block; position: relative; bottom: -1px;}
 			.mainMenu li a:hover {color: #ef308f; text-decoration: none;}
 			.mainMenu li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
@@ -464,10 +464,10 @@
 			*:first-child+html .subNav {top: 67px;}
 			*html .subNav {top: 67px;}
 			.subNav li {float: left; padding: 0 10px; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
-			*:first-child+html .subNav li {border-right: 0 none;}
-			*html .suvNav li {border-right: 0 none;}
-			.subNav li:first-child {border-left: 0 none; padding-left: 0;}
-			.subNav li:last-child {border-right: 0 none; padding-right: 0;}
+			*:first-child+html .subNav li {border-right: 0;}
+			*html .suvNav li {border-right: 0;}
+			.subNav li:first-child {border-left: 0; padding-left: 0;}
+			.subNav li:last-child {border-right: 0; padding-right: 0;}
 			.subNav li:first-child{margin-left: 0;}
 			.subNav li a {float: left; display: block; padding: 5px 0; color: #333;}
 			.subNav li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
@@ -871,7 +871,7 @@
                 width: 130px;
                 height: 75px;
                 background: #fff;
-                border: 0 none;
+                border: 0;
                 -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
@@ -948,7 +948,7 @@
             *html .slideShow {display: none;}
 
             .boxshadow .slideShow {
-                border: 0 none;
+                border: 0;
                 background: #e7e7e7 url(../images/slideBg.png);
                 -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
                 -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
@@ -1162,8 +1162,8 @@
                 .csstransforms .hovDown .hover:after {
                     bottom: auto;
                     top: -11px;
-                    border-bottom: 0 none;
-                    border-right: 0 none;
+                    border-bottom: 0;
+                    border-right: 0;
                     border-top: 5px solid #ccc;
                     border-left: 5px solid #ccc;
                }
@@ -1338,11 +1338,11 @@
                     word-wrap: break-word;      /* IE 5+ */
                     text-transform: none;
                     background: #fff;
-                    border: 0 none;
-                    padding: 0 none;
+                    border: 0;
+                    padding: 0;
                     width: 95%;
                }
-                .urlCopy .urlTxt:focus {border: 0 none;}
+                .urlCopy .urlTxt:focus {border: 0;}
                 .btnCopy {
                     display: block;
                     float: right;
@@ -1353,7 +1353,7 @@
 
                 .urlCopy embed {position: absolute; top: 0;}
 
-            .line.urlCopy {background: none; border: 0 none; padding: 0; margin: 0;}
+            .line.urlCopy {background: none; border: 0; padding: 0; margin: 0;}
 
             /* Datepicker */
             .ui-datepicker {
@@ -1707,7 +1707,7 @@
 		top: 18px;
 		right: -7px;
 		left: auto;
-		border-left: 0 none;
+		border-left: 0;
 		border-right: 1px solid #EF308F;
 	}
 }

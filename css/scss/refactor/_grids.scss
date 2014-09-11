@@ -10,10 +10,6 @@
   content: " - - - - - M E T A B R O A D C A S T - - A T L A S A P I - - - - M E T A B R O A D C A S T - - A T L A S A P I - - - - M E T A B R O A D C A S T - - A T L A S A P I - - - - - ";
 }
 
-.line {
-  *zoom: 1;
-}
-
 .unit {
   float: left;
 }
@@ -62,21 +58,11 @@
   display: table-cell;
   float: none;
   width: auto;
-  *display: block;
-  *zoom: 1;
-  _position: relative;
-  _left: -3px;
-  _margin-right: -3px;
 }
 
 .hr {
   margin-bottom: 10px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
-  -webkit-box-shadow: 0 1px 0 #fff;
-  -moz-box-shadow: 0 1px 0 #fff;
-  -o-box-shadow: 0 1px 0 #fff;
-  -khtml-box-shadow: 0 1px 0 #fff;
-  -ms-box-shadow: 0 1px 0 #fff;
   box-shadow: 0 1px 0 #fff;
 }
 
@@ -97,14 +83,10 @@ h1.hr, h2.hr, h3.hr, h4.hr, h5.hr, h6.hr {
   border-top: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   background: #e7e7e7 url(../images/slideBg.png);
-  -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  -moz-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  -o-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  -khtml-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-  -ms-box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
   box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
 }
 
+// Temporary fix while transitioning to framework
 .inset,
 .inset * {
   box-sizing: content-box;

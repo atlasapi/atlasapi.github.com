@@ -2,25 +2,12 @@
 .ui-datepicker {
   width: 199px;
   background: #efefef;
-  -moz-border-radius: 5px;
-  -o-border-radius: 5px;
-  -khtml-border-radius: 5px;
-  -ms-border-radius: 5px;
   border-radius: 5px;
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -o-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -khtml-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-  -ms-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
   z-index: 100 !important;
 }
 
 .ui-datepicker-header {
-  -moz-border-radius: 5px 5px 0 0;
-  -o-border-radius: 5px 5px 0 0;
-  -khtml-border-radius: 5px 5px 0 0;
-  -ms-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0;
   background: #ef69ac;
   color: #fff;
@@ -33,7 +20,8 @@
   font-weight: bold;
 }
 
-.ui-datepicker-prev, .ui-datepicker-next {
+.ui-datepicker-prev,
+.ui-datepicker-next {
   color: #fff;
   text-shadow: 0 1px 0 rgba(0,0,0,0.2);
   cursor: pointer;
@@ -47,7 +35,8 @@
   float: right;
 }
 
-.ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
   color: #300060;
 }
 
@@ -73,16 +62,7 @@
 
 .ui-datepicker-current-day {
   background: #8366A0;
-  -moz-border-radius: 3px;
-  -o-border-radius: 3px;
-  -khtml-border-radius: 3px;
-  -ms-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-  -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-  -o-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-  -khtml-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-  -ms-box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
   border-bottom: 1px solid #fff;
 }
@@ -93,9 +73,7 @@
 }
 
 .loading {
-  background-image: url(../images/loader.gif);
-  background-position: center;
-  background-repeat: no-repeat;
+  background: url(../images/loader.gif) center no-repeat;
 }
 
 .apiKeyHolder {
@@ -522,15 +500,11 @@
 
   .csstransforms .homeSpeech:after {
     -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    -khtml-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
     transform: rotate(45deg);
     top: 18px;
     right: -7px;
     left: auto;
-    border-left: 0 none;
+    border-left: 0;
     border-right: 1px solid #EF308F;
   }
 }

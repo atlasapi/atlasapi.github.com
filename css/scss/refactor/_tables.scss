@@ -3,11 +3,6 @@
   width: 100%;
   margin-bottom: 20px;
   background: #fff;
-  -webkit-box-shadow: 0 1px 10px rgba(0,0,0,0.2);
-  -moz-box-shadow: 0 1px 10px rgba(0,0,0,0.2);
-  -o-box-shadow: 0 1px 10px rgba(0,0,0,0.2);
-  -khtml-box-shadow: 0 1px 10px rgba(0,0,0,0.2);
-  -ms-box-shadow: 0 1px 10px rgba(0,0,0,0.2);
   box-shadow: 0 1px 10px rgba(0,0,0,0.2);
   text-transform: none;
 }
@@ -21,12 +16,6 @@
   background-color: #8e5dbf;
   background: -moz-linear-gradient(top, #8e5dbf, #3e126a);
   background: -webkit-gradient(linear, left top, left bottom, from(#8e5dbf), to(#3e126a));
-  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#8e5dbf', EndColorStr='#3e126a', GradientType=0);
-  -webkit-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
-  -moz-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
-  -o-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
-  -khtml-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
-  -ms-box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
   box-shadow: inset 0 1px 1px rgba(255,255,255,0.4);
   text-shadow: 0 -1px 0 rgba(0,0,0,0.6);
 }
@@ -52,21 +41,19 @@
 }
 
 th.first,
-      td.first {
+td.first {
   width: 200px;
 }
 
 th.second,
-      td.second {
+td.second {
   width: 362px;
 }
 
 th.fourth,
-      td.fourth {
+td.fourth {
   width: 290px;
 }
-
-/*.tbl tbody tr:hover {background: #efefef;}*/
 
 tr:nth-child(even) {
   background: #F2EDF8;
