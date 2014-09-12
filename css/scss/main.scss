@@ -1,22 +1,20 @@
 // MetaBroadcast framework
 @import "framework/base";
 
-// Styles to be refactored and either used explicity for this site or moved
-// into the framework
-@import "refactor/reset";
-@import "refactor/clearfix";
-@import "refactor/general";
-@import "refactor/tables";
-@import "refactor/lists";
-@import "refactor/buttons";
-@import "refactor/messages";
-@import "refactor/images";
-@import "refactor/projects";
-@import "refactor/grids";
-@import "refactor/slideshow";
-@import "refactor/examples";
-@import "refactor/hover";
-@import "refactor/forms";
-@import "refactor/date-picker";
-@import "refactor/client-logos";
-@import "refactor/epg-widget";
+// Site specific styles
+@import "modules/reset"; // Aim to remove need for this
+@import "modules/general";
+@import "modules/grids"; // Aim to update grid using neat
+@import "modules/tables";
+@import "modules/buttons";
+@import "modules/images";
+@import "modules/client-logos";
+@import "modules/epg-widget";
+@import "modules/slideshow";
+@import "modules/lists";
+@import "modules/messages";
+@import "modules/projects";
+@import "modules/examples";
+@import "modules/date-picker";
+@import "modules/hover";
+@import "modules/forms";

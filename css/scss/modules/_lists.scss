@@ -34,9 +34,6 @@ nav {
 
 .mainMenu li:first-child {
   border-left: 0;
-}
-
-.mainMenu li:last-child {
   border-right: 0;
 }
 
@@ -63,6 +60,7 @@ nav {
   float: left;
   position: fixed;
   top: 68px;
+  list-style: none;
   background: #efefef;
   background: rgba(239,239,239,0.95);
   border-left: 1px solid #EF308F;
