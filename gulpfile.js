@@ -47,4 +47,4 @@ gulp.task('watch', function () {
   gulp.watch('css/scss/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['getFramework', 'unzipFramework', 'deleteZipFile', 'sass']);
+gulp.task('default', ['getFramework', 'unzipFramework', 'deleteZipFile']);
