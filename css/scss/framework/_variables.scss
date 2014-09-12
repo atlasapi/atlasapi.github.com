@@ -1,6 +1,8 @@
 $primary-color: #fc0088 !default;
 $secondary-color: #250053 !default;
 
+$primary-text-color: #333 !default;
+
 $primary-bg-color: #fff !default;
 $secondary-bg-color: $secondary-color !default;
 
@@ -18,3 +20,7 @@ $h6-size: $base-font-size !default;
 $line-height: 1.5 !default;
 
 $border-radius: 5px !default;
+
+$small-space: 5px !default;
+$mediam-space: 10px !default;
+$large-space: 20px !default;
