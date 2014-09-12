@@ -33,7 +33,7 @@ gulp.task('deleteZipFile', ['unzipFramework'], function () {
     .pipe(clean({force: true}));
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', ['deleteZipFile'], function () {
   gulp.src('css/scss/main.scss')
     .pipe(sass({
       style: 'compressed',
@@ -47,4 +47,4 @@ gulp.task('watch', function () {
   gulp.watch('css/scss/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['getFramework', 'unzipFramework', 'deleteZipFile']);
+gulp.task('default', ['getFramework', 'unzipFramework', 'deleteZipFile', 'sass']);
