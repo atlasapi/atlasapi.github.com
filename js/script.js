@@ -1918,7 +1918,7 @@ $(document).ready(function(){
 
         var url;
 
-        if (MBST.ENV === 'stage' || window.location.indexOf('stage') >= 0) {
+        if (window.location.indexOf('stage') >= 0) {
             url = '//stage.atlas.metabroadcast.com/4.0/auth/providers.json';
         } else {
             url = '//atlas.metabroadcast.com/4.0/auth/providers.json';
