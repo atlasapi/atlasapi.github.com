@@ -1916,16 +1916,8 @@ $(document).ready(function(){
     $('.getApiKeyBtn').click(function (e) {
     	e.preventDefault();
 
-        var url;
-
-        if (MBST.ENV === 'stage' || window.location.href.indexOf('stage')) {
-            url = '//stage.atlas.metabroadcast.com/4.0/auth/providers.json';
-        } else {
-            url = '//atlas.metabroadcast.com/4.0/auth/providers.json';
-        }
-
 	    $.ajax({
-		    url: url,
+		    url: '//atlas.metabroadcast.com/4.0/auth/providers.json',
 			success: function (data) {
 				var str = '<div style="font-size: 16px; text-align: left;" class="mbl">Log in with one of the services below</div>',
 					i,
