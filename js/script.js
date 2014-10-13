@@ -1973,7 +1973,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $('a.apiSearch').click(function(){
+    $('a.apiSearch').live('click', function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(6);
             apiExplorer.searchQuery($(this).attr('href'));
