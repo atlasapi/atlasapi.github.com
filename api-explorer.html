@@ -17,7 +17,19 @@
           <div class="unit size1or2 explorerTitleContainer1">API explorer</div>
         </div>
       </div>
-      <div class="explorerWrapper" id="api-explorer"></div>
+      <div class="explorerWrapper">
+        <div class="clearfix mbl">
+          <form class="unit size1of2">
+            <label for="apiKey" class="apiKeyLabel">Have an API key? Put it here: </label>
+            <input type="text" class="apiKey" name="apiKey" id="apiKey">
+          </form>
+          <div class="unit size1of2 getApiKeyBtnHolder">
+            Need an API key?
+            <a href="#" class="getApiKeyBtn btn">Get your free API key</a>
+          </div>
+        </div>
+        <div id="api-explorer"></div>
+      </div>
     </section>
   </div>
 
@@ -37,7 +49,7 @@
 
   <script type="text/x-handlebars" id="panel-template">
     {{#each endpoints}}
-    <div class="tab-panel" id="api-{{name}}">
+    <div class="tabArea" id="api-{{name}}">
       <h2>{{name}}</h2>
       {{#if description}}<p>{{description}}</p>{{/if}}
       <div class="queries">
