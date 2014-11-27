@@ -51,28 +51,24 @@
     {{#each endpoints}}
     <div class="tabArea" id="api-{{name}}">
       <h2>{{name}}</h2>
-      {{#if description}}<p>{{description}}</p>{{/if}}
-      <div class="queries">
-        <h3>Query form</h3>
-        <form class="query-form" action="#" method="get">
-          <p>
-            <label for="{{name}}-query">Query</label>
-            <input class="query-url" type="text" name="{{name}}-query" value="{{model_class_link}}">
-            <button type="submit">Get data</button>
-          </p>
-          <h3>Add parameters</h3>
-          <p>Annotations:</p>
-          <ul class="annotations-list">
-            <li><label for="blah"><input class="annotations-checkbox" type="checkbox" name="blah" id="blah"> blah</label></li>
-            <li><label for="foo"><input class="annotations-checkbox" type="checkbox" name="foo" id="foo"> foo</label></li>
-            <li><label for="bar"><input class="annotations-checkbox" type="checkbox" name="bar" id="bar"> bar</label></li>
-          </ul>
-        </form>
-      </div>
-      <div class="output">
-        <h3>Output</h3>
-        <pre class="{{name}}-json-output json-output"></pre>
-      </div>
+      <h3><span class="upper">GET</span> {{root_path}}</h3>
+      {{#if description}}
+      <p>{{description}}</p>
+      {{else}}
+      <p>Returns {{name}}</p>
+      {{/if}}
+      <form>
+        <table class="tbl mbm">
+          <thead>
+            <th class="first">Parameter</th>
+            <th class="second">Value</th>
+            <th class="third">Type</th>
+            <th class="fourth">Description</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </form>
     </div>
     {{/each}}
   </script>
