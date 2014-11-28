@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>API explorer</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Molengo">
+  <link rel="stylesheet" href="css/fontawesome.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="page">
+    <section class="apiExplorer">
+      <div class="marker" id="apiExplorer"></div>
+      <div class="explorerTitle">
+        <div class="line">
+          <div class="unit size1or2 explorerTitleContainer1">API explorer</div>
+        </div>
+      </div>
+      <div class="explorerWrapper">
+        <div class="clearfix mbl">
+          <form class="unit size1of2">
+            <label for="apiKey" class="apiKeyLabel">Have an API key? Put it here: </label>
+            <input type="text" class="apiKey" name="apiKey" id="apiKey">
+          </form>
+          <div class="unit size1of2 getApiKeyBtnHolder">
+            Need an API key?
+            <a href="#" class="getApiKeyBtn btn">Get your free API key</a>
+          </div>
+        </div>
+        <div id="api-explorer"></div>
+      </div>
+    </section>
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/api-explorer/lib/handlebars-v2.0.0.js"></script>
+  <script src="js/api-explorer/lib/highlight.pack.js"></script>
+  <script src="js/api-explorer/tabs"></script>
+  <script src="js/api-explorer/app.js"></script>
+
+  <script type="text/x-handlebars-template" id="navigation-template">
+    <ul class="tabs clearfix">
+      {{#each endpoints}}
+      <li><a href="#api-{{name}}">{{name}}</a></li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" id="panel-template">
+    {{#each endpoints}}
+    <div class="tabArea" id="api-{{name}}">
+      <h2>{{name}}</h2>
+      <h3><span class="upper">GET</span> {{root_path}}</h3>
+      {{#if description}}
+      <p>{{description}}</p>
+      {{else}}
+      <p>Returns {{name}}</p>
+      {{/if}}
+      <form>
+        <table class="tbl mbm">
+          <thead>
+            <th class="first">Parameter</th>
+            <th class="second">Value</th>
+            <th class="third">Type</th>
+            <th class="fourth">Description</th>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <div class="line mbm">
+          <small><strong>Valid annotations:</strong></small>
+        </div>
+        <div class="line hr mtm">
+          <h4>Request</h4>
+          <div class="unit size4of4">
+            <div class="urlCopy" id="{{name}}_queryCopy">
+
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    {{/each}}
+  </script>
+
+</body>
+</html>
