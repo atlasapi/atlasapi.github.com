@@ -32,7 +32,7 @@ apiExplorer.buildNavigation = function (data) {
 apiExplorer.buildSections = function (data) {
   var $tabHolder = $('<div class="clearfix tabHolder"></div>');
   for (var i = 0, ii = data.length; i < ii; i++) {
-    var $tabPanel = $('<div class="tabArea" id="api-' + data[i].name + '"><h2>' + data[i].name + '</div>');
+    var $tabPanel = $('<div class="tabArea" id="api-' + data[i].name + '"><h2>' + data[i].name + '</h2><h3><span class="upper">GET</span> ' + data[i].root_path + '<h3></div>');
     $tabHolder.append($tabPanel);
   }
   $(apiExplorer.container).append($tabHolder);

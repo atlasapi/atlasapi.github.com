@@ -3,13 +3,13 @@
     parameters: [
       {
         name: "id",
-        value: "r6knn",
+        default_value: "r6knn",
         type: "string",
         description: "The ID of a specific piece of content."
       },
       {
         name: "annotations",
-        value: "description,extended_description,brand_summary,series_summary,people,topics,products,related_links,key_phrases,broadcasts,locations,first_broadcasts,next_broadcasts,available_locations,upcoming,sub_items",
+        default_value: "description,extended_description,brand_summary,series_summary,people,topics,products,related_links,key_phrases,broadcasts,locations,first_broadcasts,next_broadcasts,available_locations,upcoming,sub_items",
         type: "list",
         description: "List of annotations that describe the data to be output."
       }
@@ -19,25 +19,25 @@
     parameters: [
       {
         name: "from",
-        value: "now",
-        type: "multiple",
+        default_value: "now",
+        type: "data/time",
         description: "The beginning of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration, e.g. 'now'."
       },
       {
         name: "to",
-        value: "now.plus.6h",
-        type: "multiple",
+        default_value: "now.plus.6h",
+        type: "data/time",
         description: "The end of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration., e.g. 'now.plus.6h'."
       },
       {
         name: "source",
-        value: "bbc.co.uk",
+        default_value: "bbc.co.uk",
         type: "string",
         description: "The publisher of the schedule."
       },
       {
         name: "annotations",
-        value: "channel_groups",
+        default_value: "channel_groups",
         type: "list",
         description: "List of annotations that describe the data to be output."
       }
