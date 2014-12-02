@@ -38,6 +38,10 @@ apiExplorer.buildSections = function (data) {
   $(apiExplorer.container).append($tabHolder);
 };
 
+apiExplorer.buildQueryForm = function () {
+
+};
+
 apiExplorer.setApiKey = function (apiKey) {
   var $apiKeyField = $('#customApiKey'),
       defaultApiKey = apiKey;
