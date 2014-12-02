@@ -5,6 +5,39 @@ var apiExplorer = {
   queryUrl: '//stage.atlas.metabroadcast.com'
 };
 
+apiExplorer.getEndpoints = function (url) {
+  $.ajax({
+    url: url,
+    dataType: 'json',
+    success: function (data) {
+      apiExplorer.buildNavigation(data.endpoints);
+      apiExplorer.buildSections(data.endpoints);
+      tabs(apiExplorer.container);
+    },
+    error: function (data) {
+      console.error('Unable to get endpoints');
+    }
+  });
+};
+
+apiExplorer.buildNavigation = function (data) {
+  var $navigationContainer = $('<ul class="clearfix tabs"></ul>');
+  for (var i = 0, ii = data.length; i < ii; i++) {
+    var $navigationItem = $('<li class="tab"><a href="#api-' + data[i].name + '">' + data[i].name + '</a></li>');
+    $navigationContainer.append($navigationItem);
+  }
+  $(apiExplorer.container).append($navigationContainer);
+};
+
+apiExplorer.buildSections = function (data) {
+  var $tabHolder = $('<div class="clearfix tabHolder"></div>');
+  for (var i = 0, ii = data.length; i < ii; i++) {
+    var $tabPanel = $('<div class="tabArea" id="api-' + data[i].name + '"><h2>' + data[i].name + '</div>');
+    $tabHolder.append($tabPanel);
+  }
+  $(apiExplorer.container).append($tabHolder);
+};
+
 apiExplorer.setApiKey = function (apiKey) {
   var $apiKeyField = $('#customApiKey'),
       defaultApiKey = apiKey;
@@ -29,5 +62,5 @@ apiExplorer.setContentQuery = function () {
 };
 
 apiExplorer.init = function () {
-  tabs(this.container);
+  this.getEndpoints(this.endpointsUrl);
 };
