@@ -47,6 +47,7 @@ apiExplorer.getEndpointParameters = function (url) {
     url: url,
     dataType: 'json',
     success: function (data) {
+      apiExplorer.buildQueryForm(data.content.parameters);
       console.log(data);
     },
     error: function () {
@@ -55,7 +56,28 @@ apiExplorer.getEndpointParameters = function (url) {
   });
 };
 
-apiExplorer.buildQueryForm = function () {
+apiExplorer.buildQueryForm = function (data) {
+  var table = '<table>';
+  table += '<thead>';
+  table += '<tr>';
+  table += '<th>Parameter</th>';
+  table += '<th>Value</th>';
+  table += '<th>Type</th>';
+  table += '<th>Description</th>';
+  table += '</tr>';
+  table += '</thead>';
+  table += '<tbody>';
+  for (var i = 0, ii = data.length; i < ii; i++) {
+    table += '<tr>';
+    table += '<td>' + data[i].name + '</td>';
+    table += '<td>' + data[i].default_value + '</td>';
+    table += '<td>' + data[i].type + '</td>';
+    table += '<td>' + data[i].description + '</td>';
+    table += '</tr>';
+  }
+  table += '</tbody>';
+  table += '</table>';
+  console.log(table);
 };
 
 apiExplorer.setApiKey = function (apiKey) {
