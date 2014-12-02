@@ -73,6 +73,8 @@ $(document).ready(function () {
     e.preventDefault();
     loginToAdmin();
   });
+
+  apiExplorer.init();
 });
 
 $(window).load(function () {
