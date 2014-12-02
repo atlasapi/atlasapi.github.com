@@ -12,7 +12,7 @@ apiExplorer.getEndpoints = function (url) {
     success: function (data) {
       apiExplorer.buildNavigation(data.endpoints);
       apiExplorer.buildSections(data.endpoints);
-      tabs(apiExplorer.container);
+      tabs('#apiExplorerTabs');
     },
     error: function (data) {
       console.error('Unable to get endpoints');
@@ -21,21 +21,24 @@ apiExplorer.getEndpoints = function (url) {
 };
 
 apiExplorer.buildNavigation = function (data) {
-  var $navigationContainer = $('<ul class="clearfix tabs"></ul>');
+  var navigation = '<ul class="clearfix tabs">';
   for (var i = 0, ii = data.length; i < ii; i++) {
-    var $navigationItem = $('<li class="tab"><a href="#api-' + data[i].name + '">' + data[i].name + '</a></li>');
-    $navigationContainer.append($navigationItem);
+    navigation += '<li class="tab"><a href="#api-' + data[i].name + '">' + data[i].name + '</a></li>';
   }
-  $(apiExplorer.container).append($navigationContainer);
+  navigation += '</ul>';
+  $('#apiExplorerNavigation').html(navigation);
 };
 
 apiExplorer.buildSections = function (data) {
-  var $tabHolder = $('<div class="clearfix tabHolder"></div>');
+  var tabs = '<div class="clearfix tabHolder">';
   for (var i = 0, ii = data.length; i < ii; i++) {
-    var $tabPanel = $('<div class="tabArea" id="api-' + data[i].name + '"><h2>' + data[i].name + '</h2><h3><span class="upper">GET</span> ' + data[i].root_path + '<h3></div>');
-    $tabHolder.append($tabPanel);
+    tabs += '<div class="tabArea" id="api-' + data[i].name + '">';
+    tabs += '<h2>' + data[i].name + '</h2>';
+    tabs += '<h3><span class="upper">GET</span> ' + data[i].root_path + '<h3>';
+    tabs += '</div>';
   }
-  $(apiExplorer.container).append($tabHolder);
+  tabs += '</div>';
+  $('#apiExplorerTabSections').html(tabs);
 };
 
 apiExplorer.buildQueryForm = function () {
