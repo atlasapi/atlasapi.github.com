@@ -1,6 +1,7 @@
 var apiExplorer = {
   container: '#apiExplorerTabSection',
   endpointsUrl: '//stage.atlas.metabroadcast.com/4/meta/endpoints.json',
+  endpointsParametersUrl: 'data/parameters.json',
   apiKey: 'c1e92985ec124202b7f07140bcde6e3f',
   queryUrl: '//stage.atlas.metabroadcast.com'
 };
@@ -41,8 +42,20 @@ apiExplorer.buildSections = function (data) {
   $('#apiExplorerTabSections').html(tabs);
 };
 
-apiExplorer.buildQueryForm = function () {
+apiExplorer.getEndpointParameters = function (url) {
+  $.ajax({
+    url: url,
+    dataType: 'json',
+    success: function (data) {
+      console.log(data);
+    },
+    error: function () {
+      console.error('Unable to get endpoints parameters');
+    }
+  });
+};
 
+apiExplorer.buildQueryForm = function () {
 };
 
 apiExplorer.setApiKey = function (apiKey) {
@@ -70,4 +83,5 @@ apiExplorer.setContentQuery = function () {
 
 apiExplorer.init = function () {
   this.getEndpoints(this.endpointsUrl);
+  this.getEndpointParameters(this.endpointsParametersUrl);
 };
