@@ -47,8 +47,10 @@ apiExplorer.getEndpointParameters = function (url) {
     url: url,
     dataType: 'json',
     success: function (data) {
-      apiExplorer.buildQueryForm(data.content.parameters);
-      console.log(data);
+      for (var key in data) {
+        var endpointParameters = data[key];
+        apiExplorer.buildQueryForm(data[key].parameters);
+      }
     },
     error: function () {
       console.error('Unable to get endpoints parameters');
