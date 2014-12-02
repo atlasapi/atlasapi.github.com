@@ -358,7 +358,7 @@ PageInfo.prototype.changeHash = function(n) {
     var pageInfo = this;
     pageInfo.changePageTimer = setTimeout(function(){
         var url = location.href.substr(0,location.href.indexOf('#'))+'#'+n;
-        if(Modernizr.history){
+        if(window.history.pushState){
             window.history.pushState(null,null,url);
         }
     }, 1000);
@@ -1973,7 +1973,7 @@ $(document).ready(function(){
         return false;
     });
 
-    $('a.apiSearch').live('click', function(){
+    $(document).on('click', 'a.apiSearch', function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {
             tabs.changeTab(6);
             apiExplorer.searchQuery($(this).attr('href'));

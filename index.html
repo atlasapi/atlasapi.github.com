@@ -1,41 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>atlas - media data router</title>
-<link href='https://fonts.googleapis.com/css?family=Molengo'
-	rel='stylesheet' type='text/css'>
-<link href="css/fontawesome.css" rel="stylesheet" type="text/css" />
-<link href="css/style.css" rel="stylesheet" type="text/css" />
-<link href="js/prettify/prettify.css" rel="stylesheet" type="text/css" />
-<script src="https://code.jquery.com/jquery-1.5.2.min.js"></script>
-<script src="js/jquery-ui-1.8.9.custom.min.js"></script>
-<script src="js/min/minjquery.history.js"></script>
-<script src="js/modernizr-1.7.min.js"></script>
-<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
-<script src="js/prettify/prettify.js"></script>
-<script src="js/Carousel.js"></script>
-<script src="js/script.js"></script>
-<script src="http://widgets.metabroadcast.com/loader/1/load.js"></script>
-<script>
-	MBST = MBST || {};
-	MBST.load({
-		client: 'atlasNowNextLater',
-		widgets: [
-			{
-				name: 'epg',
-				version: '1',
-				modules: {
-					grid: {
-						holder: '.epg-widget'
-					},
-					nownextlater: {
-						holder: '#widget-holder'
+	<meta charset="UTF-8">
+	<title>atlas - media data router</title>
+	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="js/prettify/prettify.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="js/min/minjquery.history.js"></script>
+	<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
+	<script src="js/prettify/prettify.js"></script>
+	<script src="js/Carousel.js"></script>
+	<script src="js/script.js"></script>
+	<script src="http://widgets.metabroadcast.com/loader/1/load.js"></script>
+	<script>
+		MBST = MBST || {};
+		MBST.load({
+			client: 'atlasNowNextLater',
+			widgets: [
+				{
+					name: 'epg',
+					version: '1',
+					modules: {
+						grid: {
+							holder: '.epg-widget'
+						},
+						nownextlater: {
+							holder: '#widget-holder'
+						}
 					}
 				}
-			}
-		]
-	});
-</script>
+			]
+		});
+	</script>
 </head>
 <body>
 	<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
