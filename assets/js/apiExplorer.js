@@ -129,7 +129,7 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
     queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
   }
 
-  endpoint.query_url = queryUrl;
+  endpoint.query_url = encodeURI(queryUrl);
 
   return endpoint;
 };
