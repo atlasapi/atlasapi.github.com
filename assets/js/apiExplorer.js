@@ -38,7 +38,7 @@ var ApiExplorer = function () {
 //   return apiExplorer.apiKey;
 // };
 
-ApiExplorer.prototype.getData = function (url, callback) {
+ApiExplorer.prototype.getData = function (url) {
   'use strict';
 
   var apiExplorer = this,
@@ -94,12 +94,21 @@ ApiExplorer.prototype.submitQueryForm = function () {
   'use strict';
 
   var apiExplorer = this;
+
   $('.queryForm').each(function () {
-    var queryUrl = $(this).find('.queryUrl');
+    var queryUrl = $(this).find('.queryUrl').val();
+
     $(this).on('submit', function (e) {
       e.preventDefault();
-      console.log(queryUrl);
-      console.log(encodeURI(queryUrl));
+
+      var response = apiExplorer.getData(queryUrl),
+          $jsonOutput = $(this).siblings('.queryResponse').find('.jsonOutput');
+
+      $jsonOutput.html(JSON.stringify(response, undefined, 2));
+
+      $jsonOutput.each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
     });
   });
 };
@@ -115,6 +124,5 @@ ApiExplorer.prototype.init = function () {
   }
 
   apiExplorer.submitQueryForm();
-
   tabs(apiExplorer.container);
 };
