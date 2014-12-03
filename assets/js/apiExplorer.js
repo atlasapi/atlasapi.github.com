@@ -123,7 +123,7 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
       queryUrl = apiExplorer.queryUrl;
 
   queryUrl += endpoint.root_path + '.json';
-  queryUrl += '&key=' + apiExplorer.apiKey;
+  queryUrl += '?key=' + apiExplorer.apiKey;
 
   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
     queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
