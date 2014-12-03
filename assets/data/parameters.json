@@ -23,6 +23,13 @@
       "name": "schedules",
       "parameters": [
         {
+          "name": "id",
+          "default_value": "r6knn",
+          "type": "string",
+          "is_multiple": "",
+          "description": "The ID of a specific piece of content."
+        },
+        {
           "name": "from",
           "default_value": "now",
           "type": "date/time",

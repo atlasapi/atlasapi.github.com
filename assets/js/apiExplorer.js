@@ -5,7 +5,7 @@ var ApiExplorer = function () {
   this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
   this.apiKey = 'c1e92985ec124202b7f07140bcde6e3f';
-  this.queryUrl = '//stage.atlas.metabroadcast.com';
+  this.queryUrl = '//atlas.metabroadcast.com';
   this.templates = [
     {
       path: 'assets/templates/navigation.ejs',
@@ -64,7 +64,8 @@ ApiExplorer.prototype.mergeData = function () {
 
   var apiExplorer = this,
       endpoints = apiExplorer.getData(apiExplorer.endpointsUrl).endpoints,
-      parameters = apiExplorer.getData(apiExplorer.endpointsParametersUrl).endpoints;
+      parameters = apiExplorer.getData(apiExplorer.endpointsParametersUrl).endpoints,
+      mergedData = [];
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -72,9 +73,11 @@ ApiExplorer.prototype.mergeData = function () {
         endpoints[i].parameters = parameters[j].parameters;
       }
     }
+
+    mergedData.push(apiExplorer.buildQueryUrl(endpoints[i]));
   }
 
-  return endpoints;
+  return mergedData;
 };
 
 ApiExplorer.prototype.compileTemplate = function (data, templatePath, container) {
@@ -111,6 +114,24 @@ ApiExplorer.prototype.submitQueryForm = function () {
       });
     });
   });
+};
+
+ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
+  'use strict';
+
+  var apiExplorer = this,
+      queryUrl = apiExplorer.queryUrl;
+
+  queryUrl += endpoint.root_path + '.json';
+  queryUrl += '?key=' + apiExplorer.apiKey;
+
+  for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
+    queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
+  }
+
+  endpoint.query_url = queryUrl;
+
+  return endpoint;
 };
 
 ApiExplorer.prototype.init = function () {
