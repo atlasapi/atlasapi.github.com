@@ -74,6 +74,7 @@ $(document).ready(function () {
     loginToAdmin();
   });
 
+  var apiExplorer = new ApiExplorer();
   apiExplorer.init();
 });
 

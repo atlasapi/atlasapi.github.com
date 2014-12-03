@@ -1,12 +1,14 @@
-var apiExplorer = {
-  container: '#apiExplorerTabSection',
-  endpointsUrl: '//stage.atlas.metabroadcast.com/4/meta/endpoints.json',
-  endpointsParametersUrl: 'data/parameters.json',
-  apiKey: 'c1e92985ec124202b7f07140bcde6e3f',
-  queryUrl: '//stage.atlas.metabroadcast.com'
+var ApiExplorer = function () {
+  this.container = '#apiExplorerTabSection';
+  this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
+  this.endpointsParametersUrl = 'data/parameters.json';
+  this.apiKey = 'c1e92985ec124202b7f07140bcde6e3f';
+  this.queryUrl = '//stage.atlas.metabroadcast.com';
 };
 
-apiExplorer.getEndpoints = function (url) {
+ApiExplorer.prototype.getEndpoints = function (url) {
+  var apiExplorer = this;
+
   $.ajax({
     url: url,
     dataType: 'json',
@@ -21,28 +23,38 @@ apiExplorer.getEndpoints = function (url) {
   });
 };
 
-apiExplorer.buildNavigation = function (data) {
-  var navigation = '<ul class="clearfix tabs">';
+ApiExplorer.prototype.buildNavigation = function (data) {
+  var apiExplorer = this,
+      navigation = '<ul class="clearfix tabs">';
+
   for (var i = 0, ii = data.length; i < ii; i++) {
     navigation += '<li class="tab"><a href="#api-' + data[i].name + '">' + data[i].name + '</a></li>';
   }
+
   navigation += '</ul>';
+
   $('#apiExplorerNavigation').html(navigation);
 };
 
-apiExplorer.buildSections = function (data) {
-  var tabs = '<div class="clearfix tabHolder">';
+ApiExplorer.prototype.buildSections = function (data) {
+  var apiExplorer = this,
+      tabs = '<div class="clearfix tabHolder">';
+
   for (var i = 0, ii = data.length; i < ii; i++) {
     tabs += '<div class="tabArea" id="api-' + data[i].name + '">';
     tabs += '<h2>' + data[i].name + '</h2>';
     tabs += '<h3><span class="upper">GET</span> ' + data[i].root_path + '<h3>';
     tabs += '</div>';
   }
+
   tabs += '</div>';
+
   $('#apiExplorerTabSections').html(tabs);
 };
 
-apiExplorer.getEndpointParameters = function (url) {
+ApiExplorer.prototype.getEndpointParameters = function (url) {
+  var apiExplorer = this;
+
   $.ajax({
     url: url,
     dataType: 'json',
@@ -58,8 +70,10 @@ apiExplorer.getEndpointParameters = function (url) {
   });
 };
 
-apiExplorer.buildQueryForm = function (data) {
-  var table = '<table>';
+ApiExplorer.prototype.buildQueryForm = function (data) {
+  var apiExplorer = this,
+      table = '<table>';
+
   table += '<thead>';
   table += '<tr>';
   table += '<th>Parameter</th>';
@@ -69,6 +83,7 @@ apiExplorer.buildQueryForm = function (data) {
   table += '</tr>';
   table += '</thead>';
   table += '<tbody>';
+
   for (var i = 0, ii = data.length; i < ii; i++) {
     table += '<tr>';
     table += '<td>' + data[i].name + '</td>';
@@ -77,13 +92,16 @@ apiExplorer.buildQueryForm = function (data) {
     table += '<td>' + data[i].description + '</td>';
     table += '</tr>';
   }
+
   table += '</tbody>';
   table += '</table>';
+
   console.log(table);
 };
 
-apiExplorer.setApiKey = function (apiKey) {
-  var $apiKeyField = $('#customApiKey'),
+ApiExplorer.prototype.setApiKey = function (apiKey) {
+  var apiExplorer = this,
+      $apiKeyField = $('#customApiKey'),
       defaultApiKey = apiKey;
 
   $apiKeyField.on('change', function () {
@@ -99,13 +117,17 @@ apiExplorer.setApiKey = function (apiKey) {
   return apiExplorer.apiKey;
 };
 
-apiExplorer.setContentQuery = function () {
-  var $contentQueryField = $('#apiContentQuery'),
+ApiExplorer.prototype.setContentQuery = function () {
+  var apiExplorer = this,
+      $contentQueryField = $('#apiContentQuery'),
       contentQuery = this.queryUrl + '/4/content.json' + '?key=' + apiExplorer.apiKey;
+
   $contentQueryField.val(contentQuery);
 };
 
-apiExplorer.init = function () {
-  this.getEndpoints(this.endpointsUrl);
-  this.getEndpointParameters(this.endpointsParametersUrl);
+ApiExplorer.prototype.init = function () {
+  var apiExplorer = this;
+
+  apiExplorer.getEndpoints(apiExplorer.endpointsUrl);
+  apiExplorer.getEndpointParameters(apiExplorer.endpointsParametersUrl);
 };
