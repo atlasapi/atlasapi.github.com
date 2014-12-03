@@ -1,0 +1,61 @@
+{
+  "endpoints": [
+    {
+      "name": "content",
+      "parameters": [
+        {
+          "name": "id",
+          "default_value": "r6knn",
+          "type": "string",
+          "is_multiple": "",
+          "description": "The ID of a specific piece of content."
+        },
+        {
+          "name": "annotations",
+          "default_value": "description,extended_description,brand_summary,series_summary,people,topics,products,related_links,key_phrases,broadcasts,locations,first_broadcasts,next_broadcasts,available_locations,upcoming,sub_items",
+          "type": "list",
+          "is_multiple": "",
+          "description": "List of annotations that describe the data to be output."
+        }
+      ]
+    },
+    {
+      "name": "schedules",
+      "parameters": [
+        {
+          "name": "from",
+          "default_value": "now",
+          "type": "data/time",
+          "is_multiple": "",
+          "description": "The beginning of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration, e.g. 'now'."
+        },
+        {
+          "name": "to",
+          "default_value": "now.plus.6h",
+          "type": "data/time",
+          "is_multiple": "",
+          "description": "The end of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration., e.g. 'now.plus.6h'."
+        },
+        {
+          "name": "source",
+          "default_value": "bbc.co.uk",
+          "type": "string",
+          "is_multiple": "",
+          "description": "The publisher of the schedule."
+        },
+        {
+          "name": "annotations",
+          "default_value": "channel_groups",
+          "type": "list",
+          "is_multiple": "",
+          "description": "List of annotations that describe the data to be output."
+        }
+      ]
+    },
+    {
+      "name": "topics",
+      "parameters": [
+      ]
+    }
+  ]
+}
