@@ -1,4 +1,6 @@
 var ApiExplorer = function () {
+  'use strict';
+
   this.container = '#apiExplorerTabs';
   this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
@@ -17,6 +19,8 @@ var ApiExplorer = function () {
 };
 
 // ApiExplorer.prototype.setApiKey = function (apiKey) {
+//   'use strict';
+//
 //   var apiExplorer = this,
 //       $apiKeyField = $('#customApiKey'),
 //       defaultApiKey = apiKey;
@@ -35,6 +39,8 @@ var ApiExplorer = function () {
 // };
 
 ApiExplorer.prototype.getData = function (url, callback) {
+  'use strict';
+
   var apiExplorer = this,
       dataResponse;
 
@@ -54,6 +60,8 @@ ApiExplorer.prototype.getData = function (url, callback) {
 };
 
 ApiExplorer.prototype.mergeData = function () {
+  'use strict';
+
   var apiExplorer = this,
       endpoints = apiExplorer.getData(apiExplorer.endpointsUrl).endpoints,
       parameters = apiExplorer.getData(apiExplorer.endpointsParametersUrl).endpoints;
@@ -70,6 +78,8 @@ ApiExplorer.prototype.mergeData = function () {
 };
 
 ApiExplorer.prototype.compileTemplate = function (data, templatePath, container) {
+  'use strict';
+
   var apiExplorer = this,
       template;
 
@@ -80,13 +90,31 @@ ApiExplorer.prototype.compileTemplate = function (data, templatePath, container)
   $(container).html(template);
 };
 
+ApiExplorer.prototype.submitQueryForm = function () {
+  'use strict';
+
+  var apiExplorer = this;
+  $('.queryForm').each(function () {
+    var queryUrl = $(this).find('.queryUrl');
+    $(this).on('submit', function (e) {
+      e.preventDefault();
+      console.log(queryUrl);
+      console.log(encodeURI(queryUrl));
+    });
+  });
+};
+
 ApiExplorer.prototype.init = function () {
+  'use strict';
+
   var apiExplorer = this,
       data = apiExplorer.mergeData();
 
   for (var i = 0, ii = apiExplorer.templates.length; i < ii; i++) {
     apiExplorer.compileTemplate(data, apiExplorer.templates[i].path, apiExplorer.templates[i].container);
   }
+
+  apiExplorer.submitQueryForm();
 
   tabs(apiExplorer.container);
 };
