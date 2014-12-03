@@ -1,28 +1,38 @@
 var ApiExplorer = function () {
-  this.container = '#apiExplorerTabSection';
+  this.container = '#apiExplorerTabs';
   this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
-  this.endpointsParametersUrl = 'data/parameters.json';
+  this.endpointsParametersUrl = 'assets/data/parameters.json';
   this.apiKey = 'c1e92985ec124202b7f07140bcde6e3f';
   this.queryUrl = '//stage.atlas.metabroadcast.com';
-};
-
-ApiExplorer.prototype.setApiKey = function (apiKey) {
-  var apiExplorer = this,
-      $apiKeyField = $('#customApiKey'),
-      defaultApiKey = apiKey;
-
-  $apiKeyField.on('change', function () {
-    if ($apiKeyField.val() !== '') {
-      apiExplorer.apiKey = $apiKeyField.val();
-      apiExplorer.setContentQuery();
-    } else {
-      apiExplorer.apiKey = defaultApiKey;
-      apiExplorer.setContentQuery();
+  this.templates = [
+    {
+      path: 'assets/templates/navigation.ejs',
+      container: '#apiExplorerNavigation'
+    },
+    {
+      path: 'assets/templates/sections.ejs',
+      container: '#apiExplorerTabSections'
     }
-  });
-
-  return apiExplorer.apiKey;
+  ];
 };
+
+// ApiExplorer.prototype.setApiKey = function (apiKey) {
+//   var apiExplorer = this,
+//       $apiKeyField = $('#customApiKey'),
+//       defaultApiKey = apiKey;
+
+//   $apiKeyField.on('change', function () {
+//     if ($apiKeyField.val() !== '') {
+//       apiExplorer.apiKey = $apiKeyField.val();
+//       apiExplorer.setContentQuery();
+//     } else {
+//       apiExplorer.apiKey = defaultApiKey;
+//       apiExplorer.setContentQuery();
+//     }
+//   });
+
+//   return apiExplorer.apiKey;
+// };
 
 ApiExplorer.prototype.getData = function (url, callback) {
   var apiExplorer = this,
@@ -59,8 +69,24 @@ ApiExplorer.prototype.mergeData = function () {
   return endpoints;
 };
 
-ApiExplorer.prototype.init = function () {
-  var apiExplorer = this;
+ApiExplorer.prototype.compileTemplate = function (data, templatePath, container) {
+  var apiExplorer = this,
+      template;
 
-  apiExplorer.mergeData();
+  template = new EJS({
+    url: templatePath
+  }).render(data);
+
+  $(container).html(template);
+};
+
+ApiExplorer.prototype.init = function () {
+  var apiExplorer = this,
+      data = apiExplorer.mergeData();
+
+  for (var i = 0, ii = apiExplorer.templates.length; i < ii; i++) {
+    apiExplorer.compileTemplate(data, apiExplorer.templates[i].path, apiExplorer.templates[i].container);
+  }
+
+  tabs(apiExplorer.container);
 };
