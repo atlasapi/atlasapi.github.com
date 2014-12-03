@@ -25,14 +25,14 @@
         {
           "name": "from",
           "default_value": "now",
-          "type": "data/time",
+          "type": "date/time",
           "is_multiple": "",
           "description": "The beginning of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration, e.g. 'now'."
         },
         {
           "name": "to",
           "default_value": "now.plus.6h",
-          "type": "data/time",
+          "type": "date/time",
           "is_multiple": "",
           "description": "The end of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration., e.g. 'now.plus.6h'."
         },
