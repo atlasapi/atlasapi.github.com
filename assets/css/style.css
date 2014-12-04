@@ -1790,7 +1790,7 @@
 
 .jsonOutput {
     overflow: auto;
-    height: 450px;
+    height: 300px;
 }
 
 input.queryUrl {
