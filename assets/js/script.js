@@ -83,6 +83,8 @@ $(window).load(function () {
   var pageInfo = new PageInfo();
   pageInfo.init();
 
+  tabs('#apiExplorerTabs');
+
   $('.mainMenu a').click(function () {
     pageInfo.menuClick = true;
     var index = $(this).parent().index();

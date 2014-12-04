@@ -1,7 +1,6 @@
 var ApiExplorer = function () {
   'use strict';
 
-  this.container = '#apiExplorerTabs';
   this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
   this.apiKey = 'c1e92985ec124202b7f07140bcde6e3f';
@@ -145,5 +144,4 @@ ApiExplorer.prototype.init = function () {
   }
 
   apiExplorer.submitQueryForm();
-  tabs(apiExplorer.container);
 };

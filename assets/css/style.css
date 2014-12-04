@@ -1787,3 +1787,16 @@
 .widget-holder {
     margin: 10px !important;
 }
+
+.jsonOutput {
+    overflow: auto;
+    height: 450px;
+}
+
+input.queryUrl {
+    width: 92%;
+}
+
+.loading {
+    background: red !important;
+}
