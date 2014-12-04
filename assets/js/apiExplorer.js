@@ -11,68 +11,20 @@ var ApiExplorer = function () {
   };
 };
 
-ApiExplorer.prototype.setApiKey = function (data) {
+ApiExplorer.prototype.getApiKey = function () {
   'use strict';
 
   var apiExplorer = this,
-      $apiKeyField = $('#apiKey'),
-      $apiKeyForm = $('#apiKeyForm'),
-      defaultApiKey = apiExplorer.defaultApiKey;
+      $apiKeyInput = $('#apiKey'),
+      apiKey;
 
-  $apiKeyField.on('change', function () {
-    var $this = $(this);
+  if ($apiKeyInput.val() !== '') {
+    apiKey = $apiKeyInput.val();
+  } else {
+    apiKey = apiExplorer.defaultApiKey;
+  }
 
-    if ($this.val() !== '') {
-      apiExplorer.defaultApiKey = $this.val();
-    } else {
-      apiExplorer.defaultApiKey = defaultApiKey;
-    }
-
-    for (var i = 0, ii = data.length; i < ii; i++) {
-      apiExplorer.buildQueryUrl(data[i]);
-    }
-
-    apiExplorer.compileTemplate(data, apiExplorer.template.path, apiExplorer.template.container);
-  });
-
-  $apiKeyForm.on('submit', function (e) {
-    e.preventDefault();
-  });
-};
-
-ApiExplorer.prototype.setParameters = function (data) {
-  'use strict';
-
-  var apiExplorer = this,
-      endpoints = data;
-
-  $(document).on('change', '.queryParameter', function () {
-    var $this = $(this),
-        newValue = $this.val(),
-        endpointName = $this.data('endpoint'),
-        parameterName = $this.attr('name');
-
-    for (var i = 0, ii = endpoints.length; i < ii; i++) {
-      if (endpoints[i].name === endpointName) {
-        for (var j = 0, jj = endpoints[i].parameters.length; j < jj; j++) {
-          if (endpoints[i].parameters[j].name === parameterName) {
-            endpoints[i].parameters[j].default_value = newValue;
-          }
-        }
-      }
-      apiExplorer.buildQueryUrl(endpoints[i]);
-    }
-
-    for (var k = 0, kk = endpoints.length; k < kk; k++) {
-      apiExplorer.buildQueryUrl(endpoints[k]);
-    }
-
-    apiExplorer.compileTemplate(endpoints, apiExplorer.template);
-
-    $('.queryParametersForm').on('submit', function (e) {
-      e.preventDefault();
-    });
-  });
+  return apiKey;
 };
 
 ApiExplorer.prototype.getData = function (url) {
@@ -127,8 +79,6 @@ ApiExplorer.prototype.compileTemplate = function (data, template) {
   }).render(data);
 
   $(template.container).html(compiledTemplate);
-
-  tabs('#apiExplorerTabs');
 };
 
 ApiExplorer.prototype.submitQueryForm = function () {
@@ -158,10 +108,11 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
   'use strict';
 
   var apiExplorer = this,
-      queryUrl = apiExplorer.queryUrl;
+      queryUrl = apiExplorer.queryUrl,
+      apiKey = apiExplorer.getApiKey();
 
   queryUrl += endpoint.root_path + '.json';
-  queryUrl += '?key=' + apiExplorer.defaultApiKey;
+  queryUrl += '?key=' + apiKey;
 
   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
     queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
@@ -177,7 +128,5 @@ ApiExplorer.prototype.init = function () {
       data = apiExplorer.mergeData();
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
-  apiExplorer.setApiKey(data);
-  apiExplorer.setParameters(data);
   apiExplorer.submitQueryForm();
 };

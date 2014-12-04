@@ -76,6 +76,7 @@ $(document).ready(function () {
 
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
+  tabs('#apiExplorerTabs');
 });
 
 $(window).load(function () {
