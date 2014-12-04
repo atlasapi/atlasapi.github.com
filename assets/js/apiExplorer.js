@@ -3,7 +3,7 @@ var ApiExplorer = function () {
 
   this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
-  this.apiKey = 'c1e92985ec124202b7f07140bcde6e3f';
+  this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
   this.queryUrl = '//atlas.metabroadcast.com';
   this.template = {
     path: 'assets/templates/apiExplorer.ejs',
@@ -17,15 +17,15 @@ ApiExplorer.prototype.setApiKey = function (data) {
   var apiExplorer = this,
       $apiKeyField = $('#apiKey'),
       $apiKeyForm = $('#apiKeyForm'),
-      defaultApiKey = apiKey;
+      defaultApiKey = apiExplorer.defaultApiKey;
 
   $apiKeyField.on('change', function () {
     var $this = $(this);
 
     if ($this.val() !== '') {
-      apiExplorer.apiKey = $this.val();
+      apiExplorer.defaultApiKey = $this.val();
     } else {
-      apiExplorer.apiKey = defaultApiKey;
+      apiExplorer.defaultApiKey = defaultApiKey;
     }
 
     for (var i = 0, ii = data.length; i < ii; i++) {
@@ -162,7 +162,7 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
       queryUrl = apiExplorer.queryUrl;
 
   queryUrl += endpoint.root_path + '.json';
-  queryUrl += '?key=' + apiExplorer.apiKey;
+  queryUrl += '?key=' + apiExplorer.defaultApiKey;
 
   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
     queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
