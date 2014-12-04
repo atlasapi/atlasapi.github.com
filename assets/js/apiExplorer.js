@@ -17,25 +17,36 @@ var ApiExplorer = function () {
   ];
 };
 
-// ApiExplorer.prototype.setApiKey = function (apiKey) {
-//   'use strict';
-//
-//   var apiExplorer = this,
-//       $apiKeyField = $('#customApiKey'),
-//       defaultApiKey = apiKey;
+ApiExplorer.prototype.setApiKey = function (apiKey, data) {
+  'use strict';
 
-//   $apiKeyField.on('change', function () {
-//     if ($apiKeyField.val() !== '') {
-//       apiExplorer.apiKey = $apiKeyField.val();
-//       apiExplorer.setContentQuery();
-//     } else {
-//       apiExplorer.apiKey = defaultApiKey;
-//       apiExplorer.setContentQuery();
-//     }
-//   });
+  var apiExplorer = this,
+      $apiKeyField = $('#apiKey'),
+      $apiKeyForm = $('#apiKeyForm'),
+      defaultApiKey = apiKey;
 
-//   return apiExplorer.apiKey;
-// };
+  $apiKeyField.on('change', function () {
+    var $this = $(this);
+
+    if ($this.val() !== '') {
+      apiExplorer.apiKey = $this.val();
+    } else {
+      apiExplorer.apiKey = defaultApiKey;
+    }
+
+    for (var i = 0, ii = data.length; i < ii; i++) {
+      apiExplorer.buildQueryUrl(data[i]);
+    }
+
+    for (var j = 0, jj = apiExplorer.templates.length; j < jj; j++) {
+      apiExplorer.compileTemplate(data, apiExplorer.templates[j].path, apiExplorer.templates[j].container);
+    }
+  });
+
+  $apiKeyForm.on('submit', function (e) {
+    e.preventDefault();
+  });
+};
 
 ApiExplorer.prototype.getData = function (url) {
   'use strict';
@@ -90,6 +101,8 @@ ApiExplorer.prototype.compileTemplate = function (data, templatePath, container)
   }).render(data);
 
   $(container).html(template);
+
+  tabs('#apiExplorerTabs');
 };
 
 ApiExplorer.prototype.submitQueryForm = function () {
@@ -143,5 +156,6 @@ ApiExplorer.prototype.init = function () {
     apiExplorer.compileTemplate(data, apiExplorer.templates[i].path, apiExplorer.templates[i].container);
   }
 
+  apiExplorer.setApiKey(apiExplorer.apiKey, data);
   apiExplorer.submitQueryForm();
 };
