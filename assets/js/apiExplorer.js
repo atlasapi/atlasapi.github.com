@@ -161,5 +161,15 @@ ApiExplorer.prototype.init = function () {
     });
   });
 
+  $(document).on('change', '.queryParameter', function () {
+    var parameterName = $(this).attr('name'),
+        newParameterValue = $(this).val(),
+        $queryUrlInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryUrl'),
+        queryUrl = $queryUrlInput.val(),
+        newQueryUrl = apiExplorer.replaceParameter(queryUrl, parameterName, newParameterValue);
+
+    $queryUrlInput.val(newQueryUrl);
+  });
+
   apiExplorer.submitQueryForm();
 };
