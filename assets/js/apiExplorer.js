@@ -11,14 +11,6 @@ var ApiExplorer = function () {
   };
 };
 
-ApiExplorer.prototype.updateQueryUrl = function (queryUrl) {
-  'use strict';
-
-  var apiExplorer = this;
-
-  $('.queryUrl').val(queryUrl);
-};
-
 ApiExplorer.prototype.getApiKey = function () {
   'use strict';
 
@@ -143,13 +135,10 @@ ApiExplorer.prototype.replaceParameter = function (url, parameterName, parameter
   return newUrl;
 };
 
-ApiExplorer.prototype.init = function () {
+ApiExplorer.prototype.updateApiKey = function () {
   'use strict';
 
-  var apiExplorer = this,
-      data = apiExplorer.mergeData();
-
-  apiExplorer.compileTemplate(data, apiExplorer.template);
+  var apiExplorer = this;
 
   $('#apiKey').on('change', function () {
     $('.queryUrl').each(function () {
@@ -160,6 +149,12 @@ ApiExplorer.prototype.init = function () {
       $(this).val(newQueryUrl);
     });
   });
+};
+
+ApiExplorer.prototype.updateParameters = function () {
+  'use strict';
+
+  var apiExplorer = this;
 
   $(document).on('change', '.queryParameter', function () {
     var parameterName = $(this).attr('name'),
@@ -170,6 +165,16 @@ ApiExplorer.prototype.init = function () {
 
     $queryUrlInput.val(newQueryUrl);
   });
+};
 
+ApiExplorer.prototype.init = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      data = apiExplorer.mergeData();
+
+  apiExplorer.compileTemplate(data, apiExplorer.template);
+  apiExplorer.updateApiKey();
+  apiExplorer.updateParameters();
   apiExplorer.submitQueryForm();
 };
