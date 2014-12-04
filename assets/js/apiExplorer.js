@@ -27,17 +27,25 @@ ApiExplorer.prototype.getApiKey = function () {
   return apiKey;
 };
 
-ApiExplorer.prototype.getData = function (url) {
+ApiExplorer.prototype.getData = function (url, callback) {
   'use strict';
 
   var apiExplorer = this,
+      async = true,
       dataResponse;
+
+  if (!callback) {
+    async = false;
+  }
 
   $.ajax({
     url: url,
     dataType: 'json',
-    async: false,
+    async: async,
     success: function (data) {
+      if (callback) {
+        callback(data);
+      }
       dataResponse = data;
     },
     error: function (err) {
@@ -92,14 +100,20 @@ ApiExplorer.prototype.submitQueryForm = function () {
     $(this).on('submit', function (e) {
       e.preventDefault();
 
-      var response = apiExplorer.getData(queryUrl),
-          $jsonOutput = $(this).siblings('.queryResponse').find('.jsonOutput');
+      var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
+      $(this).siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
 
-      $jsonOutput.html(JSON.stringify(response, undefined, 2));
+      var that = $(this);
 
-      $jsonOutput.each(function(i, block) {
-        hljs.highlightBlock(block);
+      apiExplorer.getData(queryUrl, function (response) {
+        var $jsonOutput = that.siblings('.queryResponse').find('.jsonOutput');
+        $jsonOutput.html(JSON.stringify(response, undefined, 2));
+        $jsonOutput.each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
       });
+
+
     });
   });
 };
