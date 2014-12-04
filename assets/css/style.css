@@ -1788,6 +1788,7 @@
     margin: 10px !important;
 }
 
+/* API explorer */
 .jsonOutput {
     overflow: auto;
     height: 300px;
