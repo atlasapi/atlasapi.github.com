@@ -70,7 +70,7 @@ ApiExplorer.prototype.setParameters = function (form, data) {
         apiExplorer.buildQueryUrl(endpoints[k]);
       }
 
-      apiExplorer.compileTemplate(endpoints, apiExplorer.template.path, apiExplorer.template.container);
+      apiExplorer.compileTemplate(endpoints, apiExplorer.template);
     });
   });
 };
@@ -117,17 +117,17 @@ ApiExplorer.prototype.mergeData = function () {
   return mergedData;
 };
 
-ApiExplorer.prototype.compileTemplate = function (data, templatePath, container) {
+ApiExplorer.prototype.compileTemplate = function (data, template) {
   'use strict';
 
   var apiExplorer = this,
-      template;
+      compiledTemplate;
 
-  template = new EJS({
-    url: templatePath
+  compiledTemplate = new EJS({
+    url: template.path
   }).render(data);
 
-  $(container).html(template);
+  $(template.container).html(compiledTemplate);
 
   tabs('#apiExplorerTabs');
 };
@@ -179,7 +179,7 @@ ApiExplorer.prototype.init = function () {
   var apiExplorer = this,
       data = apiExplorer.mergeData();
 
-  apiExplorer.compileTemplate(data, apiExplorer.template.path, apiExplorer.template.container);
+  apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.setApiKey(data);
   apiExplorer.setParameters('#queryParametersForm', data);
   apiExplorer.submitQueryForm();
