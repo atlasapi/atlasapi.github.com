@@ -1798,8 +1798,8 @@ input.queryUrl {
     width: 92%;
 }
 
-.loading {
-    width: 100%;
-    height: 100%;
-    background: red !important;
+.ajaxLoading {
+    width: 100% !important;
+    height: 100% !important;
+    background: url("../images/loader.gif") center center no-repeat;
 }
