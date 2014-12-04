@@ -11,6 +11,14 @@ var ApiExplorer = function () {
   };
 };
 
+ApiExplorer.prototype.updateQueryUrl = function (queryUrl) {
+  'use strict';
+
+  var apiExplorer = this;
+
+  $('.queryUrl').val(queryUrl);
+};
+
 ApiExplorer.prototype.getApiKey = function () {
   'use strict';
 
@@ -121,6 +129,20 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
   return encodeURI(queryUrl);
 };
 
+ApiExplorer.prototype.replaceParameter = function (url, parameterName, parameterValue) {
+  'use strict';
+
+  var apiExplorer = this,
+      pattern = new RegExp('(' + parameterName + '=).*?(&|$)'),
+      newUrl = url.replace(pattern, '$1' + parameterValue + '$2');
+
+  if (newUrl === url) {
+    newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
+  }
+
+  return newUrl;
+};
+
 ApiExplorer.prototype.init = function () {
   'use strict';
 
@@ -128,5 +150,16 @@ ApiExplorer.prototype.init = function () {
       data = apiExplorer.mergeData();
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
+
+  $('#apiKey').on('change', function () {
+    $('.queryUrl').each(function () {
+      var queryUrl = $(this).val(),
+          apiKey = apiExplorer.getApiKey(),
+          newQueryUrl = apiExplorer.replaceParameter(queryUrl, 'key', apiKey);
+
+      $(this).val(newQueryUrl);
+    });
+  });
+
   apiExplorer.submitQueryForm();
 };
