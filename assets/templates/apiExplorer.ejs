@@ -32,16 +32,14 @@
         </tbody>
       </table>
     </form>
-    <div class="line hr">
-      <h4>Request</h4>
-      <form class="queryForm mbl">
-        <input class="queryUrl" type="text" name="" value="<%= this[i].query_url %>">
-        <button class="btn" type="submit">Go</button>
-      </form>
-      <h4>Response</h4>
-      <div class="queryResponse">
-        <pre class="jsonOutput"></pre>
-      </div>
+    <h4>Request</h4>
+    <form class="queryForm mbl">
+      <input class="queryUrl" type="text" name="" value="<%= this[i].query_url %>">
+      <button class="btn" type="submit">Go</button>
+    </form>
+    <h4>Response</h4>
+    <div class="queryResponse">
+      <pre class="jsonOutput"></pre>
     </div>
   </div>
 <% } %>

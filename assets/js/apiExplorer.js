@@ -101,8 +101,7 @@ ApiExplorer.prototype.mergeData = function () {
 
   var apiExplorer = this,
       endpoints = apiExplorer.getData(apiExplorer.endpointsUrl).endpoints,
-      parameters = apiExplorer.getData(apiExplorer.endpointsParametersUrl).endpoints,
-      mergedData = [];
+      parameters = apiExplorer.getData(apiExplorer.endpointsParametersUrl).endpoints;
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -111,10 +110,10 @@ ApiExplorer.prototype.mergeData = function () {
       }
     }
 
-    mergedData.push(apiExplorer.buildQueryUrl(endpoints[i]));
+    endpoints[i].query_url = apiExplorer.buildQueryUrl(endpoints[i]);
   }
 
-  return mergedData;
+  return endpoints;
 };
 
 ApiExplorer.prototype.compileTemplate = function (data, template) {
@@ -168,9 +167,7 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
     queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
   }
 
-  endpoint.query_url = encodeURI(queryUrl);
-
-  return endpoint;
+  return encodeURI(queryUrl);
 };
 
 ApiExplorer.prototype.init = function () {
