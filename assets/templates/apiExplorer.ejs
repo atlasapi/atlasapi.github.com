@@ -1,0 +1,47 @@
+<ul class="tabs clearfix">
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+    <li class="tab"><a href="#api-<%= this[i].name %>"><%= this[i].name %></a></li>
+  <% } %>
+</ul>
+
+<% for (var i = 0, ii = this.length; i < ii; i++) { %>
+  <div class="tabArea" id="api-<%= this[i].name %>">
+    <h2><%= this[i].name %></h2>
+    <h3><span class="upper">GET</span> <%= this[i].root_path %></h3>
+    <form id="queryParametersForm">
+      <table class="tbl mbm queryTable">
+        <thead>
+          <tr>
+            <th class="first">Parameter</th>
+            <th class="second">Value</th>
+            <th class="third">Type</th>
+            <th class="fourth">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var j = 0, jj = this[i].parameters.length; j < jj; j++) { %>
+            <tr>
+              <td class="first"><%= this[i].parameters[j].name %></td>
+              <td class="second">
+              <input class="queryParameter" type="text" data-endpoint="<%= this[i].name %>" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>">
+              </td>
+              <td class="third"><%= this[i].parameters[j].type %></td>
+              <td class="fourth"><%= this[i].parameters[j].description %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </form>
+    <div class="line hr">
+      <h4>Request</h4>
+      <form class="queryForm mbl">
+        <input class="queryUrl" type="text" name="" value="<%= this[i].query_url %>">
+        <button class="btn" type="submit">Go</button>
+      </form>
+      <h4>Response</h4>
+      <div class="queryResponse">
+        <pre class="jsonOutput"></pre>
+      </div>
+    </div>
+  </div>
+<% } %>
