@@ -40,37 +40,37 @@ ApiExplorer.prototype.setApiKey = function (data) {
   });
 };
 
-ApiExplorer.prototype.setParameters = function (form, data) {
+ApiExplorer.prototype.setParameters = function (data) {
   'use strict';
 
   var apiExplorer = this,
-      $queryParametersForm = $(form),
-      $parameters = $queryParametersForm.find('.queryParameter'),
       endpoints = data;
 
-  $parameters.each(function () {
-    $(this).on('change', function () {
-      var $this = $(this),
-          newValue = $this.val(),
-          endpointName = $this.data('endpoint'),
-          parameterName = $this.attr('name');
+  $(document).on('change', '.queryParameter', function () {
+    var $this = $(this),
+        newValue = $this.val(),
+        endpointName = $this.data('endpoint'),
+        parameterName = $this.attr('name');
 
-      for (var i = 0, ii = endpoints.length; i < ii; i++) {
-        if (endpoints[i].name === endpointName) {
-          for (var j = 0, jj = endpoints[i].parameters.length; j < jj; j++) {
-            if (endpoints[i].parameters[j].name === parameterName) {
-              endpoints[i].parameters[j].default_value = newValue;
-            }
+    for (var i = 0, ii = endpoints.length; i < ii; i++) {
+      if (endpoints[i].name === endpointName) {
+        for (var j = 0, jj = endpoints[i].parameters.length; j < jj; j++) {
+          if (endpoints[i].parameters[j].name === parameterName) {
+            endpoints[i].parameters[j].default_value = newValue;
           }
         }
-        apiExplorer.buildQueryUrl(endpoints[i]);
       }
+      apiExplorer.buildQueryUrl(endpoints[i]);
+    }
 
-      for (var k = 0, kk = endpoints.length; k < kk; k++) {
-        apiExplorer.buildQueryUrl(endpoints[k]);
-      }
+    for (var k = 0, kk = endpoints.length; k < kk; k++) {
+      apiExplorer.buildQueryUrl(endpoints[k]);
+    }
 
-      apiExplorer.compileTemplate(endpoints, apiExplorer.template);
+    apiExplorer.compileTemplate(endpoints, apiExplorer.template);
+
+    $('.queryParametersForm').on('submit', function (e) {
+      e.preventDefault();
     });
   });
 };
@@ -181,6 +181,6 @@ ApiExplorer.prototype.init = function () {
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.setApiKey(data);
-  apiExplorer.setParameters('#queryParametersForm', data);
+  apiExplorer.setParameters(data);
   apiExplorer.submitQueryForm();
 };
