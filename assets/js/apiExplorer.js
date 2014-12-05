@@ -16,12 +16,12 @@ ApiExplorer.prototype.getApiKey = function () {
 
   var apiExplorer = this,
       $apiKeyInput = $('#apiKey'),
-      apiKey;
+      apiKey = apiExplorer.defaultApiKey;
 
-  if ($apiKeyInput.val() !== '') {
-    apiKey = $apiKeyInput.val();
-  } else {
-    apiKey = apiExplorer.defaultApiKey;
+  if ($apiKeyInput.length) {
+    if ($apiKeyInput.val() !== '') {
+      apiKey = $apiKeyInput.val();
+    }
   }
 
   return apiKey;
