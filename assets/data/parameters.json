@@ -11,6 +11,62 @@
           "description": "The ID of a specific piece of content."
         },
         {
+          "name": "type",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "source",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "aliases.namespace",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "aliases.value",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "topics.topic.id",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "topics.relationship",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "topics.supervised",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "topics.weighting",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
           "name": "annotations",
           "default_value": "description,extended_description,brand_summary,series_summary,people,topics,products,related_links,key_phrases,broadcasts,locations,first_broadcasts,next_broadcasts,available_locations,upcoming,sub_items",
           "type": "list",
@@ -62,6 +118,48 @@
     {
       "name": "topics",
       "parameters": [
+        {
+          "name": "id",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "type",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "source",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "aliases.namespace",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "aliases.value",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        },
+        {
+          "name": "annotations",
+          "default_value": "",
+          "type": "",
+          "is_multiple": "",
+          "description": ""
+        }
       ]
     }
   ]
