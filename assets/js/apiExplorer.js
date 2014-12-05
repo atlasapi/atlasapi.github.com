@@ -56,12 +56,12 @@ ApiExplorer.prototype.getData = function (url, callback) {
   return dataResponse;
 };
 
-ApiExplorer.prototype.mergeData = function () {
+ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl) {
   'use strict';
 
   var apiExplorer = this,
-      endpoints = apiExplorer.getData(apiExplorer.endpointsUrl).endpoints,
-      parameters = apiExplorer.getData(apiExplorer.endpointsParametersUrl).endpoints;
+      endpoints = apiExplorer.getData(originalDataUrl).endpoints,
+      parameters = apiExplorer.getData(newDataUrl).endpoints;
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -185,7 +185,7 @@ ApiExplorer.prototype.init = function () {
   'use strict';
 
   var apiExplorer = this,
-      data = apiExplorer.mergeData();
+      data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.updateApiKey();
