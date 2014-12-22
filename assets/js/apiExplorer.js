@@ -129,7 +129,9 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
   queryUrl += '?key=' + apiKey;
 
   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
-    queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
+    if (endpoint.parameters[i].default_value !== '') {
+      queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
+    }
   }
 
   return encodeURI(queryUrl);

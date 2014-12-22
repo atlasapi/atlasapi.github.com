@@ -12,14 +12,14 @@
         },
         {
           "name": "type",
-          "default_value": "item",
+          "default_value": "",
           "type": "string",
           "is_multiple": false,
           "description": "The type of the content (value is one of an enum, possible values are [BRAND, SERIES, ITEM, EPISODE, FILM, SONG, CLIP]."
         },
         {
           "name": "source",
-          "default_value": "bbc.co.uk",
+          "default_value": "",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher for the content."
