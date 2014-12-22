@@ -536,7 +536,9 @@ NowNextLater.prototype.loadFullscreen = function () {
           $(items[index]).find('.widget-panel:last-child').hide();
           $(items[index]).find('.widget-programme-image').on('load', function () {
             $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
-            $(items[index - 1]).find('.widget-panel:first-child').remove();
+            if ($(items[index - 1]).find('.widget-panel').length > 1) {
+              $(items[index - 1]).find('.widget-panel:first-child').remove();
+            }
             index++;
           });
         } else {
