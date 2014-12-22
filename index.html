@@ -8,10 +8,12 @@
 	<link href="js/prettify/prettify.css" rel="stylesheet">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="js/lib/ejs.js"></script>
 	<script src="js/min/minjquery.history.js"></script>
 	<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
 	<script src="js/prettify/prettify.js"></script>
 	<script src="js/Carousel.js"></script>
+	<script src="js/nownextlater-widget.js"></script>
 	<script src="js/script.js"></script>
 	<script src="http://widgets.metabroadcast.com/loader/1/load.js"></script>
 	<script>
@@ -25,9 +27,6 @@
 					modules: {
 						grid: {
 							holder: '.epg-widget'
-						},
-						nownextlater: {
-							holder: '#widget-holder'
 						}
 					}
 				}
@@ -87,7 +86,18 @@
 			<div class="unit size1of2 lastUnit">
 				<div class="inset">
 					<div class="widget-wrapper">
-						<div class="widget-holder" id="widget-holder"></div>
+						<div class="carousel-widget-container" id="carousel-widget-container"></div>
+					  <div class="fullscreen-widget-container fullscreen-container clearfix" id="fullscreen-widget-container">
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+					  </div>
 					</div>
 				</div>
 			</div>
