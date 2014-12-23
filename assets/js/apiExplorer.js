@@ -171,7 +171,14 @@ ApiExplorer.prototype.replaceParameter = function (url, parameterName, parameter
 
   var apiExplorer = this,
       pattern = new RegExp('(' + parameterName + '=).*?(&|$)'),
-      newUrl = url.replace(pattern, '$1' + parameterValue + '$2');
+      newUrl;
+
+  if (parameterValue !== '') {
+    newUrl = url.replace(pattern, '$1' + parameterValue + '$2');
+  } else {
+    newUrl = url.replace(pattern, '');
+  }
+
 
   if (newUrl === url && parameterName !== 'id') {
     newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
@@ -211,11 +218,8 @@ ApiExplorer.prototype.updateParameters = function () {
 
     if (parameterName === 'id') {
       $queryUrlInput.val(queryUrl.replace(idPattern, newParameterValue + '.json?'));
-      console.log('yo');
     } else {
-      if (newParameterValue !== '') {
-        $queryUrlInput.val(newQueryUrl);
-      }
+      $queryUrlInput.val(newQueryUrl);
     }
   });
 };
