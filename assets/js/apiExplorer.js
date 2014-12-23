@@ -145,14 +145,23 @@ ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
       queryUrl = apiExplorer.queryUrl,
       apiKey = apiExplorer.getApiKey();
 
-  queryUrl += endpoint.root_path + '.json';
-  queryUrl += '?key=' + apiKey;
+  queryUrl += endpoint.root_path;
 
   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
-    if (endpoint.parameters[i].default_value !== '') {
-      queryUrl += '&' + endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
+    if (endpoint.parameters[i].name === 'id') {
+      queryUrl += '/' + endpoint.parameters[i].default_value + '.json?';
+    }
+
+    if (endpoint.parameters[i].default_value !== '' && endpoint.parameters[i].name !== 'id') {
+      queryUrl += endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
+
+      if (i !== ii - 1) {
+        queryUrl += '&';
+      }
     }
   }
+
+  queryUrl += '&key=' + apiKey;
 
   return encodeURI(queryUrl);
 };
@@ -164,7 +173,7 @@ ApiExplorer.prototype.replaceParameter = function (url, parameterName, parameter
       pattern = new RegExp('(' + parameterName + '=).*?(&|$)'),
       newUrl = url.replace(pattern, '$1' + parameterValue + '$2');
 
-  if (newUrl === url) {
+  if (newUrl === url && parameterName !== 'id') {
     newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
   }
 
@@ -190,7 +199,8 @@ ApiExplorer.prototype.updateApiKey = function () {
 ApiExplorer.prototype.updateParameters = function () {
   'use strict';
 
-  var apiExplorer = this;
+  var apiExplorer = this,
+      idPattern = /([a-zA-Z0-9]*\.json\?)/ig;
 
   $(document).on('change', '.queryParameter', function () {
     var parameterName = $(this).attr('name'),
@@ -199,7 +209,14 @@ ApiExplorer.prototype.updateParameters = function () {
         queryUrl = $queryUrlInput.val(),
         newQueryUrl = apiExplorer.replaceParameter(queryUrl, parameterName, newParameterValue);
 
-    $queryUrlInput.val(newQueryUrl);
+    if (parameterName === 'id') {
+      $queryUrlInput.val(queryUrl.replace(idPattern, newParameterValue + '.json?'));
+      console.log('yo');
+    } else {
+      if (newParameterValue !== '') {
+        $queryUrlInput.val(newQueryUrl);
+      }
+    }
   });
 };
 
