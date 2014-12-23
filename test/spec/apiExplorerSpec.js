@@ -6,20 +6,20 @@ describe('ApiExplorer', function () {
       expect(apiExplorer).to.exist();
     });
 
-    it('should have endpointsUrl property', function () {
-      expect(apiExplorer).to.have.property('endpointsUrl');
+    it('should have endpointsURL property', function () {
+      expect(apiExplorer).to.have.property('endpointsURL');
     });
 
-    it('should have endpointsParametersUrl property', function () {
-      expect(apiExplorer).to.have.property('endpointsParametersUrl');
+    it('should have endpointsParametersURL property', function () {
+      expect(apiExplorer).to.have.property('endpointsParametersURL');
     });
 
     it('should have defaultApiKey property', function () {
       expect(apiExplorer).to.have.property('defaultApiKey');
     });
 
-    it('should have queryUrl property', function () {
-      expect(apiExplorer).to.have.property('queryUrl');
+    it('should have queryURL property', function () {
+      expect(apiExplorer).to.have.property('queryURL');
     });
 
     it('should have template property', function () {
@@ -62,39 +62,42 @@ describe('ApiExplorer', function () {
     });
 
     it('should merge parameters into the endpoints data', function () {
-      var originalDataUrl = 'mocks/mergeDataOriginalMock.json',
-          newDataUrl = 'mocks/mergeDataNewMock.json',
-          dataResponse = apiExplorer.mergeData(originalDataUrl, newDataUrl),
+      var originalDataURL = 'mocks/mergeDataOriginalMock.json',
+          newDataURL = 'mocks/mergeDataNewMock.json',
+          dataResponse = apiExplorer.mergeData(originalDataURL, newDataURL),
           updatedData = [{
           "name": "content",
           "parameters": [{
             "name": "foo",
             "value": "bar"
-          }, {
+          },
+          {
             "name": "bar",
             "value": "foo"
           }],
-          "query_url": "//atlas.metabroadcast.comundefined.json?key=c1e92985ec124202b7f07140bcde6e3f&foo=undefined&bar=undefined"
+          "query_url": "//atlas.metabroadcast.comundefinedfoo=undefined&bar=undefined&key=c1e92985ec124202b7f07140bcde6e3f"
         }, {
           "name": "schedules",
           "parameters": [{
             "name": "foo",
             "value": "bar"
-          }, {
+          },
+          {
             "name": "bar",
             "value": "foo"
           }],
-          "query_url": "//atlas.metabroadcast.comundefined.json?key=c1e92985ec124202b7f07140bcde6e3f&foo=undefined&bar=undefined"
+          "query_url": "//atlas.metabroadcast.comundefinedfoo=undefined&bar=undefined&key=c1e92985ec124202b7f07140bcde6e3f"
         }, {
           "name": "topics",
           "parameters": [{
             "name": "foo",
             "value": "bar"
-          }, {
+          },
+          {
             "name": "bar",
             "value": "foo"
           }],
-          "query_url": "//atlas.metabroadcast.comundefined.json?key=c1e92985ec124202b7f07140bcde6e3f&foo=undefined&bar=undefined"
+          "query_url": "//atlas.metabroadcast.comundefinedfoo=undefined&bar=undefined&key=c1e92985ec124202b7f07140bcde6e3f"
         }];
 
       expect(JSON.stringify(dataResponse)).to.equal(JSON.stringify(updatedData));
@@ -129,9 +132,9 @@ describe('ApiExplorer', function () {
     });
   });
 
-  describe('apiExplorer.buildQueryUrl', function () {
+  describe('apiExplorer.buildQueryURL', function () {
     it('should be defined', function () {
-      expect(apiExplorer.buildQueryUrl).to.exist();
+      expect(apiExplorer.buildQueryURL).to.exist();
     });
   });
 

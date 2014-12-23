@@ -1,10 +1,10 @@
 var ApiExplorer = function () {
   'use strict';
 
-  this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
-  this.endpointsParametersUrl = 'assets/data/parameters.json';
+  this.endpointsURL = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
+  this.endpointsParametersURL = 'assets/data/parameters.json';
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
-  this.queryUrl = '//atlas.metabroadcast.com';
+  this.queryURL = '//atlas.metabroadcast.com';
   this.template = {
     path: 'assets/templates/apiExplorer.ejs',
     container: '#apiExplorerTabSections'
@@ -27,7 +27,7 @@ ApiExplorer.prototype.getApiKey = function () {
   return apiKey;
 };
 
-ApiExplorer.prototype.getData = function (url, callback) {
+ApiExplorer.prototype.getData = function (URL, callback) {
   'use strict';
 
   var apiExplorer = this,
@@ -39,7 +39,7 @@ ApiExplorer.prototype.getData = function (url, callback) {
   }
 
   $.ajax({
-    url: url,
+    url: URL,
     dataType: 'json',
     async: async,
     success: function (data) {
@@ -56,12 +56,12 @@ ApiExplorer.prototype.getData = function (url, callback) {
   return dataResponse;
 };
 
-ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl) {
+ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
   'use strict';
 
   var apiExplorer = this,
-      endpoints = apiExplorer.getData(originalDataUrl).endpoints,
-      parameters = apiExplorer.getData(newDataUrl).endpoints;
+      endpoints = apiExplorer.getData(originalDataURL).endpoints,
+      parameters = apiExplorer.getData(newDataURL).endpoints;
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -70,7 +70,7 @@ ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl) {
       }
     }
 
-    endpoints[i].query_url = apiExplorer.buildQueryUrl(endpoints[i]);
+    endpoints[i].query_url = apiExplorer.buildQueryURL(endpoints[i]);
   }
 
   return endpoints;
@@ -115,7 +115,7 @@ ApiExplorer.prototype.submitQueryForm = function () {
   var apiExplorer = this;
 
   $('.queryForm').each(function () {
-    var queryUrl = $(this).find('.queryUrl').val();
+    var queryURL = $(this).find('.queryURL').val();
 
     $(this).on('submit', function (e) {
       e.preventDefault();
@@ -125,7 +125,7 @@ ApiExplorer.prototype.submitQueryForm = function () {
 
       var that = $(this);
 
-      apiExplorer.getData(queryUrl, function (response) {
+      apiExplorer.getData(queryURL, function (response) {
         var $jsonOutput = that.siblings('.queryResponse').find('.jsonOutput');
 
         response = apiExplorer.linkify(JSON.stringify(response, undefined, 2));
@@ -138,53 +138,53 @@ ApiExplorer.prototype.submitQueryForm = function () {
   });
 };
 
-ApiExplorer.prototype.buildQueryUrl = function (endpoint) {
+ApiExplorer.prototype.buildQueryURL = function (endpoint) {
   'use strict';
 
   var apiExplorer = this,
-      queryUrl = apiExplorer.queryUrl,
+      queryURL = apiExplorer.queryURL,
       apiKey = apiExplorer.getApiKey();
 
-  queryUrl += endpoint.root_path;
+  queryURL += endpoint.root_path;
 
   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
     if (endpoint.parameters[i].name === 'id') {
-      queryUrl += '/' + endpoint.parameters[i].default_value + '.json?';
+      queryURL += '/' + endpoint.parameters[i].default_value + '.json?';
     }
 
     if (endpoint.parameters[i].default_value !== '' && endpoint.parameters[i].name !== 'id') {
-      queryUrl += endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
+      queryURL += endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
 
       if (i !== ii - 1) {
-        queryUrl += '&';
+        queryURL += '&';
       }
     }
   }
 
-  queryUrl += '&key=' + apiKey;
+  queryURL += '&key=' + apiKey;
 
-  return encodeURI(queryUrl);
+  return encodeURI(queryURL);
 };
 
-ApiExplorer.prototype.replaceParameter = function (url, parameterName, parameterValue) {
+ApiExplorer.prototype.replaceParameter = function (URL, parameterName, parameterValue) {
   'use strict';
 
   var apiExplorer = this,
       pattern = new RegExp('(' + parameterName + '=).*?(&|$)'),
-      newUrl;
+      newURL;
 
   if (parameterValue !== '') {
-    newUrl = url.replace(pattern, '$1' + parameterValue + '$2');
+    newURL = URL.replace(pattern, '$1' + parameterValue + '$2');
   } else {
-    newUrl = url.replace(pattern, '');
+    newURL = URL.replace(pattern, '');
   }
 
 
-  if (newUrl === url && parameterName !== 'id') {
-    newUrl = newUrl + (newUrl.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
+  if (newURL === URL && parameterName !== 'id') {
+    newURL = newURL + (newURL.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
   }
 
-  return newUrl;
+  return newURL;
 };
 
 ApiExplorer.prototype.updateApiKey = function () {
@@ -193,12 +193,12 @@ ApiExplorer.prototype.updateApiKey = function () {
   var apiExplorer = this;
 
   $('#apiKey').on('change', function () {
-    $('.queryUrl').each(function () {
-      var queryUrl = $(this).val(),
+    $('.queryURL').each(function () {
+      var queryURL = $(this).val(),
           apiKey = apiExplorer.getApiKey(),
-          newQueryUrl = apiExplorer.replaceParameter(queryUrl, 'key', apiKey);
+          newQueryURL = apiExplorer.replaceParameter(queryURL, 'key', apiKey);
 
-      $(this).val(newQueryUrl);
+      $(this).val(newQueryURL);
     });
   });
 };
@@ -212,14 +212,14 @@ ApiExplorer.prototype.updateParameters = function () {
   $(document).on('change', '.queryParameter', function () {
     var parameterName = $(this).attr('name'),
         newParameterValue = $(this).val(),
-        $queryUrlInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryUrl'),
-        queryUrl = $queryUrlInput.val(),
-        newQueryUrl = apiExplorer.replaceParameter(queryUrl, parameterName, newParameterValue);
+        $queryURLInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryURL'),
+        queryURL = $queryURLInput.val(),
+        newQueryURL = apiExplorer.replaceParameter(queryURL, parameterName, newParameterValue);
 
     if (parameterName === 'id') {
-      $queryUrlInput.val(queryUrl.replace(idPattern, newParameterValue + '.json?'));
+      $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
     } else {
-      $queryUrlInput.val(newQueryUrl);
+      $queryURLInput.val(newQueryURL);
     }
   });
 };
@@ -228,7 +228,7 @@ ApiExplorer.prototype.init = function () {
   'use strict';
 
   var apiExplorer = this,
-      data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl);
+      data = apiExplorer.mergeData(apiExplorer.endpointsURL, apiExplorer.endpointsParametersURL);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.updateApiKey();
