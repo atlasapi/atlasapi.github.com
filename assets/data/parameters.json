@@ -80,7 +80,7 @@
       "parameters": [
         {
           "name": "id",
-          "default_value": "cbbh",
+          "default_value": "hkqs",
           "type": "string",
           "is_multiple": false,
           "description": "The id of the channel (this is part of the request uri, e.g. /4/schedule/{channel_id})"
