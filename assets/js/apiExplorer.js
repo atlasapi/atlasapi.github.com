@@ -89,6 +89,26 @@ ApiExplorer.prototype.compileTemplate = function (data, template) {
   $(template.container).html(compiledTemplate);
 };
 
+ApiExplorer.prototype.linkify = function (inputText) {
+  'use strict';
+
+  var apiExplorer = this,
+      replacedText,
+      replacePattern1,
+      replacePattern2,
+      replacePattern3;
+
+  // URLs starting with http://, https://, or ftp://
+  replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+  replacedText = inputText.replace(replacePattern1, '<a href="$1">$1</a>');
+
+  // URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+  replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+  replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2">$2</a>');
+
+  return replacedText;
+};
+
 ApiExplorer.prototype.submitQueryForm = function () {
   'use strict';
 
@@ -107,13 +127,13 @@ ApiExplorer.prototype.submitQueryForm = function () {
 
       apiExplorer.getData(queryUrl, function (response) {
         var $jsonOutput = that.siblings('.queryResponse').find('.jsonOutput');
-        $jsonOutput.html(JSON.stringify(response, undefined, 2));
+
+        response = apiExplorer.linkify(JSON.stringify(response, undefined, 2));
+        $jsonOutput.html(response);
         $jsonOutput.each(function(i, block) {
           hljs.highlightBlock(block);
         });
       });
-
-
     });
   });
 };

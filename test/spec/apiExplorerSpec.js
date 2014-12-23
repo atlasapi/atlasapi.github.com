@@ -107,6 +107,22 @@ describe('ApiExplorer', function () {
     });
   });
 
+  describe('apiExplorer.linkify', function () {
+    var linkifyResult = apiExplorer.linkify('http://example.com');
+
+    it('should be defined', function () {
+      expect(apiExplorer.linkify).to.exist();
+    });
+
+    it('should return a string', function () {
+      expect(linkifyResult).to.be.a('string');
+    });
+
+    it('should return a linked URL', function () {
+      expect(linkifyResult).to.equal('<a href="http://example.com">http://example.com</a>');
+    });
+  });
+
   describe('apiExplorer.submitQueryForm', function () {
     it('should be defined', function () {
       expect(apiExplorer.submitQueryForm).to.exist();
