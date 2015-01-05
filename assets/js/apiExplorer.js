@@ -115,10 +115,13 @@ ApiExplorer.prototype.submitQueryForm = function () {
   var apiExplorer = this;
 
   $('.queryForm').each(function () {
-    var queryURL = $(this).find('.queryURL').val();
+    var $this = $(this),
+        queryURL;
 
-    $(this).on('submit', function (e) {
+    $this.on('submit', function (e) {
       e.preventDefault();
+
+      queryURL = $this.find('.queryURL').val();
 
       var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
       $(this).siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
