@@ -118,7 +118,7 @@ ApiExplorer.prototype.linkIDs = function (inputText) {
       replacedText;
 
   replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
-  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="?content_id=$1">$1</a>');
+  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
 
   return replacedText;
 };
@@ -251,4 +251,17 @@ ApiExplorer.prototype.init = function () {
   apiExplorer.updateApiKey();
   apiExplorer.updateParameters();
   apiExplorer.submitQueryForm();
+
+  // Hacky code to handle linked ID's in JSON output
+  $(document).on('click', '.apiExplorerContentLink', function (e) {
+    e.preventDefault();
+    var contentID = $(this).data('id');
+    var idPattern = /([a-zA-Z0-9]*\.json\?)/ig;
+    $('a[href="#api-content"]').trigger('click');
+    $('#api-content').find('input[name="id"]').val(contentID);
+    var $queryURLInput = $('#api-content').find('.queryURL');
+    var queryURL = $queryURLInput.val();
+    $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
+    $('#api-content').find('.queryForm').trigger('submit');
+  });
 };
