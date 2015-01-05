@@ -109,6 +109,20 @@ ApiExplorer.prototype.linkify = function (inputText) {
   return replacedText;
 };
 
+ApiExplorer.prototype.linkIDs = function (inputText) {
+  'use strict';
+
+  var apiExplorer = this,
+      queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+      replacePattern,
+      replacedText;
+
+  replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
+  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="?content_id=$1">$1</a>');
+
+  return replacedText;
+};
+
 ApiExplorer.prototype.submitQueryForm = function () {
   'use strict';
 
@@ -131,7 +145,7 @@ ApiExplorer.prototype.submitQueryForm = function () {
       apiExplorer.getData(queryURL, function (response) {
         var $jsonOutput = that.siblings('.queryResponse').find('.jsonOutput');
 
-        response = apiExplorer.linkify(JSON.stringify(response, undefined, 2));
+        response = apiExplorer.linkIDs(JSON.stringify(response, undefined, 2));
         $jsonOutput.html(response);
         $jsonOutput.each(function(i, block) {
           hljs.highlightBlock(block);

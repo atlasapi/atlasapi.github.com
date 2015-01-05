@@ -126,6 +126,22 @@ describe('ApiExplorer', function () {
     });
   });
 
+  describe('apiExplorer.linkIDs', function () {
+    var linkIDsResult = apiExplorer.linkIDs('"id": "abcd"');
+
+    it('should be defined', function () {
+      expect(apiExplorer.linkIDs).to.exist();
+    });
+
+    it('should return a string', function () {
+      expect(linkIDsResult).to.be.a('string');
+    });
+
+    it('should return a linked string', function () {
+      expect(linkIDsResult).to.equal('"id": "<a class="apiExplorerContentLink" href="?content_id=abcd">abcd</a>"');
+    });
+  });
+
   describe('apiExplorer.submitQueryForm', function () {
     it('should be defined', function () {
       expect(apiExplorer.submitQueryForm).to.exist();
