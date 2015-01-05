@@ -236,12 +236,21 @@ ApiExplorer.prototype.init = function () {
   $(document).on('click', '.apiExplorerContentLink', function (e) {
     e.preventDefault();
     var contentID = $(this).data('id');
-    var idPattern = /([a-zA-Z0-9]*\.json\?)/ig;
-    $('a[href="#api-content"]').trigger('click');
-    $('#api-content').find('input[name="id"]').val(contentID);
-    var $queryURLInput = $('#api-content').find('.queryURL');
-    var queryURL = $queryURLInput.val();
-    $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
-    $('#api-content').find('.queryForm').trigger('submit');
+
+    apiExplorer.showContentJSON(contentID);
   });
+};
+
+ApiExplorer.prototype.showContentJSON = function (contentID) {
+  'use strict';
+
+  var apiExplorer = this,
+      idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
+      $queryURLInput = $('#api-content').find('.queryURL'),
+      queryURL = $queryURLInput.val();
+
+  $('a[href="#api-content"]').trigger('click');
+  $('#api-content').find('input[name="id"]').val(contentID);
+  $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
+  $('#api-content').find('.queryForm').trigger('submit');
 };
