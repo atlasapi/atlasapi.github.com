@@ -1,0 +1,13 @@
+{
+  "endpoints": [
+    {
+      "name": "content"
+    },
+    {
+      "name": "schedules"
+    },
+    {
+      "name": "topics"
+    }
+  ]
+}

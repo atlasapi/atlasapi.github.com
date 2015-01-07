@@ -74,6 +74,9 @@ $(document).ready(function () {
     loginToAdmin();
   });
 
+  var nowNextLater = new NowNextLater();
+  nowNextLater.init();
+
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
   tabs('#apiExplorerTabs');

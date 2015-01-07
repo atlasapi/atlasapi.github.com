@@ -1789,22 +1789,6 @@
     margin: 10px !important;
 }
 
-/* API explorer */
-.jsonOutput {
-    overflow: auto;
-    height: 300px;
-}
-
-input.queryURL {
-    width: 92%;
-}
-
-.ajaxLoading {
-    width: 100% !important;
-    height: 100% !important;
-    background: url("../images/loader.gif") center center no-repeat;
-}
-
 /* NowNextLater widget */
 /* Panel styles */
 .widget-panel {
