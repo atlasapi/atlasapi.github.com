@@ -221,26 +221,6 @@ ApiExplorer.prototype.updateParameters = function () {
   });
 };
 
-ApiExplorer.prototype.init = function () {
-  'use strict';
-
-  var apiExplorer = this,
-      data = apiExplorer.mergeData(apiExplorer.endpointsURL, apiExplorer.endpointsParametersURL);
-
-  apiExplorer.compileTemplate(data, apiExplorer.template);
-  apiExplorer.updateApiKey();
-  apiExplorer.updateParameters();
-  apiExplorer.submitQueryForm();
-
-  // Hacky code to handle linked ID's in JSON output
-  $(document).on('click', '.apiExplorerContentLink', function (e) {
-    e.preventDefault();
-    var contentID = $(this).data('id');
-
-    apiExplorer.showContentJSON(contentID);
-  });
-};
-
 ApiExplorer.prototype.showContentJSON = function (contentID) {
   'use strict';
 
@@ -253,4 +233,23 @@ ApiExplorer.prototype.showContentJSON = function (contentID) {
   $('#api-content').find('input[name="id"]').val(contentID);
   $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
   $('#api-content').find('.queryForm').trigger('submit');
+};
+
+ApiExplorer.prototype.init = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      data = apiExplorer.mergeData(apiExplorer.endpointsURL, apiExplorer.endpointsParametersURL);
+
+  apiExplorer.compileTemplate(data, apiExplorer.template);
+  apiExplorer.updateApiKey();
+  apiExplorer.updateParameters();
+  apiExplorer.submitQueryForm();
+
+  $(document).on('click', '.apiExplorerContentLink', function (e) {
+    e.preventDefault();
+    var contentID = $(this).data('id');
+
+    apiExplorer.showContentJSON(contentID);
+  });
 };
