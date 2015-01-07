@@ -176,7 +176,6 @@ ApiExplorer.prototype.replaceParameter = function (URL, parameterName, parameter
     newURL = URL.replace(pattern, '');
   }
 
-
   if (newURL === URL && parameterName !== 'id') {
     newURL = newURL + (newURL.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
   }
@@ -209,12 +208,18 @@ ApiExplorer.prototype.updateParameters = function () {
   $(document).on('change', '.queryParameter', function () {
     var parameterName = $(this).attr('name'),
         newParameterValue = $(this).val(),
+        defaultValue = $(this).data('default'),
         $queryURLInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryURL'),
         queryURL = $queryURLInput.val(),
         newQueryURL = apiExplorer.replaceParameter(queryURL, parameterName, newParameterValue);
 
     if (parameterName === 'id') {
-      $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
+      if ($(this).val() === '') {
+        $(this).val(defaultValue);
+        $queryURLInput.val(queryURL.replace(idPattern, defaultValue + '.json?'));
+      } else {
+        $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
+      }
     } else {
       $queryURLInput.val(newQueryURL);
     }

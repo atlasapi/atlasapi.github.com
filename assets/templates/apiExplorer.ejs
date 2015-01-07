@@ -23,7 +23,7 @@
             <tr>
               <td class="first"><%= this[i].parameters[j].name %></td>
               <td class="second">
-              <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>">
+              <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
               </td>
               <td class="third"><%= this[i].parameters[j].type %></td>
               <td class="fourth"><%= this[i].parameters[j].description %></td>
