@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>atlas - media data router</title>
+	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link href="js/prettify/prettify.css" rel="stylesheet">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script>var MBST = MBST || {};</script>
+	<script src="js/min/minjquery.history.js"></script>
+	<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
+	<script src="js/prettify/prettify.js"></script>
+	<script src="js/Carousel.js"></script>
+	<script src="js/script.js"></script>
+</head>
+<body>
+	<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
+	<header class="hr">
+		<div class="content clearfix">
+			<h1 class="fl mbn">
+				<a href="#home" class="logo">atlas - the global video and audio
+					index</a>
+			</h1>
+			<a href="../../#apiExplorer" class="btn btn_lrg"><span class="icn_mag"></span>API
+				Explorer &amp; free key</a>
+			<nav>
+				<ul class="mainMenu clearfix">
+					<li><a href="../../#home">Home</a></li>
+					<li><a href="../../#widgets">Widgets</a></li>
+					<li><a href="../../#examples">Examples</a></li>
+					<li><a href="../../#reference">Reference</a></li>
+					<li><a href="../../#about">About</a></li>
+				</ul>
+			</nav>
+			<div id="msgs" class="info" style="display: none;">You are
+				using an old browser - for a better experience and to use some of
+				the advanced features of this website please consider upgrading.</div>
+		</div>
+	</header>
+	<div class="loginWrapper" style="display: none;">
+		<div class="loginHolder">
+
+		</div>
+	</div>
+	<div class="page" style="padding-top: 77px;">
+    <!-- *** API EXPLORER SECTION *** -->
+		<section class="apiExplorer">
+			<div class="marker" id="apiExplorer"></div>
+			<div class="explorerTitle">
+				<div class="line">
+				  <div class="unit size1of2 explorerTitleContainer1">
+				  	API Explorer
+				  </div>
+				</div>
+			</div>
+			<div class="explorerWrapper" id="explorerWrapper">
+
+				<div class="clearfix mbl">
+			  	<form class="unit size1of2">
+          	<label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+          	<input type="text" class="apiKey watchMe" name="apiKey" data-title="apiKey" id="apiKey" />
+        	</form>
+         	<div class="unit size1of2 getApiKeyBtnHolder">
+        		Need an API key?
+          	<a href="#" class="getApiKeyBtn btn">Get Your Free API Key</a>
+          </div>
+			  </div>
+
+				<ul class="tabs clearfix">
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explore_schedule">Schedule</a></li>
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explore_channels">Channels</a></li>
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explore_content">Content</a></li>
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explore_content_groups">Content Groups</a></li>
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explore_topics">Topics</a></li>
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explore_products">Products</a></li>
+					<li class="tab"><a href="#apiExplorer"
+						data-tab="explorer_search">Search</a></li>
+				</ul>
+
+
+				<a href="#apiExplorer" data-tab="explore_advanced"
+					class="tab tabExt">Complete control</a>
+
+
+                <!-- SCHEDULE -->
+				<div class="tabArea" id="explore_schedule">
+					<h2>Schedule</h2>
+
+					<h3><span class="upper">GET</span> /schedule.json</h3>
+					<p>Returns a schedule for the specified channel and period.</p>
+					<form>
+						<table class="tbl mbm">
+							<thead>
+								<tr>
+									<th class="first">Parameter</th>
+									<th class="second">Value</th>
+									<th class="third">Type</th>
+									<th class="fourth">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="first">channel_id</td>
+									<td class="second"><span class="select"> <span
+											class="value">Please Select</span>  <span class="options">
+												<span class="option" data-value="cbbh">cbbh (BBC One)</span>
+												<span class="option" data-value="cbbG">cbbG (BBC Two)</span>
+												<span class="option" data-value="cbbP">cbbP (BBC Three)</span>
+												<span class="option" data-value="cbbQ">cbbQ (BBC Four)</span>
+												<span class="option" data-value="cbbV">cbbV (BBC HD)</span>
+												<span class="option" data-value="cbbW">cbbW (CBBC)</span>
+												<span class="option" data-value="cbcQ">cbcQ (BBC Radio 1)</span>
+												<span class="option" data-value="cbcS">cbcS (BBC Radio 2)</span>
+										 </span>
+										</span><input type="hidden" id="schedule_channel"
+										data-title="channel_id" class="fr watchMe" value="cbbh" />
+									</td>
+									<td class="third">string</td>
+									<td class="fourth">The id of the required channel.
+										Available from /channels.json</td>
+								</tr>
+								<tr>
+									<td class="first">from</td>
+									<td class="second"><input type="text" class="date watchMe"
+										data-title="from" id="schedule_from" /></td>
+									<td class="third">multiple</td>
+									<td class="fourth">The beginning of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration, e.g. 'now'.</td>
+								</tr>
+								<tr>
+									<td class="first">to</td>
+									<td class="second"><input type="text" class="date watchMe"
+										data-title="to" id="schedule_to" /></td>
+									<td class="third">multiple</td>
+									<td class="fourth">The end of the schedule period. Can be an ISO date, number of seconds since 1 Jan 1970 or a relative duration., e.g. 'now.plus.6h'.</td>
+								</tr>
+								<tr>
+									<td class="fist">publisher</td>
+									<td class="second"><input type="text" id="search_publisher"
+										data-title="publisher" class="watchMe" value="bbc.co.uk" /></td>
+									<td class="third">string</td>
+									<td class="fourth">The publisher of the schedule</td>
+								</tr>
+								<tr>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="channel,description,broadcasts,brand_summary" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div class="line mbm">
+							<small>
+							<b>Valid Annotations:</b> description, extended_description, brand_summary, series_summary, people, topics, segment_events, related_links, key_phrases, broadcasts, locations, first_broadcast, next_broadcast, available_locations, plus channel.</small>
+						</div>
+
+						<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="schedule_queryCopy">
+									<a href="#" id="schedule_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="https://atlas.metabroadcast.com/3.0/schedule.json?" /><input
+										type="hidden" id="schedule_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+						</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="schedule_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#schedule_json"
+									data-tab="schedule_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="schedule_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="schedule_json">
+                                </pre>
+						</div>
+					</div>
+				</div>
+
+				<!--  CHANNELS -->
+				<div class="tabArea" id="explore_channels" style="display: none;">
+					<h2>Channels and Channel groups</h2>
+					<div class="subArea" id="explore_channels">
+					<h3><span class="upper">GET</span> /channels.json</h3>
+					<p>Returns a paginated list of all channels.</p>
+					<form>
+						<table class="tbl mbm">
+							<thead>
+								<tr>
+									<th class="first">Parameter</th>
+									<th class="second">Value</th>
+									<th class="third">Type</th>
+									<th class="fourth">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+							     <tr>
+									<td class="fist">broadcaster</td>
+									<td class="second"><input type="text" id="channels_broadcaster"
+										data-title="broadcaster" class="watchMe" value="bbc.co.uk" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally filter by the broadcaster that owns the channel</td>
+							    </tr>
+						        <tr>
+									<td class="fist">media_type</td>
+									<td class="second"><input type="text" id="channels_media_type"
+										data-title="media_type" class="watchMe" value="video" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally filter by the type of channel (audio or video)</td>
+							    </tr>
+						        <tr>
+									<td class="fist">available_from</td>
+									<td class="second"><input type="text" id="channels_available_from"
+										data-title="available_from" class="watchMe" value="bbc.co.uk" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally filter by a publisher that publishes data for the channel</td>
+							    </tr>
+						        <tr>
+									<td class="fist">order_by</td>
+									<td class="second"><input type="text" id="channels_order_by"
+										data-title="order_by" class="watchMe" value="title.reverse" /></td>
+									<td class="third">string</td>
+									<td class="fourth">Optionally order the list of channels</td>
+							    </tr>
+								<tr>
+									<td class="first">limit</td>
+									<td class="second"><input
+									type="number" id="channels_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+									<td class="third">integer</td>
+									<td class="fourth">The number of channels to return per
+										page</td>
+								</tr>
+								<tr>
+									<td class="first">offset</td>
+									<td class="second"><input
+									type="number" id="channels_offset" data-title="offset" min="0"
+									max="100" step="1" value="0" class="watchMe" /></td>
+									<td class="third">integer</td>
+									<td class="fourth">The offset from the start of the list.</td>
+								</tr>
+								<tr>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<div class="line mbm">
+							<small>
+								<b>Valid annotations</b>: channel_groups, history, parent, variations
+							</small>
+						</div>
+
+						<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="channels_queryCopy">
+									<a href="#" id="schedule_channelsCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="https://atlas.metabroadcast.com/3.0/channels.json?" /><input
+										type="hidden" id="channels_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+						</div>
+					</form>
+				    <div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="channels_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#channels_json"
+									data-tab="channels_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="channels_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="channels_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+
+					<!-- CHANNELS ID -->
+					<a name="explore_channels-id"></a>
+					<div class="subArea spacer" id="explore_channels/:id">
+					<h3><span class="upper">GET</span> /channels/:id.json</h3>
+					<p>Returns the data for a particular channel.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="channels_id_id" value="" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the channel</td>
+							</tr>
+							<tr>
+								<td class="fist">annotations</td>
+								<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="channels_id_annotations" value="" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+										data to be output</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: channel_groups, history, parent, variations
+						</small>
+					</div>
+
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="channels/:id_queryCopy">
+									<a href="#" id="channels/:id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="channels/:id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+					  <div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannel" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="channels/:id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#channels/:id_json"
+									data-tab="channels/:id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="channels/:id_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="channels/:id_json">
+                            </pre>
+						</div>
+					</div>
+					</div>
+
+
+				    <!--  CHANNEL GROUPS -->
+				    <div class="subArea spacer" id="explore_channel_groups">
+					<h3><span class="upper">GET</span> /channel_groups.json</h3>
+					<p>Returns a paginated list of all channel groups.</p>
+					<form>
+						<table class="tbl mbm">
+							<thead>
+								<tr>
+									<th class="first">Parameter</th>
+									<th class="second">Value</th>
+									<th class="third">Type</th>
+									<th class="fourth">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+							    <tr>
+									<td class="first">type</td>
+									<td class="second">
+									   <span class="select">
+									     <span class="value">Please Select</span>
+									     <span class="options">
+									       <span class="option" data-value="">(Not set)</span>
+										   <span class="option" data-value="region">region</span>
+										   <span class="option" data-value="platform">platform</span>
+									     </span>
+									   </span>
+									   <input type="hidden" id="channel_groups_type" data-title="type" class="fr watchMe" value="" />
+									</td>
+									<td class="third">string</td>
+									<td class="fourth">Optional filter for regions or television platforms</td>
+								</tr>
+								<tr>
+									<td class="first">limit</td>
+									<td class="second"><input
+									type="number" id="channel_groups_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+									<td class="third">integer</td>
+									<td class="fourth">The number of channel groups to return per page</td>
+								</tr>
+								<tr>
+									<td class="first">offset</td>
+									<td class="second"><input
+									type="number" id="channel_groups_offset" data-title="offset" min="0"
+									max="100" step="1" value="0" class="watchMe" /></td>
+									<td class="third">integer</td>
+									<td class="fourth">The offset from the start of the list.</td>
+								</tr>
+								<tr>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="channel_groups_annotations" value="" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="line mbm">
+							<small>
+								<b>Valid annotations</b>: channels, history
+							</small>
+						</div>
+						<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="channel_groups_queryCopy">
+									<a href="#" id="channel_groupsCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="https://atlas.metabroadcast.com/3.0/channel_groups.json?" /><input
+										type="hidden" id="channels_groups_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+						</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="channel_groups_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#channel_groups_json"
+									data-tab="channel_groups_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available	format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="channel_groups_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="channel_groups_json">
+                                </pre>
+						</div>
+					</div>
+				</div>
+
+				    <!--  CHANNEL GROUPS ID -->
+				    <a name="explore_groups-id"></a>
+				    <div class="subArea spacer" id="explore_channel_groups/:id">
+					<h3><span class="upper">GET</span> /channel_groups/:id.json</h3>
+					<p>Returns the data for a particular channel group.</p>
+					<form>
+						<table class="tbl mbm">
+							<thead>
+								<tr>
+									<th class="first">Parameter</th>
+									<th class="second">Value</th>
+									<th class="third">Type</th>
+									<th class="fourth">Description</th>
+								</tr>
+							</thead>
+							<tbody>
+							     <tr>
+									<td class="fist">id</td>
+									<td class="second"><input type="text" id="channel_groups_id_id"
+										data-title=":id" class="watchMe" value="" /></td>
+									<td class="third">string</td>
+									<td class="fourth">The id of the channel group</td>
+							    </tr>
+							    <tr>
+									<td class="fist">annotations</td>
+									<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="" /></td>
+									<td class="third">list</td>
+									<td class="fourth">List of annotations that describe the
+										data to be output</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="line mbm">
+							<small>
+								<b>Valid annotations</b>: channels
+							</small>
+						</div>
+						<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="channel_groups_id_queryCopy">
+									<a href="#" id="channel_groups_idCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="https://atlas.metabroadcast.com/3.0/channel_groups/:id.json" /><input
+										type="hidden" id="channel_groups_id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+						</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiChannelGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="channel_groups_id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#channel_groups_id_json"
+									data-tab="channel_groups_id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="channel_groups_id_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="channel_groups_id_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+
+				</div>
+
+				<!--  CONTENT  -->
+				<div class="tabArea" id="explore_content" style="display: none;">
+					<h2>Content</h2>
+					<h3><span class="upper">GET</span> /content.json</h3>
+					<p>Returns a list of content that matches the supplied uri.
+						Used to look up content.</p>
+						<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">uri</td>
+								<td class="second"><input
+									type="text" id="content_uri" data-title="uri"
+									class="watchMe" value="http://www.bbc.co.uk/programmes/b007rsj5" /> </td>
+								<td class="third">string</td>
+								<td class="fourth">The uri of a specific piece of content</td>
+							</tr>
+							<tr>
+								<td class="first">annotations</td>
+								<td class="second"><input
+									type="text" id="content_annotations" data-title="annotations"
+									class="watchMe" value="description,brand_summary,series_summary" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+									data to be output.</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: description,
+									extended_description, brand_summary, series_summary, people,
+									topics, products, related_links, key_phrases, broadcasts,
+									locations, first_broadcasts, next_broadcasts,
+									available_locations, upcoming, sub_items
+						</small>
+					</div>
+					<div class="line hr mtm">
+					    <h4>Request</h4>
+						<div class="unit size4of5">
+							<div class="urlCopy" id="content_queryCopy">
+								<a href="#" id="content_queryCopyBtn"
+									class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+									type="text" class="urlTxt"
+									value="https://atlas.metabroadcast.com/3.0/content.json?" /><input
+									type="hidden" id="content_altered" />
+							</div>
+						</div>
+						<div class="unit size1of5 lastUnit">
+							<input type="submit" class="btn" value="Run" />
+						</div>
+					</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_json"
+									data-tab="content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_json">
+                                </pre>
+						</div>
+					</div>
+				</div>
+
+
+				<!--  CONTENT GROUPS -->
+				<div class="tabArea" id="explore_content_groups"
+					style="display: none;">
+					<h2>Content Groups</h2>
+					<div class="subArea" id="explore_content_groups">
+					<h3><span class="upper">GET</span> /content_groups.json</h3>
+					<p>Returns a paginated list of all content groups.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of content groups to return
+									per page</td>
+							</tr>
+							<tr>
+								<td class="first">offset</td>
+								<td class="second"><input
+									type="number" id="search_offset" data-title="offset" min="0"
+									max="100" step="10" value="0" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The offset from the start of the list.</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="content_groups_queryCopy">
+									<a href="#" id="content_groups_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="https://atlas.metabroadcast.com/3.0/content_groups.json?" /><input
+										type="hidden" id="content_groups_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+						<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContentGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContentGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContentGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContentGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContentGroupsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_groups_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_groups_json"
+									data-tab="content_groups_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_groups_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_groups_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+					<a name="explore_content_groups-id" ></a>
+					<div class="subArea spacer" id="explore_content_groups/:id">
+					<h3><span class="upper">GET</span> /content_groups/:id.json</h3>
+					<p>Returns the data for a particular content group.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id"  value="cbbc"  /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the content group</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="content_groups/:id_queryCopy">
+									<a href="#" id="content_groups/:id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="content_groups_id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+					<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_groups/:id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_groups/:id_json"
+									data-tab="content_groups/:id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_groups/:id_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_groups/:id_json">
+                            </pre>
+						</div>
+					</div>
+					</div>
+
+					<!--  CONTENT GROUPS ID CONTENT -->
+					<div class="subArea spacer" id="explore_content_groups/:id/content">
+					<h3><span class="upper">GET</span> /content_groups/:id/content.json</h3>
+					<p>Returns a paginated list of the content for a content group.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id" value="cbbc" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the content group</td>
+							</tr>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of pieces of content to
+									return per page</td>
+							</tr>
+							<tr>
+								<td class="first">offset</td>
+								<td class="second"><input
+									type="number" id="search_offset" data-title="offset" min="0"
+									max="100" step="10" value="0" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The offset from the start of the list</td>
+							</tr>
+							<tr>
+								<td class="first">annotations</td>
+								<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="description,brand_summary" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+									data to be output</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: all content annotations,
+								plus filtering_resource
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="content_groups_id_content_queryCopy">
+									<a href="#" id="content_groups_id_content_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="content_groups_id_content_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+										<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="content_groups/:id/content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#content_groups/:id/content_json"
+									data-tab="content_groups/:id/content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="content_groups/:id/content_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="content_groups/:id/content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+				</div>
+
+
+				<!--  TOPICS -->
+				<div class="tabArea" id="explore_topics" style="display: none;">
+					<h2>Topics</h2>
+					<div class="subArea" id="explore_topics">
+					<h3><span class="upper">GET</span> /topics.json</h3>
+					<form>
+					<p>Returns a paginated list of all topics.</p>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">namespace</td>
+								<td class="second"><input type="text"
+										class="namespace watchMe" data-title="namespace"
+										id="namespace" value="dbpedia" /></td>
+								<td class="third">string</td>
+								<td class="fourth">Optionally filter by the specified topic
+									namespace</td>
+							</tr>
+							<tr>
+								<td class="first">value</td>
+								<td class="second"><input type="text"
+										class="value watchMe" data-title="value"
+										id="value" value="http://dbpedia.org/resource/London" /></td>
+								<td class="third">string</td>
+								<td class="fourth">Optionally filter by the specified topic
+									value.</td>
+							</tr>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of topics to return per page.</td>
+							</tr>
+							<tr>
+								<td class="first">offset</td>
+								<td class="second"><input
+									type="number" id="search_offset" data-title="offset" min="0"
+									max="100" step="10" value="0" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The offset from the start of the list.</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="topics_queryCopy">
+									<a href="#" id="topics_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="topics_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+						<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiTopicsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiTopicsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiTopicsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiTopicsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiTopicsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="topics_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#topics_json"
+									data-tab="topics_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="topics_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="topics_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+
+					<!-- TOPICS ID -->
+					<a name="explore_topics-id"></a>
+					<div class="subArea spacer" id="explore_topics/:id">
+					<h3><span class="upper">GET</span> /topics/:id.json</h3>
+					<p>Returns the data for a particular topic.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id" value="ccFk" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the topic</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="topics/:id_queryCopy">
+									<a href="#" id="topics/:id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="topics/:id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+						<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="topics/:id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#topics/:id_json"
+									data-tab="topics/:id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="topics/:id_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="topics/:id_json">
+                                </pre>
+						</div>
+					</div>
+						</div>
+
+					<!-- TOPICS ID CONTENT -->
+					<div class="subArea spacer" id="explore_topics/:id/content">
+					<h3><span class="upper">GET</span> /topics/:id/content.json</h3>
+					<p>Returns a paginated list of the content for a topic.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id" value="ccFk" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the topic</td>
+							</tr>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of pieces of content to
+									return per page</td>
+							</tr>
+							<tr>
+								<td class="first">offset</td>
+								<td class="second"><input
+									type="number" id="search_offset" data-title="offset" min="0"
+									max="100" step="10" value="0" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The offset from the start of the list</td>
+							</tr>
+							<tr>
+								<td class="first">annotations</td>
+								<td class="second"><input type="text"
+										class="watchMe" data-title="annotations"
+										id="annotations" value="description,brand_summary" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+									data to be output</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: all content annotations,
+									plus filtering_resource
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="topics_id_content_queryCopy">
+									<a href="#" id="topics_id_content_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="topics_id_content_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+										<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="topics/:id/content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#topics/:id/content_json"
+									data-tab="topics/:id/content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="topics/:id/content_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="topics/:id/content_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+				</div>
+
+
+				<!--  PRODUCTS  -->
+				<div class="tabArea" id="explore_products" style="display: none;">
+					<h2>Products</h2>
+					<p>All products data is currently restricted, please enter your API key above.</p>
+					<div class="subArea" id="explore_products">
+					<h3><span class="upper">GET</span> /products.json</h3>
+					<p>Returns a paginated list of all products.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of products to return per
+									page</td>
+							</tr>
+							<tr>
+								<td class="first">offset</td>
+								<td class="second"><input
+									type="number" id="search_offset" data-title="offset" min="0"
+									max="100" step="10" value="0" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The offset from the start of the list.</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="products_queryCopy">
+									<a href="#" id="products_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="products_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+					<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiProductsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiProductsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiProductsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiProductsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiProductsId" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="products_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#products_json"
+									data-tab="products_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="products_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="products_json">
+                                </pre>
+						</div>
+					</div>
+					</div>
+
+					<!-- PRODUCTS ID -->
+					<a name="explore_products-id" ></a>
+					<div class="subArea spacer" id="explore_products/:id">
+						<h3><span class="upper">GET</span> /products/:id.json</h3>
+					    <p>Returns a paginated list of the content related to a
+						product.</p>
+					   			    <form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id" value="" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the product</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+								<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="products/:id_queryCopy">
+									<a href="#" id="products/:id_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="products/:id_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+									<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="products/:id_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#products/:id_json"
+									data-tab="products/:id_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="products/:id_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="products/:id_json">
+                                </pre>
+						</div>
+						</div>
+					</div>
+
+					<!-- PRODUCTS ID CONTENT -->
+					<div class="subArea spacer" id="explore_products/:id/content">
+					<h3><span class="upper">GET</span> /products/:id/content.json</h3>
+					<p>Returns a paginated list of the content related to a
+						product.</p>
+				    <form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">id</td>
+								<td class="second"><input type="text"
+										class="id watchMe" data-title=":id"
+										id="id"  /></td>
+								<td class="third">string</td>
+								<td class="fourth">The id of the product</td>
+							</tr>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="0"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of products to return per
+									page</td>
+							</tr>
+							<tr>
+								<td class="first">offset</td>
+								<td class="second"><input
+									type="number" id="search_offset" data-title="offset" min="0"
+									max="100" step="10" value="0" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The offset from the start of the list.</td>
+							</tr>
+							<tr>
+								<td class="first">annotations</td>
+								<td class="second"><input type="text"
+										class="annotations watchMe" data-title="annotations"
+										id="annotations" value="description" /></td>
+								<td class="third">list</td>
+								<td class="fourth">List of annotations that describe the
+									data to be output.</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: all content annotations,
+									plus filtering_resource
+						</small>
+					</div>
+					<div class="line hr">
+						    <h4>Request</h4>
+							<div class="unit size4of5">
+								<div class="urlCopy" id="products/:id/content_queryCopy">
+									<a href="#" id="products/:id/content_queryCopyBtn"
+										class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+										type="text" class="urlTxt"
+										value="" /><input
+										type="hidden" id="products/:id/content_altered" />
+								</div>
+							</div>
+							<div class="unit size1of5 lastUnit">
+								<input type="submit" class="btn" value="Run" />
+							</div>
+					</div>
+					</form>
+										<div class="resultsArea line hr" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="products/:id/content_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#products/:id/content_json"
+									data-tab="products/:id/content_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="products/:id/content_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="products/:id/content_json">
+                                </pre>
+						</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- SEARCH -->
+				<div class="tabArea" id="explore_search" style="display: none;">
+					<h2>Search</h2>
+					<h3><span class="upper">GET</span> /search.json</h3>
+					<p>Returns a list of content that matches the specified search
+						criteria.</p>
+					<form>
+					<table class="tbl mbm">
+						<thead>
+							<tr>
+								<th class="first">Parameter</th>
+								<th class="second">Value</th>
+								<th class="third">Type</th>
+								<th class="fourth">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="first">q</td>
+								<td class="second"><input
+									type="text" id="search_title" data-title="title"
+									class="watchMe" value="Doctor Who" /></td>
+								<td class="third">string</td>
+								<td class="fourth">The title of a container or item</td>
+							</tr>
+							<tr>
+								<td class="first">limit</td>
+								<td class="second"><input
+									type="number" id="search_limit" data-title="limit" min="1"
+									max="50" step="1" value="5" class="watchMe" /></td>
+								<td class="third">integer</td>
+								<td class="fourth">The number of items to return (max 50).</td>
+							</tr>
+							<tr>
+								<td class="first">publisher</td>
+								<td class="second"><input type="text" id="search_publisher"
+										data-title="publisher" class="watchMe" value="bbc.co.uk" /> </td>
+								<td class="third">string</td>
+								<td class="fourth">The publisher of the content.</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="line mbm">
+						<small>
+							<b>Valid annotations</b>: none
+						</small>
+					</div>
+					<div class="line hr mtm">
+					    <h4>Request</h4>
+						<div class="unit size4of5">
+							<div class="urlCopy" id="search_queryCopy">
+								<a href="#" id="search_queryCopyBtn"
+									class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+									type="text" class="urlTxt"
+									value="https://atlas.metabroadcast.com/3.0/search.json?" /><input
+									type="hidden" id="search_altered" />
+							</div>
+						</div>
+						<div class="unit size1of5 lastUnit">
+							<input type="submit" class="btn" value="Run" />
+						</div>
+					</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="search_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#search_json"
+									data-tab="search_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="search_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="search_json">
+                                </pre>
+						</div>
+					</div>
+				</div>
+
+                <!-- COMPLETE CONTROL -->
+				<div class="tabArea" id="explore_advanced" style="display: none;">
+					<form>
+						<div class="line urlCopy" id="advanced_queryCopy">
+							<label for="advanced_string" class="tr adv">https://atlas.metabroadcast.com/3.0/</label>
+							<div class="clearfix">
+								<a href="#" id="advanced_queryCopyBtn"
+									class="btnCopy hov hovDown hovRight" data-title="copy"></a><input
+									type="text" id="advanced_string" class="fr adv watchMe" />
+							</div>
+						</div>
+						<div class="line hr mtm">
+							<input type="submit" class="btn mbm" value="Run" />
+						</div>
+					</form>
+					<div class="resultsArea" style="display: none;">
+					    <h4>Response</h4>
+						<div class="preview mlm clearfix">
+							<a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a> <a class="showItem apiContent" style="display: none;"> <img
+								src="" /> <span class="caption"><span class="br"></span><span
+									class="pub"></span><span class="ep"></span></span>
+							</a>
+						</div>
+						<div class="output" id="advanced_output">
+							<ul class="smallTabs clearfix">
+								<li class="subTab selected"><a href="#advanced_json"
+									data-tab="advanced_json">JSON</a></li>
+								<li class="fl"><p class="mbn other">Other available
+										format(s):</p></li>
+								<li class="fl"><a href="" target="_blank"
+									data-tab="advanced_xml">XML</a></li>
+							</ul>
+							<pre class="subTabArea" id="advanced_json">
+                                </pre>
+						</div>
+					</div>
+				</div>
+			</div>
+			<input type="hidden" id="currentQuery" />
+		</section>
+	</div>
+	<div class="hoverRef" style="display: none;">
+		<div class="hover" data-title="title">
+			<span class="title">Title</span><span class="body">Search for
+				brand, series and one-off pieces of content. Can't be used with
+				genre</span>
+		</div>
+		<div class="hover" data-title="publisher">
+			<span class="title">Publisher</span><span class="body">Your
+				application will be restricted to certain publishers. You can
+				further restrict the results to specific publishers.</span>
+		</div>
+		<div class="hover" data-title="genre">
+			<span class="title">Genre</span><span class="body">The genre
+				of the content you would like.</span>
+		</div>
+		<div class="hover" data-title="tag">
+			<span class="title">Tag</span><span class="body">Your
+				application will be restricted to search for certain publishers. You
+				can further restrict the results to specific publishers.</span>
+		</div>
+		<div class="hover" data-title="available">
+			<span class="title">Available</span><span class="body">True or
+				false. 'any' will give you content that is either available or not.</span>
+		</div>
+		<div class="hover" data-title="availableCountries">
+			<span class="title">Available Countries</span><span class="body">Country
+				code eg. uk, us etc.</span>
+		</div>
+		<div class="hover" data-title="duration">
+			<span class="title">Duration</span><span class="body">Length
+				of the content</span>
+		</div>
+		<div class="hover" data-title="isLongForm">
+			<span class="title">Is Long Form</span><span class="body">True
+				or false. Only full length content?</span>
+		</div>
+		<div class="hover" data-title="dataContainerFormat">
+			<span class="title">Data Container Format</span><span class="body">The
+				format of the content eg. mp4, mp3 etc.</span>
+		</div>
+		<div class="hover" data-title="transportType">
+			<span class="title">Transport Type</span><span class="body">How
+				you get to the content. 'link' or 'embed' are common examples.</span>
+		</div>
+		<div class="hover" data-title="mediaType">
+			<span class="title">Media Type</span><span class="body">Either
+				'audio' or 'video'.</span>
+		</div>
+		<div class="hover" data-title="from">
+			<span class="title">From</span><span class="body">The
+				beginning of a schedule period.</span>
+		</div>
+		<div class="hover" data-title="to">
+			<span class="title">To</span><span class="body">The end of a
+				schedule period.</span>
+		</div>
+		<div class="hover" data-title="channel">
+			<span class="title">Channel</span><span class="body">The
+				channel that the content was broadcast on eg. bbcone, bbctwo etc.</span>
+		</div>
+		<div class="hover" data-title="copy">
+			<span class="title">copy</span><span class="body">Click to
+				copy the query to your clipboard</span>
+		</div>
+		<div class="hover" data-title="brand">
+			<span class="title">brand</span><span class="body">A special
+				type of container that can only contain episodes</span>
+		</div>
+		<div class="hover" data-title="special">
+			<span class="title">Special</span><span class="body">A one off
+				item that does not have a container</span>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-11621492-3' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</body>
+</html>

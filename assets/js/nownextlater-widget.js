@@ -426,7 +426,7 @@ NowNextLater.prototype.setupCarousel = function () {
       programmeData = nowNextLater.orderByStartTime();
 
   nowNextLater.compileTemplate(programmeData, {
-    template: 'templates/carousel.ejs',
+    template: 'assets/templates/carousel.ejs',
     container: '#carousel-widget-container'
   });
 
@@ -510,7 +510,7 @@ NowNextLater.prototype.loadFullscreen = function () {
 
   $widgetPanels.each(function (index) {
     nowNextLater.compileTemplate(dataForFullscreen[0][index], {
-      template: 'templates/fullscreen.ejs',
+      template: 'assets/templates/fullscreen.ejs',
       container: $(this),
       append: true
     });

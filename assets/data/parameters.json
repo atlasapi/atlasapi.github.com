@@ -1,0 +1,166 @@
+{
+  "endpoints": [
+    {
+      "name": "content",
+      "parameters": [
+        {
+          "name": "id",
+          "default_value": "r6knn",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The id of the content (this is part of the request uri, e.g. /4/content/{content_id})"
+        },
+        {
+          "name": "type",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The type of the content (value is one of an enum, possible values are [BRAND, SERIES, ITEM, EPISODE, FILM, SONG, CLIP]."
+        },
+        {
+          "name": "source",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The publisher for the content."
+        },
+        {
+          "name": "aliases.namespace",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "Return all topics with an alias namespace equal to the provided value."
+        },
+        {
+          "name": "aliases.value",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "Return all topics with an alias value equal to the provided value."
+        },
+        {
+          "name": "topics.topic.id",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "Match all content whose topics contain a topic with the given id."
+        },
+        {
+          "name": "topics.relationship",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "Match all content whose topics contain a topic with the given relationship."
+        },
+        {
+          "name": "topics.supervised",
+          "default_value": "",
+          "type": "boolean",
+          "is_multiple": false,
+          "description": "Match all content whose topics contain a topic with the given supervised boolean."
+        },
+        {
+          "name": "topics.weighting",
+          "default_value": "",
+          "type": "float",
+          "is_multiple": false,
+          "description": "Match all content whose topics contain a topic with the given supervised boolean."
+        },
+        {
+          "name": "annotations",
+          "default_value": "description,extended_description,brand_summary,series_summary,people,topics,products,related_links,key_phrases,broadcasts,locations,first_broadcasts,next_broadcasts,available_locations,upcoming,sub_items",
+          "type": "list",
+          "is_multiple": true,
+          "description": "List of annotations that describe the data to be output."
+        }
+      ]
+    },
+    {
+      "name": "schedules",
+      "parameters": [
+        {
+          "name": "id",
+          "default_value": "hkqs",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The id of the channel (this is part of the request uri, e.g. /4/schedule/{channel_id})"
+        },
+        {
+          "name": "from",
+          "default_value": "now",
+          "type": "date/time",
+          "is_multiple": false,
+          "description": "Date to start your schedule request from. can be an ISO DateTime or relative, e.g. 'now.plus.6h'."
+        },
+        {
+          "name": "to",
+          "default_value": "now.plus.6h",
+          "type": "date/time",
+          "is_multiple": false,
+          "description": "Date to end your schedule request. can be an ISO DateTime or relative, e.g. 'now.plus.6h'."
+        },
+        {
+          "name": "source",
+          "default_value": "bbc.co.uk",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The publisher of the schedule."
+        },
+        {
+          "name": "annotations",
+          "default_value": "channel_groups",
+          "type": "list",
+          "is_multiple": false,
+          "description": "List of annotations that describe the data to be output."
+        }
+      ]
+    },
+    {
+      "name": "topics",
+      "parameters": [
+        {
+          "name": "id",
+          "default_value": "4qzf",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The id of the topic (this is part of the request uri, e.g. /4/topics/{topic_id})"
+        },
+        {
+          "name": "type",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The type of the topic (value is one of an enum, possible values are [SUBJECT, PERSON, PLACE, ARTIST, EVENT, PRODUCT, WORK, UNKNOWN]."
+        },
+        {
+          "name": "source",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "The publisher for the topic."
+        },
+        {
+          "name": "aliases.namespace",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "Return all topics with an alias namespace equal to the provided value."
+        },
+        {
+          "name": "aliases.value",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": "Return all topics with an alias value equal to the provided value."
+        },
+        {
+          "name": "annotations",
+          "default_value": "description",
+          "type": "list",
+          "is_multiple": true,
+          "description": "List of annotations that describe the data to be output."
+        }
+      ]
+    }
+  ]
+}
