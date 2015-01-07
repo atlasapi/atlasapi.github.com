@@ -1880,6 +1880,9 @@ function getCaretPosition(editableDiv) {
 }
 
 $(document).ready(function(){
+    var nowNextLater = new NowNextLater();
+    nowNextLater.init();
+
     var pageInfo = new PageInfo();
     pageInfo.init();
 

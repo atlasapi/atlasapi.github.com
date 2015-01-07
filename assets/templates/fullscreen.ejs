@@ -1,0 +1,17 @@
+<% var data = this; %>
+<div class="widget-panel">
+  <div class="widget-image-container">
+    <img class="widget-programme-image" src="http://users-images-atlas.metabroadcast.com/?source=<%= data.image %>&resize=460" alt="<%= data.programme_title %>">
+  </div>
+  <div class="widget-programme-info">
+    <div class="widget-programme-info-inner clearfix">
+      <div class="widget-programme-details">
+        <div class="widget-programme-start-time"><%= data.start_time_string %></div>
+        <div class="widget-programme-title"><%= data.programme_title %></div>
+      </div>
+      <% if (data.channel_logo) { %>
+        <img class="widget-channel-logo" src="<%= data.channel_logo %>" alt="<%= data.channel.title %>" >
+      <% } %>
+    </div>
+  </div>
+</div>
