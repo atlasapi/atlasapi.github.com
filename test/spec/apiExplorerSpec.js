@@ -122,7 +122,7 @@ describe('ApiExplorer', function () {
     });
 
     it('should return a linked string', function () {
-      expect(linkIDsResult).to.equal('"id": "<a class="apiExplorerContentLink" href="?content_id=abcd">abcd</a>"');
+      expect(linkIDsResult).to.equal('"id": "<a class="apiExplorerContentLink" href="#" data-id="abcd">abcd</a>"');
     });
   });
 
