@@ -170,6 +170,12 @@ describe('ApiExplorer', function () {
     });
   });
 
+  describe('apiExplorer.prepopulateForm', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.prepopulateForm).to.exist();
+    });
+  });
+
   describe('apiExplorer.init', function () {
     it('should be defined', function () {
       expect(apiExplorer.init).to.exist();

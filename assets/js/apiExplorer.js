@@ -240,6 +240,43 @@ ApiExplorer.prototype.showContentJSON = function (contentID) {
   $('#api-content').find('.queryForm').trigger('submit');
 };
 
+ApiExplorer.prototype.getQueryParameters = function (str) {
+  'use strict';
+
+  var apiExplorer = this;
+
+  return (str || document.location.search).replace(/(^\?)/,'').split('&').map(function (n) {
+    return n = n.split("="),this[n[0]] = n[1],this;
+  }.bind({}))[0];
+};
+
+ApiExplorer.prototype.prepopulateForm = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      queryString = location.search.substring(1),
+      parameters = apiExplorer.getQueryParameters(queryString);
+
+  if (parameters.endpoint) {
+    window.location.hash = 'apiExplorer';
+    $(window).load(function () {
+      if ($('a[href="#api-' + parameters.endpoint + '"]')) {
+        $('a[href="#api-' + parameters.endpoint + '"]').trigger('click');
+
+        $('#api-' + parameters.endpoint).find('.queryParameter').each(function () {
+          var parameterName = $(this).attr('name');
+
+          for (var property in parameters) {
+            if (property === parameterName) {
+              $(this).val(parameters[property]);
+            }
+          }
+        });
+      }
+    });
+  }
+};
+
 ApiExplorer.prototype.init = function () {
   'use strict';
 
@@ -257,4 +294,8 @@ ApiExplorer.prototype.init = function () {
 
     apiExplorer.showContentJSON(contentID);
   });
+
+  if (window.location.search) {
+    apiExplorer.prepopulateForm();
+  }
 };
