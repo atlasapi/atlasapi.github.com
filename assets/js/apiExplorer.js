@@ -268,12 +268,15 @@ ApiExplorer.prototype.prepopulateForm = function () {
 
           for (var property in parameters) {
             if (property === parameterName) {
-              $(this).val(parameters[property]);
-              $(this).trigger('change');
+              $(this).val(parameters[property]).trigger('change');
               $('#api-' + parameters.endpoint).find('.queryForm').trigger('submit');
             }
           }
         });
+
+        if (parameters.apiKey) {
+          $('#apiKey').val(parameters.apiKey).trigger('change');
+        }
       }
     });
   }
