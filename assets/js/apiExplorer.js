@@ -269,6 +269,8 @@ ApiExplorer.prototype.prepopulateForm = function () {
           for (var property in parameters) {
             if (property === parameterName) {
               $(this).val(parameters[property]);
+              $(this).trigger('change');
+              $('#api-' + parameters.endpoint).find('.queryForm').trigger('submit');
             }
           }
         });
