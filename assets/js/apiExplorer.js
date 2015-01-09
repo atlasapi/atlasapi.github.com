@@ -67,6 +67,7 @@ ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
       if (endpoints[i].name === parameters[j].name) {
         endpoints[i].parameters = parameters[j].parameters;
+        endpoints[i].annotations = parameters[j].annotations;
       }
     }
 
@@ -282,6 +283,29 @@ ApiExplorer.prototype.prepopulateForm = function () {
   }
 };
 
+ApiExplorer.prototype.toggleAnnotations = function () {
+  'use strict';
+
+  var apiExplorer = this;
+
+  $('.queryParametersForm').each(function () {
+    var $this = $(this),
+        annotationsInput = $this.find('input[name="annotations"]'),
+        annotations = [];
+
+    $this.find('.annotation-checkbox').on('change', function () {
+      var annotation = $(this).attr('name');
+      if ($(this).is(':checked')) {
+        annotations.push(annotation);
+        annotationsInput.val(annotations.join(',')).trigger('change');
+      } else {
+        annotations.pop(annotation);
+        annotationsInput.val(annotations.join(',')).trigger('change');
+      }
+    });
+  });
+};
+
 ApiExplorer.prototype.init = function () {
   'use strict';
 
@@ -292,6 +316,7 @@ ApiExplorer.prototype.init = function () {
   apiExplorer.updateApiKey();
   apiExplorer.updateParameters();
   apiExplorer.submitQueryForm();
+  apiExplorer.toggleAnnotations();
 
   $(document).on('click', '.apiExplorerContentLink', function (e) {
     e.preventDefault();

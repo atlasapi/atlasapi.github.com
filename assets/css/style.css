@@ -1805,6 +1805,16 @@ input.queryURL {
     background: url("../images/loader.gif") center center no-repeat;
 }
 
+.tbl tbody td.annotations-row {
+    padding-bottom: 10px;
+}
+
+.annotations-row label {
+    width: 25%;
+    font-size: 14px;
+    line-height: 1;
+}
+
 /* NowNextLater widget */
 /* Panel styles */
 .widget-panel {
