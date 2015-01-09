@@ -67,6 +67,7 @@ ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
       if (endpoints[i].name === parameters[j].name) {
         endpoints[i].parameters = parameters[j].parameters;
+        endpoints[i].annotations = parameters[j].annotations;
       }
     }
 
@@ -176,7 +177,6 @@ ApiExplorer.prototype.replaceParameter = function (URL, parameterName, parameter
     newURL = URL.replace(pattern, '');
   }
 
-
   if (newURL === URL && parameterName !== 'id') {
     newURL = newURL + (newURL.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
   }
@@ -209,12 +209,18 @@ ApiExplorer.prototype.updateParameters = function () {
   $(document).on('change', '.queryParameter', function () {
     var parameterName = $(this).attr('name'),
         newParameterValue = $(this).val(),
+        defaultValue = $(this).data('default'),
         $queryURLInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryURL'),
         queryURL = $queryURLInput.val(),
         newQueryURL = apiExplorer.replaceParameter(queryURL, parameterName, newParameterValue);
 
     if (parameterName === 'id') {
-      $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
+      if ($(this).val() === '') {
+        $(this).val(defaultValue);
+        $queryURLInput.val(queryURL.replace(idPattern, defaultValue + '.json?'));
+      } else {
+        $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
+      }
     } else {
       $queryURLInput.val(newQueryURL);
     }
@@ -235,6 +241,71 @@ ApiExplorer.prototype.showContentJSON = function (contentID) {
   $('#api-content').find('.queryForm').trigger('submit');
 };
 
+ApiExplorer.prototype.getQueryParameters = function (str) {
+  'use strict';
+
+  var apiExplorer = this;
+
+  return (str || document.location.search).replace(/(^\?)/,'').split('&').map(function (n) {
+    return n = n.split("="),this[n[0]] = n[1],this;
+  }.bind({}))[0];
+};
+
+ApiExplorer.prototype.prepopulateForm = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      queryString = location.search.substring(1),
+      parameters = apiExplorer.getQueryParameters(queryString);
+
+  if (parameters.endpoint) {
+    window.location.hash = 'apiExplorer';
+    $(window).load(function () {
+      if ($('a[href="#api-' + parameters.endpoint + '"]')) {
+        $('a[href="#api-' + parameters.endpoint + '"]').trigger('click');
+
+        $('#api-' + parameters.endpoint).find('.queryParameter').each(function () {
+          var parameterName = $(this).attr('name');
+
+          for (var property in parameters) {
+            if (property === parameterName) {
+              $(this).val(parameters[property]).trigger('change');
+              $('#api-' + parameters.endpoint).find('.queryForm').trigger('submit');
+            }
+          }
+        });
+
+        if (parameters.apiKey) {
+          $('#apiKey').val(parameters.apiKey).trigger('change');
+        }
+      }
+    });
+  }
+};
+
+ApiExplorer.prototype.toggleAnnotations = function () {
+  'use strict';
+
+  var apiExplorer = this;
+
+  $('.queryParametersForm').each(function () {
+    var $this = $(this),
+        annotationsInput = $this.find('input[name="annotations"]'),
+        annotations = [];
+
+    $this.find('.annotation-checkbox').on('change', function () {
+      var annotation = $(this).attr('name');
+      if ($(this).is(':checked')) {
+        annotations.push(annotation);
+        annotationsInput.val(annotations.join(',')).trigger('change');
+      } else {
+        annotations.pop(annotation);
+        annotationsInput.val(annotations.join(',')).trigger('change');
+      }
+    });
+  });
+};
+
 ApiExplorer.prototype.init = function () {
   'use strict';
 
@@ -245,6 +316,7 @@ ApiExplorer.prototype.init = function () {
   apiExplorer.updateApiKey();
   apiExplorer.updateParameters();
   apiExplorer.submitQueryForm();
+  apiExplorer.toggleAnnotations();
 
   $(document).on('click', '.apiExplorerContentLink', function (e) {
     e.preventDefault();
@@ -252,4 +324,8 @@ ApiExplorer.prototype.init = function () {
 
     apiExplorer.showContentJSON(contentID);
   });
+
+  if (window.location.search) {
+    apiExplorer.prepopulateForm();
+  }
 };

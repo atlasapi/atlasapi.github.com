@@ -23,11 +23,23 @@
             <tr>
               <td class="first"><%= this[i].parameters[j].name %></td>
               <td class="second">
-              <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>">
+              <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
               </td>
               <td class="third"><%= this[i].parameters[j].type %></td>
               <td class="fourth"><%= this[i].parameters[j].description %></td>
             </tr>
+            <% if (this[i].parameters[j].name === 'annotations') { %>
+              <tr>
+                <td colspan="4" class="annotations-row">
+                  <% for (var k = 0, kk = this[i].annotations.length; k < kk; k++) { %>
+                    <label>
+                      <input class="annotation-checkbox" type="checkbox" name="<%= this[i].annotations[k] %>">
+                      <%= this[i].annotations[k] %>
+                    </label>
+                  <% } %>
+                </td>
+              </tr>
+            <% } %>
           <% } %>
         </tbody>
       </table>
