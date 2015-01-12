@@ -143,6 +143,13 @@ ApiExplorer.prototype.events = function () {
       apiExplorer.sendQuery($this);
     });
   });
+
+  $(document).on('click', '.apiExplorerContentLink', function (e) {
+    e.preventDefault();
+    var contentID = $(this).data('id');
+
+    apiExplorer.showContentJSON(contentID);
+  });
 };
 
 ApiExplorer.prototype.toggleAnnotations = function ($queryParametersForm) {
@@ -279,6 +286,34 @@ ApiExplorer.prototype.prepopulateForm = function () {
   }
 };
 
+ApiExplorer.prototype.showContentJSON = function (contentID) {
+  'use strict';
+
+  var apiExplorer = this,
+      idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
+      $queryURLInput = $('#api-content').find('.queryURL'),
+      queryURL = $queryURLInput.val();
+
+  $('a[href="#api-content"]').trigger('click');
+  $('#api-content').find('input[name="id"]').val(contentID);
+  $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
+  $('#api-content').find('.queryForm').trigger('submit');
+};
+
+ApiExplorer.prototype.linkIDs = function (inputText) {
+  'use strict';
+
+  var apiExplorer = this,
+      queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+      replacePattern,
+      replacedText;
+
+  replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
+  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
+
+  return replacedText;
+};
+
 ApiExplorer.prototype.init = function () {
   'use strict';
 
@@ -291,40 +326,4 @@ ApiExplorer.prototype.init = function () {
   if (window.location.search) {
     apiExplorer.prepopulateForm();
   }
-
-  // $(document).on('click', '.apiExplorerContentLink', function (e) {
-  //   e.preventDefault();
-  //   var contentID = $(this).data('id');
-
-  //   apiExplorer.showContentJSON(contentID);
-  // });
 };
-
-
-// ApiExplorer.prototype.linkIDs = function (inputText) {
-//   'use strict';
-
-//   var apiExplorer = this,
-//       queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
-//       replacePattern,
-//       replacedText;
-
-//   replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
-//   replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
-
-//   return replacedText;
-// };
-
-// ApiExplorer.prototype.showContentJSON = function (contentID) {
-//   'use strict';
-
-//   var apiExplorer = this,
-//       idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
-//       $queryURLInput = $('#api-content').find('.queryURL'),
-//       queryURL = $queryURLInput.val();
-
-//   $('a[href="#api-content"]').trigger('click');
-//   $('#api-content').find('input[name="id"]').val(contentID);
-//   $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
-//   $('#api-content').find('.queryForm').trigger('submit');
-// };
