@@ -185,12 +185,14 @@ ApiExplorer.prototype.getQueryId = function ($queryParametersForm) {
   'use strict';
 
   var $idInput = $queryParametersForm.find('input[name="id"]'),
+      defaultId = $idInput.data('default'),
       queryId;
 
   if ($idInput.val() !== '') {
     queryId = $idInput.val() + '.json?';
   } else {
-    queryId = $idInput.data('default') + '.json?';
+    queryId = defaultId + '.json?';
+    $idInput.val(defaultId);
   }
 
   return queryId;
