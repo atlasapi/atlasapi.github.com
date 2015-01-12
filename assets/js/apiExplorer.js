@@ -70,8 +70,6 @@ ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
         endpoints[i].annotations = parameters[j].annotations;
       }
     }
-
-    // endpoints[i].query_url = apiExplorer.buildQueryURL(endpoints[i]);
   }
 
   return endpoints;
@@ -90,98 +88,38 @@ ApiExplorer.prototype.compileTemplate = function (data, template) {
   $(template.container).html(compiledTemplate);
 };
 
-// ApiExplorer.prototype.linkIDs = function (inputText) {
-//   'use strict';
-
-//   var apiExplorer = this,
-//       queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
-//       replacePattern,
-//       replacedText;
-
-//   replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
-//   replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
-
-//   return replacedText;
-// };
-
-// ApiExplorer.prototype.submitQueryForm = function () {
-//   'use strict';
-
-//   var apiExplorer = this;
-
-//   $('.queryForm').each(function () {
-//     var $this = $(this),
-//         queryURL;
-
-//     $this.on('submit', function (e) {
-//       e.preventDefault();
-
-//       queryURL = $this.find('.queryURL').val();
-
-//       var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
-//       $(this).siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
-
-//       var that = $(this);
-
-//       apiExplorer.getData(queryURL, function (response) {
-//         var $jsonOutput = that.siblings('.queryResponse').find('.jsonOutput');
-
-//         response = apiExplorer.linkIDs(JSON.stringify(response, undefined, 2));
-//         $jsonOutput.html(response);
-//         $jsonOutput.each(function(i, block) {
-//           hljs.highlightBlock(block);
-//         });
-//       });
-//     });
-//   });
-// };
-
-// ApiExplorer.prototype.buildQueryURL = function (endpoint) {
-//   'use strict';
-
-//   var apiExplorer = this,
-//       queryURL = apiExplorer.queryURL,
-//       apiKey = apiExplorer.getApiKey();
-
-//   queryURL += endpoint.root_path;
-
-//   for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
-//     if (endpoint.parameters[i].name === 'id') {
-//       queryURL += '/' + endpoint.parameters[i].default_value + '.json?';
-//     }
-
-//     if (endpoint.parameters[i].default_value !== '' && endpoint.parameters[i].name !== 'id') {
-//       queryURL += endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
-
-//       if (i !== ii - 1) {
-//         queryURL += '&';
-//       }
-//     }
-//   }
-
-//   queryURL += '&key=' + apiKey;
-
-//   return encodeURI(queryURL);
-// };
-
-ApiExplorer.prototype.replaceParameter = function (URL, parameterName, parameterValue) {
+ApiExplorer.prototype.linkIDs = function (inputText) {
   'use strict';
 
   var apiExplorer = this,
-      pattern = new RegExp('(' + parameterName + '=).*?(&|$)'),
-      newURL;
+      queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+      replacePattern,
+      replacedText;
 
-  if (parameterValue !== '') {
-    newURL = URL.replace(pattern, '$1' + parameterValue + '$2');
-  } else {
-    newURL = URL.replace(pattern, '');
-  }
+  replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
+  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
 
-  if (newURL === URL && parameterName !== 'id') {
-    newURL = newURL + (newURL.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
-  }
+  return replacedText;
+};
 
-  return newURL;
+ApiExplorer.prototype.submitQueryForm = function ($queryForm) {
+  'use strict';
+
+  var apiExplorer = this,
+      queryURL = $queryForm.find('.queryURL').val(),
+      $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
+
+  $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
+
+  apiExplorer.getData(queryURL, function (response) {
+    var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
+
+    response = apiExplorer.linkIDs(JSON.stringify(response, undefined, 2));
+    $jsonOutput.html(response);
+    $jsonOutput.each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
 };
 
 ApiExplorer.prototype.updateApiKey = function () {
@@ -190,12 +128,8 @@ ApiExplorer.prototype.updateApiKey = function () {
   var apiExplorer = this;
 
   $('#apiKey').on('change', function () {
-    $('.queryURL').each(function () {
-      var queryURL = $(this).val(),
-          apiKey = apiExplorer.getApiKey(),
-          newQueryURL = apiExplorer.replaceParameter(queryURL, 'key', apiKey);
-
-      $(this).val(newQueryURL);
+    $('.queryParametersForm').each(function () {
+      apiExplorer.updateForm($(this));
     });
   });
 };
@@ -212,6 +146,21 @@ ApiExplorer.prototype.updateQueryForm = function () {
 
     $this.find('.queryParameter').on('change', function () {
       apiExplorer.updateForm($this);
+    });
+  });
+};
+
+ApiExplorer.prototype.getResponse = function () {
+  'use strict';
+
+  var apiExplorer = this;
+
+  $('.queryForm').each(function () {
+    var $this = $(this);
+
+    $this.on('submit', function (e) {
+      e.preventDefault();
+      apiExplorer.submitQueryForm($this);
     });
   });
 };
@@ -246,7 +195,6 @@ ApiExplorer.prototype.getURLComponents = function ($queryParametersForm) {
   var apiExplorer = this,
       urlComponents = {};
 
-  urlComponents.url = apiExplorer.queryURL;
   urlComponents.endpoint = $queryParametersForm.data('endpoint') + '/';
   urlComponents.id = apiExplorer.getQueryID($queryParametersForm);
   urlComponents.parameters = apiExplorer.getQueryParameters($queryParametersForm);
@@ -258,7 +206,8 @@ ApiExplorer.prototype.getURLComponents = function ($queryParametersForm) {
 ApiExplorer.prototype.constructQueryURL = function (urlComponents) {
   'use strict';
 
-  var queryURL = urlComponents.url;
+  var apiExplorer = this,
+      queryURL = apiExplorer.queryURL;
 
   queryURL += urlComponents.endpoint;
   queryURL += urlComponents.id;
@@ -325,33 +274,6 @@ ApiExplorer.prototype.toggleQueryID = function ($queryParametersForm) {
   });
 };
 
-ApiExplorer.prototype.updateParameters = function () {
-  'use strict';
-
-  var apiExplorer = this,
-      idPattern = /([a-zA-Z0-9]*\.json\?)/ig;
-
-  $(document).on('change', '.queryParameter', function () {
-    var parameterName = $(this).attr('name'),
-        newParameterValue = $(this).val(),
-        defaultValue = $(this).data('default'),
-        $queryURLInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryURL'),
-        queryURL = $queryURLInput.val(),
-        newQueryURL = apiExplorer.replaceParameter(queryURL, parameterName, newParameterValue);
-
-    if (parameterName === 'id') {
-      if ($(this).val() === '') {
-        $(this).val(defaultValue);
-        $queryURLInput.val(queryURL.replace(idPattern, defaultValue + '.json?'));
-      } else {
-        $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
-      }
-    } else {
-      $queryURLInput.val(newQueryURL);
-    }
-  });
-};
-
 ApiExplorer.prototype.showContentJSON = function (contentID) {
   'use strict';
 
@@ -406,21 +328,18 @@ ApiExplorer.prototype.init = function () {
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.updateApiKey();
-  // apiExplorer.updateParameters();
-  // apiExplorer.submitQueryForm();
   apiExplorer.toggleAnnotations();
-
   apiExplorer.updateQueryForm();
-  apiExplorer.constructQueryURL();
+  apiExplorer.getResponse();
 
-  $(document).on('click', '.apiExplorerContentLink', function (e) {
-    e.preventDefault();
-    var contentID = $(this).data('id');
+  // $(document).on('click', '.apiExplorerContentLink', function (e) {
+  //   e.preventDefault();
+  //   var contentID = $(this).data('id');
 
-    apiExplorer.showContentJSON(contentID);
-  });
+  //   apiExplorer.showContentJSON(contentID);
+  // });
 
-  if (window.location.search) {
-    apiExplorer.prepopulateForm();
-  }
+  // if (window.location.search) {
+  //   apiExplorer.prepopulateForm();
+  // }
 };
