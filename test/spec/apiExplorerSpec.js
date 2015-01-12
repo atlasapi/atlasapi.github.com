@@ -27,12 +27,6 @@ describe('ApiExplorer', function () {
     });
   });
 
-  describe('apiExplorer.getApiKey', function () {
-    it('should be defined', function () {
-      expect(apiExplorer.getApiKey).to.exist();
-    });
-  });
-
   describe('apiExplorer.getData', function () {
     it('should be defined', function () {
       expect(apiExplorer.getData).to.exist();
@@ -49,6 +43,17 @@ describe('ApiExplorer', function () {
         };
 
       expect(JSON.stringify(dataResponse)).to.equal(JSON.stringify(mockObject));
+    });
+  });
+
+  describe('apiExplorer.getApiKey', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.getApiKey).to.exist();
+    });
+
+    it('should return an API key', function () {
+      var apiKey = apiExplorer.getApiKey();
+      expect(apiKey).to.equal(apiExplorer.defaultApiKey);
     });
   });
 
@@ -73,6 +78,12 @@ describe('ApiExplorer', function () {
     });
   });
 
+  describe('apiExplorer.sendQuery', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.sendQuery).to.exist();
+    });
+  });
+
   describe('apiExplorer.linkIds', function () {
     var linkIdsResult = apiExplorer.linkIds('"id": "abcd"');
 
@@ -89,15 +100,63 @@ describe('ApiExplorer', function () {
     });
   });
 
-  describe('apiExplorer.sendQuery', function () {
+  describe('apiExplorer.toggleAnnotations', function () {
     it('should be defined', function () {
-      expect(apiExplorer.sendQuery).to.exist();
+      expect(apiExplorer.toggleAnnotations).to.exist();
+    });
+  });
+
+  describe('apiExplorer.updateForm', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.updateForm).to.exist();
+    });
+  });
+
+  describe('apiExplorer.getQueryId', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.getQueryId).to.exist();
+    });
+  });
+
+  describe('apiExplorer.getQueryUrlComponents', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.getQueryUrlComponents).to.exist();
+    });
+  });
+
+  describe('apiExplorer.constructQueryUrl', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.constructQueryUrl).to.exist();
+    });
+  });
+
+  describe('apiExplorer.getQueryParameters', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.getQueryParameters).to.exist();
+    });
+  });
+
+  describe('apiExplorer.formatQueryParameters', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.formatQueryParameters).to.exist();
     });
   });
 
   describe('apiExplorer.prepopulateForm', function () {
     it('should be defined', function () {
       expect(apiExplorer.prepopulateForm).to.exist();
+    });
+  });
+
+  describe('apiExplorer.showContentJSON', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.showContentJSON).to.exist();
+    });
+  });
+
+  describe('apiExplorer.events', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.events).to.exist();
     });
   });
 

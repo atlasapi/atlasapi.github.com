@@ -47,7 +47,7 @@ ApiExplorer.prototype.getApiKey = function () {
       $apiKeyInput = $('#apiKey'),
       apiKey;
 
-  if ($apiKeyInput.val() !== '') {
+  if ($apiKeyInput.val()) {
     apiKey = $apiKeyInput.val();
   } else {
     apiKey = apiExplorer.defaultApiKey;
@@ -108,48 +108,18 @@ ApiExplorer.prototype.sendQuery = function ($queryForm) {
   });
 };
 
-ApiExplorer.prototype.events = function () {
+ApiExplorer.prototype.linkIds = function (inputText) {
   'use strict';
 
   var apiExplorer = this,
-      $queryParametersForm = $('.queryParametersForm'),
-      $queryForm = $('.queryForm');
+      queryUrl = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+      replacePattern,
+      replacedText;
 
-  $('#apiKey').on('change', function () {
-    $queryParametersForm.each(function () {
-      apiExplorer.updateForm($(this));
-    });
-  });
+  replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
+  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
 
-  $queryParametersForm.each(function () {
-    var $this = $(this);
-
-    apiExplorer.updateForm($this);
-
-    $this.find('.queryParameter').on('change', function () {
-      apiExplorer.updateForm($this);
-    });
-
-    $this.find('.annotation-checkbox').on('change', function () {
-      apiExplorer.toggleAnnotations($this);
-    });
-  });
-
-  $queryForm.each(function () {
-    var $this = $(this);
-
-    $this.on('submit', function (e) {
-      e.preventDefault();
-      apiExplorer.sendQuery($this);
-    });
-  });
-
-  $(document).on('click', '.apiExplorerContentLink', function (e) {
-    e.preventDefault();
-    var contentId = $(this).data('id');
-
-    apiExplorer.showContentJSON(contentId);
-  });
+  return replacedText;
 };
 
 ApiExplorer.prototype.toggleAnnotations = function ($queryParametersForm) {
@@ -302,18 +272,48 @@ ApiExplorer.prototype.showContentJSON = function (contentId) {
   $('#api-content').find('.queryForm').trigger('submit');
 };
 
-ApiExplorer.prototype.linkIds = function (inputText) {
+ApiExplorer.prototype.events = function () {
   'use strict';
 
   var apiExplorer = this,
-      queryUrl = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
-      replacePattern,
-      replacedText;
+      $queryParametersForm = $('.queryParametersForm'),
+      $queryForm = $('.queryForm');
 
-  replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
-  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
+  $('#apiKey').on('change', function () {
+    $queryParametersForm.each(function () {
+      apiExplorer.updateForm($(this));
+    });
+  });
 
-  return replacedText;
+  $queryParametersForm.each(function () {
+    var $this = $(this);
+
+    apiExplorer.updateForm($this);
+
+    $this.find('.queryParameter').on('change', function () {
+      apiExplorer.updateForm($this);
+    });
+
+    $this.find('.annotation-checkbox').on('change', function () {
+      apiExplorer.toggleAnnotations($this);
+    });
+  });
+
+  $queryForm.each(function () {
+    var $this = $(this);
+
+    $this.on('submit', function (e) {
+      e.preventDefault();
+      apiExplorer.sendQuery($this);
+    });
+  });
+
+  $(document).on('click', '.apiExplorerContentLink', function (e) {
+    e.preventDefault();
+    var contentId = $(this).data('id');
+
+    apiExplorer.showContentJSON(contentId);
+  });
 };
 
 ApiExplorer.prototype.init = function () {
