@@ -11,22 +11,6 @@ var ApiExplorer = function () {
   };
 };
 
-ApiExplorer.prototype.getApiKey = function () {
-  'use strict';
-
-  var apiExplorer = this,
-      $apiKeyInput = $('#apiKey'),
-      apiKey;
-
-  if ($apiKeyInput.val() !== '') {
-    apiKey = $apiKeyInput.val();
-  } else {
-    apiKey = apiExplorer.defaultApiKey;
-  }
-
-  return apiKey;
-};
-
 ApiExplorer.prototype.getData = function (URL, callback) {
   'use strict';
 
@@ -54,6 +38,22 @@ ApiExplorer.prototype.getData = function (URL, callback) {
   });
 
   return dataResponse;
+};
+
+ApiExplorer.prototype.getApiKey = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      $apiKeyInput = $('#apiKey'),
+      apiKey;
+
+  if ($apiKeyInput.val() !== '') {
+    apiKey = $apiKeyInput.val();
+  } else {
+    apiKey = apiExplorer.defaultApiKey;
+  }
+
+  return apiKey;
 };
 
 ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
@@ -88,21 +88,7 @@ ApiExplorer.prototype.compileTemplate = function (data, template) {
   $(template.container).html(compiledTemplate);
 };
 
-ApiExplorer.prototype.linkIDs = function (inputText) {
-  'use strict';
-
-  var apiExplorer = this,
-      queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
-      replacePattern,
-      replacedText;
-
-  replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
-  replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
-
-  return replacedText;
-};
-
-ApiExplorer.prototype.submitQueryForm = function ($queryForm) {
+ApiExplorer.prototype.sendQuery = function ($queryForm) {
   'use strict';
 
   var apiExplorer = this,
@@ -122,24 +108,20 @@ ApiExplorer.prototype.submitQueryForm = function ($queryForm) {
   });
 };
 
-ApiExplorer.prototype.updateApiKey = function () {
+ApiExplorer.prototype.events = function () {
   'use strict';
 
-  var apiExplorer = this;
+  var apiExplorer = this,
+      $queryParametersForm = $('.queryParametersForm'),
+      $queryForm = $('.queryForm');
 
   $('#apiKey').on('change', function () {
-    $('.queryParametersForm').each(function () {
+    $queryParametersForm.each(function () {
       apiExplorer.updateForm($(this));
     });
   });
-};
 
-ApiExplorer.prototype.updateQueryForm = function () {
-  'use strict';
-
-  var apiExplorer = this;
-
-  $('.queryParametersForm').each(function () {
+  $queryParametersForm.each(function () {
     var $this = $(this);
 
     apiExplorer.updateForm($this);
@@ -147,21 +129,39 @@ ApiExplorer.prototype.updateQueryForm = function () {
     $this.find('.queryParameter').on('change', function () {
       apiExplorer.updateForm($this);
     });
+
+    $this.find('.annotation-checkbox').on('change', function () {
+      apiExplorer.toggleAnnotations($this);
+    });
   });
-};
 
-ApiExplorer.prototype.getResponse = function () {
-  'use strict';
-
-  var apiExplorer = this;
-
-  $('.queryForm').each(function () {
+  $queryForm.each(function () {
     var $this = $(this);
 
     $this.on('submit', function (e) {
       e.preventDefault();
-      apiExplorer.submitQueryForm($this);
+      apiExplorer.sendQuery($this);
     });
+  });
+};
+
+ApiExplorer.prototype.toggleAnnotations = function ($queryParametersForm) {
+  'use strict';
+
+  var apiExplorer = this,
+      $annotationsInput = $queryParametersForm.find('input[name="annotations"]'),
+      $annotationCheckbox = $queryParametersForm.find('.annotation-checkbox'),
+      annotations = [];
+
+  $annotationCheckbox.each(function () {
+    var $this = $(this),
+        annotation = $this.attr('name');
+
+    if ($this.is(':checked')) {
+      annotations.push(annotation);
+    }
+
+    $annotationsInput.val(annotations.join(',')).trigger('change');
   });
 };
 
@@ -170,8 +170,8 @@ ApiExplorer.prototype.updateForm = function ($queryParametersForm) {
 
   var apiExplorer = this;
 
-  apiExplorer.getURLComponents($queryParametersForm);
-  $queryParametersForm.siblings('.queryForm').find('.queryURL').val(apiExplorer.getURLComponents($queryParametersForm));
+  apiExplorer.getQueryURLComponents($queryParametersForm);
+  $queryParametersForm.siblings('.queryForm').find('.queryURL').val(apiExplorer.getQueryURLComponents($queryParametersForm));
 };
 
 ApiExplorer.prototype.getQueryID = function ($queryParametersForm) {
@@ -189,8 +189,7 @@ ApiExplorer.prototype.getQueryID = function ($queryParametersForm) {
   return queryID;
 };
 
-
-ApiExplorer.prototype.getURLComponents = function ($queryParametersForm) {
+ApiExplorer.prototype.getQueryURLComponents = function ($queryParametersForm) {
   'use strict';
 
   var apiExplorer = this,
@@ -220,29 +219,6 @@ ApiExplorer.prototype.constructQueryURL = function (urlComponents) {
   return queryURL;
 };
 
-ApiExplorer.prototype.toggleAnnotations = function () {
-  'use strict';
-
-  var apiExplorer = this;
-
-  $('.queryParametersForm').each(function () {
-    var $this = $(this),
-        annotationsInput = $this.find('input[name="annotations"]'),
-        annotations = [];
-
-    $this.find('.annotation-checkbox').on('change', function () {
-      var annotation = $(this).attr('name');
-      if ($(this).is(':checked')) {
-        annotations.push(annotation);
-        annotationsInput.val(annotations.join(',')).trigger('change');
-      } else {
-        annotations.pop(annotation);
-        annotationsInput.val(annotations.join(',')).trigger('change');
-      }
-    });
-  });
-};
-
 ApiExplorer.prototype.getQueryParameters = function ($queryParametersForm) {
   'use strict';
 
@@ -259,34 +235,6 @@ ApiExplorer.prototype.getQueryParameters = function ($queryParametersForm) {
   });
 
   return parameters.join('&');
-};
-
-ApiExplorer.prototype.toggleQueryID = function ($queryParametersForm) {
-  'use strict';
-
-  var apiExplorer = this;
-
-  $queryParametersForm.find('input[name="id"]').on('change', function () {
-    if ($(this).val() === '') {
-      console.log('Default', $(this).val($(this).data('default')));
-    } else {
-      console.log('New value', $(this).val());
-    }
-  });
-};
-
-ApiExplorer.prototype.showContentJSON = function (contentID) {
-  'use strict';
-
-  var apiExplorer = this,
-      idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
-      $queryURLInput = $('#api-content').find('.queryURL'),
-      queryURL = $queryURLInput.val();
-
-  $('a[href="#api-content"]').trigger('click');
-  $('#api-content').find('input[name="id"]').val(contentID);
-  $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
-  $('#api-content').find('.queryForm').trigger('submit');
 };
 
 ApiExplorer.prototype.formatQueryParameters = function (str) {
@@ -338,10 +286,11 @@ ApiExplorer.prototype.init = function () {
       data = apiExplorer.mergeData(apiExplorer.endpointsURL, apiExplorer.endpointsParametersURL);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
-  apiExplorer.updateApiKey();
-  apiExplorer.toggleAnnotations();
-  apiExplorer.updateQueryForm();
-  apiExplorer.getResponse();
+  apiExplorer.events();
+
+  if (window.location.search) {
+    apiExplorer.prepopulateForm();
+  }
 
   // $(document).on('click', '.apiExplorerContentLink', function (e) {
   //   e.preventDefault();
@@ -349,8 +298,33 @@ ApiExplorer.prototype.init = function () {
 
   //   apiExplorer.showContentJSON(contentID);
   // });
-
-  if (window.location.search) {
-    apiExplorer.prepopulateForm();
-  }
 };
+
+
+// ApiExplorer.prototype.linkIDs = function (inputText) {
+//   'use strict';
+
+//   var apiExplorer = this,
+//       queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+//       replacePattern,
+//       replacedText;
+
+//   replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
+//   replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
+
+//   return replacedText;
+// };
+
+// ApiExplorer.prototype.showContentJSON = function (contentID) {
+//   'use strict';
+
+//   var apiExplorer = this,
+//       idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
+//       $queryURLInput = $('#api-content').find('.queryURL'),
+//       queryURL = $queryURLInput.val();
+
+//   $('a[href="#api-content"]').trigger('click');
+//   $('#api-content').find('input[name="id"]').val(contentID);
+//   $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
+//   $('#api-content').find('.queryForm').trigger('submit');
+// };
