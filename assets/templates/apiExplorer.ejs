@@ -8,7 +8,7 @@
   <div class="tabArea" id="api-<%= this[i].name %>">
     <h2><%= this[i].name %></h2>
     <h3><span class="upper">GET</span> <%= this[i].root_path %></h3>
-    <form class="queryParametersForm">
+    <form class="queryParametersForm" data-endpoint="<%= this[i].root_path %>">
       <table class="tbl mbm queryTable">
         <thead>
           <tr>
@@ -49,7 +49,7 @@
     </form>
     <h4>Request</h4>
     <form class="queryForm mbl">
-      <input class="queryURL" type="text" name="" value="<%= this[i].query_url %>">
+      <input class="queryURL" id="<%= this[i].name %>-queryURL" type="text" name="" value="<%= this[i].query_url %>">
       <button class="btn" type="submit">Go</button>
     </form>
     <h4>Response</h4>
