@@ -6,20 +6,20 @@ describe('ApiExplorer', function () {
       expect(apiExplorer).to.exist();
     });
 
-    it('should have endpointsURL property', function () {
-      expect(apiExplorer).to.have.property('endpointsURL');
+    it('should have endpointsUrl property', function () {
+      expect(apiExplorer).to.have.property('endpointsUrl');
     });
 
-    it('should have endpointsParametersURL property', function () {
-      expect(apiExplorer).to.have.property('endpointsParametersURL');
+    it('should have endpointsParametersUrl property', function () {
+      expect(apiExplorer).to.have.property('endpointsParametersUrl');
     });
 
     it('should have defaultApiKey property', function () {
       expect(apiExplorer).to.have.property('defaultApiKey');
     });
 
-    it('should have queryURL property', function () {
-      expect(apiExplorer).to.have.property('queryURL');
+    it('should have queryUrl property', function () {
+      expect(apiExplorer).to.have.property('queryUrl');
     });
 
     it('should have template property', function () {
@@ -30,10 +30,6 @@ describe('ApiExplorer', function () {
   describe('apiExplorer.getApiKey', function () {
     it('should be defined', function () {
       expect(apiExplorer.getApiKey).to.exist();
-    });
-
-    it('should return an api key', function () {
-      expect(apiExplorer.defaultApiKey).to.equal(apiExplorer.getApiKey());
     });
   });
 
@@ -62,43 +58,10 @@ describe('ApiExplorer', function () {
     });
 
     it('should merge parameters into the endpoints data', function () {
-      var originalDataURL = 'mocks/mergeDataOriginalMock.json',
-          newDataURL = 'mocks/mergeDataNewMock.json',
-          dataResponse = apiExplorer.mergeData(originalDataURL, newDataURL),
-          updatedData = [{
-          "name": "content",
-          "parameters": [{
-            "name": "foo",
-            "value": "bar"
-          },
-          {
-            "name": "bar",
-            "value": "foo"
-          }],
-          "query_url": "//atlas.metabroadcast.comundefinedfoo=undefined&bar=undefined&key=c1e92985ec124202b7f07140bcde6e3f"
-        }, {
-          "name": "schedules",
-          "parameters": [{
-            "name": "foo",
-            "value": "bar"
-          },
-          {
-            "name": "bar",
-            "value": "foo"
-          }],
-          "query_url": "//atlas.metabroadcast.comundefinedfoo=undefined&bar=undefined&key=c1e92985ec124202b7f07140bcde6e3f"
-        }, {
-          "name": "topics",
-          "parameters": [{
-            "name": "foo",
-            "value": "bar"
-          },
-          {
-            "name": "bar",
-            "value": "foo"
-          }],
-          "query_url": "//atlas.metabroadcast.comundefinedfoo=undefined&bar=undefined&key=c1e92985ec124202b7f07140bcde6e3f"
-        }];
+      var originalDataUrl = 'mocks/mergeDataOriginalMock.json',
+          newDataUrl = 'mocks/mergeDataNewMock.json',
+          dataResponse = apiExplorer.mergeData(originalDataUrl, newDataUrl),
+          updatedData = [{"name":"content","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]},{"name":"schedules","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]},{"name":"topics","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]}];
 
       expect(JSON.stringify(dataResponse)).to.equal(JSON.stringify(updatedData));
     });
@@ -110,63 +73,25 @@ describe('ApiExplorer', function () {
     });
   });
 
-  describe('apiExplorer.linkIDs', function () {
-    var linkIDsResult = apiExplorer.linkIDs('"id": "abcd"');
+  describe('apiExplorer.linkIds', function () {
+    var linkIdsResult = apiExplorer.linkIds('"id": "abcd"');
 
     it('should be defined', function () {
-      expect(apiExplorer.linkIDs).to.exist();
+      expect(apiExplorer.linkIds).to.exist();
     });
 
     it('should return a string', function () {
-      expect(linkIDsResult).to.be.a('string');
+      expect(linkIdsResult).to.be.a('string');
     });
 
     it('should return a linked string', function () {
-      expect(linkIDsResult).to.equal('"id": "<a class="apiExplorerContentLink" href="#" data-id="abcd">abcd</a>"');
+      expect(linkIdsResult).to.equal('"id": "<a class="apiExplorerContentLink" href="#" data-id="abcd">abcd</a>"');
     });
   });
 
-  describe('apiExplorer.submitQueryForm', function () {
+  describe('apiExplorer.sendQuery', function () {
     it('should be defined', function () {
-      expect(apiExplorer.submitQueryForm).to.exist();
-    });
-  });
-
-  describe('apiExplorer.buildQueryURL', function () {
-    it('should be defined', function () {
-      expect(apiExplorer.buildQueryURL).to.exist();
-    });
-  });
-
-  describe('apiExplorer.replaceParameter', function () {
-    it('should be defined', function () {
-      expect(apiExplorer.replaceParameter).to.exist();
-    });
-
-    it('should replace the value of given URL parameter if follows "?"', function () {
-      var url = 'http://example.com?foo=bar&bar=foo',
-          newUrl = 'http://example.com?foo=foobar&bar=foo';
-
-      expect(apiExplorer.replaceParameter(url, 'foo', 'foobar')).to.equal(newUrl);
-    });
-
-    it('should replace the value of given URL parameter if follows "&"', function () {
-      var url = 'http://example.com?foo=bar&bar=foo',
-          newUrl = 'http://example.com?foo=bar&bar=foobar';
-
-      expect(apiExplorer.replaceParameter(url, 'bar', 'foobar')).to.equal(newUrl);
-    });
-  });
-
-  describe('apiExplorer.updateApiKey', function () {
-    it('should be defined', function () {
-      expect(apiExplorer.updateApiKey).to.exist();
-    });
-  });
-
-  describe('apiExplorer.updateParameters', function () {
-    it('should be defined', function () {
-      expect(apiExplorer.updateParameters).to.exist();
+      expect(apiExplorer.sendQuery).to.exist();
     });
   });
 
