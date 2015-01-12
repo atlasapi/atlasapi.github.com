@@ -208,10 +208,21 @@ ApiExplorer.prototype.updateQueryForm = function () {
   $('.queryParametersForm').each(function () {
     var $this = $(this);
 
-    apiExplorer.getURLComponents($this);
+    apiExplorer.updateForm($this);
 
-    $this.siblings('.queryForm').find('.queryURL').val(apiExplorer.getURLComponents($this));
+    $this.find('.queryParameter').on('change', function () {
+      apiExplorer.updateForm($this);
+    });
   });
+};
+
+ApiExplorer.prototype.updateForm = function ($queryParametersForm) {
+  'use strict';
+
+  var apiExplorer = this;
+
+  apiExplorer.getURLComponents($queryParametersForm);
+  $queryParametersForm.siblings('.queryForm').find('.queryURL').val(apiExplorer.getURLComponents($queryParametersForm));
 };
 
 ApiExplorer.prototype.getQueryID = function ($queryParametersForm) {
