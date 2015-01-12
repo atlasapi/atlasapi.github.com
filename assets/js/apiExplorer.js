@@ -189,6 +189,7 @@ ApiExplorer.prototype.getQueryID = function ($queryParametersForm) {
   return queryID;
 };
 
+
 ApiExplorer.prototype.getURLComponents = function ($queryParametersForm) {
   'use strict';
 
@@ -288,12 +289,22 @@ ApiExplorer.prototype.showContentJSON = function (contentID) {
   $('#api-content').find('.queryForm').trigger('submit');
 };
 
+ApiExplorer.prototype.formatQueryParameters = function (str) {
+  'use strict';
+
+  var apiExplorer = this;
+
+  return (str || document.location.search).replace(/(^\?)/,'').split('&').map(function (n) {
+    return n = n.split("="),this[n[0]] = n[1],this;
+  }.bind({}))[0];
+};
+
 ApiExplorer.prototype.prepopulateForm = function () {
   'use strict';
 
   var apiExplorer = this,
       queryString = location.search.substring(1),
-      parameters = apiExplorer.getQueryParameters(queryString);
+      parameters = apiExplorer.formatQueryParameters(queryString);
 
   if (parameters.endpoint) {
     window.location.hash = 'apiExplorer';
@@ -339,7 +350,7 @@ ApiExplorer.prototype.init = function () {
   //   apiExplorer.showContentJSON(contentID);
   // });
 
-  // if (window.location.search) {
-  //   apiExplorer.prepopulateForm();
-  // }
+  if (window.location.search) {
+    apiExplorer.prepopulateForm();
+  }
 };
