@@ -1,17 +1,17 @@
 var ApiExplorer = function () {
   'use strict';
 
-  this.endpointsURL = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
-  this.endpointsParametersURL = 'assets/data/parameters.json';
+  this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
+  this.endpointsParametersUrl = 'assets/data/parameters.json';
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
-  this.queryURL = '//atlas.metabroadcast.com';
+  this.queryUrl = '//atlas.metabroadcast.com';
   this.template = {
     path: 'assets/templates/apiExplorer.ejs',
     container: '#apiExplorerTabSections'
   };
 };
 
-ApiExplorer.prototype.getData = function (URL, callback) {
+ApiExplorer.prototype.getData = function (url, callback) {
   'use strict';
 
   var apiExplorer = this,
@@ -23,7 +23,7 @@ ApiExplorer.prototype.getData = function (URL, callback) {
   }
 
   $.ajax({
-    url: URL,
+    url: url,
     dataType: 'json',
     async: async,
     success: function (data) {
@@ -56,12 +56,12 @@ ApiExplorer.prototype.getApiKey = function () {
   return apiKey;
 };
 
-ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
+ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl) {
   'use strict';
 
   var apiExplorer = this,
-      endpoints = apiExplorer.getData(originalDataURL).endpoints,
-      parameters = apiExplorer.getData(newDataURL).endpoints;
+      endpoints = apiExplorer.getData(originalDataUrl).endpoints,
+      parameters = apiExplorer.getData(newDataUrl).endpoints;
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -92,15 +92,15 @@ ApiExplorer.prototype.sendQuery = function ($queryForm) {
   'use strict';
 
   var apiExplorer = this,
-      queryURL = $queryForm.find('.queryURL').val(),
+      queryUrl = $queryForm.find('.queryUrl').val(),
       $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
 
   $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
 
-  apiExplorer.getData(queryURL, function (response) {
+  apiExplorer.getData(queryUrl, function (response) {
     var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
 
-    response = apiExplorer.linkIDs(JSON.stringify(response, undefined, 2));
+    response = apiExplorer.linkIds(JSON.stringify(response, undefined, 2));
     $jsonOutput.html(response);
     $jsonOutput.each(function(i, block) {
       hljs.highlightBlock(block);
@@ -146,9 +146,9 @@ ApiExplorer.prototype.events = function () {
 
   $(document).on('click', '.apiExplorerContentLink', function (e) {
     e.preventDefault();
-    var contentID = $(this).data('id');
+    var contentId = $(this).data('id');
 
-    apiExplorer.showContentJSON(contentID);
+    apiExplorer.showContentJSON(contentId);
   });
 };
 
@@ -177,53 +177,53 @@ ApiExplorer.prototype.updateForm = function ($queryParametersForm) {
 
   var apiExplorer = this;
 
-  apiExplorer.getQueryURLComponents($queryParametersForm);
-  $queryParametersForm.siblings('.queryForm').find('.queryURL').val(apiExplorer.getQueryURLComponents($queryParametersForm));
+  apiExplorer.getQueryUrlComponents($queryParametersForm);
+  $queryParametersForm.siblings('.queryForm').find('.queryUrl').val(apiExplorer.getQueryUrlComponents($queryParametersForm));
 };
 
-ApiExplorer.prototype.getQueryID = function ($queryParametersForm) {
+ApiExplorer.prototype.getQueryId = function ($queryParametersForm) {
   'use strict';
 
   var $idInput = $queryParametersForm.find('input[name="id"]'),
-      queryID;
+      queryId;
 
   if ($idInput.val() !== '') {
-    queryID = $idInput.val() + '.json?';
+    queryId = $idInput.val() + '.json?';
   } else {
-    queryID = $idInput.data('default') + '.json?';
+    queryId = $idInput.data('default') + '.json?';
   }
 
-  return queryID;
+  return queryId;
 };
 
-ApiExplorer.prototype.getQueryURLComponents = function ($queryParametersForm) {
+ApiExplorer.prototype.getQueryUrlComponents = function ($queryParametersForm) {
   'use strict';
 
   var apiExplorer = this,
       urlComponents = {};
 
   urlComponents.endpoint = $queryParametersForm.data('endpoint') + '/';
-  urlComponents.id = apiExplorer.getQueryID($queryParametersForm);
+  urlComponents.id = apiExplorer.getQueryId($queryParametersForm);
   urlComponents.parameters = apiExplorer.getQueryParameters($queryParametersForm);
   urlComponents.apiKey = apiExplorer.getApiKey();
 
-  return apiExplorer.constructQueryURL(urlComponents);
+  return apiExplorer.constructQueryUrl(urlComponents);
 };
 
-ApiExplorer.prototype.constructQueryURL = function (urlComponents) {
+ApiExplorer.prototype.constructQueryUrl = function (urlComponents) {
   'use strict';
 
   var apiExplorer = this,
-      queryURL = apiExplorer.queryURL;
+      queryUrl = apiExplorer.queryUrl;
 
-  queryURL += urlComponents.endpoint;
-  queryURL += urlComponents.id;
+  queryUrl += urlComponents.endpoint;
+  queryUrl += urlComponents.id;
   if (urlComponents.parameters) {
-    queryURL += urlComponents.parameters + '&';
+    queryUrl += urlComponents.parameters + '&';
   }
-  queryURL += 'key=' + urlComponents.apiKey;
+  queryUrl += 'key=' + urlComponents.apiKey;
 
-  return queryURL;
+  return queryUrl;
 };
 
 ApiExplorer.prototype.getQueryParameters = function ($queryParametersForm) {
@@ -286,25 +286,25 @@ ApiExplorer.prototype.prepopulateForm = function () {
   }
 };
 
-ApiExplorer.prototype.showContentJSON = function (contentID) {
+ApiExplorer.prototype.showContentJSON = function (contentId) {
   'use strict';
 
   var apiExplorer = this,
       idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
-      $queryURLInput = $('#api-content').find('.queryURL'),
-      queryURL = $queryURLInput.val();
+      $queryUrlInput = $('#api-content').find('.queryUrl'),
+      queryUrl = $queryUrlInput.val();
 
   $('a[href="#api-content"]').trigger('click');
-  $('#api-content').find('input[name="id"]').val(contentID);
-  $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
+  $('#api-content').find('input[name="id"]').val(contentId);
+  $queryUrlInput.val(queryUrl.replace(idPattern, contentId + '.json?'));
   $('#api-content').find('.queryForm').trigger('submit');
 };
 
-ApiExplorer.prototype.linkIDs = function (inputText) {
+ApiExplorer.prototype.linkIds = function (inputText) {
   'use strict';
 
   var apiExplorer = this,
-      queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+      queryUrl = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
       replacePattern,
       replacedText;
 
@@ -318,7 +318,7 @@ ApiExplorer.prototype.init = function () {
   'use strict';
 
   var apiExplorer = this,
-      data = apiExplorer.mergeData(apiExplorer.endpointsURL, apiExplorer.endpointsParametersURL);
+      data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.events();
