@@ -335,10 +335,10 @@ ApiExplorer.prototype.init = function () {
     apiExplorer.prepopulateForm();
   }
 
-  apiExplorer.scheduleId();
+  apiExplorer.scheduleId(data);
 };
 
-ApiExplorer.prototype.scheduleId = function () {
+ApiExplorer.prototype.scheduleId = function (data) {
   'use strict';
 
   var apiExplorer = this;
@@ -348,4 +348,33 @@ ApiExplorer.prototype.scheduleId = function () {
       $('#schedules-id-input').val($(this).val()).trigger('change');
     }
   });
+
+  $('.channel-picker-platforms').on('change', function () {
+    var platformId = $(this).val(),
+        regions = [];
+
+    $('.channel-picker-regions').empty();
+
+    for (var i = 0, ii = data.length; i < ii; i++) {
+      if (data[i].channel_groups) {
+        for (var j = 0, jj = data[i].channel_groups.length; j < jj; j++) {
+          if (data[i].channel_groups[j].id === platformId) {
+            regions = data[i].channel_groups[j].regions;
+            apiExplorer.populateRegions(regions);
+          }
+        }
+      }
+    }
+  });
+};
+
+ApiExplorer.prototype.populateRegions = function (regions) {
+  'use strict';
+
+  var apiExplorer = this,
+      $regionsMenu = $('.channel-picker-regions');
+
+  for (var i = 0, ii = regions.length; i < ii; i++) {
+    $regionsMenu.append('<option value="' + regions[i].id + '">' + regions[i].id + ' (' + regions[i].title + ')' + '</option>');
+  }
 };

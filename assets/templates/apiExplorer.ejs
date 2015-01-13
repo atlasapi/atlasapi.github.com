@@ -62,18 +62,18 @@
                         cbcS (BBC Radio 2)
                       </label>
                     </div>
-                    <div class="channel-picker-platform">
+                    <div>
                       <label for="channel-picker-platforms">platform: </label>
-                      <select name="channel-picker-platforms">
+                      <select name="channel-picker-platforms" class="channel-picker-platforms">
                         <option value="">select platform</option>
                         <% for (var l = 0, ll = this[i].channel_groups.length; l < ll; l++) { %>
                         <option value="<%= this[i].channel_groups[l].id %>"><%= this[i].channel_groups[l].id %> (<%= this[i].channel_groups[l].title %>)</option>
                         <% } %>
                       </select>
                     </div>
-                    <div class="channel-picker-regions">
+                    <div>
                       <label for="channel-picker-regions">regions: </label>
-                      <select name="channel-picker-regions">
+                      <select name="channel-picker-regions" class="channel-picker-regions">
                         <option value="">select region</option>
                       </select>
                     </div>
