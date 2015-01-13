@@ -278,7 +278,7 @@ ApiExplorer.prototype.showContentJSON = function (contentId) {
   $('#api-content').find('.queryForm').trigger('submit');
 };
 
-ApiExplorer.prototype.events = function () {
+ApiExplorer.prototype.events = function (data) {
   'use strict';
 
   var apiExplorer = this,
@@ -320,6 +320,17 @@ ApiExplorer.prototype.events = function () {
 
     apiExplorer.showContentJSON(contentId);
   });
+
+  $('.channel-picker-toggle').on('click', function (e) {
+    e.preventDefault();
+    apiExplorer.toggleChannelPicker(data);
+  });
+
+  $(document).on('change', '.channel-picker-radio', function () {
+    if ($(this).is(':checked')) {
+      $('#schedules-id-input').val($(this).val()).trigger('change');
+    }
+  });
 };
 
 ApiExplorer.prototype.init = function () {
@@ -329,67 +340,109 @@ ApiExplorer.prototype.init = function () {
       data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl, apiExplorer.channelGroupsUrl);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
-  apiExplorer.events();
+  apiExplorer.events(data);
 
   if (window.location.search) {
     apiExplorer.prepopulateForm();
   }
-
-  apiExplorer.scheduleId(data);
-  $('.toggle-picker').on('click', function (e) {
-    e.preventDefault();
-    var target = $(this).attr('href');
-    $(target).slideToggle();
-  });
-  $(document).on('change', '.channel-picker-regions', function () {
-    $('.channels-by-region').empty();
-    $('.channels-by-region').append('Ya');
-  });
 };
 
-ApiExplorer.prototype.scheduleId = function (data) {
-  'use strict';
-
-  var apiExplorer = this;
-
-  $('.channel-picker-radio').on('change', function () {
-    if ($(this).is(':checked')) {
-      $('#schedules-id-input').val($(this).val()).trigger('change');
-    }
-  });
-
-  $('.channel-picker-platforms').on('change', function () {
-    var platformId = $(this).val(),
-        regions = [];
-
-    $('.channel-picker-regions').empty();
-
-    for (var i = 0, ii = data.length; i < ii; i++) {
-      if (data[i].channel_groups) {
-        for (var j = 0, jj = data[i].channel_groups.length; j < jj; j++) {
-          if (data[i].channel_groups[j].id === platformId) {
-            if (data[i].channel_groups[j].regions) {
-              regions = data[i].channel_groups[j].regions;
-              apiExplorer.populateRegions(regions);
-            }
-          }
-        }
-      }
-    }
-  });
-};
-
-ApiExplorer.prototype.populateRegions = function (regions) {
+ApiExplorer.prototype.toggleChannelPicker = function (data) {
   'use strict';
 
   var apiExplorer = this,
-      $regionsMenu = $('.channel-picker-regions');
+      compiledTemplate,
+      channelGroups;
 
-  for (var i = 0, ii = regions.length; i < ii; i++) {
-    $regionsMenu.append('<option value="' + regions[i].id + '">' + regions[i].id + ' (' + regions[i].title + ')' + '</option>');
+  for (var i = 0, ii = data.length; i < ii; i++) {
+    if (data[i].channel_groups) {
+      channelGroups = data[i].channel_groups;
+    }
   }
 
-  $regionsMenu.on('change', function () {
+  compiledTemplate = new EJS({
+    url: 'assets/templates/channelPicker.ejs'
+  }).render();
 
+  if ($('.channel-picker-row').length) {
+    $('.channel-picker-row').remove();
+  } else {
+    $('#schedules-id-row').after(compiledTemplate);
+  }
+
+  apiExplorer.buildPlatformTemplate(channelGroups);
+};
+
+ApiExplorer.prototype.buildPlatformTemplate = function (data) {
+  'use strict';
+
+  var apiExplorer = this,
+      compiledTemplate,
+      regions;
+
+  compiledTemplate = new EJS({
+    url: 'assets/templates/platformPicker.ejs'
+  }).render(data);
+
+  $('.platform-picker').html(compiledTemplate);
+
+  $('.channel-picker-platforms').on('change', function () {
+    var platformId = $(this).val();
+
+    for (var i = 0, ii = data.length; i < ii; i++) {
+      if (data[i].id === platformId) {
+        regions = data[i].regions;
+      }
+    }
+
+    apiExplorer.buildRegionsTemplate(regions);
   });
+};
+
+ApiExplorer.prototype.buildRegionsTemplate = function (data) {
+  'use strict';
+
+  var apiExplorer = this,
+      compiledTemplate,
+      regionId;
+
+  compiledTemplate = new EJS({
+    url: 'assets/templates/regionsPicker.ejs'
+  }).render(data);
+
+  $('.region-picker').html(compiledTemplate);
+
+  $('.channel-picker-regions').on('change', function () {
+    regionId = $(this).val();
+
+    apiExplorer.getRegionChannels(regionId);
+  });
+};
+
+ApiExplorer.prototype.getRegionChannels = function (regionId) {
+  'use strict';
+
+  var apiExplorer = this,
+      channelsEndpoint = '//users-atlas.metabroadcast.com/3.0/channel_groups/',
+      channelsAnnotations = '?annotations=channels',
+      channelsUrl,
+      channels;
+
+  channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations;
+  channels = apiExplorer.getData(channelsUrl).channel_groups[0].channels;
+
+  apiExplorer.buildChannelsTemplate(channels);
+};
+
+ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
+  'use strict';
+
+  var apiExplorer = this,
+      compiledTemplate;
+
+  compiledTemplate = new EJS({
+    url: 'assets/templates/channels.ejs'
+  }).render(channels);
+
+  $('.channels-container').html(compiledTemplate);
 };

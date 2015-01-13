@@ -1,0 +1,7 @@
+<label for="channel-picker-platforms">platform: </label>
+<select name="channel-picker-platforms" class="channel-picker-platforms">
+  <option value="">select platform</option>
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+    <option value="<%= this[i].id %>"><%= this[i].id %> (<%= this[i].title %>)</option>
+  <% } %>
+</select>
