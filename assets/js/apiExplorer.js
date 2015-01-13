@@ -445,13 +445,36 @@ ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
   'use strict';
 
   var apiExplorer = this,
-      compiledTemplate;
+      compiledTemplate,
+      regexPattern = new RegExp('[^/]+$');
 
-  console.log(channels);
+  for (var i = 0, ii = channels.length; i < ii; i++) {
+    var aliases = channels[i].channel.aliases;
+
+    channels[i].deer_id = apiExplorer.convertIdToDeer(aliases);
+  }
 
   compiledTemplate = new EJS({
     url: 'assets/templates/channels.ejs'
   }).render(channels);
 
   $('.channels-container').html(compiledTemplate);
+};
+
+ApiExplorer.prototype.convertIdToDeer = function (aliases) {
+  'use strict';
+
+  var apiExplorer = this,
+      deerIdPattern = new RegExp('[^/]+$'),
+      deerId;
+
+  for (var i = 0, ii = aliases.length; i < ii; i++) {
+    if (aliases[i].search('http://atlas.metabroadcast.com/4.0/channels/') !== -1) {
+      deerId = aliases[i].match(deerIdPattern);
+    }
+  }
+
+  console.log(deerId[0]);
+
+  return deerId[0];
 };
