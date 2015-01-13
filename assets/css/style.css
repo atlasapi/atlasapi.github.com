@@ -1832,6 +1832,7 @@ input.queryUrl {
     margin: 0 2% 0 0;
 }
 
+.channel-picker-toggle,
 .toggle-picker {
     display: block;
 }
