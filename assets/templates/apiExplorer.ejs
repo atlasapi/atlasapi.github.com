@@ -23,9 +23,44 @@
             <tr>
               <td class="first"><%= this[i].parameters[j].name %></td>
               <td class="second">
-                <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
-                <% if (this[i].parameters[j].name === 'id') { %>
+                <input class="queryParameter" id="<%= this[i].name %>-id-input" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
+                <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
                   <button class="channel-picker-button">Channel picker</button>
+                  <div id="channel-picker">
+                    <h3>choose from popular channels</h3>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbh">
+                      cbbh (BBC One)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbG">
+                      cbbG (BBC Two)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbP">
+                      cbbP (BBC Three)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbQ">
+                      cbbQ (BBC Four)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbV">
+                      cbbV (BBC HD)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbW">
+                      cbbW (CBBC)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbcQ">
+                      cbcQ (BBC Radio 1)
+                    </label>
+                    <label>
+                      <input class="channel-picker-radio" type="radio" name="channel-id" value="cbcS">
+                      cbcS (BBC Radio 2)
+                    </label>
+                  </div>
                 <% } %>
               </td>
               <td class="third"><%= this[i].parameters[j].type %></td>

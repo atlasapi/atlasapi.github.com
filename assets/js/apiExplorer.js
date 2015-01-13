@@ -328,4 +328,20 @@ ApiExplorer.prototype.init = function () {
   if (window.location.search) {
     apiExplorer.prepopulateForm();
   }
+
+  apiExplorer.scheduleId();
+};
+
+ApiExplorer.prototype.scheduleId = function () {
+  'use strict';
+
+  var apiExplorer = this;
+
+  $('.channel-picker-radio').each(function () {
+    $(this).on('change', function () {
+      if ($(this).is(':checked')) {
+        $('#schedules-id-input').val($(this).val()).trigger('change');
+      }
+    });
+  });
 };
