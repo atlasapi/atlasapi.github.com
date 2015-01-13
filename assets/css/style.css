@@ -1836,6 +1836,24 @@ input.queryUrl {
     display: block;
 }
 
+.pickers {
+    float: left;
+    width: 23%;
+    margin: 0 1%;
+}
+
+.channels-container {
+    float: left;
+    width: 23%;
+    margin: 0 1%;
+}
+
+.channels-by-region {
+    float: left;
+    width: 23%;
+    margin: 0 1%;
+}
+
 /* NowNextLater widget */
 /* Panel styles */
 .widget-panel {

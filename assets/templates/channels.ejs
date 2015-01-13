@@ -1,0 +1,3 @@
+<% for (var i = 0, ii = this.length; i < ii; i++) { %>
+    <label><input class="channel-picker-radio" type="radio" name="channel-id" value="<%= this[i].channel.id %>"> <%= this[i].channel.id %> (<%= this[i].channel.title %>)</label>
+<% } %>

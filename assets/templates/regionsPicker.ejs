@@ -1,0 +1,7 @@
+<label for="channel-picker-regions">regions: </label>
+<select name="channel-picker-regions" class="channel-picker-regions">
+  <option value="">select region</option>
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+    <option value="<%= this[i].id %>"><%= this[i].id %> (<%= this[i].title %>)</option>
+  <% } %>
+</select>

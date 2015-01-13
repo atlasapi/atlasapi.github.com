@@ -20,12 +20,12 @@
         </thead>
         <tbody>
           <% for (var j = 0, jj = this[i].parameters.length; j < jj; j++) { %>
-            <tr>
+            <tr id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
               <td class="first"><%= this[i].parameters[j].name %></td>
               <td class="second">
                 <input class="queryParameter" id="<%= this[i].name %>-id-input" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
                 <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
-                  <a class="toggle-picker" href="#<%= this[i].name %>-channel-picker">channel picker</a>
+                  <a class="channel-picker-toggle" href="#<%= this[i].name %>-channel-picker">channel picker</a>
                 <% } %>
                 <% if (this[i].parameters[j].name === 'annotations') { %>
                   <a class="toggle-picker" href="#<%= this[i].name %>-annotations-picker">annotations picker</a>
@@ -34,65 +34,6 @@
               <td class="third"><%= this[i].parameters[j].type %></td>
               <td class="fourth"><%= this[i].parameters[j].description %></td>
             </tr>
-            <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
-              <tr class="hide" id="<%= this[i].name %>-channel-picker">
-                <td colspan="4" class="channel-picker-row">
-                    <div class="clearfix">
-                      <div class="popular-channels">
-                        <div class="clearfix"><label>popular channels</label></div>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbh">
-                          cbbh (BBC One)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbG">
-                          cbbG (BBC Two)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbP">
-                          cbbP (BBC Three)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbQ">
-                          cbbQ (BBC Four)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbV">
-                          cbbV (BBC HD)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbW">
-                          cbbW (CBBC)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbcQ">
-                          cbcQ (BBC Radio 1)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbcS">
-                          cbcS (BBC Radio 2)
-                        </label>
-                      </div>
-                      <div>
-                        <label for="channel-picker-platforms">platform: </label>
-                        <select name="channel-picker-platforms" class="channel-picker-platforms">
-                          <option value="">select platform</option>
-                          <% for (var l = 0, ll = this[i].channel_groups.length; l < ll; l++) { %>
-                          <option value="<%= this[i].channel_groups[l].id %>"><%= this[i].channel_groups[l].id %> (<%= this[i].channel_groups[l].title %>)</option>
-                          <% } %>
-                        </select>
-                      </div>
-                      <div>
-                        <label for="channel-picker-regions">regions: </label>
-                        <select name="channel-picker-regions" class="channel-picker-regions">
-                          <option value="">select region</option>
-                        </select>
-                      </div>
-                      <div class="channels-by-region"></div>
-                    </div>
-                </td>
-              </tr>
-            <% } %>
             <% if (this[i].parameters[j].name === 'annotations') { %>
               <tr class="hide" id="<%= this[i].name %>-annotations-picker">
                 <td colspan="4" class="annotations-row">
