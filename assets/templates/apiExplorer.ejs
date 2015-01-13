@@ -37,48 +37,25 @@
             <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
               <tr class="hide" id="<%= this[i].name %>-channel-picker">
                 <td colspan="4" class="channel-picker-row">
-                    <div class="clearfix">
-                      <div class="popular-channels">
-                        <div class="clearfix"><label>popular channels</label></div>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbh">
-                          cbbh (BBC One)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbG">
-                          cbbG (BBC Two)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbP">
-                          cbbP (BBC Three)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbQ">
-                          cbbQ (BBC Four)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbV">
-                          cbbV (BBC HD)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbbW">
-                          cbbW (CBBC)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbcQ">
-                          cbcQ (BBC Radio 1)
-                        </label>
-                        <label>
-                          <input class="channel-picker-radio" type="radio" name="channel-id" value="cbcS">
-                          cbcS (BBC Radio 2)
-                        </label>
-                      </div>
+                  <div class="clearfix">
+                    <div class="popular-channels">
+                      <div class="clearfix"><label>popular channels</label></div>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbbh"> cbbh (BBC One)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbbG"> cbbG (BBC Two)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbbP"> cbbP (BBC Three)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbbQ"> cbbQ (BBC Four)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbbV"> cbbV (BBC HD)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbbW"> cbbW (CBBC)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbcQ"> cbcQ (BBC Radio 1)</label>
+                      <label><input class="channel-picker-radio" type="radio" name="channel-id" value="cbcS"> cbcS (BBC Radio 2)</label>
+                    </div>
+                    <div class="pickers">
                       <div>
                         <label for="channel-picker-platforms">platform: </label>
                         <select name="channel-picker-platforms" class="channel-picker-platforms">
                           <option value="">select platform</option>
                           <% for (var l = 0, ll = this[i].channel_groups.length; l < ll; l++) { %>
-                          <option value="<%= this[i].channel_groups[l].id %>"><%= this[i].channel_groups[l].id %> (<%= this[i].channel_groups[l].title %>)</option>
+                            <option value="<%= this[i].channel_groups[l].id %>"><%= this[i].channel_groups[l].id %> (<%= this[i].channel_groups[l].title %>)</option>
                           <% } %>
                         </select>
                       </div>
@@ -88,8 +65,9 @@
                           <option value="">select region</option>
                         </select>
                       </div>
-                      <div class="channels-by-region"></div>
                     </div>
+                    <div class="channels-by-region"></div>
+                  </div>
                 </td>
               </tr>
             <% } %>

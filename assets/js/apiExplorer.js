@@ -341,6 +341,10 @@ ApiExplorer.prototype.init = function () {
     var target = $(this).attr('href');
     $(target).slideToggle();
   });
+  $(document).on('change', '.channel-picker-regions', function () {
+    $('.channels-by-region').empty();
+    $('.channels-by-region').append('Ya');
+  });
 };
 
 ApiExplorer.prototype.scheduleId = function (data) {
