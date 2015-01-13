@@ -336,6 +336,11 @@ ApiExplorer.prototype.init = function () {
   }
 
   apiExplorer.scheduleId(data);
+  $('.toggle-picker').on('click', function (e) {
+    e.preventDefault();
+    var target = $(this).attr('href');
+    $(target).slideToggle();
+  });
 };
 
 ApiExplorer.prototype.scheduleId = function (data) {
@@ -359,8 +364,10 @@ ApiExplorer.prototype.scheduleId = function (data) {
       if (data[i].channel_groups) {
         for (var j = 0, jj = data[i].channel_groups.length; j < jj; j++) {
           if (data[i].channel_groups[j].id === platformId) {
-            regions = data[i].channel_groups[j].regions;
-            apiExplorer.populateRegions(regions);
+            if (data[i].channel_groups[j].regions) {
+              regions = data[i].channel_groups[j].regions;
+              apiExplorer.populateRegions(regions);
+            }
           }
         }
       }
@@ -377,4 +384,8 @@ ApiExplorer.prototype.populateRegions = function (regions) {
   for (var i = 0, ii = regions.length; i < ii; i++) {
     $regionsMenu.append('<option value="' + regions[i].id + '">' + regions[i].id + ' (' + regions[i].title + ')' + '</option>');
   }
+
+  $regionsMenu.on('change', function () {
+
+  });
 };

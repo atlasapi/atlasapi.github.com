@@ -1815,6 +1815,27 @@ input.queryUrl {
     line-height: 1;
 }
 
+.channel-picker-row label {
+    width: auto;
+    float: none;
+}
+
+.popular-channels {
+    float: left;
+    width: 48%;
+    margin: 0 1%;
+}
+
+.popular-channels label {
+    float: left;
+    width: 48%;
+    margin: 0 2% 0 0;
+}
+
+.toggle-picker {
+    display: block;
+}
+
 /* NowNextLater widget */
 /* Panel styles */
 .widget-panel {
