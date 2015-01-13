@@ -1,33 +1,18 @@
 var ApiExplorer = function () {
   'use strict';
 
-  this.endpointsURL = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
-  this.endpointsParametersURL = 'assets/data/parameters.json';
+  this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
+  this.endpointsParametersUrl = 'assets/data/parameters.json';
+  this.channelGroupsUrl = '//atlas.metabroadcast.com/3.0/channel_groups.json?offset=0&type=platform&apiKey=c1e92985ec124202b7f07140bcde6e3f';
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
-  this.queryURL = '//atlas.metabroadcast.com';
+  this.queryUrl = '//atlas.metabroadcast.com';
   this.template = {
     path: 'assets/templates/apiExplorer.ejs',
     container: '#apiExplorerTabSections'
   };
 };
 
-ApiExplorer.prototype.getApiKey = function () {
-  'use strict';
-
-  var apiExplorer = this,
-      $apiKeyInput = $('#apiKey'),
-      apiKey = apiExplorer.defaultApiKey;
-
-  if ($apiKeyInput.length) {
-    if ($apiKeyInput.val() !== '') {
-      apiKey = $apiKeyInput.val();
-    }
-  }
-
-  return apiKey;
-};
-
-ApiExplorer.prototype.getData = function (URL, callback) {
+ApiExplorer.prototype.getData = function (url, callback) {
   'use strict';
 
   var apiExplorer = this,
@@ -39,7 +24,7 @@ ApiExplorer.prototype.getData = function (URL, callback) {
   }
 
   $.ajax({
-    url: URL,
+    url: url,
     dataType: 'json',
     async: async,
     success: function (data) {
@@ -56,12 +41,29 @@ ApiExplorer.prototype.getData = function (URL, callback) {
   return dataResponse;
 };
 
-ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
+ApiExplorer.prototype.getApiKey = function () {
   'use strict';
 
   var apiExplorer = this,
-      endpoints = apiExplorer.getData(originalDataURL).endpoints,
-      parameters = apiExplorer.getData(newDataURL).endpoints;
+      $apiKeyInput = $('#apiKey'),
+      apiKey;
+
+  if ($apiKeyInput.val()) {
+    apiKey = $apiKeyInput.val();
+  } else {
+    apiKey = apiExplorer.defaultApiKey;
+  }
+
+  return apiKey;
+};
+
+ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl, channelGroupsUrl) {
+  'use strict';
+
+  var apiExplorer = this,
+      endpoints = apiExplorer.getData(originalDataUrl).endpoints,
+      parameters = apiExplorer.getData(newDataUrl).endpoints,
+      channelGroups = apiExplorer.getData(channelGroupsUrl).channel_groups;
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -71,7 +73,9 @@ ApiExplorer.prototype.mergeData = function (originalDataURL, newDataURL) {
       }
     }
 
-    endpoints[i].query_url = apiExplorer.buildQueryURL(endpoints[i]);
+    if (endpoints[i].name === 'schedules') {
+      endpoints[i].channel_groups = channelGroups;
+    }
   }
 
   return endpoints;
@@ -90,11 +94,31 @@ ApiExplorer.prototype.compileTemplate = function (data, template) {
   $(template.container).html(compiledTemplate);
 };
 
-ApiExplorer.prototype.linkIDs = function (inputText) {
+ApiExplorer.prototype.sendQuery = function ($queryForm) {
   'use strict';
 
   var apiExplorer = this,
-      queryURL = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
+      queryUrl = $queryForm.find('.queryUrl').val(),
+      $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
+
+  $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
+
+  apiExplorer.getData(queryUrl, function (response) {
+    var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
+
+    response = apiExplorer.linkIds(JSON.stringify(response, undefined, 2));
+    $jsonOutput.html(response);
+    $jsonOutput.each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
+  });
+};
+
+ApiExplorer.prototype.linkIds = function (inputText) {
+  'use strict';
+
+  var apiExplorer = this,
+      queryUrl = '//atlas.metabroadcast.com/4/content/$1.json?annotations',
       replacePattern,
       replacedText;
 
@@ -104,144 +128,101 @@ ApiExplorer.prototype.linkIDs = function (inputText) {
   return replacedText;
 };
 
-ApiExplorer.prototype.submitQueryForm = function () {
+ApiExplorer.prototype.toggleAnnotations = function ($queryParametersForm) {
   'use strict';
 
-  var apiExplorer = this;
+  var apiExplorer = this,
+      $annotationsInput = $queryParametersForm.find('input[name="annotations"]'),
+      $annotationCheckbox = $queryParametersForm.find('.annotation-checkbox'),
+      annotations = [];
 
-  $('.queryForm').each(function () {
+  $annotationCheckbox.each(function () {
     var $this = $(this),
-        queryURL;
+        annotation = $this.attr('name');
 
-    $this.on('submit', function (e) {
-      e.preventDefault();
+    if ($this.is(':checked')) {
+      annotations.push(annotation);
+    }
 
-      queryURL = $this.find('.queryURL').val();
-
-      var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
-      $(this).siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
-
-      var that = $(this);
-
-      apiExplorer.getData(queryURL, function (response) {
-        var $jsonOutput = that.siblings('.queryResponse').find('.jsonOutput');
-
-        response = apiExplorer.linkIDs(JSON.stringify(response, undefined, 2));
-        $jsonOutput.html(response);
-        $jsonOutput.each(function(i, block) {
-          hljs.highlightBlock(block);
-        });
-      });
-    });
+    $annotationsInput.val(annotations.join(',')).trigger('change');
   });
 };
 
-ApiExplorer.prototype.buildQueryURL = function (endpoint) {
-  'use strict';
-
-  var apiExplorer = this,
-      queryURL = apiExplorer.queryURL,
-      apiKey = apiExplorer.getApiKey();
-
-  queryURL += endpoint.root_path;
-
-  for (var i = 0, ii = endpoint.parameters.length; i < ii; i++) {
-    if (endpoint.parameters[i].name === 'id') {
-      queryURL += '/' + endpoint.parameters[i].default_value + '.json?';
-    }
-
-    if (endpoint.parameters[i].default_value !== '' && endpoint.parameters[i].name !== 'id') {
-      queryURL += endpoint.parameters[i].name + '=' + endpoint.parameters[i].default_value;
-
-      if (i !== ii - 1) {
-        queryURL += '&';
-      }
-    }
-  }
-
-  queryURL += '&key=' + apiKey;
-
-  return encodeURI(queryURL);
-};
-
-ApiExplorer.prototype.replaceParameter = function (URL, parameterName, parameterValue) {
-  'use strict';
-
-  var apiExplorer = this,
-      pattern = new RegExp('(' + parameterName + '=).*?(&|$)'),
-      newURL;
-
-  if (parameterValue !== '') {
-    newURL = URL.replace(pattern, '$1' + parameterValue + '$2');
-  } else {
-    newURL = URL.replace(pattern, '');
-  }
-
-  if (newURL === URL && parameterName !== 'id') {
-    newURL = newURL + (newURL.indexOf('?') > 0 ? '&' : '?') + parameterName + '=' + parameterValue;
-  }
-
-  return newURL;
-};
-
-ApiExplorer.prototype.updateApiKey = function () {
+ApiExplorer.prototype.updateForm = function ($queryParametersForm) {
   'use strict';
 
   var apiExplorer = this;
 
-  $('#apiKey').on('change', function () {
-    $('.queryURL').each(function () {
-      var queryURL = $(this).val(),
-          apiKey = apiExplorer.getApiKey(),
-          newQueryURL = apiExplorer.replaceParameter(queryURL, 'key', apiKey);
-
-      $(this).val(newQueryURL);
-    });
-  });
+  apiExplorer.getQueryUrlComponents($queryParametersForm);
+  $queryParametersForm.siblings('.queryForm').find('.queryUrl').val(apiExplorer.getQueryUrlComponents($queryParametersForm));
 };
 
-ApiExplorer.prototype.updateParameters = function () {
+ApiExplorer.prototype.getQueryId = function ($queryParametersForm) {
+  'use strict';
+
+  var $idInput = $queryParametersForm.find('input[name="id"]'),
+      defaultId = $idInput.data('default'),
+      queryId;
+
+  if ($idInput.val() !== '') {
+    queryId = $idInput.val() + '.json?';
+  } else {
+    queryId = defaultId + '.json?';
+    $idInput.val(defaultId);
+  }
+
+  return queryId;
+};
+
+ApiExplorer.prototype.getQueryUrlComponents = function ($queryParametersForm) {
   'use strict';
 
   var apiExplorer = this,
-      idPattern = /([a-zA-Z0-9]*\.json\?)/ig;
+      urlComponents = {};
 
-  $(document).on('change', '.queryParameter', function () {
-    var parameterName = $(this).attr('name'),
-        newParameterValue = $(this).val(),
-        defaultValue = $(this).data('default'),
-        $queryURLInput = $(this).closest('.queryParametersForm').siblings('.queryForm').find('.queryURL'),
-        queryURL = $queryURLInput.val(),
-        newQueryURL = apiExplorer.replaceParameter(queryURL, parameterName, newParameterValue);
+  urlComponents.endpoint = $queryParametersForm.data('endpoint') + '/';
+  urlComponents.id = apiExplorer.getQueryId($queryParametersForm);
+  urlComponents.parameters = apiExplorer.getQueryParameters($queryParametersForm);
+  urlComponents.apiKey = apiExplorer.getApiKey();
 
-    if (parameterName === 'id') {
-      if ($(this).val() === '') {
-        $(this).val(defaultValue);
-        $queryURLInput.val(queryURL.replace(idPattern, defaultValue + '.json?'));
-      } else {
-        $queryURLInput.val(queryURL.replace(idPattern, newParameterValue + '.json?'));
-      }
-    } else {
-      $queryURLInput.val(newQueryURL);
+  return apiExplorer.constructQueryUrl(urlComponents);
+};
+
+ApiExplorer.prototype.constructQueryUrl = function (urlComponents) {
+  'use strict';
+
+  var apiExplorer = this,
+      queryUrl = apiExplorer.queryUrl;
+
+  queryUrl += urlComponents.endpoint;
+  queryUrl += urlComponents.id;
+  if (urlComponents.parameters) {
+    queryUrl += urlComponents.parameters + '&';
+  }
+  queryUrl += 'key=' + urlComponents.apiKey;
+
+  return queryUrl;
+};
+
+ApiExplorer.prototype.getQueryParameters = function ($queryParametersForm) {
+  'use strict';
+
+  var apiExplorer = this,
+      parameters = [];
+
+  $queryParametersForm.find('.queryParameter').each(function () {
+    var $this = $(this);
+
+    if ($this.attr('name') !== 'id' && $this.val() !== '') {
+      var parameter = $this.attr('name') + '=' + $this.val();
+      parameters.push(parameter);
     }
   });
+
+  return parameters.join('&');
 };
 
-ApiExplorer.prototype.showContentJSON = function (contentID) {
-  'use strict';
-
-  var apiExplorer = this,
-      idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
-      $queryURLInput = $('#api-content').find('.queryURL'),
-      queryURL = $queryURLInput.val();
-
-  $('a[href="#api-content"]').trigger('click');
-  $('#api-content').find('input[name="id"]').val(contentID);
-  $queryURLInput.val(queryURL.replace(idPattern, contentID + '.json?'));
-  $('#api-content').find('.queryForm').trigger('submit');
-};
-
-ApiExplorer.prototype.getQueryParameters = function (str) {
+ApiExplorer.prototype.formatQueryParameters = function (str) {
   'use strict';
 
   var apiExplorer = this;
@@ -256,7 +237,7 @@ ApiExplorer.prototype.prepopulateForm = function () {
 
   var apiExplorer = this,
       queryString = location.search.substring(1),
-      parameters = apiExplorer.getQueryParameters(queryString);
+      parameters = apiExplorer.formatQueryParameters(queryString);
 
   if (parameters.endpoint) {
     window.location.hash = 'apiExplorer';
@@ -283,26 +264,61 @@ ApiExplorer.prototype.prepopulateForm = function () {
   }
 };
 
-ApiExplorer.prototype.toggleAnnotations = function () {
+ApiExplorer.prototype.showContentJSON = function (contentId) {
   'use strict';
 
-  var apiExplorer = this;
+  var apiExplorer = this,
+      idPattern = /([a-zA-Z0-9]*\.json\?)/ig,
+      $queryUrlInput = $('#api-content').find('.queryUrl'),
+      queryUrl = $queryUrlInput.val();
 
-  $('.queryParametersForm').each(function () {
-    var $this = $(this),
-        annotationsInput = $this.find('input[name="annotations"]'),
-        annotations = [];
+  $('a[href="#api-content"]').trigger('click');
+  $('#api-content').find('input[name="id"]').val(contentId);
+  $queryUrlInput.val(queryUrl.replace(idPattern, contentId + '.json?'));
+  $('#api-content').find('.queryForm').trigger('submit');
+};
+
+ApiExplorer.prototype.events = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      $queryParametersForm = $('.queryParametersForm'),
+      $queryForm = $('.queryForm');
+
+  $('#apiKey').on('change', function () {
+    $queryParametersForm.each(function () {
+      apiExplorer.updateForm($(this));
+    });
+  });
+
+  $queryParametersForm.each(function () {
+    var $this = $(this);
+
+    apiExplorer.updateForm($this);
+
+    $this.find('.queryParameter').on('change', function () {
+      apiExplorer.updateForm($this);
+    });
 
     $this.find('.annotation-checkbox').on('change', function () {
-      var annotation = $(this).attr('name');
-      if ($(this).is(':checked')) {
-        annotations.push(annotation);
-        annotationsInput.val(annotations.join(',')).trigger('change');
-      } else {
-        annotations.pop(annotation);
-        annotationsInput.val(annotations.join(',')).trigger('change');
-      }
+      apiExplorer.toggleAnnotations($this);
     });
+  });
+
+  $queryForm.each(function () {
+    var $this = $(this);
+
+    $this.on('submit', function (e) {
+      e.preventDefault();
+      apiExplorer.sendQuery($this);
+    });
+  });
+
+  $(document).on('click', '.apiExplorerContentLink', function (e) {
+    e.preventDefault();
+    var contentId = $(this).data('id');
+
+    apiExplorer.showContentJSON(contentId);
   });
 };
 
@@ -310,22 +326,66 @@ ApiExplorer.prototype.init = function () {
   'use strict';
 
   var apiExplorer = this,
-      data = apiExplorer.mergeData(apiExplorer.endpointsURL, apiExplorer.endpointsParametersURL);
+      data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl, apiExplorer.channelGroupsUrl);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
-  apiExplorer.updateApiKey();
-  apiExplorer.updateParameters();
-  apiExplorer.submitQueryForm();
-  apiExplorer.toggleAnnotations();
-
-  $(document).on('click', '.apiExplorerContentLink', function (e) {
-    e.preventDefault();
-    var contentID = $(this).data('id');
-
-    apiExplorer.showContentJSON(contentID);
-  });
+  apiExplorer.events();
 
   if (window.location.search) {
     apiExplorer.prepopulateForm();
   }
+
+  apiExplorer.scheduleId(data);
+  $('.toggle-picker').on('click', function (e) {
+    e.preventDefault();
+    var target = $(this).attr('href');
+    $(target).slideToggle();
+  });
+};
+
+ApiExplorer.prototype.scheduleId = function (data) {
+  'use strict';
+
+  var apiExplorer = this;
+
+  $('.channel-picker-radio').on('change', function () {
+    if ($(this).is(':checked')) {
+      $('#schedules-id-input').val($(this).val()).trigger('change');
+    }
+  });
+
+  $('.channel-picker-platforms').on('change', function () {
+    var platformId = $(this).val(),
+        regions = [];
+
+    $('.channel-picker-regions').empty();
+
+    for (var i = 0, ii = data.length; i < ii; i++) {
+      if (data[i].channel_groups) {
+        for (var j = 0, jj = data[i].channel_groups.length; j < jj; j++) {
+          if (data[i].channel_groups[j].id === platformId) {
+            if (data[i].channel_groups[j].regions) {
+              regions = data[i].channel_groups[j].regions;
+              apiExplorer.populateRegions(regions);
+            }
+          }
+        }
+      }
+    }
+  });
+};
+
+ApiExplorer.prototype.populateRegions = function (regions) {
+  'use strict';
+
+  var apiExplorer = this,
+      $regionsMenu = $('.channel-picker-regions');
+
+  for (var i = 0, ii = regions.length; i < ii; i++) {
+    $regionsMenu.append('<option value="' + regions[i].id + '">' + regions[i].id + ' (' + regions[i].title + ')' + '</option>');
+  }
+
+  $regionsMenu.on('change', function () {
+
+  });
 };

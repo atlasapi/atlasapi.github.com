@@ -1,0 +1,1405 @@
+{
+    "channel_groups": [
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Sky HD",
+            "available_countries": [
+                "GB",
+                "IE"
+            ],
+            "regions": [
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgj"
+                },
+                {
+                    "title": "Henley on Thames",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgh"
+                },
+                {
+                    "title": "London (Kent)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgm"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgk"
+                },
+                {
+                    "title": "London (Essex)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgn"
+                },
+                {
+                    "title": "Meridian (West)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfW"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfX"
+                },
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfZ"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfY"
+                },
+                {
+                    "title": "South Lakeland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf2"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf4"
+                },
+                {
+                    "title": "West Dorset",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf5"
+                },
+                {
+                    "title": "West England",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf6"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf7"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf8"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbf9"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgb"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgc"
+                },
+                {
+                    "title": "London (Thames Valley)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgd"
+                },
+                {
+                    "title": "Anglia",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgf"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgg"
+                },
+                {
+                    "title": "Meridian (East)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfV"
+                },
+                {
+                    "title": "North East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfT"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfS"
+                },
+                {
+                    "title": "North Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfR"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfQ"
+                },
+                {
+                    "title": "Oxford",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfP"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfN"
+                },
+                {
+                    "title": "Republic of Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbfM"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/1"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/1",
+            "id": "cbfK",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Sky SD",
+            "available_countries": [
+                "GB",
+                "IE"
+            ],
+            "regions": [
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgr"
+                },
+                {
+                    "title": "Republic of Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgq"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgt"
+                },
+                {
+                    "title": "Oxford",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgs"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgw"
+                },
+                {
+                    "title": "North Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgv"
+                },
+                {
+                    "title": "Meridian (East)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgy"
+                },
+                {
+                    "title": "North East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgx"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgB"
+                },
+                {
+                    "title": "Meridian (West)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgz"
+                },
+                {
+                    "title": "London (Essex)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgY"
+                },
+                {
+                    "title": "London (Kent)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgZ"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgX"
+                },
+                {
+                    "title": "South Lakeland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgF"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgG"
+                },
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgC"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgD"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgK"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgM"
+                },
+                {
+                    "title": "West Dorset",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgH"
+                },
+                {
+                    "title": "West England",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgJ"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgQ"
+                },
+                {
+                    "title": "London (Thames Valley)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgR"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgN"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgP"
+                },
+                {
+                    "title": "Henley on Thames",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgV"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgW"
+                },
+                {
+                    "title": "Anglia",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgS"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbgT"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/2"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/2",
+            "id": "cbgp",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Freeview",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbg7"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbg6"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbg5"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbg4"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhc"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhb"
+                },
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbg9"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbg8"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhh"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhg"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhf"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhd"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbht"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhq"
+                },
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhp"
+                },
+                {
+                    "title": "South",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhs"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhr"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhk"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhj"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhn"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhm"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/3"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/3",
+            "id": "cbg2",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Freesat",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhT"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhP"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhQ"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhR"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhS"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhJ"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhK"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhM"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhN"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhD"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhF"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhG"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhH"
+                },
+                {
+                    "title": "South England",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhz"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhy"
+                },
+                {
+                    "title": "Cambridge",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhC"
+                },
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhB"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhx"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhw"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/4"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/4",
+            "id": "cbhv",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Virgin",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhW"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhX"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjj"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjh"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjg"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjf"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjd"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjc"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjb"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh9"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh8"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh7"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh6"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh5"
+                },
+                {
+                    "title": "Cambridge",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh4"
+                },
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbh2"
+                },
+                {
+                    "title": "South England",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhY"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbhZ"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/5"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/5",
+            "id": "cbhV",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Top Up TV",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjC"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjD"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjz"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjB"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjx"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjy"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjv"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjw"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjs"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjt"
+                },
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjq"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjr"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjn"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjp"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjm"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjG"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjF"
+                },
+                {
+                    "title": "South",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjJ"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjH"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjM"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjK"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/6"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/6",
+            "id": "cbjk",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "YouView",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkb"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkc"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkd"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkf"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkg"
+                },
+                {
+                    "title": "South",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkh"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkj"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjY"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj2"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj4"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj5"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj6"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj7"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj8"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbj9"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjT"
+                },
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjS"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjW"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjV"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjZ"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbjX"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/10"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/10",
+            "id": "cbjR",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "Saorsat",
+            "available_countries": [
+                "IE"
+            ],
+            "regions": [],
+            "aliases": [
+                "http://pressassociation.com/platforms/9"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/9",
+            "id": "cbjQ",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "BT TV",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkJ"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkK"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkG"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkH"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkM"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkz"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbky"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkx"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkw"
+                },
+                {
+                    "title": "South",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkF"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkD"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkC"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkB"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkq"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkp"
+                },
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkn"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkm"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkv"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkt"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbks"
+                },
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbkr"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/11"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/11",
+            "id": "cbkk",
+            "type": "platform"
+        },
+        {
+            "publisher": {
+                "key": "metabroadcast.com",
+                "name": "UK Channel Lineups",
+                "country": "ALL"
+            },
+            "title": "TalkTalk YouView",
+            "available_countries": [
+                "GB"
+            ],
+            "regions": [
+                {
+                    "title": "Northern Ireland",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmk"
+                },
+                {
+                    "title": "Channel Islands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmm"
+                },
+                {
+                    "title": "North East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmh"
+                },
+                {
+                    "title": "North West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmj"
+                },
+                {
+                    "title": "London",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmg"
+                },
+                {
+                    "title": "South",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmw"
+                },
+                {
+                    "title": "Cambridgeshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmv"
+                },
+                {
+                    "title": "Scotland (North)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmt"
+                },
+                {
+                    "title": "South West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbms"
+                },
+                {
+                    "title": "Scotland (Central)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmr"
+                },
+                {
+                    "title": "Scotland (Borders)",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmq"
+                },
+                {
+                    "title": "Cumbria",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmp"
+                },
+                {
+                    "title": "Oxfordshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmn"
+                },
+                {
+                    "title": "West Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmG"
+                },
+                {
+                    "title": "Yorkshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmF"
+                },
+                {
+                    "title": "Wales",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmD"
+                },
+                {
+                    "title": "West",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmC"
+                },
+                {
+                    "title": "East Midlands",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmB"
+                },
+                {
+                    "title": "East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmz"
+                },
+                {
+                    "title": "South East",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmy"
+                },
+                {
+                    "title": "Yorkshire & Lincolnshire",
+                    "aliases": [],
+                    "v4_aliases": [],
+                    "id": "cbmx"
+                }
+            ],
+            "aliases": [
+                "http://pressassociation.com/platforms/12"
+            ],
+            "v4_aliases": [],
+            "uri": "http://ref.atlasapi.org/platforms/pressassociation.com/12",
+            "id": "cbkN",
+            "type": "platform"
+        }
+    ]
+}
