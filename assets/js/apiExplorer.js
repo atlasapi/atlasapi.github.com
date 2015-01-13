@@ -331,6 +331,13 @@ ApiExplorer.prototype.events = function (data) {
       $('#schedules-id-input').val($(this).val()).trigger('change');
     }
   });
+
+  $(document).on('click', '.toggle-picker', function (e) {
+    e.preventDefault();
+    var target = $(this).attr('href');
+
+    $(target).toggle();
+  });
 };
 
 ApiExplorer.prototype.init = function () {
