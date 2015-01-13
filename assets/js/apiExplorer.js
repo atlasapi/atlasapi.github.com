@@ -3,6 +3,7 @@ var ApiExplorer = function () {
 
   this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
+  this.channelGroupsUrl = '//atlas.metabroadcast.com/3.0/channel_groups.json?offset=0&type=platform&apiKey=c1e92985ec124202b7f07140bcde6e3f';
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
   this.queryUrl = '//atlas.metabroadcast.com';
   this.template = {
@@ -56,12 +57,13 @@ ApiExplorer.prototype.getApiKey = function () {
   return apiKey;
 };
 
-ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl) {
+ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl, channelGroupsUrl) {
   'use strict';
 
   var apiExplorer = this,
       endpoints = apiExplorer.getData(originalDataUrl).endpoints,
-      parameters = apiExplorer.getData(newDataUrl).endpoints;
+      parameters = apiExplorer.getData(newDataUrl).endpoints,
+      channelGroups = apiExplorer.getData(channelGroupsUrl).channel_groups;
 
   for (var i = 0, ii = endpoints.length; i < ii; i++) {
     for (var j = 0, jj = parameters.length; j < jj; j++) {
@@ -69,6 +71,10 @@ ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl) {
         endpoints[i].parameters = parameters[j].parameters;
         endpoints[i].annotations = parameters[j].annotations;
       }
+    }
+
+    if (endpoints[i].name === 'schedules') {
+      endpoints[i].channel_groups = channelGroups;
     }
   }
 
@@ -320,7 +326,7 @@ ApiExplorer.prototype.init = function () {
   'use strict';
 
   var apiExplorer = this,
-      data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl);
+      data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl, apiExplorer.channelGroupsUrl);
 
   apiExplorer.compileTemplate(data, apiExplorer.template);
   apiExplorer.events();
@@ -337,11 +343,9 @@ ApiExplorer.prototype.scheduleId = function () {
 
   var apiExplorer = this;
 
-  $('.channel-picker-radio').each(function () {
-    $(this).on('change', function () {
-      if ($(this).is(':checked')) {
-        $('#schedules-id-input').val($(this).val()).trigger('change');
-      }
-    });
+  $('.channel-picker-radio').on('change', function () {
+    if ($(this).is(':checked')) {
+      $('#schedules-id-input').val($(this).val()).trigger('change');
+    }
   });
 };

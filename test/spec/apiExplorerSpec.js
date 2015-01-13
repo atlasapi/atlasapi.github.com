@@ -14,6 +14,10 @@ describe('ApiExplorer', function () {
       expect(apiExplorer).to.have.property('endpointsParametersUrl');
     });
 
+    it('should have channelGroupsUrl property', function () {
+      expect(apiExplorer).to.have.property('channelGroupsUrl');
+    });
+
     it('should have defaultApiKey property', function () {
       expect(apiExplorer).to.have.property('defaultApiKey');
     });
@@ -65,7 +69,8 @@ describe('ApiExplorer', function () {
     it('should merge parameters into the endpoints data', function () {
       var originalDataUrl = 'mocks/mergeDataOriginalMock.json',
           newDataUrl = 'mocks/mergeDataNewMock.json',
-          dataResponse = apiExplorer.mergeData(originalDataUrl, newDataUrl),
+          channelGroupsUrl = 'mocks/channelGroupsMock.json',
+          dataResponse = apiExplorer.mergeData(originalDataUrl, newDataUrl, channelGroupsUrl),
           updatedData = [{"name":"content","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]},{"name":"schedules","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]},{"name":"topics","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]}];
 
       expect(JSON.stringify(dataResponse)).to.equal(JSON.stringify(updatedData));
