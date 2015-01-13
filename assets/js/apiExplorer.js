@@ -447,6 +447,8 @@ ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
   var apiExplorer = this,
       compiledTemplate;
 
+  console.log(channels);
+
   compiledTemplate = new EJS({
     url: 'assets/templates/channels.ejs'
   }).render(channels);
