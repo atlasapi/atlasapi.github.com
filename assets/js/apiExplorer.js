@@ -10,6 +10,7 @@ var ApiExplorer = function () {
     path: 'assets/templates/apiExplorer.ejs',
     container: '#apiExplorerTabSections'
   };
+  this.singleId = true;
 };
 
 ApiExplorer.prototype.getData = function (url, callback) {
@@ -165,9 +166,9 @@ ApiExplorer.prototype.getQueryId = function ($queryParametersForm) {
       queryId;
 
   if ($idInput.val() !== '') {
-    queryId = $idInput.val() + '.json?';
+    queryId = $idInput.val();
   } else {
-    queryId = defaultId + '.json?';
+    queryId = defaultId;
     $idInput.val(defaultId);
   }
 
@@ -180,7 +181,7 @@ ApiExplorer.prototype.getQueryUrlComponents = function ($queryParametersForm) {
   var apiExplorer = this,
       urlComponents = {};
 
-  urlComponents.endpoint = $queryParametersForm.data('endpoint') + '/';
+  urlComponents.endpoint = $queryParametersForm.data('endpoint');
   urlComponents.id = apiExplorer.getQueryId($queryParametersForm);
   urlComponents.parameters = apiExplorer.getQueryParameters($queryParametersForm);
   urlComponents.apiKey = apiExplorer.getApiKey();
@@ -194,11 +195,21 @@ ApiExplorer.prototype.constructQueryUrl = function (urlComponents) {
   var apiExplorer = this,
       queryUrl = apiExplorer.queryUrl;
 
-  queryUrl += urlComponents.endpoint;
-  queryUrl += urlComponents.id;
+  if (apiExplorer.singleId === true) {
+    queryUrl += urlComponents.endpoint + '/';
+    queryUrl += urlComponents.id + '.json?';
+  } else {
+    queryUrl += urlComponents.endpoint + '.json?';
+  }
+
   if (urlComponents.parameters) {
     queryUrl += urlComponents.parameters + '&';
   }
+
+  if (apiExplorer.singleId === false) {
+    queryUrl += 'id=' + urlComponents.id + '&';
+  }
+
   queryUrl += 'key=' + urlComponents.apiKey;
 
   return queryUrl;
@@ -334,6 +345,12 @@ ApiExplorer.prototype.events = function (data) {
         channelIds.push($(this).val());
       }
     });
+
+    if (channelIds.length === 1) {
+      apiExplorer.singleId = true;
+    } else {
+      apiExplorer.singleId = false;
+    }
 
     $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
   });
