@@ -1846,6 +1846,13 @@ input.queryUrl {
     margin: 0;
 }
 
+.popular-channels label,
+.channels-container label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .channel-picker-toggle,
 .toggle-picker {
     display: block;
