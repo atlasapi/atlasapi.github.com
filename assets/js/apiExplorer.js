@@ -483,8 +483,8 @@ ApiExplorer.prototype.substringMatcher = function (strs) {
     substrRegex = new RegExp(q, 'i');
 
     $.each(strs, function (i, str) {
-      if (substrRegex.test(str)) {
-        matches.push({ value: str });
+      if (substrRegex.test(str.channel.title)) {
+        matches.push({ value: str.channel.title + str.deer_id });
       }
     });
 
@@ -500,22 +500,19 @@ ApiExplorer.prototype.getRegionChannels = function (regionId) {
       channelsAnnotations = '?annotations=channels',
       channelsUrl,
       channels,
-      searchResults = [],
-      temp = [];
+      searchResults = [];
 
   channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations;
   channels = apiExplorer.getData(channelsUrl).channel_groups[0].channels;
 
   for (var i = 0, ii = channels.length; i < ii; i++) {
-    searchResults.push({
-      channelName: channels[i].channel.title,
-      channelID: channels[i].deer_id
-    });
-    temp.push(channels[i].channel.title);
+    searchResults.push(channels[i]);
   }
 
+  console.log(searchResults);
+
   apiExplorer.buildChannelsTemplate(channels);
-  apiExplorer.buildChannelSearchTemplate(temp);
+  apiExplorer.buildChannelSearchTemplate(searchResults);
 };
 
 ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
