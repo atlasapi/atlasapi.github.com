@@ -1,3 +1,6 @@
-<% for (var i = 0, ii = this.length; i < ii; i++) { %>
-    <label><input class="channel-picker-radio" type="radio" name="channel-id" value="<%= this[i].deer_id %>"> <%= this[i].channel.title %> (<%= this[i].deer_id %>)</label>
-<% } %>
+<h4>all channels in region</h4>
+<div class="clearfix">
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+      <label><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="<%= this[i].deer_id %>"> <%= this[i].channel.title %> (<%= this[i].deer_id %>)</label>
+  <% } %>
+</div>

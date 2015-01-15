@@ -326,10 +326,16 @@ ApiExplorer.prototype.events = function (data) {
     apiExplorer.toggleChannelPicker(data);
   });
 
-  $(document).on('change', '.channel-picker-radio', function () {
-    if ($(this).is(':checked')) {
-      $('#schedules-id-input').val($(this).val()).trigger('change');
-    }
+  $(document).on('change', '.channel-picker-checkbox', function () {
+    var channelIds = [];
+
+    $('.channel-picker-checkbox').each(function () {
+      if ($(this).is(':checked')) {
+        channelIds.push($(this).val());
+      }
+    });
+
+    $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
   });
 
   $(document).on('click', '.toggle-picker', function (e) {
