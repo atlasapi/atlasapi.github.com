@@ -474,7 +474,5 @@ ApiExplorer.prototype.convertIdToDeer = function (aliases) {
     }
   }
 
-  console.log(deerId[0]);
-
   return deerId[0];
 };
