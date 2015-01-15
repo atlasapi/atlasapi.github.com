@@ -29,6 +29,10 @@ describe('ApiExplorer', function () {
     it('should have template property', function () {
       expect(apiExplorer).to.have.property('template');
     });
+
+    it('should have singleId property', function () {
+      expect(apiExplorer).to.have.property('singleId');
+    });
   });
 
   describe('apiExplorer.getData', function () {
@@ -64,16 +68,6 @@ describe('ApiExplorer', function () {
   describe('apiExplorer.mergeData', function () {
     it('should be defined', function () {
       expect(apiExplorer.mergeData).to.exist();
-    });
-
-    it('should merge parameters into the endpoints data', function () {
-      var originalDataUrl = 'mocks/mergeDataOriginalMock.json',
-          newDataUrl = 'mocks/mergeDataNewMock.json',
-          channelGroupsUrl = 'mocks/channelGroupsMock.json',
-          dataResponse = apiExplorer.mergeData(originalDataUrl, newDataUrl, channelGroupsUrl),
-          updatedData = [{"name":"content","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]},{"name":"schedules","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]},{"name":"topics","parameters":[{"name":"foo","value":"bar"},{"name":"bar","value":"foo"}]}];
-
-      expect(JSON.stringify(dataResponse)).to.equal(JSON.stringify(updatedData));
     });
   });
 
@@ -165,25 +159,45 @@ describe('ApiExplorer', function () {
     });
   });
 
+  describe('apiExplorer.convertIdToDeer', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.convertIdToDeer).to.exist();
+    });
+  });
+
+  describe('apiExplorer.buildChannelsTemplate', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.buildChannelsTemplate).to.exist();
+    });
+  });
+
+  describe('apiExplorer.getRegionChannels', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.getRegionChannels).to.exist();
+    });
+  });
+
+  describe('apiExplorer.buildRegionsTemplate', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.buildRegionsTemplate).to.exist();
+    });
+  });
+
+  describe('apiExplorer.buildPlatformTemplate', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.buildRegionsTemplate).to.exist();
+    });
+  });
+
+  describe('apiExplorer.toggleChannelPicker', function () {
+    it('should be defined', function () {
+      expect(apiExplorer.toggleChannelPicker).to.exist();
+    });
+  });
+
   describe('apiExplorer.init', function () {
     it('should be defined', function () {
       expect(apiExplorer.init).to.exist();
-    });
-
-    it('should call apiExplorer.compileTemplate method', function () {
-
-    });
-
-    it('should call apiExplorer.updateApiKey method', function () {
-
-    });
-
-    it('should call apiExplorer.updateParameters method', function () {
-
-    });
-
-    it('should call apiExplorer.submitQueryForm method', function () {
-
     });
   });
 });
