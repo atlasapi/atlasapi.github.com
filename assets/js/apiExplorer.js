@@ -484,7 +484,7 @@ ApiExplorer.prototype.substringMatcher = function (strs) {
 
     $.each(strs, function (i, str) {
       if (substrRegex.test(str.channel.title)) {
-        matches.push({ value: str.channel.title + str.deer_id });
+        matches.push({ value: str.channel.title + ' (' + str.deer_id + ')'});
       }
     });
 
@@ -508,8 +508,6 @@ ApiExplorer.prototype.getRegionChannels = function (regionId) {
   for (var i = 0, ii = channels.length; i < ii; i++) {
     searchResults.push(channels[i]);
   }
-
-  console.log(searchResults);
 
   apiExplorer.buildChannelsTemplate(channels);
   apiExplorer.buildChannelSearchTemplate(searchResults);
