@@ -449,6 +449,49 @@ ApiExplorer.prototype.buildRegionsTemplate = function (data) {
   });
 };
 
+ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
+  'use strict';
+
+  var apiExplorer = this,
+      compiledTemplate;
+
+  compiledTemplate = new EJS({
+    url: 'assets/templates/channelSearch.ejs'
+  }).render(data);
+
+  $('.channel-search').html(compiledTemplate);
+
+  $('#channel-search-box').typeahead({
+    hint: true,
+    highlight: true,
+    minLenght: 1
+  }, {
+    name: 'data',
+    displayKey: 'value',
+    source: apiExplorer.substringMatcher(data)
+  });
+};
+
+ApiExplorer.prototype.substringMatcher = function (strs) {
+  'use strict';
+
+  return function (q, cb) {
+    var matches,
+        substrRegex;
+
+    matches = [];
+    substrRegex = new RegExp(q, 'i');
+
+    $.each(strs, function (i, str) {
+      if (substrRegex.test(str.channel.title)) {
+        matches.push({ value: str.channel.title + ' (' + str.deer_id + ')'});
+      }
+    });
+
+    cb(matches);
+  };
+};
+
 ApiExplorer.prototype.getRegionChannels = function (regionId) {
   'use strict';
 
@@ -456,12 +499,18 @@ ApiExplorer.prototype.getRegionChannels = function (regionId) {
       channelsEndpoint = '//users-atlas.metabroadcast.com/3.0/channel_groups/',
       channelsAnnotations = '?annotations=channels',
       channelsUrl,
-      channels;
+      channels,
+      searchResults = [];
 
   channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations;
   channels = apiExplorer.getData(channelsUrl).channel_groups[0].channels;
 
+  for (var i = 0, ii = channels.length; i < ii; i++) {
+    searchResults.push(channels[i]);
+  }
+
   apiExplorer.buildChannelsTemplate(channels);
+  apiExplorer.buildChannelSearchTemplate(searchResults);
 };
 
 ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
