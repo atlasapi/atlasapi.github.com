@@ -1818,18 +1818,32 @@ input.queryUrl {
 .channel-picker-row label {
     width: auto;
     float: none;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.channel-picker-row h4 {
+    margin-bottom: 10px;
+}
+
+.platform-picker {
+    margin-bottom: 10px;
+}
+
+.channels-container h4 {
+    padding-left: 1%;
 }
 
 .popular-channels {
     float: left;
-    width: 48%;
-    margin: 0 1%;
+    width: 74%;
+    margin: 0 0 0 1%;
 }
 
 .popular-channels label {
     float: left;
-    width: 48%;
-    margin: 0 2% 0 0;
+    width: 33.33%;
+    margin: 0;
 }
 
 .channel-picker-toggle,
@@ -1843,7 +1857,7 @@ input.queryUrl {
     margin: 0 1%;
 }
 
-.channels-container {
+.channels-container label {
     float: left;
     width: 23%;
     margin: 0 1%;
