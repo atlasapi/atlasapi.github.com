@@ -1826,7 +1826,8 @@ input.queryUrl {
     margin-bottom: 10px;
 }
 
-.platform-picker {
+.platform-picker,
+.region-picker {
     margin-bottom: 10px;
 }
 
@@ -1874,6 +1875,10 @@ input.queryUrl {
     float: left;
     width: 23%;
     margin: 0 1%;
+}
+
+.toggle-link {
+    color: #ef308f;
 }
 
 /* NowNextLater widget */
