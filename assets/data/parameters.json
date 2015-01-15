@@ -8,14 +8,14 @@
           "default_value": "r6knn",
           "type": "string",
           "is_multiple": false,
-          "description": "The id of the content (this is part of the request uri, e.g. /4/content/{content_id})"
+          "description": "The ID of the content, used as part of the request URI, e.g. /4/content/{content_id}"
         },
         {
           "name": "type",
           "default_value": "",
           "type": "string",
           "is_multiple": false,
-          "description": "The type of the content (value is one of an enum, possible values are [BRAND, SERIES, ITEM, EPISODE, FILM, SONG, CLIP]."
+          "description": "The type of the content. Possible values are [BRAND, SERIES, ITEM, EPISODE, FILM, SONG, CLIP]."
         },
         {
           "name": "source",
@@ -43,7 +43,7 @@
           "default_value": "",
           "type": "string",
           "is_multiple": false,
-          "description": "Match all content whose topics contain a topic with the given id."
+          "description": "Match all content whose topics contain a topic with the given ID."
         },
         {
           "name": "topics.relationship",
@@ -110,21 +110,21 @@
           "default_value": "hkqs",
           "type": "string",
           "is_multiple": false,
-          "description": "The id of the channel (this is part of the request uri, e.g. /4/schedule/{channel_id})"
+          "description": "The ID of the channel, used as part of the request URI, e.g. /4/schedule/{channel_id}"
         },
         {
           "name": "from",
           "default_value": "now",
           "type": "date/time",
           "is_multiple": false,
-          "description": "Date to start your schedule request from. can be an ISO DateTime or relative, e.g. 'now.plus.6h'."
+          "description": "Date to start your schedule request from. It can be an ISO DateTime or relative, e.g. 'now.plus.6h'."
         },
         {
           "name": "to",
           "default_value": "now.plus.6h",
           "type": "date/time",
           "is_multiple": false,
-          "description": "Date to end your schedule request. can be an ISO DateTime or relative, e.g. 'now.plus.6h'."
+          "description": "Date to end your schedule request. It can be an ISO DateTime or relative, e.g. 'now.plus.6h'."
         },
         {
           "name": "source",
@@ -156,14 +156,14 @@
           "default_value": "4qzf",
           "type": "string",
           "is_multiple": false,
-          "description": "The id of the topic (this is part of the request uri, e.g. /4/topics/{topic_id})"
+          "description": "The ID of the topic, used as part of the request URI, e.g. /4/topics/{topic_id})"
         },
         {
           "name": "type",
           "default_value": "",
           "type": "string",
           "is_multiple": false,
-          "description": "The type of the topic (value is one of an enum, possible values are [SUBJECT, PERSON, PLACE, ARTIST, EVENT, PRODUCT, WORK, UNKNOWN]."
+          "description": "The type of the topic. Possible values are [SUBJECT, PERSON, PLACE, ARTIST, EVENT, PRODUCT, WORK, UNKNOWN]."
         },
         {
           "name": "source",
