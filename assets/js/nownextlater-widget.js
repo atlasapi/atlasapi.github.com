@@ -529,7 +529,7 @@ NowNextLater.prototype.loadFullscreen = function () {
       if (page < dataForFullscreen.length) {
         if (index < items.length) {
           nowNextLater.compileTemplate(dataForFullscreen[page][index], {
-            template: 'templates/fullscreen.ejs',
+            template: 'assets/templates/fullscreen.ejs',
             container: $(items[index]),
             append: true
           });
