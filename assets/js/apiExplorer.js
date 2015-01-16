@@ -521,7 +521,11 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   });
 
   $('#channel-search-box').on('typeahead:autocompleted typeahead:selected', function (obj, datum, name) {
-    $('#schedules-id-input').val(datum.deer_id).trigger('change');
+    $('.channel-picker-checkbox').each(function () {
+      if (datum.deer_id === $(this).val()) {
+        $(this).prop('checked', true).trigger('change');
+      }
+    });
   });
 };
 
