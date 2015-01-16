@@ -470,21 +470,23 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
     displayKey: 'value',
     source: apiExplorer.substringMatcher(data)
   });
+
+  $('#channel-search-box').bind('typeahead:selected', function (obj, datum, name) {
+    $('#schedules-id-input').val(datum.id).trigger('change');
+    console.log(obj, datum, name);
+  });
 };
 
 ApiExplorer.prototype.substringMatcher = function (strs) {
   'use strict';
 
   return function (q, cb) {
-    var matches,
-        substrRegex;
-
-    matches = [];
-    substrRegex = new RegExp(q, 'i');
+    var matches = [],
+        substrRegex = new RegExp(q, 'i');
 
     $.each(strs, function (i, str) {
       if (substrRegex.test(str.channel.title)) {
-        matches.push({ value: str.channel.title + ' (' + str.deer_id + ')'});
+        matches.push({ value: str.channel.title + ' (' + str.deer_id + ')', id: str.deer_id});
       }
     });
 
