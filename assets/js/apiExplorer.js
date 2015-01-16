@@ -464,14 +464,14 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   $('#channel-search-box').typeahead({
     hint: true,
     highlight: true,
-    minLenght: 1
+    minLength: 1
   }, {
     name: 'data',
     displayKey: 'value',
     source: apiExplorer.substringMatcher(data)
   });
 
-  $('#channel-search-box').bind('typeahead:selected', function (obj, datum, name) {
+  $('#channel-search-box').on('typeahead:selected', function (obj, datum, name) {
     $('#schedules-id-input').val(datum.id).trigger('change');
     console.log(obj, datum, name);
   });
