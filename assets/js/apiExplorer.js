@@ -521,8 +521,7 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   });
 
   $('#channel-search-box').on('typeahead:autocompleted typeahead:selected', function (obj, datum, name) {
-    $('#schedules-id-input').val(datum.id).trigger('change');
-    console.log(obj, datum, name);
+    $('#schedules-id-input').val(datum.deer_id).trigger('change');
   });
 };
 
