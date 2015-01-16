@@ -471,7 +471,7 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
     source: apiExplorer.substringMatcher(data)
   });
 
-  $('#channel-search-box').on('typeahead:selected', function (obj, datum, name) {
+  $('#channel-search-box').on('typeahead:autocompleted typeahead:selected', function (obj, datum, name) {
     $('#schedules-id-input').val(datum.id).trigger('change');
     console.log(obj, datum, name);
   });
