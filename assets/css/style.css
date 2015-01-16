@@ -1885,6 +1885,34 @@ input.queryUrl {
     background: #fff;
 }
 
+.tt-suggestion {
+    padding: 5px;
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+.tt-suggestion.tt-cursor {
+    background: #380b66;
+    color: #ef308f;
+}
+
+.twitter-typeahead,
+.tt-hint,
+.channel-search-box {
+    width: 100% !important;
+}
+
+.tt-dropdown-menu {
+    width: 100%;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+       -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+
+
 /* NowNextLater widget */
 /* Panel styles */
 .widget-panel {
