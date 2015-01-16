@@ -453,13 +453,62 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   'use strict';
 
   var apiExplorer = this,
-      compiledTemplate;
+      now = new Date().toISOString(),
+      compiledTemplate,
+      monthMap = {
+      1: 'January',
+      2: 'February',
+      3: 'March',
+      4: 'April',
+      5: 'May',
+      6: 'June',
+      7: 'July',
+      8: 'August',
+      9: 'September',
+      10: 'October',
+      11: 'November',
+      12: 'December'
+    };
 
   compiledTemplate = new EJS({
     url: 'assets/templates/channelSearch.ejs'
   }).render(data);
 
   $('.channel-search').html(compiledTemplate);
+
+  for (var i = 0, ii = data.length; i < ii; i++) {
+    var startDate = new Date(data[i].start_date),
+        formattedDate = {};
+
+    if (startDate.getDay() === 1 || startDate.getDay() === 21 || startDate.getDay() === 31) {
+      formattedDate.day = startDate.getDay() + 'st ';
+    } else if (startDate.getDay() === 2 || startDate === 22) {
+      formattedDate.day = startDate.getDay() + 'nd ';
+    } else if (startDate.getDay() === 3 || startDate === 23) {
+      formattedDate.day = startDate.getDay() + 'rd ';
+    } else {
+      formattedDate.day = startDate.getDay() + 'th ';
+    }
+
+    formattedDate.month = monthMap[startDate.getMonth()] + ' ';
+    formattedDate.year = startDate.getFullYear();
+
+    if (data[i].start_date > now) {
+      var startDateString = formattedDate.day + formattedDate.month + formattedDate.year;
+      data[i].value = data[i].channel.title + ' (' + data[i].deer_id + ') Starts on ' + startDateString;
+    } else {
+      data[i].value = data[i].channel.title + ' (' + data[i].deer_id + ')';
+    }
+  }
+
+  var engine = new Bloodhound({
+    name: 'data',
+    local: data,
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace
+  });
+
+  engine.initialize();
 
   $('#channel-search-box').typeahead({
     hint: true,
@@ -468,7 +517,7 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   }, {
     name: 'data',
     displayKey: 'value',
-    source: apiExplorer.substringMatcher(data)
+    source: engine.ttAdapter()
   });
 
   $('#channel-search-box').on('typeahead:autocompleted typeahead:selected', function (obj, datum, name) {
