@@ -425,6 +425,7 @@ ApiExplorer.prototype.buildPlatformTemplate = function (data) {
   $('.platform-picker').html(compiledTemplate);
 
   apiExplorer.buildDummyRegionsTemplate();
+  apiExplorer.buildDummySearchTemplate();
 
   $('.channel-picker-platforms').on('change', function () {
     var platformId = $(this).val();
