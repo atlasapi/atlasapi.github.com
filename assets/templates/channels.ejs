@@ -1,4 +1,4 @@
-<h4>all channels in region</h4>
+<h4>all channels in <%= this[0].platform_title %>, <%= this[0].region_title %></h4>
 <div class="clearfix">
   <% for (var i = 0, ii = this.length; i < ii; i++) { %>
       <label title="<%= this[i].channel.title %> (<%= this[i].deer_id %>)"><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="<%= this[i].deer_id %>"> <%= this[i].channel.title %> (<%= this[i].deer_id %>)</label>

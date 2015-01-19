@@ -1,6 +1,11 @@
 <tr class="channel-picker-row">
   <td colspan="4">
      <div class="clearfix">
+      <div class="pickers">
+        <div class="platform-picker" id="platform-picker"></div>
+        <div class="region-picker" id="region-picker"></div>
+        <div class="channel-search" id="channel-search"></div>
+      </div>
       <div class="popular-channels">
         <h4>choose from popular channels</h4>
         <label title="BBC One (hkqs)"><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="hkqs"> BBC One (hkqs)</label>
@@ -11,11 +16,7 @@
         <label title="CBBC (hkrx)"><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="hkrx"> CBBC (hkrx)</label>
         <label title="BBC Radio 1 (hkth)"><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="hkth"> BBC Radio 1 (hkth)</label>
         <label title="BBC Radio 2 (hktk)"><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="hktk"> BBC Radio 2 (hktk)</label>
-      </div>
-      <div class="pickers">
-        <div class="platform-picker" id="platform-picker"></div>
-        <div class="region-picker" id="region-picker"></div>
-        <div class="channel-search" id="channel-search"></div>
+        <a class="fr btn close-channel-picker" href="#">&times; close</a>
       </div>
     </div>
     <div class="channels-container mtl"></div>

@@ -579,10 +579,18 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   });
 
   $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (obj, datum, name) {
-    console.log('obj', obj, 'datum', datum, 'name', name);
     $('.channel-picker-checkbox').each(function () {
       if (datum.deer_id === $(this).val()) {
         $(this).prop('checked', true).trigger('change');
+
+        if (!$('.id-added').length) {
+          $('#channel-search-box').after('<div class="id-added">channel id selected</div>');
+          setTimeout(function () {
+            $('.id-added').fadeOut('slow', function () {
+              $(this).remove();
+            });
+          }, 3000);
+        }
       }
     });
   });
@@ -615,21 +623,26 @@ ApiExplorer.prototype.getRegionChannels = function (regionId) {
       channelsEndpoint = '//users-atlas.metabroadcast.com/3.0/channel_groups/',
       channelsAnnotations = '?annotations=channels',
       channelsUrl,
-      channels,
-      searchResults = [];
+      channelsData,
+      searchResults = [],
+      platformTitle,
+      regionTitle;
 
   channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations;
-  channels = apiExplorer.getData(channelsUrl).channel_groups[0].channels;
+  channelsData = apiExplorer.getData(channelsUrl);
 
-  for (var i = 0, ii = channels.length; i < ii; i++) {
-    searchResults.push(channels[i]);
+  platformTitle = channelsData.channel_groups[0].platform.title;
+  regionTitle = channelsData.channel_groups[0].title;
+
+  for (var i = 0, ii = channelsData.channel_groups[0].channels.length; i < ii; i++) {
+    searchResults.push(channelsData.channel_groups[0].channels[i]);
   }
 
-  apiExplorer.buildChannelsTemplate(channels);
+  apiExplorer.buildChannelsTemplate(channelsData.channel_groups[0].channels, platformTitle, regionTitle);
   apiExplorer.buildChannelSearchTemplate(searchResults);
 };
 
-ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
+ApiExplorer.prototype.buildChannelsTemplate = function (channels, platformTitle, regionTitle) {
   'use strict';
 
   var apiExplorer = this,
@@ -639,6 +652,8 @@ ApiExplorer.prototype.buildChannelsTemplate = function (channels) {
   for (var i = 0, ii = channels.length; i < ii; i++) {
     var aliases = channels[i].channel.aliases;
 
+    channels[i].platform_title = platformTitle;
+    channels[i].region_title = regionTitle;
     channels[i].deer_id = apiExplorer.convertIdToDeer(aliases);
   }
 
