@@ -424,6 +424,8 @@ ApiExplorer.prototype.buildPlatformTemplate = function (data) {
 
   $('.platform-picker').html(compiledTemplate);
 
+  apiExplorer.buildDummyRegionsTemplate();
+
   $('.channel-picker-platforms').on('change', function () {
     var platformId = $(this).val();
 
@@ -433,8 +435,26 @@ ApiExplorer.prototype.buildPlatformTemplate = function (data) {
       }
     }
 
-    apiExplorer.buildRegionsTemplate(regions);
+    if ($(this).val() !== '') {
+      apiExplorer.buildRegionsTemplate(regions);
+    } else {
+      apiExplorer.buildDummyRegionsTemplate();
+      apiExplorer.buildDummySearchTemplate();
+    }
   });
+};
+
+ApiExplorer.prototype.buildDummyRegionsTemplate = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      compiledTemplate;
+
+  compiledTemplate = new EJS({
+    url: 'assets/templates/dummyRegionsTemplate.ejs'
+  }).render();
+
+  $('.region-picker').html(compiledTemplate);
 };
 
 ApiExplorer.prototype.buildRegionsTemplate = function (data) {
