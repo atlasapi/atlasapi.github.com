@@ -7,7 +7,7 @@ var ApiExplorer = function () {
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
   this.queryUrl = '//atlas.metabroadcast.com';
   this.template = {
-    path: 'assets/templates/apiExplorer.ejs',
+    path: 'assets/templates/apiExplorer.ejs?v=201510191550',
     container: '#apiExplorerTabSections'
   };
   this.singleId = true;
@@ -399,7 +399,7 @@ ApiExplorer.prototype.toggleChannelPicker = function (data) {
   }
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/channelPicker.ejs'
+    url: 'assets/templates/channelPicker.ejs?v=201510191550'
   }).render();
 
   if ($('.channel-picker-row').length) {
@@ -419,7 +419,7 @@ ApiExplorer.prototype.buildPlatformTemplate = function (data) {
       regions;
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/platformPicker.ejs'
+    url: 'assets/templates/platformPicker.ejs?v=201510191550'
   }).render(data);
 
   $('.platform-picker').html(compiledTemplate);
@@ -452,7 +452,7 @@ ApiExplorer.prototype.buildDummyRegionsTemplate = function () {
       compiledTemplate;
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/dummyRegionsTemplate.ejs'
+    url: 'assets/templates/dummyRegionsTemplate.ejs?v=201510191550'
   }).render();
 
   $('.region-picker').html(compiledTemplate);
@@ -466,7 +466,7 @@ ApiExplorer.prototype.buildRegionsTemplate = function (data) {
       regionId;
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/regionsPicker.ejs'
+    url: 'assets/templates/regionsPicker.ejs?v=201510191550'
   }).render(data);
 
   $('.region-picker').html(compiledTemplate);
@@ -491,7 +491,7 @@ ApiExplorer.prototype.buildDummySearchTemplate = function () {
       compiledTemplate;
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/dummySearchTemplate.ejs'
+    url: 'assets/templates/dummySearchTemplate.ejs?v=201510191550'
   }).render();
 
   $('#channel-search').html(compiledTemplate);
@@ -519,7 +519,7 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
     };
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/channelSearch.ejs'
+    url: 'assets/templates/channelSearch.ejs?v=201510191550'
   }).render(data);
 
   $('.channel-search').html(compiledTemplate);
@@ -658,7 +658,7 @@ ApiExplorer.prototype.buildChannelsTemplate = function (channels, platformTitle,
   }
 
   compiledTemplate = new EJS({
-    url: 'assets/templates/channels.ejs'
+    url: 'assets/templates/channels.ejs?v=201510191550'
   }).render(channels);
 
   $('.channels-container').html(compiledTemplate);
