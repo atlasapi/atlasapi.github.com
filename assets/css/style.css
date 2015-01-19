@@ -1793,6 +1793,7 @@
 .jsonOutput {
     overflow: auto;
     height: 300px;
+    text-transform: none;
 }
 
 input.queryUrl {
