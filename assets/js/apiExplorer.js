@@ -1,7 +1,7 @@
 var ApiExplorer = function () {
   'use strict';
 
-  this.endpointsUrl = '//stage.atlas.metabroadcast.com/4/meta/endpoints.json';
+  this.endpointsUrl = '//atlas.metabroadcast.com/4/meta/endpoints.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
   this.channelGroupsUrl = '//atlas.metabroadcast.com/3.0/channel_groups.json?offset=0&type=platform&apiKey=c1e92985ec124202b7f07140bcde6e3f';
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
@@ -478,7 +478,8 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
 
   for (var i = 0, ii = data.length; i < ii; i++) {
     var startDate = new Date(data[i].start_date),
-        formattedDate = {};
+        formattedDate = {},
+        query = [];
 
     if (startDate.getDay() === 1 || startDate.getDay() === 21 || startDate.getDay() === 31) {
       formattedDate.day = startDate.getDay() + 'st ';
@@ -499,16 +500,25 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
     } else {
       data[i].value = data[i].channel.title + ' (' + data[i].deer_id + ')';
     }
+
+    query = [
+      data[i].channel.title,
+      data[i].deer_id,
+      data[i].channel.title.replace(/\s/ig, ''),
+      data[i].channel.title.replace(/\sone/ig, '1'),
+      data[i].channel.title.replace(/one/ig, '1'),
+      data[i].channel.title.replace(/\stwo/ig, '2'),
+      data[i].channel.title.replace(/two/ig, '2'),
+      data[i].channel.title.replace(/\sthree/ig, '3'),
+      data[i].channel.title.replace(/three/ig, '3'),
+      data[i].channel.title.replace(/\sfour/ig, '4'),
+      data[i].channel.title.replace(/four/ig, '4'),
+      data[i].channel.title.replace(/\sfive/ig, '5'),
+      data[i].channel.title.replace(/five/ig, '5')
+    ];
+
+    data[i].query = query.join();
   }
-
-  var engine = new Bloodhound({
-    name: 'data',
-    local: data,
-    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-    queryTokenizer: Bloodhound.tokenizers.whitespace
-  });
-
-  engine.initialize();
 
   $('#channel-search-box').typeahead({
     hint: true,
@@ -517,7 +527,7 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
   }, {
     name: 'data',
     displayKey: 'value',
-    source: engine.ttAdapter()
+    source: apiExplorer.substringMatcher(data)
   });
 
   $('#channel-search-box').on('typeahead:autocompleted typeahead:selected', function (obj, datum, name) {
@@ -537,8 +547,8 @@ ApiExplorer.prototype.substringMatcher = function (strs) {
         substrRegex = new RegExp(q, 'i');
 
     $.each(strs, function (i, str) {
-      if (substrRegex.test(str.channel.title)) {
-        matches.push({ value: str.channel.title + ' (' + str.deer_id + ')', id: str.deer_id});
+      if (substrRegex.test(str.query)) {
+        matches.push({ value: str.value });
       }
     });
 
