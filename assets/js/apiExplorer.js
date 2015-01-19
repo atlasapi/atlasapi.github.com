@@ -337,6 +337,14 @@ ApiExplorer.prototype.events = function (data) {
     apiExplorer.toggleChannelPicker(data);
   });
 
+  $(document).on('click', '.close-channel-picker', function (e) {
+    e.preventDefault();
+
+    if ($('.channel-picker-row').length) {
+      $('.channel-picker-row').remove();
+    }
+  });
+
   $(document).on('change', '.channel-picker-checkbox', function () {
     var channelIds = [];
 
