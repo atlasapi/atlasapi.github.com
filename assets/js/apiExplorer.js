@@ -584,12 +584,12 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
         $(this).prop('checked', true).trigger('change');
 
         if (!$('.id-added').length) {
-          $('#channel-search-box').after('<div class="id-added">channel id selected</div>');
+          $('#channel-search-box').after('<div class="id-added">&#10003;</div>');
           setTimeout(function () {
             $('.id-added').fadeOut('slow', function () {
               $(this).remove();
             });
-          }, 3000);
+          }, 1000);
         }
       }
     });
