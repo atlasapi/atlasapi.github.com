@@ -538,7 +538,8 @@ ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
     source: apiExplorer.substringMatcher(data)
   });
 
-  $('#channel-search-box').on('typeahead:autocompleted typeahead:selected', function (obj, datum, name) {
+  $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (obj, datum, name) {
+    console.log('obj', obj, 'datum', datum, 'name', name);
     $('.channel-picker-checkbox').each(function () {
       if (datum.deer_id === $(this).val()) {
         $(this).prop('checked', true).trigger('change');
@@ -556,7 +557,10 @@ ApiExplorer.prototype.substringMatcher = function (strs) {
 
     $.each(strs, function (i, str) {
       if (substrRegex.test(str.query)) {
-        matches.push({ value: str.value });
+        matches.push({
+          value: str.value,
+          deer_id: str.deer_id
+        });
       }
     });
 
