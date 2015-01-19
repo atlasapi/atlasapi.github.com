@@ -1836,6 +1836,7 @@ input.queryUrl {
 }
 
 .popular-channels {
+    position: relative;
     float: left;
     width: 74%;
     margin: 0 0 0 1%;
@@ -1860,9 +1861,20 @@ input.queryUrl {
 }
 
 .pickers {
+    position: relative;
     float: left;
     width: 23%;
     margin: 0 1%;
+}
+
+.popular-channels .close-channel-picker {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.pickers select {
+    width: 100%;
 }
 
 .channels-container label {
