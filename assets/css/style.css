@@ -1873,6 +1873,19 @@ input.queryUrl {
     right: 0;
 }
 
+.id-added {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 140px;
+    text-align: center;
+    margin: 0 5px;
+    padding: 3px;
+    background: #ef308f;
+    color: #fff;
+    border-radius: 3px;
+}
+
 .pickers select {
     width: 100%;
 }
