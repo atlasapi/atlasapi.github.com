@@ -1915,6 +1915,16 @@ input.queryUrl {
     text-align: right;
 }
 
+.dummy h4 {
+    color: #999;
+}
+
+.dummy input {
+    box-sizing: border-box;
+    opacity: 0.5;
+    height: auto;
+}
+
 
 /* NowNextLater widget */
 /* Panel styles */

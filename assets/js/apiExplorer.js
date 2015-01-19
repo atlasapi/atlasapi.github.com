@@ -450,11 +450,30 @@ ApiExplorer.prototype.buildRegionsTemplate = function (data) {
 
   $('.region-picker').html(compiledTemplate);
 
+  apiExplorer.buildDummySearchTemplate();
+
   $('.channel-picker-regions').on('change', function () {
     regionId = $(this).val();
 
-    apiExplorer.getRegionChannels(regionId);
+    if (regionId !== '') {
+      apiExplorer.getRegionChannels(regionId);
+    } else {
+      apiExplorer.buildDummySearchTemplate();
+    }
   });
+};
+
+ApiExplorer.prototype.buildDummySearchTemplate = function () {
+  'use strict';
+
+  var apiExplorer = this,
+      compiledTemplate;
+
+  compiledTemplate = new EJS({
+    url: 'assets/templates/dummySearchTemplate.ejs'
+  }).render();
+
+  $('#channel-search').html(compiledTemplate);
 };
 
 ApiExplorer.prototype.buildChannelSearchTemplate = function (data) {
