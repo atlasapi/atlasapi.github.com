@@ -1,23 +1,27 @@
-<a href="/"><img src="assets/images/logo.png" alt="Atlas"></a>
+<div class="container">
+  <a class="site-logo" href="/"><img src="assets/images/logo.png" alt="Atlas"></a>
 
-<ul class="nav">
-  <li><a href="#widgets">widgets</a></li>
-  <li><a href="#examples">examples</a></li>
-  <li><a href="#reference">reference</a></li>
-  <li><a href="#about">about</a></li>
-</ul>
+  <ul class="site-nav nav">
+    <li><a href="#widgets">widgets</a></li>
+    <li><a href="#examples">examples</a></li>
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#about">about</a></li>
+  </ul>
 
-<a class="btn btn_lrg" href="#apiExplorer">
-  <span class="icn_mag"></span>
-  api explorer
-</a>
+  <a class="btn btn_lrg" href="#apiExplorer">
+    <span class="icn_mag"></span>
+    api explorer
+  </a>
 
-<div class="user-link">
-  <%= this.user.full_name %>
-  <img src="<%= this.user.profile_image %>" alt="<%= this.user.full_name %>">
-  <div class="user-menu">
-    <a href="/admin?#/profile">your profile</a>
-    <a href="/admin?#/terms">terms of use</a>
-    <a class="logout" href="#">log out</a>
+  <div class="navbar-user">
+    <div class="user-avatar">
+      <img class="profile-picture" src="<%= this.user.profile_image %>" alt="<%= this.user.full_name %>">
+      <span class="user-name"><%= this.user.full_name %></span>
+    </div>
+    <ul class="user-dropdown-menu hide">
+      <li><a href="/admin?#/profile">your profile</a></li>
+      <li><a href="/admin?#/terms">terms of use</a></li>
+      <li><a class="logout" href="#">log out</a></li>
+    </ul>
   </div>
 </div>

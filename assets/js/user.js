@@ -56,10 +56,19 @@ var user = (function () {
     loadHeader(loggedOutHeaderTemplatePath);
   }
 
+  function toggleUserMenu() {
+    $('.user-dropdown-menu').toggleClass('hide');
+  }
+
   function events() {
     $(document).on('click', '.logout', function (e) {
       e.preventDefault();
       logout();
+    });
+
+    $(document).on('click', '.navbar-user', function (e) {
+      e.preventDefault();
+      toggleUserMenu();
     });
   }
 
