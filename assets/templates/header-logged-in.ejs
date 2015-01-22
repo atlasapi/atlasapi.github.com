@@ -1,29 +1,12 @@
-<div class="container">
-  <div class="navbar-brand">
-    <a class="navbar-logo" href="/"><img src="assets/images/logo.png" alt="Atlas"></a>
+<a class="navbar-api-explorer-btn btn" href="#apiExplorer">api explorer</a>
+<div class="navbar-user logged-in">
+  <div class="user-avatar">
+    <img class="profile-picture" src="<%= this.user.profile_image %>" alt="<%= this.user.full_name %>">
+    <span class="user-name"><%= this.user.full_name %></span>
   </div>
-
-  <div class="navbar-links">
-    <ul class="nav">
-      <li><a href="#widgets">widgets</a></li>
-      <li><a href="#examples">examples</a></li>
-      <li><a href="#reference">reference</a></li>
-      <li><a href="#about">about</a></li>
-    </ul>
-  </div>
-
-  <div class="navbar-tools">
-    <a class="navbar-api-explorer-btn btn" href="#apiExplorer">api explorer</a>
-    <div class="navbar-user logged-in">
-      <div class="user-avatar">
-        <img class="profile-picture" src="<%= this.user.profile_image %>" alt="<%= this.user.full_name %>">
-        <span class="user-name"><%= this.user.full_name %></span>
-      </div>
-      <ul class="user-dropdown-menu hide">
-        <li><a href="/admin?#/profile">your profile</a></li>
-        <li><a href="/admin?#/terms">terms of use</a></li>
-        <li><a class="logout" href="#">log out</a></li>
-      </ul>
-    </div>
-  </div>
+  <ul class="user-dropdown-menu hide">
+    <li><a href="/admin?#/profile">your profile</a></li>
+    <li><a href="/admin?#/terms">terms of use</a></li>
+    <li><a class="logout" href="#">log out</a></li>
+  </ul>
 </div>

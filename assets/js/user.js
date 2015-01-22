@@ -32,7 +32,7 @@ var user = (function () {
       }).render();
     }
 
-    $('#header').html(headerTemplate);
+    $('#navbar-tools').html(headerTemplate);
   }
 
   function getUserData() {
