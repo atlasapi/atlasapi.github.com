@@ -74,8 +74,6 @@ $(document).ready(function () {
     loginToAdmin();
   });
 
-  user.init();
-
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 
