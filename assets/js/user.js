@@ -1,8 +1,8 @@
 var user = (function () {
   'use strict';
 
-  var loggedInHeaderTemplatePath = 'assets/templates/header-logged-in.ejs',
-      loggedOutHeaderTemplatePath = 'assets/templates/header-logged-out.ejs';
+  var loggedInHeaderTemplatePath = 'assets/templates/logged-in.ejs',
+      loggedOutHeaderTemplatePath = 'assets/templates/logged-out.ejs';
 
   function getCredentials() {
     return {
