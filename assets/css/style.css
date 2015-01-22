@@ -2161,24 +2161,82 @@ input.queryUrl {
     z-index: 1000;
 }
 
-.site-logo {
+/* Logo */
+.navbar-brand {
     float: left;
 }
 
-.site-nav {
+.navbar-logo {
+    position: relative;
+    top: -0.25rem;
+    height: 5.06rem;
+    line-height: 5.06rem;
+}
+
+.navbar-logo img {
+    vertical-align: middle;
+}
+
+/* Navigation */
+.navbar-links {
+    float: left;
+    margin-left: 1rem;
+}
+
+.navbar-links .nav {
+    height: 5.06rem;
     float: left;
 }
 
-/* Navbar */
+.navbar-login {
+    height: 5.06rem;
+    line-height: 5.06rem;
+}
+
+.navbar-links .nav > li {
+    float: left;
+    height: 5.06rem;
+    line-height: 5.06rem;
+}
+
+.navbar-links .nav a {
+    height: 5.06rem;
+    padding: 0 0.5rem;
+    font-size: 1.125rem;
+    -webkit-transition: all .1s ease;
+    transition: all .1s ease;
+}
+
+.navbar-links .nav a:hover,
+.navbar-links .nav a:active,
+.navbar-links .nav a:focus {
+    color: #fc0088;
+}
+
+/* Nav tools */
+.navbar-tools {
+    float: right;
+}
+
+/* Api Explorer button */
+.navbar-api-explorer-btn {
+    float: left;
+    margin: 1.25rem 1rem 0 0;
+}
+
+/* User profile nav */
 .navbar-user {
     position: relative;
     float: right;
-    padding-right: 3rem;
     height: 5.06rem;
+}
+
+.logged-in {
+    padding-right: 3rem;
     cursor: pointer;
 }
 
-.navbar-user:before {
+.logged-in:before {
     content: "";
     display: block;
     position: absolute;
@@ -2225,6 +2283,7 @@ input.queryUrl {
 .user-dropdown-menu > li a {
     display: block;
     text-decoration: none;
+    -webkit-transition: all .1s ease;
     transition: all .1s ease;
     color: #250053;
 }
@@ -2255,6 +2314,6 @@ input.queryUrl {
 
 .container {
     width: 96%;
-    max-width: 940px;
+    max-width: 960px;
     margin: 0 auto;
 }
