@@ -2169,8 +2169,8 @@ input.queryUrl {
 .navbar-logo {
     position: relative;
     top: -0.25rem;
-    height: 5.06rem;
-    line-height: 5.06rem;
+    height: 4rem;
+    line-height: 4rem;
 }
 
 .navbar-logo img {
@@ -2184,23 +2184,24 @@ input.queryUrl {
 }
 
 .navbar-links .nav {
-    height: 5.06rem;
+    height: 4rem;
     float: left;
 }
 
 .navbar-login {
-    height: 5.06rem;
-    line-height: 5.06rem;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.125rem;
 }
 
 .navbar-links .nav > li {
     float: left;
-    height: 5.06rem;
-    line-height: 5.06rem;
+    height: 4rem;
+    line-height: 4rem;
 }
 
 .navbar-links .nav a {
-    height: 5.06rem;
+    height: 4rem;
     padding: 0 0.5rem;
     font-size: 1.125rem;
     -webkit-transition: all .1s ease;
@@ -2221,18 +2222,26 @@ input.queryUrl {
 /* Api Explorer button */
 .navbar-api-explorer-btn {
     float: left;
-    margin: 1.25rem 1rem 0 0;
+    margin: 1rem 1rem 0 0;
+    border: 1px solid #684090;
+    background-color: #8e5dbf;
+    background: -moz-linear-gradient(top, #8e5dbf, #3e126a);
+    background: -webkit-gradient(linear, left top, left bottom, from(#8e5dbf), to(#3e126a));
+}
+
+.btn-logged-out {
+    margin-top: 0.75rem;
 }
 
 /* User profile nav */
 .navbar-user {
     position: relative;
     float: right;
-    height: 5.06rem;
+    height: 4rem;
 }
 
 .logged-in {
-    padding-right: 3rem;
+    padding-right: 2.25rem;
     cursor: pointer;
 }
 
@@ -2240,7 +2249,7 @@ input.queryUrl {
     content: "";
     display: block;
     position: absolute;
-    top: 36px;
+    top: 1.85rem;
     right: 1rem;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
@@ -2249,17 +2258,17 @@ input.queryUrl {
 
 .profile-picture {
     float: right;
-    width: 3.365rem;
-    height: 3.365rem;
-    margin: 0.8rem 0 0;
+    width: 2rem;
+    height: 2rem;
+    margin: 1rem 0 0;
     border-radius: 50%;
 }
 
 .user-name {
     float: left;
-    height: 5.06rem;
-    margin-right: 1rem;
-    line-height: 5.06rem;
+    height: 4rem;
+    margin-right: 0.5rem;
+    line-height: 4rem;
     -webkit-transition: all .1s ease;
     transition: all .1s ease;
 }
