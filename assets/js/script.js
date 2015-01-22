@@ -74,6 +74,8 @@ $(document).ready(function () {
     loginToAdmin();
   });
 
+  handleLoggedInStatus();
+
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 

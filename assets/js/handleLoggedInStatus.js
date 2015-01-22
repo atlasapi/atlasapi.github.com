@@ -2,7 +2,7 @@ var handleLoggedInStatus = (function () {
   'use strict';
 
   function userLoggedIn() {
-    return localStorage.getItem ? true : false;
+    return localStorage.getItem('auth.token') ? true : false;
   }
 
   function getCredentials() {
@@ -27,21 +27,6 @@ var handleLoggedInStatus = (function () {
       url: url,
       success: function (data) {
         loadTemplate(template.templatePath, template.templateContainer, data)
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
-      }
-    });
-  }
-
-  function getGroupsData() {
-    var credentials = getCredentials(),
-        credentialsQueryString = encodeQueryData(credentials);
-
-    $.ajax({
-      url: 'http://atlas-admin-backend.stage.metabroadcast.com/api/user/groups?' + credentialsQueryString,
-      success: function (data) {
-        console.log(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
@@ -97,12 +82,16 @@ var handleLoggedInStatus = (function () {
         templateContainer: '#apps-menu'
       });
 
-      getGroupsData();
+      getDataAndLoadTemplate('http://atlas-admin-backend.stage.metabroadcast.com/api/user/groups?' + credentialsQueryString, {
+        templatePath: 'assets/templates/content-menu.ejs',
+        templateContainer: '#content-menu'
+      });
+
       events();
     } else {
       loadTemplate('assets/templates/logged-out.ejs', '#navbar-tools');
     }
   }
 
-  return init();
+  return init;
 })();
