@@ -1,8 +1,6 @@
 <a href="#">Content</a>
 <ul class="content-dropdown dropdown-menu">
-  <% if (this.length) { %>
-    <% for (var i = 0, ii = this.length; i < ii; i++) { %>
-      <li><%= this[i].name %></li>
-    <% } %>
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+    <li><%= this[i].name.replace(/-/g, ' ') %></li>
   <% } %>
 </ul>

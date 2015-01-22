@@ -26,6 +26,7 @@ var handleLoggedInStatus = (function () {
     $.ajax({
       url: url,
       success: function (data) {
+        console.log(data);
         loadTemplate(template.templatePath, template.templateContainer, data)
       },
       error: function (jqXHR, textStatus, errorThrown) {
