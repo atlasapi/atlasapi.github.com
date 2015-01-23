@@ -66,7 +66,10 @@ var handleLoggedInStatus = (function () {
     var $targetMenu = $this.find('.dropdown-menu');
 
     $('.dropdown-menu').not($targetMenu).hide();
-    $this.find('.dropdown-menu').toggle();
+    $targetMenu.toggle();
+
+    $('.has-dropdown').not($this).removeClass('active-link');
+    $this.toggleClass('active-link');
   }
 
   function handleClick(element, callback) {
