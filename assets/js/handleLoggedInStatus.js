@@ -102,7 +102,7 @@ var handleLoggedInStatus = (function () {
   }
 
   function toggleDropDownMenu($this) {
-    var $targetMenu = $this.find('.dropdown-menu');
+    var $targetMenu = $this.siblings('.dropdown-menu');
 
     $('.dropdown-menu').not($targetMenu).hide();
     $targetMenu.toggle();
@@ -127,7 +127,7 @@ var handleLoggedInStatus = (function () {
 
   function events() {
     handleClick('.logout', logout);
-    handleClick('.has-dropdown-menu', toggleDropDownMenu);
+    handleClick('.has-dropdown-menu > a', toggleDropDownMenu);
   }
 
   function init() {

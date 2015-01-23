@@ -2248,6 +2248,7 @@ input.queryUrl {
 }
 
 .user-avatar {
+    display: block;
     padding-right: 6px;
 }
 
@@ -2319,8 +2320,7 @@ input.queryUrl {
     padding-right: 10px;
 }
 
-.has-dropdown-menu > a:after,
-.has-dropdown-menu > .user-avatar:after {
+.has-dropdown-menu > a:after {
     content: "";
     display: block;
     position: absolute;
