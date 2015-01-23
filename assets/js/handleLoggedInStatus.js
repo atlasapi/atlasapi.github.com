@@ -58,10 +58,6 @@ var handleLoggedInStatus = (function () {
     });
   }
 
-  function toggleUserMenu() {
-    $('.user-dropdown-menu').toggleClass('hide');
-  }
-
   function toggleDropDownMenu($this) {
     var $targetMenu = $this.find('.dropdown-menu');
 
@@ -81,7 +77,6 @@ var handleLoggedInStatus = (function () {
 
   function events() {
     handleClick('.logout', logout);
-    handleClick('.navbar-user', toggleUserMenu);
     handleClick('.has-dropdown-menu', toggleDropDownMenu);
   }
 

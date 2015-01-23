@@ -1,10 +1,10 @@
 <a class="navbar-api-explorer-btn btn" href="#apiExplorer">api explorer</a>
-<div class="navbar-user logged-in">
+<div class="navbar-user logged-in has-dropdown-menu">
   <div class="user-avatar">
     <img class="profile-picture" src="<%= this.user.profile_image %>" alt="<%= this.user.full_name %>">
     <span class="user-name"><%= this.user.full_name %></span>
   </div>
-  <ul class="user-dropdown-menu hide">
+  <ul class="user-dropdown-menu dropdown-menu">
     <li><a href="/admin?#/profile">your profile</a></li>
     <li><a href="/admin?#/terms">terms of use</a></li>
     <li><a class="logout" href="#">log out</a></li>

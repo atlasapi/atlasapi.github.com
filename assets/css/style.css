@@ -2239,28 +2239,16 @@ input.queryUrl {
     height: 4rem;
 }
 
-.logged-in {
-    padding-right: 2.25rem;
-    cursor: pointer;
-}
-
-.logged-in:before {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 1.85rem;
-    right: 1rem;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #fc0088;
-}
-
 .profile-picture {
     float: right;
     width: 2rem;
     height: 2rem;
     margin: 1rem 0 0;
     border-radius: 50%;
+}
+
+.user-avatar {
+    padding-right: 6px;
 }
 
 .user-name {
@@ -2373,4 +2361,8 @@ input.queryUrl {
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-bottom: 6px solid #fc0088;
+}
+
+.logged-in {
+    cursor: pointer;
 }
