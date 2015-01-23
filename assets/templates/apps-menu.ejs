@@ -1,6 +1,6 @@
 <% if (this.applications) { %>
   <a href="#">Apps</a>
-  <ul class="apps-dropdown dropdown">
+  <ul class="apps-dropdown dropdown-menu">
     <% for (var i = 0; i < 3; i++) { %>
       <li><a href="/admin?#/applications/<%= this.applications[i].id %>"><%= this.applications[i].title %> <%= this.applications[i].credentials.apiKey %></a></li>
     <% } %>

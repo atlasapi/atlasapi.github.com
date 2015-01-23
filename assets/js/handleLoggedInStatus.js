@@ -22,12 +22,15 @@ var handleLoggedInStatus = (function () {
     return queryData.join('&');
   }
 
-  function getDataAndLoadTemplate(url, template) {
+  function getDataAndLoadTemplate(url, templateInfo) {
     $.ajax({
       url: url,
       success: function (data) {
         console.log(data);
-        loadTemplate(template.templatePath, template.templateContainer, data)
+        loadTemplate({
+          templatePath: templateInfo.templatePath,
+          templateContainer: templateInfo.templateContainer
+        }, data)
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
@@ -35,37 +38,48 @@ var handleLoggedInStatus = (function () {
     });
   }
 
-  function loadTemplate(templatePath, templateContainer, data) {
+  function loadTemplate(templateInfo, data) {
     var data = data || {},
         template;
 
     template = new EJS({
-      url: templatePath
+      url: templateInfo.templatePath
     }).render(data);
 
-    $(templateContainer).html(template);
+    $(templateInfo.templateContainer).html(template);
   }
 
   function logout() {
     localStorage.removeItem('auth.provider');
     localStorage.removeItem('auth.token');
-    loadTemplate('assets/templates/logged-out.ejs', '#navbar-tools');
+    loadTemplate({
+      templatePath: 'assets/templates/logged-out.ejs',
+      templateContainer: '#navbar-tools'
+    });
   }
 
   function toggleUserMenu() {
     $('.user-dropdown-menu').toggleClass('hide');
   }
 
+  function toggleDropDownMenu($this) {
+    var $targetMenu = $this.find('.dropdown-menu');
+
+    $('.dropdown-menu').not($targetMenu).hide();
+    $this.find('.dropdown-menu').toggle();
+  }
+
   function handleClick(element, callback) {
     $(document).on('click', element, function (e) {
       e.preventDefault();
-      callback();
+      callback($(this));
     });
   }
 
   function events() {
     handleClick('.logout', logout);
     handleClick('.navbar-user', toggleUserMenu);
+    handleClick('.has-dropdown-menu', toggleDropDownMenu);
   }
 
   function init() {
@@ -88,9 +102,17 @@ var handleLoggedInStatus = (function () {
         templateContainer: '#content-menu'
       });
 
+      loadTemplate({
+        templatePath: 'assets/templates/admin-menu.ejs',
+        templateContainer: '#admin-menu'
+      });
+
       events();
     } else {
-      loadTemplate('assets/templates/logged-out.ejs', '#navbar-tools');
+      loadTemplate({
+        templatePath: 'assets/templates/logged-out.ejs',
+        templateContainer: '#navbar-tools'
+      });
     }
   }
 
