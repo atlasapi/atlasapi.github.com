@@ -2029,7 +2029,7 @@ input.queryUrl {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 1250;
+  z-index: 950;
 }
 
 .carousel {
