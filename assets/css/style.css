@@ -2319,7 +2319,7 @@ input.queryUrl {
     padding-right: 10px;
 }
 
-.has-dropdown-menu:after {
+.has-dropdown-menu > a:after {
     content: "";
     display: block;
     position: absolute;

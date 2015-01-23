@@ -22,15 +22,53 @@ var handleLoggedInStatus = (function () {
     return queryData.join('&');
   }
 
-  function getDataAndLoadTemplate(url, templateInfo) {
+  function getUserDataAndLoadTemplate(url) {
     $.ajax({
       url: url,
       success: function (data) {
-        console.log(data);
         loadTemplate({
-          templatePath: templateInfo.templatePath,
-          templateContainer: templateInfo.templateContainer
-        }, data)
+          templatePath: 'assets/templates/logged-in.ejs',
+          templateContainer: '#navbar-tools'
+        }, data);
+        if (data.user.role === 'admin') {
+          loadTemplate({
+            templatePath: 'assets/templates/admin-menu.ejs',
+            templateContainer: '#admin-menu'
+          });
+        }
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+      }
+    });
+  }
+
+  function getApplicationsDataAndLoadTemplate(url) {
+    $.ajax({
+      url: url,
+      success: function (data) {
+        data.applications = [];
+        loadTemplate({
+          templatePath: 'assets/templates/apps-menu.ejs',
+          templateContainer: '#apps-menu'
+        }, data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+      }
+    });
+  }
+
+  function getGroupsDataAndLoadTemplate(url) {
+    $.ajax({
+      url: url,
+      success: function (data) {
+        if (data.length) {
+          loadTemplate({
+            templatePath: 'assets/templates/content-menu.ejs',
+            templateContainer: '#content-menu'
+          }, data);
+        }
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
@@ -85,25 +123,9 @@ var handleLoggedInStatus = (function () {
       var credentials = getCredentials(),
           credentialsQueryString = encodeQueryData(credentials);
 
-      getDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString, {
-        templatePath: 'assets/templates/logged-in.ejs',
-        templateContainer: '#navbar-tools'
-      });
-
-      getDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, {
-        templatePath: 'assets/templates/apps-menu.ejs',
-        templateContainer: '#apps-menu'
-      });
-
-      getDataAndLoadTemplate('http://atlas-admin-backend.stage.metabroadcast.com/api/user/groups?' + credentialsQueryString, {
-        templatePath: 'assets/templates/content-menu.ejs',
-        templateContainer: '#content-menu'
-      });
-
-      loadTemplate({
-        templatePath: 'assets/templates/admin-menu.ejs',
-        templateContainer: '#admin-menu'
-      });
+      getUserDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString);
+      getApplicationsDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString);
+      getGroupsDataAndLoadTemplate('http://atlas-admin-backend.stage.metabroadcast.com/api/user/groups?' + credentialsQueryString);
 
       events();
     } else {
