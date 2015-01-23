@@ -36,9 +36,11 @@ var handleLoggedInStatus = (function () {
             templateContainer: '#admin-menu'
           });
         }
+        loadUserPhoto();
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
+        logout();
       }
     });
   }
@@ -93,6 +95,10 @@ var handleLoggedInStatus = (function () {
       templatePath: 'assets/templates/logged-out.ejs',
       templateContainer: '#navbar-tools'
     });
+
+    $('.user-menus > li').each(function () {
+      $(this).empty();
+    });
   }
 
   function toggleDropDownMenu($this) {
@@ -110,6 +116,13 @@ var handleLoggedInStatus = (function () {
       e.preventDefault();
       callback($(this));
     });
+  }
+
+  function loadUserPhoto() {
+    var $userPhoto = $('.profile-picture'),
+        imageUrl = $userPhoto.data('src');
+
+    $userPhoto.attr('src', imageUrl);
   }
 
   function events() {
