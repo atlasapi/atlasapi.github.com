@@ -47,7 +47,6 @@ var handleLoggedInStatus = (function () {
     $.ajax({
       url: url,
       success: function (data) {
-        data.applications = [];
         loadTemplate({
           templatePath: 'assets/templates/apps-menu.ejs',
           templateContainer: '#apps-menu'
