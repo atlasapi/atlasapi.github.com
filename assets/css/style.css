@@ -2319,7 +2319,8 @@ input.queryUrl {
     padding-right: 10px;
 }
 
-.has-dropdown-menu > a:after {
+.has-dropdown-menu > a:after,
+.has-dropdown-menu > .user-avatar:after {
     content: "";
     display: block;
     position: absolute;
