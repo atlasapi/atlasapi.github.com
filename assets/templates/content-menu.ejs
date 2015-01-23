@@ -1,6 +1,16 @@
 <a href="#">Content</a>
 <ul class="content-dropdown dropdown-menu">
   <% for (var i = 0, ii = this.length; i < ii; i++) { %>
-    <li><%= this[i].name.replace(/-/g, ' ') %></li>
+    <li>
+      <% if (this[i].name === 'BTBlackout') { %>
+        <a href="/admin?#/epg/bt-tv">EPG</a>
+      <% } %>
+      <% if (this[i].name === 'BBC-YV-Feed') { %>
+        <a href="/admin?#/scrubbables">Feeds</a>
+      <% } %>
+      <% if (this[i].name === 'BBC-Scrubbables') { %>
+        <a href="/admin?#/feeds">Scrubbables</a>
+      <% } %>
+    </li>
   <% } %>
 </ul>

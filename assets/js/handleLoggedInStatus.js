@@ -64,7 +64,7 @@ var handleLoggedInStatus = (function () {
     $('.dropdown-menu').not($targetMenu).hide();
     $targetMenu.toggle();
 
-    $('.has-dropdown').not($this).removeClass('active-link');
+    $('.has-dropdown-menu').not($this).removeClass('active-link');
     $this.toggleClass('active-link');
   }
 
