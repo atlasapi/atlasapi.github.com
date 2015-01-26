@@ -1,10 +1,18 @@
 var handleLoggedInStatus = (function () {
   'use strict';
 
+  /**
+   * Checks to see if user is logged in or not
+   * @return {boolean} `true` if logged in, `false` if not
+   */
   function userLoggedIn() {
     return localStorage.getItem('auth.token') ? true : false;
   }
 
+  /**
+   * Gets users auth credentials from localStorage
+   * @return {object} OAuth provider and token
+   */
   function getCredentials() {
     return {
       oauth_provider: localStorage.getItem('auth.provider'),
@@ -12,6 +20,12 @@ var handleLoggedInStatus = (function () {
     };
   }
 
+  /**
+   * Creates a query string from an object
+   * @param  {object} data The key/value pairs to be encoded
+   * @return {string}      An encoded query string
+   */
+  // TODO: This needs to be common
   function encodeQueryData(data) {
     var queryData = [];
 
@@ -22,6 +36,10 @@ var handleLoggedInStatus = (function () {
     return queryData.join('&');
   }
 
+  /**
+   * Get data from users endpoint and pass to template to be compiled
+   * @param  {string} url users endpoint URL
+   */
   function getUserDataAndLoadTemplate(url) {
     $.ajax({
       url: url,
@@ -45,6 +63,10 @@ var handleLoggedInStatus = (function () {
     });
   }
 
+  /**
+   * Get data from applications endpoint and pass to template to be compiled
+   * @param  {string} url applications endpoint URL
+   */
   function getApplicationsDataAndLoadTemplate(url) {
     $.ajax({
       url: url,
@@ -60,6 +82,10 @@ var handleLoggedInStatus = (function () {
     });
   }
 
+  /**
+   * Get data from groups endpoint and pass to template to be compiled
+   * @param  {string} url groups endpoint URL
+   */
   function getGroupsDataAndLoadTemplate(url) {
     $.ajax({
       url: url,
@@ -77,6 +103,11 @@ var handleLoggedInStatus = (function () {
     });
   }
 
+  /**
+   * Compiles template and optionally passes in data
+   * @param  {object} templateInfo The `templatePath` and `templateContainer`
+   * @param  {object} data         Data to be passed into the template
+   */
   function loadTemplate(templateInfo, data) {
     var data = data || {},
         template;
@@ -88,6 +119,9 @@ var handleLoggedInStatus = (function () {
     $(templateInfo.templateContainer).html(template);
   }
 
+  /**
+   * Logs out user
+   */
   function logout() {
     localStorage.removeItem('auth.provider');
     localStorage.removeItem('auth.token');
@@ -101,6 +135,10 @@ var handleLoggedInStatus = (function () {
     });
   }
 
+  /**
+   * Toggles visibility of dropdown menus
+   * @param  {selector} $this The element being clicked
+   */
   function toggleDropDownMenu($this) {
     var $targetMenu = $this.siblings('.dropdown-menu');
 
@@ -111,6 +149,11 @@ var handleLoggedInStatus = (function () {
     $this.toggleClass('active-link');
   }
 
+  /**
+   * Handles click events with a callback
+   * @param  {selector}   element  The element being clicked
+   * @param  {function} callback The function to be called when click event occurs
+   */
   function handleClick(element, callback) {
     $(document).on('click', element, function (e) {
       e.preventDefault();
@@ -118,6 +161,9 @@ var handleLoggedInStatus = (function () {
     });
   }
 
+  /**
+   * Loads users photo once page has loaded
+   */
   function loadUserPhoto() {
     var $userPhoto = $('.profile-picture'),
         imageUrl = $userPhoto.data('src');
@@ -125,11 +171,17 @@ var handleLoggedInStatus = (function () {
     $userPhoto.attr('src', imageUrl);
   }
 
+  /**
+   * Handles any event based functions
+   */
   function events() {
     handleClick('.logout', logout);
     handleClick('.has-dropdown-menu > a', toggleDropDownMenu);
   }
 
+  /**
+   * Initialises the class
+   */
   function init() {
     if (userLoggedIn()) {
       var credentials = getCredentials(),
