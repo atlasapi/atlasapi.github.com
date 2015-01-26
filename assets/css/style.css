@@ -2159,6 +2159,7 @@ input.queryUrl {
     background: rgba(239,239,239,0.95);
     box-shadow: 0 1px #EF308F, 0 5px 10px rgba(0,0,0,0.2);
     z-index: 1000;
+    font-size: 1.125rem;
 }
 
 /* Logo */
