@@ -18,8 +18,10 @@ function highlightCurrentPage() {
       if (isOnScreen(target)) {
         $(this).siblings().removeClass('active-link');
         $(this).addClass('active-link');
-        if (history.pushState) {
-          history.pushState(null, null, target);
+        if (!$('.submenu .active-link')) {
+          if (history.pushState) {
+            history.pushState(null, null, target);
+          }
         }
       } else {
         $(this).removeClass('active-link');
@@ -31,10 +33,12 @@ function highlightCurrentPage() {
       if (isOnScreen(target)) {
         $(this).siblings().removeClass('active-link');
         $(this).addClass('active-link');
-        if (history.pushState) {
-          history.pushState(null, null, target);
-        } else {
-          $(this).removeClass('active-link');
+        if ($('.submenu').is(':visible')) {
+          if (history.pushState) {
+            history.pushState(null, null, target);
+          } else {
+            $(this).removeClass('active-link');
+          }
         }
       }
     });
