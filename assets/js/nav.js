@@ -1,15 +1,28 @@
 function highlightCurrentPage() {
 
+  if (window.location.hash) {
+    $(window).scrollTop($(window.location.hash).offset().top - 64);
+  }
+
   function isOnScreen(el) {
-    var distance = $(el).offset().top - 250,
+    var distance = $(el).offset().top - 150,
         $window = $(window);
 
-    if ($window.scrollTop() > distance && $window.scrollTop() < distance + $(el).height()) {
+    if ($window.scrollTop() > distance && $window.scrollTop() < distance + 90 + $(el).height()) {
       return true;
     } else {
       return false;
     }
   }
+
+  $('#nav-main a').on('click', function (e) {
+    e.preventDefault();
+    var target = $(this).attr('href');
+    $(window).scrollTop($(target).offset().top - 64);
+    if (history.pushState) {
+      history.pushState(null, null, target);
+    }
+  });
 
   $(document).scroll(function () {
 
@@ -18,7 +31,7 @@ function highlightCurrentPage() {
       if (isOnScreen(target)) {
         $(this).siblings().removeClass('active-link');
         $(this).addClass('active-link');
-        if (!$('.submenu .active-link')) {
+        if (!$('.submenu').is(':visible')) {
           if (history.pushState) {
             history.pushState(null, null, target);
           }
