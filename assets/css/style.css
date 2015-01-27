@@ -2306,10 +2306,6 @@ input.queryUrl {
     clear: both;
 }
 
-.nav > li {
-    float: left;
-}
-
 .container {
     width: 960px;
     margin: 0 auto;
@@ -2318,8 +2314,7 @@ input.queryUrl {
 /* Dropdowns */
 .has-dropdown-menu {
     position: relative;
-    margin-right: 5px;
-    padding-right: 10px;
+    padding-right: 15px;
 }
 
 .has-dropdown-menu > a:after {
@@ -2327,7 +2322,7 @@ input.queryUrl {
     display: block;
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 5px;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid #fc0088;
