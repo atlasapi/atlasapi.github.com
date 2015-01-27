@@ -4,7 +4,7 @@ function highlightCurrentPage() {
     var distance = $(el).offset().top - 250,
         $window = $(window);
 
-    if ($window.scrollTop() > distance) {
+    if ($window.scrollTop() > distance && $window.scrollTop() < distance + $(el).height()) {
       return true;
     } else {
       return false;
