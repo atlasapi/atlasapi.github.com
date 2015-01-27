@@ -1,6 +1,10 @@
 var NowNextLater = function () {
   'use strict';
 
+  var coeff = 1000 * 60 * 5;
+  var date = new Date();
+  var rounded = new Date(Math.round(date.getTime() / coeff) * coeff);
+
   this.apiKey = '84097c4de516445eb7bb58f4b73d2842';
   this.channelGroupsEndpointURL = '//users-atlas.metabroadcast.com/3.0/channel_groups/';
   this.channelGroupsID = 'cbgZ';
@@ -8,7 +12,7 @@ var NowNextLater = function () {
   this.channelIDsLimit = 200;
   this.scheduleEndpointURL = '//users3-atlas.metabroadcast.com/3.0/schedule.json?';
   this.scheduleCount = 2;
-  this.scheduleFrom = new Date().toISOString();
+  this.scheduleFrom = rounded.toISOString();
   this.scheduleAnnotations = ['channel', 'channel_summary', 'extended_description', 'brand_summary', 'broadcasts'];
   this.fadeDuration = 1000 * 3;
   this.carouselInterval = false;
