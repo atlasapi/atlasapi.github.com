@@ -552,7 +552,7 @@ NowNextLater.prototype.loadFullscreen = function () {
           index = 0;
         }
       } else {
-        page = 0;
+        page = 1;
         index = 0;
       }
     }
