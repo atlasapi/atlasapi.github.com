@@ -39,13 +39,21 @@
 
 	<div class="site-header" id="header">
 		<div class="container">
-			<a class="site-logo" href="/"><img src="assets/images/logo.png" alt="Atlas"></a>
+			<a class="site-logo" href="#home"><img src="assets/images/logo.png" alt="Atlas"></a>
 			<div class="navbar-links">
-			  <ul class="nav">
-			    <li><a href="#widgets">widgets</a></li>
-			    <li><a href="#examples">examples</a></li>
-			    <li><a href="#reference">reference</a></li>
-			    <li><a href="#about">about</a></li>
+			  <ul class="nav" id="nav-main">
+			    <li class="nav-item"><a href="#widgets">widgets</a></li>
+			    <li class="nav-item"><a href="#examples">examples</a></li>
+			    <li class="nav-item">
+			    	<a href="#reference">reference</a>
+			    	<ul class="submenu">
+			    		<li><a href="#reference_overview">overview</a></li>
+			    		<li><a href="#reference_dataModel">data model</a></li>
+			    		<li><a href="#reference_sources">sources</a></li>
+			    		<li><a href="#reference_feeds">feeds</a></li>
+			    	</ul>
+			    </li>
+			    <li class="nav-item"><a href="#about">about</a></li>
 			  </ul>
 			</div>
 			<div class="navbar-links">
@@ -149,8 +157,7 @@
 			<li><i class="clientLogo youview-logo"></i></li>
 		</ol>
 
-		<section class="widgets">
-			<div class="marker" id="widgets"></div>
+		<section class="widgets" id="widgets">
 			<h2>Widgets</h2>
 			<h3>EPG</h3>
 			<div class="mbl">
@@ -174,8 +181,7 @@ MBST.load({
 });</code></pre>
 		</section>
 
-		<section class="examples">
-			<div class="marker" id="examples"></div>
+		<section class="examples" id="examples">
 			<h2>Examples</h2>
 			<div class="clearfix">
 				<div class="example clearfix">
@@ -212,8 +218,7 @@ MBST.load({
 			</div>
 		</section>
 
-		<section class="reference">
-			<div class="marker" id="reference"></div>
+		<section class="reference" id="reference">
 			<ul class="subNav" style="display: none;">
 				<li><a href="#reference_overview">Overview</a></li>
 				<li><a href="#reference_dataModel">Data Model</a></li>
@@ -222,8 +227,7 @@ MBST.load({
 			</ul>
 			<h2>Reference</h2>
 
-			<section data-title="reference_overview" class="subSection">
-				<div class="marker" id="reference_overview"></div>
+			<section data-title="reference_overview" class="subSection" id="reference_overview">
 				<h3>Overview</h3>
 				<p>Atlas is a metadata aggregator built for multiple data sets.
 					It ingests data from many different sources, indexes it, matches
@@ -235,8 +239,7 @@ MBST.load({
 					common data model that all sources are mapped to.</p>
 			</section>
 
-			<section data-title="reference_dataModel" class="subSection">
-				<div class="marker" id="reference_dataModel"></div>
+			<section data-title="reference_dataModel" class="subSection" id="reference_dataModel">
 				<h3>Data Model</h3>
 				<p>The Atlas data model has a number of key resource types. They
 					are containers and items (collectively know as content), content
@@ -294,8 +297,7 @@ MBST.load({
 				   platform in a particular region.</p>
 			</section>
 
-			<section data-title="reference_sources" class="subSection">
-				<div class="marker" id="reference_sources"></div>
+			<section data-title="reference_sources" class="subSection" id="reference_sources">
 				<h3>Sources</h3>
 				<p>Atlas works with data from the following sources:</p>
 
@@ -458,8 +460,7 @@ MBST.load({
 				</p>
 			</section>
 
-			<section data-title="reference_feeds" class="subSection">
-				<div class="marker" id="reference_feeds"></div>
+			<section data-title="reference_feeds" class="subSection" id="reference_feeds">
 				<h3>Feeds</h3>
 				<p>In addition to the RESTful API, Atlas also provides data in a
 					variety of feed formats</p>
@@ -513,8 +514,7 @@ MBST.load({
 			</section>
 		</section>
 
-		<section class="about">
-			<div class="marker" id="about"></div>
+		<section class="about" id="about">
 			<h2>About</h2>
 
 			<div class="line">

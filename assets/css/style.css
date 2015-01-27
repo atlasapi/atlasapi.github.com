@@ -428,50 +428,6 @@
 			.list {list-style-type: none; font-size: 12px; line-height: 18px; margin-bottom: 10px;}
 			.list li {padding-left: 20px; background:url(../images/bullet.gif) 0 10px no-repeat; font-size: 14px; line-height: 24px;}
 
-			nav {float: left; margin-left: 10px;}
-			.mainMenu {list-style-type: none; font-size: 22px; margin-top: 23px; line-height: 28px; float: left; }
-			.mainMenu li {float: left; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
-			.mainMenu li:first-child {border-left: 0 none;}
-			.mainMenu li:last-child {border-right: 0 none;}
-			.mainMenu li a {color: #333; padding: 0 20px 5px; display: block; position: relative; bottom: -1px;}
-			.mainMenu li a:hover {color: #ef308f; text-decoration: none;}
-			.mainMenu li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
-
-			.subNav {
-                font-size: 16px;
-                float: left;
-                position: fixed;
-                top: 68px;
-                background: #efefef;
-                background: rgba(239,239,239,0.95);
-                border-left: 1px solid #EF308F;
-                border-bottom: 1px solid #EF308F;
-                border-right: 1px solid #EF308F;
-                z-index: 20;
-                padding: 0 10px;
-                -moz-border-radius: 0 0 5px 5px;
-                -o-border-radius: 0 0 5px 5px;
-                -khtml-border-radius: 0 0 5px 5px;
-                -ms-border-radius: 0 0 5px 5px;
-                border-radius: 0 0 5px 5px;
-                -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -o-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -khtml-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -ms-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-			}
-			*:first-child+html .subNav {top: 67px;}
-			*html .subNav {top: 67px;}
-			.subNav li {float: left; padding: 0 10px; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
-			*:first-child+html .subNav li {border-right: 0 none;}
-			*html .suvNav li {border-right: 0 none;}
-			.subNav li:first-child {border-left: 0 none; padding-left: 0;}
-			.subNav li:last-child {border-right: 0 none; padding-right: 0;}
-			.subNav li:first-child{margin-left: 0;}
-			.subNav li a {float: left; display: block; padding: 5px 0; color: #333;}
-			.subNav li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
-
 			.tabs {
                 background: #e2e2e2;
                 float: left;
@@ -2181,6 +2137,7 @@ input.queryUrl {
 
 .nav > li {
     float: left;
+    position: relative;
 }
 
 .navbar-links .nav {
@@ -2204,8 +2161,6 @@ input.queryUrl {
     display: block;
     padding: 0.25rem 0.5rem 0.5rem;
     font-size: 1.125rem;
-    -webkit-transition: all .1s ease;
-    transition: all .1s ease;
 }
 
 .navbar-links .nav a:hover,
@@ -2253,8 +2208,6 @@ input.queryUrl {
 .user-name {
     float: left;
     margin: 2rem 0 0;
-    -webkit-transition: all .1s ease;
-    transition: all .1s ease;
 }
 
 /* Generic */
@@ -2350,4 +2303,50 @@ input.queryUrl {
 
 .logged-in {
     cursor: pointer;
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    min-width: 330%;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    background: #efefef;
+    background: rgba(239,239,239,0.95);
+    border-left: 1px solid #EF308F;
+    border-bottom: 1px solid #EF308F;
+    border-right: 1px solid #EF308F;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    padding: 0 10px;
+    z-index: -20;
+    margin-top: 1px;
+}
+
+.active-link .submenu {
+    display: block;
+}
+
+.active-link > a {
+    background: url("../images/selected.gif") bottom center no-repeat;
+}
+
+.submenu li {
+    float: left;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #ddd;
+}
+
+.submenu li:first-child {
+    border-left: 0;
+}
+
+.submenu li:last-child {
+    border-right: 0;
+}
+
+.navbar-links .nav .submenu a {
+    font-size: 16px;
+    padding: 0.2rem 0.5rem 0.3rem;
 }
