@@ -85,7 +85,7 @@
 			section .marker {position: absolute; top: -68px;}
 
 			.home {padding: 90px 0 10px;}
-			*html .home {padding: 100px 0 10px;}
+
 			.homepageInfo {
                 font-size: 11px;
                 color: #666;
@@ -1379,9 +1379,6 @@
 
             .loading {background-image: url(../images/loader.gif); background-position: center; background-repeat: no-repeat;}
 
-            .apiKeyHolder {
-	            margin: 96px 0 30px;
-           }
 
             .apiKeyHolder ul strong {
                 color: #ef308f;

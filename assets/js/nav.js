@@ -15,7 +15,7 @@ function highlightCurrentPage() {
     }
   }
 
-  $('#nav-main a').on('click', function (e) {
+  $('#nav-main a, .navbar-api-explorer-btn').on('click', function (e) {
     e.preventDefault();
     var target = $(this).attr('href');
     $(window).scrollTop($(target).offset().top - 64);
@@ -55,5 +55,17 @@ function highlightCurrentPage() {
         }
       }
     });
+
+    if (isOnScreen('#apiExplorer')) {
+      if (history.pushState) {
+        history.pushState(null, null, '#apiExplorer');
+      }
+    }
+
+    if (isOnScreen('#home')) {
+      if (history.pushState) {
+        history.pushState(null, null, '#home');
+      }
+    }
   });
 }
