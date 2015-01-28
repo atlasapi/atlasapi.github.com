@@ -86,7 +86,7 @@ var handleLoggedInStatus = (function () {
     $.ajax({
       url: url,
       success: function (data) {
-        data = sortApplicationsByDate(data);
+        data = sortApplicationsByDateDescending(data);
 
         loadTemplate({
           templatePath: 'assets/templates/apps-menu.ejs',
