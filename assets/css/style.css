@@ -2347,3 +2347,16 @@ input.queryUrl {
     font-size: 16px;
     padding: 0.2rem 0.5rem 0.3rem;
 }
+
+.menu-separator {
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.apps-dropdown .application-link {
+    line-height: 1.5;
+}
+
+.menu-title h4 {
+    margin: 0;
+}
