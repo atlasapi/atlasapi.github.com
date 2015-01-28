@@ -64,6 +64,21 @@ var handleLoggedInStatus = (function () {
   }
 
   /**
+   * Sorts array of applications by most recently created
+   * @param  {object} data The data returned from the applications endpoint
+   * @return {object}      The applications data sorted my most recently created
+   */
+  function sortApplicationsByDateDescending(data) {
+    data.applications.sort(function (a, b) {
+      a = new Date(a.created);
+      b = new Date(b.created);
+      return a > b ? -1 : a < b ? 1 : 0;
+    });
+
+    return data;
+  }
+
+  /**
    * Get data from applications endpoint and pass to template to be compiled
    * @param  {string} url applications endpoint URL
    */
@@ -71,6 +86,8 @@ var handleLoggedInStatus = (function () {
     $.ajax({
       url: url,
       success: function (data) {
+        data = sortApplicationsByDate(data);
+
         loadTemplate({
           templatePath: 'assets/templates/apps-menu.ejs',
           templateContainer: '#apps-menu'
