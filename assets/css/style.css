@@ -84,7 +84,7 @@
 			section.subSection:last-child {border-bottom: 0 none;}
 			section .marker {position: absolute; top: -68px;}
 
-			.home {padding: 90px 0 10px;}
+			.home {padding: 130px 0 10px;}
 
 			.homepageInfo {
                 font-size: 11px;
@@ -2167,17 +2167,17 @@ input.queryUrl {
 
 .navbar-tools {
     float: right;
+    height: 36px;
 }
 
 .navbar-login {
     position: relative;
-    top: 1.75rem;
-    font-size: 1.125rem;
+    font-size: 1rem;
 }
 
 .navbar-api-explorer-btn {
-    float: left;
-    margin: 0.8rem 1rem 0 0;
+    float: right;
+    margin: 0.8rem 0 0;
     border: 1px solid #684090;
     background-color: #8e5dbf;
     background: linear-gradient(top, #8e5dbf, #3e126a);
@@ -2186,14 +2186,13 @@ input.queryUrl {
 /* User profile nav */
 .navbar-user {
     position: relative;
-    float: right;
 }
 
 .profile-picture {
     float: right;
-    width: 2rem;
-    height: 2rem;
-    margin: 1.25rem 0 0 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: 0.5rem 0 0 0.5rem;
     border-radius: 50%;
 }
 
@@ -2204,7 +2203,7 @@ input.queryUrl {
 
 .user-name {
     float: left;
-    margin: 2rem 0 0;
+    margin: 0.75rem 0 0;
 }
 
 /* Generic */
@@ -2245,7 +2244,7 @@ input.queryUrl {
 }
 
 .navbar-user.has-dropdown-menu > a:after {
-    top: 85%;
+    top: 1.5rem;
 }
 
 .dropdown-menu {
@@ -2294,8 +2293,14 @@ input.queryUrl {
 }
 
 .user-dropdown-menu {
-    top: 100%;
-    margin-top: 6px;
+    top: 2.5rem;
+    left: auto;
+    right: 0;
+}
+
+.user-dropdown-menu:after {
+    left: auto;
+    right: 1.75rem;
 }
 
 .logged-in {
@@ -2360,3 +2365,4 @@ input.queryUrl {
 .menu-title h4 {
     margin: 0;
 }
+

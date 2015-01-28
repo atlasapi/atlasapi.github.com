@@ -1,11 +1,11 @@
 function highlightCurrentPage() {
 
   if (window.location.hash) {
-    $(window).scrollTop($(window.location.hash).offset().top - 64);
+    $(window).scrollTop($(window.location.hash).offset().top - 100);
   }
 
   function isOnScreen(el) {
-    var distance = $(el).offset().top - 150,
+    var distance = $(el).offset().top - 200,
         $window = $(window);
 
     if ($window.scrollTop() > distance && $window.scrollTop() < distance + 90 + $(el).height()) {
@@ -18,7 +18,7 @@ function highlightCurrentPage() {
   $('#nav-main a, .navbar-api-explorer-btn').on('click', function (e) {
     e.preventDefault();
     var target = $(this).attr('href');
-    $(window).scrollTop($(target).offset().top - 64);
+    $(window).scrollTop($(target).offset().top - 100);
     if (history.pushState) {
       history.pushState(null, null, target);
     }
