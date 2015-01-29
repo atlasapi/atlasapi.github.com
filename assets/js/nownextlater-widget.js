@@ -508,9 +508,8 @@ NowNextLater.prototype.loadFullscreen = function () {
 
   var nowNextLater = this,
       programmeData = nowNextLater.orderByStartTime(),
-      dataForFullscreen = nowNextLater.groupDataForFullscreenView(programmeData);
-
-  var $widgetPanels = $('.widget-panel-container .widget-panel-inner');
+      dataForFullscreen = nowNextLater.groupDataForFullscreenView(programmeData),
+      $widgetPanels = $('.widget-panel-container .widget-panel-inner');
 
   $widgetPanels.each(function (index) {
     nowNextLater.compileTemplate(dataForFullscreen[0][index], {
@@ -520,44 +519,48 @@ NowNextLater.prototype.loadFullscreen = function () {
     });
   });
 
-  function loadNewProg() {
-    var items = $('.widget-panel-container .widget-panel-inner'),
-        index = 0,
-        page = 1;
+  nowNextLater.loadNewProgramme(dataForFullscreen);
+};
 
-    nowNextLater.fullscreenInterval = setInterval(function () {
-      loadPanel();
-    }, 1000);
+NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
+  'use strict';
 
-    function loadPanel() {
-      if (page < dataForFullscreen.length) {
-        if (index < items.length) {
-          nowNextLater.compileTemplate(dataForFullscreen[page][index], {
-            template: 'assets/templates/fullscreen.ejs',
-            container: $(items[index]),
-            append: true
-          });
-          $(items[index]).find('.widget-panel:last-child').hide();
-          $(items[index]).find('.widget-programme-image').on('load', function () {
-            $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
-            if ($(items[index - 1]).find('.widget-panel').length > 1) {
-              $(items[index - 1]).find('.widget-panel:first-child').remove();
-            }
-            index++;
-          });
-        } else {
-          var newData = nowNextLater.runProgrammeFilters();
-          dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-          page++;
-          index = 0;
-        }
+  var nowNextLater = this,
+      items = $('.widget-panel-container .widget-panel-inner'),
+      index = 0,
+      page = 1;
+
+  nowNextLater.fullscreenInterval = setInterval(function () {
+    loadPanel();
+  }, 1000);
+
+  function loadPanel() {
+    if (page < dataForFullscreen.length) {
+      if (index < items.length) {
+        nowNextLater.compileTemplate(dataForFullscreen[page][index], {
+          template: 'assets/templates/fullscreen.ejs',
+          container: $(items[index]),
+          append: true
+        });
+        $(items[index]).find('.widget-panel:last-child').hide();
+        $(items[index]).find('.widget-programme-image').on('load', function () {
+          $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
+          if ($(items[index - 1]).find('.widget-panel').length > 1) {
+            $(items[index - 1]).find('.widget-panel:first-child').remove();
+          }
+          index++;
+        });
       } else {
-        page = 1;
+        var newData = nowNextLater.runProgrammeFilters();
+        dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
+        page++;
         index = 0;
       }
+    } else {
+      page = 1;
+      index = 0;
     }
   }
-  loadNewProg();
 };
 
 NowNextLater.prototype.goFullScreen = function (element) {
