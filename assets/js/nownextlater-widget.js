@@ -363,7 +363,9 @@ NowNextLater.prototype.orderByStartTime = function () {
       programmes = nowNextLater.runProgrammeFilters();
 
   programmes.sort(function (a, b) {
-    return new Date(a.broadcasts[0].transmission_time) - new Date(b.broadcasts[0].transmission_time);
+    a = new Date(a.broadcasts[0].transmission_time);
+    b = new Date(b.broadcasts[0].transmission_time);
+    return a > b ? -1 : a < b ? 1 : 0;
   });
 
   return programmes;
@@ -535,6 +537,7 @@ NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
   }, 1000);
 
   function loadPanel() {
+    var imageLoaded;
     if (page < dataForFullscreen.length) {
       if (index < items.length) {
         nowNextLater.compileTemplate(dataForFullscreen[page][index], {
@@ -544,12 +547,24 @@ NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
         });
         $(items[index]).find('.widget-panel:last-child').hide();
         $(items[index]).find('.widget-programme-image').on('load', function () {
+          imageLoaded = true;
           $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
           if ($(items[index - 1]).find('.widget-panel').length > 1) {
             $(items[index - 1]).find('.widget-panel:first-child').remove();
           }
           index++;
         });
+
+        var imageLoadedTimeout = setTimeout(function () {
+          if (!imageLoaded) {
+            $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
+            $(items[index]).find('.widget-panel:last-child .widget-programme-image').attr('src', 'http://placehold.it/460x259&text=Image+not+available');
+            if ($(items[index - 1]).find('.widget-panel').length > 1) {
+              $(items[index - 1]).find('.widget-panel:first-child').remove();
+            }
+            index++;
+          }
+        }, 5000);
       } else {
         var newData = nowNextLater.runProgrammeFilters();
         dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
