@@ -567,7 +567,7 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
         setTimeout(function () {
           if (!imageLoaded) {
             $widgetPanel.find('.widget-programme-image').attr('src', 'http://placehold.it/460x259&text=Image+not+available');
-            $widgetPanel.fadeIn(1000, function () {
+            $widgetPanel.fadeIn(1500, function () {
               if ($(items[index - 1]).find('.widget-panel').length > 1) {
                 $(items[index-1]).find('.widget-panel:first-child').remove();
               }
