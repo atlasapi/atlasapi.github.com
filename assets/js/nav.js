@@ -1,6 +1,8 @@
 function highlightCurrentPage() {
 
-  $(window).scrollTop($(window.location.hash).offset().top - 100);
+  if (window.location.hash !== '') {
+    $(window).scrollTop($(window.location.hash).offset().top - 100);
+  }
 
   function isOnScreen(el) {
     var distance = $(el).offset().top - 200,
