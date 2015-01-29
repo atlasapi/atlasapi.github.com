@@ -532,49 +532,65 @@ NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
       index = 0,
       page = 1;
 
-  nowNextLater.fullscreenInterval = setInterval(function () {
-    loadPanel();
-  }, 1000);
+  nowNextLater.loadPanel(items, index, page, dataForFullscreen);
+};
 
-  function loadPanel() {
-    var imageLoaded;
-    if (page < dataForFullscreen.length) {
-      if (index < items.length) {
+NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscreen) {
+  'use strict';
+
+  var nowNextLater = this;
+
+  if (page < dataForFullscreen.length) {
+    if (index < items.length) {
+      var $widgetPanel,
+          imageLoaded;
+
+      setTimeout(function () {
+
         nowNextLater.compileTemplate(dataForFullscreen[page][index], {
           template: 'assets/templates/fullscreen.ejs',
           container: $(items[index]),
           append: true
         });
-        $(items[index]).find('.widget-panel:last-child').hide();
-        $(items[index]).find('.widget-programme-image').on('load', function () {
+
+        $widgetPanel = $(items[index]).find('.widget-panel:last-child');
+        $widgetPanel.hide();
+        $widgetPanel.find('.widget-programme-image').on('load', function () {
           imageLoaded = true;
-          $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
-          if ($(items[index - 1]).find('.widget-panel').length > 1) {
-            $(items[index - 1]).find('.widget-panel:first-child').remove();
-          }
-          index++;
+          $widgetPanel.fadeIn(1000, function () {
+            if ($(items[index - 1]).find('.widget-panel').length > 1) {
+              $(items[index-1]).find('.widget-panel:first-child').remove();
+            }
+          });
         });
 
-        var imageLoadedTimeout = setTimeout(function () {
+        setTimeout(function () {
           if (!imageLoaded) {
-            $(items[index]).find('.widget-panel:last-child').fadeIn(1000);
-            $(items[index]).find('.widget-panel:last-child .widget-programme-image').attr('src', 'http://placehold.it/460x259&text=Image+not+available');
-            if ($(items[index - 1]).find('.widget-panel').length > 1) {
-              $(items[index - 1]).find('.widget-panel:first-child').remove();
-            }
-            index++;
+            $widgetPanel.find('.widget-programme-image').attr('src', 'http://placehold.it/460x259&text=Image+not+available');
+            $widgetPanel.fadeIn(1000, function () {
+              if ($(items[index - 1]).find('.widget-panel').length > 1) {
+                $(items[index-1]).find('.widget-panel:first-child').remove();
+              }
+            });
           }
-        }, 5000);
-      } else {
-        var newData = nowNextLater.runProgrammeFilters();
-        dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-        page++;
-        index = 0;
-      }
+        }, 1400);
+
+        index++;
+
+        nowNextLater.loadPanel(items, index, page, dataForFullscreen);
+      }, 1500);
     } else {
-      page = 1;
-      index = 0;
+      setTimeout(function () {
+        page++;
+        nowNextLater.loadPanel(items, 0, page, dataForFullscreen);
+      });
     }
+  } else {
+    setTimeout(function () {
+      var newData = nowNextLater.runProgrammeFilters();
+      dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
+      nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
+    });
   }
 };
 
