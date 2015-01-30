@@ -534,6 +534,8 @@ NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
       index = 0,
       page = 1;
 
+  console.log('loadNewProgramme', 'index', index, 'page', page);
+
   nowNextLater.loadPanel(items, index, page, dataForFullscreen);
 };
 
@@ -543,6 +545,8 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
   var nowNextLater = this,
       $widgetPanel,
       imageLoaded;;
+
+  console.log('loadPanel');
 
   if (page < dataForFullscreen.length) {
     if (index < items.length) {
@@ -579,11 +583,14 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
 
         index++;
 
+        console.log('index', index, 'page', page);
+
         nowNextLater.loadPanel(items, index, page, dataForFullscreen);
       }, 1500);
     } else {
       nowNextLater.loadPanelTimeout = setTimeout(function () {
         page++;
+        console.log('index', index, 'page', page);
         nowNextLater.loadPanel(items, 0, page, dataForFullscreen);
       });
     }
@@ -592,6 +599,7 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
       var newData = nowNextLater.runProgrammeFilters();
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
       nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
+      console.log('index', index, 'page', page);
     });
   }
 };
