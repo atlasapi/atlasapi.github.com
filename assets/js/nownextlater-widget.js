@@ -593,8 +593,12 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
     nowNextLater.loadPanelTimeout = setTimeout(function () {
       var newData = nowNextLater.runProgrammeFilters();
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-      nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
-      console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
+      if (dataForFullscreen.length) {
+        nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
+        console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
+      } else {
+        console.error('No data');
+      }
     });
   }
 };
