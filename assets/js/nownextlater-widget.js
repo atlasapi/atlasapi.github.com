@@ -82,8 +82,8 @@ NowNextLater.prototype.getData = function (url) {
     success: function (data) {
       dataResponse = data;
     },
-    error: function () {
-      console.error('Unable to get data');
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.error(errorThrown);
     }
   });
 
