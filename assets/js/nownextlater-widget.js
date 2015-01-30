@@ -19,6 +19,8 @@ var NowNextLater = function () {
   this.carouselSpeed = 1000 * 5;
   this.burnGuardTimeout = false;
   this.fullscreenInterval = false;
+  this.loadPanelTimeout = false;
+  this.loadImageTimeout = false;
   this.fullscreenButton = $('<a class="fullscreen-button" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXCAQAAAC7KEemAAAA7klEQVR4Ab3UP2oCURgE8GfpFbyAIF5ARKysRZBUGoVAzmHnNp7EU1jZWHoR/xWCz1/AYh8PE3GbzFSzzBS7M98GhauEvYaQqGEv4aoIbnIMssBAjlsAsLOwMFbLAjXjx/MdQApEE+EPTsQ8sHFBNP3VPhVxsUmBQt8Z0ezJPhNx1lekwFLQc0I0z+xzESc9wRKCLYaCoOuIaFTaRyKOug81xDaoa5aGjgPWpV7joFPqpnqQs22lVaqWlXbuCCrwfwMV3qHqV3rq4e7jdQ9503ffr5vOt3T39daWyrXO310rRJ/v3EP1i6t+0xX/Gj9yFgEV5JXFEAAAAABJRU5ErkJggg=="></a>');
 };
 
@@ -538,14 +540,14 @@ NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
 NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscreen) {
   'use strict';
 
-  var nowNextLater = this;
+  var nowNextLater = this,
+      $widgetPanel,
+      imageLoaded;;
 
   if (page < dataForFullscreen.length) {
     if (index < items.length) {
-      var $widgetPanel,
-          imageLoaded;
 
-      setTimeout(function () {
+      nowNextLater.loadPanelTimeout = setTimeout(function () {
 
         nowNextLater.compileTemplate(dataForFullscreen[page][index], {
           template: 'assets/templates/fullscreen.ejs',
@@ -564,7 +566,7 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
           });
         });
 
-        setTimeout(function () {
+        nowNextLater.loadImageTimeout = setTimeout(function () {
           if (!imageLoaded) {
             $widgetPanel.find('.widget-programme-image').attr('src', 'http://placehold.it/460x259&text=Image+not+available');
             $widgetPanel.fadeIn(1500, function () {
@@ -580,13 +582,13 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
         nowNextLater.loadPanel(items, index, page, dataForFullscreen);
       }, 1500);
     } else {
-      setTimeout(function () {
+      nowNextLater.loadPanelTimeout = setTimeout(function () {
         page++;
         nowNextLater.loadPanel(items, 0, page, dataForFullscreen);
       });
     }
   } else {
-    setTimeout(function () {
+    nowNextLater.loadPanelTimeout = setTimeout(function () {
       var newData = nowNextLater.runProgrammeFilters();
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
       nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
@@ -629,6 +631,8 @@ NowNextLater.prototype.leaveFullscreen = function () {
 
   clearInterval(nowNextLater.fullscreenInterval);
   clearTimeout(nowNextLater.burnGuardTimeout);
+  clearTimeout(nowNextLater.loadPanelTimeout);
+  clearTimeout(nowNextLater.loadImageTimeout);
   $('#fullscreen-widget-container').hide();
   nowNextLater.triggerCarousel();
 };
