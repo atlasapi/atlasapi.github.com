@@ -534,8 +534,6 @@ NowNextLater.prototype.loadNewProgramme = function (dataForFullscreen) {
       index = 0,
       page = 1;
 
-  console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
-
   nowNextLater.loadPanel(items, index, page, dataForFullscreen);
 };
 
@@ -583,14 +581,11 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
 
         index++;
 
-        console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
-
         nowNextLater.loadPanel(items, index, page, dataForFullscreen);
       }, 1500);
     } else {
       nowNextLater.loadPanelTimeout = setTimeout(function () {
         page++;
-        console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
         nowNextLater.loadPanel(items, 0, page, dataForFullscreen);
       });
     }
