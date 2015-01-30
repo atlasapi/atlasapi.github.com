@@ -1982,7 +1982,7 @@ input.queryUrl {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 950;
+  z-index: 300;
 }
 
 .carousel {
@@ -2263,6 +2263,10 @@ input.queryUrl {
     box-sizing: border-box;
     text-align: left;
     z-index: 1050;
+}
+
+.dropdown-menu a {
+    display: block;
 }
 
 .dropdown-menu a:hover {
