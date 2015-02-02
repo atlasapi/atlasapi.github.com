@@ -388,6 +388,8 @@ NowNextLater.prototype.groupDataForFullscreenView = function (data) {
     programmes.pop();
   }
 
+  console.log('data', programmes);
+
   return programmes;
 };
 
