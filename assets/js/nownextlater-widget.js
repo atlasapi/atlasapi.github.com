@@ -597,15 +597,14 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
         clearTimeout(nowNextLater.noDataTimeout);
       }
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-      if (dataForFullscreen.length < 0) {
-        nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
-        console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
+      if (dataForFullscreen.length) {
+        nowNextLater.loadPanel(items, 0, 0, dataForFullscreen);
         console.log('fullscreen data', dataForFullscreen);
       } else {
         nowNextLater.noDataTimeout = setTimeout(function () {
           var newData = nowNextLater.runProgrammeFilters();
           dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-          nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
+          nowNextLater.loadPanel(items, 0, 0, dataForFullscreen);
           console.log('Retrying for data');
         }, 1000);
       }
