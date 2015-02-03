@@ -597,7 +597,7 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
         clearTimeout(nowNextLater.noDataTimeout);
       }
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-      if (dataForFullscreen.length <= 0) {
+      if (dataForFullscreen.length < 0) {
         nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
         console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
         console.log('fullscreen data', dataForFullscreen);
