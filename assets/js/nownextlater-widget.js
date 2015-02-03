@@ -21,6 +21,7 @@ var NowNextLater = function () {
   this.fullscreenInterval = false;
   this.loadPanelTimeout = false;
   this.loadImageTimeout = false;
+  this.noDataTimeout = false;
   this.fullscreenButton = $('<a class="fullscreen-button" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXCAQAAAC7KEemAAAA7klEQVR4Ab3UP2oCURgE8GfpFbyAIF5ARKysRZBUGoVAzmHnNp7EU1jZWHoR/xWCz1/AYh8PE3GbzFSzzBS7M98GhauEvYaQqGEv4aoIbnIMssBAjlsAsLOwMFbLAjXjx/MdQApEE+EPTsQ8sHFBNP3VPhVxsUmBQt8Z0ezJPhNx1lekwFLQc0I0z+xzESc9wRKCLYaCoOuIaFTaRyKOug81xDaoa5aGjgPWpV7joFPqpnqQs22lVaqWlXbuCCrwfwMV3qHqV3rq4e7jdQ9503ffr5vOt3T39daWyrXO310rRJ/v3EP1i6t+0xX/Gj9yFgEV5JXFEAAAAABJRU5ErkJggg=="></a>');
 };
 
@@ -544,9 +545,7 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
 
   var nowNextLater = this,
       $widgetPanel,
-      imageLoaded;;
-
-  console.log('loadPanel');
+      imageLoaded;
 
   if (page < dataForFullscreen.length) {
     if (index < items.length) {
@@ -594,12 +593,21 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
   } else {
     nowNextLater.loadPanelTimeout = setTimeout(function () {
       var newData = nowNextLater.runProgrammeFilters();
+      if (nowNextLater.noDataTimeout) {
+        clearTimeout(nowNextLater.noDataTimeout);
+      }
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-      if (dataForFullscreen.length) {
+      if (dataForFullscreen.length <= 0) {
         nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
         console.log('index', index, 'page', page, 'page count', dataForFullscreen.length);
+        console.log('fullscreen data', dataForFullscreen);
       } else {
-        console.error('No data');
+        nowNextLater.noDataTimeout = setTimeout(function () {
+          var newData = nowNextLater.runProgrammeFilters();
+          dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
+          nowNextLater.loadPanel(items, 0, 1, dataForFullscreen);
+          console.log('Retrying for data');
+        }, 1000);
       }
     });
   }
