@@ -592,19 +592,14 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
     }
   } else {
     nowNextLater.loadPanelTimeout = setTimeout(function () {
-      var newData = nowNextLater.runProgrammeFilters();
       if (nowNextLater.noDataTimeout) {
         clearTimeout(nowNextLater.noDataTimeout);
       }
-      dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
       if (dataForFullscreen.length) {
-        nowNextLater.loadPanel(items, 0, 0, dataForFullscreen);
-        console.log('fullscreen data', dataForFullscreen);
+        nowNextLater.loadFullscreen();
       } else {
         nowNextLater.noDataTimeout = setTimeout(function () {
-          var newData = nowNextLater.runProgrammeFilters();
-          dataForFullscreen = nowNextLater.groupDataForFullscreenView(newData);
-          nowNextLater.loadPanel(items, 0, 0, dataForFullscreen);
+          nowNextLater.loadFullscreen();
           console.log('Retrying for data');
         }, 1000);
       }
