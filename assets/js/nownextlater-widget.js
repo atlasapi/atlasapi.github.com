@@ -14,7 +14,6 @@ var NowNextLater = function () {
   this.carouselSpeed = 1000 * 5;
   this.burnGuardTimeout = false;
   this.fullscreenInterval = false;
-  this.loadPanelTimeout = false;
   this.loadImageTimeout = false;
   this.noDataTimeout = false;
   this.fullscreenButton = $('<a class="fullscreen-button" href="#"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAXCAQAAAC7KEemAAAA7klEQVR4Ab3UP2oCURgE8GfpFbyAIF5ARKysRZBUGoVAzmHnNp7EU1jZWHoR/xWCz1/AYh8PE3GbzFSzzBS7M98GhauEvYaQqGEv4aoIbnIMssBAjlsAsLOwMFbLAjXjx/MdQApEE+EPTsQ8sHFBNP3VPhVxsUmBQt8Z0ezJPhNx1lekwFLQc0I0z+xzESc9wRKCLYaCoOuIaFTaRyKOug81xDaoa5aGjgPWpV7joFPqpnqQs22lVaqWlXbuCCrwfwMV3qHqV3rq4e7jdQ9503ffr5vOt3T39daWyrXO310rRJ/v3EP1i6t+0xX/Gj9yFgEV5JXFEAAAAABJRU5ErkJggg=="></a>');
@@ -387,8 +386,6 @@ NowNextLater.prototype.groupDataForFullscreenView = function (data) {
     programmes.pop();
   }
 
-  console.log('data', programmes);
-
   return programmes;
 };
 
@@ -584,24 +581,12 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
       }, 1500);
     } else {
       nowNextLater.loadPanelTimeout = setTimeout(function () {
+        var programmeData = nowNextLater.orderByStartTime();
+        dataForFullscreen = nowNextLater.groupDataForFullscreenView(programmeData),
         page++;
         nowNextLater.loadPanel(items, 0, page, dataForFullscreen);
       });
     }
-  } else {
-    nowNextLater.loadPanelTimeout = setTimeout(function () {
-      if (nowNextLater.noDataTimeout) {
-        clearTimeout(nowNextLater.noDataTimeout);
-      }
-      if (dataForFullscreen.length) {
-        nowNextLater.loadFullscreen();
-      } else {
-        nowNextLater.noDataTimeout = setTimeout(function () {
-          nowNextLater.loadFullscreen();
-          console.log('Retrying for data');
-        }, 1000);
-      }
-    });
   }
 };
 
