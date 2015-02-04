@@ -1,10 +1,6 @@
 var NowNextLater = function () {
   'use strict';
 
-  var coeff = 1000 * 60 * 5;
-  var date = new Date();
-  var rounded = new Date(Math.round(date.getTime() / coeff) * coeff);
-
   this.apiKey = '84097c4de516445eb7bb58f4b73d2842';
   this.channelGroupsEndpointURL = '//users-atlas.metabroadcast.com/3.0/channel_groups/';
   this.channelGroupsID = 'cbgZ';
@@ -12,7 +8,6 @@ var NowNextLater = function () {
   this.channelIDsLimit = 200;
   this.scheduleEndpointURL = '//users3-atlas.metabroadcast.com/3.0/schedule.json?';
   this.scheduleCount = 2;
-  this.scheduleFrom = rounded.toISOString();
   this.scheduleAnnotations = ['channel', 'channel_summary', 'extended_description', 'brand_summary', 'broadcasts'];
   this.fadeDuration = 1000 * 3;
   this.carouselInterval = false;
@@ -59,11 +54,14 @@ NowNextLater.prototype.buildScheduleURL = function () {
 
   var nowNextLater = this,
       channelIDs = nowNextLater.createListOfChannelIDs(),
-      scheduleURL = nowNextLater.scheduleEndpointURL;
+      scheduleURL = nowNextLater.scheduleEndpointURL,
+      coeff = 1000 * 60 * 5,
+      date = new Date(),
+      rounded = new Date(Math.round(date.getTime() / coeff) * coeff);
 
   scheduleURL += 'channel_id=' + channelIDs.join();
   scheduleURL += '&annotations=' + nowNextLater.scheduleAnnotations.join();
-  scheduleURL += '&from=' + nowNextLater.scheduleFrom;
+  scheduleURL += '&from=' + rounded.toISOString();
   scheduleURL += '&count=' + nowNextLater.scheduleCount;
   scheduleURL += '&apiKey=' + nowNextLater.apiKey;
 
