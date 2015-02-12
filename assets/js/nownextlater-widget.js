@@ -386,8 +386,6 @@ NowNextLater.prototype.groupDataForFullscreenView = function (data) {
     programmes.pop();
   }
 
-  console.log('data', programmes);
-
   return programmes;
 };
 
@@ -586,7 +584,6 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
         var programmeData = nowNextLater.orderByStartTime();
         dataForFullscreen = nowNextLater.groupDataForFullscreenView(programmeData);
         page++;
-        console.log('page', page, 'page count', dataForFullscreen.length);
         nowNextLater.loadPanel(items, 0, page, dataForFullscreen);
       });
     }
@@ -595,7 +592,6 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
       var programmeData = nowNextLater.orderByStartTime();
       dataForFullscreen = nowNextLater.groupDataForFullscreenView(programmeData);
       nowNextLater.loadPanel(items, 0, 0, dataForFullscreen);
-      console.log('start again');
     });
   }
 };
