@@ -2168,7 +2168,7 @@ input.queryUrl {
 .navbar-tools {
     float: right;
     height: 36px;
-    margin: 0.8rem 0 0 1rem;
+    margin: 0.8rem 1rem 0 0;
 }
 
 .navbar-login {
