@@ -2226,32 +2226,27 @@ input.queryUrl {
 }
 
 .container {
-    width: 96%;
     min-width: 960px;
-    max-width: 1400px;
     margin: 0 auto;
+    padding: 0 7%;
 }
 
 /* Dropdowns */
-.has-dropdown-menu {
+.navbar-user {
     position: relative;
     padding-right: 15px;
 }
 
-.has-dropdown-menu > a:after {
+.navbar-user > a:after {
     content: "";
     display: block;
     position: absolute;
-    top: 50%;
+    top: 1.5rem;
     right: 5px;
     margin-top: -3px;
     border-left: 6px solid transparent;
     border-right: 6px solid transparent;
     border-top: 6px solid #fc0088;
-}
-
-.navbar-user.has-dropdown-menu > a:after {
-    top: 1.5rem;
 }
 
 .dropdown-menu {
