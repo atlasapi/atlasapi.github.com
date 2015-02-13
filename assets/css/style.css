@@ -2232,21 +2232,8 @@ input.queryUrl {
 }
 
 /* Dropdowns */
-.navbar-user {
+.has-dropdown-menu {
     position: relative;
-    padding-right: 15px;
-}
-
-.navbar-user > a:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: 1.5rem;
-    right: 5px;
-    margin-top: -3px;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #fc0088;
 }
 
 .dropdown-menu {
