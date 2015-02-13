@@ -84,7 +84,7 @@
 			section.subSection:last-child {border-bottom: 0 none;}
 			section .marker {position: absolute; top: -68px;}
 
-			.home {padding: 130px 0 10px;}
+			.home {padding: 100px 0 10px;}
 
 			.homepageInfo {
                 font-size: 11px;
@@ -2138,7 +2138,7 @@ input.queryUrl {
 }
 
 .navbar-links .nav {
-    margin-top: 1.75rem;
+    margin-top: 1.85rem;
 }
 
 .navbar-links .nav > li {
@@ -2156,7 +2156,7 @@ input.queryUrl {
 
 .navbar-links .nav a {
     display: block;
-    padding: 0.25rem 0.5rem 0.5rem;
+    padding: 0.25rem 0.75rem 0.5rem;
     font-size: 1.125rem;
 }
 
@@ -2168,10 +2168,15 @@ input.queryUrl {
 .navbar-tools {
     float: right;
     height: 36px;
+    margin: 0.8rem 0 0 1rem;
 }
 
 .navbar-login {
+    float: right;
     position: relative;
+    padding: 0.25rem 1rem;
+    border: 1px solid #EF308F;
+    border-radius: 5px;
     font-size: 1rem;
 }
 
@@ -2221,7 +2226,9 @@ input.queryUrl {
 }
 
 .container {
-    width: 960px;
+    width: 96%;
+    min-width: 960px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 

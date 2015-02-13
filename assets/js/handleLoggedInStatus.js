@@ -137,6 +137,19 @@ var handleLoggedInStatus = (function () {
   }
 
   /**
+   * Compiles template for user menus
+   */
+  function loadNavigationTemplate() {
+    var template;
+
+    template = new EJS({
+      url: 'assets/templates/user-navigation.ejs'
+    }).render();
+
+    $('#nav-main').append(template);
+  }
+
+  /**
    * Logs out user
    */
   function logout() {
@@ -147,7 +160,7 @@ var handleLoggedInStatus = (function () {
       templateContainer: '#navbar-tools'
     });
 
-    $('.user-menus > li').each(function () {
+    $('.user-menu').each(function () {
       $(this).empty();
     });
   }
@@ -204,6 +217,7 @@ var handleLoggedInStatus = (function () {
       var credentials = getCredentials(),
           credentialsQueryString = encodeQueryData(credentials);
 
+      loadNavigationTemplate();
       getUserDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString);
       getApplicationsDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString);
       getGroupsDataAndLoadTemplate('http://atlas-admin-backend.stage.metabroadcast.com/api/user/groups?' + credentialsQueryString);
