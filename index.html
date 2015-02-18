@@ -3,16 +3,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>atlas - media data router</title>
-	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
 	<link href="assets/css/lib/github.css" rel="stylesheet">
 	<link href="assets/css/style.css?v=201501191622" rel="stylesheet">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 	<script src="assets/js/lib/ejs.min.js"></script>
 	<script src="assets/js/lib/highlight.pack.js"></script>
 	<script src="assets/js/lib/typeahead.bundle.min.js"></script>
 	<script src="assets/js/nav.js"></script>
 	<script src="assets/js/apiExplorer.js"></script>
 	<script src="assets/js/nownextlater-widget.js"></script>
+	<script src="assets/js/handleLoggedInStatus.js"></script>
 	<script src="assets/js/script.js"></script>
 	<script src="http://widgets.metabroadcast.com/loader/1/load.js"></script>
 	<script>
@@ -34,121 +36,121 @@
 	</script>
 </head>
 <body>
-	<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/assets/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
-	<header class="hr">
-		<div class="content clearfix">
-			<h1 class="fl mbn">
-				<a href="#home" class="logo">atlas - the global video and audio
-					index</a>
-			</h1>
-			<a href="#apiExplorer" class="btn btn_lrg"><span class="icn_mag"></span>API
-				Explorer &amp; free key</a>
-			<nav>
-				<ul class="mainMenu clearfix">
-					<li><a href="#home" class="selected">Home</a></li>
-					<li><a href="#widgets">Widgets</a></li>
-					<li><a href="#examples">Examples</a></li>
-					<li><a href="#reference">Reference</a></li>
-					<li><a href="#about">About</a></li>
-				</ul>
-			</nav>
-			<div id="msgs" class="info" style="display: none;">You are
-				using an old browser - for a better experience and to use some of
-				the advanced features of this website please consider upgrading.</div>
-		</div>
-	</header>
-	<div class="loginWrapper" style="display: none;">
-		<div class="loginHolder">
 
+	<div class="site-header" id="header">
+		<div class="container">
+			<a class="site-logo" href="#home"><img src="assets/images/logo.png" alt="Atlas"></a>
+			<div class="navbar-links">
+			  <ul class="nav" id="nav-main">
+			    <li class="nav-item"><a href="#widgets">widgets</a></li>
+			    <li class="nav-item"><a href="#examples">examples</a></li>
+			    <li class="nav-item">
+			    	<a href="#reference">reference</a>
+			    	<ul class="submenu">
+			    		<li><a href="#reference_overview">overview</a></li>
+			    		<li><a href="#reference_dataModel">data model</a></li>
+			    		<li><a href="#reference_sources">sources</a></li>
+			    		<li><a href="#reference_feeds">feeds</a></li>
+			    	</ul>
+			    </li>
+			    <li class="nav-item"><a href="#about">about</a></li>
+				</ul>
+			</div>
+			<a class="navbar-api-explorer-btn btn btn_lrg" href="#apiExplorer">
+  			<span class="icn_mag"></span>
+  			api explorer &amp; free key
+			</a>
+			<div class="navbar-tools" id="navbar-tools"></div>
 		</div>
 	</div>
+
+	<div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
+
 	<div class="page">
-		<section class="home" style="margin: 0; padding: 0;">
-			<div class="marker" id="home"></div>
-		</section>
-		<div class="line apiKeyHolder">
-			<div class="unit size1of2">
-				<div class="ml getApiKeyInner">
-					<h2>helping millions find TV, radio and music quicker</h2>
-					<ul class="list">
-						<li><strong>many sources, single view</strong> across epg providers, broadcasters, tv, ott platforms, open data
-						<li><strong>rich data</strong> schedules, vod availability, deep links, descriptions, images, people, music, sports, topics, news links and demographics
-						<li><strong>fast apis</strong> for listings, episode guides, search, more
-						<li><strong>simple widgets</strong> for websites and apps
-						<li><strong>access control</strong> to preseve your advantage
-						<li><strong>specialist feeds</strong> to google, microsoft, tv anytime platforms, more
-						<li><strong>open source</strong> with free API keys
-						<li><strong>full support</strong> comprehensive sla provided by metabroadcast
-					</ul>
+		<div class="home" id="home">
+			<div class="line apiKeyHolder">
+				<div class="unit size1of2">
+					<div class="ml getApiKeyInner">
+						<h2>helping millions find TV, radio and music quicker</h2>
+						<ul class="list">
+							<li><strong>many sources, single view</strong> across epg providers, broadcasters, tv, ott platforms, open data
+							<li><strong>rich data</strong> schedules, vod availability, deep links, descriptions, images, people, music, sports, topics, news links and demographics
+							<li><strong>fast apis</strong> for listings, episode guides, search, more
+							<li><strong>simple widgets</strong> for websites and apps
+							<li><strong>access control</strong> to preseve your advantage
+							<li><strong>specialist feeds</strong> to google, microsoft, tv anytime platforms, more
+							<li><strong>open source</strong> with free API keys
+							<li><strong>full support</strong> comprehensive sla provided by metabroadcast
+						</ul>
+					</div>
 				</div>
-			</div>
-			<div class="unit size1of2 lastUnit">
-				<div class="inset">
-					<div class="widget-wrapper">
-						<div class="carousel-widget-container" id="carousel-widget-container"></div>
-					  <div class="fullscreen-widget-container fullscreen-container clearfix" id="fullscreen-widget-container">
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
-					  </div>
+				<div class="unit size1of2 lastUnit">
+					<div class="inset">
+						<div class="widget-wrapper">
+							<div class="carousel-widget-container" id="carousel-widget-container"></div>
+						  <div class="fullscreen-widget-container fullscreen-container clearfix" id="fullscreen-widget-container">
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						    <div class="widget-panel-container"><div class="widget-panel-inner"></div></div>
+						  </div>
+						</div>
 					</div>
 				</div>
 			</div>
+
+			<ol class="clientList clearfix">
+				<li><i class="clientLogo amazon-logo"></i></li>
+				<li><i class="clientLogo android-logo"></i></li>
+				<li><i class="clientLogo apple-logo"></i></li>
+				<li><i class="clientLogo barb-logo"></i></li>
+				<li><i class="clientLogo bbc-logo"></i></li>
+				<li><i class="clientLogo belfast-telegraph-logo"></i></li>
+				<li><i class="clientLogo bloomberg-logo"></i></li>
+				<li><i class="clientLogo bt-logo"></i></li>
+				<li><i class="clientLogo channel4-logo"></i></li>
+				<li><i class="clientLogo channel5-logo"></i></li>
+				<li><i class="clientLogo daily-mail-logo"></i></li>
+				<li><i class="clientLogo echonest-logo"></i></li>
+				<li><i class="clientLogo facebook-logo"></i></li>
+				<li><i class="clientLogo freebase-logo"></i></li>
+				<li><i class="clientLogo getty-images-logo"></i></li>
+				<li><i class="clientLogo google-logo"></i></li>
+				<li><i class="clientLogo insidesoap-logo"></i></li>
+				<li><i class="clientLogo irish-independent-logo"></i></li>
+				<li><i class="clientLogo itv-logo"></i></li>
+				<li><i class="clientLogo iva-logo"></i></li>
+				<li><i class="clientLogo knowledgemotion-logo"></i></li>
+				<li><i class="clientLogo musicbrainz-logo"></i></li>
+				<li><i class="clientLogo opta-logo"></i></li>
+				<li><i class="clientLogo pagesuite-logo"></i></li>
+				<li><i class="clientLogo press-association-logo"></i></li>
+				<li><i class="clientLogo radio-times-logo"></i></li>
+				<li><i class="clientLogo radioplayer-logo"></i></li>
+				<li><i class="clientLogo rightster-logo"></i></li>
+				<li><i class="clientLogo rte-logo"></i></li>
+				<li><i class="clientLogo soundcloud-logo"></i></li>
+				<li><i class="clientLogo the-space-logo"></i></li>
+				<li><i class="clientLogo spotify-logo"></i></li>
+				<li><i class="clientLogo the-sun-logo"></i></li>
+				<li><i class="clientLogo talktalk-logo"></i></li>
+				<li><i class="clientLogo tv-choice-logo"></i></li>
+				<li><i class="clientLogo twitter-logo"></i></li>
+				<li><i class="clientLogo uktv-logo"></i></li>
+				<li><i class="clientLogo vimeo-logo"></i></li>
+				<li><i class="clientLogo wikipedia-logo"></i></li>
+				<li><i class="clientLogo xbox-logo"></i></li>
+				<li><i class="clientLogo youtube-logo"></i></li>
+				<li><i class="clientLogo youview-logo"></i></li>
+			</ol>
 		</div>
 
-		<ol class="clientList clearfix">
-			<li><i class="clientLogo amazon-logo"></i></li>
-			<li><i class="clientLogo android-logo"></i></li>
-			<li><i class="clientLogo apple-logo"></i></li>
-			<li><i class="clientLogo barb-logo"></i></li>
-			<li><i class="clientLogo bbc-logo"></i></li>
-			<li><i class="clientLogo belfast-telegraph-logo"></i></li>
-			<li><i class="clientLogo bloomberg-logo"></i></li>
-			<li><i class="clientLogo bt-logo"></i></li>
-			<li><i class="clientLogo channel4-logo"></i></li>
-			<li><i class="clientLogo channel5-logo"></i></li>
-			<li><i class="clientLogo daily-mail-logo"></i></li>
-			<li><i class="clientLogo echonest-logo"></i></li>
-			<li><i class="clientLogo facebook-logo"></i></li>
-			<li><i class="clientLogo freebase-logo"></i></li>
-			<li><i class="clientLogo getty-images-logo"></i></li>
-			<li><i class="clientLogo google-logo"></i></li>
-			<li><i class="clientLogo insidesoap-logo"></i></li>
-			<li><i class="clientLogo irish-independent-logo"></i></li>
-			<li><i class="clientLogo itv-logo"></i></li>
-			<li><i class="clientLogo iva-logo"></i></li>
-			<li><i class="clientLogo knowledgemotion-logo"></i></li>
-			<li><i class="clientLogo musicbrainz-logo"></i></li>
-			<li><i class="clientLogo opta-logo"></i></li>
-			<li><i class="clientLogo pagesuite-logo"></i></li>
-			<li><i class="clientLogo press-association-logo"></i></li>
-			<li><i class="clientLogo radio-times-logo"></i></li>
-			<li><i class="clientLogo radioplayer-logo"></i></li>
-			<li><i class="clientLogo rightster-logo"></i></li>
-			<li><i class="clientLogo rte-logo"></i></li>
-			<li><i class="clientLogo soundcloud-logo"></i></li>
-			<li><i class="clientLogo the-space-logo"></i></li>
-			<li><i class="clientLogo spotify-logo"></i></li>
-			<li><i class="clientLogo the-sun-logo"></i></li>
-			<li><i class="clientLogo talktalk-logo"></i></li>
-			<li><i class="clientLogo tv-choice-logo"></i></li>
-			<li><i class="clientLogo twitter-logo"></i></li>
-			<li><i class="clientLogo uktv-logo"></i></li>
-			<li><i class="clientLogo vimeo-logo"></i></li>
-			<li><i class="clientLogo wikipedia-logo"></i></li>
-			<li><i class="clientLogo xbox-logo"></i></li>
-			<li><i class="clientLogo youtube-logo"></i></li>
-			<li><i class="clientLogo youview-logo"></i></li>
-		</ol>
-
-		<section class="widgets">
-			<div class="marker" id="widgets"></div>
+		<section class="widgets" id="widgets">
 			<h2>Widgets</h2>
 			<h3>EPG</h3>
 			<div class="mbl">
@@ -172,8 +174,7 @@ MBST.load({
 });</code></pre>
 		</section>
 
-		<section class="examples">
-			<div class="marker" id="examples"></div>
+		<section class="examples" id="examples">
 			<h2>Examples</h2>
 			<div class="clearfix">
 				<div class="example clearfix">
@@ -210,8 +211,7 @@ MBST.load({
 			</div>
 		</section>
 
-		<section class="reference">
-			<div class="marker" id="reference"></div>
+		<section class="reference" id="reference">
 			<ul class="subNav" style="display: none;">
 				<li><a href="#reference_overview">Overview</a></li>
 				<li><a href="#reference_dataModel">Data Model</a></li>
@@ -220,8 +220,7 @@ MBST.load({
 			</ul>
 			<h2>Reference</h2>
 
-			<section data-title="reference_overview" class="subSection">
-				<div class="marker" id="reference_overview"></div>
+			<section data-title="reference_overview" class="subSection" id="reference_overview">
 				<h3>Overview</h3>
 				<p>Atlas is a metadata aggregator built for multiple data sets.
 					It ingests data from many different sources, indexes it, matches
@@ -233,8 +232,7 @@ MBST.load({
 					common data model that all sources are mapped to.</p>
 			</section>
 
-			<section data-title="reference_dataModel" class="subSection">
-				<div class="marker" id="reference_dataModel"></div>
+			<section data-title="reference_dataModel" class="subSection" id="reference_dataModel">
 				<h3>Data Model</h3>
 				<p>The Atlas data model has a number of key resource types. They
 					are containers and items (collectively know as content), content
@@ -292,8 +290,7 @@ MBST.load({
 				   platform in a particular region.</p>
 			</section>
 
-			<section data-title="reference_sources" class="subSection">
-				<div class="marker" id="reference_sources"></div>
+			<section data-title="reference_sources" class="subSection" id="reference_sources">
 				<h3>Sources</h3>
 				<p>Atlas works with data from the following sources:</p>
 
@@ -456,8 +453,7 @@ MBST.load({
 				</p>
 			</section>
 
-			<section data-title="reference_feeds" class="subSection">
-				<div class="marker" id="reference_feeds"></div>
+			<section data-title="reference_feeds" class="subSection" id="reference_feeds">
 				<h3>Feeds</h3>
 				<p>In addition to the RESTful API, Atlas also provides data in a
 					variety of feed formats</p>
@@ -511,8 +507,7 @@ MBST.load({
 			</section>
 		</section>
 
-		<section class="about">
-			<div class="marker" id="about"></div>
+		<section class="about" id="about">
 			<h2>About</h2>
 
 			<div class="line">
@@ -593,8 +588,7 @@ MBST.load({
 
 
     <!-- API EXPLORER SECTION -->
-		<section class="apiExplorer">
-			<div class="marker" id="apiExplorer"></div>
+		<section class="apiExplorer" id="apiExplorer">
 			<div class="explorerTitle">
 				<div class="line">
 				  <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>

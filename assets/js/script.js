@@ -69,10 +69,12 @@ $(document).ready(function () {
 
   popovers();
 
-  $('.getApiKeyBtn').on('click', function (e) {
+  $(document).on('click', '.getApiKeyBtn', function (e) {
     e.preventDefault();
     loginToAdmin();
   });
+
+  handleLoggedInStatus();
 
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
@@ -84,28 +86,6 @@ $(document).ready(function () {
 
 $(window).load(function () {
 
-  var pageInfo = new PageInfo();
-  pageInfo.init();
+  highlightCurrentPage();
 
-  $('.mainMenu a').click(function () {
-    pageInfo.menuClick = true;
-    var index = $(this).parent().index();
-    if (index >= 0) {
-      $(document).scrollTop(pageInfo.section[index].position);
-      pageInfo.changePage(index);
-    }
-  });
-
-  $('.subNav a').click(function () {
-    var index = $(this).parent().index();
-    if (index >= 0) {
-      $(document).scrollTop(pageInfo.section[pageInfo.currentSection].subSection[index].position);
-      pageInfo.changeSubSection(index);
-    }
-  });
-
-  $(window).scroll(function (e) {
-    pageInfo.currentEvent = e;
-    pageInfo.update(false,false,true);
-  });
 });

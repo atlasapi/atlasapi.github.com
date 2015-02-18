@@ -1,0 +1,11 @@
+<div class="navbar-user logged-in has-dropdown-menu">
+  <a class="user-avatar" href="#">
+    <img class="profile-picture" src="assets/images/user-photo.jpg" data-src="<%= this.user.profile_image %>" alt="<%= this.user.full_name %>">
+    <span class="user-name"><%= this.user.full_name %></span>
+  </a>
+  <ul class="user-dropdown-menu dropdown-menu">
+    <li><a href="/admin?#/profile">your profile</a></li>
+    <li><a href="/admin?#/terms">terms of use</a></li>
+    <li><a class="logout" href="#">log out</a></li>
+  </ul>
+</div>

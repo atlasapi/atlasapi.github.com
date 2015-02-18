@@ -84,8 +84,8 @@
 			section.subSection:last-child {border-bottom: 0 none;}
 			section .marker {position: absolute; top: -68px;}
 
-			.home {padding: 90px 0 10px;}
-			*html .home {padding: 100px 0 10px;}
+			.home {padding: 100px 0 10px;}
+
 			.homepageInfo {
                 font-size: 11px;
                 color: #666;
@@ -427,50 +427,6 @@
 			/* Lists */
 			.list {list-style-type: none; font-size: 12px; line-height: 18px; margin-bottom: 10px;}
 			.list li {padding-left: 20px; background:url(../images/bullet.gif) 0 10px no-repeat; font-size: 14px; line-height: 24px;}
-
-			nav {float: left; margin-left: 10px;}
-			.mainMenu {list-style-type: none; font-size: 22px; margin-top: 23px; line-height: 28px; float: left; }
-			.mainMenu li {float: left; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
-			.mainMenu li:first-child {border-left: 0 none;}
-			.mainMenu li:last-child {border-right: 0 none;}
-			.mainMenu li a {color: #333; padding: 0 20px 5px; display: block; position: relative; bottom: -1px;}
-			.mainMenu li a:hover {color: #ef308f; text-decoration: none;}
-			.mainMenu li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
-
-			.subNav {
-                font-size: 16px;
-                float: left;
-                position: fixed;
-                top: 68px;
-                background: #efefef;
-                background: rgba(239,239,239,0.95);
-                border-left: 1px solid #EF308F;
-                border-bottom: 1px solid #EF308F;
-                border-right: 1px solid #EF308F;
-                z-index: 20;
-                padding: 0 10px;
-                -moz-border-radius: 0 0 5px 5px;
-                -o-border-radius: 0 0 5px 5px;
-                -khtml-border-radius: 0 0 5px 5px;
-                -ms-border-radius: 0 0 5px 5px;
-                border-radius: 0 0 5px 5px;
-                -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -o-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -khtml-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                -ms-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-			}
-			*:first-child+html .subNav {top: 67px;}
-			*html .subNav {top: 67px;}
-			.subNav li {float: left; padding: 0 10px; border-right: 1px solid #ddd; border-left: 1px solid #fff;}
-			*:first-child+html .subNav li {border-right: 0 none;}
-			*html .suvNav li {border-right: 0 none;}
-			.subNav li:first-child {border-left: 0 none; padding-left: 0;}
-			.subNav li:last-child {border-right: 0 none; padding-right: 0;}
-			.subNav li:first-child{margin-left: 0;}
-			.subNav li a {float: left; display: block; padding: 5px 0; color: #333;}
-			.subNav li a.selected {color: #ef308f; background: url(../images/selected.gif) bottom center no-repeat;}
 
 			.tabs {
                 background: #e2e2e2;
@@ -1423,9 +1379,6 @@
 
             .loading {background-image: url(../images/loader.gif); background-position: center; background-repeat: no-repeat;}
 
-            .apiKeyHolder {
-	            margin: 96px 0 30px;
-           }
 
             .apiKeyHolder ul strong {
                 color: #ef308f;
@@ -1547,7 +1500,7 @@
 	            width: 520px;
 	            height: auto;
 	            position: absolute;
-	            top: 25%;
+	            top: 30%;
 	            left: 50%;
 	            margin-top: -150px;
 	            margin-left: -275px;
@@ -2029,7 +1982,7 @@ input.queryUrl {
   position: absolute;
   top: 10px;
   right: 10px;
-  z-index: 1250;
+  z-index: 300;
 }
 
 .carousel {
@@ -2149,3 +2102,260 @@ input.queryUrl {
   background: rgb(51,0,102);
   margin: 0 !important;
 }
+
+
+/* Header */
+.site-header {
+    position: fixed;
+    width: 100%;
+    background: #efefef;
+    background: rgba(239,239,239,0.95);
+    box-shadow: 0 1px #EF308F, 0 5px 10px rgba(0,0,0,0.2);
+    z-index: 450;
+    font-size: 16px;
+}
+
+.site-logo {
+    float: left;
+    position: relative;
+    height: 4rem;
+    line-height: 4rem;
+}
+
+.site-logo img {
+    vertical-align: middle;
+}
+
+/* Navigation */
+.navbar-links {
+    float: left;
+    margin-left: 1rem;
+}
+
+.nav > li {
+    float: left;
+    position: relative;
+}
+
+.navbar-links .nav {
+    margin-top: 1.85rem;
+}
+
+.navbar-links .nav > li {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #ddd;
+}
+
+.navbar-links .nav > li:first-child {
+    border-left: 0;
+}
+
+.navbar-links .nav > li:last-child {
+    border-right: 0;
+}
+
+.navbar-links .nav a {
+    display: block;
+    padding: 0.25rem 0.75rem 0.5rem;
+    font-size: 1.125rem;
+}
+
+.navbar-links .nav a:hover,
+.navbar-links .active-link > a {
+    color: #fc0088;
+}
+
+.navbar-tools {
+    float: right;
+    height: 36px;
+    margin: 0.8rem 1rem 0 0;
+}
+
+.navbar-login {
+    float: right;
+    position: relative;
+    padding: 0.25rem 1rem;
+    border: 1px solid #EF308F;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.navbar-api-explorer-btn {
+    float: right;
+    margin: 0.8rem 0 0;
+    border: 1px solid #684090;
+    background-color: #8e5dbf;
+    background: linear-gradient(top, #8e5dbf, #3e126a);
+}
+
+/* User profile nav */
+.navbar-user {
+    position: relative;
+}
+
+.profile-picture {
+    float: right;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin: 0.5rem 0 0 0.5rem;
+    border-radius: 50%;
+}
+
+.user-avatar {
+    display: block;
+    padding-right: 6px;
+}
+
+.user-name {
+    float: left;
+    margin: 0.75rem 0 0;
+}
+
+/* Generic */
+.container:before,
+.container:after,
+.nav:before,
+.nav:after {
+    content: " ";
+    display: table;
+}
+
+.container:after,
+.nav:after {
+    clear: both;
+}
+
+.container {
+    min-width: 960px;
+    margin: 0 auto;
+    padding: 0 7%;
+}
+
+/* Dropdowns */
+.has-dropdown-menu {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    display: none;
+    width: 12rem;
+    margin-left: -6rem;
+    padding: 1rem;
+    border: 1px solid #fc0088;
+    border-radius: 4px;
+    background: #eee;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+    line-height: 2.25rem;
+    box-sizing: border-box;
+    text-align: left;
+    z-index: 1050;
+}
+
+.dropdown-menu a {
+    display: block;
+}
+
+.dropdown-menu a:hover {
+    color: #fc0088;
+}
+
+.navbar-links .dropdown-menu a {
+    display: block;
+    padding: 0;
+    height: auto;
+}
+
+.dropdown-menu-large {
+    width: 20rem;
+    margin-left: -10rem;
+}
+
+.dropdown-menu:after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    display: block;
+    margin-left: -3px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fc0088;
+}
+
+.user-dropdown-menu {
+    top: 2.5rem;
+    left: auto;
+    right: 0;
+}
+
+.user-dropdown-menu:after {
+    left: auto;
+    right: 1.75rem;
+}
+
+.logged-in {
+    cursor: pointer;
+}
+
+/* Submenu */
+.submenu {
+    display: none;
+    min-width: 330%;
+    overflow: hidden;
+    position: absolute;
+    top: 100%;
+    background: #efefef;
+    background: rgba(239,239,239,0.95);
+    border-left: 1px solid #EF308F;
+    border-bottom: 1px solid #EF308F;
+    border-right: 1px solid #EF308F;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    padding: 0 10px;
+    z-index: -20;
+    margin-top: 1px;
+}
+
+.active-link .submenu {
+    display: block;
+}
+
+.active-link > a {
+    background: url("../images/selected.gif") bottom center no-repeat;
+}
+
+.submenu li {
+    float: left;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #ddd;
+}
+
+.submenu li:first-child {
+    border-left: 0;
+}
+
+.submenu li:last-child {
+    border-right: 0;
+}
+
+.navbar-links .nav .submenu a {
+    font-size: 16px;
+    padding: 0.2rem 0.5rem 0.3rem;
+}
+
+.menu-separator {
+    border-bottom: 1px solid #ccc;
+    margin: 10px 0;
+}
+
+.apps-dropdown .application-link {
+    line-height: 1.5;
+}
+
+.menu-title h4 {
+    margin: 0;
+}
+
