@@ -218,9 +218,9 @@ var handleLoggedInStatus = (function () {
           credentialsQueryString = encodeQueryData(credentials);
 
       loadNavigationTemplate();
-      getUserDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString);
-      getApplicationsDataAndLoadTemplate('http://stage.atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString);
-      getGroupsDataAndLoadTemplate('http://atlas-admin-backend.stage.metabroadcast.com/api/user/groups?' + credentialsQueryString);
+      getUserDataAndLoadTemplate('http://atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString);
+      getApplicationsDataAndLoadTemplate('http://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString);
+      getGroupsDataAndLoadTemplate('http://atlas-admin-backend.metabroadcast.com/api/user/groups?' + credentialsQueryString);
 
       events();
     } else {
