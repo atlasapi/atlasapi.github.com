@@ -207,6 +207,10 @@ var handleLoggedInStatus = (function () {
   function events() {
     handleClick('.logout', logout);
     handleClick('.has-dropdown-menu > a', toggleDropDownMenu);
+
+    $(':not(.dropdown-menu)').on('click', function (e) {
+      $('.dropdown-menu').hide();
+    });
   }
 
   /**
