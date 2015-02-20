@@ -2302,21 +2302,33 @@ input.queryUrl {
 
 /* Submenu */
 .submenu {
-    display: none;
-    min-width: 330%;
-    overflow: hidden;
     position: absolute;
-    top: 100%;
-    background: #efefef;
-    background: rgba(239,239,239,0.95);
-    border-left: 1px solid #EF308F;
-    border-bottom: 1px solid #EF308F;
-    border-right: 1px solid #EF308F;
-    border-radius: 0 0 5px 5px;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    padding: 0 10px;
-    z-index: -20;
-    margin-top: 1px;
+    top: 90%;
+    left: 50%;
+    display: none;
+    width: 12rem;
+    margin-left: -6rem;
+    padding: 1rem;
+    border: 1px solid #fc0088;
+    border-radius: 4px;
+    background: #eee;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.2);
+    line-height: 2.25rem;
+    box-sizing: border-box;
+    text-align: left;
+    z-index: 1050;
+}
+
+.submenu:after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    display: block;
+    margin-left: -3px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fc0088;
 }
 
 .active-link .submenu {
@@ -2327,23 +2339,12 @@ input.queryUrl {
     background: url("../images/selected.gif") bottom center no-repeat;
 }
 
+.has-submenu > a {
+    background: none;
+}
+
 .submenu li {
-    float: left;
-    border-left: 1px solid #fff;
-    border-right: 1px solid #ddd;
-}
 
-.submenu li:first-child {
-    border-left: 0;
-}
-
-.submenu li:last-child {
-    border-right: 0;
-}
-
-.navbar-links .nav .submenu a {
-    font-size: 16px;
-    padding: 0.2rem 0.5rem 0.3rem;
 }
 
 .menu-separator {

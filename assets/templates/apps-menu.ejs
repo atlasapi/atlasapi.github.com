@@ -1,12 +1,10 @@
 <a href="#">Apps</a>
 <ul class="apps-dropdown dropdown-menu dropdown-menu-large">
   <% if (this.applications.length) { %>
-    <li class="menu-title"><h4>recent applications</h4></li>
     <% for (var i = 0; i < 3; i++) { %>
       <li class="application-link">
         <a href="/admin?#/applications/<%= this.applications[i].id %>">
-          <strong><%= this.applications[i].title %>:</strong>
-          <%= this.applications[i].credentials.apiKey %>
+          <%= this.applications[i].title %>
         </a>
       </li>
     <% } %>
