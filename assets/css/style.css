@@ -2339,6 +2339,10 @@ input.queryUrl {
     background: url("../images/selected.gif") bottom center no-repeat;
 }
 
+.submenu .active-link > a {
+    background: none;
+}
+
 .has-submenu > a {
     background: none;
 }
