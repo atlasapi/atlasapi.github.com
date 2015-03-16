@@ -15,7 +15,7 @@ function highlightCurrentPage() {
     }
   }
 
-  $('#nav-main a, .navbar-api-explorer-btn').on('click', function (e) {
+  $('#nav-main a, .navbar-api-explorer-btn').not('.user-menu a').on('click', function (e) {
     e.preventDefault();
     var target = $(this).attr('href');
     $(window).scrollTop($(target).offset().top - 64);
@@ -26,7 +26,7 @@ function highlightCurrentPage() {
 
   $(document).scroll(function () {
 
-    $('#nav-main > li').each(function () {
+    $('#nav-main > li').not('.user-menu').each(function () {
       var target = $(this).find('a').attr('href');
       if (isOnScreen(target)) {
         $(this).siblings().removeClass('active-link');
@@ -41,7 +41,7 @@ function highlightCurrentPage() {
       }
     });
 
-    $('.submenu > li').each(function () {
+    $('.submenu > li').not('.user-menu .submenu').each(function () {
       var target = $(this).find('a').attr('href');
       if (isOnScreen(target)) {
         $(this).siblings().removeClass('active-link');
