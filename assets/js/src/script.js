@@ -1,3 +1,4 @@
+
 var tabs = function (tabSection) {
   $(tabSection).each(function () {
     var $tabs = $(tabSection);

@@ -1,4 +1,3 @@
-// V
 
 if (!Date.prototype.toISOString) {
   Date.prototype.toISOString = function () {
