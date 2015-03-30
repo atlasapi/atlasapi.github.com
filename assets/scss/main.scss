@@ -1,2 +1,27 @@
+// Third-party
 @import "lib/github-syntax";
-@import "base";
+
+// Base
+@import "base/reset";
+@import "base/scaffolding";
+@import "base/typography";
+@import "base/tables";
+
+// Components
+@import "components/lists";
+@import "components/tabs";
+@import "components/buttons";
+@import "components/messages";
+@import "components/images";
+@import "components/projects";
+@import "components/grids";
+@import "components/slideshow";
+@import "components/examples";
+@import "components/forms";
+@import "components/misc";
+@import "components/logos";
+@import "components/epg-widget";
+@import "components/api-explorer";
+@import "components/nownext-widget";
+@import "components/header";
+@import "components/navigation";

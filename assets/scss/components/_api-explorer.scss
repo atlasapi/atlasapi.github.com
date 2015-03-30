@@ -1,0 +1,160 @@
+.jsonOutput {
+  overflow: auto;
+  height: 300px;
+  text-transform: none;
+}
+
+input.queryUrl {
+  width: 92%;
+}
+
+.ajaxLoading {
+  width: 100% !important;
+  height: 100% !important;
+  background: url("../images/loader.gif") center center no-repeat;
+}
+
+.tbl tbody td.annotations-row {
+  padding-bottom: 10px;
+}
+
+.annotations-row label {
+  width: 25%;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.channel-picker-row label {
+  width: auto;
+  float: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.channel-picker-row h4 {
+  margin-bottom: 10px;
+}
+
+.platform-picker,
+.region-picker {
+  margin-bottom: 10px;
+}
+
+.channels-container h4 {
+  padding-left: 1%;
+}
+
+.popular-channels {
+  position: relative;
+  float: left;
+  width: 74%;
+  margin: 0 0 0 1%;
+}
+
+.popular-channels label {
+  float: left;
+  width: 33.33%;
+  margin: 0;
+}
+
+.popular-channels label,
+.channels-container label {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.channel-picker-toggle,
+.toggle-picker {
+  display: block;
+}
+
+.pickers {
+  position: relative;
+  float: left;
+  width: 23%;
+  margin: 0 1%;
+}
+
+.popular-channels .close-channel-picker {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.id-added {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  margin: 0 5px;
+  padding: 3px;
+  background: #ef308f;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.pickers select {
+  width: 100%;
+}
+
+.channels-container label {
+  float: left;
+  width: 23%;
+  margin: 0 1%;
+}
+
+.channels-by-region {
+  float: left;
+  width: 23%;
+  margin: 0 1%;
+}
+
+.toggle-link {
+  color: #ef308f;
+}
+
+.tt-dropdown-menu {
+  background: #fff;
+}
+
+.tt-suggestion {
+  padding: 5px;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.tt-suggestion.tt-cursor {
+  background: #380b66;
+  color: #ef308f;
+}
+
+.twitter-typeahead,
+.tt-hint,
+.channel-search-box {
+  width: 100% !important;
+}
+
+.tt-dropdown-menu {
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+}
+
+.close-channel-picker {
+  text-align: right;
+}
+
+.dummy h4 {
+  color: #999;
+}
+
+.dummy input {
+  box-sizing: border-box;
+  opacity: 0.5;
+  height: auto;
+}

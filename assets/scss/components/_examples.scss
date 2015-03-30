@@ -1,0 +1,186 @@
+.example {
+  position: relative;
+  background: #fff;
+  border: 1px solid #E7E5E5;
+  display: block;
+  float: left;
+  padding: 10px 10px 0;
+  margin: 0 0 30px;
+  border-radius: 5px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+}
+
+*:first-child+html .example {
+  width: 70%;
+}
+
+.example h3 mark {
+  font-size: 1.2em;
+}
+
+.example h3 {
+  font-size: 24px;
+  padding: 1px 10px 5px;
+  margin: 20px 10px;
+  line-height: 31px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  border-radius: 5px;
+  position: relative;
+  background: #fff;
+  background:-moz-linear-gradient(top, #000000, #FFE8F3);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#FFE8F3));
+  filter: progid:DXImageTransform.Microsoft.Gradient(
+    StartColorStr='#ffffff', EndColorStr='#FFE8F3', GradientType=0);
+  text-align: center;
+  color: #380B66;
+}
+
+.csstransforms .example h3:after {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: #fff;
+  position: absolute;
+  top: -10px;
+  right: 50%;
+  transform: rotate(45deg);
+  content: "\00a0";
+  box-shadow: -3px -2px 3px rgba(0,0,0,0.13);
+  border-radius: 5px 0 20px 0;
+}
+
+.example h3 .hov {
+  color: #EF308F;
+}
+
+.example a.api {
+  font-size: 20px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+  margin: 0 20px;
+  color: #EF308F;
+  display: inline-block;
+}
+
+.example a:hover {
+  text-decoration: none;
+}
+
+.example.right {
+  float: right;
+}
+
+.example.right h3 {
+  background: #fff;
+  background:-moz-linear-gradient(top, #000000, #e3d7f0);
+  background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#e3d7f0));
+  filter: progid:DXImageTransform.Microsoft.Gradient(StartColorStr='#ffffff', EndColorStr='#e3d7f0', GradientType=0);
+}
+
+.hov {
+  position: relative;
+  color: #380b66;
+}
+
+a.hov {
+  text-decoration: none;
+}
+
+.hover {
+  display: none;
+  background: #fff;
+  border: 5px solid #ccc;
+  border-radius: 5px;
+  position: absolute;
+  width: 150px;
+  font-size: 12px;
+  text-decoration: none;
+  color: #222;
+  padding: 3px;
+  right: 50%;
+  margin-right: -75px;
+  bottom: 25px;
+  line-height:140%;
+  z-index: 9;
+  text-align: left;
+}
+
+.csstransforms .hover:after {
+  width: 10px;
+  height: 10px;
+  display: block;
+  background: #fff;
+  position: absolute;
+  bottom: -11px;
+  left: 75px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -khtml-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  content: "\00a0";
+  border-bottom: 5px solid #ccc;
+  border-right: 5px solid #ccc;
+  border-radius: 0 0 5px 0;
+}
+
+.hover .title {
+  text-decoration: none;
+  display: block;
+  color: #380b66;
+  font-size: 14px;
+}
+
+.hover .body {
+  display: block;
+  white-space: pre;           /* CSS 2.0 */
+  white-space: pre-wrap;      /* CSS 2.1 */
+  white-space: pre-line;      /* CSS 3.0 */
+  white-space: -pre-wrap;     /* Opera 4-6 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  white-space: -moz-pre-wrap; /* Mozilla */
+  white-space: -hp-pre-wrap;  /* HP Printers */
+  word-wrap: break-word;      /* IE 5+ */
+}
+
+.hovDown .hover {
+  bottom: auto;
+  top: 30px;
+}
+
+.csstransforms .hovDown .hover:after {
+  bottom: auto;
+  top: -11px;
+  border-bottom: 0 none;
+  border-right: 0 none;
+  border-top: 5px solid #ccc;
+  border-left: 5px solid #ccc;
+}
+
+.hovRight .hover {
+  right: -10px;
+  margin-right: 0;
+}
+
+.csstransforms .hovRight .hover:after {
+  left: auto;
+  right: 10px;
+}
+
+.hovLeft .hover {
+  right: auto;
+  left: -10px;
+  margin-right: 0;
+}
+
+.csstransforms .hovLeft .hover:after {
+  left: 10px;
+}
+
+.hov:hover {
+  cursor: pointer;
+}
+
+.hov.js:hover .hover {
+  display: none;
+}
