@@ -4,17 +4,20 @@
   padding: 0;
 }
 
+.menu-heading,
 .menu-item {
   display: block;
   padding: 5px;
-  border-top: 1px solid #ddd;
-  border-left: 3px solid transparent;
 }
 
-.menu-item:first-child {
-  border-top: 0;
+.menu-heading {
+  font-size: 22px;
+  font-style: italic;
+  color: #ef308f;
 }
 
 .menu-item-selected {
-  border-left: 3px solid #fc0088;
+  background: #ef308f;
+  color: #fff;
+  text-shadow: none;
 }
