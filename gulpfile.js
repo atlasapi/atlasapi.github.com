@@ -37,7 +37,7 @@ gulp.task('scripts', function () {
     .pipe(gulp.dest('./assets/js'));
 });
 
-gulp.task('watch', function () {
+gulp.task('dev', function () {
   gulp.watch('./assets/scss/**/*.scss', ['styles']);
   gulp.watch('./assets/js/src/**/*.js', ['scripts']);
 });
