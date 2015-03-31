@@ -224,12 +224,98 @@
     },
     {
       "name": "channels",
-      "parameters": [],
+      "parameters": [
+        {
+          "name": "id",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "limit",
+          "default_value": "",
+          "type": "number",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "offset",
+          "default_value": "",
+          "type": "number",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "source",
+          "default_value": "",
+          "type": "number",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "annotations",
+          "default_value": "",
+          "type": "list",
+          "is_multiple": true,
+          "description": "List of annotations that describe the data to be output."
+        }
+      ],
       "annotations": []
     },
     {
       "name": "channel_groups",
-      "parameters": [],
+      "parameters": [
+        {
+          "name": "id",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "limit",
+          "default_value": "",
+          "type": "number",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "offset",
+          "default_value": "",
+          "type": "number",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "source",
+          "default_value": "",
+          "type": "number",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "type",
+          "default_value": "platform",
+          "type": "string",
+          "is_multiple": false,
+          "description": ""
+        },
+        {
+          "name": "channel_genres",
+          "default_value": "",
+          "type": "list",
+          "is_multiple": true,
+          "description": "List of genres."
+        },
+        {
+          "name": "annotations",
+          "default_value": "",
+          "type": "list",
+          "is_multiple": true,
+          "description": "List of annotations that describe the data to be output."
+        }
+      ],
       "annotations": []
     }
   ]
