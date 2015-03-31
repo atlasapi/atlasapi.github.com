@@ -221,6 +221,16 @@
         "topics",
         "upcoming"
       ]
+    },
+    {
+      "name": "channels",
+      "parameters": [],
+      "annotations": []
+    },
+    {
+      "name": "channel_groups",
+      "parameters": [],
+      "annotations": []
     }
   ]
 }

@@ -1,4 +1,3 @@
-
 var tabs = function (tabSection) {
   $(tabSection).each(function () {
     var $tabs = $(tabSection);
@@ -83,6 +82,8 @@ $(document).ready(function () {
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
   tabs('#apiExplorerTabs');
+
+  ApiDocs.init();
 });
 
 $(window).load(function () {
