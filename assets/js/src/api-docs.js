@@ -1,23 +1,43 @@
 var ApiDocs = (function () {
+  'use strict';
+
   var apiData = [];
 
   var init = function () {
-    // getEndpointData();
+    getEndpointsData();
+    getParametersData();
+    enableTabLinks();
   };
 
-  var getEndpointData = function () {
+  var compileTemplate = function (data, template) {
+    var compiledTemplate = new EJS({
+      url: template.path
+    }).render(data);
+
+    $(template.container).html(compiledTemplate);
+  };
+
+  var enableTabLinks = function () {
+    $(document).on('click', '.api-docs-nav .menu-item', function (e) {
+      e.preventDefault();
+
+      var $this = $(this),
+          tabPanelId = $this.attr('href'),
+          $tabPanel = $(tabPanelId);
+
+      $('.api-docs-nav').find('.menu-item').removeClass('menu-item-selected');
+      $(this).addClass('menu-item-selected');
+
+      $('.api-docs-panel').hide();
+      $tabPanel.show();
+    });
+  };
+
+  var getEndpointsData = function () {
     $.ajax({
       url: '//atlas.metabroadcast.com/4/meta/endpoints.json',
       success: function (data) {
-        _.forEach(data.endpoints, function (endpoint) {
-          var endpointData = {
-            description: endpoint.description,
-            name: endpoint.name,
-            operations: endpoint.operations,
-            root: endpoint.root_path
-          };
-          getEndpointResponseData(endpoint.model_class_link, endpointData);
-        });
+        getParametersData(data.endpoints);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error({
@@ -29,48 +49,12 @@ var ApiDocs = (function () {
     });
   };
 
-  var getEndpointResponseData = function (modelClassUrl, endpointData) {
-    endpointData.fields = [];
-    $.ajax({
-      url: modelClassUrl,
-      success: function (data) {
-        _.forEach(data.model_class.fields, function (field) {
-          endpointData.fields.push({
-            description: field.description,
-            type: field.json_type,
-            name: field.name
-          });
-        });
-        getEndpointParametersAndAnnotations(endpointData);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.error({
-          jqXHR: jqXHR,
-          textStatus: textStatus,
-          errorThrown: errorThrown
-        });
-      }
-    });
-  };
-
-  var getEndpointParametersAndAnnotations = function (endpointData) {
-    endpointData.parameters = [];
+  var getParametersData = function (endpointsData) {
     $.ajax({
       url: 'assets/data/parameters.json',
       success: function (data) {
-        _.forEach(data.endpoints, function (endpoint) {
-          if (_.isMatch(endpoint, { name: endpointData.name })) {
-            endpointData.annotations = endpoint.annotations;
-            _.forEach(endpoint.parameters, function (parameter) {
-              endpointData.parameters.push({
-                name: parameter.name,
-                type: parameter.type,
-                description: parameter.description
-              });
-            });
-          }
-        });
-        console.log('woohoo', endpointData);
+        var parametersData = data.endpoints;
+        mergeData(parametersData, endpointsData)
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error({
@@ -79,6 +63,21 @@ var ApiDocs = (function () {
           errorThrown: errorThrown
         });
       }
+    });
+  };
+
+  var mergeData = function (parametersData, endpointsData) {
+    _.forEach(endpointsData, function (endpoint) {
+      _.forEach(parametersData, function (parameters) {
+        if (endpoint.name === parameters.name) {
+          endpoint.parameters = parameters.parameters;
+          endpoint.annotations = parameters.annotations;
+        }
+      });
+    });
+    compileTemplate(endpointsData, {
+      path: 'assets/templates/api-docs.ejs',
+      container: '#api-docs'
     });
   };
 
@@ -86,30 +85,3 @@ var ApiDocs = (function () {
     init: init
   };
 })();
-
-var anExampleEndpoint = {
-  name: 'String',
-  description: 'String',
-  root: 'String',
-  operations: [
-    {
-      method: 'String',
-      path: 'String'
-    }
-  ],
-  fields: [
-    {
-      name: 'String',
-      description: 'String',
-      type: 'String'
-    }
-  ],
-  parameters: [
-    {
-      name: 'String',
-      type: 'String',
-      description: 'String'
-    }
-  ],
-  annotations: []
-};

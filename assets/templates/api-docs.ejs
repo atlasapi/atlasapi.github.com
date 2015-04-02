@@ -1,0 +1,60 @@
+<h2>api documentation</h2>
+
+<div class="api-docs-container clearfix pbl">
+  <div class="size1of4 unit">
+    <nav class="menu api-docs-nav">
+      <div class="menu-heading">Endpoints</div>
+      <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+        <% if (i === 0) { %>
+          <a class="menu-item menu-item-selected" href="#api-docs-<%= this[i].name %>"><%= this[i].name %></a>
+        <% } else { %>
+          <a class="menu-item" href="#api-docs-<%= this[i].name %>"><%= this[i].name %></a>
+        <% } %>
+      <% } %>
+    </nav>
+  </div>
+  <div class="size3of4 unit">
+    <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+      <div class="api-docs-panel pll" id="api-docs-<%= this[i].name %>">
+        <h3><%= this[i].name %></h3>
+        <% if (this[i].description) { %>
+          <h4>Description</h4>
+          <p><%= this[i].description %></p>
+        <% } %>
+        <h4>HTTP methods</h4>
+        <% for (var j = 0, jj = this[i].operations.length; j < jj; j++) { %>
+          <pre><code><%= this[i].operations[j].method %> <%= this[i].root_path %><%= this[i].operations[j].path %></code></pre>
+        <% } %>
+        <h4>Parameters</h4>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var k = 0, kk = this[i].parameters.length; k < kk; k++) { %>
+              <tr>
+                <td><%= this[i].parameters[k].name %></td>
+                <td><%= this[i].parameters[k].type %></td>
+                <td><%= this[i].parameters[k].description %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <p>
+          available annotations:
+          <% for (var l = 0, ll = this[i].annotations.length; l < ll; l++) { %>
+            <% if (l !== ll - 1) { %>
+              <%= this[i].annotations[l] %>,
+            <% } else { %>
+              <%= this[i].annotations[l] %>
+            <% } %>
+          <% } %>
+        </p>
+      </div>
+    <% } %>
+  </div>
+</div>
