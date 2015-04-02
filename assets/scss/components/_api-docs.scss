@@ -5,3 +5,15 @@
 .api-docs-panel:first-child {
   display: block;
 }
+
+.api-docs-annotations {
+  overflow: hidden;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.api-docs-annotations li {
+  float: left;
+  width: 25%;
+}

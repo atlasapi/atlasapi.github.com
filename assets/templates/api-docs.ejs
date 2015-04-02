@@ -44,16 +44,12 @@
             <% } %>
           </tbody>
         </table>
-        <p>
-          available annotations:
+        <h4>Available annotations</h4>
+        <ul class="api-docs-annotations">
           <% for (var l = 0, ll = this[i].annotations.length; l < ll; l++) { %>
-            <% if (l !== ll - 1) { %>
-              <%= this[i].annotations[l] %>,
-            <% } else { %>
-              <%= this[i].annotations[l] %>
-            <% } %>
+            <li><%= this[i].annotations[l] %></li>
           <% } %>
-        </p>
+        </ul>
       </div>
     <% } %>
   </div>
