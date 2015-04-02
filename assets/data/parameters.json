@@ -261,7 +261,33 @@
           "description": "List of annotations that describe the data to be output."
         }
       ],
-      "annotations": []
+      "annotations": [
+        "available_locations",
+        "brand_reference",
+        "brand_summary",
+        "broadcasts",
+        "channel",
+        "channels",
+        "channel_summary",
+        "clips",
+        "content_groups",
+        "description",
+        "extended_description",
+        "filtering_resource",
+        "images",
+        "key_phrases",
+        "locations",
+        "people",
+        "products",
+        "publisher",
+        "recently_broadcast",
+        "related_links",
+        "segment_events",
+        "series_reference",
+        "series_summary",
+        "topics",
+        "upcoming"
+      ]
     },
     {
       "name": "channel_groups",
@@ -316,7 +342,33 @@
           "description": "List of annotations that describe the data to be output."
         }
       ],
-      "annotations": []
+      "annotations": [
+        "available_locations",
+        "brand_reference",
+        "brand_summary",
+        "broadcasts",
+        "channel",
+        "channels",
+        "channel_summary",
+        "clips",
+        "content_groups",
+        "description",
+        "extended_description",
+        "filtering_resource",
+        "images",
+        "key_phrases",
+        "locations",
+        "people",
+        "products",
+        "publisher",
+        "recently_broadcast",
+        "related_links",
+        "segment_events",
+        "series_reference",
+        "series_summary",
+        "topics",
+        "upcoming"
+      ]
     }
   ]
 }
