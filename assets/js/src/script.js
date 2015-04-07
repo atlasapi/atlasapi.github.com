@@ -81,6 +81,10 @@ $(document).ready(function () {
 
   ApiData.init(function (data) {
     ApiDocs.init(data);
+    var apiDocsSubmenu = new EJS({
+      url: 'assets/templates/api-docs-submenu.ejs'
+    }).render(data);
+    $('#api-docs-submenu').html(apiDocsSubmenu);
   });
 
   var apiExplorer = new ApiExplorer();
