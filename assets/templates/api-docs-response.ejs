@@ -1,3 +1,5 @@
+<h4>Response</h4>
+
 <% if (this.description) { %>
   <p><%= this.description %></p>
 <% } %>
@@ -5,7 +7,9 @@
 <% for (var i = 0, ii = this.fields.length; i < ii; i++) { %>
   <ul class="list">
     <li>Name: <%= this.fields[i].name %></li>
-    <li>Description: <%= this.fields[i].description %></li>
+    <% if (this.fields[i].description) { %>
+      <li>Description: <%= this.fields[i].description %></li>
+    <% } %>
     <li>Type: <%= this.fields[i].json_type %></li>
   </ul>
 <% } %>
