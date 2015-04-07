@@ -79,11 +79,13 @@ $(document).ready(function () {
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 
+  ApiData.init(function (data) {
+    ApiDocs.init(data);
+  });
+
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
   tabs('#apiExplorerTabs');
-
-  ApiDocs.init();
 });
 
 $(window).load(function () {
