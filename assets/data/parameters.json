@@ -2,6 +2,7 @@
   "endpoints": [
     {
       "name": "content",
+      "service_level": "beta",
       "parameters": [
         {
           "name": "id",
@@ -104,6 +105,7 @@
     },
     {
       "name": "schedules",
+      "service_level": "beta",
       "parameters": [
         {
           "name": "id",
@@ -150,6 +152,7 @@
     },
     {
       "name": "topics",
+      "service_level": "beta",
       "parameters": [
         {
           "name": "id",
@@ -224,6 +227,7 @@
     },
     {
       "name": "channels",
+      "service_level": "beta",
       "parameters": [
         {
           "name": "id",
@@ -291,6 +295,7 @@
     },
     {
       "name": "channel_groups",
+      "service_level": "beta",
       "parameters": [
         {
           "name": "id",

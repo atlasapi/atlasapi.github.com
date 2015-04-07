@@ -72,6 +72,7 @@ var ApiDocs = (function () {
         if (endpoint.name === parameters.name) {
           endpoint.parameters = parameters.parameters;
           endpoint.annotations = parameters.annotations;
+          endpoint.service_level = parameters.service_level;
         }
       });
     });
