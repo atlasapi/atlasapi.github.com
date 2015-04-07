@@ -26,7 +26,7 @@ gulp.task('scripts', function () {
     './assets/js/src/nownextlater-widget.js',
     './assets/js/src/api-data.js',
     './assets/js/src/api-docs.js',
-    './assets/js/src/apiExplorer.js',
+    './assets/js/src/api-explorer.js',
     './assets/js/src/script.js'
   ])
     .pipe(sourcemaps.init())
