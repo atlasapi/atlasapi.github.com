@@ -73,6 +73,7 @@ var ApiDocs = (function () {
           endpoint.parameters = parameters.parameters;
           endpoint.annotations = parameters.annotations;
           endpoint.service_level = parameters.service_level;
+          endpoint.error_messages = parameters.error_messages;
         }
       });
     });
