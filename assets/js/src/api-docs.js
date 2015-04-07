@@ -35,7 +35,7 @@ var ApiDocs = (function () {
   };
 
   var getResponseData = function (endpointsData) {
-    _.forEach(data, function (endpoint) {
+    _.forEach(endpointsData, function (endpoint) {
       $.ajax({
         url: endpoint.model_class_link,
         success: function (data) {
@@ -43,14 +43,9 @@ var ApiDocs = (function () {
             path: 'assets/templates/api-docs-response.ejs',
             container: '#api-docs-response'
           });
-          console.log(data);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.error({
-            jqXHR: jqXHR,
-            textStatus: textStatus,
-            errorThrown: errorThrown
-          });
+          console.error(errorThrown);
         }
       });
     });
