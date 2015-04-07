@@ -2,7 +2,7 @@ var ApiDocs = (function () {
   'use strict';
 
   var init = function (endpointsData) {
-    buildTemplate(endpointsData);
+    populateTemplate(endpointsData);
     enableTabLinks();
   };
 
@@ -26,7 +26,7 @@ var ApiDocs = (function () {
     });
   };
 
-  var buildTemplate = function (endpointsData) {
+  var populateTemplate = function (endpointsData) {
     compileTemplate(endpointsData, {
       path: 'assets/templates/api-docs.ejs',
       container: '#api-docs'
