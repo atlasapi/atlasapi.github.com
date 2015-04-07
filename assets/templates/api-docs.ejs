@@ -21,16 +21,18 @@
           <h4>Description</h4>
           <p><%= this[i].description %></p>
         <% } %>
-        <h4>HTTP methods</h4>
+        <h4>Endpoints</h4>
         <% for (var j = 0, jj = this[i].operations.length; j < jj; j++) { %>
           <pre><code><%= this[i].operations[j].method %> <%= this[i].root_path %><%= this[i].operations[j].path %></code></pre>
         <% } %>
-        <p>SLA: <%= this[i].service_level %></p>
+        <h4>SLA</h4>
+        <p>Current service level: <%= this[i].service_level %></p>
         <h4>Error messages</h4>
         <table class="tbl">
           <thead>
             <tr>
               <th>Status code</th>
+              <th>Error code</th>
               <th>Error message</th>
             </tr>
           </thead>
@@ -38,6 +40,7 @@
             <% for (var l = 0, ll = this[i].error_messages.length; l < ll; l++) { %>
               <tr>
                   <td><%= this[i].error_messages[l].status_code %></td>
+                  <td><%= this[i].error_messages[l].error_code %></td>
                   <td><%= this[i].error_messages[l].error_message %></td>
               </tr>
             <% } %>
