@@ -5,7 +5,11 @@
     <nav class="menu ui-tabs-nav">
       <div class="menu-heading">Endpoints</div>
       <% for (var i = 0, ii = this.length; i < ii; i++) { %>
-        <a class="menu-item ui-tabs-link" href="#api-docs-<%= this[i].name %>"><%= this[i].name %></a>
+        <% if (i === 0) { %>
+          <a class="menu-item ui-tabs-link ui-tabs-active-link" href="#api-docs-<%= this[i].name %>"><%= this[i].name %></a>
+        <% } else { %>
+          <a class="menu-item ui-tabs-link" href="#api-docs-<%= this[i].name %>"><%= this[i].name %></a>
+        <% } %>
       <% } %>
     </nav>
   </div>

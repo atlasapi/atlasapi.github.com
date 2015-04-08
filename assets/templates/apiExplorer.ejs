@@ -2,7 +2,11 @@
   <ul class="ui-tabs-nav clearfix">
     <% for (var i = 0, ii = this.length; i < ii; i++) { %>
       <% if (this[i].parameters) { %>
-        <li><a class="ui-tabs-link" href="#api-<%= this[i].name %>"><%= this[i].name %></a></li>
+        <% if (i === 0) { %>
+          <li><a class="ui-tabs-link ui-tabs-active-link" href="#api-<%= this[i].name %>"><%= this[i].name %></a></li>
+        <% } else { %>
+          <li><a class="ui-tabs-link" href="#api-<%= this[i].name %>"><%= this[i].name %></a></li>
+        <% } %>
       <% } %>
     <% } %>
   </ul>

@@ -79,5 +79,5 @@ $(document).ready(function () {
 
 $(window).load(function () {
   UiTabs.init();
-  highlightCurrentPage();
+  // highlightCurrentPage();
 });

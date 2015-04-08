@@ -1,36 +1,40 @@
 var UiTabs = (function () {
   'use strict';
 
-  var activeClass = 'ui-tabs-active-link';
-
-  var activateLink = function (elem) {
-    $('.' + activeClass).removeClass(activeClass);
-    $(elem).addClass(activeClass);
-  };
-
-  var activateTab = function (tabSelector) {
-    $('.ui-tabs-panel').hide();
-    $(tabSelector).show();
-  };
-
-  var transition = function (selector, link) {
-    activateTab(selector);
-    activateLink(link);
-  };
-
   var showActiveTab = function () {
-    var active = location.hash;
+    var activeClass = 'ui-tabs-active-link';
 
-    if (active) {
-      transition(active, 'a[href="' + active + '"]');
-    }
+    $('.ui-tabs').each(function () {
+      var $tabsContainer = $(this);
 
-    $(document).on('click', '.ui-tabs-link', function (e) {
-      e.preventDefault();
-      transition($(this).attr('href'), $(this));
-      if (history.pushState) {
-        history.pushState(null, null, $(this).attr('href'));
+      var activateLink = function (elem) {
+        $tabsContainer.find('.' + activeClass).removeClass(activeClass);
+        $(elem).addClass(activeClass);
+      };
+
+      var activateTab = function (tabSelector) {
+        $tabsContainer.find('.ui-tabs-panel').hide();
+        $(tabSelector).show();
+      };
+
+      var transition = function (selector, link) {
+        activateTab(selector);
+        activateLink(link);
+      };
+
+      var active = location.hash;
+
+      if (active) {
+        transition(active, 'a[href="' + active + '"]');
       }
+
+      $tabsContainer.find('.ui-tabs-link').on('click', function (e) {
+        e.preventDefault();
+        transition($(this).attr('href'), $(this));
+        if (history.pushState) {
+          history.pushState(null, null, $(this).attr('href'));
+        }
+      });
     });
   };
 
