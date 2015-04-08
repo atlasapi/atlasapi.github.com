@@ -10,65 +10,67 @@
   <% } %>
 </ul>
 
-<% for (var i = 0, ii = this.length; i < ii; i++) { %>
-  <% if (this[i].parameters) { %>
-    <div class="ui-tabs-panel" id="api-<%= this[i].name %>">
-      <h2><%= this[i].name %></h2>
-      <h3><span class="upper">GET</span> <%= this[i].root_path %></h3>
-      <% if (this[i].description) { %>
-      <p><%= this[i].description %></p>
-      <% } %>
-      <form class="queryParametersForm" data-endpoint="<%= this[i].root_path %>">
-        <table class="tbl mbm queryTable">
-          <thead>
-            <tr>
-              <th class="first">Parameter</th>
-              <th class="second">Value</th>
-              <th class="third">Type</th>
-              <th class="fourth">Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (var j = 0, jj = this[i].parameters.length; j < jj; j++) { %>
-              <tr id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
-                <td class="first"><%= this[i].parameters[j].name %></td>
-                <td class="second">
-                  <input class="queryParameter" id="<%= this[i].name %>-id-input" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
-                  <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
-                    <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
-                  <% } %>
-                  <% if (this[i].parameters[j].name === 'annotations') { %>
-                    <a class="toggle-picker toggle-link" href="#<%= this[i].name %>-annotations-picker">choose annotations</a>
-                  <% } %>
-                </td>
-                <td class="third"><%= this[i].parameters[j].type %></td>
-                <td class="fourth"><%= this[i].parameters[j].description %></td>
+<div class="clearfix">
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+    <% if (this[i].parameters) { %>
+      <div class="ui-tabs-panel" id="api-<%= this[i].name %>">
+        <h2><%= this[i].name %></h2>
+        <h3><span class="upper">GET</span> <%= this[i].root_path %></h3>
+        <% if (this[i].description) { %>
+        <p><%= this[i].description %></p>
+        <% } %>
+        <form class="queryParametersForm" data-endpoint="<%= this[i].root_path %>">
+          <table class="tbl mbm queryTable">
+            <thead>
+              <tr>
+                <th class="first">Parameter</th>
+                <th class="second">Value</th>
+                <th class="third">Type</th>
+                <th class="fourth">Description</th>
               </tr>
-              <% if (this[i].parameters[j].name === 'annotations') { %>
-                <tr class="hide" id="<%= this[i].name %>-annotations-picker">
-                  <td colspan="4" class="annotations-row">
-                    <% for (var k = 0, kk = this[i].annotations.length; k < kk; k++) { %>
-                      <label>
-                        <input class="annotation-checkbox" type="checkbox" name="<%= this[i].annotations[k] %>">
-                        <%= this[i].annotations[k] %>
-                      </label>
+            </thead>
+            <tbody>
+              <% for (var j = 0, jj = this[i].parameters.length; j < jj; j++) { %>
+                <tr id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
+                  <td class="first"><%= this[i].parameters[j].name %></td>
+                  <td class="second">
+                    <input class="queryParameter" id="<%= this[i].name %>-id-input" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
+                    <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
+                      <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
+                    <% } %>
+                    <% if (this[i].parameters[j].name === 'annotations') { %>
+                      <a class="toggle-picker toggle-link" href="#<%= this[i].name %>-annotations-picker">choose annotations</a>
                     <% } %>
                   </td>
+                  <td class="third"><%= this[i].parameters[j].type %></td>
+                  <td class="fourth"><%= this[i].parameters[j].description %></td>
                 </tr>
+                <% if (this[i].parameters[j].name === 'annotations') { %>
+                  <tr class="hide" id="<%= this[i].name %>-annotations-picker">
+                    <td colspan="4" class="annotations-row">
+                      <% for (var k = 0, kk = this[i].annotations.length; k < kk; k++) { %>
+                        <label>
+                          <input class="annotation-checkbox" type="checkbox" name="<%= this[i].annotations[k] %>">
+                          <%= this[i].annotations[k] %>
+                        </label>
+                      <% } %>
+                    </td>
+                  </tr>
+                <% } %>
               <% } %>
-            <% } %>
-          </tbody>
-        </table>
-      </form>
-      <h4>Request</h4>
-      <form class="queryForm mbl">
-        <input class="queryUrl" type="text" name="">
-        <button class="btn" type="submit">Go</button>
-      </form>
-      <h4>Response</h4>
-      <div class="queryResponse">
-        <pre class="jsonOutput"></pre>
+            </tbody>
+          </table>
+        </form>
+        <h4>Request</h4>
+        <form class="queryForm mbl">
+          <input class="queryUrl" type="text" name="">
+          <button class="btn" type="submit">Go</button>
+        </form>
+        <h4>Response</h4>
+        <div class="queryResponse">
+          <pre class="jsonOutput"></pre>
+        </div>
       </div>
-    </div>
+    <% } %>
   <% } %>
-<% } %>
+</div>
