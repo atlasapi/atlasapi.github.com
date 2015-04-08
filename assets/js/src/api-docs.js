@@ -3,7 +3,6 @@ var ApiDocs = (function () {
 
   var init = function (endpointsData) {
     populateTemplate(endpointsData);
-    enableTabLinks();
   };
 
   var compileTemplate = function (data, template) {
@@ -11,19 +10,6 @@ var ApiDocs = (function () {
       url: template.path
     }).render(data);
     $(template.container).html(compiledTemplate);
-  };
-
-  var enableTabLinks = function () {
-    $(document).on('click', '.api-docs-nav .menu-item', function (e) {
-      e.preventDefault();
-      var $this = $(this),
-          tabPanelId = $this.attr('href'),
-          $tabPanel = $(tabPanelId);
-      $('.api-docs-nav').find('.menu-item').removeClass('menu-item-selected');
-      $(this).addClass('menu-item-selected');
-      $('.api-docs-panel').hide();
-      $tabPanel.show();
-    });
   };
 
   var populateTemplate = function (endpointsData) {

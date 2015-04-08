@@ -80,11 +80,12 @@ $(document).ready(function () {
   nowNextLater.init();
 
   ApiData.init(function (data) {
-    ApiDocs.init(data);
     var apiDocsSubmenu = new EJS({
       url: 'assets/templates/api-docs-submenu.ejs'
     }).render(data);
     $('#api-docs-submenu').html(apiDocsSubmenu);
+
+    ApiDocs.init(data);
   });
 
   var apiExplorer = new ApiExplorer();
@@ -93,7 +94,7 @@ $(document).ready(function () {
 });
 
 $(window).load(function () {
-
-  highlightCurrentPage();
+  UiTabs.init();
+  // highlightCurrentPage();
 
 });
