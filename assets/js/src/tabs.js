@@ -28,6 +28,9 @@ var UiTabs = (function () {
     $(document).on('click', '.ui-tabs-link', function (e) {
       e.preventDefault();
       transition($(this).attr('href'), $(this));
+      if (history.pushState) {
+        history.pushState(null, null, $(this).attr('href'));
+      }
     });
   };
 
