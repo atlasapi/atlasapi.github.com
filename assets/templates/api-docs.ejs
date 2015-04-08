@@ -1,6 +1,6 @@
 <h2>api documentation</h2>
 
-<div class="api-docs-container clearfix pbl ui-tabs ui-tabs-vertical">
+<div class="clearfix pbl ui-tabs ui-tabs-vertical">
   <div class="size1of4 unit">
     <nav class="menu ui-tabs-nav">
       <div class="menu-heading">Endpoints</div>
@@ -15,7 +15,7 @@
   </div>
   <div class="size3of4 unit">
     <% for (var i = 0, ii = this.length; i < ii; i++) { %>
-      <div class="ui-tabs-panel api-docs-panel pll" id="api-docs-<%= this[i].name %>">
+      <div class="ui-tabs-panel pll" id="api-docs-<%= this[i].name %>">
         <h3><%= this[i].name %></h3>
         <% if (this[i].description) { %>
           <h4>Description</h4>

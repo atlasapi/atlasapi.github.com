@@ -16,7 +16,7 @@ var UiTabs = (function () {
     };
 
     var activateTab = function (tabSelector) {
-      $(tabSelector).siblings('.ui-tabs-panel').hide();
+      $(tabSelector).closest('.ui-tabs').find('.ui-tabs-panel').hide();
       $(tabSelector).show();
     };
 

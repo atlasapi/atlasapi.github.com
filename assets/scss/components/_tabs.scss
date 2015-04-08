@@ -1,3 +1,11 @@
+.ui-tabs-panel {
+  display: none;
+}
+
+.ui-tabs .ui-tabs-panel:first-child {
+  display: block;
+}
+
 .ui-tabs-horizontal .ui-tabs-nav {
   background: #e2e2e2;
   float: left;

@@ -7,8 +7,8 @@ var ApiExplorer = function () {
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
   this.queryUrl = '//atlas.metabroadcast.com';
   this.template = {
-    path: 'assets/templates/apiExplorer.ejs?v=201510191550',
-    container: '#apiExplorerTabSections'
+    path: 'assets/templates/api-explorer.ejs',
+    container: '#api-explorer-tabs'
   };
   this.singleId = true;
 };
