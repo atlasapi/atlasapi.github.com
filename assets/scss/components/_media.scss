@@ -1,0 +1,17 @@
+.media {
+  display: block;
+}
+
+.media .img,
+.media-image {
+  display: block;
+  float: left;
+  margin-right: 10px;
+}
+
+.media .bd,
+.media-body {
+  display: table-cell;
+  line-height: 32px;
+  font-size: 15px;
+}

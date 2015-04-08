@@ -1,18 +1,3 @@
-var tabs = function (tabSection) {
-  $(tabSection).each(function () {
-    var $tabs = $(tabSection);
-    $(this).find(".tabArea").not(":first").hide();
-    $tabs.find(".tabs li:first-child").addClass("selected");
-    $tabs.find(".tabs a").on("click", function (e) {
-      e.preventDefault();
-      var $this = $(this);
-      var tabTarget = $this.attr("href");
-      $this.parent().addClass("selected").siblings().removeClass("selected");
-      $(tabTarget).show().siblings(".tabArea").hide();
-    });
-  });
-};
-
 var popovers = function () {
   var hoverTimer;
   $('.hov').bind('mouseover',function () {
@@ -90,11 +75,9 @@ $(document).ready(function () {
 
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
-  tabs('#apiExplorerTabs');
 });
 
 $(window).load(function () {
   UiTabs.init();
-  // highlightCurrentPage();
-
+  highlightCurrentPage();
 });

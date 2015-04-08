@@ -1,4 +1,4 @@
-.tabs {
+.ui-tabs-horizontal .ui-tabs-nav {
   background: #e2e2e2;
   float: left;
   border-radius: 5px 5px 0 0;
@@ -6,11 +6,11 @@
   box-shadow: inset 0 1px 5px rgba(0,0,0,0.1);
 }
 
-.tabs li {
+.ui-tabs-horizontal .ui-tabs-nav li {
   float: left;
 }
 
-.tabs li a {
+.ui-tabs-horizontal .ui-tabs-link {
   font-size: 18px;
   line-height: 40px;
   height: 40px;
@@ -19,49 +19,26 @@
   display: block;
 }
 
-.tabs li:first-child a {
+.ui-tabs-horizontal li:first-child .ui-tabs-link {
   border-radius: 5px 0 0 0;
 }
 
-.tabs li:last-child a {
+.ui-tabs-horizontal li:last-child .ui-tabs-link {
   border-radius: 0 5px 0 0;
 }
 
-.tabs li a:hover {
+.ui-tabs-horizontal li .ui-tabs-link:hover {
   text-decoration: none; color: #ef308f;
 }
 
-.tabs li.selected a {
+.ui-tabs-horizontal .ui-tabs-active-link {
   background: #fff;
   color: #ef308f;
   text-shadow: 0 1px 2px rgba(0,0,0,0.2);
   box-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 
-.tabExt {
-  float: right;
-  color: #fff;
-  background: #b5a7c4;
-  height: 20px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  line-height: 20px;
-  display: block;
-  font-size: 14px;
-  padding: 5px 15px;
-  border-radius: 5px 5px 0 0;
-  margin-top: 10px;
-}
-
-.tabExt.selected {
-  background: #fff; color: #ef308f; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
-}
-
-.tabExt.selected:hover {
-  text-decoration: none;
-}
-
-.tabArea {
+.ui-tabs-horizontal .ui-tabs-panel {
   clear: both;
   background: #fff;
   border-radius: 0 0 5px 5px;
@@ -70,111 +47,6 @@
   position: relative;
 }
 
-.resultsArea {
-  position: relative;
-  overflow-x: hidden;
-  text-transform: none;
-}
-
-.resultsArea .preview {
-  max-height: 114px;
-  overflow-y: hidden;
-  position: relative;
-}
-
-.resultsArea .pageNumber {
-  float: right;
-  width: 80px;
-  text-align: center;
-  margin: 0;
-  padding-top: 15px;
-  font-size: 12px;
-  color: #666;
-}
-
-*:first-child+html .resultsArea {
-  position: relative;
-  display: block;
-  overflow: hidden;
-}
-
-*:first-child+html .output {
-  margin-top: 10px;
-}
-
-.smallTabs {
-  display: block;
-  padding-right: 5px;
-}
-
-.smallTabs li {
-  float: right;
-}
-
-.smallTabs a {
-  font-size: 14px;
-  color: #222;
-  padding: 3px 10px;
-  display: block;
-  text-decoration: underline;
-}
-
-.smallTabs a:hover {
-  text-decoration: none;
-}
-
-.smallTabs .subTab a {
-  cursor: default;
-}
-
-.smallTabs .selected a {
-  background: #8366a0;
-  color: #fff;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  text-decoration: none;
-  border-radius: 5px 5px 0 0;
-}
-
-.smallTabs .other {
-  margin-top: 3px;
-}
-
-.socialList li {
-  margin: 0 20px 10px 0;
-  float: left;
-}
-
-.media {
-  display: block;
-}
-
-.media .img {
-  display: block;
-  float: left;
-  margin-right: 10px;
-}
-
-.media .bd {
-  display: table-cell;
-  line-height: 32px;
-  font-size: 15px;
-}
-
-.queries {
-  float: left;
-  width: 38750px;
-  position: relative;
-}
-
-.queries .query {
-  color: #333;
-  position: relative;
-  float: left;
-  width: 743px;
-  text-align:right;
-}
-
-// New tabs
 .ui-tabs-vertical .ui-tabs-active-link {
   background: #ef308f;
   color: #fff;
