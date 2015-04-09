@@ -4,12 +4,21 @@
   <p><%= this.description %></p>
 <% } %>
 
-<% for (var i = 0, ii = this.fields.length; i < ii; i++) { %>
-  <ul class="list">
-    <li>Name: <%= this.fields[i].name %></li>
-    <% if (this.fields[i].description) { %>
-      <li>Description: <%= this.fields[i].description %></li>
+<table class="tbl">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (var i = 0, ii = this.fields.length; i < ii; i++) { %>
+      <tr>
+        <td><%= this.fields[i].name %></td>
+        <td><%= this.fields[i].json_type %></td>
+        <td><%= this.fields[i].description %></td>
+      </tr>
     <% } %>
-    <li>Type: <%= this.fields[i].json_type %></li>
-  </ul>
-<% } %>
+  </tbody>
+</table>

@@ -25,6 +25,7 @@ var ApiDocs = (function () {
       $.ajax({
         url: endpoint.model_class_link,
         success: function (data) {
+          console.log(data);
           compileTemplate(data.model_class, {
             path: 'assets/templates/api-docs-response.ejs',
             container: '#api-docs-response'

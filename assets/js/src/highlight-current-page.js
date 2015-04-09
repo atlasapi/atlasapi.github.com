@@ -70,6 +70,15 @@ var HighlightCurrentPage = (function () {
         }
       });
 
+      $('#api-docs-submenu').find('a').each(function () {
+        var target = $(this).attr('href');
+        if ($(target).is(':visible') && isOnScreen(target)) {
+          history.pushState(null, null, target);
+          $('#api-docs-submenu').find('.api-docs-submenu-link').removeClass(activeClass);
+          $('#api-docs-submenu').find('a[href="' + target + '"]').closest('.api-docs-submenu-link').addClass(activeClass);
+        }
+      });
+
       if (isOnScreen('#apiExplorer')) {
         if (history.pushState) {
           history.pushState(null, null, '#apiExplorer');
@@ -81,15 +90,6 @@ var HighlightCurrentPage = (function () {
           history.pushState(null, null, '#home');
         }
       }
-
-      $('#api-docs-submenu').find('a').each(function () {
-        var target = $(this).attr('href');
-        if ($(target).is(':visible')) {
-          history.pushState(null, null, target);
-          $('#api-docs-submenu').find('.api-docs-submenu-link').removeClass(activeClass);
-          $('#api-docs-submenu').find('a[href="' + target + '"]').closest('.api-docs-submenu-link').addClass(activeClass);
-        }
-      });
     });
   };
 
