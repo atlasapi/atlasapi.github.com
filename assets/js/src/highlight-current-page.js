@@ -39,7 +39,8 @@ var HighlightCurrentPage = (function () {
 
     $(document).on('click', '#api-docs .menu .menu-item', function () {
       var target = $(this).attr('href');
-      $('#api-docs-submenu').find('a[href="' + target + '"]').trigger('click');
+      $('.api-docs-submenu-link').removeClass(activeClass);
+      $('#api-docs-submenu').find('a[href="' + target + '"]').closest('.api-docs-submenu-link').addClass(activeClass);
     });
 
     var onScroll = function () {
