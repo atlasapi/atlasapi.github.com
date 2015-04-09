@@ -12,8 +12,7 @@ var HighlightCurrentPage = (function () {
   var isOnScreen = function (el) {
     var distance = $(el).offset().top - 150;
     var $window = $(window);
-
-    if ($window.scrollTop() > distance && $window.scrollTop() < distance + 90 + $(el).height()) {
+    if ($window.scrollTop() > distance && $window.scrollTop() < distance + 90 + $(el).height() && $(el).is(':visible')) {
       return true;
     }
   };
@@ -36,6 +35,11 @@ var HighlightCurrentPage = (function () {
       }
       $('.ui-tabs').find('a[href="' + target + '"]').trigger('click');
       $(window).scrollTop($('#api-docs').offset().top - headerHeight);
+    });
+
+    $(document).on('click', '#api-docs .menu .menu-item', function () {
+      var target = $(this).attr('href');
+      $('#api-docs-submenu').find('a[href="' + target + '"]').trigger('click');
     });
 
     var onScroll = function () {
