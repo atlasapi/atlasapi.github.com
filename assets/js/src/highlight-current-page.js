@@ -38,7 +38,7 @@ var HighlightCurrentPage = (function () {
       $(window).scrollTop($('#api-docs').offset().top - headerHeight);
     });
 
-    var onScroll = debounce(function () {
+    var onScroll = function () {
       $('#nav-main > li').not('.user-menu').each(function () {
         var target = $(this).find('a').attr('href');
         if (isOnScreen(target)) {
@@ -89,11 +89,9 @@ var HighlightCurrentPage = (function () {
           history.pushState(null, null, '#home');
         }
       }
-    }, 250);
+    };
 
-    $(document).scroll(function () {
-      onScroll();
-    });
+    $(document).scroll(_.debounce(onScroll, 100));
   };
 
   return {
