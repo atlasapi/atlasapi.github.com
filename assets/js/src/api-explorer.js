@@ -10,29 +10,6 @@ var ApiExplorer = (function () {
   };
   var singleId = true;
 
-  var getData = function (url, callback) {
-    var async = true;
-    var dataResponse;
-    if (!callback) {
-      async = false;
-    }
-    $.ajax({
-      url: url,
-      dataType: 'json',
-      async: async,
-      success: function (data) {
-        if (callback) {
-          callback(data);
-        }
-        dataResponse = data;
-      },
-      error: function (err) {
-        console.error(err);
-      }
-    });
-    return dataResponse;
-  };
-
   var getApiKey = function () {
     var $apiKeyInput = $('#apiKey');
     var apiKey;
@@ -59,7 +36,7 @@ var ApiExplorer = (function () {
         });
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorTrown);
+        console.error(errorThrown);
       }
     });
   };
@@ -263,7 +240,7 @@ var ApiExplorer = (function () {
         buildPlatformTemplate(channelGroups);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorTrown);
+        console.error(errorThrown);
       }
     });
   };
@@ -432,14 +409,22 @@ var ApiExplorer = (function () {
     var platformTitle;
     var regionTitle;
     channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations + '&type=region' + '&key=' + defaultApiKey;
-    channelsData = getData(channelsUrl);
-    platformTitle = channelsData.channel_group.title;
-    regionTitle = channelsData.channel_group.title;
-    for (var i = 0, ii = channelsData.channel_group.channels.length; i < ii; i++) {
-      searchResults.push(channelsData.channel_group.channels[i]);
-    }
-    buildChannelsTemplate(channelsData.channel_group.channels, platformTitle, regionTitle);
-    buildChannelSearchTemplate(searchResults);
+    $.ajax({
+      url: channelsUrl,
+      success: function (data) {
+        channelsData = data;
+        platformTitle = channelsData.channel_group.title;
+        regionTitle = channelsData.channel_group.title;
+        for (var i = 0, ii = channelsData.channel_group.channels.length; i < ii; i++) {
+          searchResults.push(channelsData.channel_group.channels[i]);
+        }
+        buildChannelsTemplate(channelsData.channel_group.channels, platformTitle, regionTitle);
+        buildChannelSearchTemplate(searchResults);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+      }
+    });
   };
 
   var buildChannelsTemplate = function (channels, platformTitle, regionTitle) {
