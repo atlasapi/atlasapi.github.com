@@ -5,18 +5,11 @@ var ApiDocs = (function () {
     populateTemplate(endpointsData);
   };
 
-  var compileTemplate = function (data, template) {
-    var compiledTemplate = new EJS({
-      url: template.path
-    }).render(data);
-    $(template.container).html(compiledTemplate);
-  };
-
   var populateTemplate = function (endpointsData) {
-    compileTemplate(endpointsData, {
+    CompileTemplate({
       path: 'assets/templates/api-docs.ejs',
       container: '#api-docs'
-    });
+    }, endpointsData);
     getResponseData(endpointsData);
   };
 
@@ -25,10 +18,10 @@ var ApiDocs = (function () {
       $.ajax({
         url: endpoint.model_class_link,
         success: function (data) {
-          compileTemplate(data.model_class, {
+          CompileTemplate({
             path: 'assets/templates/api-docs-response.ejs',
             container: '#api-docs-response'
-          });
+          }, data.model_class);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error(errorThrown);
