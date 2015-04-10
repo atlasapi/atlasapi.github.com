@@ -82,19 +82,6 @@ ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl, channel
   return endpoints;
 };
 
-ApiExplorer.prototype.compileTemplate = function (data, template) {
-  'use strict';
-
-  var apiExplorer = this,
-      compiledTemplate;
-
-  compiledTemplate = new EJS({
-    url: template.path
-  }).render(data);
-
-  $(template.container).html(compiledTemplate);
-};
-
 ApiExplorer.prototype.sendQuery = function ($queryForm) {
   'use strict';
 
@@ -377,7 +364,7 @@ ApiExplorer.prototype.init = function () {
   var apiExplorer = this,
       data = apiExplorer.mergeData(apiExplorer.endpointsUrl, apiExplorer.endpointsParametersUrl, apiExplorer.channelGroupsUrl);
 
-  apiExplorer.compileTemplate(data, apiExplorer.template);
+  CompileTemplate(apiExplorer.template, data);
   apiExplorer.events(data);
 
   if (window.location.search) {
