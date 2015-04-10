@@ -2,6 +2,12 @@ var ApiExplorer = (function () {
   'use strict';
 
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
+  var channelGroupsUrl = '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + defaultApiKey;
+  var defaultQueryUrl = '//atlas.metabroadcast.com';
+  var apiExplorerTemplate = {
+    path: 'assets/templates/api-explorer.ejs',
+    container: '#api-explorer-tabs'
+  };
   var singleId = true;
 
   var getApiKey = function () {
@@ -86,7 +92,6 @@ var ApiExplorer = (function () {
   };
 
   var constructQueryUrl = function (urlComponents) {
-    var defaultQueryUrl = '//atlas.metabroadcast.com';
     var queryUrl = defaultQueryUrl;
     if (singleId === true) {
       queryUrl += urlComponents.endpoint + '/';
@@ -221,7 +226,7 @@ var ApiExplorer = (function () {
   var toggleChannelPicker = function () {
     var compiledTemplate;
     $.ajax({
-      url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + defaultApiKey;,
+      url: channelGroupsUrl,
       success: function (data) {
         var channelGroups = data.channel_groups;
         compiledTemplate = new EJS({
@@ -437,10 +442,7 @@ var ApiExplorer = (function () {
   };
 
   var init = function (endpointsData) {
-    CompileTemplate({
-      path: 'assets/templates/api-explorer.ejs',
-      container: '#api-explorer-tabs'
-    }, endpointsData);
+    CompileTemplate(apiExplorerTemplate, endpointsData);
     events(endpointsData);
     if (window.location.search) {
       prepopulateForm();
