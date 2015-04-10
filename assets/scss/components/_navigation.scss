@@ -234,3 +234,14 @@
 .menu-title h4 {
   margin: 0;
 }
+
+// API docs submenu specific
+.active-link .api-docs-submenu {
+  display: none;
+}
+
+.has-submenu:hover .api-docs-submenu,
+.has-submenu:active .api-docs-submenu,
+.has-submenu:focus .api-docs-submenu {
+  display: block;
+}
