@@ -1,10 +1,9 @@
 var ApiExplorer = (function () {
   'use strict';
 
-  var endpointsUrl = '//atlas.metabroadcast.com/4/meta/endpoints.json';
-  var endpointsParametersUrl = 'assets/data/parameters.json';
-  var channelGroupsUrl = '//atlas.metabroadcast.com/3.0/channel_groups.json?offset=0&type=platform&apiKey=c1e92985ec124202b7f07140bcde6e3f';
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
+  var channelGroupsUrl = '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + defaultApiKey;
+
   var defaultQueryUrl = '//atlas.metabroadcast.com';
   var apiExplorerTemplate = {
     path: 'assets/templates/api-explorer.ejs',
@@ -44,24 +43,6 @@ var ApiExplorer = (function () {
       apiKey = defaultApiKey;
     }
     return apiKey;
-  };
-
-  var mergeData = function (originalDataUrl, newDataUrl, channelGroupsUrl) {
-    var endpoints = getData(originalDataUrl).endpoints;
-    var parameters = getData(newDataUrl).endpoints;
-    var channelGroups = getData(channelGroupsUrl).channel_groups;
-    for (var i = 0, ii = endpoints.length; i < ii; i++) {
-      for (var j = 0, jj = parameters.length; j < jj; j++) {
-        if (endpoints[i].name === parameters[j].name) {
-          endpoints[i].parameters = parameters[j].parameters;
-          endpoints[i].annotations = parameters[j].annotations;
-        }
-      }
-      if (endpoints[i].name === 'schedules') {
-        endpoints[i].channel_groups = channelGroups;
-      }
-    }
-    return endpoints;
   };
 
   var sendQuery = function ($queryForm) {
@@ -260,14 +241,9 @@ var ApiExplorer = (function () {
     });
   };
 
-  var toggleChannelPicker = function (data) {
+  var toggleChannelPicker = function () {
     var compiledTemplate;
-    var channelGroups;
-    for (var i = 0, ii = data.length; i < ii; i++) {
-      if (data[i].channel_groups) {
-        channelGroups = data[i].channel_groups;
-      }
-    }
+    var channelGroups = getData(channelGroupsUrl).channel_groups;
     compiledTemplate = new EJS({
       url: 'assets/templates/channelPicker.ejs?v=201510191550'
     }).render();
@@ -376,13 +352,13 @@ var ApiExplorer = (function () {
       formattedDate.year = startDate.getFullYear();
       if (data[i].start_date > now) {
         var startDateString = formattedDate.day + formattedDate.month + formattedDate.year;
-        data[i].value = data[i].channel.title + ' (' + data[i].deer_id + ') Starts on ' + startDateString;
+        data[i].value = data[i].channel.title + ' (' + data[i].id + ') Starts on ' + startDateString;
       } else {
-        data[i].value = data[i].channel.title + ' (' + data[i].deer_id + ')';
+        data[i].value = data[i].channel.title + ' (' + data[i].id + ')';
       }
       query = [
         data[i].channel.title,
-        data[i].deer_id,
+        data[i].id,
         data[i].channel.title.replace(/\s/ig, ''),
         data[i].channel.title.replace(/\s?one/ig, '1'),
         data[i].channel.title.replace(/\s?two/ig, '2'),
@@ -403,7 +379,7 @@ var ApiExplorer = (function () {
     });
     $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (obj, datum, name) {
       $('.channel-picker-checkbox').each(function () {
-        if (datum.deer_id === $(this).val()) {
+        if (datum.id === $(this).val()) {
           $(this).prop('checked', true).trigger('change');
           if (!$('.id-added').length) {
             $('#channel-search-box').after('<div class="id-added">&#10003;</div>');
@@ -426,7 +402,7 @@ var ApiExplorer = (function () {
         if (substrRegex.test(str.query)) {
           matches.push({
             value: str.value,
-            deer_id: str.deer_id
+            id: str.id
           });
         }
       });
@@ -435,21 +411,21 @@ var ApiExplorer = (function () {
   };
 
   var getRegionChannels = function (regionId) {
-    var channelsEndpoint = '//users-atlas.metabroadcast.com/3.0/channel_groups/';
+    var channelsEndpoint = '//atlas.metabroadcast.com/4/channel_groups/';
     var channelsAnnotations = '?annotations=channels';
     var channelsUrl;
     var channelsData;
     var searchResults = [];
     var platformTitle;
     var regionTitle;
-    channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations;
+    channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations + '&type=region' + '&key=' + defaultApiKey;
     channelsData = getData(channelsUrl);
-    platformTitle = channelsData.channel_groups[0].platform.title;
-    regionTitle = channelsData.channel_groups[0].title;
-    for (var i = 0, ii = channelsData.channel_groups[0].channels.length; i < ii; i++) {
-      searchResults.push(channelsData.channel_groups[0].channels[i]);
+    platformTitle = channelsData.channel_group.title;
+    regionTitle = channelsData.channel_group.title;
+    for (var i = 0, ii = channelsData.channel_group.channels.length; i < ii; i++) {
+      searchResults.push(channelsData.channel_group.channels[i]);
     }
-    buildChannelsTemplate(channelsData.channel_groups[0].channels, platformTitle, regionTitle);
+    buildChannelsTemplate(channelsData.channel_group.channels, platformTitle, regionTitle);
     buildChannelSearchTemplate(searchResults);
   };
 
@@ -460,7 +436,6 @@ var ApiExplorer = (function () {
       var aliases = channels[i].channel.aliases;
       channels[i].platform_title = platformTitle;
       channels[i].region_title = regionTitle;
-      channels[i].deer_id = convertIdToDeer(aliases);
     }
     compiledTemplate = new EJS({
       url: 'assets/templates/channels.ejs?v=201510191550'
@@ -468,21 +443,9 @@ var ApiExplorer = (function () {
     $('.channels-container').html(compiledTemplate);
   };
 
-  var convertIdToDeer = function (aliases) {
-    var deerIdPattern = new RegExp('[^/]+$');
-    var deerId;
-    for (var i = 0, ii = aliases.length; i < ii; i++) {
-      if (aliases[i].search('http://atlas.metabroadcast.com/4.0/channels/') !== -1) {
-        deerId = aliases[i].match(deerIdPattern);
-      }
-    }
-    return deerId[0];
-  };
-
   var init = function (endpointsData) {
-    var data = mergeData(endpointsUrl, endpointsParametersUrl, channelGroupsUrl);
-    CompileTemplate(apiExplorerTemplate, data);
-    events(data);
+    CompileTemplate(apiExplorerTemplate, endpointsData);
+    events(endpointsData);
     if (window.location.search) {
       prepopulateForm();
     }
