@@ -3,7 +3,6 @@ var ApiExplorer = (function () {
 
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
   var channelGroupsUrl = '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + defaultApiKey;
-
   var defaultQueryUrl = '//atlas.metabroadcast.com';
   var apiExplorerTemplate = {
     path: 'assets/templates/api-explorer.ejs',
@@ -49,13 +48,19 @@ var ApiExplorer = (function () {
     var queryUrl = $queryForm.find('.queryUrl').val();
     var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
     $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
-    getData(queryUrl, function (response) {
-      var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
-      response = linkIds(JSON.stringify(response, undefined, 2));
-      $jsonOutput.html(response);
-      $jsonOutput.each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
+    $.ajax({
+      url: queryUrl,
+      success: function (data) {
+        var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
+        data = linkIds(JSON.stringify(data, undefined, 2));
+        $jsonOutput.html(data);
+        $jsonOutput.each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorTrown);
+      }
     });
   };
 
@@ -243,16 +248,24 @@ var ApiExplorer = (function () {
 
   var toggleChannelPicker = function () {
     var compiledTemplate;
-    var channelGroups = getData(channelGroupsUrl).channel_groups;
-    compiledTemplate = new EJS({
-      url: 'assets/templates/channelPicker.ejs?v=201510191550'
-    }).render();
-    if ($('.channel-picker-row').length) {
-      $('.channel-picker-row').remove();
-    } else {
-      $('#schedules-id-row').after(compiledTemplate);
-    }
-    buildPlatformTemplate(channelGroups);
+    $.ajax({
+      url: channelGroupsUrl,
+      success: function (data) {
+        var channelGroups = data.channel_groups;
+        compiledTemplate = new EJS({
+          url: 'assets/templates/channelPicker.ejs?v=201510191550'
+        }).render();
+        if ($('.channel-picker-row').length) {
+          $('.channel-picker-row').remove();
+        } else {
+          $('#schedules-id-row').after(compiledTemplate);
+        }
+        buildPlatformTemplate(channelGroups);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorTrown);
+      }
+    });
   };
 
   var buildPlatformTemplate = function (data) {
@@ -352,13 +365,13 @@ var ApiExplorer = (function () {
       formattedDate.year = startDate.getFullYear();
       if (data[i].start_date > now) {
         var startDateString = formattedDate.day + formattedDate.month + formattedDate.year;
-        data[i].value = data[i].channel.title + ' (' + data[i].id + ') Starts on ' + startDateString;
+        data[i].value = data[i].channel.title + ' (' + data[i].channel.id + ') Starts on ' + startDateString;
       } else {
-        data[i].value = data[i].channel.title + ' (' + data[i].id + ')';
+        data[i].value = data[i].channel.title + ' (' + data[i].channel.id + ')';
       }
       query = [
         data[i].channel.title,
-        data[i].id,
+        data[i].channel.id,
         data[i].channel.title.replace(/\s/ig, ''),
         data[i].channel.title.replace(/\s?one/ig, '1'),
         data[i].channel.title.replace(/\s?two/ig, '2'),
@@ -379,7 +392,7 @@ var ApiExplorer = (function () {
     });
     $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (obj, datum, name) {
       $('.channel-picker-checkbox').each(function () {
-        if (datum.id === $(this).val()) {
+        if (datum.channel.id === $(this).val()) {
           $(this).prop('checked', true).trigger('change');
           if (!$('.id-added').length) {
             $('#channel-search-box').after('<div class="id-added">&#10003;</div>');
