@@ -70,10 +70,8 @@ $(document).ready(function () {
       container: '#api-docs-submenu'
     }, data);
     ApiDocs.init(data);
+    ApiExplorer.init(data);
   });
-
-  var apiExplorer = new ApiExplorer();
-  apiExplorer.init();
 });
 
 $(window).load(function () {
