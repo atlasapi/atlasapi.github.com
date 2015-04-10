@@ -2,15 +2,11 @@ var CompileTemplate = (function () {
   'use strict';
 
   return function (template, data) {
+    data = data || {};
+
     var compiledTemplate = new EJS({
       url: template.path
-    });
-
-    if (data) {
-      compiledTemplate.render(data);
-    } else {
-      compiledTemplate.render();
-    }
+    }).render(data);
 
     $(template.container).html(compiledTemplate);
   };
