@@ -76,12 +76,12 @@ $(document).ready(function () {
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
 
-  $(document).on('click', '.has-submenu', function (e) {
-    // e.preventDefault();
-    // var $submenu = $(this).find('.submenu');
-    // $('.submenu').not($submenu).hide();
-    // $('.dropdown-menu').hide();
-    // $submenu.toggle();
+  $(document).on('click', '.has-submenu a', function () {
+    $(this).siblings('.submenu').addClass('hide-menu');
+  });
+
+  $(document).on('mouseout', '.has-submenu a', function () {
+    $(this).siblings('.submenu').removeClass('hide-menu');
   });
 });
 
