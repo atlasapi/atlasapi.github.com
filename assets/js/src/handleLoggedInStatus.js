@@ -173,6 +173,7 @@ var handleLoggedInStatus = (function () {
     var $targetMenu = $this.siblings('.dropdown-menu');
 
     $('.dropdown-menu').not($targetMenu).hide();
+    $('.submenu').hide();
     $targetMenu.toggle();
 
     $('.has-dropdown-menu').not($this).removeClass('active-link');
