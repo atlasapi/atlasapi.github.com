@@ -78,7 +78,9 @@ $(document).ready(function () {
 
   $(document).on('click', '.has-submenu', function (e) {
     e.preventDefault();
-    $(this).find('.submenu').toggle();
+    var $submenu = $(this).find('.submenu');
+    $('.submenu').not($submenu).hide();
+    $submenu.toggle();
   });
 });
 
