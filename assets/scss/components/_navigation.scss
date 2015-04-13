@@ -202,24 +202,12 @@
   border-bottom: 6px solid #fc0088;
 }
 
-.active-link .submenu {
-  display: block;
-}
-
 .active-link > a {
   background: url("../images/selected.gif") bottom center no-repeat;
 }
 
-.submenu .active-link > a {
+.submenu .active-link a {
   background: none;
-}
-
-.has-submenu > a {
-  background: none;
-}
-
-.submenu li {
-
 }
 
 .menu-separator {
@@ -235,13 +223,8 @@
   margin: 0;
 }
 
-// API docs submenu specific
-.active-link .api-docs-submenu {
-  display: none;
-}
-
-.has-submenu:hover .api-docs-submenu,
-.has-submenu:active .api-docs-submenu,
-.has-submenu:focus .api-docs-submenu {
+.has-submenu:hover .submenu,
+.has-submenu:active .submenu,
+.has-submenu:focus .submenu {
   display: block;
 }
