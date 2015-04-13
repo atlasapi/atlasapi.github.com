@@ -77,11 +77,11 @@ $(document).ready(function () {
   apiExplorer.init();
 
   $(document).on('click', '.has-submenu', function (e) {
-    e.preventDefault();
-    var $submenu = $(this).find('.submenu');
-    $('.submenu').not($submenu).hide();
-    $('.dropdown-menu').hide();
-    $submenu.toggle();
+    // e.preventDefault();
+    // var $submenu = $(this).find('.submenu');
+    // $('.submenu').not($submenu).hide();
+    // $('.dropdown-menu').hide();
+    // $submenu.toggle();
   });
 });
 
