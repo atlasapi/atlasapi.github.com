@@ -22,6 +22,7 @@ gulp.task('scripts', function () {
     './assets/js/src/lib/highlight.pack.js',
     './assets/js/src/lib/typeahead.bundle.min.js',
     './assets/js/src/highlight-current-page.js',
+    './assets/js/src/submenus.js',
     './assets/js/src/tabs.js',
     './assets/js/src/handleLoggedInStatus.js',
     './assets/js/src/nownextlater-widget.js',

@@ -1,4 +1,4 @@
-var HighlightCurrentPage = (function () {
+var highlightCurrentPage = (function () {
   'use strict';
 
   var active = location.hash;

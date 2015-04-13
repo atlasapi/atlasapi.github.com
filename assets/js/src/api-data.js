@@ -1,4 +1,4 @@
-var ApiData = (function () {
+var apiData = (function () {
   'use strict';
 
   var getEndpointsData = function (callback) {

@@ -1,4 +1,4 @@
-var UiTabs = (function () {
+var uiTabs = (function () {
   'use strict';
 
   var showActiveTab = function () {

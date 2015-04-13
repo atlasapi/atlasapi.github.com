@@ -1,4 +1,4 @@
-var ApiDocs = (function () {
+var apiDocs = (function () {
   'use strict';
 
   var init = function (endpointsData) {

@@ -64,13 +64,13 @@ $(document).ready(function () {
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 
-  ApiData.init(function (data) {
+  apiData.init(function (data) {
     var apiDocsSubmenu = new EJS({
       url: 'assets/templates/api-docs-submenu.ejs'
     }).render(data);
     $('#api-docs-submenu').html(apiDocsSubmenu);
 
-    ApiDocs.init(data);
+    apiDocs.init(data);
   });
 
   var apiExplorer = new ApiExplorer();
@@ -78,6 +78,6 @@ $(document).ready(function () {
 });
 
 $(window).load(function () {
-  UiTabs.init();
-  HighlightCurrentPage.init();
+  uiTabs.init();
+  highlightCurrentPage.init();
 });
