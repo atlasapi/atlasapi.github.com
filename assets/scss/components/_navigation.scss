@@ -32,8 +32,11 @@
 }
 
 .navbar-links .nav a:hover,
+.navbar-links .nav a:active,
+.navbar-links .nav a:focus,
 .navbar-links .active-link > a {
   color: #fc0088;
+  background: url("../images/selected.gif") bottom center no-repeat;
 }
 
 .navbar-tools {
@@ -133,11 +136,10 @@
   border-bottom: 6px solid #fc0088;
 }
 
-.active-link > a {
-  background: url("../images/selected.gif") bottom center no-repeat;
-}
-
-.submenu .active-link a {
+.navbar-links .nav .submenu a:hover,
+.navbar-links .nav .submenu a:active,
+.navbar-links .nav .submenu a:focus,
+.navbar-links .nav .submenu .active-link a {
   background: none;
 }
 

@@ -76,11 +76,20 @@ $(document).ready(function () {
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
 
+  // Required to make submenu's dissappear on click
   $(document).on('click', '.has-submenu a', function () {
     $(this).siblings('.submenu').addClass('hide-menu');
   });
 
+  $(document).on('click', '.submenu a', function () {
+    $(this).closest('.submenu').addClass('hide-menu');
+  });
+
   $(document).on('mouseout', '.has-submenu a', function () {
+    $(this).siblings('.submenu').removeClass('hide-menu');
+  });
+
+  $(document).on('mouseout', '.submenu a', function () {
     $(this).siblings('.submenu').removeClass('hide-menu');
   });
 });
