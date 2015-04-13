@@ -75,9 +75,15 @@ $(document).ready(function () {
 
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
+
+  $(document).on('click', '.has-submenu', function (e) {
+    e.preventDefault();
+    $(this).find('.submenu').toggle();
+  });
 });
 
 $(window).load(function () {
   uiTabs.init();
+  submenus.init();
   highlightCurrentPage.init();
 });
