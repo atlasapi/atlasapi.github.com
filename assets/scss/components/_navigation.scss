@@ -136,6 +136,12 @@
   border-bottom: 6px solid #fc0088;
 }
 
+.submenu a:hover,
+.submenu a:active,
+.submenu a:focus {
+  color: #fc0088;
+}
+
 .navbar-links .nav .submenu a:hover,
 .navbar-links .nav .submenu a:active,
 .navbar-links .nav .submenu a:focus,
