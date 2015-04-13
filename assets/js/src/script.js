@@ -86,6 +86,5 @@ $(document).ready(function () {
 
 $(window).load(function () {
   uiTabs.init();
-  submenus.init();
   highlightCurrentPage.init();
 });
