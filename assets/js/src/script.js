@@ -92,6 +92,10 @@ $(document).ready(function () {
   $(document).on('mouseout', '.submenu a', function () {
     $(this).siblings('.submenu').removeClass('hide-menu');
   });
+
+  $(document).on('click', '.user-menu a', function (e) {
+    e.preventDefault();
+  });
 });
 
 $(window).load(function () {
