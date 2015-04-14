@@ -77,7 +77,7 @@ $(document).ready(function () {
   apiExplorer.init();
 
   // Required to make submenu's dissappear on click
-  $(document).on('click', '.has-submenu a', function () {
+  $('.has-submenu a').not('.user-menu-link').on('click', function () {
     $(this).siblings('.submenu').addClass('hide-menu');
   });
 
@@ -85,13 +85,29 @@ $(document).ready(function () {
     $(this).closest('.submenu').addClass('hide-menu');
   });
 
-  $(document).on('mouseout', '.has-submenu a', function () {
+  $('.has-submenu a').not('.user-menu-link').on('mouseout', function () {
     $(this).siblings('.submenu').removeClass('hide-menu');
   });
 
   $(document).on('mouseout', '.submenu a', function () {
     $(this).siblings('.submenu').removeClass('hide-menu');
   });
+
+  // $(document).on('click', '.has-submenu a', function () {
+  //   $(this).siblings('.submenu').addClass('hide-menu');
+  // });
+
+  // $(document).on('click', '.submenu a', function () {
+  //   $(this).closest('.submenu').addClass('hide-menu');
+  // });
+
+  // $(document).on('mouseout', '.has-submenu a', function () {
+  //   $(this).siblings('.submenu').removeClass('hide-menu');
+  // });
+
+  // $(document).on('mouseout', '.submenu a', function () {
+  //   $(this).siblings('.submenu').removeClass('hide-menu');
+  // });
 
   $(document).on('click', '.user-menu-link', function (e) {
     e.preventDefault();
