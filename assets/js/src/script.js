@@ -93,7 +93,7 @@ $(document).ready(function () {
     $(this).siblings('.submenu').removeClass('hide-menu');
   });
 
-  $(document).on('click', '.user-menu a', function (e) {
+  $(document).on('click', '.user-menu-link', function (e) {
     e.preventDefault();
   });
 });
