@@ -1,4 +1,4 @@
-var ApiExplorer = (function () {
+var apiExplorer = (function () {
   'use strict';
 
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';

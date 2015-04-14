@@ -1,13 +1,9 @@
-var HighlightCurrentPage = (function () {
+var highlightCurrentPage = (function () {
   'use strict';
 
   var active = location.hash;
   var headerHeight = 64;
   var activeClass = 'active-link';
-
-  if (active && $(active).length) {
-    $(window).scrollTop($(active).offset().top - headerHeight);
-  }
 
   var isOnScreen = function (el) {
     var distance = $(el).offset().top - 150;
@@ -18,6 +14,10 @@ var HighlightCurrentPage = (function () {
   };
 
   var updateOnScroll = function () {
+    if (active && $(active).length) {
+      $(window).scrollTop($(active).offset().top - headerHeight);
+    }
+
     $('#nav-main a, .navbar-api-explorer-btn').not('.user-menu a').on('click', function (e) {
       e.preventDefault();
       var target = $(this).attr('href');
