@@ -9,13 +9,17 @@
     <tr>
       <th>Name</th>
       <th>Type</th>
+      <th>JSON Type</th>
+      <th>Multiple</th>
     </tr>
   </thead>
   <tbody>
     <% for (var i = 0, ii = this.fields.length; i < ii; i++) { %>
       <tr>
         <td><%= this.fields[i].name %></td>
+        <td><%= this.fields[i].type %></td>
         <td><%= this.fields[i].json_type %></td>
+        <td><%= this.fields[i].is_multiple %></td>
       </tr>
     <% } %>
   </tbody>

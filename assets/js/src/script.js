@@ -69,8 +69,8 @@ $(document).ready(function () {
       path: 'assets/templates/api-docs-submenu.ejs',
       container: '#api-docs-submenu'
     }, data);
-    apiDocs.init(data);
     apiExplorer.init(data);
+    apiDocs.init(data);
   });
 
   // Required to make submenu's dissappear on click

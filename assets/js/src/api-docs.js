@@ -16,10 +16,26 @@ var apiDocs = (function () {
 
   var populateExampleResponse = function (endpointsData) {
     _.forEach(endpointsData, function (endpoint) {
-      console.log('endpoint', endpoint);
       CompileTemplate({
         path: 'assets/templates/api-docs-example-response.ejs',
         container: '#api-docs-' + endpoint.name + ' .api-docs-example-response'
+      });
+      var url = $('#api-' + endpoint.name).find('.queryUrl').val();
+      $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val(url);
+      $.ajax({
+        url: url,
+        success: function (data) {
+          $('#api-docs-' + endpoint.name)
+            .find('.api-docs-example-response')
+            .find('.jsonOutput')
+            .html(JSON.stringify(data, undefined, 2));
+          $('#api-docs-' + endpoint.name).find('.jsonOutput').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
+        }
       });
     });
   };
