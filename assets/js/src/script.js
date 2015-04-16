@@ -64,20 +64,41 @@ $(document).ready(function () {
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 
-  ApiData.init(function (data) {
+  apiData.init(function (data) {
     var apiDocsSubmenu = new EJS({
       url: 'assets/templates/api-docs-submenu.ejs'
     }).render(data);
     $('#api-docs-submenu').html(apiDocsSubmenu);
 
-    ApiDocs.init(data);
+    apiDocs.init(data);
   });
 
   var apiExplorer = new ApiExplorer();
   apiExplorer.init();
+
+  // Required to make submenu's dissappear on click
+  $('.has-submenu a').not('.user-menu-link').on('click', function () {
+    $(this).siblings('.submenu').addClass('hide-menu');
+  });
+
+  $('.has-submenu a').not('.user-menu-link').on('mouseover', function () {
+    $(this).siblings('.submenu').removeClass('hide-menu');
+  });
+
+  $(document).on('click', '.submenu a', function () {
+    $(this).closest('.submenu').addClass('hide-menu');
+  });
+
+  $(document).on('mouseover', '.submenu a', function () {
+    $(this).siblings('.submenu').removeClass('hide-menu');
+  });
+
+  $(document).on('click', '.user-menu-link', function (e) {
+    e.preventDefault();
+  });
 });
 
 $(window).load(function () {
-  UiTabs.init();
-  HighlightCurrentPage.init();
+  uiTabs.init();
+  highlightCurrentPage.init();
 });
