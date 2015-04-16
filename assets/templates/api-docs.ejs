@@ -27,23 +27,7 @@
         <% } %>
         <h4>SLA</h4>
         <p>Current service level: <%= this[i].service_level %></p>
-        <h4>Error messages</h4>
-        <table class="tbl">
-          <thead>
-            <tr>
-              <th>Status code</th>
-              <th>Error code</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% for (var l = 0, ll = this[i].error_messages.length; l < ll; l++) { %>
-              <tr>
-                  <td><%= this[i].error_messages[l].status_code %></td>
-                  <td><%= this[i].error_messages[l].error_code %></td>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
+        <h4>Example response</h4>
         <h4>Parameters</h4>
         <table class="tbl">
           <thead>
@@ -70,6 +54,23 @@
           <% } %>
         </ul>
         <div id="api-docs-response"></div>
+        <h4>Error messages</h4>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Status code</th>
+              <th>Error code</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var l = 0, ll = this[i].error_messages.length; l < ll; l++) { %>
+              <tr>
+                  <td><%= this[i].error_messages[l].status_code %></td>
+                  <td><%= this[i].error_messages[l].error_code %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
       </div>
     <% } %>
   </div>
