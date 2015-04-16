@@ -225,7 +225,7 @@ var apiExplorer = (function () {
       success: function (data) {
         var channelGroups = data.channel_groups;
         compiledTemplate = new EJS({
-          url: 'assets/templates/channelPicker.ejs?v=201510191550'
+          url: 'assets/templates/channelPicker.ejs'
         }).render();
         if ($('.channel-picker-row').length) {
           $('.channel-picker-row').remove();
@@ -244,7 +244,7 @@ var apiExplorer = (function () {
     var compiledTemplate;
     var regions;
     compiledTemplate = new EJS({
-      url: 'assets/templates/platformPicker.ejs?v=201510191550'
+      url: 'assets/templates/platformPicker.ejs'
     }).render(data);
     $('.platform-picker').html(compiledTemplate);
     buildDummyRegionsTemplate();
@@ -268,7 +268,7 @@ var apiExplorer = (function () {
   var buildDummyRegionsTemplate = function () {
     var compiledTemplate;
     compiledTemplate = new EJS({
-      url: 'assets/templates/dummyRegionsTemplate.ejs?v=201510191550'
+      url: 'assets/templates/dummyRegionsTemplate.ejs'
     }).render();
     $('.region-picker').html(compiledTemplate);
   };
@@ -277,7 +277,7 @@ var apiExplorer = (function () {
     var compiledTemplate;
     var regionId;
     compiledTemplate = new EJS({
-      url: 'assets/templates/regionsPicker.ejs?v=201510191550'
+      url: 'assets/templates/regionsPicker.ejs'
     }).render(data);
     $('.region-picker').html(compiledTemplate);
     buildDummySearchTemplate();
@@ -294,7 +294,7 @@ var apiExplorer = (function () {
   var buildDummySearchTemplate = function () {
     var compiledTemplate;
     compiledTemplate = new EJS({
-      url: 'assets/templates/dummySearchTemplate.ejs?v=201510191550'
+      url: 'assets/templates/dummySearchTemplate.ejs'
     }).render();
     $('#channel-search').html(compiledTemplate);
   };
@@ -317,7 +317,7 @@ var apiExplorer = (function () {
       12: 'December'
     };
     compiledTemplate = new EJS({
-      url: 'assets/templates/channelSearch.ejs?v=201510191550'
+      url: 'assets/templates/channelSearch.ejs'
     }).render(data);
     $('.channel-search').html(compiledTemplate);
     for (var i = 0, ii = data.length; i < ii; i++) {
@@ -431,7 +431,7 @@ var apiExplorer = (function () {
       channels[i].region_title = regionTitle;
     }
     compiledTemplate = new EJS({
-      url: 'assets/templates/channels.ejs?v=201510191550'
+      url: 'assets/templates/channels.ejs'
     }).render(channels);
     $('.channels-container').html(compiledTemplate);
   };
