@@ -10,7 +10,18 @@ var apiDocs = (function () {
       path: 'assets/templates/api-docs.ejs',
       container: '#api-docs'
     }, endpointsData);
+    populateExampleResponse(endpointsData);
     getResponseData(endpointsData);
+  };
+
+  var populateExampleResponse = function (endpointsData) {
+    _.forEach(endpointsData, function (endpoint) {
+      console.log('endpoint', endpoint);
+      CompileTemplate({
+        path: 'assets/templates/api-docs-example-response.ejs',
+        container: '#api-docs-' + endpoint.name + ' .api-docs-example-response'
+      });
+    });
   };
 
   var getResponseData = function (endpointsData) {
