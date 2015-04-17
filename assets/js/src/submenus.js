@@ -1,4 +1,6 @@
 var submenus = (function () {
+  'use strict';
+  
   return function () {
     // Required to make submenu's dissappear on click
     $('.has-submenu a').not('.user-menu-link').on('click', function () {

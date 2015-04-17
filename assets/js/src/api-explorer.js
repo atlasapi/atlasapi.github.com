@@ -79,7 +79,7 @@ var apiExplorer = (function () {
     if (urlComponents.parameters) {
       queryUrl += urlComponents.parameters + '&';
     }
-    if (apiExplorer.singleId === false) {
+    if (singleId === false) {
       queryUrl += 'id=' + urlComponents.id + '&';
     }
     queryUrl += 'key=' + urlComponents.apiKey;
@@ -176,7 +176,7 @@ var apiExplorer = (function () {
       container: '#api-explorer-tabs'
     }, endpointsData);
     events(endpointsData);
-    channelPicker.ini(endpointsData);
+    channelPicker();
     if (window.location.search) {
       prepopulateForm();
     }
