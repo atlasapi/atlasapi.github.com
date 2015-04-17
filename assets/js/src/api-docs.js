@@ -12,6 +12,7 @@ var apiDocs = (function () {
     }, endpointsData);
     populateExampleResponse(endpointsData);
     getResponseData(endpointsData);
+    linkToApiExplorer();
   };
 
   var populateExampleResponse = function (endpointsData) {
@@ -19,9 +20,9 @@ var apiDocs = (function () {
       CompileTemplate({
         path: 'assets/templates/api-docs-example-response.ejs',
         container: '#api-docs-' + endpoint.name + ' .api-docs-example-response'
-      });
+      }, endpoint);
       var url = $('#api-' + endpoint.name).find('.queryUrl').val();
-      $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val(url);
+      $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val('http:' + url);
       $.ajax({
         url: url,
         success: function (data) {
@@ -37,6 +38,16 @@ var apiDocs = (function () {
           console.error(errorThrown);
         }
       });
+    });
+  };
+
+  var linkToApiExplorer = function () {
+    $(document).on('click', '.open-api-explorer-tab', function (e) {
+      e.preventDefault();
+      var target = $(this).attr('href');
+      var headerHeight = 64;
+      $(window).scrollTop($('#apiExplorer').offset().top - headerHeight);
+      $('.api-explorer-nav').find('a[href=' + target + ']').trigger('click');
     });
   };
 
