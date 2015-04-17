@@ -9,11 +9,10 @@ var apiExplorer = (function () {
   };
 
   var sendQuery = function ($queryForm) {
-    var queryUrl = $queryForm.find('.queryUrl').val();
     var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
     $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
     $.ajax({
-      url: queryUrl,
+      url: $queryForm.find('.queryUrl').val(),
       success: function (data) {
         var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
         data = linkIds(JSON.stringify(data, undefined, 2));
@@ -29,12 +28,8 @@ var apiExplorer = (function () {
   };
 
   var linkIds = function (inputText) {
-    var queryUrl = '//atlas.metabroadcast.com/4/content/$1.json?annotations';
-    var replacePattern;
-    var replacedText;
-    replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
-    replacedText = inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
-    return replacedText;
+    var replacePattern = /[\n\r]*"id": "*([^",\n\r]*)/g;
+    return inputText.replace(replacePattern, '"id": "<a class="apiExplorerContentLink" href="#" data-id="$1">$1</a>');
   };
 
   var toggleAnnotations = function ($queryParametersForm) {
@@ -58,14 +53,8 @@ var apiExplorer = (function () {
 
   var getQueryId = function ($queryParametersForm) {
     var $idInput = $queryParametersForm.find('input[name="id"]');
-    var defaultId = $idInput.data('default');
-    var queryId;
-    if ($idInput.val() !== '') {
-      queryId = $idInput.val();
-    } else {
-      queryId = defaultId;
-      $idInput.val(defaultId);
-    }
+    var queryId = $idInput.val() || $idInput.data('default');
+    $idInput.val(queryId);
     return queryId;
   };
 
