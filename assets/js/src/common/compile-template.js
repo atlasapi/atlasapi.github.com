@@ -1,4 +1,4 @@
-var CompileTemplate = (function () {
+var compileTemplate = (function () {
   'use strict';
 
   return function (template, data) {

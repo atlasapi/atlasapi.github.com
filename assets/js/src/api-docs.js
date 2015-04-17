@@ -6,7 +6,7 @@ var apiDocs = (function () {
   };
 
   var populateTemplate = function (endpointsData) {
-    CompileTemplate({
+    compileTemplate({
       path: 'assets/templates/api-docs.ejs',
       container: '#api-docs'
     }, endpointsData);
@@ -17,7 +17,7 @@ var apiDocs = (function () {
 
   var populateExampleResponse = function (endpointsData) {
     _.forEach(endpointsData, function (endpoint) {
-      CompileTemplate({
+      compileTemplate({
         path: 'assets/templates/api-docs-example-response.ejs',
         container: '#api-docs-' + endpoint.name + ' .api-docs-example-response'
       }, endpoint);
@@ -56,7 +56,7 @@ var apiDocs = (function () {
       $.ajax({
         url: endpoint.model_class_link,
         success: function (data) {
-          CompileTemplate({
+          compileTemplate({
             path: 'assets/templates/api-docs-response.ejs',
             container: '#api-docs-response'
           }, data.model_class);

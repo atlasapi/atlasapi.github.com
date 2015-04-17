@@ -65,7 +65,7 @@ $(document).ready(function () {
   nowNextLater.init();
 
   apiData.init(function (data) {
-    CompileTemplate({
+    compileTemplate({
       path: 'assets/templates/api-docs-submenu.ejs',
       container: '#api-docs-submenu'
     }, data);

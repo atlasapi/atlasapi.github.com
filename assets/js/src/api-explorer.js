@@ -241,12 +241,11 @@ var apiExplorer = (function () {
   };
 
   var buildPlatformTemplate = function (data) {
-    var compiledTemplate;
     var regions;
-    compiledTemplate = new EJS({
-      url: 'assets/templates/platformPicker.ejs'
-    }).render(data);
-    $('.platform-picker').html(compiledTemplate);
+    compileTemplate({
+      path: 'assets/templates/platformPicker.ejs',
+      container: '.platform-picker'
+    }, data); 
     buildDummyRegionsTemplate();
     buildDummySearchTemplate();
     $('.channel-picker-platforms').on('change', function () {
@@ -266,20 +265,18 @@ var apiExplorer = (function () {
   };
 
   var buildDummyRegionsTemplate = function () {
-    var compiledTemplate;
-    compiledTemplate = new EJS({
-      url: 'assets/templates/dummyRegionsTemplate.ejs'
-    }).render();
-    $('.region-picker').html(compiledTemplate);
+    compileTemplate({
+      path: 'assets/templates/dummyRegionsTemplate.ejs',
+      container: '.region-picker'
+    });
   };
 
   var buildRegionsTemplate = function (data) {
-    var compiledTemplate;
     var regionId;
-    compiledTemplate = new EJS({
-      url: 'assets/templates/regionsPicker.ejs'
-    }).render(data);
-    $('.region-picker').html(compiledTemplate);
+    compileTemplate({
+      path: 'assets/templates/regionsPicker.ejs',
+      container: '.region-picker'
+    }, data);
     buildDummySearchTemplate();
     $('.channel-picker-regions').on('change', function () {
       regionId = $(this).val();
@@ -292,16 +289,14 @@ var apiExplorer = (function () {
   };
 
   var buildDummySearchTemplate = function () {
-    var compiledTemplate;
-    compiledTemplate = new EJS({
-      url: 'assets/templates/dummySearchTemplate.ejs'
-    }).render();
-    $('#channel-search').html(compiledTemplate);
+    compileTemplate({
+      path: 'assets/templates/dummySearchTemplate.ejs',
+      container: '#channel-search'
+    });
   };
 
   var buildChannelSearchTemplate = function (data) {
     var now = new Date().toISOString();
-    var compiledTemplate;
     var monthMap = {
       1: 'January',
       2: 'February',
@@ -316,10 +311,10 @@ var apiExplorer = (function () {
       11: 'November',
       12: 'December'
     };
-    compiledTemplate = new EJS({
-      url: 'assets/templates/channelSearch.ejs'
-    }).render(data);
-    $('.channel-search').html(compiledTemplate);
+    compileTemplate({
+      path: 'assets/templates/channelSearch.ejs',
+      container: '.channel-search'
+    }, data);
     for (var i = 0, ii = data.length; i < ii; i++) {
       var startDate = new Date(data[i].start_date);
       var formattedDate = {};
@@ -423,21 +418,20 @@ var apiExplorer = (function () {
   };
 
   var buildChannelsTemplate = function (channels, platformTitle, regionTitle) {
-    var compiledTemplate;
     var regexPattern = new RegExp('[^/]+$');
     for (var i = 0, ii = channels.length; i < ii; i++) {
       var aliases = channels[i].channel.aliases;
       channels[i].platform_title = platformTitle;
       channels[i].region_title = regionTitle;
     }
-    compiledTemplate = new EJS({
-      url: 'assets/templates/channels.ejs'
-    }).render(channels);
-    $('.channels-container').html(compiledTemplate);
+    compileTemplate({
+      path: 'assets/templates/channels.ejs',
+      container: '.channels-container'
+    }, channels);
   };
 
   var init = function (endpointsData) {
-    CompileTemplate({
+    compileTemplate({
       path: 'assets/templates/api-explorer.ejs',
       container: '#api-explorer-tabs'
     }, endpointsData);
