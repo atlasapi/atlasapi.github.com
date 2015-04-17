@@ -5,14 +5,7 @@ var apiExplorer = (function () {
   var singleId = true;
 
   var getApiKey = function () {
-    var $apiKeyInput = $('#apiKey');
-    var apiKey;
-    if ($apiKeyInput.val()) {
-      apiKey = $apiKeyInput.val();
-    } else {
-      apiKey = defaultApiKey;
-    }
-    return apiKey;
+    return $('#apiKey').val() || defaultApiKey;
   };
 
   var sendQuery = function ($queryForm) {
@@ -114,12 +107,6 @@ var apiExplorer = (function () {
       }
     });
     return parameters.join('&');
-  };
-
-  var formatQueryParameters = function (str) {
-    return (str || document.location.search).replace(/(^\?)/,'').split('&').map(function (n) {
-      return n = n.split("="),this[n[0]] = n[1],this;
-    }.bind({}))[0];
   };
 
   var prepopulateForm = function () {
@@ -253,6 +240,9 @@ var apiExplorer = (function () {
       for (var i = 0, ii = data.length; i < ii; i++) {
         if (data[i].id === platformId) {
           regions = data[i].regions;
+          _.forEach(regions, function (region) {
+            region.platform_title = data[i].title;
+          });
         }
       }
       if ($(this).val() !== '') {
@@ -403,7 +393,8 @@ var apiExplorer = (function () {
       url: channelsUrl,
       success: function (data) {
         channelsData = data;
-        platformTitle = channelsData.channel_group.title;
+        console.log(data);
+        platformTitle = channelsData.channel_group.platform_title;
         regionTitle = channelsData.channel_group.title;
         for (var i = 0, ii = channelsData.channel_group.channels.length; i < ii; i++) {
           searchResults.push(channelsData.channel_group.channels[i]);
