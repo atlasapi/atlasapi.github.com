@@ -166,6 +166,13 @@ var apiExplorer = (function () {
       var target = $(this).attr('href');
       $(target).toggle();
     });
+    $(document).on('click', '.open-api-docs-tab', function (e) {
+      e.preventDefault();
+      var target = $(this).attr('href');
+      var headerHeight = 64;
+      $(window).scrollTop($('#api-docs').offset().top - headerHeight);
+      $('.api-docs .menu').find('a[href=' + target + ']').trigger('click');
+    });
   };
 
   var init = function (endpointsData) {
