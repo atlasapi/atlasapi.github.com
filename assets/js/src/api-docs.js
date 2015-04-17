@@ -6,10 +6,10 @@ var apiDocs = (function () {
   };
 
   var populateTemplate = function (endpointsData) {
-    compileTemplate({
-      path: 'assets/templates/api-docs.ejs',
-      container: '#api-docs'
-    }, endpointsData);
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-docs.ejs'
+    }).render(endpointsData);
+    $('#api-docs').html(compiledTemplate);
     populateExampleResponse(endpointsData);
     getResponseData(endpointsData);
     linkToApiExplorer();
@@ -17,10 +17,10 @@ var apiDocs = (function () {
 
   var populateExampleResponse = function (endpointsData) {
     _.forEach(endpointsData, function (endpoint) {
-      compileTemplate({
-        path: 'assets/templates/api-docs-example-response.ejs',
-        container: '#api-docs-' + endpoint.name + ' .api-docs-example-response'
-      }, endpoint);
+      var compiledTemplate = new EJS({
+        url: 'assets/templates/api-docs-example-response.ejs'
+      }).render(endpoint);
+      $('#api-docs-' + endpoint.name + ' .api-docs-example-response').html(compiledTemplate);
       var url = $('#api-' + endpoint.name).find('.queryUrl').val();
       $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val('http:' + url);
       $.ajax({
@@ -56,10 +56,10 @@ var apiDocs = (function () {
       $.ajax({
         url: endpoint.model_class_link,
         success: function (data) {
-          compileTemplate({
-            path: 'assets/templates/api-docs-response.ejs',
-            container: '#api-docs-response'
-          }, data.model_class);
+          var compiledTemplate = new EJS({
+            url: 'assets/templates/api-docs-response.ejs'
+          }).render(data.model_class);
+          $('#api-docs-response').html(compiledTemplate);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error(errorThrown);

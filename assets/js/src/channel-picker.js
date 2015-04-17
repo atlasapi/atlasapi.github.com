@@ -150,10 +150,10 @@ var channelPicker = (function () {
       11: 'November',
       12: 'December'
     };
-    compileTemplate({
-      path: 'assets/templates/channelSearch.ejs',
-      container: '.channel-search'
-    }, data);
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/channelSearch.ejs'
+    }).render(data);
+    $('.channel-search').html(compiledTemplate);
     for (var i = 0, ii = data.length; i < ii; i++) {
       var startDate = new Date(data[i].start_date);
       var formattedDate = {};

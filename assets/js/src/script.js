@@ -65,10 +65,10 @@ $(document).ready(function () {
   nowNextLater.init();
 
   apiData.init(function (data) {
-    compileTemplate({
-      path: 'assets/templates/api-docs-submenu.ejs',
-      container: '#api-docs-submenu'
-    }, data);
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-docs-submenu.ejs'
+    }).render(data);
+    $('#api-docs-submenu').html(compiledTemplate);
     apiExplorer.init(data);
     apiDocs.init(data);
     submenus();

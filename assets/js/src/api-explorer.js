@@ -169,10 +169,10 @@ var apiExplorer = (function () {
   };
 
   var init = function (endpointsData) {
-    compileTemplate({
-      path: 'assets/templates/api-explorer.ejs',
-      container: '#api-explorer-tabs'
-    }, endpointsData);
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-explorer.ejs'
+    }).render(endpointsData);
+    $('#api-explorer-tabs').html(compiledTemplate);
     events(endpointsData);
     channelPicker();
     if (window.location.search) {
