@@ -13,14 +13,14 @@
         },
         {
           "name": "type",
-          "default_value": "",
+          "default_value": "item",
           "type": "string",
           "is_multiple": false,
           "description": "The type of the content. Possible values are [BRAND, SERIES, ITEM, EPISODE, FILM, SONG, CLIP]."
         },
         {
           "name": "source",
-          "default_value": "",
+          "default_value": "pressassociation.com",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher for the content."
@@ -69,7 +69,7 @@
         },
         {
           "name": "annotations",
-          "default_value": "",
+          "default_value": "brand_summary,broadcasts,channel,channels,channel_summary,description",
           "type": "list",
           "is_multiple": true,
           "description": "List of annotations that describe the data to be output."
@@ -204,7 +204,7 @@
         },
         {
           "name": "annotations",
-          "default_value": "",
+          "default_value": "channel,channels,channel_summary,content_groups",
           "type": "list",
           "is_multiple": false,
           "description": "List of annotations that describe the data to be output."
@@ -297,14 +297,14 @@
         },
         {
           "name": "type",
-          "default_value": "",
+          "default_value": "place",
           "type": "string",
           "is_multiple": false,
           "description": "The type of the topic. Possible values are [SUBJECT, PERSON, PLACE, ARTIST, EVENT, PRODUCT, WORK, UNKNOWN]."
         },
         {
           "name": "source",
-          "default_value": "",
+          "default_value": "pressassociation.com",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher for the topic."
@@ -325,7 +325,7 @@
         },
         {
           "name": "annotations",
-          "default_value": "",
+          "default_value": "available_locations,broadcasts,channel,channels,channel_summary,description,products",
           "type": "list",
           "is_multiple": true,
           "description": "List of annotations that describe the data to be output."
@@ -432,7 +432,7 @@
       "parameters": [
         {
           "name": "id",
-          "default_value": "",
+          "default_value": "hkqs",
           "type": "string",
           "is_multiple": false,
           "description": ""
@@ -460,7 +460,7 @@
         },
         {
           "name": "annotations",
-          "default_value": "",
+          "default_value": "brand_summary,channel,channels,channel_summary,description",
           "type": "list",
           "is_multiple": true,
           "description": "List of annotations that describe the data to be output."
@@ -567,7 +567,7 @@
       "parameters": [
         {
           "name": "id",
-          "default_value": "",
+          "default_value": "hkxt",
           "type": "string",
           "is_multiple": false,
           "description": ""
@@ -609,7 +609,7 @@
         },
         {
           "name": "annotations",
-          "default_value": "",
+          "default_value": "channel,channels,channel_summary,content_groups,description",
           "type": "list",
           "is_multiple": true,
           "description": "List of annotations that describe the data to be output."
