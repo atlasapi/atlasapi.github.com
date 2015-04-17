@@ -126,7 +126,7 @@ var channelPicker = (function () {
         if (substrRegex.test(str.query)) {
           matches.push({
             value: str.value,
-            id: str.id
+            id: str.channel.id
           });
         }
       });
@@ -196,9 +196,9 @@ var channelPicker = (function () {
       displayKey: 'value',
       source: substringMatcher(data)
     });
-    $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (obj, datum, name) {
+    $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (event, datum) {
       $('.channel-picker-checkbox').each(function () {
-        if (datum.channel.id === $(this).val()) {
+        if (datum.id === $(this).val()) {
           $(this).prop('checked', true).trigger('change');
           if (!$('.id-added').length) {
             $('#channel-search-box').after('<div class="id-added">&#10003;</div>');
@@ -223,20 +223,20 @@ var channelPicker = (function () {
   };
   
   var channelPickerChange = function () {
-    $(document).on('change', '.channel-picker-checkbox', function () {
-      var channelIds = [];
-      $('.channel-picker-checkbox').each(function () {
-        if ($(this).is(':checked')) {
-          channelIds.push($(this).val());
-        }
-      });
-      if (channelIds.length === 1) {
-        singleId = true;
-      } else {
-        singleId = false;
-      }
-      $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
-    });
+    // $(document).on('change', '.channel-picker-checkbox', function () {
+    //   var channelIds = [];
+    //   $('.channel-picker-checkbox').each(function () {
+    //     if ($(this).is(':checked')) {
+    //       channelIds.push($(this).val());
+    //     }
+    //   });
+    //   if (channelIds.length === 1) {
+    //     singleId = true;
+    //   } else {
+    //     singleId = false;
+    //   }
+    //   $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
+    // });
   };
 
   return function () {
