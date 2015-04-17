@@ -223,20 +223,15 @@ var channelPicker = (function () {
   };
   
   var channelPickerChange = function () {
-    // $(document).on('change', '.channel-picker-checkbox', function () {
-    //   var channelIds = [];
-    //   $('.channel-picker-checkbox').each(function () {
-    //     if ($(this).is(':checked')) {
-    //       channelIds.push($(this).val());
-    //     }
-    //   });
-    //   if (channelIds.length === 1) {
-    //     singleId = true;
-    //   } else {
-    //     singleId = false;
-    //   }
-    //   $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
-    // });
+    $(document).on('change', '.channel-picker-checkbox', function () {
+      var channelIds = [];
+      $('.channel-picker-checkbox').each(function () {
+        if ($(this).is(':checked')) {
+          channelIds.push($(this).val());
+        }
+      });
+      $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
+    });
   };
 
   return function () {

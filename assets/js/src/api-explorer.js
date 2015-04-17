@@ -2,7 +2,6 @@ var apiExplorer = (function () {
   'use strict';
 
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
-  var singleId = true;
 
   var getApiKey = function () {
     return $('#apiKey').val() || defaultApiKey;
@@ -70,17 +69,16 @@ var apiExplorer = (function () {
   var constructQueryUrl = function (urlComponents) {
     var defaultQueryUrl = '//atlas.metabroadcast.com';
     var queryUrl = defaultQueryUrl;
-    if (singleId === true) {
+    var urlIds = urlComponents.id.split(',');
+    if (urlIds.length <= 1) {
       queryUrl += urlComponents.endpoint + '/';
       queryUrl += urlComponents.id + '.json?';
     } else {
       queryUrl += urlComponents.endpoint + '.json?';
+      queryUrl += 'id=' + urlComponents.id + '&';
     }
     if (urlComponents.parameters) {
       queryUrl += urlComponents.parameters + '&';
-    }
-    if (singleId === false) {
-      queryUrl += 'id=' + urlComponents.id + '&';
     }
     queryUrl += 'key=' + urlComponents.apiKey;
     return queryUrl;
