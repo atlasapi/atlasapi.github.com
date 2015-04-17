@@ -3,7 +3,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var sass = require('gulp-sass');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
-var watch = require('gulp-watch');
 
 gulp.task('styles', function () {
   gulp.src('./assets/scss/**/*.scss')
@@ -29,6 +28,7 @@ gulp.task('scripts', function () {
     './assets/js/src/nownextlater-widget.js',
     './assets/js/src/api-docs.js',
     './assets/js/src/api-explorer.js',
+    './assets/js/src/submenus.js',
     './assets/js/src/script.js'
   ])
     .pipe(sourcemaps.init())
