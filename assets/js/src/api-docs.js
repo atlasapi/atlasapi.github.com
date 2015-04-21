@@ -24,7 +24,8 @@ var apiDocs = (function () {
       var url = $('#api-' + endpoint.name).find('.queryUrl').val();
       $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val('http:' + url);
       $('#api-docs-' + endpoint.name).find('.api-docs-example-curl').val('curl -i http:' + url);
-      $('#api-docs-' + endpoint.name).find('.api-docs-example-ajax').text().replace(/@url/, url);
+      var ajaxExampleText = $('#api-docs-' + endpoint.name).find('.api-docs-example-ajax').text().replace('@url', 'http:' + url);
+      $('#api-docs-' + endpoint.name).find('.api-docs-example-ajax').text(ajaxExampleText);
       $.ajax({
         url: url,
         success: function (data) {
