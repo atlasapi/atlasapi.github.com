@@ -20,17 +20,18 @@ var apiDocs = (function () {
       var compiledTemplate = new EJS({
         url: 'assets/templates/api-docs-example-response.ejs'
       }).render(endpoint);
-      $('#api-docs-' + endpoint.name + ' .api-docs-example-response').html(compiledTemplate);
-      var url = $('#api-' + endpoint.name).find('.queryUrl').val();
-      $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val(url);
-      $('#api-docs-' + endpoint.name).find('.api-docs-example-curl').val('curl -i ' + url);
-      var ajaxExampleText = $('#api-docs-' + endpoint.name).find('.api-docs-example-ajax').text().replace('@url', url);
-      $('#api-docs-' + endpoint.name).find('.api-docs-example-ajax').text(ajaxExampleText);
+      var url = $('#api-' + endpoint.name).find('.queryUrl').val(); 
+      var $endpointContainer = $('#api-docs-' + endpoint.name);
+      var ajaxExampleText = $endpointContainer.find('.api-docs-example-ajax').text().replace('@url', url);
+      $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
+      $endpointContainer.find('.api-docs-example-call').val(url);
+      $endpointContainer.find('.api-docs-example-curl').val('curl -i ' + url);
+      $endpointContainer.find('.api-docs-example-ajax').text(ajaxExampleText);
       $.ajax({
         url: url,
         success: function (data) {
-          $('#api-docs-' + endpoint.name).find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
-          $('#api-docs-' + endpoint.name).find('.code-example').each(function(i, block) {
+          $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
+          $endpointContainer.find('.code-example').each(function(i, block) {
             hljs.highlightBlock(block);
           });
         },
