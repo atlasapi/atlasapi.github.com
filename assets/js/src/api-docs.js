@@ -23,6 +23,7 @@ var apiDocs = (function () {
       $('#api-docs-' + endpoint.name + ' .api-docs-example-response').html(compiledTemplate);
       var url = $('#api-' + endpoint.name).find('.queryUrl').val();
       $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val('http:' + url);
+      $('#api-docs-' + endpoint.name).find('.api-docs-example-curl').val('curl -i http:' + url);
       $.ajax({
         url: url,
         success: function (data) {
