@@ -47,8 +47,8 @@ var apiExplorer = (function () {
 
   var updateForm = function ($queryParametersForm) {
     var queryUrlValue = getQueryUrlComponents($queryParametersForm);
-    $queryParametersForm.siblings('.queryForm').find('.queryUrl').val(queryUrlValue);
-    $queryParametersForm.siblings('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
+    $queryParametersForm.siblings('.api-explorer-examples').find('.queryUrl').val(queryUrlValue);
+    $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
   };
 
   var getQueryId = function ($queryParametersForm) {

@@ -76,7 +76,7 @@ $(document).ready(function () {
 
   $(document).on('click', '.js-select-on-click', function () {
     $(this).select();
-  });;
+  });
 });
 
 $(window).load(function () {
