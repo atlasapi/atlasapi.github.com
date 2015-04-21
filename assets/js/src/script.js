@@ -73,6 +73,10 @@ $(document).ready(function () {
     apiDocs.init(data);
     submenus();
   });
+
+  $(document).on('click', '.js-select-on-click', function () {
+    $(this).select();
+  });;
 });
 
 $(window).load(function () {
