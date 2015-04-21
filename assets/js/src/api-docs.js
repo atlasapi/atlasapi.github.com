@@ -54,8 +54,8 @@ var apiDocs = (function () {
         success: function (data) {
           var compiledTemplate = new EJS({
             url: 'assets/templates/api-docs-response.ejs'
-          }).render(data.model_class);
-          $('#api-docs-response').html(compiledTemplate);
+          }).render(data.type);
+          $('#api-docs-' + endpoint.name).find('.api-docs-response').html(compiledTemplate);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error(errorThrown);
