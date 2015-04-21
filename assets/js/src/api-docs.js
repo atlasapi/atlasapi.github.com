@@ -24,13 +24,11 @@ var apiDocs = (function () {
       var url = $('#api-' + endpoint.name).find('.queryUrl').val();
       $('#api-docs-' + endpoint.name).find('.api-docs-example-call').val('http:' + url);
       $('#api-docs-' + endpoint.name).find('.api-docs-example-curl').val('curl -i http:' + url);
+      $('#api-docs-' + endpoint.name).find('.api-docs-example-ajax').text().replace(/@url/, url);
       $.ajax({
         url: url,
         success: function (data) {
-          $('#api-docs-' + endpoint.name)
-            .find('.api-docs-example-response')
-            .find('.jsonOutput')
-            .html(JSON.stringify(data, undefined, 2));
+          $('#api-docs-' + endpoint.name).find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
           $('#api-docs-' + endpoint.name).find('.code-example').each(function(i, block) {
             hljs.highlightBlock(block);
           });
