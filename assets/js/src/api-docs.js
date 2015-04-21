@@ -31,7 +31,7 @@ var apiDocs = (function () {
             .find('.api-docs-example-response')
             .find('.jsonOutput')
             .html(JSON.stringify(data, undefined, 2));
-          $('#api-docs-' + endpoint.name).find('.jsonOutput').each(function(i, block) {
+          $('#api-docs-' + endpoint.name).find('.code-example').each(function(i, block) {
             hljs.highlightBlock(block);
           });
         },
