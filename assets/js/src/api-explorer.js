@@ -49,6 +49,12 @@ var apiExplorer = (function () {
     var queryUrlValue = getQueryUrlComponents($queryParametersForm);
     $queryParametersForm.siblings('.api-explorer-examples').find('.queryUrl').val(queryUrlValue);
     $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
+    var $ajaxExample = $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-ajax');
+    var $ajaxExampleText = $ajaxExample.text().replace('@url', queryUrlValue);
+    $ajaxExample.text($ajaxExampleText);
+    $ajaxExample.each(function (i, block) {
+      hljs.highlightBlock(block);
+    });
   };
 
   var getQueryId = function ($queryParametersForm) {
