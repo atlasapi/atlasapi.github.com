@@ -62,9 +62,21 @@
             </tbody>
           </table>
         </form>
+        <h4>curl</h4>
+        <p><input class="api-explorer-example-curl js-select-on-click" type="text" name="curl-example" value=""></p>
+        <h4>AJAX (with jQuery)</h4>
+        <pre class="api-explorer-example-ajax code-example js-select-on-click">$.ajax({
+  url: '@url',
+  success: function (data) {
+    console.log(data);
+  },
+  error: function (jqXHR, textStatus) {
+    console.error(textStatus);
+  }
+});</pre>
         <h4>Request</h4>
         <form class="queryForm mbl">
-          <input class="queryUrl js-select-on-click" type="text" name="">
+          <input class="queryUrl js-select-on-click" type="text" name="query-url">
           <button class="btn" type="submit">Go</button>
         </form>
         <h4>Response</h4>
