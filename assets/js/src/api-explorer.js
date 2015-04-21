@@ -67,7 +67,7 @@ var apiExplorer = (function () {
   };
 
   var constructQueryUrl = function (urlComponents) {
-    var defaultQueryUrl = '//atlas.metabroadcast.com';
+    var defaultQueryUrl = 'https://atlas.metabroadcast.com';
     var queryUrl = defaultQueryUrl;
     var urlIds = urlComponents.id.split(',');
     if (urlIds.length <= 1) {
