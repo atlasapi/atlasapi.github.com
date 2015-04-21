@@ -5,19 +5,46 @@ var apiDocs = (function () {
     populateTemplate(endpointsData);
   };
 
-  var compileTemplate = function (data, template) {
+  var populateTemplate = function (endpointsData) {
     var compiledTemplate = new EJS({
-      url: template.path
-    }).render(data);
-    $(template.container).html(compiledTemplate);
+      url: 'assets/templates/api-docs.ejs'
+    }).render(endpointsData);
+    $('#api-docs').html(compiledTemplate);
+    populateExampleResponse(endpointsData);
+    getResponseData(endpointsData);
+    linkToApiExplorer();
   };
 
-  var populateTemplate = function (endpointsData) {
-    compileTemplate(endpointsData, {
-      path: 'assets/templates/api-docs.ejs',
-      container: '#api-docs'
+  var populateExampleResponse = function (endpointsData) {
+    _.forEach(endpointsData, function (endpoint) {
+      var compiledTemplate = new EJS({
+        url: 'assets/templates/api-docs-example-response.ejs'
+      }).render(endpoint);
+      var $endpointContainer = $('#api-docs-' + endpoint.name);
+      $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
+      $.ajax({
+        url: $('#api-' + endpoint.name).find('.queryUrl').val(),
+        success: function (data) {
+          $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
+          $endpointContainer.find('.code-example').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
+        }
+      });
     });
-    getResponseData(endpointsData);
+  };
+
+  var linkToApiExplorer = function () {
+    $(document).on('click', '.open-api-explorer-tab', function (e) {
+      e.preventDefault();
+      var target = $(this).attr('href');
+      var headerHeight = 64;
+      $(window).scrollTop($('#apiExplorer').offset().top - headerHeight);
+      $('.api-explorer-nav').find('a[href=' + target + ']').trigger('click');
+    });
   };
 
   var getResponseData = function (endpointsData) {
@@ -25,10 +52,10 @@ var apiDocs = (function () {
       $.ajax({
         url: endpoint.model_class_link,
         success: function (data) {
-          compileTemplate(data.model_class, {
-            path: 'assets/templates/api-docs-response.ejs',
-            container: '#api-docs-response'
-          });
+          var compiledTemplate = new EJS({
+            url: 'assets/templates/api-docs-response.ejs'
+          }).render(data.model_class);
+          $('#api-docs-response').html(compiledTemplate);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           console.error(errorThrown);
