@@ -1,7 +1,7 @@
 var ApiExplorer = function () {
   'use strict';
 
-  this.endpointsUrl = '//atlas.metabroadcast.com/4/meta/endpoints.json';
+  this.endpointsUrl = '//atlas.metabroadcast.com/4/meta/resources.json';
   this.endpointsParametersUrl = 'assets/data/parameters.json';
   this.channelGroupsUrl = '//atlas.metabroadcast.com/3.0/channel_groups.json?offset=0&type=platform&apiKey=c1e92985ec124202b7f07140bcde6e3f';
   this.defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
@@ -62,7 +62,7 @@ ApiExplorer.prototype.mergeData = function (originalDataUrl, newDataUrl, channel
   'use strict';
 
   var apiExplorer = this,
-      endpoints = apiExplorer.getData(originalDataUrl).endpoints,
+      endpoints = apiExplorer.getData(originalDataUrl).resources,
       parameters = apiExplorer.getData(newDataUrl).endpoints,
       channelGroups = apiExplorer.getData(channelGroupsUrl).channel_groups;
 

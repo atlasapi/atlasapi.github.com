@@ -3,9 +3,9 @@ var apiData = (function () {
 
   var getEndpointsData = function (callback) {
     $.ajax({
-      url: '//atlas.metabroadcast.com/4/meta/endpoints.json',
+      url: '//atlas.metabroadcast.com/4/meta/resources.json',
       success: function (data) {
-        getLocalData(data.endpoints, callback);
+        getLocalData(data.resources, callback);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
