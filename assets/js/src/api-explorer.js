@@ -46,12 +46,20 @@ var apiExplorer = (function () {
   };
 
   var updateForm = function ($queryParametersForm) {
+    var ajaxExampleText = "$.ajax({
+  url: '@url',
+  success: function (data) {
+    console.log(data);
+  },
+  error: function (jqXHR, textStatus) {
+    console.error(textStatus);
+  }
+});";
     var queryUrlValue = getQueryUrlComponents($queryParametersForm);
     $queryParametersForm.siblings('.api-explorer-examples').find('.queryUrl').val(queryUrlValue);
     $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
     var $ajaxExample = $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-ajax');
-    var $ajaxExampleText = $ajaxExample.text().replace('@url', queryUrlValue);
-    $ajaxExample.text($ajaxExampleText);
+    $ajaxExample.text(ajaxExampleText.replace('@url', queryUrlValue));
     $ajaxExample.each(function (i, block) {
       hljs.highlightBlock(block);
     });
