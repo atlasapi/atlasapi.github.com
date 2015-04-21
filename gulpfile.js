@@ -21,6 +21,7 @@ gulp.task('scripts', function () {
     './assets/js/src/lib/highlight.pack.js',
     './assets/js/src/lib/typeahead.bundle.min.js',
     './assets/js/src/lib/moment.min.js',
+    './assets/js/src/lib/jquery.selectText.js',
     './assets/js/src/common/api-data.js',
     './assets/js/src/common/tabs.js',
     './assets/js/src/highlight-current-page.js',

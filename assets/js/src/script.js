@@ -77,6 +77,10 @@ $(document).ready(function () {
   $(document).on('click', '.js-select-on-click', function () {
     $(this).select();
   });
+
+  $(document).on('click', '.code-example', function () {
+    $(this).selectText();
+  });
 });
 
 $(window).load(function () {
