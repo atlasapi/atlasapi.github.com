@@ -22,10 +22,10 @@ var apiDocs = (function () {
       }).render(endpoint);
       var url = $('#api-' + endpoint.name).find('.queryUrl').val(); 
       var $endpointContainer = $('#api-docs-' + endpoint.name);
-      var ajaxExampleText = $endpointContainer.find('.api-docs-example-ajax').text().replace('@url', url);
       $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
       $endpointContainer.find('.api-docs-example-call').val(url);
       $endpointContainer.find('.api-docs-example-curl').val('curl -i ' + url);
+      var ajaxExampleText = $endpointContainer.find('.api-docs-example-ajax').text().replace('@url', url);
       $endpointContainer.find('.api-docs-example-ajax').text(ajaxExampleText);
       $.ajax({
         url: url,
