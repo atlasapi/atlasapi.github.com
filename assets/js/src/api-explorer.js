@@ -195,6 +195,12 @@ var apiExplorer = (function () {
     $(document).on('click', '.logout', function () {
       loadApiKeyButton();
     });
+    $(document).on('focus', '.queryUrl', function () {
+      $(this).closest('.queryForm').find('.api-key-warning').show();
+    });
+    $(document).on('blur', '.queryUrl', function () {
+      $(this).closest('.queryForm').find('.api-key-warning').hide();
+    });
   };
 
   var loadUserApiKeyDropdown = function (data) {
