@@ -192,13 +192,16 @@ var apiExplorer = (function () {
       var userApiKey = $(this).val();
       $('#apiKey').val(userApiKey).trigger('change');
     });
+    $(document).on('click', '.logout', function () {
+      loadApiKeyButton();
+    });
   };
 
   var loadUserApiKeyDropdown = function (data) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-key-dropdown.ejs'
     }).render(data.applications);
-    $('#user-api-key-holder').html(compiledTemplate);
+    $('#getApiKeyBtnHolder').html(compiledTemplate);
   };
 
   var loadApiKeyButton = function () {
