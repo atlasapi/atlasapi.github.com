@@ -194,10 +194,10 @@ var apiExplorer = (function () {
     });
   };
 
-  var loadUserApiKeyDropdown = function () {
+  var loadUserApiKeyDropdown = function (data) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-key-dropdown.ejs'
-    }).render();
+    }).render(data.applications);
     $('#user-api-key-holder').html(compiledTemplate);
   };
 
@@ -215,7 +215,9 @@ var apiExplorer = (function () {
     $('#api-explorer-tabs').html(compiledTemplate);
     events(endpointsData);
     if (atlasUser.isLoggedIn()) {
-      loadUserApiKeyDropdown();
+      var credentials = atlasUser.getCredentials();
+      var credentialsQueryString = encodeQueryData(credentials);
+      atlasUser.getUserData('http://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadUserApiKeyDropdown);
     } else {
       loadApiKeyButton();
     }
