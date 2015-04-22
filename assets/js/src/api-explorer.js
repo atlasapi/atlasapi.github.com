@@ -188,6 +188,24 @@ var apiExplorer = (function () {
       $(window).scrollTop($('#api-docs').offset().top - headerHeight);
       $('.api-docs .menu').find('a[href=' + target + ']').trigger('click');
     });
+    $(document).on('change', '#user-api-keys', function () {
+      var userApiKey = $(this).val();
+      $('#apiKey').val(userApiKey).trigger('change');
+    });
+  };
+
+  var loadUserApiKeyDropdown = function () {
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-key-dropdown.ejs'
+    }).render();
+    $('#user-api-key-holder').html(compiledTemplate);
+  };
+
+  var loadApiKeyButton = function () {
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-key-button.ejs'
+    }).render();
+    $('#getApiKeyBtnHolder').html(compiledTemplate);
   };
 
   var init = function (endpointsData) {
@@ -196,6 +214,11 @@ var apiExplorer = (function () {
     }).render(endpointsData);
     $('#api-explorer-tabs').html(compiledTemplate);
     events(endpointsData);
+    if (atlasUser.isLoggedIn()) {
+      loadUserApiKeyDropdown();
+    } else {
+      loadApiKeyButton();
+    }
     channelPicker();
     if (window.location.search) {
       prepopulateForm();

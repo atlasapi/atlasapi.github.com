@@ -25,6 +25,8 @@ gulp.task('scripts', function () {
     './assets/js/src/common/api-data.js',
     './assets/js/src/common/tabs.js',
     './assets/js/src/common/popovers.js',
+    './assets/js/src/common/encode-query-data.js',
+    './assets/js/src/common/atlas-user.js',
     './assets/js/src/login-to-admin.js',
     './assets/js/src/highlight-current-page.js',
     './assets/js/src/handleLoggedInStatus.js',
