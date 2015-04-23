@@ -213,6 +213,12 @@ var apiExplorer = (function () {
         $(this).closest('.api-key-warning').hide();
       }
     });
+    $(document).on('keyup', function (e) {
+      var escKeyCode = 27;
+      if (e.keyCode === escKeyCode) {
+        $('.api-key-warning').hide();
+      }
+    });
   };
 
   var loadUserApiKeyDropdown = function (data) {
