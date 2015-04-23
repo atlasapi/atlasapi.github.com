@@ -219,12 +219,23 @@ var apiExplorer = (function () {
         $('.api-key-warning').hide();
       }
     });
+
+    $('#user-query-form').on('submit', function (e) {
+      e.preventDefault();
+      handleUserQueryUrl($(this));
+    });
+  };
+
+  var handleUserQueryUrl = function (queryForm) {
+    var queryUrl = $(queryForm).find('.user-query-url').val();
   };
 
   var loadUserApiKeyDropdown = function (data) {
-    var shortKeyLength = 6;
     _.forEach(data.applications, function (application) {
-      application.shortKey = application.credentials.apiKey.substring(0, shortKeyLength);
+      var apiKey = application.credentials.apiKey;
+      application.shortKey = apiKey.substring(0, 3);
+      application.shortKey += '...';
+      application.shortKey += apiKey.substring(apiKey.length - 3);
     });
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-key-dropdown.ejs'
