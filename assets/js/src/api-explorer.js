@@ -198,10 +198,10 @@ var apiExplorer = (function () {
     $(document).on('focus', '.queryUrl', function () {
       var $apiKeyWarning = $(this).closest('.queryForm').find('.api-key-warning');
       $apiKeyWarning.show();
-      var apiKeyWarning = setTimeout(function () {
-        $apiKeyWarning.fadeOut('slow');
-        clearTimeout(apiKeyWarning);
-      }, 5000);
+    });
+    $(document).on('click', '.close-api-key-warning', function (e) {
+      e.preventDefault();
+      $(this).closest('.api-key-warning').hide();
     });
   };
 
