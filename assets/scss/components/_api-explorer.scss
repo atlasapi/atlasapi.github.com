@@ -197,3 +197,13 @@ input.queryUrl {
 .has-api-key-warning {
   position: relative;
 }
+
+.close-api-key-warning {
+  color: #ef308f;
+}
+
+.close-api-key-warning:hover,
+.close-api-key-warning:active,
+.close-api-key-warning:focus {
+  text-decoration: underline;
+}
