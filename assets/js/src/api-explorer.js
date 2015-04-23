@@ -4,7 +4,11 @@ var apiExplorer = (function () {
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
 
   var getApiKey = function () {
-    return $('#apiKey').val() || defaultApiKey;
+    if (atlasUser.isLoggedIn()) {
+      return $('#apiKey').val() || $('#user-api-keys').val();
+    } else {
+      return $('#apiKey').val() || defaultApiKey;
+    }
   };
 
   var sendQuery = function ($queryForm) {
@@ -215,6 +219,7 @@ var apiExplorer = (function () {
       url: 'assets/templates/api-key-dropdown.ejs'
     }).render(data.applications);
     $('#getApiKeyBtnHolder').html(compiledTemplate);
+    $('#user-api-keys').trigger('change');
   };
 
   var loadApiKeyButton = function () {
