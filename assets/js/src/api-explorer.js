@@ -198,6 +198,7 @@ var apiExplorer = (function () {
     });
     $(document).on('click', '.logout', function () {
       loadApiKeyButton();
+      $('#apiKey').val('').trigger('change');
     });
     $(document).on('click', '.show-api-key-warning', function () {
       if (!atlasUser.isLoggedIn()) {
