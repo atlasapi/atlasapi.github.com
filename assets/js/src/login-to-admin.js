@@ -1,4 +1,6 @@
 var loginToAdmin = (function () {
+  'use strict';
+  
   return function () {
     var url;
     if (MBST.ENV === 'stage' || window.location.href.indexOf('stage')) {

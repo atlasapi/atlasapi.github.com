@@ -1,4 +1,6 @@
 var popovers = (function () {
+  'use strict';
+  
   return function () {
     var hoverTimer;
     $('.hov').bind('mouseover',function () {
