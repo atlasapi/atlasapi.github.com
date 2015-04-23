@@ -228,6 +228,18 @@ var apiExplorer = (function () {
 
   var handleUserQueryUrl = function (queryForm) {
     var queryUrl = $(queryForm).find('.user-query-url').val();
+    var endpointName = queryUrl.split('4');
+    endpointName = endpointName[1].split('/');
+    endpointName = endpointName[1];
+    endpointName = endpointName.split('.');
+    endpointName = endpointName[0];
+    var target = '#api-' + endpointName;
+    // Get query params
+    $('.api-explorer-nav').find('a[href="' + target + '"]').trigger('click');
+    $(target).find('.queryTable').find('.queryParameter').each(function (index, parameterInput) {
+      // if parameter name === query param key, put value
+      $(parameterInput).val('').trigger('change');
+    });
   };
 
   var loadUserApiKeyDropdown = function (data) {
