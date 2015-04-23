@@ -196,13 +196,17 @@ var apiExplorer = (function () {
       loadApiKeyButton();
     });
     $(document).on('click', '.show-api-key-warning', function () {
-      var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
-      $('.api-key-warning').hide();
-      $apiKeyWarning.show();
+      if (!atlasUser.isLoggedIn()) {
+        var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
+        $('.api-key-warning').hide();
+        $apiKeyWarning.show();
+      }
     });
     $(document).on('click', '.close-api-key-warning', function (e) {
       e.preventDefault();
-      $(this).closest('.api-key-warning').hide();
+      if (!atlasUser.isLoggedIn()) {
+        $(this).closest('.api-key-warning').hide();
+      }
     });
   };
 
