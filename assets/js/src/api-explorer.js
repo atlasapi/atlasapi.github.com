@@ -222,6 +222,10 @@ var apiExplorer = (function () {
   };
 
   var loadUserApiKeyDropdown = function (data) {
+    var shortKeyLength = 6;
+    _.forEach(data.applications, function (application) {
+      application.shortKey = application.credentials.apiKey.substring(0, shortKeyLength);
+    });
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-key-dropdown.ejs'
     }).render(data.applications);

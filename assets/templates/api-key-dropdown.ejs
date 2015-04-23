@@ -1,6 +1,6 @@
 <label class="apiKeyLabel" for="user-api-keys">Your API Keys:</label>
 <select class="user-api-keys" id="user-api-keys" name="user-api-keys">
   <% for (var i = 0, ii = this.length; i < ii; i++) { %>
-    <option value="<%= this[i].credentials.apiKey %>"><%= this[i].title %></option>
+    <option value="<%= this[i].credentials.apiKey %>"><%= this[i].title %> (<%= this[i].shortKey %>...)</option>
   <% } %>
 </select>
