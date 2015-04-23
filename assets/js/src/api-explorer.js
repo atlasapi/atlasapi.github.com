@@ -195,8 +195,8 @@ var apiExplorer = (function () {
     $(document).on('click', '.logout', function () {
       loadApiKeyButton();
     });
-    $(document).on('focus', '.has-api-key-warning', function () {
-      var $apiKeyWarning = $(this).closest('.queryForm').find('.api-key-warning');
+    $(document).on('click', '.show-api-key-warning', function () {
+      var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
       $('.api-key-warning').hide();
       $apiKeyWarning.show();
     });

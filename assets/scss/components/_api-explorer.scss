@@ -164,10 +164,6 @@ input.queryUrl {
   max-width: 300px;
 }
 
-.queryForm {
-  position: relative;
-}
-
 .api-key-warning {
   display: none;
   position: absolute;
@@ -179,6 +175,7 @@ input.queryUrl {
   border: 1px solid #fc0088;
   background: #fff;
   text-align: center;
+  z-index: 10;
 }
 
 .api-key-warning:after {
@@ -195,4 +192,8 @@ input.queryUrl {
 
 .api-key-warning p {
   margin: 0 0 10px;
+}
+
+.has-api-key-warning {
+  position: relative;
 }
