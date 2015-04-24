@@ -234,12 +234,17 @@ var apiExplorer = (function () {
     endpointName = endpointName.split('.');
     endpointName = endpointName[0];
     var target = '#api-' + endpointName;
-    // Get query params
+    var queryParameters = createQueryParamsObject(queryUrl);
     $('.api-explorer-nav').find('a[href="' + target + '"]').trigger('click');
+    $('#apiKey').val(queryParameters.key).trigger('change');
     $(target).find('.queryTable').find('.queryParameter').each(function (index, parameterInput) {
-      // if parameter name === query param key, put value
+      var inputName = $(parameterInput).attr('name');
       $(parameterInput).val('').trigger('change');
+      if (queryParameters[inputName]) {
+        $('[name="' + inputName + '"]').val(queryParameters[inputName]).trigger('change');
+      }
     });
+    sendQuery($(target).find('.queryForm'));
   };
 
   var loadUserApiKeyDropdown = function (data) {
