@@ -220,9 +220,30 @@ var apiExplorer = (function () {
       }
     });
 
-    $('#user-query-form').on('submit', function (e) {
+    $(document).on('change', '.user-query-url', function () {
+      $('.user-query-url').val($(this).val());
+    });
+
+    $('.user-query-form').on('submit', function (e) {
       e.preventDefault();
       handleUserQueryUrl($(this));
+    });
+  };
+
+  var selectAnnotations = function (tabPanel, queryParameters) {
+    var $tabPanel = $(tabPanel);
+    var annotations = queryParameters.annotations.split(',');
+    if (!$tabPanel.find('.annotations-row').is(':visible')) {
+      $tabPanel.find('.toggle-picker').trigger('click');
+    }
+    $tabPanel.find('.annotation-checkbox').each(function (index, checkbox) {
+      var annotationIndex = $.inArray($(checkbox).attr('name'), annotations);
+      if (annotationIndex != -1) {
+        $(checkbox).prop('checked', true);
+      } else {
+        $(checkbox).prop('checked', false);
+      }
+      $(checkbox).trigger('change');
     });
   };
 
@@ -244,6 +265,8 @@ var apiExplorer = (function () {
         $('[name="' + inputName + '"]').val(queryParameters[inputName]).trigger('change');
       }
     });
+    selectAnnotations(target, queryParameters);
+    $(window).scrollTop($('#apiExplorer').offset().top - 64);
     sendQuery($(target).find('.queryForm'));
   };
 
