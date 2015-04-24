@@ -10,7 +10,7 @@ var channelPicker = (function () {
     });
   };
 
-  var toggleChannelPicker = function () {
+  var toggleChannelPicker = function (callback) {
     $.ajax({
       url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
@@ -21,8 +21,12 @@ var channelPicker = (function () {
           $('.channel-picker-row').remove();
         } else {
           $('#schedules-id-row').after(compiledTemplate);
+          $('.channel-picker-row').trigger('channelpicker:load');
         }
         buildPlatformTemplate(data.channel_groups);
+        if (callback) {
+          callback();
+        }
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
@@ -234,9 +238,14 @@ var channelPicker = (function () {
     });
   };
 
-  return function () {
+  var init = function () {
     channelPickerClick();
     closeChannelPicker();
     channelPickerChange();
+  };
+
+  return {
+    init: init,
+    toggle: toggleChannelPicker
   };
 })();
