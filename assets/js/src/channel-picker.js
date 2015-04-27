@@ -17,7 +17,7 @@ var channelPicker = (function () {
         var compiledTemplate = new EJS({
           url: 'assets/templates/channelPicker.ejs'
         }).render();
-        if ($('.channel-picker-row').length) {
+        if ($('.channel-picker-row').length && !checkSelectedChannels) {
           $('.channel-picker-row').remove();
         } else {
           $('#schedules-id-row').after(compiledTemplate);
@@ -29,21 +29,16 @@ var channelPicker = (function () {
         console.error(errorThrown);
       }
     }).then(function () {
-      console.log('We have hit then');
       if (checkSelectedChannels) {
-        console.log('Condition has been met');
         selectChannels(options);
-        // callback();
       }
     });
   };
 
   var selectChannels = function (options) {
-    console.log('selectChannels has been called');
     var $tabPanel = $(options.tabPanel);
     var channels = options.queryParameters.id.split(',');
     $tabPanel.find('.channel-picker-checkbox').each(function (index, checkbox) {
-      console.log($(checkbox).val());
       var channelIndex = $.inArray($(checkbox).val(), channels);
       if (channelIndex !== -1) {
         $(checkbox).prop('checked', true);
@@ -52,8 +47,6 @@ var channelPicker = (function () {
       }
       $(checkbox).trigger('change');
     });
-    console.log(channels);
-    console.log($tabPanel.find('.channel-picker-checkbox').length);
   };
 
   var buildPlatformTemplate = function (platforms) {
