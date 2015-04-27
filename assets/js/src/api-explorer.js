@@ -247,20 +247,6 @@ var apiExplorer = (function () {
     });
   };
 
-  var selectChannels = function (tabPanel, queryParameters) {
-    var $tabPanel = $(tabPanel);
-    var channels = queryParameters.id.split(',');
-    $tabPanel.find('.channel-picker-checkbox').each(function (index, checkbox) {
-      var channelIndex = $.inArray($(checkbox).attr('name'), channels);
-      if (channelIndex !== -1) {
-        $(checkbox).prop('checked', true);
-      } else {
-        $(checkbox).prop('checkbed', false);
-      }
-      $(checkbox).trigger('change');
-    });
-  };
-
   var handleUserQueryUrl = function (queryForm) {
     var queryUrl = $(queryForm).find('.user-query-url').val();
     var endpointName = queryUrl.split('4');
@@ -281,7 +267,10 @@ var apiExplorer = (function () {
     });
     selectAnnotations(target, queryParameters);
     if ($(target).find('.channel-picker-toggle')) {
-      channelPicker.toggle(selectChannels(target, queryParameters));
+      channelPicker.toggle(true, {
+        tabPanel: target,
+        queryParameters: queryParameters
+      });
     }
     $(window).scrollTop($('#apiExplorer').offset().top - 64);
     sendQuery($(target).find('.queryForm'));
