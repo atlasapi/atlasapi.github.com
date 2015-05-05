@@ -11,9 +11,6 @@ $(function () {
 
   handleLoggedInStatus();
 
-  var nowNextLater = new NowNextLater();
-  nowNextLater.init();
-
   apiData.init(function (data) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-docs-submenu.ejs'
@@ -36,4 +33,6 @@ $(function () {
 $(window).load(function () {
   uiTabs.init();
   highlightCurrentPage.init();
+  var nowNextLater = new NowNextLater();
+  nowNextLater.init();
 });
