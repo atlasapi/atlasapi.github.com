@@ -13,11 +13,11 @@ var apiExplorer = (function () {
 
   var sendQuery = function ($queryForm) {
     var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
-    $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
+    var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
+    $jsonOutput.html($loadingDiv);
     $.ajax({
       url: $queryForm.find('.queryUrl').val(),
       success: function (data) {
-        var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
         data = linkIds(JSON.stringify(data, undefined, 2));
         $jsonOutput.html(data);
         $jsonOutput.each(function(i, block) {
@@ -25,7 +25,7 @@ var apiExplorer = (function () {
         });
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        $jsonOutput.html('Error: ' + errorThrown);
       }
     });
   };
