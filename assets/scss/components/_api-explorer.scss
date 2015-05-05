@@ -158,3 +158,56 @@ input.queryUrl {
   opacity: 0.5;
   height: auto;
 }
+
+.user-api-keys {
+  display: inline-block;
+  max-width: 300px;
+}
+
+.api-key-warning {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fc0088;
+  background: #fff;
+  text-align: center;
+  z-index: 10;
+}
+
+.api-key-warning:after {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 10px;
+  display: block;
+  margin-left: -3px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fc0088;
+}
+
+.api-key-warning p {
+  margin: 0 0 10px;
+}
+
+.has-api-key-warning {
+  position: relative;
+}
+
+.close-api-key-warning {
+  color: #ef308f;
+}
+
+.close-api-key-warning:hover,
+.close-api-key-warning:active,
+.close-api-key-warning:focus {
+  text-decoration: underline;
+}
+
+input.user-query-url {
+  width: 92%;
+}

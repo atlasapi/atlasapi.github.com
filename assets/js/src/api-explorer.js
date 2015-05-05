@@ -4,16 +4,20 @@ var apiExplorer = (function () {
   var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
 
   var getApiKey = function () {
-    return $('#apiKey').val() || defaultApiKey;
+    if (atlasUser.isLoggedIn()) {
+      return $('#apiKey').val() || $('#user-api-keys').val();
+    } else {
+      return $('#apiKey').val() || defaultApiKey;
+    }
   };
 
   var sendQuery = function ($queryForm) {
     var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
-    $queryForm.siblings('.queryResponse').find('.jsonOutput').html($loadingDiv);
+    var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
+    $jsonOutput.html($loadingDiv);
     $.ajax({
       url: $queryForm.find('.queryUrl').val(),
       success: function (data) {
-        var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
         data = linkIds(JSON.stringify(data, undefined, 2));
         $jsonOutput.html(data);
         $jsonOutput.each(function(i, block) {
@@ -21,7 +25,7 @@ var apiExplorer = (function () {
         });
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        $jsonOutput.html('Error: ' + errorThrown);
       }
     });
   };
@@ -188,6 +192,109 @@ var apiExplorer = (function () {
       $(window).scrollTop($('#api-docs').offset().top - headerHeight);
       $('.api-docs .menu').find('a[href=' + target + ']').trigger('click');
     });
+    $(document).on('change', '#user-api-keys', function () {
+      var userApiKey = $(this).val();
+      $('#apiKey').val(userApiKey).trigger('change');
+    });
+    $(document).on('click', '.logout', function () {
+      loadApiKeyButton();
+      $('#apiKey').val('').trigger('change');
+    });
+    $(document).on('click', '.show-api-key-warning', function () {
+      if (!atlasUser.isLoggedIn()) {
+        var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
+        $('.api-key-warning').hide();
+        $apiKeyWarning.show();
+      }
+    });
+    $(document).on('click', '.close-api-key-warning', function (e) {
+      e.preventDefault();
+      if (!atlasUser.isLoggedIn()) {
+        $(this).closest('.api-key-warning').hide();
+      }
+    });
+    $(document).on('keyup', function (e) {
+      var escKeyCode = 27;
+      if (e.keyCode === escKeyCode) {
+        $('.api-key-warning').hide();
+      }
+    });
+
+    $(document).on('change', '.user-query-url', function () {
+      $('.user-query-url').val($(this).val());
+    });
+
+    $('.user-query-form').on('submit', function (e) {
+      e.preventDefault();
+      handleUserQueryUrl($(this));
+    });
+  };
+
+  var selectAnnotations = function (tabPanel, queryParameters) {
+    var $tabPanel = $(tabPanel);
+    var annotations = queryParameters.annotations.split(',');
+    if (!$tabPanel.find('.annotations-row').is(':visible')) {
+      $tabPanel.find('.toggle-picker').trigger('click');
+    }
+    $tabPanel.find('.annotation-checkbox').each(function (index, checkbox) {
+      var annotationIndex = $.inArray($(checkbox).attr('name'), annotations);
+      if (annotationIndex !== -1) {
+        $(checkbox).prop('checked', true);
+      } else {
+        $(checkbox).prop('checked', false);
+      }
+      $(checkbox).trigger('change');
+    });
+  };
+
+  var handleUserQueryUrl = function (queryForm) {
+    var queryUrl = $(queryForm).find('.user-query-url').val();
+    var endpointName = queryUrl.split('4');
+    endpointName = endpointName[1].split('/');
+    endpointName = endpointName[1];
+    endpointName = endpointName.split('.');
+    endpointName = endpointName[0];
+    var target = '#api-' + endpointName;
+    var queryParameters = createQueryParamsObject(queryUrl);
+    $('.api-explorer-nav').find('a[href="' + target + '"]').trigger('click');
+    $('#apiKey').val(queryParameters.key).trigger('change');
+    $(target).find('.queryTable').find('.queryParameter').each(function (index, parameterInput) {
+      var inputName = $(parameterInput).attr('name');
+      $(parameterInput).val('').trigger('change');
+      if (queryParameters[inputName]) {
+        $('[name="' + inputName + '"]').val(queryParameters[inputName]).trigger('change');
+      }
+    });
+    selectAnnotations(target, queryParameters);
+    if ($(target).find('.channel-picker-toggle')) {
+      channelPicker.toggle(true, {
+        tabPanel: target,
+        queryParameters: queryParameters
+      });
+    }
+    $(window).scrollTop($('#apiExplorer').offset().top - 64);
+    sendQuery($(target).find('.queryForm'));
+  };
+
+  var loadUserApiKeyDropdown = function (data) {
+    _.forEach(data.applications, function (application) {
+      var apiKey = application.credentials.apiKey;
+      application.shortKey = apiKey.substring(0, 3);
+      application.shortKey += '...';
+      application.shortKey += apiKey.substring(apiKey.length - 3);
+    });
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-key-dropdown.ejs'
+    }).render(data.applications);
+    $('#getApiKeyBtnHolder').html(compiledTemplate);
+    $('#user-api-keys').trigger('change');
+  };
+
+  var loadApiKeyButton = function () {
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-key-button.ejs'
+    }).render();
+    $('#getApiKeyBtnHolder').html(compiledTemplate);
   };
 
   var init = function (endpointsData) {
@@ -196,7 +303,14 @@ var apiExplorer = (function () {
     }).render(endpointsData);
     $('#api-explorer-tabs').html(compiledTemplate);
     events(endpointsData);
-    channelPicker();
+    if (atlasUser.isLoggedIn()) {
+      var credentials = atlasUser.getCredentials();
+      var credentialsQueryString = encodeQueryData(credentials);
+      atlasUser.getUserData('http://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadUserApiKeyDropdown);
+    } else {
+      loadApiKeyButton();
+    }
+    channelPicker.init();
     if (window.location.search) {
       prepopulateForm();
     }

@@ -10,23 +10,42 @@ var channelPicker = (function () {
     });
   };
 
-  var toggleChannelPicker = function () {
+  var toggleChannelPicker = function (checkSelectedChannels, options) {
     $.ajax({
       url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
         var compiledTemplate = new EJS({
           url: 'assets/templates/channelPicker.ejs'
         }).render();
-        if ($('.channel-picker-row').length) {
+        if ($('.channel-picker-row').length && !checkSelectedChannels) {
           $('.channel-picker-row').remove();
         } else {
           $('#schedules-id-row').after(compiledTemplate);
+          $('.channel-picker-row').trigger('channelpicker:load');
         }
         buildPlatformTemplate(data.channel_groups);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
       }
+    }).then(function () {
+      if (checkSelectedChannels) {
+        selectChannels(options);
+      }
+    });
+  };
+
+  var selectChannels = function (options) {
+    var $tabPanel = $(options.tabPanel);
+    var channels = options.queryParameters.id.split(',');
+    $tabPanel.find('.channel-picker-checkbox').each(function (index, checkbox) {
+      var channelIndex = $.inArray($(checkbox).val(), channels);
+      if (channelIndex !== -1) {
+        $(checkbox).prop('checked', true);
+      } else {
+        $(checkbox).prop('checked', false);
+      }
+      $(checkbox).trigger('change');
     });
   };
 
@@ -234,9 +253,14 @@ var channelPicker = (function () {
     });
   };
 
-  return function () {
+  var init = function () {
     channelPickerClick();
     closeChannelPicker();
     channelPickerChange();
+  };
+
+  return {
+    init: init,
+    toggle: toggleChannelPicker
   };
 })();
