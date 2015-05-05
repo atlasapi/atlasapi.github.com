@@ -6,7 +6,7 @@ var loginToAdmin = (function () {
     if (MBST.ENV === 'stage' || window.location.href.indexOf('stage')) {
       url = '//stage.atlas.metabroadcast.com/4/auth/providers.json';
     } else {
-      url = '//atlas.metabroadcast.com/4.0/auth/providers.json';
+      url = '//atlas.metabroadcast.com/4/auth/providers.json';
     }
     $.ajax({
       url: url,
