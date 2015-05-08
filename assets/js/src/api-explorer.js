@@ -71,7 +71,7 @@ var apiExplorer = (function () {
 
   var getQueryId = function ($queryParametersForm) {
     var $idInput = $queryParametersForm.find('input[name="id"]');
-    var queryId = $idInput.val() || $idInput.data('default');
+    var queryId = $idInput.val() || '';
     $idInput.val(queryId);
     return queryId;
   };
@@ -90,7 +90,10 @@ var apiExplorer = (function () {
     var queryUrl = defaultQueryUrl;
     var urlIds = urlComponents.id.split(',');
     if (urlIds.length <= 1) {
-      queryUrl += urlComponents.endpoint + '/';
+      queryUrl += urlComponents.endpoint;
+      if (urlComponents.id !== '') {
+        queryUrl += '/';
+      }
       queryUrl += urlComponents.id + '.json?';
     } else {
       queryUrl += urlComponents.endpoint + '.json?';
