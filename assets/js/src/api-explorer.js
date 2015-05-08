@@ -67,6 +67,9 @@ var apiExplorer = (function () {
     $ajaxExample.each(function (i, block) {
       hljs.highlightBlock(block);
     });
+    if ($('.user-query-url').val() !== '') {
+      $('.user-query-url').val(queryUrlValue);
+    }
   };
 
   var getQueryId = function ($queryParametersForm) {
