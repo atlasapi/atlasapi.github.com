@@ -55,7 +55,7 @@
         },
         {
           "name": "topics.supervised",
-          "default_value": "",
+          "default_value": ["true", "false"],
           "type": "boolean",
           "is_multiple": false,
           "description": "Match all content whose topics contain a topic with the given supervised boolean."

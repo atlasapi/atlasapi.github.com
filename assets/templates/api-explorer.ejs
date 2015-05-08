@@ -35,7 +35,16 @@
                 <tr id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
                   <td class="first"><%= this[i].parameters[j].name %></td>
                   <td class="second">
-                    <input class="queryParameter" id="<%= this[i].name %>-id-input" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
+                    <% if (Array.isArray(this[i].parameters[j].default_value)) { %>
+                      <select class="queryParameter" name="<%= this[i].parameters[j].name %>">
+                        <option value="">Select value</option>
+                        <% for (var k = 0, kk = this[i].parameters[j].default_value.length; k < kk; k++) { %>
+                          <option value="<%= this[i].parameters[j].default_value[k] %>"><%= this[i].parameters[j].default_value[k] %></option>
+                        <% } %>
+                      </select>
+                    <% } else { %>
+                      <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
+                    <% } %>
                     <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
                       <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
                     <% } %>
