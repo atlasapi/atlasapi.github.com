@@ -1,8 +1,9 @@
 var apiDocs = (function () {
   'use strict';
 
-  var init = function (endpointsData) {
+  var init = function (endpointsData) { 
     populateTemplate(endpointsData);
+    populateTypesTemplate();
   };
 
   var populateTemplate = function (endpointsData) {
@@ -61,6 +62,21 @@ var apiDocs = (function () {
           console.error(errorThrown);
         }
       });
+    });
+  };
+
+  var populateTypesTemplate = function () {
+    $.ajax({
+      url: 'https://atlas.metabroadcast.com/4/meta/types.json',
+      success: function (data) {
+        var compiledTemplate = new EJS({
+          url: 'assets/templates/api-docs-types.ejs'
+        }).render(data.types);
+        $('#api-docs-types-container').html(compiledTemplate);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        console.error(errorThrown);
+      }
     });
   };
 
