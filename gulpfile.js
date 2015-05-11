@@ -33,6 +33,7 @@ gulp.task('scripts', function () {
     './assets/js/src/handleLoggedInStatus.js',
     './assets/js/src/nownextlater-widget.js',
     './assets/js/src/channel-picker.js',
+    './assets/js/src/channel-group-picker.js',
     './assets/js/src/api-docs.js',
     './assets/js/src/api-explorer.js',
     './assets/js/src/submenus.js',

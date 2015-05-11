@@ -317,6 +317,7 @@ var apiExplorer = (function () {
       loadApiKeyButton();
     }
     channelPicker.init();
+    channelGroupPicker.init();
     if (window.location.search) {
       prepopulateForm();
     }

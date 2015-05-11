@@ -1036,7 +1036,7 @@
         },
         {
           "name": "type",
-          "default_value": "platform",
+          "default_value": ["platform", "region"],
           "type": "string",
           "is_multiple": false,
           "description": ""
