@@ -3,7 +3,7 @@
 <div class="clearfix pbl ui-tabs ui-tabs-vertical">
   <div class="size1of4 unit">
     <nav class="menu ui-tabs-nav">
-      <div class="menu-heading">Endpoints</div>
+      <div class="menu-heading">Resources</div>
       <% for (var i = 0, ii = this.length; i < ii; i++) { %>
         <% if (i === 0) { %>
           <a class="menu-item ui-tabs-link ui-tabs-active-link" href="#api-docs-<%= this[i].name %>"><%= this[i].name %></a>
@@ -21,7 +21,7 @@
           <h4>Description</h4>
           <p><%= this[i].description %></p>
         <% } %>
-        <h4>Endpoints</h4>
+        <h4>Resources</h4>
         <% for (var j = 0, jj = this[i].operations.length; j < jj; j++) { %>
           <pre><code><%= this[i].operations[j].method %> <%= this[i].root_path %><%= this[i].operations[j].path %></code></pre>
         <% } %>
