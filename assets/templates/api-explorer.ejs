@@ -48,6 +48,9 @@
                     <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
                       <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
                     <% } %>
+                    <% if (this[i].name === 'channel_groups' && this[i].parameters[j].name === 'id') { %>
+                      <a class="channel-group-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channel group</a>
+                    <% } %>
                     <% if (this[i].parameters[j].name === 'annotations') { %>
                       <a class="toggle-picker toggle-link" href="#<%= this[i].name %>-annotations-picker">choose annotations</a>
                     <% } %>
