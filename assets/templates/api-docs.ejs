@@ -49,11 +49,24 @@
           </tbody>
         </table>
         <h4>Available annotations</h4>
-        <ul class="api-docs-annotations">
-          <% for (var l = 0, ll = this[i].annotations.length; l < ll; l++) { %>
-            <li><%= this[i].annotations[l] %></li>
-          <% } %>
-        </ul>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var l = 0, ll = this[i].annotations.length; l < ll; l++) { %>
+              <tr>
+                <td><%= this[i].annotations[l].name %></td>
+                <td><%= this[i].annotations[l].type %></td>
+                <td><%= this[i].annotations[l].description %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
         <div class="api-docs-response"></div>
         <h4>Error messages</h4>
         <table class="tbl">

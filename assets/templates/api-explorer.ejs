@@ -61,7 +61,7 @@
                       <% for (var k = 0, kk = this[i].annotations.length; k < kk; k++) { %>
                         <label>
                           <input class="annotation-checkbox" type="checkbox" name="<%= this[i].annotations[k] %>">
-                          <%= this[i].annotations[k] %>
+                          <%= this[i].annotations[k].name %>
                         </label>
                       <% } %>
                     </td>
