@@ -15,6 +15,33 @@
     <% for (var i = 0, ii = this.length; i < ii; i++) { %>
       <div class="ui-tabs-panel pll" id="api-docs-types-<%= this[i].name %>">
         <h3><%= this[i].name %></h3>
+        <% if (this[i].description) { %>
+          <h4>Description</h4>
+          <p><%= this[i].description %></p>
+        <% } %>
+        <h4>Fields</h4>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Type</th>
+              <th>JSON Type</th>
+              <th>Multiple</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for (var j = 0, jj = this[i].fields.length; j < jj; j++) { %>
+              <tr>
+                <td><%= this[i].fields[j].name %></td>
+                <td><%= this[i].fields[j].type %></td>
+                <td><%= this[i].fields[j].json_type %></td>
+                <td><%= this[i].fields[j].is_multiple %></td>
+                <td><%= this[i].fields[j].description %></td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
       </div>
     <% } %>
   </div>
