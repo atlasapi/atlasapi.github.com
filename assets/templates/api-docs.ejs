@@ -60,7 +60,12 @@
             <% for (var l = 0, ll = this[i].annotations.length; l < ll; l++) { %>
               <tr>
                 <td><%= this[i].annotations[l].name %></td>
-                <td><%= this[i].annotations[l].type %></td>
+                <td>
+                  <%= this[i].annotations[l].type %>
+                  <% if (this[i].annotations[l].type !== '') { %>
+                    <a class="api-docs-types-link" href="#api-docs-types-<%= this[i].annotations[l].type.toLowerCase() %>"><i class="fa fa-info-circle"></i></a>
+                  <% } %>
+                </td>
               </tr>
             <% } %>
           </tbody>

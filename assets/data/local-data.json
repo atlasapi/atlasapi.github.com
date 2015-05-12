@@ -82,43 +82,43 @@
         },
         {
           "name": "brand_reference",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "brand_summary",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "broadcasts",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "channel",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "channels",
-          "type": ""
+          "type": "channelGroup"
         },
         {
           "name": "channel_summary",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "clips",
-          "type": ""
+          "type": "clip"
         },
         {
           "name": "content_groups",
-          "type": ""
+          "type": "contentGroup"
         },
         {
           "name": "description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "extended_description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "filtering_resource",
@@ -126,11 +126,11 @@
         },
         {
           "name": "images",
-          "type": ""
+          "type": "image"
         },
         {
           "name": "key_phrases",
-          "type": ""
+          "type": "keyphrase"
         },
         {
           "name": "locations",
@@ -138,7 +138,7 @@
         },
         {
           "name": "people",
-          "type": ""
+          "type": "person"
         },
         {
           "name": "products",
@@ -150,7 +150,7 @@
         },
         {
           "name": "recently_broadcast",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "regions",
@@ -162,19 +162,19 @@
         },
         {
           "name": "segment_events",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_reference",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "series_summary",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "topics",
-          "type": ""
+          "type": "topic"
         },
         {
           "name": "upcoming",
@@ -296,43 +296,43 @@
         },
         {
           "name": "brand_reference",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "brand_summary",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "broadcasts",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "channel",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "channels",
-          "type": ""
+          "type": "channelGroup"
         },
         {
           "name": "channel_summary",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "clips",
-          "type": ""
+          "type": "clip"
         },
         {
           "name": "content_groups",
-          "type": ""
+          "type": "contentGroup"
         },
         {
           "name": "description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "extended_description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "filtering_resource",
@@ -340,11 +340,11 @@
         },
         {
           "name": "images",
-          "type": ""
+          "type": "image"
         },
         {
           "name": "key_phrases",
-          "type": ""
+          "type": "keyphrase"
         },
         {
           "name": "locations",
@@ -352,7 +352,7 @@
         },
         {
           "name": "people",
-          "type": ""
+          "type": "person"
         },
         {
           "name": "products",
@@ -364,7 +364,7 @@
         },
         {
           "name": "recently_broadcast",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "regions",
@@ -376,19 +376,19 @@
         },
         {
           "name": "segment_events",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_reference",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_summary",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "topics",
-          "type": ""
+          "type": "topic"
         },
         {
           "name": "upcoming",
@@ -517,43 +517,43 @@
         },
         {
           "name": "brand_reference",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "brand_summary",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "broadcasts",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "channel",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "channels",
-          "type": ""
+          "type": "channelGroup"
         },
         {
           "name": "channel_summary",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "clips",
-          "type": ""
+          "type": "clip"
         },
         {
           "name": "content_groups",
-          "type": ""
+          "type": "contentGroup"
         },
         {
           "name": "description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "extended_description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "filtering_resource",
@@ -561,11 +561,11 @@
         },
         {
           "name": "images",
-          "type": ""
+          "type": "image"
         },
         {
           "name": "key_phrases",
-          "type": ""
+          "type": "keyPhrase"
         },
         {
           "name": "locations",
@@ -573,7 +573,7 @@
         },
         {
           "name": "people",
-          "type": ""
+          "type": "person"
         },
         {
           "name": "products",
@@ -585,7 +585,7 @@
         },
         {
           "name": "recently_broadcast",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "regions",
@@ -597,19 +597,19 @@
         },
         {
           "name": "segment_events",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_reference",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "series_summary",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "topics",
-          "type": ""
+          "type": "topic"
         },
         {
           "name": "upcoming",
@@ -731,43 +731,43 @@
         },
         {
           "name": "brand_reference",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "brand_summary",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "broadcasts",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "channel",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "channels",
-          "type": ""
+          "type": "channelGroup"
         },
         {
           "name": "channel_summary",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "clips",
-          "type": ""
+          "type": "clip"
         },
         {
           "name": "content_groups",
-          "type": ""
+          "type": "contentGroup"
         },
         {
           "name": "description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "extended_description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "filtering_resource",
@@ -775,11 +775,11 @@
         },
         {
           "name": "images",
-          "type": ""
+          "type": "image"
         },
         {
           "name": "key_phrases",
-          "type": ""
+          "type": "keyPhrase"
         },
         {
           "name": "locations",
@@ -787,7 +787,7 @@
         },
         {
           "name": "people",
-          "type": ""
+          "type": "person"
         },
         {
           "name": "products",
@@ -799,7 +799,7 @@
         },
         {
           "name": "recently_broadcast",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "regions",
@@ -811,19 +811,19 @@
         },
         {
           "name": "segment_events",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_reference",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_summary",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "topics",
-          "type": ""
+          "type": "topic"
         },
         {
           "name": "upcoming",
@@ -959,43 +959,43 @@
         },
         {
           "name": "brand_reference",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "brand_summary",
-          "type": ""
+          "type": "brand"
         },
         {
           "name": "broadcasts",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "channel",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "channels",
-          "type": ""
+          "type": "channelGroup"
         },
         {
           "name": "channel_summary",
-          "type": ""
+          "type": "channel"
         },
         {
           "name": "clips",
-          "type": ""
+          "type": "clip"
         },
         {
           "name": "content_groups",
-          "type": ""
+          "type": "contentGroup"
         },
         {
           "name": "description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "extended_description",
-          "type": ""
+          "type": "description"
         },
         {
           "name": "filtering_resource",
@@ -1003,11 +1003,11 @@
         },
         {
           "name": "images",
-          "type": ""
+          "type": "image"
         },
         {
           "name": "key_phrases",
-          "type": ""
+          "type": "keyPhrase"
         },
         {
           "name": "locations",
@@ -1015,7 +1015,7 @@
         },
         {
           "name": "people",
-          "type": ""
+          "type": "person"
         },
         {
           "name": "products",
@@ -1027,7 +1027,7 @@
         },
         {
           "name": "recently_broadcast",
-          "type": ""
+          "type": "broadcast"
         },
         {
           "name": "regions",
@@ -1039,19 +1039,19 @@
         },
         {
           "name": "segment_events",
-          "type": ""
+          "type": "segmentRef"
         },
         {
           "name": "series_reference",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "series_summary",
-          "type": ""
+          "type": "seriesRef"
         },
         {
           "name": "topics",
-          "type": ""
+          "type": "topic"
         },
         {
           "name": "upcoming",
