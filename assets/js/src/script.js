@@ -31,7 +31,7 @@ $(function () {
 });
 
 $(window).load(function () {
-  uiTabs.init();
+  uiTabs();
   highlightCurrentPage.init();
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
