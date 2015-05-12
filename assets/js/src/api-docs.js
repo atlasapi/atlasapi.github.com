@@ -69,6 +69,16 @@ var apiDocs = (function () {
     $.ajax({
       url: 'https://atlas.metabroadcast.com/4/meta/types.json',
       success: function (data) {
+        // Sort types by name alphabetically
+        data.types.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
         var compiledTemplate = new EJS({
           url: 'assets/templates/api-docs-types.ejs'
         }).render(data.types);
