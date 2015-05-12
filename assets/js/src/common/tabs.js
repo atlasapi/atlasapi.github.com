@@ -1,7 +1,7 @@
 var uiTabs = (function () {
   'use strict';
 
-  var showActiveTab = function () {
+  return function () {
     var activeClass = 'ui-tabs-active-link';
     var active = location.hash;
 
@@ -27,17 +27,14 @@ var uiTabs = (function () {
     $('.ui-tabs').each(function () {
       var $tabsContainer = $(this);
 
-      $tabsContainer.find('.ui-tabs-link').on('click', function (e) {
+      $(document).on('click', '.ui-tabs-link', function (e) {
         e.preventDefault();
+        var target = $(this).attr('href');
         transition($(this).attr('href'), $(this));
         if (history.pushState) {
           history.pushState(null, null, $(this).attr('href'));
         }
       });
     });
-  };
-
-  return {
-    init: showActiveTab
-  };
+  }
 })();
