@@ -4,6 +4,7 @@ var apiDocs = (function () {
   var init = function (endpointsData) { 
     populateTemplate(endpointsData);
     populateTypesTemplate();
+    linkResponseToTypes();
   };
 
   var populateTemplate = function (endpointsData) {
@@ -87,6 +88,16 @@ var apiDocs = (function () {
       error: function (jqXHR, textStatus, errorThrown) {
         console.error(errorThrown);
       }
+    });
+  };
+
+  var linkResponseToTypes = function () {
+    $(document).on('click', '.api-docs-types-link', function (e) {
+      e.preventDefault();
+      var target = $(this).attr('href');
+      var headerHeight = 64;
+      $(window).scrollTop($('#api-docs-types-container').offset().top - headerHeight);   
+      $('.api-docs-types-container').find('a[href=' + target + ']').trigger('click');
     });
   };
 

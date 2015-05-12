@@ -16,10 +16,10 @@
   <tbody>
     <% for (var i = 0, ii = this.fields.length; i < ii; i++) { %>
       <tr>
-        <td><a href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].name %></a></td>
-        <td><a href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].type %></a></td>
-        <td><a href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].json_type %></a></td>
-        <td><a href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].is_multiple %></a></td>
+        <td><a class="api-docs-types-link" href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].name %></a></td>
+        <td><a class="api-docs-types-link" href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].type %></a></td>
+        <td><a class="api-docs-types-link" href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].json_type %></a></td>
+        <td><a class="api-docs-types-link" href="#api-docs-types-<%= this.fields[i].type.toLowerCase() %>"><%= this.fields[i].is_multiple %></a></td>
       </tr>
     <% } %>
   </tbody>
