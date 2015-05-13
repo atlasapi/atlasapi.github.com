@@ -7,6 +7,10 @@ var apiDocs = (function () {
     linkResponseToTypes();
   };
 
+  var loadEndpointsData = function () {
+    return endpointsData;
+  };
+
   var populateTemplate = function (endpointsData) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-docs.ejs'
@@ -18,23 +22,25 @@ var apiDocs = (function () {
   };
 
   var populateExampleResponse = function (endpointsData) {
-    _.forEach(endpointsData, function (endpoint) {
-      var compiledTemplate = new EJS({
-        url: 'assets/templates/api-docs-example-response.ejs'
-      }).render(endpoint);
-      var $endpointContainer = $('#api-docs-' + endpoint.name);
-      $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
-      $.ajax({
-        url: $('#api-' + endpoint.name).find('.queryUrl').val(),
-        success: function (data) {
-          $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
-          $endpointContainer.find('.code-example').each(function(i, block) {
-            hljs.highlightBlock(block);
-          });
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          console.error(errorThrown);
-        }
+    $('#apiKey').on('change', function () {
+      _.forEach(endpointsData, function (endpoint) {
+        var compiledTemplate = new EJS({
+          url: 'assets/templates/api-docs-example-response.ejs'
+        }).render(endpoint);
+        var $endpointContainer = $('#api-docs-' + endpoint.name);
+        $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
+        $.ajax({
+          url: $('#api-' + endpoint.name).find('.queryUrl').val(),
+          success: function (data) {
+            $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
+            $endpointContainer.find('.code-example').each(function(i, block) {
+              hljs.highlightBlock(block);
+            });
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.error(errorThrown);
+          }
+        });
       });
     });
   };
@@ -101,7 +107,13 @@ var apiDocs = (function () {
     });
   };
 
+  var loadExamples = function () {
+    console.log('loadExamples');
+    populateExampleResponse();
+  };
+
   return {
-    init: init
+    init: init,
+    loadExamples: loadExamples
   };
 })();

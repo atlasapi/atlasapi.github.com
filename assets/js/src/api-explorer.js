@@ -294,6 +294,7 @@ var apiExplorer = (function () {
     }).render(data.applications);
     $('#getApiKeyBtnHolder').html(compiledTemplate);
     $('#user-api-keys').trigger('change');
+    apiDocs.loadExamples();
   };
 
   var loadApiKeyButton = function () {
