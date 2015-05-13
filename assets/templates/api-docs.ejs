@@ -61,9 +61,8 @@
               <tr>
                 <td><%= this[i].annotations[l].name %></td>
                 <td>
-                  <%= this[i].annotations[l].type %>
                   <% if (this[i].annotations[l].type !== '') { %>
-                    <a class="api-docs-types-link" href="#api-docs-types-<%= this[i].annotations[l].type.toLowerCase() %>"><i class="fa fa-info-circle"></i></a>
+                    <a class="api-docs-types-link" href="#api-docs-types-<%= this[i].annotations[l].type.toLowerCase() %>"><%= this[i].annotations[l].type %></a>
                   <% } %>
                 </td>
               </tr>
