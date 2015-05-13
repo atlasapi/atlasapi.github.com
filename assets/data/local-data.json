@@ -276,7 +276,7 @@
         },
         {
           "name": "source",
-          "default_value": "bbc.co.uk",
+          "default_value": "pressassociation.com",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher of the schedule."

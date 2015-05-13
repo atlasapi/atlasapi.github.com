@@ -108,7 +108,6 @@ var apiDocs = (function () {
   };
 
   var loadExamples = function () {
-    console.log('loadExamples');
     populateExampleResponse();
   };
 
