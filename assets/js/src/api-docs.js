@@ -1,38 +1,63 @@
 var apiDocs = (function () {
   'use strict';
 
-  var init = function (endpointsData) { 
-    populateTemplate(endpointsData);
-    populateTypesTemplate();
+  var init = function (resourcesData) { 
+    getTypesData(resourcesData);
+  };
+
+  var getTypesData = function (resourcesData) {
+    $.ajax({
+      url: 'https://atlas.metabroadcast.com/4/meta/types.json',
+      success: function (data) {
+        // Sort types by name alphabetically
+        data.types.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+        combineTypesAndResources(data.types, resourcesData);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        log.error(errorThrown);
+      }
+    })
+  };
+
+  var combineTypesAndResources = function (typesData, resourcesData) {
+    var apiData = {
+      types: typesData,
+      resources: resourcesData
+    };
+    populateTemplate(apiData);
+  };
+
+  var populateTemplate = function (apiData) {
+    var compiledTemplate = new EJS({
+      url: 'assets/templates/api-docs.ejs'
+    }).render(apiData);
+    $('#api-docs').html(compiledTemplate);
+    populateExampleResponse(apiData);
+    getResponseData(apiData);
+    linkToApiExplorer();
     linkResponseToTypes();
     $('#apiKey').on('change', function () {
-      populateExampleResponse(endpointsData);
+      populateExampleResponse(apiData);
     });
   };
 
-  var loadEndpointsData = function () {
-    return endpointsData;
-  };
-
-  var populateTemplate = function (endpointsData) {
-    var compiledTemplate = new EJS({
-      url: 'assets/templates/api-docs.ejs'
-    }).render(endpointsData);
-    $('#api-docs').html(compiledTemplate);
-    populateExampleResponse(endpointsData);
-    getResponseData(endpointsData);
-    linkToApiExplorer();
-  };
-
-  var populateExampleResponse = function (endpointsData) {
-    _.forEach(endpointsData, function (endpoint) {
+  var populateExampleResponse = function (apiData) {
+    _.forEach(apiData.resources, function (resource) {
       var compiledTemplate = new EJS({
         url: 'assets/templates/api-docs-example-response.ejs'
-      }).render(endpoint);
-      var $endpointContainer = $('#api-docs-' + endpoint.name);
+      }).render(resource);
+      var $endpointContainer = $('#api-docs-' + resource.name);
       $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
       $.ajax({
-        url: $('#api-' + endpoint.name).find('.queryUrl').val(),
+        url: $('#api-' + resource.name).find('.queryUrl').val(),
         success: function (data) {
           $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
           $endpointContainer.find('.code-example').each(function(i, block) {
@@ -56,67 +81,21 @@ var apiDocs = (function () {
     });
   };
 
-  var getResponseData = function (endpointsData) {
-    _.forEach(endpointsData, function (endpoint) {
+  var getResponseData = function (apiData) {
+    _.forEach(apiData.resources, function (resource) {
       $.ajax({
-        url: endpoint.model_class_link,
+        url: resource.model_class_link,
         success: function (data) {
           var compiledTemplate = new EJS({
             url: 'assets/templates/api-docs-response.ejs'
           }).render(data.type);
-          $('#api-docs-' + endpoint.name).find('.api-docs-response').html(compiledTemplate);
+          $('#api-docs-' + resource.name).find('.api-docs-response').html(compiledTemplate);
         },
         error: function (jqXHR, textStatus, errorThrown) {
           log.error(errorThrown);
         }
       });
     });
-  };
-
-  var populateTypesTemplate = function () {
-    $.ajax({
-      url: 'https://atlas.metabroadcast.com/4/meta/types.json',
-      success: function (data) {
-        // Sort types by name alphabetically
-        data.types.sort(function (a, b) {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        });
-        var compiledTemplate = new EJS({
-          url: 'assets/templates/api-docs-types.ejs'
-        }).render(data.types);
-        $('#api-docs-types-container').html(compiledTemplate);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        log.error(errorThrown);
-      }
-    });
-  };
-
-  var getTypesData = function () {
-    $.ajax({
-      url: 'https://atlas.metabroadcast.com/4/meta/types.json',
-      success: function (data) {
-        // Sort types by name alphabetically
-        data.types.sort(function (a, b) {
-          if (a.name < b.name) {
-            return -1;
-          }
-          if (a.name > b.name) {
-            return 1;
-          }
-          return 0;
-        });
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        log.error(errorThrown);
-      }
-    })
   };
 
   var linkResponseToTypes = function () {
