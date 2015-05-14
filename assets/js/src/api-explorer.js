@@ -12,7 +12,7 @@ var apiExplorer = (function () {
   };
 
   var sendQuery = function ($queryForm) {
-    var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
+    var $loadingDiv = $('<div class="ajaxLoading"></div>');
     var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
     $jsonOutput.html($loadingDiv);
     $.ajax({

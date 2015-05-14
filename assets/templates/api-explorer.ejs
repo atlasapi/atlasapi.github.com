@@ -32,7 +32,7 @@
             </thead>
             <tbody>
               <% for (var j = 0, jj = this[i].parameters.length; j < jj; j++) { %>
-                <tr id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
+                <tr class="api-explorer-param-<%= this[i].parameters[j].name %>" id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
                   <td class="first"><%= this[i].parameters[j].name %></td>
                   <td class="second">
                     <% if (Array.isArray(this[i].parameters[j].default_value)) { %>
@@ -46,6 +46,9 @@
                       <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
                     <% } %>
                     <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
+                      <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channel</a>
+                    <% } %>
+                    <% if (this[i].name === 'channels' && this[i].parameters[j].name === 'id') { %>
                       <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
                     <% } %>
                     <% if (this[i].name === 'channel_groups' && this[i].parameters[j].name === 'id') { %>

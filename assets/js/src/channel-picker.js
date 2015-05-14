@@ -6,22 +6,25 @@ var channelPicker = (function () {
   var channelPickerClick = function () {
     $('.channel-picker-toggle').on('click', function (e) {
       e.preventDefault();
-      toggleChannelPicker();
+      var tabPanel = $(this).closest('.ui-tabs-panel').attr('id');
+      toggleChannelPicker(false, {
+        tabPanel: tabPanel
+      });
     });
   };
 
   var toggleChannelPicker = function (checkSelectedChannels, options) {
+    var $tabPanel = $('#' + options.tabPanel);
     $.ajax({
       url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
         var compiledTemplate = new EJS({
           url: 'assets/templates/channelPicker.ejs'
         }).render();
-        if ($('.channel-picker-row').length && !checkSelectedChannels) {
-          $('.channel-picker-row').remove();
+        if ($tabPanel.find('.channel-picker-row').length && !checkSelectedChannels) {
+          $tabPanel.find('.channel-picker-row').remove();
         } else {
-          $('#schedules-id-row').after(compiledTemplate);
-          $('.channel-picker-row').trigger('channelpicker:load');
+          $tabPanel.find('.api-explorer-param-id').after(compiledTemplate);
         }
         buildPlatformTemplate(data.channel_groups);
       },
