@@ -19,9 +19,12 @@ input.queryUrl {
 }
 
 .annotations-row label {
-  width: 25%;
   font-size: 14px;
   line-height: 1;
+}
+
+input.annotation-checkbox {
+  margin: 5px 0;
 }
 
 .channel-picker-row label {

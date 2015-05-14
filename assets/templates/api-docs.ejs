@@ -65,6 +65,7 @@
             <tr>
               <th>Name</th>
               <th>Type added to the response</th>
+              <th>Description</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +77,7 @@
                     <a class="api-docs-types-link" href="#api-docs-types-<%= resources[i].annotations[l].type.toLowerCase() %>"><%= resources[i].annotations[l].type %></a>
                   <% } %>
                 </td>
+                <td><%= resources[i].annotations[l].description %></td>
               </tr>
             <% } %>
           </tbody>

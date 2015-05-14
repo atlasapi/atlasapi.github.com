@@ -234,6 +234,10 @@ var apiExplorer = (function () {
       e.preventDefault();
       handleUserQueryUrl($(this));
     });
+
+    $(document).on('click', '.annotations-picker-table tr', function () {
+      $(this).find('.annotation-checkbox').trigger('click');
+    });
   };
 
   var selectAnnotations = function (tabPanel, queryParameters) {
