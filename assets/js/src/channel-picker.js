@@ -27,6 +27,7 @@ var channelPicker = (function () {
           $tabPanel.find('.api-explorer-param-id').after(compiledTemplate);
         }
         buildPlatformTemplate(data.channel_groups, $tabPanel);
+        channelPickerChange($tabPanel);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         log.error(errorThrown);
@@ -244,22 +245,27 @@ var channelPicker = (function () {
     });  
   };
   
-  var channelPickerChange = function () {
+  var channelPickerChange = function ($tabPanel) {
     $(document).on('change', '.channel-picker-checkbox', function () {
       var channelIds = [];
-      $('.channel-picker-checkbox').each(function () {
+      var $this = $(this);
+      $tabPanel.find('.channel-picker-checkbox').each(function () {
         if ($(this).is(':checked')) {
-          channelIds.push($(this).val());
+          if ($tabPanel.find('.api-explorer-param-id').attr('id') === 'channels-id-row') {
+            $tabPanel.find('.channel-picker-checkbox').not($this).prop('checked', false);
+            $tabPanel.find('input[name="id"]').val($(this).val()).trigger('change');
+          } else {
+            channelIds.push($(this).val());
+            $tabPanel.find('input[name="id"]').val(channelIds.join(',')).trigger('change');
+          }
         }
       });
-      $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
     });
   };
 
   var init = function () {
     channelPickerClick();
     closeChannelPicker();
-    channelPickerChange();
   };
 
   return {

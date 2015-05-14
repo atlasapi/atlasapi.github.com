@@ -46,10 +46,10 @@
                       <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
                     <% } %>
                     <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
-                      <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channel</a>
+                      <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
                     <% } %>
                     <% if (this[i].name === 'channels' && this[i].parameters[j].name === 'id') { %>
-                      <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channels</a>
+                      <a class="channel-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channel</a>
                     <% } %>
                     <% if (this[i].name === 'channel_groups' && this[i].parameters[j].name === 'id') { %>
                       <a class="channel-group-picker-toggle toggle-link" href="#<%= this[i].name %>-channel-picker">choose channel group</a>
