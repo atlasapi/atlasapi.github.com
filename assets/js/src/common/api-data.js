@@ -8,7 +8,7 @@ var apiData = (function () {
         getLocalData(data.resources, callback);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };
@@ -20,7 +20,7 @@ var apiData = (function () {
         mergeData(endpointsData, data.resources, callback);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };

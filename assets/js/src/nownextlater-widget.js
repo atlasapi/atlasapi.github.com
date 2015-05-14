@@ -81,7 +81,7 @@ NowNextLater.prototype.getData = function (url) {
       dataResponse = data;
     },
     error: function (jqXHR, textStatus, errorThrown) {
-      console.error(errorThrown);
+      log.error(errorThrown);
     }
   });
 

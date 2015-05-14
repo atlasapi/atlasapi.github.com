@@ -25,7 +25,7 @@ var channelGroupPicker = (function () {
         }
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };

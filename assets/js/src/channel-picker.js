@@ -26,7 +26,7 @@ var channelPicker = (function () {
         buildPlatformTemplate(data.channel_groups);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     }).then(function () {
       if (checkSelectedChannels) {
@@ -121,7 +121,7 @@ var channelPicker = (function () {
         buildChannelSearchTemplate(searchResults);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };

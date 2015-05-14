@@ -19,7 +19,7 @@ var atlasUser = (function () {
         callback(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };

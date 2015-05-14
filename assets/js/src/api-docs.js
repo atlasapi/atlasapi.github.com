@@ -40,7 +40,7 @@ var apiDocs = (function () {
           });
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.error(errorThrown);
+          log.error(errorThrown);
         }
       });
     });
@@ -67,7 +67,7 @@ var apiDocs = (function () {
           $('#api-docs-' + endpoint.name).find('.api-docs-response').html(compiledTemplate);
         },
         error: function (jqXHR, textStatus, errorThrown) {
-          console.error(errorThrown);
+          log.error(errorThrown);
         }
       });
     });
@@ -93,9 +93,30 @@ var apiDocs = (function () {
         $('#api-docs-types-container').html(compiledTemplate);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
+  };
+
+  var getTypesData = function () {
+    $.ajax({
+      url: 'https://atlas.metabroadcast.com/4/meta/types.json',
+      success: function (data) {
+        // Sort types by name alphabetically
+        data.types.sort(function (a, b) {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        log.error(errorThrown);
+      }
+    })
   };
 
   var linkResponseToTypes = function () {
