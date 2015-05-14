@@ -103,8 +103,8 @@ var apiDocs = (function () {
       e.preventDefault();
       var target = $(this).attr('href');
       var headerHeight = 64;
-      $(window).scrollTop($('#api-docs-types-container').offset().top - headerHeight);   
-      $('.api-docs-types-container').find('a[href=' + target + ']').trigger('click');
+      $(window).scrollTop($('#api-docs').offset().top - headerHeight);   
+      $('#api-docs .menu').find('a[href=' + target + ']').trigger('click');
     });
   };
 

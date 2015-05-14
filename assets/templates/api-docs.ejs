@@ -23,6 +23,8 @@
 
   <!-- Start panels -->
   <div class="size3of4 unit">
+
+    <!-- Start resources panels -->
     <% for (var i = 0, ii = resources.length; i < ii; i++) { %>
       <div class="ui-tabs-panel pll" id="api-docs-<%= resources[i].name %>">
         <h3><%= resources[i].name %></h3>
@@ -90,14 +92,17 @@
           <tbody>
             <% for (var l = 0, ll = resources[i].error_messages.length; l < ll; l++) { %>
               <tr>
-                  <td><%= resources[i].error_messages[l].status_code %></td>
-                  <td><%= resources[i].error_messages[l].error_code %></td>
+                <td><%= resources[i].error_messages[l].status_code %></td>
+                <td><%= resources[i].error_messages[l].error_code %></td>
               </tr>
             <% } %>
           </tbody>
         </table>
       </div>
     <% } %>
+    <!-- End resources panels -->
+    
+    <!-- Start types panels -->
     <% for (var i = 0, ii = types.length; i < ii; i++) { %>
       <div class="ui-tabs-panel pll" id="api-docs-types-<%= types[i].name %>">
         <h3><%= types[i].name %></h3>
@@ -120,7 +125,7 @@
             <% for (var j = 0, jj = types[i].fields.length; j < jj; j++) { %>
               <tr>
                 <td><%= types[i].fields[j].name %></td>
-                <td><%= types[i].fields[j].type %></td>
+                <td><a class="api-docs-types-link" href="#api-docs-types-<%= types[i].fields[j].type.toLowerCase() %>"><%= types[i].fields[j].type %></a></td>
                 <td><%= types[i].fields[j].json_type %></td>
                 <td><%= types[i].fields[j].is_multiple %></td>
                 <td><%= types[i].fields[j].description %></td>
@@ -130,6 +135,7 @@
         </table>
       </div>
     <% } %>
+    <!-- End types panels -->
 
   </div>
   <!-- End panels -->
