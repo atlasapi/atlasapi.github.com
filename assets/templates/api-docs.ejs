@@ -36,7 +36,7 @@
         <% for (var j = 0, jj = resources[i].operations.length; j < jj; j++) { %>
           <pre><code><%= resources[i].operations[j].method %> <%= resources[i].root_path %><%= resources[i].operations[j].path %></code></pre>
         <% } %>
-        <h4>SLA</h4>
+        <h4>Status</h4>
         <p>Current service level: <%= resources[i].service_level %></p>
         <h4>Example response</h4>
         <div class="api-docs-example-response clearfix"></div>
@@ -135,6 +135,28 @@
             <% } %>
           </tbody>
         </table>
+        <h4>Annotation types per resource</h4>
+        <% for (var k = 0, kk = resources.length; k < kk; k++) { %>
+          <div class="clearfix">
+            <h5><%= resources[k].name %></h5>
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Annotation</th>
+                  <th>Type added to the response</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (var l = 0, ll = resources[k].annotations.length; l < ll; l++) { %>
+                  <tr>
+                    <td><%= resources[k].annotations[l].name %></td>
+                    <td><a class="api-docs-types-link" href="#api-docs-types-<%= resources[k].annotations[l].type %>"><%= resources[k].annotations[l].type %></a></td>
+                  </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        <% } %>
       </div>
     <% } %>
     <!-- End types panels -->
