@@ -5,6 +5,9 @@ var apiDocs = (function () {
     populateTemplate(endpointsData);
     populateTypesTemplate();
     linkResponseToTypes();
+    $('#apiKey').on('change', function () {
+      populateExampleResponse(endpointsData);
+    });
   };
 
   var loadEndpointsData = function () {
@@ -22,25 +25,23 @@ var apiDocs = (function () {
   };
 
   var populateExampleResponse = function (endpointsData) {
-    $('#apiKey').on('change', function () {
-      _.forEach(endpointsData, function (endpoint) {
-        var compiledTemplate = new EJS({
-          url: 'assets/templates/api-docs-example-response.ejs'
-        }).render(endpoint);
-        var $endpointContainer = $('#api-docs-' + endpoint.name);
-        $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
-        $.ajax({
-          url: $('#api-' + endpoint.name).find('.queryUrl').val(),
-          success: function (data) {
-            $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
-            $endpointContainer.find('.code-example').each(function(i, block) {
-              hljs.highlightBlock(block);
-            });
-          },
-          error: function (jqXHR, textStatus, errorThrown) {
-            console.error(errorThrown);
-          }
-        });
+    _.forEach(endpointsData, function (endpoint) {
+      var compiledTemplate = new EJS({
+        url: 'assets/templates/api-docs-example-response.ejs'
+      }).render(endpoint);
+      var $endpointContainer = $('#api-docs-' + endpoint.name);
+      $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
+      $.ajax({
+        url: $('#api-' + endpoint.name).find('.queryUrl').val(),
+        success: function (data) {
+          $endpointContainer.find('.jsonOutput').html(JSON.stringify(data, undefined, 2));
+          $endpointContainer.find('.code-example').each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error(errorThrown);
+        }
       });
     });
   };
@@ -107,12 +108,7 @@ var apiDocs = (function () {
     });
   };
 
-  var loadExamples = function () {
-    populateExampleResponse();
-  };
-
   return {
-    init: init,
-    loadExamples: loadExamples
+    init: init
   };
 })();
