@@ -63,7 +63,7 @@
                   <td class="fourth"><%= this[i].parameters[j].description %></td>
                 </tr>
                 <% if (this[i].parameters[j].name === 'annotations') { %>
-                  <tr class="hide" id="<%= this[i].name %>-annotations-picker">
+                  <tr class="hide annotations-picker-row" id="<%= this[i].name %>-annotations-picker">
                     <td colspan="4" class="annotations-row">
                       <a class="btn toggle-picker mbm" href="#<%= this[i].name %>-annotations-picker">&times; close</a>
                       <table class="tbl annotations-picker-table">

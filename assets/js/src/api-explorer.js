@@ -234,10 +234,6 @@ var apiExplorer = (function () {
       e.preventDefault();
       handleUserQueryUrl($(this));
     });
-
-    $(document).on('click', '.annotations-picker-table tr', function () {
-      $(this).find('.annotation-checkbox').trigger('click');
-    });
   };
 
   var selectAnnotations = function (tabPanel, queryParameters) {
@@ -254,6 +250,19 @@ var apiExplorer = (function () {
         $(checkbox).prop('checked', false);
       }
       $(checkbox).trigger('change');
+    });
+  };
+
+  var selectDefaultAnnotations = function () {
+    $('.api-explorer-param-annotations').each(function (index, annotationsRow) {
+      var annotations = $(annotationsRow).find('.queryParameter').val();
+      annotations = annotations.split(',');
+      $(annotationsRow).siblings('.annotations-picker-row').find('.annotation-checkbox').each(function (index, annotationCheckbox) {
+        var annotationName = $(annotationCheckbox).attr('name');
+        if ($.inArray(annotationName, annotations) > -1) {
+          $(annotationCheckbox).prop('checked', true); 
+        }
+      });
     });
   };
 
@@ -322,6 +331,7 @@ var apiExplorer = (function () {
     }
     channelPicker.init();
     channelGroupPicker.init();
+    selectDefaultAnnotations();
     if (window.location.search) {
       prepopulateForm();
     }
