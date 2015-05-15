@@ -178,7 +178,7 @@
         },
         {
           "name": "related_links",
-          "type": "",
+          "type": "relatedlink",
           "description": ""
         },
         {
@@ -418,7 +418,7 @@
         },
         {
           "name": "related_links",
-          "type": "",
+          "type": "relatedlink",
           "description": ""
         },
         {
@@ -665,7 +665,7 @@
         },
         {
           "name": "related_links",
-          "type": "",
+          "type": "relatedlink",
           "description": ""
         },
         {
@@ -905,7 +905,7 @@
         },
         {
           "name": "related_links",
-          "type": "",
+          "type": "relatedlink",
           "description": ""
         },
         {
@@ -1159,7 +1159,7 @@
         },
         {
           "name": "related_links",
-          "type": "",
+          "type": "relatedlink",
           "description": ""
         },
         {
