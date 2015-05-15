@@ -82,13 +82,18 @@ var apiDocs = (function () {
   };
 
   var getResponseData = function (apiData) {
+    var typesToLink = [];
+    _.forEach(apiData.types, function (type) {
+      typesToLink.push(type.name);
+    });
     _.forEach(apiData.resources, function (resource) {
       $.ajax({
         url: resource.model_class_link,
         success: function (data) {
+          data.typesToLink = typesToLink;
           var compiledTemplate = new EJS({
             url: 'assets/templates/api-docs-response.ejs'
-          }).render(data.type);
+          }).render(data);
           $('#api-docs-' + resource.name).find('.api-docs-response').html(compiledTemplate);
         },
         error: function (jqXHR, textStatus, errorThrown) {
