@@ -12,7 +12,7 @@ var channelGroupPicker = (function () {
 
   var toggleChannelGroupPicker = function (options) {
     $.ajax({
-      url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
+      url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
         var compiledTemplate = new EJS({
           url: 'assets/templates/channel-group-picker.ejs'

@@ -16,7 +16,7 @@ var channelPicker = (function () {
   var toggleChannelPicker = function (checkSelectedChannels, options) {
     var $tabPanel = $('#' + options.tabPanel);
     $.ajax({
-      url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
+      url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
         var compiledTemplate = new EJS({
           url: 'assets/templates/channelPicker.ejs'
@@ -110,7 +110,7 @@ var channelPicker = (function () {
   };
 
   var getRegionChannels = function (regionId, platformTitle, $tabPanel) {
-    var channelsEndpoint = '//atlas.metabroadcast.com/4/channel_groups/';
+    var channelsEndpoint = 'https://atlas.metabroadcast.com/4/channel_groups/';
     var channelsAnnotations = '?annotations=channels';
     var searchResults = [];
     var channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations + '&type=region' + '&key=' + apiKey;
