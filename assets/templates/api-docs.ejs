@@ -127,7 +127,13 @@
             <% for (var j = 0, jj = types[i].fields.length; j < jj; j++) { %>
               <tr>
                 <td><%= types[i].fields[j].name %></td>
-                <td><a class="api-docs-types-link" href="#api-docs-types-<%= types[i].fields[j].type.toLowerCase() %>"><%= types[i].fields[j].type %></a></td>
+                <td>
+                  <% if (jQuery.inArray(types[i].fields[j].type.toLowerCase(), typesToLink) > -1) { %>
+                    <a class="api-docs-types-link" href="#api-docs-types-<%= types[i].fields[j].type.toLowerCase() %>"><%= types[i].fields[j].type %></a>
+                  <% } else { %>
+                    <%= types[i].fields[j].type %>
+                  <% } %>
+                </td>
                 <td><%= types[i].fields[j].json_type %></td>
                 <td><%= types[i].fields[j].is_multiple %></td>
                 <td><%= types[i].fields[j].description %></td>

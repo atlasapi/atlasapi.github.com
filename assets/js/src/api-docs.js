@@ -51,6 +51,11 @@ var apiDocs = (function () {
   };
 
   var populateTemplate = function (apiData) {
+    var typesToLink = [];
+    _.forEach(apiData.types, function (type) {
+      typesToLink.push(type.name);
+    });
+    apiData.typesToLink = typesToLink;
     var compiledTemplate = new EJS({
       url: 'assets/templates/api-docs.ejs'
     }).render(apiData);
