@@ -32,6 +32,21 @@ var apiDocs = (function () {
       types: typesData,
       resources: resourcesData
     };
+    addDescriptionsToAnnotations(apiData);
+  };
+
+  var addDescriptionsToAnnotations = function (apiData) {
+    _.forEach(apiData.resources, function (resource) {
+      _.forEach(resource.annotations, function (annotation) {
+        if (annotation.description === '') {
+          _.forEach(apiData.types, function (type) {
+            if (annotation.type === type.name) {
+              annotation.description = type.description;
+            }
+          });
+        }
+      });
+    });
     populateTemplate(apiData);
   };
 
