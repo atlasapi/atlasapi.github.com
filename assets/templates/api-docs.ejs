@@ -142,17 +142,19 @@
               <tr>
                 <th>Resource</th>
                 <th>Annotation</th>
-                <th>Type added to the response</th>
+                <th>Description</th>
               </tr>
             </thead>
             <tbody>
               <% for (var k = 0, kk = resources.length; k < kk; k++) { %>
                 <% for (var l = 0, ll = resources[k].annotations.length; l < ll; l++) { %>
-                  <tr>
-                    <td><%= resources[k].name %></td>
-                    <td><%= resources[k].annotations[l].name %></td>
-                    <td><a class="api-docs-types-link" href="#api-docs-types-<%= resources[k].annotations[l].type %>"><%= resources[k].annotations[l].type %></a></td>
-                  </tr>
+                  <% if (resources[k].annotations[l].type === types[i].name) { %>
+                    <tr>
+                      <td><%= resources[k].name %></td>
+                      <td><%= resources[k].annotations[l].name %></td>
+                      <td><%= resources[k].annotations[l].description %></td>
+                    </tr>
+                  <% } %>
                 <% } %>
               <% } %>
             </tbody>
