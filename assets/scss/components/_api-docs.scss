@@ -1,15 +1,15 @@
-.api-docs-annotations {
-  overflow: hidden;
-  list-style: none;
-  margin-bottom: 20px;
-}
-
-.api-docs-annotations li {
-  float: left;
-  width: 25%;
-}
-
 .open-api-docs-tab {
   color: #ef308f;
   box-shadow: none;
+}
+
+.api-docs-types-link {
+  color: #ef308f;
+  text-decoration: underline !important; // This is dirty as hell, but necessary to override a third-party stylesheet
+}
+
+.api-docs-types-link:hover,
+.api-docs-types-link:active,
+.api-docs-types-link:focus {
+  text-decoration: none !important; // This is dirty as hell, but necessary to override a third-party stylesheet
 }

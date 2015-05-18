@@ -3,12 +3,12 @@ var apiData = (function () {
 
   var getEndpointsData = function (callback) {
     $.ajax({
-      url: '//atlas.metabroadcast.com/4/meta/resources.json',
+      url: 'https://atlas.metabroadcast.com/4/meta/resources.json',
       success: function (data) {
         getLocalData(data.resources, callback);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };
@@ -17,10 +17,10 @@ var apiData = (function () {
     $.ajax({
       url: 'assets/data/local-data.json',
       success: function (data) {
-        mergeData(endpointsData, data.endpoints, callback);
+        mergeData(endpointsData, data.resources, callback);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };

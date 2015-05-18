@@ -1,7 +1,7 @@
 <h4>Response reference</h4>
 
-<% if (this.description) { %>
-  <p><%= this.description %></p>
+<% if (type.description) { %>
+  <p><%= type.description %></p>
 <% } %>
 
 <table class="tbl">
@@ -14,12 +14,20 @@
     </tr>
   </thead>
   <tbody>
-    <% for (var i = 0, ii = this.fields.length; i < ii; i++) { %>
+    <% for (var i = 0, ii = type.fields.length; i < ii; i++) { %>
       <tr>
-        <td><%= this.fields[i].name %></td>
-        <td><%= this.fields[i].type %></td>
-        <td><%= this.fields[i].json_type %></td>
-        <td><%= this.fields[i].is_multiple %></td>
+        <td><%= type.fields[i].name %></td>
+        <td>
+          <% if (jQuery.inArray(type.fields[i].type.toLowerCase(), typesToLink) > -1) { %>
+            <a class="api-docs-types-link" href="#api-docs-types-<%= type.fields[i].type.toLowerCase() %>">
+              <%= type.fields[i].type %>
+            </a>
+          <% } else { %>
+            <%= type.fields[i].type %>
+          <% } %>
+        </td>
+        <td><%= type.fields[i].json_type %></td>
+        <td><%= type.fields[i].is_multiple %></td>
       </tr>
     <% } %>
   </tbody>

@@ -12,7 +12,7 @@ var apiExplorer = (function () {
   };
 
   var sendQuery = function ($queryForm) {
-    var $loadingDiv = $('<div class="ajaxLoading" style="width: 50px; height: 50px;"></div>');
+    var $loadingDiv = $('<div class="ajaxLoading"></div>');
     var $jsonOutput = $queryForm.siblings('.queryResponse').find('.jsonOutput');
     $jsonOutput.html($loadingDiv);
     $.ajax({
@@ -253,6 +253,19 @@ var apiExplorer = (function () {
     });
   };
 
+  var selectDefaultAnnotations = function () {
+    $('.api-explorer-param-annotations').each(function (index, annotationsRow) {
+      var annotations = $(annotationsRow).find('.queryParameter').val();
+      annotations = annotations.split(',');
+      $(annotationsRow).siblings('.annotations-picker-row').find('.annotation-checkbox').each(function (index, annotationCheckbox) {
+        var annotationName = $(annotationCheckbox).attr('name');
+        if ($.inArray(annotationName, annotations) > -1) {
+          $(annotationCheckbox).prop('checked', true); 
+        }
+      });
+    });
+  };
+
   var handleUserQueryUrl = function (queryForm) {
     var queryUrl = $(queryForm).find('.user-query-url').val();
     var endpointName = queryUrl.split('4');
@@ -317,6 +330,8 @@ var apiExplorer = (function () {
       loadApiKeyButton();
     }
     channelPicker.init();
+    channelGroupPicker.init();
+    selectDefaultAnnotations();
     if (window.location.search) {
       prepopulateForm();
     }

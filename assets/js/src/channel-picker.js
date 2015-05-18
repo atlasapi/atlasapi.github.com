@@ -6,27 +6,31 @@ var channelPicker = (function () {
   var channelPickerClick = function () {
     $('.channel-picker-toggle').on('click', function (e) {
       e.preventDefault();
-      toggleChannelPicker();
+      var tabPanel = $(this).closest('.ui-tabs-panel').attr('id');
+      toggleChannelPicker(false, {
+        tabPanel: tabPanel
+      });
     });
   };
 
   var toggleChannelPicker = function (checkSelectedChannels, options) {
+    var $tabPanel = $('#' + options.tabPanel);
     $.ajax({
-      url: '//atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
+      url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
         var compiledTemplate = new EJS({
           url: 'assets/templates/channelPicker.ejs'
         }).render();
-        if ($('.channel-picker-row').length && !checkSelectedChannels) {
-          $('.channel-picker-row').remove();
+        if ($tabPanel.find('.channel-picker-row').length && !checkSelectedChannels) {
+          $tabPanel.find('.channel-picker-row').remove();
         } else {
-          $('#schedules-id-row').after(compiledTemplate);
-          $('.channel-picker-row').trigger('channelpicker:load');
+          $tabPanel.find('.api-explorer-param-id').after(compiledTemplate);
         }
-        buildPlatformTemplate(data.channel_groups);
+        buildPlatformTemplate(data.channel_groups, $tabPanel);
+        channelPickerChange($tabPanel);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     }).then(function () {
       if (checkSelectedChannels) {
@@ -49,14 +53,14 @@ var channelPicker = (function () {
     });
   };
 
-  var buildPlatformTemplate = function (platforms) {
+  var buildPlatformTemplate = function (platforms, $tabPanel) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/platformPicker.ejs'
     }).render(platforms);
-    $('.platform-picker').html(compiledTemplate);
-    buildDummyRegionsTemplate();
-    buildDummySearchTemplate();
-    $('.channel-picker-platforms').on('change', function () {
+    $tabPanel.find('.platform-picker').html(compiledTemplate);
+    buildDummyRegionsTemplate($tabPanel);
+    buildDummySearchTemplate($tabPanel);
+    $tabPanel.find('.channel-picker-platforms').on('change', function () {
       var platformId = $(this).val();
       var platformTitle;
       var regions;
@@ -67,46 +71,46 @@ var channelPicker = (function () {
         }
       });
       if ($(this).val() !== '') {
-        buildRegionsTemplate(regions, platformTitle);
+        buildRegionsTemplate(regions, platformTitle, $tabPanel);
       } else {
-        buildDummyRegionsTemplate();
-        buildDummySearchTemplate();
+        buildDummyRegionsTemplate($tabPanel);
+        buildDummySearchTemplate($tabPanel);
       }
     });
   };
 
-  var buildDummyRegionsTemplate = function () {
+  var buildDummyRegionsTemplate = function ($tabPanel) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/dummyRegionsTemplate.ejs'
     }).render();
-    $('.region-picker').html(compiledTemplate);
+    $tabPanel.find('.region-picker').html(compiledTemplate);
   };
 
-  var buildRegionsTemplate = function (regions, platformTitle) {
+  var buildRegionsTemplate = function (regions, platformTitle, $tabPanel) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/regionsPicker.ejs'
     }).render(regions);
-    $('.region-picker').html(compiledTemplate);
-    buildDummySearchTemplate();
-    $('.channel-picker-regions').on('change', function () {
+    $tabPanel.find('.region-picker').html(compiledTemplate);
+    buildDummySearchTemplate($tabPanel);
+    $tabPanel.find('.channel-picker-regions').on('change', function () {
       var regionId = $(this).val();
       if (regionId !== '') {
-        getRegionChannels(regionId, platformTitle);
+        getRegionChannels(regionId, platformTitle, $tabPanel);
       } else {
-        buildDummySearchTemplate();
+        buildDummySearchTemplate($tabPanel);
       }
     });
   };
 
-  var buildDummySearchTemplate = function () {
+  var buildDummySearchTemplate = function ($tabPanel) {
     var compiledTemplate = new EJS({
       url: 'assets/templates/dummySearchTemplate.ejs'
     }).render();
-    $('#channel-search').html(compiledTemplate);
+    $tabPanel.find('.channel-search').html(compiledTemplate);
   };
 
-  var getRegionChannels = function (regionId, platformTitle) {
-    var channelsEndpoint = '//atlas.metabroadcast.com/4/channel_groups/';
+  var getRegionChannels = function (regionId, platformTitle, $tabPanel) {
+    var channelsEndpoint = 'https://atlas.metabroadcast.com/4/channel_groups/';
     var channelsAnnotations = '?annotations=channels';
     var searchResults = [];
     var channelsUrl = channelsEndpoint + regionId + '.json' + channelsAnnotations + '&type=region' + '&key=' + apiKey;
@@ -117,16 +121,16 @@ var channelPicker = (function () {
         _.forEach(data.channel_group.channels, function (channel) {
           searchResults.push(channel);
         });
-        buildChannelsTemplate(data.channel_group.channels, platformTitle, regionTitle);
-        buildChannelSearchTemplate(searchResults);
+        buildChannelsTemplate(data.channel_group.channels, platformTitle, regionTitle, $tabPanel);
+        buildChannelSearchTemplate(searchResults, $tabPanel);
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        console.error(errorThrown);
+        log.error(errorThrown);
       }
     });
   };
 
-  var buildChannelsTemplate = function (channels, platformTitle, regionTitle) {
+  var buildChannelsTemplate = function (channels, platformTitle, regionTitle, $tabPanel) {
     _.forEach(channels, function (channel) {
       channel.platform_title = platformTitle;
       channel.region_title = regionTitle;
@@ -134,7 +138,7 @@ var channelPicker = (function () {
     var compiledTemplate = new EJS({
       url: 'assets/templates/channels.ejs'
     }).render(channels);
-    $('.channels-container').html(compiledTemplate);
+    $tabPanel.find('.channels-container').html(compiledTemplate);
   };
 
   var substringMatcher = function (strs) {
@@ -153,7 +157,7 @@ var channelPicker = (function () {
     };
   };
 
-  var buildChannelSearchTemplate = function (data) {
+  var buildChannelSearchTemplate = function (data, $tabPanel) {
     var now = new Date().toISOString();
     var monthMap = {
       1: 'January',
@@ -172,7 +176,7 @@ var channelPicker = (function () {
     var compiledTemplate = new EJS({
       url: 'assets/templates/channelSearch.ejs'
     }).render(data);
-    $('.channel-search').html(compiledTemplate);
+    $tabPanel.find('.channel-search').html(compiledTemplate);
     for (var i = 0, ii = data.length; i < ii; i++) {
       var startDate = new Date(data[i].start_date);
       var formattedDate = {};
@@ -206,7 +210,7 @@ var channelPicker = (function () {
       ];
       data[i].query = query.join();
     }
-    $('#channel-search-box').typeahead({
+    $('.channel-search-box').typeahead({
       hint: true,
       highlight: true,
       minLength: 1
@@ -215,12 +219,12 @@ var channelPicker = (function () {
       displayKey: 'value',
       source: substringMatcher(data)
     });
-    $(document).on('typeahead:autocompleted typeahead:selected', '#channel-search-box', function (event, datum) {
-      $('.channel-picker-checkbox').each(function () {
+    $(document).on('typeahead:autocompleted typeahead:selected', '.channel-search-box', function (event, datum) {
+      $tabPanel.find('.channel-picker-checkbox').each(function () {
         if (datum.id === $(this).val()) {
           $(this).prop('checked', true).trigger('change');
           if (!$('.id-added').length) {
-            $('#channel-search-box').after('<div class="id-added">&#10003;</div>');
+            $tabPanel.find('.channel-search-box').after('<div class="id-added">&#10003;</div>');
             setTimeout(function () {
               $('.id-added').fadeOut('slow', function () {
                 $(this).remove();
@@ -235,28 +239,33 @@ var channelPicker = (function () {
   var closeChannelPicker = function () {
     $(document).on('click', '.close-channel-picker', function (e) {
       e.preventDefault();
-      if ($('.channel-picker-row').length) {
-        $('.channel-picker-row').remove();
+      if ($(this).closest('.ui-tabs-panel').find('.channel-picker-row').length) {
+        $(this).closest('.ui-tabs-panel').find('.channel-picker-row').remove();
       }
     });  
   };
   
-  var channelPickerChange = function () {
+  var channelPickerChange = function ($tabPanel) {
     $(document).on('change', '.channel-picker-checkbox', function () {
       var channelIds = [];
-      $('.channel-picker-checkbox').each(function () {
+      var $this = $(this);
+      $tabPanel.find('.channel-picker-checkbox').each(function () {
         if ($(this).is(':checked')) {
-          channelIds.push($(this).val());
+          if ($tabPanel.find('.api-explorer-param-id').attr('id') === 'channels-id-row') {
+            $tabPanel.find('.channel-picker-checkbox').not($this).prop('checked', false);
+            $tabPanel.find('input[name="id"]').val($(this).val()).trigger('change');
+          } else {
+            channelIds.push($(this).val());
+            $tabPanel.find('input[name="id"]').val(channelIds.join(',')).trigger('change');
+          }
         }
       });
-      $('#schedules-id-input').val(channelIds.join(',')).trigger('change');
     });
   };
 
   var init = function () {
     channelPickerClick();
     closeChannelPicker();
-    channelPickerChange();
   };
 
   return {
