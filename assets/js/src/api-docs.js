@@ -47,6 +47,15 @@ var apiDocs = (function () {
     $('#apiKey').on('change', function () {
       populateExampleResponse(apiData);
     });
+    hideEmptyTables();
+  };
+
+  var hideEmptyTables = function () {
+    $('.api-docs-annotations-resource').each(function (index, table) {
+      if (!$(table).find('tbody').find('tr').length) {
+        $(table).hide();
+      }
+    });
   };
 
   var populateExampleResponse = function (apiData) {
