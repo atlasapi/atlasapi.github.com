@@ -3,11 +3,12 @@ var loginToAdmin = (function () {
   
   return function () {
     var url;
-    if (MBST.ENV === 'stage' || window.location.href.indexOf('stage') !== -1) {
-      url = '//stage.atlas.metabroadcast.com/4/auth/providers.json';
+    if (MBST.ENV === 'stage' || window.location.href.indexOf('stage') !== -1 || window.location.href.indexOf('dev') !== -1) {
+      url = 'http://stage.atlas.metabroadcast.com/4/auth/providers.json';
     } else {
       url = 'https://atlas.metabroadcast.com/4/auth/providers.json';
     }
+
     $.ajax({
       url: url,
       success: function (data) {
