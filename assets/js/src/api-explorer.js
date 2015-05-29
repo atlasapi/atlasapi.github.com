@@ -325,7 +325,7 @@ var apiExplorer = (function () {
     if (atlasUser.isLoggedIn()) {
       var credentials = atlasUser.getCredentials();
       var credentialsQueryString = encodeQueryData(credentials);
-      atlasUser.getUserData('http://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadUserApiKeyDropdown);
+      atlasUser.getUserData('https://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadUserApiKeyDropdown);
     } else {
       loadApiKeyButton();
     }
