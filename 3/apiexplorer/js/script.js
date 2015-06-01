@@ -1880,6 +1880,17 @@ function getCaretPosition(editableDiv) {
 
 $(document).ready(function(){
 
+    handleLoggedInStatus();
+
+    apiData.init(function (data) {
+        var compiledTemplate = new EJS({
+          url: 'assets/templates/api-docs-submenu.ejs'
+      }).render(data);
+        $('#api-docs-submenu').html(compiledTemplate);
+        apiDocs.init(data);
+        submenus();
+    });
+
     var pageInfo = new PageInfo();
     pageInfo.init();
 
@@ -1953,21 +1964,6 @@ $(document).ready(function(){
     now = Math.round(now/1000);
     var twoHours = now+14400;
 
-    var carousel = new Carousel({
-    	api: queryBeg,
-    	holder: $('#newCarousel'),
-	    requestList: [
-	        {'type': 'Schedule', 'query':'schedule.json?from=now&to=now.plus.24h&channel=bbcone&publisher=bbc.co.uk&annotations=brand_summary,description'},
-	        {'type': 'Search', 'query':'search.json?q=red&publisher=bbc.co.uk&limit=5'},
-	        {'type': 'Schedule', 'query':'schedule.json?from=now.minus.24h&to=now&channel=bbchd&publisher=bbc.co.uk&annotations=brand_summary,description'},
-	        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=bbctwo&publisher=bbc.co.uk&annotations=brand_summary,description'},
-	        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=radio1&publisher=bbc.co.uk&annotations=brand_summary,description'},
-	        {'type': 'Schedule', 'query':'schedule.json?from='+now+'&to='+twoHours+'&channel=cbbc&publisher=bbc.co.uk&annotations=brand_summary,description'},
-	        {'type': 'Search', 'query':'search.json?q=Britain&limit=5'}
-	    ],
-	    time: 10000
-    });
-
     tabs.changeTab(0);
     $('.subTab a').click(function(){
         return false;
@@ -1986,20 +1982,6 @@ $(document).ready(function(){
         }
         return false;
     });
-
-//    $('a.apiDiscover').click(function(){
-//        if(apiFuncRun == false && $(this).attr('href')!= '') {
-//            tabs.changeTab(1);
-//            apiExplorer.discoverQuery($(this).attr('href'));
-//            if($.browser.msie && $.browser.version.substr(0,1)<=7) {
-//                $('a[href="#apiExplorer"]').click();
-//            } else {
-//                window.location.hash = 'apiExplorer';
-//            }
-//            apiFuncRun = true;
-//        }
-//        return false;
-//    });
 
     $('a.apiSchedule').click(function(){
         if(apiFuncRun == false && $(this).attr('href')!= '') {

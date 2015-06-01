@@ -8,37 +8,58 @@
 	<link href="js/prettify/prettify.css" rel="stylesheet">
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<script src="../../assets/js/src/lib/lodash.min.js"></script>
+	<script src="../../assets/js/src/lib/ejs.min.js"></script>
+	<script src="../../assets/js/src/lib/jquery.selectText.js"></script>
+  <script src="../../assets/js/src/lib/loglevel.js"></script>
+  <script src="../../assets/js/src/common/api-data.js"></script>
+  <script src="../../assets/js/src/common/atlas-user.js"></script>
+  <script src="../../assets/js/src/common/encode-query-data.js"></script>
+  <script src="../../assets/js/src/common/create-query-params-object.js"></script>
+  <script src="../../assets/js/src/login-to-admin.js"></script>
+  <script src="../../assets/js/src/highlight-current-page.js"></script>
+  <script src="../../assets/js/src/handleLoggedInStatus.js"></script>
+  <script src="../../assets/js/src/api-docs.js"></script>
+  <script src="../../assets/js/src/submenus.js"></script>
 	<script>var MBST = MBST || {};</script>
 	<script src="js/min/minjquery.history.js"></script>
 	<script type="text/javascript" src="js/min/minZeroClipboard.js"></script>
 	<script src="js/prettify/prettify.js"></script>
-	<script src="js/Carousel.js"></script>
 	<script src="js/script.js"></script>
 </head>
 <body>
-	<!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0; position: absolute; top: 66px; left: 0; width:100%; z-index: 20;'> <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/images/upgrade.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." /></a></div> <![endif]-->
-	<header class="hr">
-		<div class="content clearfix">
-			<h1 class="fl mbn">
-				<a href="#home" class="logo">atlas - the global video and audio
-					index</a>
-			</h1>
-			<a href="../../#apiExplorer" class="btn btn_lrg"><span class="icn_mag"></span>API
-				Explorer &amp; free key</a>
-			<nav>
-				<ul class="mainMenu clearfix">
-					<li><a href="../../#home">Home</a></li>
-					<li><a href="../../#widgets">Widgets</a></li>
-					<li><a href="../../#examples">Examples</a></li>
-					<li><a href="../../#reference">Reference</a></li>
-					<li><a href="../../#about">About</a></li>
+	
+	<div class="site-header" id="header">
+		<div class="container">
+			<a class="site-logo" href="../../#home"><img src="../../assets/images/logo.png" alt="Atlas"></a>
+			<div class="navbar-links">
+			  <ul class="nav" id="nav-main">
+			    <li class="nav-item"><a href="../../#widgets">widgets</a></li>
+			    <li class="nav-item"><a href="../../#examples">examples</a></li>
+			    <li class="nav-item has-submenu">
+			    	<a href="../../#reference">reference</a>
+			    	<ul class="submenu">
+			    		<li><a href="../../#reference_overview">overview</a></li>
+			    		<li><a href="../../#reference_dataModel">data model</a></li>
+			    		<li><a href="../../#reference_sources">sources</a></li>
+			    		<li><a href="../../#reference_feeds">feeds</a></li>
+			    	</ul>
+			    </li>
+			    <li class="nav-item"><a href="../../#about">about</a></li>
+			    <li class="nav-item has-submenu">
+			    	<a href="../../#api-docs">docs</a>
+			    	<ul class="submenu api-docs-submenu" id="api-docs-submenu"></ul>
+			    </li>
 				</ul>
-			</nav>
-			<div id="msgs" class="info" style="display: none;">You are
-				using an old browser - for a better experience and to use some of
-				the advanced features of this website please consider upgrading.</div>
+			</div>
+			<a class="navbar-api-explorer-btn btn btn_lrg" href="../../#apiExplorer">
+  			<span class="icn_mag"></span>
+  			api explorer &amp; free key
+			</a>
+			<div class="navbar-tools" id="navbar-tools"></div>
 		</div>
-	</header>
+	</div>
+
 	<div class="loginWrapper" style="display: none;">
 		<div class="loginHolder">
 
