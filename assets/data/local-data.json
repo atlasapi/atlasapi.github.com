@@ -20,7 +20,7 @@
         },
         {
           "name": "source",
-          "default_value": "bbc.co.uk",
+          "default_value": "pressassociation.com",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher for the content."
@@ -302,7 +302,7 @@
         },
         {
           "name": "source",
-          "default_value": "bbc.co.uk",
+          "default_value": "pressassociation.com",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher of the schedule."
@@ -535,7 +535,7 @@
         },
         {
           "name": "source",
-          "default_value": "bbc.co.uk",
+          "default_value": "pressassociation.com",
           "type": "string",
           "is_multiple": false,
           "description": "The publisher for the topic."
