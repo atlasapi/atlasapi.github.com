@@ -5,7 +5,7 @@ var apiExplorer = (function () {
 
   var getApiKey = function () {
     if (atlasUser.isLoggedIn()) {
-      return $('#apiKey').val() || $('#user-api-keys').val();
+      return $('#apiKey').val() || $('#user-api-keys').val() || defaultApiKey;
     } else {
       return $('#apiKey').val() || defaultApiKey;
     }
@@ -260,7 +260,7 @@ var apiExplorer = (function () {
       $(annotationsRow).siblings('.annotations-picker-row').find('.annotation-checkbox').each(function (index, annotationCheckbox) {
         var annotationName = $(annotationCheckbox).attr('name');
         if ($.inArray(annotationName, annotations) > -1) {
-          $(annotationCheckbox).prop('checked', true); 
+          $(annotationCheckbox).prop('checked', true);
         }
       });
     });
