@@ -75,6 +75,27 @@
           "description": "Search query for the title of a piece of content."
         },
         {
+          "name": "limit",
+          "default_value": 2,
+          "type": "number",
+          "is_multiple": false,
+          "description": "Number of items to return."
+        },
+        {
+          "name": "offset",
+          "default_value": 0,
+          "type": "number",
+          "is_multiple": false,
+          "description": "Number of items to offset."
+        },
+        {
+          "name": "specialization",
+          "default_value": "",
+          "type": "string",
+          "is_multiple": true,
+          "description": "Type of content, e.g. 'film'"
+        },
+        {
           "name": "annotations",
           "default_value": "brand_summary,broadcasts,channel,channels,channel_summary,description",
           "type": "list",
