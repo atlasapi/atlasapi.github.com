@@ -68,6 +68,13 @@
           "description": "Match all content whose topics contain a topic with the given supervised boolean."
         },
         {
+          "name": "q",
+          "default_value": "",
+          "type": "search query",
+          "is_multiple": false,
+          "description": "Search query for the title of a piece of content."
+        },
+        {
           "name": "annotations",
           "default_value": "brand_summary,broadcasts,channel,channels,channel_summary,description",
           "type": "list",
