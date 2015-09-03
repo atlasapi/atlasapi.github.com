@@ -73,10 +73,6 @@ var apiDocs = (function () {
     if (window.location.hash) {
       var target = window.location.hash;
       $('a[href="' + target + '"]').trigger('click');
-      $(window).scrollTop($(target).offset().top - 100);
-      if (history.pushState) {
-        history.pushState(null, null, target);
-      }
     }
   };
 
