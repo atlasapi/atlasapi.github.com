@@ -32,9 +32,13 @@ $(function () {
     if ($('#apiExplorer').length) {
       apiExplorer.init(data);
 
-      if (window.location.hash === '#apiExplorer') {
-        $(window).scrollTop($('#apiExplorer').offset().top - 100);
-      }
+      $('.navbar-api-explorer-btn').on('click', function (e) {
+        e.preventDefault();
+        $(window).scrollTop($('#apiExplorer').offset().top - 64);
+        if (history.pushState) {
+          history.pushState(null, null, '#apiExplorer');
+        }
+      });
     }
 
     // Initiate submenu behaviour
