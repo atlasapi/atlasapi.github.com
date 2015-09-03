@@ -12,9 +12,9 @@ $(function () {
 
   handleLoggedInStatus();
 
-  // apiData.init(function (data) {
-  //   submenus();
-  // });
+  apiData.init(function (data) {
+    submenus();
+  });
 
   $(document).on('click', '.js-select-on-click', function () {
     $(this).select();

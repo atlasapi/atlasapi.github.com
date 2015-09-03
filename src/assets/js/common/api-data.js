@@ -15,7 +15,7 @@ var apiData = (function () {
 
   var getLocalData = function (endpointsData, callback) {
     $.ajax({
-      url: 'assets/data/local-data.json',
+      url: '../data/local-data.json',
       success: function (data) {
         mergeData(endpointsData, data.resources, callback);
       },
