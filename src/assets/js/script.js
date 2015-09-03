@@ -10,7 +10,7 @@ $(function () {
   //   loginToAdmin();
   // });
 
-  // handleLoggedInStatus();
+  handleLoggedInStatus();
 
   // apiData.init(function (data) {
   //   submenus();
