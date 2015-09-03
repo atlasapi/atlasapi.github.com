@@ -70,12 +70,13 @@ var apiDocs = (function () {
     hideEmptyTables();
     // Unhides api explorer to make loading appear more pleasant
     $('#apiExplorer').removeClass('hide');
-    if (window.location.hash === '#apiExplorer') {
-      $('.navbar-api-explorer-btn').trigger('click');
-    }
     if (window.location.hash) {
       var target = window.location.hash;
       $('a[href="' + target + '"]').trigger('click');
+      $(window).scrollTop($(target).offset().top - 100);
+      if (history.pushState) {
+        history.pushState(null, null, target);
+      }
     }
   };
 

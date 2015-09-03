@@ -26,6 +26,13 @@ $(function () {
     // Initiate api docs if on page
     if ($('#api-docs').length) {
       apiDocs.init(data);
+
+      $(document).on('click', '.api-docs-submenu-link a', function (e) {
+        var target = $(this).attr('href');
+        target = target.split('#');
+        target = target[1];
+        $('.ui-tabs-nav').find('a[href="#' + target + '"]').trigger('click');
+      });
     }
 
     // Initiate api explorer if on page
@@ -34,7 +41,7 @@ $(function () {
 
       $('.navbar-api-explorer-btn').on('click', function (e) {
         e.preventDefault();
-        $(window).scrollTop($('#apiExplorer').offset().top - 64);
+        $(window).scrollTop($('#apiExplorer').offset().top - 100);
         if (history.pushState) {
           history.pushState(null, null, '#apiExplorer');
         }
