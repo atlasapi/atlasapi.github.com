@@ -5,10 +5,10 @@ $(function () {
 
   popovers();
 
-  // $(document).on('click', '.getApiKeyBtn', function (e) {
-  //   e.preventDefault();
-  //   loginToAdmin();
-  // });
+  $(document).on('click', '.getApiKeyBtn', function (e) {
+    e.preventDefault();
+    loginToAdmin();
+  });
 
   handleLoggedInStatus();
 

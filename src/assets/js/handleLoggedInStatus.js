@@ -3,12 +3,12 @@ var handleLoggedInStatus = (function () {
 
   var loadUserDataTemplate = function (data) {
     loadTemplate({
-      templatePath: 'assets/templates/logged-in.ejs',
+      templatePath: '../templates/logged-in.ejs',
       templateContainer: '#navbar-tools'
     }, data);
     if (data.user.role === 'admin') {
       loadTemplate({
-        templatePath: 'assets/templates/admin-menu.ejs',
+        templatePath: '../templates/admin-menu.ejs',
         templateContainer: '#admin-menu'
       });
     }
@@ -27,15 +27,15 @@ var handleLoggedInStatus = (function () {
   var loadApplicationsTemplate = function (data) {
     data = sortApplicationsByDateDescending(data);
     loadTemplate({
-      templatePath: 'assets/templates/apps-menu.ejs',
+      templatePath: '../templates/apps-menu.ejs',
       templateContainer: '#apps-menu'
-    }, data);  
+    }, data);
   };
 
   var loadGroupsTemplate = function (data) {
     if (data.length) {
       loadTemplate({
-        templatePath: 'assets/templates/content-menu.ejs',
+        templatePath: '../templates/content-menu.ejs',
         templateContainer: '#content-menu'
       }, data);
     }
@@ -52,7 +52,7 @@ var handleLoggedInStatus = (function () {
 
   var loadNavigationTemplate = function () {
     var template = new EJS({
-      url: 'assets/templates/user-navigation.ejs'
+      url: '../templates/user-navigation.ejs'
     }).render();
     $('#nav-main').append(template);
   };
@@ -61,7 +61,7 @@ var handleLoggedInStatus = (function () {
     localStorage.removeItem('auth.provider');
     localStorage.removeItem('auth.token');
     loadTemplate({
-      templatePath: 'assets/templates/logged-out.ejs',
+      templatePath: '../templates/logged-out.ejs',
       templateContainer: '#navbar-tools'
     });
     $('.user-menu').each(function () {
@@ -110,7 +110,7 @@ var handleLoggedInStatus = (function () {
       events();
     } else {
       loadTemplate({
-        templatePath: 'assets/templates/logged-out.ejs',
+        templatePath: '../templates/logged-out.ejs',
         templateContainer: '#navbar-tools'
       });
     }
