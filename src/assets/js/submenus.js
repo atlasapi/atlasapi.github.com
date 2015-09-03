@@ -1,13 +1,13 @@
 var submenus = (function () {
   'use strict';
-  
+
   return function () {
     // Required to make submenu's dissappear on click
-    $('.has-submenu a').not('.user-menu-link').on('click', function () {
+    $('.has-submenu a').not('.user-menu-link, .api-docs-submenu-link').on('click', function () {
       $(this).siblings('.submenu').addClass('hide-menu');
     });
 
-    $('.has-submenu a').not('.user-menu-link').on('mouseover', function () {
+    $('.has-submenu a').not('.user-menu-link, .api-docs-submenu-link').on('mouseover', function () {
       $(this).siblings('.submenu').removeClass('hide-menu');
     });
 

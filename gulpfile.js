@@ -32,29 +32,15 @@ gulp.task('styles', function () {
 // Compiles necessary files for api docs
 gulp.task('apiDocs', function () {
   gulp.src([
-    './src/assets/js/lib/lodash.min.js',
-    './src/assets/js/lib/ejs.min.js',
     './src/assets/js/lib/highlight.pack.js',
     './src/assets/js/lib/typeahead.bundle.min.js',
     './src/assets/js/lib/moment.min.js',
-    './src/assets/js/lib/jquery.selectText.js',
-    './src/assets/js/lib/loglevel.js',
-    './src/assets/js/common/api-data.js',
     './src/assets/js/common/tabs.js',
-    './src/assets/js/common/popovers.js',
     './src/assets/js/common/encode-query-data.js',
     './src/assets/js/common/create-query-params-object.js',
-    './src/assets/js/common/atlas-user.js',
-    './src/assets/js/login-to-admin.js',
-    './src/assets/js/highlight-current-page.js',
-    './src/assets/js/handleLoggedInStatus.js',
-    './src/assets/js/nownextlater-widget.js',
     './src/assets/js/channel-picker.js',
     './src/assets/js/channel-group-picker.js',
-    './src/assets/js/api-docs.js',
-    './src/assets/js/api-explorer.js',
-    './src/assets/js/submenus.js',
-    './src/assets/js/script.js'
+    './src/assets/js/api-docs.js'
   ])
     .pipe(sourcemaps.init())
     .pipe(concat('api-docs-bundle.js'))
@@ -68,29 +54,15 @@ gulp.task('apiDocs', function () {
 // Compiles necessary files for api explorer
 gulp.task('apiExplorer', function () {
   gulp.src([
-    './src/assets/js/lib/lodash.min.js',
-    './src/assets/js/lib/ejs.min.js',
     './src/assets/js/lib/highlight.pack.js',
     './src/assets/js/lib/typeahead.bundle.min.js',
     './src/assets/js/lib/moment.min.js',
-    './src/assets/js/lib/jquery.selectText.js',
-    './src/assets/js/lib/loglevel.js',
-    './src/assets/js/common/api-data.js',
     './src/assets/js/common/tabs.js',
-    './src/assets/js/common/popovers.js',
     './src/assets/js/common/encode-query-data.js',
     './src/assets/js/common/create-query-params-object.js',
-    './src/assets/js/common/atlas-user.js',
-    './src/assets/js/login-to-admin.js',
-    './src/assets/js/highlight-current-page.js',
-    './src/assets/js/handleLoggedInStatus.js',
-    './src/assets/js/nownextlater-widget.js',
     './src/assets/js/channel-picker.js',
     './src/assets/js/channel-group-picker.js',
-    './src/assets/js/api-docs.js',
     './src/assets/js/api-explorer.js',
-    './src/assets/js/submenus.js',
-    './src/assets/js/script.js'
   ])
     .pipe(sourcemaps.init())
     .pipe(concat('api-explorer-bundle.js'))

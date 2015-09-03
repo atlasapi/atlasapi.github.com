@@ -22,7 +22,7 @@ var highlightCurrentPage = (function () {
       $(window).scrollTop($(active).offset().top - headerHeight);
     }
 
-    $('#nav-main a').not('.user-menu a').on('click', function (e) {
+    $('#nav-main a').not('.user-menu a, .api-docs-link, .api-docs-submenu-link a').on('click', function (e) {
       e.preventDefault();
       var target = $(this).attr('href');
       $(window).scrollTop($(target).offset().top - headerHeight);
