@@ -38,7 +38,7 @@ $(function () {
 
 $(window).load(function () {
   // Initiate navigation highlighting
-  // highlightCurrentPage.init();
+  highlightCurrentPage.init();
 
   // Initiated now next widget
   var nowNextLater = new NowNextLater();
