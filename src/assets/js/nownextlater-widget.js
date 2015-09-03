@@ -432,7 +432,7 @@ NowNextLater.prototype.setupCarousel = function () {
       programmeData = nowNextLater.orderByStartTime();
 
   nowNextLater.compileTemplate(programmeData, {
-    template: 'assets/templates/carousel.ejs',
+    template: '../templates/carousel.ejs',
     container: '#carousel-widget-container'
   });
 
@@ -515,7 +515,7 @@ NowNextLater.prototype.loadFullscreen = function () {
 
   $widgetPanels.each(function (index) {
     nowNextLater.compileTemplate(dataForFullscreen[0][index], {
-      template: 'assets/templates/fullscreen.ejs',
+      template: '../templates/fullscreen.ejs',
       container: $(this),
       append: true
     });
@@ -548,7 +548,7 @@ NowNextLater.prototype.loadPanel = function (items, index, page, dataForFullscre
       nowNextLater.loadPanelTimeout = setTimeout(function () {
 
         nowNextLater.compileTemplate(dataForFullscreen[page][index], {
-          template: 'assets/templates/fullscreen.ejs',
+          template: '../templates/fullscreen.ejs',
           container: $(items[index]),
           append: true
         });

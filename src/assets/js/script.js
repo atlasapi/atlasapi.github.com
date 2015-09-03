@@ -27,6 +27,6 @@ $(function () {
 
 $(window).load(function () {
   highlightCurrentPage.init();
-  // var nowNextLater = new NowNextLater();
-  // nowNextLater.init();
+  var nowNextLater = new NowNextLater();
+  nowNextLater.init();
 });

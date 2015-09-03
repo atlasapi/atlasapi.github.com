@@ -15,6 +15,7 @@ gulp.task('copyFiles', function () {
   gulp.src('./src/images/**/*').pipe(gulp.dest('./build/images'));
   gulp.src('./src/favicon.ico').pipe(gulp.dest('./build'));
   gulp.src('./3/**/*').pipe(gulp.dest('./build/3'));
+  gulp.src('./src/templates/**/*').pipe(gulp.dest('./build/templates'));
 });
 
 gulp.task('styles', function () {
@@ -118,7 +119,7 @@ gulp.task('scripts', function () {
     // './src/assets/js/login-to-admin.js',
     './src/assets/js/highlight-current-page.js',
     // './src/assets/js/handleLoggedInStatus.js',
-    // './src/assets/js/nownextlater-widget.js',
+    './src/assets/js/nownextlater-widget.js',
     // './src/assets/js/channel-picker.js',
     // './src/assets/js/channel-group-picker.js',
     // './src/assets/js/api-docs.js',
