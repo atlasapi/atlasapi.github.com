@@ -12,9 +12,9 @@ var dateForVersioning = new Date().getTime();
 gulp.task('copyFiles', function () {
   gulp.src('./src/googled4b379d670909716.html').pipe(gulp.dest('./build'));
   gulp.src('./src/CNAME').pipe(gulp.dest('./build'));
-  gulp.src('./src/pages/**/*.html').pipe(gulp.dest('./build'));
   gulp.src('./src/images/**/*').pipe(gulp.dest('./build/images'));
   gulp.src('./src/favicon.ico').pipe(gulp.dest('./build'));
+  gulp.src('./3/**/*').pipe(gulp.dest('./build/3'));
 });
 
 gulp.task('styles', function () {
@@ -104,25 +104,25 @@ gulp.task('scripts', function () {
   gulp.src([
     './src/assets/js/lib/lodash.min.js',
     './src/assets/js/lib/ejs.min.js',
-    './src/assets/js/lib/highlight.pack.js',
-    './src/assets/js/lib/typeahead.bundle.min.js',
-    './src/assets/js/lib/moment.min.js',
-    './src/assets/js/lib/jquery.selectText.js',
-    './src/assets/js/lib/loglevel.js',
+    // './src/assets/js/lib/highlight.pack.js',
+    // './src/assets/js/lib/typeahead.bundle.min.js',
+    // './src/assets/js/lib/moment.min.js',
+    // './src/assets/js/lib/jquery.selectText.js',
+    // './src/assets/js/lib/loglevel.js',
     './src/assets/js/common/api-data.js',
-    './src/assets/js/common/tabs.js',
+    // './src/assets/js/common/tabs.js',
     './src/assets/js/common/popovers.js',
-    './src/assets/js/common/encode-query-data.js',
-    './src/assets/js/common/create-query-params-object.js',
-    './src/assets/js/common/atlas-user.js',
-    './src/assets/js/login-to-admin.js',
+    // './src/assets/js/common/encode-query-data.js',
+    // './src/assets/js/common/create-query-params-object.js',
+    // './src/assets/js/common/atlas-user.js',
+    // './src/assets/js/login-to-admin.js',
     './src/assets/js/highlight-current-page.js',
-    './src/assets/js/handleLoggedInStatus.js',
-    './src/assets/js/nownextlater-widget.js',
-    './src/assets/js/channel-picker.js',
-    './src/assets/js/channel-group-picker.js',
-    './src/assets/js/api-docs.js',
-    './src/assets/js/api-explorer.js',
+    // './src/assets/js/handleLoggedInStatus.js',
+    // './src/assets/js/nownextlater-widget.js',
+    // './src/assets/js/channel-picker.js',
+    // './src/assets/js/channel-group-picker.js',
+    // './src/assets/js/api-docs.js',
+    // './src/assets/js/api-explorer.js',
     './src/assets/js/submenus.js',
     './src/assets/js/script.js'
   ])
@@ -162,10 +162,10 @@ gulp.task('watch', function () {
   gulp.watch('./src/pages/**/*.html', ['versioning', 'copyFiles']);
   gulp.watch('./src/assets/images/**/*', ['copyFiles']);
   gulp.watch('./src/assets/scss/**/*.scss', ['styles', 'versioning', 'copyFiles']);
-  gulp.watch('./src/assets/js/**/*.js', ['scripts', 'apiDocs', 'apiExplorer', 'verioning', 'copyFiles']);
+  gulp.watch('./src/assets/js/**/*.js', ['copyFiles', 'scripts', 'apiDocs', 'apiExplorer', 'versioning']);
 });
 
-gulp.task('build', ['copyFiles', 'styles', 'scripts', 'apiDocs', 'apiExplorer', 'versioning']);
+gulp.task('build', ['styles', 'scripts', 'apiDocs', 'apiExplorer', 'versioning', 'copyFiles']);
 
 gulp.task('server', shell.task(['http-server build -p 3000 -a dev.mbst.tv -s -c-1 -o --cors']));
 

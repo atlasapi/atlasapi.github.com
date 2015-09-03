@@ -4,16 +4,16 @@ $(function () {
 
   popovers();
 
-  $(document).on('click', '.getApiKeyBtn', function (e) {
-    e.preventDefault();
-    loginToAdmin();
-  });
+  // $(document).on('click', '.getApiKeyBtn', function (e) {
+  //   e.preventDefault();
+  //   loginToAdmin();
+  // });
 
-  handleLoggedInStatus();
+  // handleLoggedInStatus();
 
-  apiData.init(function (data) {
-    submenus();
-  });
+  // apiData.init(function (data) {
+  //   submenus();
+  // });
 
   $(document).on('click', '.js-select-on-click', function () {
     $(this).select();
@@ -25,8 +25,7 @@ $(function () {
 });
 
 $(window).load(function () {
-  uiTabs();
   highlightCurrentPage.init();
-  var nowNextLater = new NowNextLater();
-  nowNextLater.init();
+  // var nowNextLater = new NowNextLater();
+  // nowNextLater.init();
 });
