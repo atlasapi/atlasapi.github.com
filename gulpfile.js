@@ -10,13 +10,9 @@ var runSequence = require('run-sequence');
 var dateForVersioning = new Date().getTime();
 
 gulp.task('copyFiles', function () {
-  gulp.src('./src/googled4b379d670909716.html').pipe(gulp.dest('./build'));
-  gulp.src('./src/CNAME').pipe(gulp.dest('./build'));
-  gulp.src('./src/assets/images/**/*').pipe(gulp.dest('./build/images'));
-  gulp.src('./src/favicon.ico').pipe(gulp.dest('./build'));
-  gulp.src('./3/**/*').pipe(gulp.dest('./build/3'));
-  gulp.src('./src/templates/**/*').pipe(gulp.dest('./build/templates'));
-  gulp.src('./src/data/**/*').pipe(gulp.dest('./build/data'));
+  gulp.src('./src/assets/images/**/*').pipe(gulp.dest('./images'));
+  gulp.src('./src/templates/**/*').pipe(gulp.dest('./templates'));
+  gulp.src('./src/data/**/*').pipe(gulp.dest('./data'));
 });
 
 gulp.task('styles', function () {
@@ -26,7 +22,7 @@ gulp.task('styles', function () {
       outputStyle: 'compressed'
     }))
     .pipe(sourcemaps.write('./sourcemaps'))
-    .pipe(gulp.dest('./build/css'));
+    .pipe(gulp.dest('./css'));
 });
 
 // Compiles necessary files for api docs
@@ -48,7 +44,7 @@ gulp.task('apiDocs', function () {
       mangle: true
     }))
     .pipe(sourcemaps.write('./sourcemaps'))
-    .pipe(gulp.dest('./build/js'));
+    .pipe(gulp.dest('./js'));
 });
 
 // Compiles necessary files for api explorer
@@ -70,7 +66,7 @@ gulp.task('apiExplorer', function () {
       mangle: true
     }))
     .pipe(sourcemaps.write('./sourcemaps'))
-    .pipe(gulp.dest('./build/js'));
+    .pipe(gulp.dest('./js'));
 });
 
 // Compiles javascript needed for all pages
@@ -96,30 +92,18 @@ gulp.task('scripts', function () {
       mangle: true
     }))
     .pipe(sourcemaps.write('./sourcemaps'))
-    .pipe(gulp.dest('./build/js'));
+    .pipe(gulp.dest('./js'));
 });
 
 gulp.task('versioning', function () {
   gulp.src('./src/pages/**/*.html')
     .pipe(htmlReplace({
-      'css': '/css/main.' + dateForVersioning + '.css',
-      'mainJs': '/js/main-bundle.' + dateForVersioning + '.js',
-      'apiDocs': '/js/api-docs-bundle.' + dateForVersioning + '.js',
-      'apiExplorer': '/js/api-explorer-bundle.' + dateForVersioning + '.js'
+      'css': '/css/main.css?qs=' + dateForVersioning,
+      'mainJs': '/js/main-bundle.js?qs=' + dateForVersioning,
+      'apiDocs': '/js/api-docs-bundle.js?qs=' + dateForVersioning,
+      'apiExplorer': '/js/api-explorer-bundle.js?qs=' + dateForVersioning
     }))
-    .pipe(gulp.dest('./build'));
-  gulp.src('./build/css/main.css')
-    .pipe(rename('./main.' + dateForVersioning + '.css'))
-    .pipe(gulp.dest('./build/css'));
-  gulp.src('./build/js/main-bundle.js')
-    .pipe(rename('./main-bundle.' + dateForVersioning + '.js'))
-    .pipe(gulp.dest('./build/js'));
-  gulp.src('./build/js/api-docs-bundle.js')
-    .pipe(rename('./api-docs-bundle.' + dateForVersioning + '.js'))
-    .pipe(gulp.dest('./build/js'));
-  gulp.src('./build/js/api-explorer-bundle.js')
-    .pipe(rename('./api-explorer-bundle.' + dateForVersioning + '.js'))
-    .pipe(gulp.dest('./build/js'));
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('watch', function () {
@@ -131,7 +115,7 @@ gulp.task('watch', function () {
 
 gulp.task('build', ['styles', 'scripts', 'apiDocs', 'apiExplorer', 'copyFiles', 'versioning']);
 
-gulp.task('server', shell.task(['http-server build -p 3000 -a dev.mbst.tv -s -c-1 -o --cors']));
+gulp.task('server', shell.task(['http-server -p 3000 -a dev.mbst.tv -s -c-1 -o --cors']));
 
 gulp.task('dev', function () {
   runSequence('build', 'watch', 'server');
