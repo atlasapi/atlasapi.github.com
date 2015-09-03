@@ -4,10 +4,10 @@
 	<meta charset="UTF-8">
 	<title>api documentation - atlas</title>
 	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
-	<link rel="stylesheet" href="/css/main.css?qs=1441287305860">
+	<link rel="stylesheet" href="/css/main.css?qs=1441288500112">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="/js/main-bundle.js?qs=1441287305860"></script>
-	<script src="/js/api-docs-bundle.js?qs=1441287305860"></script>	<script>
+	<script src="/js/main-bundle.js?qs=1441288500112"></script>
+	<script src="/js/api-docs-bundle.js?qs=1441288500112"></script>	<script>
 		$(function () {
 			apiData.init(function (data) {
 	    	var compiledTemplate = new EJS({
@@ -19,6 +19,9 @@
 	    	submenus();
 	  	});
 	  });
+	  $(window).load(function () {
+  		uiTabs();
+  	});
 	</script>
 </head>
 <body>
@@ -45,7 +48,7 @@
 			    </li>
 				</ul>
 			</div>
-			<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-explorer">
+			<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-docs#api-explorer">
   			<span class="icn_mag"></span>
   			api explorer &amp; free key
 			</a>

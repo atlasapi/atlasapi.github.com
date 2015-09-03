@@ -79,8 +79,7 @@ gulp.task('versioning', function () {
     .pipe(htmlReplace({
       'css': '/css/main.css?qs=' + dateForVersioning,
       'mainJs': '/js/main-bundle.js?qs=' + dateForVersioning,
-      'apiDocs': '/js/api-docs-bundle.js?qs=' + dateForVersioning,
-      'apiExplorer': '/js/api-explorer-bundle.js?qs=' + dateForVersioning
+      'apiDocs': '/js/api-docs-bundle.js?qs=' + dateForVersioning
     }))
     .pipe(gulp.dest('./'));
 });
@@ -92,7 +91,7 @@ gulp.task('watch', function () {
   gulp.watch('./src/assets/js/**/*.js', ['build']);
 });
 
-gulp.task('build', ['styles', 'scripts', 'apiDocs', 'apiExplorer', 'copyFiles', 'versioning']);
+gulp.task('build', ['styles', 'scripts', 'apiDocs', 'copyFiles', 'versioning']);
 
 gulp.task('server', shell.task(['http-server -p 3000 -a dev.mbst.tv -s -c-1 -o --cors']));
 

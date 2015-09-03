@@ -6,14 +6,17 @@ var highlightCurrentPage = (function () {
   var activeClass = 'active-link';
 
   var isOnScreen = function (el) {
-    if (el.charAt(0) === '#') {
-      var distance = $(el).offset().top - 150;
-      var $window = $(window);
-      if ($window.scrollTop() > distance && $window.scrollTop() < distance + 90 + $(el).height() && $(el).is(':visible')) {
-        return true;
-      }
-    } else {
+    if (el.charAt(1) !== '#') {
       return;
+    }
+    el = el.substring(1);
+    if (!$(el).length) {
+      return;
+    }
+    var distance = $(el).offset().top - 150;
+    var $window = $(window);
+    if ($window.scrollTop() > distance && $window.scrollTop() < distance + 90 + $(el).height() && $(el).is(':visible')) {
+      return true;
     }
   };
 
