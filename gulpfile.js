@@ -35,31 +35,11 @@ gulp.task('apiDocs', function () {
     './src/assets/js/common/create-query-params-object.js',
     './src/assets/js/channel-picker.js',
     './src/assets/js/channel-group-picker.js',
-    './src/assets/js/api-docs.js'
+    './src/assets/js/api-docs.js',
+    './src/assets/js/api-explorer.js'
   ])
     .pipe(sourcemaps.init())
     .pipe(concat('api-docs-bundle.js'))
-    .pipe(uglify({
-      mangle: true
-    }))
-    .pipe(sourcemaps.write('./sourcemaps'))
-    .pipe(gulp.dest('./js'));
-});
-
-// Compiles necessary files for api explorer
-gulp.task('apiExplorer', function () {
-  gulp.src([
-    './src/assets/js/lib/highlight.pack.js',
-    './src/assets/js/lib/typeahead.bundle.min.js',
-    './src/assets/js/lib/moment.min.js',
-    './src/assets/js/common/tabs.js',
-    './src/assets/js/common/create-query-params-object.js',
-    './src/assets/js/channel-picker.js',
-    './src/assets/js/channel-group-picker.js',
-    './src/assets/js/api-explorer.js',
-  ])
-    .pipe(sourcemaps.init())
-    .pipe(concat('api-explorer-bundle.js'))
     .pipe(uglify({
       mangle: true
     }))

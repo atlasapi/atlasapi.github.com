@@ -1,7 +1,7 @@
 var apiDocs = (function () {
   'use strict';
 
-  var init = function (resourcesData) { 
+  var init = function (resourcesData) {
     getTypesData(resourcesData);
   };
 
@@ -57,7 +57,7 @@ var apiDocs = (function () {
     });
     apiData.typesToLink = typesToLink;
     var compiledTemplate = new EJS({
-      url: 'assets/templates/api-docs.ejs'
+      url: '../templates/api-docs.ejs'
     }).render(apiData);
     $('#api-docs').html(compiledTemplate);
     populateExampleResponse(apiData);
@@ -81,7 +81,7 @@ var apiDocs = (function () {
   var populateExampleResponse = function (apiData) {
     _.forEach(apiData.resources, function (resource) {
       var compiledTemplate = new EJS({
-        url: 'assets/templates/api-docs-example-response.ejs'
+        url: '../templates/api-docs-example-response.ejs'
       }).render(resource);
       var $endpointContainer = $('#api-docs-' + resource.name);
       $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
@@ -121,7 +121,7 @@ var apiDocs = (function () {
         success: function (data) {
           data.typesToLink = typesToLink;
           var compiledTemplate = new EJS({
-            url: 'assets/templates/api-docs-response.ejs'
+            url: '../templates/api-docs-response.ejs'
           }).render(data);
           $('#api-docs-' + resource.name).find('.api-docs-response').html(compiledTemplate);
         },
@@ -137,7 +137,7 @@ var apiDocs = (function () {
       e.preventDefault();
       var target = $(this).attr('href');
       var headerHeight = 64;
-      $(window).scrollTop($('#api-docs').offset().top - headerHeight);   
+      $(window).scrollTop($('#api-docs').offset().top - headerHeight);
       $('#api-docs .menu').find('a[href=' + target + ']').trigger('click');
     });
   };

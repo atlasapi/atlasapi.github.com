@@ -4,36 +4,48 @@
 	<meta charset="UTF-8">
 	<title>api documentation - atlas</title>
 	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
-	<link href="../assets/css/main.css" rel="stylesheet">
+	<link rel="stylesheet" href="/css/main.css?qs=1441287305860">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../assets/js/api-docs-bundle.js"></script>
+	<script src="/js/main-bundle.js?qs=1441287305860"></script>
+	<script src="/js/api-docs-bundle.js?qs=1441287305860"></script>	<script>
+		$(function () {
+			apiData.init(function (data) {
+	    	var compiledTemplate = new EJS({
+	      	url: '../templates/api-docs-submenu.ejs'
+	    	}).render(data);
+	    	$('#api-docs-submenu').html(compiledTemplate);
+	    	apiDocs.init(data);
+	    	apiExplorer.init(data);
+	    	submenus();
+	  	});
+	  });
+	</script>
 </head>
 <body>
-
 	<div class="site-header" id="header">
 		<div class="container">
-			<a class="site-logo" href="#home"><img src="../assets/images/logo.png" alt="Atlas"></a>
+			<a class="site-logo" href="/#home"><img src="/images/logo.png" alt="Atlas"></a>
 			<div class="navbar-links">
 			  <ul class="nav" id="nav-main">
-			    <li class="nav-item"><a href="#widgets">widgets</a></li>
-			    <li class="nav-item"><a href="#examples">examples</a></li>
+			    <li class="nav-item"><a href="/#widgets">widgets</a></li>
+			    <li class="nav-item"><a href="/#examples">examples</a></li>
 			    <li class="nav-item has-submenu">
 			    	<a href="#reference">reference</a>
 			    	<ul class="submenu">
-			    		<li><a href="#reference_overview">overview</a></li>
-			    		<li><a href="#reference_dataModel">data model</a></li>
-			    		<li><a href="#reference_sources">sources</a></li>
-			    		<li><a href="#reference_feeds">feeds</a></li>
+			    		<li><a href="/#reference_overview">overview</a></li>
+			    		<li><a href="/#reference_dataModel">data model</a></li>
+			    		<li><a href="/#reference_sources">sources</a></li>
+			    		<li><a href="/#reference_feeds">feeds</a></li>
 			    	</ul>
 			    </li>
-			    <li class="nav-item"><a href="#about">about</a></li>
-			    <li class="nav-item has-submenu">
-			    	<a href="../api-docs">docs</a>
+			    <li class="nav-item"><a href="/#about">about</a></li>
+			    <li class="nav-item has-submenu active-link">
+			    	<a class="api-docs-link" href="/api-docs">docs</a>
 			    	<ul class="submenu api-docs-submenu" id="api-docs-submenu"></ul>
 			    </li>
 				</ul>
 			</div>
-			<a class="navbar-api-explorer-btn btn btn_lrg" href="../api-explorer">
+			<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-explorer">
   			<span class="icn_mag"></span>
   			api explorer &amp; free key
 			</a>
@@ -45,16 +57,41 @@
 
 	<div class="page">
 		<section class="api-docs" id="api-docs"></section>
+
+		<section class="apiExplorer" id="apiExplorer">
+			<div class="explorerTitle">
+				<div class="line">
+				  <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
+				</div>
+			</div>
+			<div class="explorerWrapper" id="explorerWrapper">
+				<div class="clearfix mbm">
+			  	<form class="unit size1of2" id="apiKeyForm">
+          	<label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+          	<input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+        	</form>
+         	<div class="unit size1of2">
+         		<div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+         	</div>
+			  </div>
+       	<p class="clearfix"><a href="3/apiexplorer">looking for the old api explorer?</a></p>
+			  <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
+			</div>
+		</section>
 	</div>
 
-	<!-- Google analytics -->
 	<script>
-	(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-	function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-	e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-	e.src='https://www.google-analytics.com/analytics.js';
-	r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-	ga('create','UA-11621492-3','auto');ga('send','pageview');
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-11621492-3' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
 	</script>
 </body>
 </html>
