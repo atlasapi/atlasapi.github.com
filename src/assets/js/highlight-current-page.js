@@ -28,11 +28,14 @@ var highlightCurrentPage = (function () {
     }
 
     $('#nav-main a').not('.user-menu a, .api-docs-link, .api-docs-submenu-link a').on('click', function (e) {
-      e.preventDefault();
       var target = $(this).attr('href');
       if (target.charAt(0) === '/') {
         target = target.substring(1);
       }
+      if (!$(target).length) {
+        return;
+      }
+      e.preventDefault();
       $(window).scrollTop($(target).offset().top - headerHeight);
       if (history.pushState) {
         history.pushState(null, null, target);

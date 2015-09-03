@@ -31,6 +31,10 @@ $(function () {
     // Initiate api explorer if on page
     if ($('#apiExplorer').length) {
       apiExplorer.init(data);
+
+      if (window.location.hash === '#apiExplorer') {
+        $(window).scrollTop($('#apiExplorer').offset().top - 100);
+      }
     }
 
     // Initiate submenu behaviour

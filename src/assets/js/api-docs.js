@@ -68,6 +68,8 @@ var apiDocs = (function () {
       populateExampleResponse(apiData);
     });
     hideEmptyTables();
+    // Unhides api explorer to make loading appear more pleasant
+    $('#apiExplorer').removeClass('hide');
   };
 
   var hideEmptyTables = function () {
