@@ -6,10 +6,12 @@ var highlightCurrentPage = (function () {
   var activeClass = 'active-link';
 
   var isOnScreen = function (el) {
-    if (el.charAt(1) !== '#') {
+    if (el.charAt(0) === '/') {
+      el = el.substring(1);
+    }
+    if (el.charAt(0) !== '#') {
       return;
     }
-    el = el.substring(1);
     if (!$(el).length) {
       return;
     }
@@ -28,6 +30,9 @@ var highlightCurrentPage = (function () {
     $('#nav-main a').not('.user-menu a, .api-docs-link, .api-docs-submenu-link a').on('click', function (e) {
       e.preventDefault();
       var target = $(this).attr('href');
+      if (target.charAt(0) === '/') {
+        target = target.substring(1);
+      }
       $(window).scrollTop($(target).offset().top - headerHeight);
       if (history.pushState) {
         history.pushState(null, null, target);
