@@ -14,22 +14,6 @@
 	<!-- build:apiDocs -->
 	<script src="/js/api-docs-bundle.js"></script>
 	<!-- endbuild -->
-	<script>
-		$(function () {
-			apiData.init(function (data) {
-	    	var compiledTemplate = new EJS({
-	      	url: '../templates/api-docs-submenu.ejs'
-	    	}).render(data);
-	    	$('#api-docs-submenu').html(compiledTemplate);
-	    	apiDocs.init(data);
-	    	apiExplorer.init(data);
-	    	submenus();
-	  	});
-	  });
-	  $(window).load(function () {
-  		uiTabs();
-  	});
-	</script>
 </head>
 <body>
 	<div class="site-header" id="header">

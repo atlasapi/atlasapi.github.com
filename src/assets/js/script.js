@@ -23,6 +23,16 @@ $(function () {
     }).render(data);
     $('#api-docs-submenu').html(apiDocsSubmenu);
 
+    // Initiate api docs if on page
+    if ($('#api-docs').length) {
+      apiDocs.init(data);
+    }
+
+    // Initiate api explorer if on page
+    if ($('#apiExplorer').length) {
+      apiExplorer.init(data);
+    }
+
     // Initiate submenu behaviour
     submenus();
   });
@@ -39,6 +49,11 @@ $(function () {
 $(window).load(function () {
   // Initiate navigation highlighting
   highlightCurrentPage.init();
+
+  // Initiate tabs if api docs and explorer are present
+  if ($('#api-docs').length && $('#apiExplorer').length) {
+    uiTabs();
+  }
 
   // Initiated now next widget
   var nowNextLater = new NowNextLater();

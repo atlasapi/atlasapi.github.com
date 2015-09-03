@@ -7,23 +7,7 @@
 	<link rel="stylesheet" href="/css/main.css?qs=1441289661308">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="/js/main-bundle.js?qs=1441289661308"></script>
-	<script src="/js/api-docs-bundle.js?qs=1441289661308"></script>	<script>
-		$(function () {
-			apiData.init(function (data) {
-	    	var compiledTemplate = new EJS({
-	      	url: '../templates/api-docs-submenu.ejs'
-	    	}).render(data);
-	    	$('#api-docs-submenu').html(compiledTemplate);
-	    	apiDocs.init(data);
-	    	apiExplorer.init(data);
-	    	submenus();
-	  	});
-	  });
-	  $(window).load(function () {
-  		uiTabs();
-  	});
-	</script>
-</head>
+	<script src="/js/api-docs-bundle.js?qs=1441289661308"></script></head>
 <body>
 	<div class="site-header" id="header">
 		<div class="container">
