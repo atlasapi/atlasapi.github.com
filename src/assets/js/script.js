@@ -1,6 +1,7 @@
 $(function () {
 
-  $('section:not(.subSection):last-child').css('min-height', $(window).height() - 100);
+  // Make final section full height so highlighting works
+  $('#about').css('min-height', $(window).height() - 100);
 
   popovers();
 

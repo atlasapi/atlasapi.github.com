@@ -107,7 +107,7 @@ gulp.task('scripts', function () {
     // './src/assets/js/lib/highlight.pack.js',
     // './src/assets/js/lib/typeahead.bundle.min.js',
     // './src/assets/js/lib/moment.min.js',
-    // './src/assets/js/lib/jquery.selectText.js',
+    './src/assets/js/lib/jquery.selectText.js',
     // './src/assets/js/lib/loglevel.js',
     './src/assets/js/common/api-data.js',
     // './src/assets/js/common/tabs.js',
@@ -159,10 +159,10 @@ gulp.task('versioning', function () {
 });
 
 gulp.task('watch', function () {
-  gulp.watch('./src/pages/**/*.html', ['versioning', 'copyFiles']);
-  gulp.watch('./src/assets/images/**/*', ['copyFiles']);
-  gulp.watch('./src/assets/scss/**/*.scss', ['styles', 'versioning', 'copyFiles']);
-  gulp.watch('./src/assets/js/**/*.js', ['copyFiles', 'scripts', 'apiDocs', 'apiExplorer', 'versioning']);
+  gulp.watch('./src/pages/**/*.html', ['build']);
+  gulp.watch('./src/assets/images/**/*', ['build']);
+  gulp.watch('./src/assets/scss/**/*.scss', ['build']);
+  gulp.watch('./src/assets/js/**/*.js', ['build']);
 });
 
 gulp.task('build', ['styles', 'scripts', 'apiDocs', 'apiExplorer', 'versioning', 'copyFiles']);
