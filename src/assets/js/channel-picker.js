@@ -19,7 +19,7 @@ var channelPicker = (function () {
       url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
         var compiledTemplate = new EJS({
-          url: 'assets/templates/channelPicker.ejs'
+          url: '../templates/channelPicker.ejs'
         }).render();
         if ($tabPanel.find('.channel-picker-row').length && !checkSelectedChannels) {
           $tabPanel.find('.channel-picker-row').remove();
@@ -55,7 +55,7 @@ var channelPicker = (function () {
 
   var buildPlatformTemplate = function (platforms, $tabPanel) {
     var compiledTemplate = new EJS({
-      url: 'assets/templates/platformPicker.ejs'
+      url: '../templates/platformPicker.ejs'
     }).render(platforms);
     $tabPanel.find('.platform-picker').html(compiledTemplate);
     buildDummyRegionsTemplate($tabPanel);
@@ -81,14 +81,14 @@ var channelPicker = (function () {
 
   var buildDummyRegionsTemplate = function ($tabPanel) {
     var compiledTemplate = new EJS({
-      url: 'assets/templates/dummyRegionsTemplate.ejs'
+      url: '../templates/dummyRegionsTemplate.ejs'
     }).render();
     $tabPanel.find('.region-picker').html(compiledTemplate);
   };
 
   var buildRegionsTemplate = function (regions, platformTitle, $tabPanel) {
     var compiledTemplate = new EJS({
-      url: 'assets/templates/regionsPicker.ejs'
+      url: '../templates/regionsPicker.ejs'
     }).render(regions);
     $tabPanel.find('.region-picker').html(compiledTemplate);
     buildDummySearchTemplate($tabPanel);
@@ -104,7 +104,7 @@ var channelPicker = (function () {
 
   var buildDummySearchTemplate = function ($tabPanel) {
     var compiledTemplate = new EJS({
-      url: 'assets/templates/dummySearchTemplate.ejs'
+      url: '../templates/dummySearchTemplate.ejs'
     }).render();
     $tabPanel.find('.channel-search').html(compiledTemplate);
   };
@@ -136,7 +136,7 @@ var channelPicker = (function () {
       channel.region_title = regionTitle;
     });
     var compiledTemplate = new EJS({
-      url: 'assets/templates/channels.ejs'
+      url: '../templates/channels.ejs'
     }).render(channels);
     $tabPanel.find('.channels-container').html(compiledTemplate);
   };
@@ -174,7 +174,7 @@ var channelPicker = (function () {
       12: 'December'
     };
     var compiledTemplate = new EJS({
-      url: 'assets/templates/channelSearch.ejs'
+      url: '../templates/channelSearch.ejs'
     }).render(data);
     $tabPanel.find('.channel-search').html(compiledTemplate);
     for (var i = 0, ii = data.length; i < ii; i++) {
@@ -235,16 +235,16 @@ var channelPicker = (function () {
       });
     });
   };
-  
+
   var closeChannelPicker = function () {
     $(document).on('click', '.close-channel-picker', function (e) {
       e.preventDefault();
       if ($(this).closest('.ui-tabs-panel').find('.channel-picker-row').length) {
         $(this).closest('.ui-tabs-panel').find('.channel-picker-row').remove();
       }
-    });  
+    });
   };
-  
+
   var channelPickerChange = function ($tabPanel) {
     $(document).on('change', '.channel-picker-checkbox', function () {
       var channelIds = [];
