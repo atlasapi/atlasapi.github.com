@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<title>atlas - media data router</title>
 	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
-	<link rel="stylesheet" href="/css/main.css?qs=1441623119294">
+	<link rel="stylesheet" href="/css/main.css?qs=1444128282466">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="/js/main-bundle.js?qs=1441623119294"></script>
+	<script src="/js/main-bundle.js?qs=1444128282466"></script>
 	<script src="https://widgets.metabroadcast.com/loader/1/load.js"></script>
 	<script>
 		MBST = MBST || {};
@@ -27,7 +27,23 @@
 	</script>
 </head>
 <body>
-	<div class="site-header" id="header">
+
+	<div class="site-header">
+	  <div class="site-header-inner">
+	    <a class="site-logo" href="https://metabroadcast.com"><img src="/images/logo.png" alt="MetaBroadcast"></a>
+	    <ul class="site-nav">
+	      <li class="nav-atlas"><a href="https://atlas.metabroadcast.com"><img src="/images/atlas-logo.png" alt="atlas"></a></li>
+	      <li class="nav-voila"><a href="http://voila.metabroadcast.com"><img src="/images/voila-logo.png" alt="voila"></a></li>
+	      <li><a href="https://metabroadcast.com/blog">blog</a></li>
+	      <li><a href="https://metabroadcast.com/jobs">jobs</a></li>
+	      <li><a href="https://metabroadcast.com/team">team</a></li>
+	      <li><a href="https://metabroadcast.com/mentions">mentions</a></li>
+	      <li><a href="https://metabroadcast.com/contact">contact</a></li>
+	    </ul>
+	  </div>
+	</div>
+
+	<!-- <div class="site-header" id="header">
 		<div class="container">
 			<a class="site-logo" href="/#home"><img src="/images/logo.png" alt="Atlas"></a>
 			<div class="navbar-links">
@@ -56,11 +72,12 @@
 			</a>
 			<div class="navbar-tools" id="navbar-tools"></div>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
-	<div class="page">
+	<div class="legacy">
+		<div class="page">
 		<div class="home" id="home">
 			<div class="line apiKeyHolder">
 				<div class="unit size1of2">
@@ -547,6 +564,7 @@
 				<span class="title">Special</span>
 				<span class="body">A one off item that does not have a container</span>
 			</div>
+		</div>
 		</div>
 	</div>
 
