@@ -1887,7 +1887,7 @@ $(document).ready(function(){
           url: 'assets/templates/api-docs-submenu.ejs'
       }).render(data);
         $('#api-docs-submenu').html(compiledTemplate);
-        apiDocs.init(data);
+        // apiDocs.init(data);
         submenus();
     });
 
