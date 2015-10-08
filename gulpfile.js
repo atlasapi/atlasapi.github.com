@@ -93,7 +93,7 @@ gulp.task('watch', function () {
 
 gulp.task('build', ['styles', 'scripts', 'apiDocs', 'copyFiles', 'versioning']);
 
-gulp.task('server', shell.task(['http-server -p 3000 -a dev.mbst.tv -s -c-1 -o --cors']));
+gulp.task('server', shell.task(['http-server -p 3000 -a dev.mbst.tv -s -c-1 --cors']));
 
 gulp.task('dev', function () {
   runSequence('build', 'watch', 'server');
