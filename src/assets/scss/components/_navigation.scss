@@ -44,26 +44,6 @@
   margin: 0.75rem 0 0;
 }
 
-/* Generic */
-.container:before,
-.container:after,
-.nav:before,
-.nav:after {
-  content: " ";
-  display: table;
-}
-
-.container:after,
-.nav:after {
-  clear: both;
-}
-
-.container {
-  min-width: 960px;
-  margin: 0 auto;
-  padding: 0 7%;
-}
-
 /* Submenu */
 .submenu {
   position: absolute;

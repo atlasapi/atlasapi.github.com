@@ -54,7 +54,7 @@ var handleLoggedInStatus = (function () {
     var template = new EJS({
       url: '../templates/user-navigation.ejs'
     }).render();
-    $('#nav-main').append(template);
+    $('#sub-nav').append(template);
   };
 
   var logout = function () {
