@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<title>atlas - media data router</title>
 	<link href="https://fonts.googleapis.com/css?family=Molengo" rel="stylesheet">
-	<link rel="stylesheet" href="/css/main.css?qs=1444212432661">
+	<link rel="stylesheet" href="/css/main.css?qs=1444295493984">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script src="/js/main-bundle.js?qs=1444212432661"></script>
+	<script src="/js/main-bundle.js?qs=1444295493984"></script>
 	<script src="https://widgets.metabroadcast.com/loader/1/load.js"></script>
 	<script>
 		MBST = MBST || {};
@@ -46,47 +46,32 @@
 	<div class="sub-header">
 		<div class="sub-header-inner">
 			<ul class="sub-nav">
-				<li><a href="/#widgets">widgets</a></li>
-				<li><a href="/#examples">examples</a></li>
-				<li><a href="/#reference">reference</a></li>
-				<li><a href="/#about">about</a></li>
-				<li><a href="/#docs">docs</a></li>
+				<li class="nav-item"><a href="/#widgets">widgets</a></li>
+				<li class="nav-item"><a href="/#examples">examples</a></li>
+				<li class="nav-item has-submenu">
+					<a href="/#reference">reference</a>
+					<ul class="submenu">
+						<li><a href="/#reference_overview">overview</a></li>
+		    		<li><a href="/#reference_dataModel">data model</a></li>
+		    		<li><a href="/#reference_sources">sources</a></li>
+		    		<li><a href="/#reference_feeds">feeds</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a href="/#about">about</a></li>
+				<li class="nav-item has-submenu">
+					<a href="/#docs">docs</a>
+					<ul class="submenu api-docs-submenu" id="api-docs-submenu"></ul>
+				</li>
 			</ul>
 			<div class="sub-nav-tools">
+				<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-docs#apiExplorer">
+  				<span class="icn_mag"></span>
+  				api explorer &amp; free key
+				</a>
+				<div class="navbar-tools" id="navbar-tools"></div>
 			</div>
 		</div>
 	</div>
-
-	<!-- <div class="site-header" id="header">
-		<div class="container">
-			<a class="site-logo" href="/#home"><img src="/images/logo.png" alt="Atlas"></a>
-			<div class="navbar-links">
-			  <ul class="nav" id="nav-main">
-			    <li class="nav-item"><a href="/#widgets">widgets</a></li>
-			    <li class="nav-item"><a href="/#examples">examples</a></li>
-			    <li class="nav-item has-submenu">
-			    	<a href="/#reference">reference</a>
-			    	<ul class="submenu">
-			    		<li><a href="/#reference_overview">overview</a></li>
-			    		<li><a href="/#reference_dataModel">data model</a></li>
-			    		<li><a href="/#reference_sources">sources</a></li>
-			    		<li><a href="/#reference_feeds">feeds</a></li>
-			    	</ul>
-			    </li>
-			    <li class="nav-item"><a href="/#about">about</a></li>
-			    <li class="nav-item has-submenu">
-			    	<a class="api-docs-link" href="/api-docs">docs</a>
-			    	<ul class="submenu api-docs-submenu" id="api-docs-submenu"></ul>
-			    </li>
-				</ul>
-			</div>
-			<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-docs#apiExplorer">
-  			<span class="icn_mag"></span>
-  			api explorer &amp; free key
-			</a>
-			<div class="navbar-tools" id="navbar-tools"></div>
-		</div>
-	</div> -->
 
 	<div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
