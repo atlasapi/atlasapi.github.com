@@ -1,27 +1,31 @@
 /* Header */
 .site-header {
-  position: fixed;
-  top: 0;
   width: 100%;
   background: #306;
   color: #fff;
+  position: fixed;
+  top: 0;
   z-index: 1500;
 }
 
+
 .site-header-inner {
-  position: relative;
-  width: 68.571428571rem;
-  margin: 0 auto;
   text-align: left;
+  width: 96%;
+  max-width: 960px;
+  margin: 0 auto;
 }
 
 .site-logo {
   float: right;
-  margin: 10px 0 15px;
+  width: 220px;
+  margin: 15px 0 0;
+  padding: 0;
 }
 
 .site-logo img {
-  margin: 0;
+  display: block;
+  margin: 0 auto;
   border-radius: 0;
   box-shadow: none;
 }
@@ -29,18 +33,22 @@
 .site-nav {
   float: left;
   list-style: none;
-  margin: 3.5rem 0 0;
+  margin: 48px 0 0;
 }
 
 .site-nav > li {
   float: left;
-  font: 1.5rem 'Raleway', sans-serif;
+  font: 21px 'Raleway', sans-serif;
   font-weight: 400;
+  margin: 0;
 }
 
 .site-nav a {
-  padding: 10px 14px;
   display: block;
+  height: 32px;
+  line-height: 44px;
+  vertical-align: baseline;
+  padding: 10px 14px;
   color: #fff;
   text-decoration: none;
 }
@@ -49,34 +57,56 @@
 .site-nav a:active,
 .site-nav a:focus {
   color: #ff009a;
+  background-color: transparent;
 }
 
 .site-nav img {
   margin: 0;
 }
 
-.nav-atlas,
-.nav-voila {
-  position: relative;
-}
-
-.nav-voila {
-  top: -8px;
+.nav-atlas a,
+.nav-voila a {
+  display: block;
+  height: 32px;
+  text-indent: -9999px;
+  background-image: url(../images/logo-sprite.png);
+  background-repeat: no-repeat;
 }
 
 .nav-atlas a {
-  background: #eee;
+  width: 53px;
+  background-position: 0 -52px;
+  background-color: #eee;
 }
+
+.nav-voila a {
+  width: 50px;
+  background-position: -81px 0;
+}
+
+.nav-atlas a:hover,
+.nav-atlas a:active,
+.nav-atlas a:focus {
+  background-position: 0 -52px;
+  background-color: #eee;
+}
+
+.nav-voila a:hover,
+.nav-voila a:active,
+.nav-voila a:focus {
+  background-position: -81px -52px;
+}
+
 
 /* Sub-header */
 .sub-header {
   position: fixed;
-  top: 103px;
+  top: 100px;
   width: 100%;
   border-bottom: 1px solid #d80085;
   background: #eee;
   box-shadow: 1px 1px 7px rgba(0,0,0,0.3);
-  z-index: 1500;
+  z-index: 1400;
 }
 
 .sub-header-inner {
