@@ -113,19 +113,35 @@
   position: relative;
   width: 96%;
   margin: 0 auto;
+  max-width: 1280px;
   text-align: left;
 }
 
 .sub-nav > li {
   position: relative;
   float: left;
-  font: 1.5rem 'Raleway', sans-serif;
+  font: 21px 'Raleway', sans-serif;
   font-weight: 400;
 }
 
 .sub-nav a {
-  padding: 10px 14px;
+  padding: 10px;
   display: block;
   color: #306;
   text-decoration: none;
+}
+
+.sub-nav .selected a {
+  color: #d80085;
+  background: url(../images/selected.gif) center bottom no-repeat;
+}
+
+.sub-nav a:hover,
+.sub-nav a:active,
+.sub-nav a:focus {
+  color: #d80085;
+}
+
+.sub-nav .submenu .selected a {
+  background: none;
 }

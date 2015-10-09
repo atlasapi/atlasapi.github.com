@@ -63,7 +63,12 @@ $(function () {
 
 $(window).load(function () {
   // Initiate navigation highlighting
-  highlightCurrentPage.init();
+  // highlightCurrentPage.init();
+  $('.sub-nav').onePageNav({
+    currentClass: 'selected',
+    changeHash: true,
+    scrollSpeed: 200
+  });
 
   // Initiate tabs if api docs and explorer are present
   if ($('#api-docs').length && $('#apiExplorer').length) {
