@@ -10,62 +10,79 @@
 	<script src="/js/api-docs-bundle.js?qs=1444403039568"></script>	<script>var MBST = MBST || {};</script>
 </head>
 <body>
-	<div class="site-header" id="header">
-		<div class="container">
-			<a class="site-logo" href="/#home"><img src="/images/logo.png" alt="Atlas"></a>
-			<div class="navbar-links">
-			  <ul class="nav" id="nav-main">
-			    <li class="nav-item"><a href="/#widgets">widgets</a></li>
-			    <li class="nav-item"><a href="/#examples">examples</a></li>
-			    <li class="nav-item has-submenu">
-			    	<a href="/#reference">reference</a>
-			    	<ul class="submenu">
-			    		<li><a href="/#reference_overview">overview</a></li>
-			    		<li><a href="/#reference_dataModel">data model</a></li>
-			    		<li><a href="/#reference_sources">sources</a></li>
-			    		<li><a href="/#reference_feeds">feeds</a></li>
-			    	</ul>
-			    </li>
-			    <li class="nav-item"><a href="/#about">about</a></li>
-			    <li class="nav-item has-submenu active-link">
-			    	<a class="api-docs-link" href="/api-docs">docs</a>
-			    	<ul class="submenu api-docs-submenu" id="api-docs-submenu"></ul>
-			    </li>
-				</ul>
+
+	<div class="site-header">
+	  <div class="site-header-inner clearfix">
+	    <a class="site-logo" href="https://metabroadcast.com"><img src="/images/logo.png" alt="MetaBroadcast"></a>
+	    <ul class="site-nav">
+	      <li class="nav-atlas"><a href="https://atlas.metabroadcast.com"><img src="/images/atlas-logo.png" alt="atlas"></a></li>
+	      <li class="nav-voila"><a href="http://voila.metabroadcast.com"><img src="/images/voila-logo.png" alt="voila"></a></li>
+	      <li><a href="https://metabroadcast.com/blog">blog</a></li>
+	      <li><a href="https://metabroadcast.com/jobs">jobs</a></li>
+	      <li><a href="https://metabroadcast.com/team">team</a></li>
+	      <li><a href="https://metabroadcast.com/mentions">mentions</a></li>
+	      <li><a href="https://metabroadcast.com/contact">contact</a></li>
+	    </ul>
+	  </div>
+	</div>
+
+	<div class="sub-header">
+		<div class="sub-header-inner">
+			<ul class="sub-nav" id="sub-nav">
+				<li class="nav-item"><a href="/#widgets">widgets</a></li>
+				<li class="nav-item"><a href="/#examples">examples</a></li>
+				<li class="nav-item has-submenu">
+					<a href="/#reference">reference</a>
+					<ul class="submenu">
+						<li><a href="/#reference_overview">overview</a></li>
+		    		<li><a href="/#reference_dataModel">data model</a></li>
+		    		<li><a href="/#reference_sources">sources</a></li>
+		    		<li><a href="/#reference_feeds">feeds</a></li>
+					</ul>
+				</li>
+				<li class="nav-item"><a href="/#about">about</a></li>
+				<li class="nav-item has-submenu selected">
+					<a href="/api-docs">docs</a>
+					<ul class="submenu api-docs-submenu" id="api-docs-submenu"></ul>
+				</li>
+			</ul>
+			<div class="sub-nav-tools">
+				<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-docs#apiExplorer">
+  				<span class="icn_mag"></span>
+  				api explorer &amp; free key
+				</a>
+				<div class="navbar-tools" id="navbar-tools"></div>
 			</div>
-			<a class="navbar-api-explorer-btn btn btn_lrg" href="/api-docs#apiExplorer">
-  			<span class="icn_mag"></span>
-  			api explorer &amp; free key
-			</a>
-			<div class="navbar-tools" id="navbar-tools"></div>
 		</div>
 	</div>
 
 	<div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
-	<div class="page">
-		<section class="api-docs" id="api-docs"></section>
+	<div class="legacy">
+		<div class="page">
+			<section class="api-docs" id="api-docs"></section>
 
-		<section class="apiExplorer hide" id="apiExplorer">
-			<div class="explorerTitle">
-				<div class="line">
-				  <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
+			<section class="apiExplorer hide" id="apiExplorer">
+				<div class="explorerTitle">
+					<div class="line">
+					  <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
+					</div>
 				</div>
-			</div>
-			<div class="explorerWrapper" id="explorerWrapper">
-				<div class="clearfix mbm">
-			  	<form class="unit size1of2" id="apiKeyForm">
-          	<label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
-          	<input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
-        	</form>
-         	<div class="unit size1of2">
-         		<div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
-         	</div>
-			  </div>
-       	<p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
-			  <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
-			</div>
-		</section>
+				<div class="explorerWrapper" id="explorerWrapper">
+					<div class="clearfix mbm">
+				  	<form class="unit size1of2" id="apiKeyForm">
+	          	<label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+	          	<input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+	        	</form>
+	         	<div class="unit size1of2">
+	         		<div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+	         	</div>
+				  </div>
+	       	<p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
+				  <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
+				</div>
+			</section>
+		</div>
 	</div>
 
 	<script>

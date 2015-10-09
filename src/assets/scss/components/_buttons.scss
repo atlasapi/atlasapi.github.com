@@ -1,3 +1,152 @@
+.legacy {
+  .btn {
+    border-radius: 3px;
+    color: #fff;
+    font-size: 16px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+    border: 1px solid #d371a2;
+    padding: 3px 10px;
+    display: inline-block;
+    float: right;
+    vertical-align: center;
+    background-color: #eb80b5;
+    background: -moz-linear-gradient(top, #eb80b5, #ef308f);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eb80b5), to(#ef308f));
+    box-shadow: 0 1px 5px rgba(0,0,0,0.3);
+    line-height: 24px;
+    margin-left: 20px;
+  }
+
+  .btn:hover,
+  .btn:focus,
+  .cbtn:hover,
+  .cbtn:focus {
+    text-decoration: none;
+    border: 1px solid #333;
+    outline: none;
+  }
+
+  .btn:active,
+  .cbtn:active {
+    box-shadow: inset 0 1px 5px rgba(0,0,0,0.4);
+    border: 1px solid #d371a2;
+  }
+
+  .btn[type="submit"] {
+    margin-left: 5px;
+  }
+
+  .btn_lrg {
+    margin-top: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 5px 15px 8px;
+    border: 1px solid #684090;
+    background-color: #8e5dbf;
+    background: -moz-linear-gradient(top, #8e5dbf, #3e126a);
+    background: -webkit-gradient(linear, left top, left bottom, from(#8e5dbf), to(#3e126a));
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.4), 0 1px 5px rgba(0,0,0,0.3);
+    line-height: 26px;
+  }
+
+  .btn_lrg .icn_mag {
+    width: 16px; height: 16px;
+    display: block;
+    float: left;
+    background: url(../images/apiMag.png) center no-repeat;
+    margin: 6px 10px 0 0;
+  }
+
+  .btn_lrg:active {
+    border: 1px solid #684090;
+  }
+
+  .cbtn {
+    border-radius: 3px;
+    color: #fff;
+    font-size: 14px;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+    border: 1px solid #d371a2;
+    padding: 3px 10px 5px;
+    display: inline-block;
+    vertical-align: center;
+    background-color: #eb80b5;
+    background: -moz-linear-gradient(top, #eb80b5, #ef308f);
+    background: -webkit-gradient(linear, left top, left bottom, from(#eb80b5), to(#ef308f));
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2), 0 1px 5px rgba(0,0,0,0.1);
+    line-height: 17px;
+    float: left;
+    margin-top: 10px;
+  }
+
+  .cbtn .icn {
+    width: 16px;
+    height: 16px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .cbtn:hover {
+    text-decoration: none;
+  }
+
+  .cbtn.previous .icn {
+    float: left;
+    margin-right: 3px;
+    background-image: url(../images/arrow_left.png);
+  }
+
+  .cbtn.next {
+    float: right;
+    width: 46px;
+  }
+
+  .cbtn.next .icn {
+    float: right;
+    margin-left: 3px;
+    background-image: url(../images/arrow_right.png);
+  }
+
+  .cbtn.previewNext {
+    width: auto;
+  }
+
+  *:first-child+html .cbtn.previewNext {
+    width: 20px;
+  }
+
+  .cbtn.previewPrev {
+    float: right;
+  }
+
+  .wait {
+    float: right;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    color: #666;
+  }
+
+  .wait .icn {
+    width: 16px;
+    height: 16px;
+    float: right;
+    margin-left: 3px;
+    background: url(../images/sml_loader.gif) center right no-repeat;
+  }
+
+  .btn.inactive, .cbtn.inactive {
+    border: 1px solid #bbb;
+    background-color: #d4d1d2;
+    background: -moz-linear-gradient(top, #d4d1d2, #a7a6a7);
+    background: -webkit-gradient(linear, left top, left bottom, from(#d4d1d2), to(#a7a6a7));
+    cursor: default;
+    position: relative;
+  }
+}
+
 .btn {
   border-radius: 3px;
   color: #fff;
