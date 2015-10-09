@@ -53,8 +53,8 @@
   top: 90%;
   left: 50%;
   display: none;
-  width: 12rem;
-  margin-left: -6rem;
+  width: 16rem;
+  margin-left: -8rem;
   padding: 1rem;
   border: 1px solid #fc0088;
   border-radius: 4px;
@@ -125,12 +125,25 @@
 .dropdown-menu-large {
   width: 20rem;
   margin-left: -10rem;
+
 }
 
 .user-dropdown-menu {
   top: 2.25rem;
   left: auto;
   right: 0;
+}
+
+.user-dropdown-menu li {
+  font: 21px 'Raleway', sans-serif;
+  font-weight: 400;
+}
+
+.user-dropdown-menu a {
+  padding: 10px;
+  display: block;
+  color: #306;
+  text-decoration: none;
 }
 
 .user-dropdown-menu:after {
@@ -140,4 +153,9 @@
 
 .logged-in {
   cursor: pointer;
+}
+
+.navbar-login,
+.user-menu-link {
+  color: #306;
 }
