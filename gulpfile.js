@@ -60,7 +60,6 @@ gulp.task('scripts', function () {
     './src/assets/js/common/encode-query-data.js',
     './src/assets/js/common/atlas-user.js',
     './src/assets/js/login-to-admin.js',
-    // './src/assets/js/highlight-current-page.js',
     './src/assets/js/handleLoggedInStatus.js',
     './src/assets/js/nownextlater-widget.js',
     './src/assets/js/submenus.js',
