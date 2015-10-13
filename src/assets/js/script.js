@@ -70,6 +70,11 @@ $(window).load(function () {
     scrollSpeed: 200
   });
 
+  if (window.location.hash) {
+    var target = window.location.hash;
+    $('.sub-nav').find('a[href=' + target + ']').trigger('click');
+  }
+
   // Initiate tabs if api docs and explorer are present
   if ($('#api-docs').length && $('#apiExplorer').length) {
     uiTabs();
