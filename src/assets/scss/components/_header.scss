@@ -131,7 +131,7 @@
   text-decoration: none;
 }
 
-.sub-nav .selected a {
+.sub-nav .selected > a {
   color: #d80085;
   background: url(../images/selected.gif) center bottom no-repeat;
 }
