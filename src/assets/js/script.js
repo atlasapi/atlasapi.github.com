@@ -4,7 +4,7 @@ $(function () {
 
   // Initiate navigation highlighting
   // highlightCurrentPage.init();
-  $('.sub-nav').onePageNav({
+  $('.sub-nav').not('.docs-nav').onePageNav({
     currentClass: 'selected',
     changeHash: true,
     scrollSpeed: 200
