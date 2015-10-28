@@ -889,6 +889,7 @@ table .status {
   margin: 0;
   padding: 0; }
 
+.selected .dropdown a,
 .dropdown .selected a {
   background: none; }
 
@@ -896,6 +897,12 @@ table .status {
 .has-dropdown:active .dropdown,
 .has-dropdown:focus .dropdown {
   display: block; }
+
+.hide-dropdown,
+.has-dropdown:hover .hide-dropdown,
+.has-dropdown:active .hide-dropdown,
+.has-dropdown:focus .hide-dropdown {
+  display: none; }
 
 .section {
   padding: 1.5rem 0; }

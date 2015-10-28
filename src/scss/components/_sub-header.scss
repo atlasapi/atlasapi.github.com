@@ -90,6 +90,7 @@
   padding: 0;
 }
 
+.selected .dropdown a,
 .dropdown .selected a {
   background: none;
 }
@@ -98,4 +99,11 @@
 .has-dropdown:active .dropdown,
 .has-dropdown:focus .dropdown {
   display: block;
+}
+
+.hide-dropdown,
+.has-dropdown:hover .hide-dropdown,
+.has-dropdown:active .hide-dropdown,
+.has-dropdown:focus .hide-dropdown {
+  display: none;
 }

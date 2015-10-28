@@ -56,4 +56,18 @@ var tooltip = function () {
   });
 };
 
-export {elementListToArray, equalHeightCols, tabbedDisplay, tooltip}
+var dropdowns = function () {
+  $(document).on('click', '.dropdown a', function () {
+    $(this).closest('.dropdown').addClass('hide-dropdown');
+  });
+
+  $(document).on('click', '.has-dropdown', function () {
+    $(this).find('.dropdown').addClass('hide-dropdown');
+  });
+
+  $(document).on('mouseleave', '.has-dropdown', function () {
+    $('.hide-dropdown').removeClass('hide-dropdown');
+  });
+};
+
+export {elementListToArray, equalHeightCols, tabbedDisplay, tooltip, dropdowns}

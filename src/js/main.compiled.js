@@ -150,10 +150,25 @@ var tooltip = function tooltip() {
   });
 };
 
+var dropdowns = function dropdowns() {
+  $(document).on('click', '.dropdown a', function () {
+    $(this).closest('.dropdown').addClass('hide-dropdown');
+  });
+
+  $(document).on('click', '.has-dropdown', function () {
+    $(this).find('.dropdown').addClass('hide-dropdown');
+  });
+
+  $(document).on('mouseleave', '.has-dropdown', function () {
+    $('.hide-dropdown').removeClass('hide-dropdown');
+  });
+};
+
 exports.elementListToArray = elementListToArray;
 exports.equalHeightCols = equalHeightCols;
 exports.tabbedDisplay = tabbedDisplay;
 exports.tooltip = tooltip;
+exports.dropdowns = dropdowns;
 
 },{}],7:[function(require,module,exports){
 'use strict';
@@ -257,6 +272,7 @@ $(window).load(function () {
   });
 
   (0, _libHelpersJs.tooltip)();
+  (0, _libHelpersJs.dropdowns)();
 
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {
