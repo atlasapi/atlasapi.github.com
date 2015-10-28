@@ -1,0 +1,28 @@
+{
+  "name": "fesk",
+  "version": "0.0.0",
+  "authors": [
+    "Lukewh <luke@lukewh.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "exoskeleton": "~0.7.0",
+    "lodash": "~3.7.0",
+    "moment": "~2.10.2",
+    "loglevel": "~1.2.0",
+    "handlebars": "~3.0.3",
+    "jasmine-core": "~2.3.0",
+    "backbone.nativeajax": "~0.3.2",
+    "es6-module-loader": "~0.16.6",
+    "backbone.nativeview": "~0.3.2",
+    "common-style": "git@bitbucket.org:mbst/common-style.git#~0.1.12",
+    "flexslider": "~2.5.0"
+  }
+}

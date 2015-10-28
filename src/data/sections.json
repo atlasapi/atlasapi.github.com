@@ -1,0 +1,34 @@
+{
+  "sections": [
+    {
+      "title": "Home",
+      "containerId": "#home",
+      "templateId": "#home-template"
+    },
+    {
+      "title": "Demo",
+      "containerId": "#demo",
+      "templateId": "#demo-template"
+    },
+    {
+      "title": "Tour",
+      "containerId": "#tour",
+      "templateId": "#tour-template"
+    },
+    {
+      "title": "Case Study",
+      "containerId": "#case-study",
+      "templateId": "#case-study-template"
+    },
+    {
+      "title": "Features",
+      "containerId": "#features",
+      "templateId": "#features-template"
+    },
+    {
+      "title": "About",
+      "containerId": "#about",
+      "templateId": "#about-template"
+    }
+  ]
+}

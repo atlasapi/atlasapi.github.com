@@ -1,0 +1,12 @@
+.list {
+  display: block;
+  margin-left: 1.42rem;
+  margin-top: 1.5rem;
+  
+  > li {
+    font-size: 1.28rem;
+    margin: 0.25em 0;
+  }
+}
+
+ul.list { list-style-type: disc; }

@@ -1,0 +1,15 @@
+.container {
+  @include outer-container(960px);
+  width: 96%;
+}
+
+.row {
+  @include row();
+}
+
+.split {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(6);
+    @include omega(2n);
+  }
+}

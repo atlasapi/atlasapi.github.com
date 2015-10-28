@@ -1,2 +1,13 @@
-/.project
-build/
+node_modules
+npm-debug.log
+
+src/components
+bower_components
+
+build
+
+*.map
+*.compiled.*
+
+src/_css
+src/_index.html

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>atlas - media data router</title>
+    <!-- build:css css/app.css -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+
+    <div class="site-header" id="site-header"></div>
+    <div class="sub-header" id="sub-header"></div>
+    <div class="section section-home" id="home"></div>
+    <div class="section section-alt" id="demo"></div>
+    <div class="section" id="tour"></div>
+    <div class="section section-alt" id="case-study"></div>
+    <div class="section" id="features"></div>
+    <div class="section section-alt" id="about"></div>
+
+    <!-- templates -->
+    <link rel="import" href="templates/header.html">
+    <link rel="import" href="templates/sub-header.html">
+    <link rel="import" href="templates/home.html">
+    <link rel="import" href="templates/demo.html">
+    <link rel="import" href="templates/tour.html">
+    <link rel="import" href="templates/case-study.html">
+    <link rel="import" href="templates/features.html">
+    <link rel="import" href="templates/about.html">
+    <!-- /templates -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- build:js js/app.js -->
+    <script src="components/lodash/lodash.js"></script>
+    <script src="components/handlebars/handlebars.js"></script>
+    <script src="components/loglevel/dist/loglevel.js"></script>
+    <script src="components/moment/moment.js"></script>
+    <script src="components/exoskeleton/exoskeleton.js"></script>
+    <script src="components/backbone.nativeajax/backbone.nativeajax.js"></script>
+    <script src="components/backbone.nativeview/backbone.nativeview.js"></script>
+    <script src="components/flexslider/jquery.flexslider.js"></script>
+    <script src="js/lib/jquery.nav.js"></script>
+    <script src="js/main.compiled.js"></script>
+    <!-- endbuild -->
+
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push([ '_setAccount', 'UA-11621492-3' ]);
+      _gaq.push([ '_trackPageview' ]);
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

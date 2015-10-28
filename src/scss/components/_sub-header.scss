@@ -1,0 +1,53 @@
+.sub-header {
+  width: 100%;
+  border-bottom: 1px solid #306;
+  background: #eee;
+  box-shadow: 1px 1px 7px rgba(0,0,0,0.3);
+
+  @media only screen and (min-width: 700px) {
+    position: fixed;
+    top: 100px;
+    z-index: 1400;
+  }
+}
+
+.sub-nav {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+}
+
+.sub-nav > li {
+  float: left;
+  font-weight: 400;
+  font: 16px 'Raleway', sans-serif;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 18px
+  }
+}
+
+.sub-nav a {
+  padding: 5px;
+  display: block;
+  color: #306;
+  text-decoration: none;
+
+  @media only screen and (min-width: 700px) {
+    padding: 10px 14px;
+  }
+}
+
+.sub-nav a:hover,
+.sub-nav a:active,
+.sub-nav a:focus {
+  color: #ff009a;
+}
+
+.sub-nav .selected a {
+  color: #ff009a;
+  background: url(../img/selected.gif) center bottom no-repeat;
+}

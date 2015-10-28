@@ -1,0 +1,30 @@
+<template id="header-template">
+  <div class="container">
+    {{#if isDev}}
+      <a class="site-logo" href="http://dev.metabroadcast.com"><img src="/img/logo.png" alt="MetaBroadcast"></a>
+    {{else}}
+      <a class="site-logo" href="https://metabroadcast.com"><img src="/img/logo.png" alt="MetaBroadcast"></a>
+    {{/if}}
+    <ul class="site-nav">
+      <li class="nav-atlas">
+        {{#if isDev}}
+          <a href="https://stage.atlas.metabroadcast.com">atlas</a>
+        {{else}}
+          <a href="https://atlas.metabroadcast.com">atlas</a>
+        {{/if}}
+      </li>
+      <li class="nav-voila">
+        {{#if isDev}}
+          <a href="http://voila-stage.metabroadcast.com">voila</a>
+        {{else}}
+          <a href="http://voila.metabroadcast.com">voila</a>
+        {{/if}}
+      </li>
+      <li><a href="https://metabroadcast.com/blog">blog</a></li>
+      <li><a href="https://metabroadcast.com/jobs">jobs</a></li>
+      <li><a href="https://metabroadcast.com/team">team</a></li>
+      <li><a href="https://metabroadcast.com/mentions">mentions</a></li>
+      <li><a href="https://metabroadcast.com/contact">contact</a></li>
+    </ul>
+  </div>
+</template>
