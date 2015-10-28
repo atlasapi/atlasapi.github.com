@@ -639,6 +639,18 @@ img {
   max-width: 100%;
   height: auto; }
 
+a {
+  text-decoration: none; }
+
+a:hover,
+a:active,
+a:focus {
+  text-decoration: underline; }
+
+.unstyled {
+  list-style: none;
+  padding: 0; }
+
 .highlight {
   color: #ff009a; }
 
@@ -1006,5 +1018,36 @@ img {
 
 .youview-logo {
   background-position: -4557px 0px; }
+
+.icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url("../img/icons.png");
+  background-repeat: no-repeat; }
+
+.icon-github {
+  background-position: -192px 0; }
+
+.icon-wiki {
+  background-position: -224px 0; }
+
+.icon-google {
+  background-position: -160px 0; }
+
+.icon-twitter {
+  background-position: 0 0; }
+
+.icon-mbst {
+  background-position: -96px 0; }
+
+.icon-java {
+  background-position: -128px 0; }
+
+.icon-ruby {
+  background-position: -32px 0; }
+
+.icon-python {
+  background-position: -64px 0; }
 
 /*# sourceMappingURL=app.css.map */

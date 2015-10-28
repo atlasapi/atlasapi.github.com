@@ -26,3 +26,18 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover,
+a:active,
+a:focus {
+  text-decoration: underline;
+}
+
+.unstyled {
+  list-style: none;
+  padding: 0;
+}

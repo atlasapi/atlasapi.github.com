@@ -14,15 +14,5 @@ export default Backbone.View.extend({
         templateId: section.get('templateId')
       });
     });
-
-    var slideshowOptions = {
-      animation: 'slide',
-      slideshow: false,
-      animationLoop: false
-    };
-
-    $('.tour-slideshow').flexslider(slideshowOptions);
-    $('.bt-tv-slideshow').flexslider(slideshowOptions);
-    $('.radiotimes-slideshow').flexslider(slideshowOptions);
   }
 });
