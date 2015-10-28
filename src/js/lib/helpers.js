@@ -33,4 +33,27 @@ var tabbedDisplay = function (tabSection) {
   });
 };
 
-export {elementListToArray, equalHeightCols, tabbedDisplay}
+var tooltip = function () {
+  $('.tooltip').each(function (index, tooltip) {
+    var $tooltip = $(tooltip);
+    var tooltipTitle = $tooltip.data('title');
+    var tooltipText = $tooltip.data('text');
+    var $tooltipBody = $('<div class="tooltip-body"></div>');
+    var $tooltipHeading = $('<h4 class="tooltip-heading"></h4>');
+    var $tooltipContent = $('<div class="tooltip-content"></div>');
+
+    $tooltipHeading.text(tooltipTitle);
+    $tooltipContent.text(tooltipText);
+    $tooltipBody
+      .append($tooltipHeading)
+      .append($tooltipContent);
+
+    $tooltip.on('mouseover', function () {
+      $tooltip.append($tooltipBody);
+    }).on('mouseout', function () {
+      $tooltip.find('.tooltip-body').remove();
+    });
+  });
+};
+
+export {elementListToArray, equalHeightCols, tabbedDisplay, tooltip}

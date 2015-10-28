@@ -129,9 +129,31 @@ var tabbedDisplay = function tabbedDisplay(tabSection) {
   });
 };
 
+var tooltip = function tooltip() {
+  $('.tooltip').each(function (index, tooltip) {
+    var $tooltip = $(tooltip);
+    var tooltipTitle = $tooltip.data('title');
+    var tooltipText = $tooltip.data('text');
+    var $tooltipBody = $('<div class="tooltip-body"></div>');
+    var $tooltipHeading = $('<h4 class="tooltip-heading"></h4>');
+    var $tooltipContent = $('<div class="tooltip-content"></div>');
+
+    $tooltipHeading.text(tooltipTitle);
+    $tooltipContent.text(tooltipText);
+    $tooltipBody.append($tooltipHeading).append($tooltipContent);
+
+    $tooltip.on('mouseover', function () {
+      $tooltip.append($tooltipBody);
+    }).on('mouseout', function () {
+      $tooltip.find('.tooltip-body').remove();
+    });
+  });
+};
+
 exports.elementListToArray = elementListToArray;
 exports.equalHeightCols = equalHeightCols;
 exports.tabbedDisplay = tabbedDisplay;
+exports.tooltip = tooltip;
 
 },{}],7:[function(require,module,exports){
 'use strict';
@@ -208,6 +230,8 @@ var _ViewsSectionViewJs = require('./Views/SectionView.js');
 
 var _ViewsSectionViewJs2 = _interopRequireDefault(_ViewsSectionViewJs);
 
+var _libHelpersJs = require('./lib/helpers.js');
+
 (0, _libTemplatesJs.loadTemplates)();
 
 var envInfo = {};
@@ -232,6 +256,8 @@ $(window).load(function () {
     scrollSpeed: 200
   });
 
+  (0, _libHelpersJs.tooltip)();
+
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {
     var target = window.location.hash;
@@ -239,7 +265,7 @@ $(window).load(function () {
   }
 });
 
-},{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
+},{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/helpers.js":6,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
 
 
 //# sourceMappingURL=main.compiled.js.map

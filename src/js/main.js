@@ -3,6 +3,7 @@ import {loadTemplates} from './lib/templates.js';
 import ContentCollection from './Collections/ContentCollection.js';
 import ContentCollectionView from './Views/ContentCollectionView.js';
 import SectionView from './Views/SectionView.js';
+import {tooltip} from './lib/helpers.js';
 
 loadTemplates();
 
@@ -27,6 +28,8 @@ $(window).load(function () {
     changeHash: true,
     scrollSpeed: 200
   });
+
+  tooltip();
 
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {

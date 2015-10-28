@@ -1079,4 +1079,74 @@ table .status {
 .icon-python {
   background-position: -64px 0; }
 
+.example-call {
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid #e7e5e5;
+  padding: 0.75rem;
+  margin: 0 0 1rem;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05); }
+
+.example-call-link {
+  width: 100%;
+  overflow: auto;
+  display: block;
+  margin: 0 0 1rem; }
+
+.example-call-description {
+  border-radius: 5px;
+  padding: 0.25rem 0;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  margin: 0;
+  color: #306;
+  background: linear-gradient(to left top, #e3d7f0, #fff); }
+
+.example-call:nth-child(2n) .example-call-description {
+  background: linear-gradient(to left top, #FFE8F3, #fff); }
+
+.tooltip {
+  position: relative;
+  cursor: pointer;
+  color: #ff009a; }
+
+.tooltip-body {
+  position: absolute;
+  border-radius: 5px;
+  background: #fff;
+  border: 3px solid #ccc;
+  padding: 0.75rem;
+  top: 100%;
+  left: 50%;
+  margin-left: -100px;
+  width: 200px;
+  text-align: left;
+  color: #333;
+  z-index: 1050; }
+  @media only screen and (min-width: 700px) {
+    .tooltip-body {
+      margin-left: -150px;
+      width: 300px; } }
+
+.tooltip-heading {
+  margin: 0;
+  color: #333; }
+
+.tooltip-content {
+  font-size: 1rem; }
+
+.tooltip-body:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(204, 204, 204, 0);
+  border-bottom-color: #ccc;
+  border-width: 10px;
+  margin-left: -10px; }
+
 /*# sourceMappingURL=app.css.map */
