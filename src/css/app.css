@@ -856,6 +856,47 @@ table .status {
   color: #ff009a;
   background: url(../img/selected.gif) center bottom no-repeat; }
 
+.has-dropdown {
+  position: relative; }
+
+.dropdown {
+  display: none;
+  position: absolute;
+  width: 200px;
+  left: 50%;
+  top: 100%;
+  margin-left: -100px;
+  border: 1px solid #ff009a;
+  background: #eee;
+  border-radius: 5px;
+  padding: 0.75rem 0; }
+
+.dropdown:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #ff009a;
+  border-width: 10px;
+  margin-left: -10px; }
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.dropdown .selected a {
+  background: none; }
+
+.has-dropdown:hover .dropdown,
+.has-dropdown:active .dropdown,
+.has-dropdown:focus .dropdown {
+  display: block; }
+
 .section {
   padding: 1.5rem 0; }
 
