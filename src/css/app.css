@@ -1019,12 +1019,20 @@ a:focus {
 .youview-logo {
   background-position: -4557px 0px; }
 
+.icon-list li {
+  line-height: 32px;
+  margin-bottom: 0.5rem; }
+
+.icon-list a {
+  display: block; }
+
 .icon {
   display: inline-block;
   width: 32px;
   height: 32px;
   background-image: url("../img/icons.png");
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat;
+  vertical-align: middle; }
 
 .icon-github {
   background-position: -192px 0; }
