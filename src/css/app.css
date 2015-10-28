@@ -651,8 +651,29 @@ a:focus {
   list-style: none;
   padding: 0; }
 
+hr {
+  margin: 1.5rem 0;
+  border-width: 1px 0 0;
+  border-style: dashed;
+  border-color: #ccc; }
+
+table {
+  margin: 0 0 1.5rem; }
+
+th {
+  text-align: left; }
+
+table .status {
+  text-align: center; }
+
 .highlight {
   color: #ff009a; }
+
+.message {
+  background: #fdf8da;
+  border: 1px solid #feef97;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px; }
 
 .site-header {
   width: 100%;

@@ -41,3 +41,22 @@ a:focus {
   list-style: none;
   padding: 0;
 }
+
+hr {
+  margin: 1.5rem 0;
+  border-width: 1px 0 0;
+  border-style: dashed;
+  border-color: #ccc;
+}
+
+table {
+  margin: 0 0 1.5rem;
+}
+
+th {
+  text-align: left;
+}
+
+table .status {
+  text-align: center;
+}
