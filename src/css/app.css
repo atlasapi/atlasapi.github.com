@@ -1149,4 +1149,7 @@ table .status {
   border-width: 10px;
   margin-left: -10px; }
 
+.epg-widget {
+  height: 450px; }
+
 /*# sourceMappingURL=app.css.map */

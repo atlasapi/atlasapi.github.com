@@ -41,6 +41,25 @@
     <script src="js/main.compiled.js"></script>
     <!-- endbuild -->
 
+    <script src="https://widgets.metabroadcast.com/loader/1/load.js"></script>
+        <script>
+            MBST = MBST || {};
+            MBST.load({
+                client: 'atlasNowNextLater',
+                widgets: [
+                    {
+                        name: 'epg',
+                        version: '1',
+                        modules: {
+                            grid: {
+                                holder: '.epg-widget'
+                            }
+                        }
+                    }
+                ]
+            });
+        </script>
+
     <script>
       var _gaq = _gaq || [];
       _gaq.push([ '_setAccount', 'UA-11621492-3' ]);
