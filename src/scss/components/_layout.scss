@@ -13,3 +13,15 @@
     @include omega(2n);
   }
 }
+
+.span-9 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(9);
+  }
+}
+
+.span-3 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(3);
+  }
+}

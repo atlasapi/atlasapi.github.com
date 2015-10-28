@@ -22,7 +22,6 @@
     "backbone.nativeajax": "~0.3.2",
     "es6-module-loader": "~0.16.6",
     "backbone.nativeview": "~0.3.2",
-    "common-style": "git@bitbucket.org:mbst/common-style.git#~0.1.12",
-    "flexslider": "~2.5.0"
+    "common-style": "git@bitbucket.org:mbst/common-style.git#~0.1.12"
   }
 }
