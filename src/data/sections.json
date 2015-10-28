@@ -6,24 +6,19 @@
       "templateId": "#home-template"
     },
     {
-      "title": "Demo",
-      "containerId": "#demo",
-      "templateId": "#demo-template"
+      "title": "Widgets",
+      "containerId": "#widgets",
+      "templateId": "#widgets-template"
     },
     {
-      "title": "Tour",
-      "containerId": "#tour",
-      "templateId": "#tour-template"
+      "title": "Examples",
+      "containerId": "#examples",
+      "templateId": "#examples-template"
     },
     {
-      "title": "Case Study",
-      "containerId": "#case-study",
-      "templateId": "#case-study-template"
-    },
-    {
-      "title": "Features",
-      "containerId": "#features",
-      "templateId": "#features-template"
+      "title": "Reference",
+      "containerId": "#reference",
+      "templateId": "#reference-template"
     },
     {
       "title": "About",

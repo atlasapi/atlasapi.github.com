@@ -218,8 +218,6 @@ var _ViewsSectionViewJs = require('./Views/SectionView.js');
 
 var _ViewsSectionViewJs2 = _interopRequireDefault(_ViewsSectionViewJs);
 
-var _libHelpersJs = require('./lib/helpers.js');
-
 (0, _libTemplatesJs.loadTemplates)();
 
 var envInfo = {};
@@ -238,15 +236,11 @@ $(function () {
 });
 
 $(window).load(function () {
-  (0, _libHelpersJs.equalHeightCols)();
-
   $('.sub-nav').onePageNav({
     currentClass: 'selected',
     changeHash: true,
     scrollSpeed: 200
   });
-
-  (0, _libHelpersJs.tabbedDisplay)(".tabs");
 
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {
@@ -255,9 +249,7 @@ $(window).load(function () {
   }
 });
 
-$(window).on('resize', _.debounce(_libHelpersJs.equalHeightCols, 250));
-
-},{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/helpers.js":6,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
+},{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
 
 
 //# sourceMappingURL=main.compiled.js.map

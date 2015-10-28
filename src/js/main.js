@@ -3,7 +3,6 @@ import {loadTemplates} from './lib/templates.js';
 import ContentCollection from './Collections/ContentCollection.js';
 import ContentCollectionView from './Views/ContentCollectionView.js';
 import SectionView from './Views/SectionView.js';
-import {equalHeightCols, tabbedDisplay} from './lib/helpers.js';
 
 loadTemplates();
 
@@ -23,15 +22,11 @@ $(function () {
 });
 
 $(window).load(function () {
-  equalHeightCols();
-
   $('.sub-nav').onePageNav({
     currentClass: 'selected',
     changeHash: true,
     scrollSpeed: 200
   });
-
-  tabbedDisplay(".tabs");
 
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {
@@ -39,5 +34,3 @@ $(window).load(function () {
     $('.sub-nav').find('a[href=' + target + ']').trigger('click');
   }
 });
-
-$(window).on('resize', _.debounce(equalHeightCols, 250));
