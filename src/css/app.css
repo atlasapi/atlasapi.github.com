@@ -754,7 +754,8 @@ table .status {
 .nav-atlas a:hover,
 .nav-atlas a:active,
 .nav-atlas a:focus {
-  background-position: 0 -52px; }
+  background-position: 0 -52px;
+  background-color: #eee; }
 
 .nav-voila a:hover,
 .nav-voila a:active,
