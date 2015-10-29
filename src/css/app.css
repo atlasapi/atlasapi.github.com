@@ -907,6 +907,10 @@ table .status {
 .section {
   padding: 1.5rem 0; }
 
+.section-home li {
+  font-size: 1rem;
+  margin: 0.75rem 0; }
+
 @media only screen and (min-width: 700px) {
   .section-home {
     margin-top: 141px; } }
