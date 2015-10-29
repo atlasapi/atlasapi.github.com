@@ -1,0 +1,28 @@
+<template id="carousel-template">
+  <div class="carousel">
+    {{#each this}}
+      <div class="widget-panel carousel-slide">
+        <div class="widget-image-container">
+          <img class="widget-programme-image" src="" alt="{{programme_title}}" data-src="http://users-images-atlas.metabroadcast.com/?source={{image}}&resize=460">
+        </div>
+        <div class="widget-programme-info">
+          <div class="widget-programme-info-inner clearfix">
+            <div class="widget-programme-details">
+              <div class="widget-programme-start-time">{{start_time_string}}</div>
+              <div class="widget-programme-title">{{programme_title}}</div>
+            </div>
+            {{#if channel_logo}}
+              <img class="widget-channel-logo" src="" alt="{{channel.title}}" data-src="{{channel_logo}}">
+            {{/if}}
+          </div>
+          <div class="widget-api-call">
+            <a href="https://atlas.metabroadcast.com/3.0/search.json?q={{title}}&limit=2">
+              https://atlas.metabroadcast.com/3.0/search.json?q={{title}}&limit=2
+            </a>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+</template>

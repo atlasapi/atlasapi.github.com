@@ -1,0 +1,19 @@
+<template id="fullscreen-template">
+  <div class="widget-panel">
+    <div class="widget-image-container">
+      <img class="widget-programme-image" src="https://users-images-atlas.metabroadcast.com/?source={{image}}&resize=460" alt="{{programme_title}}">
+    </div>
+    <div class="widget-programme-info">
+      <div class="widget-programme-info-inner clearfix">
+        <div class="widget-programme-details">
+          <div class="widget-programme-start-time">{{start_time_string}}</div>
+          <div class="widget-programme-title">{{programme_title}}</div>
+        </div>
+        {{#if channel_logo}}
+          <img class="widget-channel-logo" src="{{channel_logo}}" alt="{{channel.title}}">
+        {{/if}}
+      </div>
+    </div>
+  </div>
+
+</template>

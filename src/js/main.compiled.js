@@ -279,6 +279,10 @@ $(window).load(function () {
     var target = window.location.hash;
     $('.sub-nav').find('a[href=' + target + ']').trigger('click');
   }
+
+  // Initiate now next widget
+  var nowNextLater = new NowNextLater();
+  nowNextLater.init();
 });
 
 },{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/helpers.js":6,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])

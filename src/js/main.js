@@ -37,4 +37,8 @@ $(window).load(function () {
     var target = window.location.hash;
     $('.sub-nav').find('a[href=' + target + ']').trigger('click');
   }
+
+  // Initiate now next widget
+  var nowNextLater = new NowNextLater();
+  nowNextLater.init();
 });
