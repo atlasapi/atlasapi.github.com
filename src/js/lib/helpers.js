@@ -70,4 +70,11 @@ var dropdowns = function () {
   });
 };
 
-export {elementListToArray, equalHeightCols, tabbedDisplay, tooltip, dropdowns}
+var toggleSelectedNavItem = function () {
+  if ($('.dropdown').find('.selected')) {
+    var $selectedItem = $('.dropdown').find('.selected');
+    $selectedItem.closest('.has-dropdown').addClass('selected');
+  }
+};
+
+export {elementListToArray, equalHeightCols, tabbedDisplay, tooltip, dropdowns, toggleSelectedNavItem}

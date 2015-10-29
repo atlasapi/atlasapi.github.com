@@ -3,7 +3,7 @@ import {loadTemplates} from './lib/templates.js';
 import ContentCollection from './Collections/ContentCollection.js';
 import ContentCollectionView from './Views/ContentCollectionView.js';
 import SectionView from './Views/SectionView.js';
-import {tooltip, dropdowns} from './lib/helpers.js';
+import {tooltip, dropdowns, toggleSelectedNavItem} from './lib/helpers.js';
 
 loadTemplates();
 
@@ -42,3 +42,5 @@ $(window).load(function () {
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 });
+
+$(window).on('scroll', _.debounce(toggleSelectedNavItem, 250));

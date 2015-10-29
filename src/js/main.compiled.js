@@ -164,11 +164,19 @@ var dropdowns = function dropdowns() {
   });
 };
 
+var toggleSelectedNavItem = function toggleSelectedNavItem() {
+  if ($('.dropdown').find('.selected')) {
+    var $selectedItem = $('.dropdown').find('.selected');
+    $selectedItem.closest('.has-dropdown').addClass('selected');
+  }
+};
+
 exports.elementListToArray = elementListToArray;
 exports.equalHeightCols = equalHeightCols;
 exports.tabbedDisplay = tabbedDisplay;
 exports.tooltip = tooltip;
 exports.dropdowns = dropdowns;
+exports.toggleSelectedNavItem = toggleSelectedNavItem;
 
 },{}],7:[function(require,module,exports){
 'use strict';
@@ -284,6 +292,8 @@ $(window).load(function () {
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
 });
+
+$(window).on('scroll', _.debounce(_libHelpersJs.toggleSelectedNavItem, 250));
 
 },{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/helpers.js":6,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
 

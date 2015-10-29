@@ -893,6 +893,12 @@ table .status {
   margin: 0;
   padding: 0; }
 
+.selected .dropdown a {
+  color: #306; }
+
+.dropdown .selected a {
+  color: #ff009a; }
+
 .selected .dropdown a,
 .dropdown .selected a {
   background: none; }
