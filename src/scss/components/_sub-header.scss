@@ -53,6 +53,11 @@
   background: url(../img/selected.gif) center bottom no-repeat;
 }
 
+// Hidden so nav highlighting works as expected
+.sub-nav-home {
+  display: none;
+}
+
 .has-dropdown {
   position: relative;
 }
