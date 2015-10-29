@@ -417,13 +417,14 @@ NowNextLater.prototype.setupCarousel = function () {
   var template = Handlebars.compile($('#carousel-template').html());
   $('#carousel-widget-container').html(template(programmeData));
 
-  $('#carousel-widget-container').hide();
+  $('.carousel').hide();
 
   nowNextLater.preloadCarouselImages('.carousel-slide:first-child', '.widget-programme-image');
   nowNextLater.preloadCarouselImages('.carousel-slide:first-child', '.widget-channel-logo');
 
   $('.carousel-slide:first-child .widget-programme-image').on('load', function () {
-    $('#carousel-widget-container').fadeIn();
+    $('#carousel-widget-container').removeClass('carousel-widget-container-empty');
+    $('.carousel').fadeIn();
   });
 
   $('.carousel-slide:gt(0)').hide();
