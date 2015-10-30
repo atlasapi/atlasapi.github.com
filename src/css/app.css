@@ -823,6 +823,7 @@ table .status {
       z-index: 1400; } }
 
 .sub-nav {
+  float: left;
   position: relative;
   list-style: none;
   margin: 0;
@@ -830,6 +831,9 @@ table .status {
   text-align: left;
   list-style: none;
   text-transform: lowercase; }
+
+.sub-nav-tools {
+  float: right; }
 
 .sub-nav > li {
   float: left;
@@ -913,6 +917,25 @@ table .status {
 .has-dropdown:active .hide-dropdown,
 .has-dropdown:focus .hide-dropdown {
   display: none; }
+
+.navbar-user {
+  position: relative; }
+
+.profile-picture {
+  float: right;
+  width: 25px;
+  height: 25px;
+  margin: 6px 0 0 8px;
+  border-radius: 50%; }
+
+.user-avatar {
+  display: block;
+  padding-right: 6px; }
+
+.user-name {
+  float: left;
+  margin: 9px 0 0;
+  font-size: 14px; }
 
 .section {
   padding: 1.5rem 0; }

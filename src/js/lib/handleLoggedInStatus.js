@@ -2,15 +2,11 @@ var handleLoggedInStatus = (function () {
   'use strict';
 
   var loadUserDataTemplate = function (data) {
-    loadTemplate({
-      templatePath: '../templates/logged-in.ejs',
-      templateContainer: '#navbar-tools'
-    }, data);
+    var template = Handlebars.compile($('#logged-in-template').html());
+    $('#navbar-tools').html(template(data));
     if (data.user.role === 'admin') {
-      loadTemplate({
-        templatePath: '../templates/admin-menu.ejs',
-        templateContainer: '#admin-menu'
-      });
+      var adminTemplate = Handlebars.compile($('#admin-menu-template').html());
+      $('#admin-menu').html(adminTemplate());
     }
     loadUserPhoto();
   };
@@ -26,44 +22,27 @@ var handleLoggedInStatus = (function () {
 
   var loadApplicationsTemplate = function (data) {
     data = sortApplicationsByDateDescending(data);
-    loadTemplate({
-      templatePath: '../templates/apps-menu.ejs',
-      templateContainer: '#apps-menu'
-    }, data);
+    var template = Handlebars.compile($('#apps-menu-template').html());
+    $('#apps-menu').html(template(data));
   };
 
   var loadGroupsTemplate = function (data) {
     if (data.length) {
-      loadTemplate({
-        templatePath: '../templates/content-menu.ejs',
-        templateContainer: '#content-menu'
-      }, data);
+      var template = Handlebars.compile($('#content-menu-template').html());
+      $('#content-menu').html(template(data));
     }
   };
 
-  var loadTemplate = function (templateInfo, data) {
-    var data = data || {},
-        template;
-    template = new EJS({
-      url: templateInfo.templatePath
-    }).render(data);
-    $(templateInfo.templateContainer).html(template);
-  };
-
   var loadNavigationTemplate = function () {
-    var template = new EJS({
-      url: '../templates/user-navigation.ejs'
-    }).render();
-    $('#sub-nav').append(template);
+    var template = Handlebars.compile($('#user-navigation-template').html());
+    $('#sub-nav').append(template());
   };
 
   var logout = function () {
     localStorage.removeItem('auth.provider');
     localStorage.removeItem('auth.token');
-    loadTemplate({
-      templatePath: '../templates/logged-out.ejs',
-      templateContainer: '#navbar-tools'
-    });
+    var template = Handlebars.compile($('#logged-out-template').html());
+    $('#navbar-tools').html(template());
     $('.user-menu').each(function () {
       $(this).empty();
     });
@@ -109,10 +88,8 @@ var handleLoggedInStatus = (function () {
       atlasUser.getUserData('//atlas-admin-backend.metabroadcast.com/api/user/groups?' + credentialsQueryString, loadGroupsTemplate);
       events();
     } else {
-      loadTemplate({
-        templatePath: '../templates/logged-out.ejs',
-        templateContainer: '#navbar-tools'
-      });
+      var template = Handlebars.compile($('#logged-out-template').html());
+      $('#navbar-tools').html(template());
     }
   }
 })();

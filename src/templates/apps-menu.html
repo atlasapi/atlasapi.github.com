@@ -1,7 +1,8 @@
 <template id="apps-menu-template">
   <a class="user-menu-link" href="#">Apps</a>
   <ul class="apps-dropdown submenu dropdown-menu-large">
-    <% if (this.applications.length) { %>
+    {{#if applications}}
+      {{#each this}}
       <% for (var i = 0; i < 3; i++) { %>
         <li class="application-link">
           <a href="/admin?#/applications/<%= this.applications[i].id %>">
@@ -10,7 +11,7 @@
         </li>
       <% } %>
       <li class="menu-separator"></li>
-    <% } %>
+    {{/if}}
     <li><a href="/admin?#/applications">All applications&hellip;</a></li>
     <li><a href="/admin?#/wishlist">Wishlist</a></li>
   </ul>
