@@ -1,19 +1,21 @@
 <template id="apps-menu-template">
   <a class="user-menu-link" href="#">Apps</a>
-  <ul class="apps-dropdown dropdown">
-    {{#if applications}}
-      <li class="applications-link">
-        <a href="/admin?#/applications/{{applications.1.id}}">{{applications.1.title}}</a>
-      </li>
-      <li class="applications-link">
-        <a href="/admin?#/applications/{{applicaitons.2.id}}">{{applications.2.title}}</a>
-      </li>
-      <li class="applications-link">
-        <a href="/admin?#/applications/{{applications.3.id}}">{{applications.3.title}}</a>
-      </li>
-      <li class="menu-separator">
-    {{/if}}
-    <li><a href="/admin?#/applications">All applications&hellip;</a></li>
-    <li><a href="/admin?#/wishlist">Wishlist</a></li>
-  </ul>
+  <div class="dropdown">
+    <ul>
+      {{#if applications}}
+        <li class="applications-link">
+          <a href="/admin?#/applications/{{applications.1.id}}">{{applications.1.title}}</a>
+        </li>
+        <li class="applications-link">
+          <a href="/admin?#/applications/{{applicaitons.2.id}}">{{applications.2.title}}</a>
+        </li>
+        <li class="applications-link">
+          <a href="/admin?#/applications/{{applications.3.id}}">{{applications.3.title}}</a>
+        </li>
+        <li class="menu-separator"></li>
+      {{/if}}
+      <li><a href="/admin?#/applications">All applications&hellip;</a></li>
+      <li><a href="/admin?#/wishlist">Wishlist</a></li>
+    </ul>
+  </div>
 </template>

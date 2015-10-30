@@ -28,6 +28,22 @@ var handleLoggedInStatus = (function () {
 
   var loadGroupsTemplate = function (data) {
     if (data.length) {
+      data.forEach(function (group) {
+        if (group.name === 'BTBlackout') {
+          group.title = 'EPG';
+          group.url = '/admin?#/epg/bt-tv';
+        }
+        if (group.name === 'BBC-YV-Feed') {
+          group.title = 'Feeds';
+          group.url = '/admin?#/feeds';
+        }
+        if (group.name === 'BBC-Scrubbables') {
+          group.title = 'Scrubbables';
+          group.url = '/admin?#/scrubbables';
+        }
+      });
+
+      console.log('data', data);
       var template = Handlebars.compile($('#content-menu-template').html());
       $('#content-menu').html(template(data));
     }

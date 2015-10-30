@@ -1,18 +1,10 @@
 <template id="content-menu-template">
   <a class="user-menu-link" href="#">Content</a>
-  <ul class="content-dropdown submenu">
-    {{# each this}}
-      <li>
-        {{#if name desired="BTBlackout" type=type}}
-          <a href="/admin?#/epg/bt-tv">EPG</a>
-        {{/if}}
-        {{#if name desired="BBC-YV-Feed" type=type}}
-          <a href="/admin?#/feeds">Feeds</a>
-        {{/if}}
-        {{#if name desired="BBC-Scrubbables" type=type}}
-          <a href="/admin?#/scrubbables">Scrubbables</a>
-        {{/if}}
-      </li>
-    {{/each}}
-  </ul>
+  <div class="dropdown">
+    <ul>
+      {{# each this}}
+        <li><a href="{{url}}">{{title}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
 </template>
