@@ -905,12 +905,17 @@ table .status {
     .dropdown a {
       padding: 10px 14px; } }
 
-.navbar-tools a {
+.dropdown a:hover,
+.dropdown a:active,
+.dropdown a:focus {
+  color: #ff009a; }
+
+.user-name {
   color: #306; }
 
-.navbar-tools a:hover,
-.navbar-tools a:active,
-.navbar-tools a:focus {
+.user-name:hover,
+.user-name:active,
+.user-name:focus {
   color: #ff009a; }
 
 .dropdown ul {
