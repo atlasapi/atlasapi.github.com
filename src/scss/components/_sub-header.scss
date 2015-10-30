@@ -13,17 +13,23 @@
 }
 
 .sub-nav {
-  float: left;
   position: relative;
   list-style: none;
   margin: 0;
   padding: 0;
   text-align: left;
   list-style: none;
+
+  @media only screen and (min-width: 700px) {
+    float: left;
+  }
 }
 
 .sub-nav-tools {
-  float: right;
+
+  @media only screen and (min-width: 700px) {
+    float: right;
+  }
 }
 
 .sub-nav > li {
@@ -202,8 +208,6 @@
 }
 
 .api-explorer-btn {
-  position: absolute;
-  left: 101%;
   min-width: 220px;
   display: inline-block;
   background: $secondary-color;
@@ -211,6 +215,11 @@
   border-radius: 5px;
   padding: 0.25rem 0.5rem;
   margin-top: 0.3rem;
+
+  @media only screen and (min-width: 700px) {
+    position: absolute;
+    left: 101%;
+  }
 }
 
 .api-explorer-btn:hover,
