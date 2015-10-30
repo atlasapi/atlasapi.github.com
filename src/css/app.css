@@ -565,7 +565,8 @@ tr:nth-child(even) {
   max-width: 960px;
   margin-left: auto;
   margin-right: auto;
-  width: 96%; }
+  width: 96%;
+  position: relative; }
   .container::after {
     clear: both;
     content: "";
@@ -979,6 +980,33 @@ table .status {
   padding: 0.25rem 0.5rem;
   margin-top: 0.3rem; }
 
+.api-explorer-btn {
+  position: absolute;
+  left: 101%;
+  min-width: 220px;
+  display: inline-block;
+  background: #306;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.3rem; }
+
+.api-explorer-btn:hover,
+.api-explorer-btn:active,
+.api-explorer-btn:focus {
+  color: #fff; }
+
+.icon-search {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../img/icon-search.png) 0 0 no-repeat; }
+
+.api-explorer-btn .icon-search {
+  position: relative;
+  top: 0.2rem;
+  margin-right: 0.25rem; }
+
 .navbar-login:hover,
 .navbar-login:active,
 .navbar-login:focus {
@@ -1057,6 +1085,10 @@ table .status {
 
 .btn-twitter {
   background-color: #55ACEE; }
+
+.menu-separator {
+  border-bottom: 1px solid #ccc;
+  margin: 0 14px; }
 
 .section {
   padding: 1.5rem 0; }

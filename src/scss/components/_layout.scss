@@ -1,6 +1,7 @@
 .container {
   @include outer-container(960px);
   width: 96%;
+  position: relative;
 }
 
 .row {

@@ -288,8 +288,6 @@ $(window).load(function () {
   (0, _libHelpersJs.dropdowns)();
   handleLoggedInStatus();
 
-  console.log('loggedIn', atlasUser.isLoggedIn());
-
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {
     var target = window.location.hash;
