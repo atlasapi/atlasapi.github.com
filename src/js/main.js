@@ -31,6 +31,7 @@ $(window).load(function () {
 
   tooltip();
   dropdowns();
+  handleLoggedInStatus();
 
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {

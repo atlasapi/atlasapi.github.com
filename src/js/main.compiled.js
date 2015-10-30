@@ -281,6 +281,7 @@ $(window).load(function () {
 
   (0, _libHelpersJs.tooltip)();
   (0, _libHelpersJs.dropdowns)();
+  handleLoggedInStatus();
 
   // Makes sure correct nav item is highlighted
   if (window.location.hash) {
