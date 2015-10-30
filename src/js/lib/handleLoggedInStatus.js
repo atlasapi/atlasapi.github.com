@@ -43,7 +43,6 @@ var handleLoggedInStatus = (function () {
         }
       });
 
-      console.log('data', data);
       var template = Handlebars.compile($('#content-menu-template').html());
       $('#content-menu').html(template(data));
     }
