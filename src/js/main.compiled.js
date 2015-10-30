@@ -270,6 +270,11 @@ $(function () {
   var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
   $('#site-header').html(headerTemplate(envInfo));
   $('#sub-header').html(subHeaderTemplate);
+
+  $(document).on('click', '.navbar-login', function (e) {
+    e.preventDefault();
+    loginToAdmin();
+  });
 });
 
 $(window).load(function () {

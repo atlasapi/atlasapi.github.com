@@ -937,6 +937,94 @@ table .status {
   margin: 9px 0 0;
   font-size: 14px; }
 
+.navbar-login {
+  text-transform: lowercase;
+  display: inline-block;
+  background: #ff009a;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.25rem; }
+
+.navbar-login:hover,
+.navbar-login:active,
+.navbar-login:focus {
+  background: #306;
+  color: #fff; }
+
+.loginWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1600; }
+
+.loginHolder {
+  width: 520px;
+  height: auto;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -275px;
+  background: #fff;
+  border-radius: 6px;
+  padding: 30px;
+  text-align: center; }
+
+.signInBtn {
+  border-radius: 6px;
+  color: #fff;
+  width: 260px;
+  cursor: pointer;
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  overflow: hidden;
+  padding: 10px 0px 10px 61px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-shadow: none;
+  margin: 0 auto 20px; }
+
+.signInBtn:hover {
+  text-decoration: none;
+  color: #fff; }
+
+.unit .signInBtn {
+  margin-right: 10px; }
+
+.lastUnit .signInBtn {
+  margin-right: 0;
+  margin-left: 10px; }
+
+.signInBtn .fa {
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  text-align: center;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: 32px;
+  width: 45px;
+  line-height: 45px; }
+
+.btn-github {
+  background-color: #444; }
+
+.btn-google {
+  background-color: #DD4B39; }
+
+.btn-twitter {
+  background-color: #55ACEE; }
+
 .section {
   padding: 1.5rem 0; }
 
