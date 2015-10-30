@@ -3,6 +3,7 @@
   border-bottom: 1px solid #306;
   background: #eee;
   box-shadow: 1px 1px 7px rgba(0,0,0,0.3);
+  text-transform: lowercase;
 
   @media only screen and (min-width: 700px) {
     position: fixed;
@@ -19,7 +20,6 @@
   padding: 0;
   text-align: left;
   list-style: none;
-  text-transform: lowercase;
 }
 
 .sub-nav-tools {
@@ -94,6 +94,32 @@
   margin-left: -10px;
 }
 
+.dropdown li {
+  font-weight: 400;
+  font: 16px 'Raleway', sans-serif;
+}
+
+.dropdown a {
+  padding: 5px;
+  display: block;
+  color: #306;
+  text-decoration: none;
+
+  @media only screen and (min-width: 700px) {
+    padding: 10px 14px;
+  }
+}
+
+.navbar-tools a {
+  color: $secondary-color;
+}
+
+.navbar-tools a:hover,
+.navbar-tools a:active,
+.navbar-tools a:focus {
+  color: $primary-color;
+}
+
 .dropdown ul {
   list-style: none;
   margin: 0;
@@ -126,37 +152,47 @@
   display: none;
 }
 
-.navbar-user {
-  position: relative;
-}
-
 .profile-picture {
   float: right;
-  width: 25px;
-  height: 25px;
-  margin: 6px 0 0 8px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
+}
+
+.user-menu-link {
+  padding: 0.3rem 0;
+}
+
+.user-menu-link:before,
+.user-menu-link:after {
+  content: " ";
+  display: table;
+}
+
+.user-menu-link:after {
+  clear: both;
 }
 
 .user-avatar {
   display: block;
-  padding-right: 6px;
+}
+
+.profile-picture {
+  margin-left: 0.5rem;
 }
 
 .user-name {
   float: left;
-  margin: 9px 0 0;
-  font-size: 14px;
+  margin: 0.3rem 0 0;
 }
 
 .navbar-login {
-  text-transform: lowercase;
   display: inline-block;
   background: $primary-color;
   color: #fff;
   border-radius: 5px;
   padding: 0.25rem 0.5rem;
-  margin-top: 0.25rem;
+  margin-top: 0.3rem;
 }
 
 .navbar-login:hover,
