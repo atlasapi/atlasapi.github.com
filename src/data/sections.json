@@ -24,6 +24,11 @@
       "title": "About",
       "containerId": "#about",
       "templateId": "#about-template"
+    },
+    {
+      "title": "API Documentation",
+      "containerId": "#api-docs",
+      "templateId": "#api-docs-template"
     }
   ]
 }

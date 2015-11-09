@@ -1106,6 +1106,10 @@ table .status {
   .section-home {
     margin-top: 141px; } }
 
+@media only screen and (min-width: 700px) {
+  .section-api-docs {
+    margin-top: 118px; } }
+
 .well {
   margin: 1.5rem 0;
   padding: 1rem;
@@ -1115,6 +1119,10 @@ table .status {
 
 .well-condensed {
   padding: 0.5rem; }
+
+.section-api-docs .well {
+  margin-top: 0;
+  border-radius: 0 0 5px 5px; }
 
 .client-list {
   list-style: none;

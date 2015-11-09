@@ -282,10 +282,17 @@ $(function () {
 });
 
 $(window).load(function () {
-  $('.sub-nav').onePageNav({
-    currentClass: 'selected',
-    changeHash: true,
-    scrollSpeed: 200
+  if ($('#home').length) {
+    $('.sub-nav').onePageNav({
+      currentClass: 'selected',
+      changeHash: true,
+      scrollSpeed: 200
+    });
+  }
+
+  // Initiate API Docs
+  apiData.init(function (data) {
+    console.log('data', data);
   });
 
   (0, _libHelpersJs.tooltip)();
