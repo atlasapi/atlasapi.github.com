@@ -104,8 +104,7 @@ gulp.task('templates', ['scss', '6to5'], function () {
 gulp.task('useref', ['templates'], function () {
   var assets = useref.assets();
 
-  return gulp.src('./src/_index.html')
-    .pipe(rename('index.html'))
+  return gulp.src('./src/**/*.html')
     .pipe(assets)
     .pipe(gulpif('*.js', uglify()))
     .pipe(gulpif('*.css', minify()))
