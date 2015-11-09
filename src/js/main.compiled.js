@@ -13,7 +13,7 @@ var _ModelsSectionModelJs2 = _interopRequireDefault(_ModelsSectionModelJs);
 
 exports['default'] = Backbone.Collection.extend({
   model: _ModelsSectionModelJs2['default'],
-  url: 'data/sections.json',
+  url: '/data/sections.json',
   parse: function parse(response) {
     return response.sections;
   }
@@ -68,12 +68,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = Backbone.View.extend({
   initialize: function initialize(options) {
-    this.template = Handlebars.compile($(options.templateId).html());
-    this.render();
+    if ($(options.templateId)) {
+      this.template = Handlebars.compile($(options.templateId).html());
+      this.render();
+    }
   },
 
   render: function render() {
-    this.el.innerHTML = this.template();
+    if (this.el) {
+      this.el.innerHTML = this.template();
+    }
   }
 });
 module.exports = exports["default"];
