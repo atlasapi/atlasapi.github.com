@@ -24,7 +24,7 @@ var apiDocs = (function () {
       error: function (jqXHR, textStatus, errorThrown) {
         log.error(errorThrown);
       }
-    })
+    });
   };
 
   var combineTypesAndResources = function (typesData, resourcesData) {
@@ -56,14 +56,12 @@ var apiDocs = (function () {
       typesToLink.push(type.name);
     });
     apiData.typesToLink = typesToLink;
-    var compiledTemplate = new EJS({
-      url: '../templates/api-docs.ejs'
-    }).render(apiData);
-    $('#api-docs').html(compiledTemplate);
-    populateExampleResponse(apiData);
-    getResponseData(apiData);
-    linkToApiExplorer();
-    linkResponseToTypes();
+    var template = Handlebars.compile($('#api-docs-template').html());
+    $('#api-docs').html(template(apiData));
+    // populateExampleResponse(apiData);
+    // getResponseData(apiData);
+    // linkToApiExplorer();
+    // linkResponseToTypes();
     $('#apiKey').on('change', function () {
       populateExampleResponse(apiData);
     });
@@ -74,6 +72,7 @@ var apiDocs = (function () {
       var target = window.location.hash;
       $('a[href="' + target + '"]').trigger('click');
     }
+    uiTabs();
   };
 
   var hideEmptyTables = function () {
@@ -86,11 +85,9 @@ var apiDocs = (function () {
 
   var populateExampleResponse = function (apiData) {
     _.forEach(apiData.resources, function (resource) {
-      var compiledTemplate = new EJS({
-        url: '../templates/api-docs-example-response.ejs'
-      }).render(resource);
+      var template = Handlebars.compile($('#api-docs-example-response-template').html());
       var $endpointContainer = $('#api-docs-' + resource.name);
-      $endpointContainer.find('.api-docs-example-response').html(compiledTemplate);
+      $endpointContainer.find('.api-docs-example-response').html(template(resource));
       $.ajax({
         url: $('#api-' + resource.name).find('.queryUrl').val(),
         success: function (data) {
@@ -126,10 +123,8 @@ var apiDocs = (function () {
         url: resource.model_class_link,
         success: function (data) {
           data.typesToLink = typesToLink;
-          var compiledTemplate = new EJS({
-            url: '../templates/api-docs-response.ejs'
-          }).render(data);
-          $('#api-docs-' + resource.name).find('.api-docs-response').html(compiledTemplate);
+          var template = Handlebars.compile($('#api-docs-response-template').html());
+          $('#api-docs-' + resource.name).find('.api-docs-response').html(template(data));
         },
         error: function (jqXHR, textStatus, errorThrown) {
           log.error(errorThrown);

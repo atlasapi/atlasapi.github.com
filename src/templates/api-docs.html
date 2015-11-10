@@ -1,8 +1,169 @@
 <template id="api-docs-template">
   <div class="container">
     <div class="well">
-      <h1>API Documentation</h1>
+      <h1>api documentation</h1>
 
+      <div class="row ui-tabs">
+
+        <!-- Start navigation -->
+        <div class="span-3">
+          <nav class="menu ui-tabs-nav">
+            <h3>Resources</h3>
+            {{#each resources}}
+              <a class="menu-item ui-tabs-link" href="#api-docs-{{name}}">{{name}}</a>
+            {{/each}}
+            <h3>Types</h3>
+            {{#each types}}
+              <a class="menu-item ui-tabs-link" href="#api-docs-types-{{name}}">{{name}}</a>
+            {{/each}}
+          </nav>
+        </div>
+        <!-- End navigation -->
+
+        <!-- Start panels -->
+        <div class="span-9">
+
+          <!-- Start resources panels -->
+          {{#each resources}}
+            <div class="ui-tabs-panel pll" id="api-docs-{{name}}">
+              <h2>{{name}}</h2>
+              {{#if description}}
+                <h3>Description</h3>
+                <p>{{description}}</p>
+              {{/if}}
+              <h3>Resources</h3>
+              {{#each operations}}
+                <pre><code>{{method}} {{root_path}}{{path}}</code></pre>
+              {{/each}}
+              <h3>Status</h3>
+              <p>Current service level: {{service_level}}</p>
+              <h3>Example response</h3>
+              <div class="api-docs-example-response clearfix"></div>
+              <h3>Parameters</h3>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each parameters}}
+                    <tr>
+                      <td>{{name}}</td>
+                      <td>{{type}}</td>
+                      <td>{{description}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <h3>Available annotations</h3>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type added to the response</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each annotations}}
+                    <tr>
+                      <td>{{name}}</td>
+                      <td>
+                        {{#if type}}
+                          <a class="api-docs-types-link" href="#api-docs-types-{{type}}">{{type}}</a>
+                        {{/if}}
+                      </td>
+                      <td>{{description}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <div class="api-docs-response"></div>
+              <h3>Error messages</h3>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Status code</th>
+                    <th>Error code</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each error_messages}}
+                    <tr>
+                      <td>{{status_code}}</td>
+                      <td>{{error_code}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          {{/each}}
+          <!-- End resources panels -->
+
+          <!-- Start types panels -->
+          {{#each types}}
+            <div class="ui-tabs-panel pll" id="api-docs-types-{{name}}">
+              <h2>{{name}}</h2>
+              {{#if description}}
+                <h3>Description</h3>
+                <p>{{description}}</p>
+              {{/if}}
+              <h3>Fields</h3>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>JSON Type</th>
+                    <th>Multiple</th>
+                    <th>Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each fields}}
+                    <tr>
+                      <td>{{name}}</td>
+                      <td>{{type}}</td>
+                      <td>{{json_type}}</td>
+                      <td>{{is_multiple}}</td>
+                      <td>{{description}}</td>
+                    </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+              <div class="api-docs-annotations-resource clearfix">
+                <h3>Annotation types per resource</h3>
+                <table class="tbl">
+                  <thead>
+                    <tr>
+                      <th>Resource</th>
+                      <th>Annotation</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each resources}}
+                      {{#each annotations}}
+                        <tr>
+                          <td>{{name}}</td>
+                          <td>{{name}}</td>
+                          <td>{{description}}</td>
+                        </tr>
+                      {{/each}}
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          {{/each}}
+          <!-- End types panels -->
+
+        </div>
+        <!-- End panels -->
+      </div>
     </div>
   </div>
 </template>

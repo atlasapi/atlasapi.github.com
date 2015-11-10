@@ -38,7 +38,7 @@ $(window).load(function () {
 
   // Initiate API Docs
   apiData.init(function (data) {
-    console.log('data', data);
+    apiDocs.init(data);
   });
 
   tooltip();

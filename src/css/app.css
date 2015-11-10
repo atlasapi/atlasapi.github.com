@@ -1577,4 +1577,87 @@ table .status {
   background: #330066;
   margin: 0 !important; }
 
+.api-docs {
+  padding-top: 145px; }
+
+.open-api-docs-tab {
+  color: #ef308f;
+  box-shadow: none; }
+
+.api-docs-types-link {
+  color: #ef308f;
+  text-decoration: underline !important; }
+
+.api-docs-types-link:hover,
+.api-docs-types-link:active,
+.api-docs-types-link:focus {
+  text-decoration: none !important; }
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+.menu-item {
+  display: block;
+  padding: 5px; }
+
+.menu-item-selected {
+  background: #ef308f;
+  color: #fff;
+  text-shadow: none; }
+
+.ui-tabs-panel {
+  display: none; }
+
+.ui-tabs-panel:first-child {
+  display: block; }
+
+.ui-tabs-horizontal .ui-tabs-nav {
+  background: #e2e2e2;
+  float: left;
+  border-radius: 5px 5px 0 0;
+  height: 40px;
+  box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.1); }
+
+.ui-tabs-horizontal .ui-tabs-nav li {
+  float: left; }
+
+.ui-tabs-horizontal .ui-tabs-link {
+  font-size: 18px;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 15px;
+  color: #333;
+  display: block; }
+
+.ui-tabs-horizontal li:first-child .ui-tabs-link {
+  border-radius: 5px 0 0 0; }
+
+.ui-tabs-horizontal li:last-child .ui-tabs-link {
+  border-radius: 0 5px 0 0; }
+
+.ui-tabs-horizontal li .ui-tabs-link:hover {
+  text-decoration: none;
+  color: #ef308f; }
+
+.ui-tabs-horizontal .ui-tabs-active-link {
+  background: #fff;
+  color: #ef308f;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4); }
+
+.ui-tabs-horizontal .ui-tabs-panel {
+  clear: both;
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+  position: relative; }
+
+.ui-tabs-vertical .ui-tabs-active-link {
+  background: #ef308f;
+  color: #fff;
+  text-shadow: none; }
+
 /*# sourceMappingURL=app.css.map */
