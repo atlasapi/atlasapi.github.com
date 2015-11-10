@@ -14,13 +14,11 @@ var channelGroupPicker = (function () {
     $.ajax({
       url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
-        var compiledTemplate = new EJS({
-          url: '../templates/channel-group-picker.ejs'
-        }).render();
+        var template = Handlebars.compile($('#channel-group-picker-template').html());
         if ($('.channel-group-picker-container').find('.channel-group-platform-picker').length) {
           $('.channel-group-picker-container').empty();
         } else {
-          $('.channel-group-picker-container').html(compiledTemplate);
+          $('.channel-group-picker-container').html(template());
           buildPlatformTemplate(data.channel_groups);
         }
       },
@@ -31,10 +29,8 @@ var channelGroupPicker = (function () {
   };
 
   var buildPlatformTemplate = function (platforms) {
-    var compiledTemplate = new EJS({
-      url: '../templates/platformPicker.ejs'
-    }).render(platforms);
-    $('.channel-group-platform-picker').html(compiledTemplate);
+    var template = Handlebars.compile($('#platform-picker-template').html());
+    $('.channel-group-platform-picker').html(template(platforms));
     buildDummyRegionsTemplate();
     $('.channel-group-picker-container').find('.channel-picker-platforms').on('change', function (e) {
       var platformId = $(this).val();
@@ -58,10 +54,8 @@ var channelGroupPicker = (function () {
   };
 
   var buildRegionsTemplate = function (regions, platformTitle) {
-    var compiledTemplate = new EJS({
-      url: '../templates/regionsPicker.ejs'
-    }).render(regions);
-    $('#channel_groups-id-row').find('.channel-group-region-picker').html(compiledTemplate);
+    var template = Handlebars.compile($('#regions-picker-template').html());
+    $('#channel_groups-id-row').find('.channel-group-region-picker').html(template(regions));
     $(document).on('change', '.channel-group-region-picker .channel-picker-regions', function () {
       var regionId = $(this).val();
       $('#channel_groups-id-row').find('.queryParameter').val(regionId);
@@ -71,10 +65,8 @@ var channelGroupPicker = (function () {
   };
 
   var buildDummyRegionsTemplate = function () {
-    var compiledTemplate = new EJS({
-      url: '../templates/dummyRegionsTemplate.ejs'
-    }).render();
-    $('#channel_groups-id-row').find('.channel-group-region-picker').html(compiledTemplate);
+    var template = Handlebars.compile($('#dummy-regions-template').html());
+    $('#channel_groups-id-row').find('.channel-group-region-picker').html(template());
   };
 
   var closeChannelGroupPicker = function () {

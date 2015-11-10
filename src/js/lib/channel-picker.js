@@ -18,13 +18,11 @@ var channelPicker = (function () {
     $.ajax({
       url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
-        var compiledTemplate = new EJS({
-          url: '../templates/channelPicker.ejs'
-        }).render();
+        var template = Handlebars.compile($('#channel-picker-template').html());
         if ($tabPanel.find('.channel-picker-row').length && !checkSelectedChannels) {
           $tabPanel.find('.channel-picker-row').remove();
         } else {
-          $tabPanel.find('.api-explorer-param-id').after(compiledTemplate);
+          $tabPanel.find('.api-explorer-param-id').after(template());
         }
         buildPlatformTemplate(data.channel_groups, $tabPanel);
         channelPickerChange($tabPanel);
@@ -54,10 +52,8 @@ var channelPicker = (function () {
   };
 
   var buildPlatformTemplate = function (platforms, $tabPanel) {
-    var compiledTemplate = new EJS({
-      url: '../templates/platformPicker.ejs'
-    }).render(platforms);
-    $tabPanel.find('.platform-picker').html(compiledTemplate);
+    var template = Handlebars.compile($('#platform-picker-template').html());
+    $tabPanel.find('.platform-picker').html(template(platforms));
     buildDummyRegionsTemplate($tabPanel);
     buildDummySearchTemplate($tabPanel);
     $tabPanel.find('.channel-picker-platforms').on('change', function () {
@@ -80,17 +76,13 @@ var channelPicker = (function () {
   };
 
   var buildDummyRegionsTemplate = function ($tabPanel) {
-    var compiledTemplate = new EJS({
-      url: '../templates/dummyRegionsTemplate.ejs'
-    }).render();
-    $tabPanel.find('.region-picker').html(compiledTemplate);
+    var template = Handlebars.compile($('#regions-template').html());
+    $tabPanel.find('.region-picker').html(template());
   };
 
   var buildRegionsTemplate = function (regions, platformTitle, $tabPanel) {
-    var compiledTemplate = new EJS({
-      url: '../templates/regionsPicker.ejs'
-    }).render(regions);
-    $tabPanel.find('.region-picker').html(compiledTemplate);
+    var template = Handlebars.compile($('#regions-picker-template').html());
+    $tabPanel.find('.region-picker').html(template(regions));
     buildDummySearchTemplate($tabPanel);
     $tabPanel.find('.channel-picker-regions').on('change', function () {
       var regionId = $(this).val();
@@ -103,10 +95,8 @@ var channelPicker = (function () {
   };
 
   var buildDummySearchTemplate = function ($tabPanel) {
-    var compiledTemplate = new EJS({
-      url: '../templates/dummySearchTemplate.ejs'
-    }).render();
-    $tabPanel.find('.channel-search').html(compiledTemplate);
+    var template = Handlebars.compile($('#search-template').html());
+    $tabPanel.find('.channel-search').html(template());
   };
 
   var getRegionChannels = function (regionId, platformTitle, $tabPanel) {
@@ -135,10 +125,8 @@ var channelPicker = (function () {
       channel.platform_title = platformTitle;
       channel.region_title = regionTitle;
     });
-    var compiledTemplate = new EJS({
-      url: '../templates/channels.ejs'
-    }).render(channels);
-    $tabPanel.find('.channels-container').html(compiledTemplate);
+    var template = Handlebars.compile($('#channels-template').html());
+    $tabPanel.find('.channels-container').html(template(channels));
   };
 
   var substringMatcher = function (strs) {
@@ -173,10 +161,8 @@ var channelPicker = (function () {
       11: 'November',
       12: 'December'
     };
-    var compiledTemplate = new EJS({
-      url: '../templates/channelSearch.ejs'
-    }).render(data);
-    $tabPanel.find('.channel-search').html(compiledTemplate);
+    var template = Handlebars.compile($('#channel-search-template').html());
+    $tabPanel.find('.channel-search').html(template(data));
     for (var i = 0, ii = data.length; i < ii; i++) {
       var startDate = new Date(data[i].start_date);
       var formattedDate = {};

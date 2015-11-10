@@ -29,11 +29,6 @@
       "title": "API Documentation",
       "containerId": "#api-docs",
       "templateId": "#api-docs-template"
-    },
-    {
-      "title": "API Explorer",
-      "containerId": "#api-explorer",
-      "templateId": "#api-explorer-template"
     }
   ]
 }

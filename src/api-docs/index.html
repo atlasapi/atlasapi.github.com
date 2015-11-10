@@ -13,7 +13,26 @@
     <div class="site-header" id="site-header"></div>
     <div class="sub-header" id="sub-header"></div>
     <div class="section section-api-docs" id="api-docs"></div>
-    <div class="section section-api-explorer" id="api-explorer"></div>
+    <section class="apiExplorer hide" id="apiExplorer">
+        <div class="explorerTitle">
+            <div class="line">
+              <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
+            </div>
+        </div>
+        <div class="explorerWrapper" id="explorerWrapper">
+            <div class="clearfix mbm">
+            <form class="unit size1of2" id="apiKeyForm">
+        <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+        <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+        </form>
+        <div class="unit size1of2">
+            <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+        </div>
+          </div>
+    <p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
+          <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
+        </div>
+    </section>
     <div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
     <!-- templates -->

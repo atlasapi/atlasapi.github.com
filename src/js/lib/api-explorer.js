@@ -50,7 +50,7 @@ var apiExplorer = (function () {
   };
 
   var updateForm = function ($queryParametersForm) {
-    var ajaxExampleText = "$.ajax({
+    var ajaxExampleText = `$.ajax({
   url: '@url',
   success: function (data) {
     console.log(data);
@@ -58,7 +58,7 @@ var apiExplorer = (function () {
   error: function (jqXHR, textStatus) {
     console.error(textStatus);
   }
-});";
+});`;
     var queryUrlValue = getQueryUrlComponents($queryParametersForm);
     $queryParametersForm.siblings('.api-explorer-examples').find('.queryUrl').val(queryUrlValue);
     $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
@@ -308,17 +308,13 @@ var apiExplorer = (function () {
   };
 
   var loadApiKeyButton = function () {
-    var compiledTemplate = new EJS({
-      url: '../templates/api-key-button.ejs'
-    }).render();
-    $('#getApiKeyBtnHolder').html(compiledTemplate);
+    var template = Handlebars.compile($('#api-key-button-template').html());
+    $('#getApiKeyBtnHolder').html(template());
   };
 
   var init = function (endpointsData) {
-    var compiledTemplate = new EJS({
-      url: '../templates/api-explorer.ejs'
-    }).render(endpointsData);
-    $('#api-explorer-tabs').html(compiledTemplate);
+    var template = Handlebars.compile($('#api-explorer-template').html());
+    $('#api-explorer-tabs').html(template(endpointsData));
     events(endpointsData);
     if (atlasUser.isLoggedIn()) {
       var credentials = atlasUser.getCredentials();
