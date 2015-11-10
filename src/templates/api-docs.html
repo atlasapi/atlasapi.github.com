@@ -6,22 +6,26 @@
       <div class="row ui-tabs">
 
         <!-- Start navigation -->
-        <div class="span-3">
+        <div class="span-4">
           <nav class="menu ui-tabs-nav">
-            <h3>Resources</h3>
+            <h2>Resources</h2>
+            <ul class="unstyled">
             {{#each resources}}
-              <a class="menu-item ui-tabs-link" href="#api-docs-{{name}}">{{name}}</a>
+              <li><a class="menu-item ui-tabs-link" href="#api-docs-{{name}}">{{name}}</a></li>
             {{/each}}
-            <h3>Types</h3>
+            </ul>
+            <h2>Types</h2>
+            <ul class="unstyled">
             {{#each types}}
-              <a class="menu-item ui-tabs-link" href="#api-docs-types-{{name}}">{{name}}</a>
+              <li><a class="menu-item ui-tabs-link" href="#api-docs-types-{{name}}">{{name}}</a></li>
             {{/each}}
+            </ul>
           </nav>
         </div>
         <!-- End navigation -->
 
         <!-- Start panels -->
-        <div class="span-9">
+        <div class="span-8">
 
           <!-- Start resources panels -->
           {{#each resources}}
@@ -49,13 +53,13 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{#each parameters}}
+                  {{#parameters}}
                     <tr>
                       <td>{{name}}</td>
                       <td>{{type}}</td>
                       <td>{{description}}</td>
                     </tr>
-                  {{/each}}
+                  {{/parameters}}
                 </tbody>
               </table>
               <h3>Available annotations</h3>

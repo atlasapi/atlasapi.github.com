@@ -602,6 +602,24 @@ tr:nth-child(even) {
       margin-right: 0; } }
 
 @media only screen and (min-width: 700px) {
+  .span-4 {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 31.76157%; }
+    .span-4:last-child {
+      margin-right: 0; } }
+
+@media only screen and (min-width: 700px) {
+  .span-8 {
+    float: left;
+    display: block;
+    margin-right: 2.35765%;
+    width: 65.88078%; }
+    .span-8:last-child {
+      margin-right: 0; } }
+
+@media only screen and (min-width: 700px) {
   .span-9 {
     float: left;
     display: block;
@@ -666,6 +684,16 @@ th {
 
 table .status {
   text-align: center; }
+
+pre {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  border: 1px solid #ccc; }
+  pre code {
+    background: inherit;
+    padding: 0; }
 
 .highlight {
   color: #ff009a; }
@@ -1659,5 +1687,12 @@ table .status {
   background: #ef308f;
   color: #fff;
   text-shadow: none; }
+
+.ui-tabs-link:hover,
+.ui-tabs-link:active,
+.ui-tabs-link:focus,
+.ui-tabs-active-link {
+  background: #ff009a;
+  color: #fff; }
 
 /*# sourceMappingURL=app.css.map */

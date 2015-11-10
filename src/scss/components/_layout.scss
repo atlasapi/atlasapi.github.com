@@ -21,6 +21,18 @@
   }
 }
 
+.span-4 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(4);
+  }
+}
+
+.span-8 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(8);
+  }
+}
+
 .span-9 {
   @media only screen and (min-width: 700px) {
     @include span-columns(9);

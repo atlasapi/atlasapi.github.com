@@ -60,3 +60,16 @@ th {
 table .status {
   text-align: center;
 }
+
+pre {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+
+  code {
+    background: inherit;
+    padding: 0;
+  }
+}

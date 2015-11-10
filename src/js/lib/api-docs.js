@@ -58,6 +58,7 @@ var apiDocs = (function () {
     apiData.typesToLink = typesToLink;
     var template = Handlebars.compile($('#api-docs-template').html());
     $('#api-docs').html(template(apiData));
+    console.log('apiData', apiData);
     // populateExampleResponse(apiData);
     // getResponseData(apiData);
     // linkToApiExplorer();

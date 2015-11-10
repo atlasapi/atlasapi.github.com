@@ -60,3 +60,11 @@
   color: #fff;
   text-shadow: none;
 }
+
+.ui-tabs-link:hover,
+.ui-tabs-link:active,
+.ui-tabs-link:focus,
+.ui-tabs-active-link {
+  background: $primary-color;
+  color: #fff;
+}
