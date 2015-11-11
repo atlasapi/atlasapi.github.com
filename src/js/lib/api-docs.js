@@ -72,7 +72,6 @@ var apiDocs = (function () {
       var target = window.location.hash;
       $('a[href="' + target + '"]').trigger('click');
     }
-    uiTabs();
   };
 
   var hideEmptyTables = function () {
