@@ -13,25 +13,23 @@
     <div class="site-header" id="site-header"></div>
     <div class="sub-header" id="sub-header"></div>
     <div class="section section-api-docs" id="api-docs"></div>
-    <section class="apiExplorer hide" id="apiExplorer">
-        <div class="explorerTitle">
-            <div class="line">
-              <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
-            </div>
+    <section class="apiExplorer container" id="apiExplorer">
+      <div class="explorerTitle">
+        <div class="line">
+          <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
         </div>
-        <div class="explorerWrapper" id="explorerWrapper">
-            <div class="clearfix mbm">
-            <form class="unit size1of2" id="apiKeyForm">
-        <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
-        <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+      </div>
+      <div class="explorerWrapper" id="explorerWrapper">
+        <form class="unit size1of2" id="apiKeyForm">
+          <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here:</label>
+          <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
         </form>
         <div class="unit size1of2">
-            <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+          <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
         </div>
-          </div>
-    <p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
-          <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
-        </div>
+        <p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
+        <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
+      </div>
     </section>
     <div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
@@ -54,17 +52,17 @@
     <link rel="import" href="/templates/api-docs.html">
     <link rel="import" href="/templates/api-docs-response.html">
     <link rel="import" href="/templates/api-docs-example-response.html">
-    <link rel="import" href="/templates/api-explorer">
-    <link rel="import" href="/templates/api-key-button">
-    <link rel="import" href="/templates/api-key-dropdown">
-    <link rel="import" href="/templates/channel-group-picker">
-    <link rel="import" href="/templates/channel-picker">
-    <link rel="import" href="/templates/channel-search">
-    <link rel="import" href="/templates/channels">
-    <link rel="import" href="/templates/dummy-regions">
-    <link rel="import" href="/templates/dummy-search">
-    <link rel="import" href="/templates/platform-picker">
-    <link rel="import" href="/templates/regions-picker">
+    <link rel="import" href="/templates/api-explorer.html">
+    <link rel="import" href="/templates/api-key-button.html">
+    <link rel="import" href="/templates/api-key-dropdown.html">
+    <link rel="import" href="/templates/channel-group-picker.html">
+    <link rel="import" href="/templates/channel-picker.html">
+    <link rel="import" href="/templates/channel-search.html">
+    <link rel="import" href="/templates/channels.html">
+    <link rel="import" href="/templates/dummy-regions.html">
+    <link rel="import" href="/templates/dummy-search.html">
+    <link rel="import" href="/templates/platform-picker.html">
+    <link rel="import" href="/templates/regions-picker.html">
     <!-- /templates -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -76,8 +74,12 @@
     <script src="/components/exoskeleton/exoskeleton.js"></script>
     <script src="/components/backbone.nativeajax/backbone.nativeajax.js"></script>
     <script src="/components/backbone.nativeview/backbone.nativeview.js"></script>
+    <script src="/js/lib/channel-picker.js"></script>
+    <script src="/js/lib/channel-group-picker.js"></script>
+    <script src="/js/lib/highlight.js"></script>
     <script src="/js/lib/api-data.js"></script>
     <script src="/js/lib/api-docs.js"></script>
+    <script src="/js/lib/api-explorer.js"></script>
     <script src="/js/lib/tabs.js"></script>
     <script src="/js/lib/jquery.nav.js"></script>
     <script src="/js/lib/nownext-widget.js"></script>

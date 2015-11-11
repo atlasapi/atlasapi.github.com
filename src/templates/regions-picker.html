@@ -2,8 +2,8 @@
   <h4>choose a region</h4>
   <select name="channel-picker-regions" class="channel-picker-regions">
     <option value="">select region</option>
-    <% for (var i = 0, ii = this.length; i < ii; i++) { %>
-      <option value="<%= this[i].id %>"><%= this[i].title %> (<%= this[i].id %>)</option>
-    <% } %>
+    {{#each this}}
+      <option value="{{id}}">{{title}} ({{id}})</option>
+    {{/each}}
   </select>
 </template>

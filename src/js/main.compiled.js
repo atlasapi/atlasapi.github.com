@@ -282,17 +282,16 @@ $(function () {
 });
 
 $(window).load(function () {
-  if ($('#home').length) {
-    $('.sub-nav').onePageNav({
-      currentClass: 'selected',
-      changeHash: true,
-      scrollSpeed: 200
-    });
-  }
+  $('.sub-nav').onePageNav({
+    currentClass: 'selected',
+    changeHash: true,
+    scrollSpeed: 200
+  });
 
   // Initiate API Docs
   apiData.init(function (data) {
     apiDocs.init(data);
+    apiExplorer.init(data);
   });
 
   (0, _libHelpersJs.tooltip)();
