@@ -14,6 +14,29 @@
     <div class="sub-header" id="sub-header"></div>
     <div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
+    <section class="api-docs" id="api-docs"></section>
+
+    <section class="apiExplorer hide" id="apiExplorer">
+      <div class="explorerTitle">
+        <div class="line">
+          <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
+        </div>
+      </div>
+      <div class="explorerWrapper" id="explorerWrapper">
+        <div class="clearfix mbm">
+          <form class="unit size1of2" id="apiKeyForm">
+            <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+            <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+          </form>
+          <div class="unit size1of2">
+            <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+          </div>
+        </div>
+        <p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
+        <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
+      </div>
+    </section>
+
     <!-- templates -->
     <link rel="import" href="/templates/header.html">
     <link rel="import" href="/templates/sub-header.html">
@@ -33,6 +56,7 @@
     <!-- /templates -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <!-- build:js /js/app.js -->
     <script src="/components/lodash/lodash.js"></script>
     <script src="/components/handlebars/handlebars.js"></script>
@@ -49,6 +73,52 @@
     <script src="/js/lib/login-to-admin.js"></script>
     <script src="/js/main.compiled.js"></script>
     <!-- endbuild -->
+
+    <!-- Only for api docs/explorer -->
+    <script src="js/lodash.min.js"></script>
+    <script src="js/ejs.min.js"></script>
+    <script src="js/jquery.selectText.js"></script>
+    <script src="js/api-data.js"></script>
+    <script src="js/encode-query-data.js"></script>
+    <script src="js/atlas-user.js"></script>
+    <script src="js/highlight.pack.js"></script>
+    <script src="js/typeahead.bundle.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/create-query-params-object.js"></script>
+    <script src="js/channel-picker.js"></script>
+    <script src="js/channel-group-picker.js"></script>
+    <script src="js/api-docs.js"></script>
+    <script src="js/api-explorer.js"></script>
+    <script>
+      $(function () {
+        // Grabs api documentation data
+        apiData.init(function (data) {
+          // Initiate api docs if on page
+          if ($('#api-docs').length) {
+            apiDocs.init(data);
+          }
+          // Initiate api explorer if on page
+          if ($('#apiExplorer').length) {
+            apiExplorer.init(data);
+          }
+        });
+        // Select text on click
+        $(document).on('click', '.js-select-on-click', function () {
+          $(this).select();
+        });
+        $(document).on('click', '.code-example', function () {
+          $(this).selectText();
+        });
+      });
+
+      $(window).load(function () {
+        // Initiate tabs if api docs and explorer are present
+        if ($('#api-docs').length && $('#apiExplorer').length) {
+          uiTabs();
+        }
+      });
+    </script>
 
     <script>
       var _gaq = _gaq || [];

@@ -1,0 +1,10 @@
+<label class="apiKeyLabel" for="user-api-keys">Your API Keys:</label>
+<select class="user-api-keys" id="user-api-keys" name="user-api-keys">
+  <% if (this.length) { %>
+    <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+      <option value="<%= this[i].credentials.apiKey %>"><%= this[i].title %> (<%= this[i].shortKey %>)</option>
+    <% } %>
+  <% } else { %>
+    <option value="">No applications</option>
+  <% } %>
+</select>

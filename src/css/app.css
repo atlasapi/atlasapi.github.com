@@ -1706,7 +1706,7 @@ input.queryUrl {
 .ajaxLoading {
   width: 100% !important;
   height: 100% !important;
-  background: url("../images/loader.gif") center center no-repeat; }
+  background: url("../img/loader.gif") center center no-repeat; }
 
 .tbl tbody td.annotations-row {
   padding-bottom: 10px; }
