@@ -10,9 +10,9 @@ Handlebars.registerHelper('if', function (conditional, options) {
 });
 
 /**
-  * Usage: {{#if isArray this}}{{/if}}
+  * Usage: {{#ifArray this}}{{/ifArray}}
   */
-Handlebars.registerHelper('isArray', function (item, options) {
+Handlebars.registerHelper('ifArray', function (item, options) {
   if (Object.prototype.toString.call(item) === '[object Array]') {
     return options.fn(this);
   } else {

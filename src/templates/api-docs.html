@@ -30,20 +30,20 @@
           <!-- Start resources panels -->
           {{#each resources}}
             <div class="ui-tabs-panel pll" id="api-docs-{{name}}">
-              <h2>{{name}}</h2>
+              <h3>{{name}}</h3>
               {{#if description}}
-                <h3>Description</h3>
+                <h4>Description</h4>
                 <p>{{description}}</p>
               {{/if}}
-              <h3>Resources</h3>
+              <h4>Resources</h4>
               {{#each operations}}
                 <pre><code>{{method}} {{root_path}}{{path}}</code></pre>
               {{/each}}
-              <h3>Status</h3>
+              <h4>Status</h4>
               <p>Current service level: {{service_level}}</p>
-              <h3>Example response</h3>
+              <h4>Example response</h4>
               <div class="api-docs-example-response clearfix"></div>
-              <h3>Parameters</h3>
+              <h4>Parameters</h4>
               <table class="tbl">
                 <thead>
                   <tr>
@@ -53,16 +53,16 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {{#parameters}}
+                  {{#each parameters}}
                     <tr>
                       <td>{{name}}</td>
                       <td>{{type}}</td>
                       <td>{{description}}</td>
                     </tr>
-                  {{/parameters}}
+                  {{/each}}
                 </tbody>
               </table>
-              <h3>Available annotations</h3>
+              <h4>Available annotations</h4>
               <table class="tbl">
                 <thead>
                   <tr>
@@ -77,7 +77,7 @@
                       <td>{{name}}</td>
                       <td>
                         {{#if type}}
-                          <a class="api-docs-types-link" href="#api-docs-types-{{type}}">{{type}}</a>
+                          <a class="api-docs-types-link" href="#api-docs-types-{{type}} %>">{{type}}</a>
                         {{/if}}
                       </td>
                       <td>{{description}}</td>
@@ -86,7 +86,7 @@
                 </tbody>
               </table>
               <div class="api-docs-response"></div>
-              <h3>Error messages</h3>
+              <h4>Error messages</h4>
               <table class="tbl">
                 <thead>
                   <tr>
@@ -110,12 +110,12 @@
           <!-- Start types panels -->
           {{#each types}}
             <div class="ui-tabs-panel pll" id="api-docs-types-{{name}}">
-              <h2>{{name}}</h2>
+              <h3>{{name}}</h3>
               {{#if description}}
-                <h3>Description</h3>
+                <h4>Description</h4>
                 <p>{{description}}</p>
               {{/if}}
-              <h3>Fields</h3>
+              <h4>Fields</h4>
               <table class="tbl">
                 <thead>
                   <tr>
@@ -139,7 +139,7 @@
                 </tbody>
               </table>
               <div class="api-docs-annotations-resource clearfix">
-                <h3>Annotation types per resource</h3>
+                <h4>Annotation types per resource</h4>
                 <table class="tbl">
                   <thead>
                     <tr>
@@ -152,7 +152,7 @@
                     {{#each resources}}
                       {{#each annotations}}
                         <tr>
-                          <td>{{name}}</td>
+                          <td>{{../../name}}</td>
                           <td>{{name}}</td>
                           <td>{{description}}</td>
                         </tr>

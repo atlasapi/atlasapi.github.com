@@ -51,35 +51,14 @@ var apiDocs = (function () {
   };
 
   var populateTemplate = function (apiData) {
-    var typesToLink = [];
-    _.forEach(apiData.types, function (type) {
-      typesToLink.push(type.name);
-    });
-    apiData.typesToLink = typesToLink;
     var template = Handlebars.compile($('#api-docs-template').html());
     $('#api-docs').html(template(apiData));
+    uiTabs();
     // populateExampleResponse(apiData);
-    // getResponseData(apiData);
     // linkToApiExplorer();
-    // linkResponseToTypes();
-    $('#apiKey').on('change', function () {
-      populateExampleResponse(apiData);
-    });
-    hideEmptyTables();
-    // Unhides api explorer to make loading appear more pleasant
-    $('#apiExplorer').removeClass('hide');
-    if (window.location.hash) {
-      var target = window.location.hash;
-      $('a[href="' + target + '"]').trigger('click');
-    }
-  };
-
-  var hideEmptyTables = function () {
-    $('.api-docs-annotations-resource').each(function (index, table) {
-      if (!$(table).find('tbody').find('tr').length) {
-        $(table).hide();
-      }
-    });
+    // $('#apiKey').on('change', function () {
+    //   populateExampleResponse(apiData);
+    // });
   };
 
   var populateExampleResponse = function (apiData) {
@@ -109,36 +88,6 @@ var apiDocs = (function () {
       var headerHeight = 64;
       $(window).scrollTop($('#apiExplorer').offset().top - headerHeight);
       $('.api-explorer-nav').find('a[href=' + target + ']').trigger('click');
-    });
-  };
-
-  var getResponseData = function (apiData) {
-    var typesToLink = [];
-    _.forEach(apiData.types, function (type) {
-      typesToLink.push(type.name);
-    });
-    _.forEach(apiData.resources, function (resource) {
-      $.ajax({
-        url: resource.model_class_link,
-        success: function (data) {
-          data.typesToLink = typesToLink;
-          var template = Handlebars.compile($('#api-docs-response-template').html());
-          $('#api-docs-' + resource.name).find('.api-docs-response').html(template(data));
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          log.error(errorThrown);
-        }
-      });
-    });
-  };
-
-  var linkResponseToTypes = function () {
-    $(document).on('click', '.api-docs-types-link', function (e) {
-      e.preventDefault();
-      var target = $(this).attr('href');
-      var headerHeight = 64;
-      $(window).scrollTop($('#api-docs').offset().top - headerHeight);
-      $('#api-docs .menu').find('a[href=' + target + ']').trigger('click');
     });
   };
 
