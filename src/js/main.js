@@ -28,11 +28,18 @@ $(function () {
 });
 
 $(window).load(function () {
-  $('.sub-nav').onePageNav({
+  var onePageNavOptions = {
     currentClass: 'selected',
     changeHash: true,
     scrollSpeed: 200
-  });
+  };
+
+  // This is so external links work on the docs page
+  if ($('.homepage').length) {
+    $('.sub-nav').onePageNav(onePageNavOptions);
+  } else {
+    $('.dropdown').onePageNav(onePageNavOptions);
+  }
 
   tooltip();
   dropdowns();
