@@ -27,10 +27,21 @@
 .menu-item {
   display: block;
   padding: 5px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: #fff;
+  }
 }
 
 .menu-item-selected {
-  background: #ef308f;
+  background: $primary-color;
   color: #fff;
   text-shadow: none;
+}
+
+.api-docs .btn {
+  margin-left: 0;
 }

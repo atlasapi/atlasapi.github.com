@@ -1,12 +1,12 @@
 <div class="well">
-  <h2>api documentation</h2>
+  <h1>api documentation</h1>
 
   <div class="clearfix pbl ui-tabs ui-tabs-vertical">
 
     <!-- Start navigation -->
     <div class="span-4">
       <nav class="menu ui-tabs-nav">
-        <h3>Resources</h3>
+        <h2>Resources</h2>
         <ul class="unstyled">
         <% for (var i = 0, ii = resources.length; i < ii; i++) { %>
           <% if (i === 0) { %>
@@ -16,7 +16,7 @@
           <% } %>
         <% } %>
         </ul>
-        <h3>Types</h3>
+        <h2>Types</h2>
         <ul class="unstyled">
         <% for (var i = 0, ii = types.length; i < ii; i++) { %>
           <li><a class="menu-item ui-tabs-link" href="#api-docs-types-<%= types[i].name %>"><%= types[i].name %></a></li>
@@ -32,20 +32,20 @@
       <!-- Start resources panels -->
       <% for (var i = 0, ii = resources.length; i < ii; i++) { %>
         <div class="ui-tabs-panel pll" id="api-docs-<%= resources[i].name %>">
-          <h3><%= resources[i].name %></h3>
+          <h2><%= resources[i].name %></h2>
           <% if (resources[i].description) { %>
-            <h4>Description</h4>
+            <h3>Description</h3>
             <p><%= resources[i].description %></p>
           <% } %>
-          <h4>Resources</h4>
+          <h3>Resources</h3>
           <% for (var j = 0, jj = resources[i].operations.length; j < jj; j++) { %>
             <pre><code><%= resources[i].operations[j].method %> <%= resources[i].root_path %><%= resources[i].operations[j].path %></code></pre>
           <% } %>
-          <h4>Status</h4>
+          <h3>Status</h3>
           <p>Current service level: <%= resources[i].service_level %></p>
-          <h4>Example response</h4>
+          <h3>Example response</h3>
           <div class="api-docs-example-response clearfix"></div>
-          <h4>Parameters</h4>
+          <h3>Parameters</h3>
           <table class="tbl">
             <thead>
               <tr>
@@ -64,7 +64,7 @@
               <% } %>
             </tbody>
           </table>
-          <h4>Available annotations</h4>
+          <h3>Available annotations</h3>
           <table class="tbl">
             <thead>
               <tr>
@@ -88,7 +88,7 @@
             </tbody>
           </table>
           <div class="api-docs-response"></div>
-          <h4>Error messages</h4>
+          <h3>Error messages</h3>
           <table class="tbl">
             <thead>
               <tr>
@@ -112,12 +112,12 @@
       <!-- Start types panels -->
       <% for (var i = 0, ii = types.length; i < ii; i++) { %>
         <div class="ui-tabs-panel pll" id="api-docs-types-<%= types[i].name %>">
-          <h3><%= types[i].name %></h3>
+          <h2><%= types[i].name %></h2>
           <% if (types[i].description) { %>
-            <h4>Description</h4>
+            <h3>Description</h3>
             <p><%= types[i].description %></p>
           <% } %>
-          <h4>Fields</h4>
+          <h3>Fields</h3>
           <table class="tbl">
             <thead>
               <tr>
@@ -147,7 +147,7 @@
             </tbody>
           </table>
           <div class="api-docs-annotations-resource clearfix">
-            <h4>Annotation types per resource</h4>
+            <h3>Annotation types per resource</h3>
             <table class="tbl">
               <thead>
                 <tr>

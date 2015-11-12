@@ -36,7 +36,8 @@
 }
 
 .ui-tabs-horizontal li .ui-tabs-link:hover {
-  text-decoration: none; color: #ef308f;
+  text-decoration: none;
+  color: #ef308f;
 }
 
 .ui-tabs-horizontal .ui-tabs-active-link {
@@ -56,7 +57,7 @@
 }
 
 .ui-tabs-vertical .ui-tabs-active-link {
-  background: #ef308f;
+  background: $primary-color;
   color: #fff;
   text-shadow: none;
 }
