@@ -695,6 +695,9 @@ pre {
     background: inherit;
     padding: 0; }
 
+.btn:hover, .btn:active, .btn:focus {
+  text-decoration: none; }
+
 .highlight {
   color: #ff009a; }
 
@@ -1938,6 +1941,12 @@ select.queryParameter {
 
 .api-explorer table table {
   margin: 0; }
+
+.api-explorer-btn:hover, .api-explorer-btn:active, .api-explorer-btn:focus {
+  text-decoration: none; }
+
+.open-api-docs {
+  box-shadow: none !important; }
 
 /*
 

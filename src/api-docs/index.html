@@ -135,6 +135,17 @@
         $('.sub-nav a').on('click', function () {
           uiTabs();
         });
+
+        var scrollToApiExplorer = function () {
+          $('html, body').animate({
+            scrollTop: $('#apiExplorer').offset().top - 145
+          }, 200);
+        };
+
+        $(document).on('click', '.api-explorer-btn', function (e) {
+          e.preventDefault();
+          scrollToApiExplorer();
+        });
       });
     </script>
 
