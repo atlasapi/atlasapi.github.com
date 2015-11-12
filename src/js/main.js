@@ -19,7 +19,7 @@ $(function () {
   var headerTemplate = Handlebars.compile($('#header-template').html());
   var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
   $('#site-header').html(headerTemplate(envInfo));
-  $('#sub-header').html(subHeaderTemplate);
+  $('#sub-header').html(subHeaderTemplate());
 
   $(document).on('click', '.navbar-login', function (e) {
     e.preventDefault();
@@ -32,12 +32,6 @@ $(window).load(function () {
     currentClass: 'selected',
     changeHash: true,
     scrollSpeed: 200
-  });
-
-  // Initiate API Docs
-  apiData.init(function (data) {
-    apiDocs.init(data);
-    apiExplorer.init(data);
   });
 
   tooltip();
@@ -53,12 +47,6 @@ $(window).load(function () {
   // Initiate now next widget
   var nowNextLater = new NowNextLater();
   nowNextLater.init();
-
-  uiTabs();
-
-  $('.sub-nav a').on('click', function () {
-    uiTabs();
-  });
 });
 
 $(window).on('scroll', _.debounce(toggleSelectedNavItem, 250));

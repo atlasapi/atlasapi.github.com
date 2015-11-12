@@ -1,8 +1,0 @@
-<template id="channels-template">
-  <h4>all channels in {{this.0.platform_title}}, {{this.0.region_title}}</h4>
-  <div class="clearfix">
-    {{#each this}}
-      <label title="{{channel.title}} ({{channel.id}})"><input class="channel-picker-checkbox" type="checkbox" name="channel-id" value="{{channel.id}}"> {{channel.title}} ({{channel.id}})</label>
-    {{/each}}
-  </div>
-</template>

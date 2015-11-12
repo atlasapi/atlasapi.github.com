@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>atlas - media data router</title>
+    <title>api documentation - atlas</title>
     <!-- build:css /css/app.css -->
     <link rel="stylesheet" href="/css/app.css">
     <!-- endbuild -->
@@ -12,25 +12,6 @@
 
     <div class="site-header" id="site-header"></div>
     <div class="sub-header" id="sub-header"></div>
-    <div class="section section-api-docs" id="api-docs"></div>
-    <section class="apiExplorer container" id="apiExplorer">
-      <div class="explorerTitle">
-        <div class="line">
-          <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
-        </div>
-      </div>
-      <div class="explorerWrapper" id="explorerWrapper">
-        <form class="unit size1of2" id="apiKeyForm">
-          <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here:</label>
-          <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
-        </form>
-        <div class="unit size1of2">
-          <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
-        </div>
-        <p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
-        <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
-      </div>
-    </section>
     <div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
     <!-- templates -->
@@ -60,7 +41,6 @@
     <script src="/components/exoskeleton/exoskeleton.js"></script>
     <script src="/components/backbone.nativeajax/backbone.nativeajax.js"></script>
     <script src="/components/backbone.nativeview/backbone.nativeview.js"></script>
-    <script src="/js/lib/tabs.js"></script>
     <script src="/js/lib/jquery.nav.js"></script>
     <script src="/js/lib/nownext-widget.js"></script>
     <script src="/js/lib/encodeQueryData.js"></script>
@@ -69,25 +49,6 @@
     <script src="/js/lib/login-to-admin.js"></script>
     <script src="/js/main.compiled.js"></script>
     <!-- endbuild -->
-
-    <script src="https://widgets.metabroadcast.com/loader/1/load.js"></script>
-        <script>
-            MBST = MBST || {};
-            MBST.load({
-                client: 'atlasNowNextLater',
-                widgets: [
-                    {
-                        name: 'epg',
-                        version: '1',
-                        modules: {
-                            grid: {
-                                holder: '.epg-widget'
-                            }
-                        }
-                    }
-                ]
-            });
-        </script>
 
     <script>
       var _gaq = _gaq || [];
