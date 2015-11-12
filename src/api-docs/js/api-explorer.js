@@ -50,15 +50,15 @@ var apiExplorer = (function () {
   };
 
   var updateForm = function ($queryParametersForm) {
-    var ajaxExampleText = "$.ajax({";
-    ajaxExampleText += "url: '@url',"
-    ajaxExampleText += "success: function (data) {";
-    ajaxExampleText += "console.log(data);";
-    ajaxExampleText += "},";
-    ajaxExampleText += "error: function (jqXHR, textStatus) {";
-    ajaxExampleText += "console.error(textStatus);";
-    ajaxExampleText += "}";
-    ajaxExampleText += "});";;
+    var ajaxExampleText = "$.ajax({\n";
+    ajaxExampleText += "  url: '@url',\n"
+    ajaxExampleText += "  success: function (data) {\n";
+    ajaxExampleText += "    console.log(data);\n";
+    ajaxExampleText += "  },\n";
+    ajaxExampleText += "  error: function (jqXHR, textStatus) {\n";
+    ajaxExampleText += "    console.error(textStatus);\n";
+    ajaxExampleText += "  }\n";
+    ajaxExampleText += "});\n";
     var queryUrlValue = getQueryUrlComponents($queryParametersForm);
     $queryParametersForm.siblings('.api-explorer-examples').find('.queryUrl').val(queryUrlValue);
     $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
