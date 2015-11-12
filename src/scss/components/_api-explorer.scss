@@ -73,6 +73,13 @@ input.annotation-checkbox {
   display: block;
 }
 
+.btn.toggle-picker,
+.close-channel-picker,
+.close-channel-group-picker {
+  float: right;
+  margin: 0.5rem 0;
+}
+
 .pickers {
   position: relative;
   float: left;
@@ -186,7 +193,7 @@ input.annotation-checkbox {
   content: "";
   position: absolute;
   top: -7px;
-  right: 10px;
+  right: 50px;
   display: block;
   margin-left: -3px;
   border-left: 6px solid transparent;
@@ -222,4 +229,69 @@ select.queryParameter {
 
 .channel-group-picker-container h4 {
   margin-top: 10px;
+}
+
+.api-explorer-nav {
+  margin: 0;
+}
+
+.full-width-input {
+  width: 100%;
+}
+
+.api-explorer-title {
+  background: $secondary-color;
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  margin: 0;
+}
+
+.api-explorer-inner {
+  padding: 1rem 1rem 3rem;
+  border: 1px solid #e7e5e5;
+  border-radius: 0 0 5px 5px;
+  background: #efefef;
+}
+
+.getApiKeyBtnHolder {
+  text-align: right;
+
+  .btn {
+    margin-left: 10px;
+  }
+}
+
+.api-explorer {
+  .ui-tabs-link {
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: $primary-color;
+      text-decoration: none;
+      background: transparent;
+    }
+
+    &.ui-tabs-active-link {
+      background: #fff;
+      color: $primary-color;
+      text-decoration: none;
+    }
+  }
+
+  .ui-tabs-panel {
+    padding-top: 1.5rem;
+  }
+
+  .queryParameter {
+
+    @media only screen and (min-width: 700px) {
+      min-width: 300px;
+    }
+  }
+
+  table table {
+    margin: 0;
+  }
 }

@@ -1,7 +1,3 @@
-.api-docs {
-  padding-top: 145px;
-}
-
 .open-api-docs-tab {
   color: #ef308f;
   box-shadow: none;
@@ -44,4 +40,10 @@
 
 .api-docs .btn {
   margin-left: 0;
+}
+
+.docs-loading {
+  text-align: center;
+  margin: 6rem 0 3rem;
+  padding: 3rem 0 0;
 }

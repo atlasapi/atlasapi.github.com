@@ -14,26 +14,34 @@
     <div class="sub-header" id="sub-header"></div>
     <div class="loginWrapper" style="display: none;"><div class="loginHolder"></div></div>
 
-    <section class="api-docs container" id="api-docs"></section>
-
-    <section class="apiExplorer container hide" id="apiExplorer">
-      <div class="explorerTitle">
-        <div class="line">
-          <div class="unit size1of2 explorerTitleContainer1">API Explorer</div>
-        </div>
+    <section class="api-docs section-api-docs container" id="api-docs">
+      <div class="docs-loading">
+        <h1>Loading API documentation...</h1>
+        <p><img src="/img/loader.gif" alt="Loading..."></p>
       </div>
-      <div class="explorerWrapper" id="explorerWrapper">
-        <div class="clearfix mbm">
-          <form class="unit size1of2" id="apiKeyForm">
-            <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
-            <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
-          </form>
-          <div class="unit size1of2">
-            <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+    </section>
+
+    <section class="api-explorer container hide" id="apiExplorer">
+      <h1 class="api-explorer-title">API Explorer</h1>
+      <div class="api-explorer-inner">
+        <div class="explorerWrapper" id="explorerWrapper">
+          <div class="row">
+            <form class="split" id="apiKeyForm">
+              <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+              <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+            </form>
+            <div class="split">
+              <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+            </div>
+          </div>
+          <p><small><a href="/3/apiexplorer">looking for the old api explorer?</a></small></p>
+          <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs">
+            <div class="docs-loading">
+              <h1>Loading API Explorer...</h1>
+              <p><img src="/img/loader.gif" alt="Loading..."></p>
+            </div>
           </div>
         </div>
-        <p class="clearfix"><a href="/3/apiexplorer">looking for the old api explorer?</a></p>
-        <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs"></div>
       </div>
     </section>
 
@@ -91,6 +99,7 @@
     <script src="js/api-docs.js"></script>
     <script src="js/api-explorer.js"></script>
     <script>
+      var MBST = MBST || {};
       $(function () {
         // Grabs api documentation data
         apiData.init(function (data) {
@@ -109,6 +118,11 @@
         });
         $(document).on('click', '.code-example', function () {
           $(this).selectText();
+        });
+
+        $(document).on('click', '.getApiKeyBtn', function (e) {
+          e.preventDefault();
+          loginToAdmin();
         });
       });
 

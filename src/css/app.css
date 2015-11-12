@@ -1136,7 +1136,7 @@ pre {
 
 @media only screen and (min-width: 700px) {
   .section-api-docs {
-    margin-top: 118px; } }
+    margin-top: 143px; } }
 
 .well {
   margin: 1.5rem 0;
@@ -1605,9 +1605,6 @@ pre {
   background: #330066;
   margin: 0 !important; }
 
-.api-docs {
-  padding-top: 145px; }
-
 .open-api-docs-tab {
   color: #ef308f;
   box-shadow: none; }
@@ -1640,6 +1637,11 @@ pre {
 
 .api-docs .btn {
   margin-left: 0; }
+
+.docs-loading {
+  text-align: center;
+  margin: 6rem 0 3rem;
+  padding: 3rem 0 0; }
 
 .ui-tabs-panel {
   display: none; }
@@ -1685,7 +1687,7 @@ pre {
   clear: both;
   background: #fff;
   border-radius: 0 0 5px 5px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
   padding: 10px;
   position: relative; }
 
@@ -1761,6 +1763,12 @@ input.annotation-checkbox {
 .channel-group-picker-toggle,
 .toggle-picker {
   display: block; }
+
+.btn.toggle-picker,
+.close-channel-picker,
+.close-channel-group-picker {
+  float: right;
+  margin: 0.5rem 0; }
 
 .pickers {
   position: relative;
@@ -1857,7 +1865,7 @@ input.annotation-checkbox {
   content: "";
   position: absolute;
   top: -7px;
-  right: 10px;
+  right: 50px;
   display: block;
   margin-left: -3px;
   border-left: 6px solid transparent;
@@ -1886,6 +1894,50 @@ select.queryParameter {
 
 .channel-group-picker-container h4 {
   margin-top: 10px; }
+
+.api-explorer-nav {
+  margin: 0; }
+
+.full-width-input {
+  width: 100%; }
+
+.api-explorer-title {
+  background: #306;
+  color: #fff;
+  border-radius: 5px 5px 0 0;
+  padding: 10px;
+  margin: 0; }
+
+.api-explorer-inner {
+  padding: 1rem 1rem 3rem;
+  border: 1px solid #e7e5e5;
+  border-radius: 0 0 5px 5px;
+  background: #efefef; }
+
+.getApiKeyBtnHolder {
+  text-align: right; }
+  .getApiKeyBtnHolder .btn {
+    margin-left: 10px; }
+
+.api-explorer .ui-tabs-link:hover, .api-explorer .ui-tabs-link:active, .api-explorer .ui-tabs-link:focus {
+  color: #ff009a;
+  text-decoration: none;
+  background: transparent; }
+
+.api-explorer .ui-tabs-link.ui-tabs-active-link {
+  background: #fff;
+  color: #ff009a;
+  text-decoration: none; }
+
+.api-explorer .ui-tabs-panel {
+  padding-top: 1.5rem; }
+
+@media only screen and (min-width: 700px) {
+  .api-explorer .queryParameter {
+    min-width: 300px; } }
+
+.api-explorer table table {
+  margin: 0; }
 
 /*
 
