@@ -203,6 +203,14 @@ gulp.task('images', function () {
 });
 
 /**
+ * Copy api docs and explorer to build
+ */
+gulp.task('copyApiDocs', function () {
+  gulp.src('./src/3/**/*').pipe(gulp.dest('./build/3'));
+  gulp.src('./src/api-docs/**/*').pipe(gulp.dest('./build/api-docs'));
+});
+
+/**
  * Copy JSON to build
  */
 gulp.task('json', function () {
@@ -214,7 +222,7 @@ gulp.task('server', shell.task(['http-server src -p 8080 -a dev.mbst.tv --cors']
 /**
  *  The tasks that should be run on a day to day basis
  */
-gulp.task('build', ['getEnvironment', 'reset', '6to5', 'scss', 'images', 'json', 'templates', 'useref', 'clean']);
+gulp.task('build', ['getEnvironment', 'reset', '6to5', 'scss', 'images', 'json', 'templates', 'copyApiDocs', 'useref', 'clean']);
 
 gulp.task('upload', ['gitPush']);
 
