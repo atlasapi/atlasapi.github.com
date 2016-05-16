@@ -1,8 +1,8 @@
 var atlasUser = (function () {
   'use strict';
-  
+
   var isLoggedIn = function () {
-    return localStorage.getItem('auth.token') ? true : false;
+    return Cookies.get('iPlanetDirectoryPro') ? true : false;
   };
 
   var getCredentials = function () {
@@ -23,7 +23,7 @@ var atlasUser = (function () {
       }
     });
   };
-  
+
   return {
     isLoggedIn: isLoggedIn,
     getCredentials: getCredentials,

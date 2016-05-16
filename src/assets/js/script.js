@@ -22,7 +22,6 @@ $(function () {
   // Trigger login
   $(document).on('click', '.getApiKeyBtn', function (e) {
     e.preventDefault();
-    loginToAdmin();
   });
 
   // Show if user is logged in or not

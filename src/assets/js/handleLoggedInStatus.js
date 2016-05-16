@@ -1,18 +1,21 @@
 var handleLoggedInStatus = (function () {
   'use strict';
 
-  var loadUserDataTemplate = function (data) {
+  var loadUserDataTemplate = function (userData) {
     loadTemplate({
       templatePath: '../templates/logged-in.ejs',
       templateContainer: '#navbar-tools'
-    }, data);
-    if (data.user.role === 'admin') {
-      loadTemplate({
-        templatePath: '../templates/admin-menu.ejs',
-        templateContainer: '#admin-menu'
+    }, userData);
+    if (userData.role) {
+      userData.role.forEach(function(role) {
+        if (role.id === 'admins') {
+          loadTemplate({
+            templatePath: '../templates/admin-menu.ejs',
+            templateContainer: '#admin-menu'
+          });
+        }
       });
     }
-    loadUserPhoto();
   };
 
   var sortApplicationsByDateDescending = function (data) {
@@ -24,21 +27,36 @@ var handleLoggedInStatus = (function () {
     return data;
   };
 
-  var loadApplicationsTemplate = function (data) {
-    data = sortApplicationsByDateDescending(data);
+  var loadApplicationsTemplate = function () {
     loadTemplate({
       templatePath: '../templates/apps-menu.ejs',
       templateContainer: '#apps-menu'
-    }, data);
+    });
   };
 
   var loadGroupsTemplate = function (data) {
-    if (data.length) {
-      loadTemplate({
-        templatePath: '../templates/content-menu.ejs',
-        templateContainer: '#content-menu'
-      }, data);
-    }
+    var groupsData = {
+      admin: false,
+      youview: false,
+      blackout: false
+    };
+    data.role.forEach(function(role) {
+      if (role.id === 'admins') {
+        groupsData.admin = true;
+      }
+
+      if (role.id === 'bt-blackout') {
+        groupsData.blackout = true;
+      }
+
+      if (role.id === 'youview-feeds') {
+        groupsData.youview = true;
+      }
+    });
+    loadTemplate({
+      templatePath: '../templates/content-menu.ejs',
+      templateContainer: '#content-menu'
+    }, groupsData);
   };
 
   var loadTemplate = function (templateInfo, data) {
@@ -101,12 +119,22 @@ var handleLoggedInStatus = (function () {
 
   return function () {
     if (atlasUser.isLoggedIn()) {
-      var credentials = atlasUser.getCredentials(),
-          credentialsQueryString = encodeQueryData(credentials);
+      var credentials = atlasUser.getCredentials();
       loadNavigationTemplate();
-      atlasUser.getUserData('https://atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString, loadUserDataTemplate);
-      atlasUser.getUserData('https://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadApplicationsTemplate);
-      atlasUser.getUserData('//atlas-admin-backend.metabroadcast.com/api/user/groups?' + credentialsQueryString, loadGroupsTemplate);
+      $.ajax({
+        url: 'https://admin-backend.metabroadcast.com/1/user',
+        headers: {
+          iPlanetDirectoryPro: Cookies.get('iPlanetDirectoryPro')
+        },
+        success: function(user) {
+          loadApplicationsTemplate();
+          loadUserDataTemplate(user);
+          loadGroupsTemplate(user);
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
       events();
     } else {
       loadTemplate({
