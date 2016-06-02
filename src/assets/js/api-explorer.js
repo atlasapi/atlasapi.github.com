@@ -1,14 +1,17 @@
 var apiExplorer = (function () {
   'use strict';
 
-  var defaultApiKey = 'c1e92985ec124202b7f07140bcde6e3f';
-
   var getApiKey = function () {
+
+    var apiKey = '';
+
     if (atlasUser.isLoggedIn()) {
-      return $('#apiKey').val() || $('#user-api-keys').val() || defaultApiKey;
+      apiKey = $('#apiKey').val() || $('#user-api-keys').val();
     } else {
-      return $('#apiKey').val() || defaultApiKey;
+      apiKey = $('#apiKey').val();
     }
+
+    return apiKey;
   };
 
   var sendQuery = function ($queryForm) {
@@ -50,15 +53,15 @@ var apiExplorer = (function () {
   };
 
   var updateForm = function ($queryParametersForm) {
-    var ajaxExampleText = "$.ajax({
-  url: '@url',
-  success: function (data) {
-    console.log(data);
-  },
-  error: function (jqXHR, textStatus) {
-    console.error(textStatus);
-  }
-});";
+    var ajaxExampleText = "$.ajax({\
+      url: '@url',\
+      success: function (data) {\
+        console.log(data);\
+      },\
+      error: function (jqXHR, textStatus) {\
+        console.error(textStatus);\
+      }\
+    });";
     var queryUrlValue = getQueryUrlComponents($queryParametersForm);
     $queryParametersForm.siblings('.api-explorer-examples').find('.queryUrl').val(queryUrlValue);
     $queryParametersForm.siblings('.api-explorer-examples').find('.api-explorer-example-curl').val('curl -i \'' + queryUrlValue + '\'');
@@ -206,7 +209,10 @@ var apiExplorer = (function () {
       loadApiKeyButton();
       $('#apiKey').val('').trigger('change');
     });
-    $(document).on('click', '.show-api-key-warning', function () {
+    $(document).on('click', '.show-api-key-warning', function (e) {
+
+      e.preventDefault();
+
       if (!atlasUser.isLoggedIn()) {
         var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
         $('.api-key-warning').hide();
@@ -316,6 +322,22 @@ var apiExplorer = (function () {
     $('#getApiKeyBtnHolder').html(compiledTemplate);
   };
 
+  var getApplicationData = function(data) {
+
+    $.ajax({
+      url: 'https://admin-backend.metabroadcast.com/1/applications/atlas?email=' + data.attributes.mail,
+      headers: {
+        iPlanetDirectoryPro: Cookies.get('iPlanetDirectoryPro')
+      },
+      success: function(data) {
+        loadUserApiKeyDropdown(data);
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        log.error(errorThrown);
+      }
+    });
+  };
+
   var init = function (endpointsData) {
     var compiledTemplate = new EJS({
       url: '../templates/api-explorer.ejs'
@@ -325,7 +347,7 @@ var apiExplorer = (function () {
     if (atlasUser.isLoggedIn()) {
       var credentials = atlasUser.getCredentials();
       var credentialsQueryString = encodeQueryData(credentials);
-      atlasUser.getUserData('https://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadUserApiKeyDropdown);
+      atlasUser.getUserData(getApplicationData);
     } else {
       loadApiKeyButton();
     }

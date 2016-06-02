@@ -127,6 +127,7 @@ var handleLoggedInStatus = (function () {
           iPlanetDirectoryPro: Cookies.get('iPlanetDirectoryPro')
         },
         success: function(user) {
+          console.log(user);
           loadApplicationsTemplate();
           loadUserDataTemplate(user);
           loadGroupsTemplate(user);

@@ -163,6 +163,10 @@
   box-shadow: 0 1px 5px rgba(0,0,0,0.3);
   line-height: 24px;
   margin-left: 20px;
+
+  &:disabled{
+    cursor: not-allowed;
+  }
 }
 
 .btn:hover,

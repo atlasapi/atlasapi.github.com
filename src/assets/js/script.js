@@ -19,11 +19,6 @@ $(function () {
   // Initiate popovers for examples section
   popovers();
 
-  // Trigger login
-  $(document).on('click', '.getApiKeyBtn', function (e) {
-    e.preventDefault();
-  });
-
   // Show if user is logged in or not
   handleLoggedInStatus();
 
