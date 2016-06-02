@@ -12,11 +12,14 @@ var atlasUser = (function () {
     };
   };
 
-  var getUserData = function (url, callback) {
+  var getUserData = function (callback) {
     $.ajax({
-      url: url,
-      success: function (data) {
-        callback(data);
+      url: 'https://admin-backend.metabroadcast.com/1/user',
+      headers: {
+        iPlanetDirectoryPro: Cookies.get('iPlanetDirectoryPro')
+      },
+      success: function(user) {
+        callback(user);
       },
       error: function (jqXHR, textStatus, errorThrown) {
         log.error(errorThrown);

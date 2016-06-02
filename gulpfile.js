@@ -7,6 +7,7 @@ var shell = require('gulp-shell');
 var htmlReplace = require('gulp-html-replace');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
+var gutil = require('gulp-util');
 var dateForVersioning = new Date().getTime();
 
 gulp.task('copyFiles', function () {
@@ -42,7 +43,7 @@ gulp.task('apiDocs', function () {
     .pipe(concat('api-docs-bundle.js'))
     .pipe(uglify({
       mangle: true
-    }))
+    }).on('error', gutil.log))
     .pipe(sourcemaps.write('./sourcemaps'))
     .pipe(gulp.dest('./js'));
 });
@@ -96,7 +97,7 @@ gulp.task('build', ['styles', 'scripts', 'apiDocs', 'copyFiles', 'versioning']);
 gulp.task('server', shell.task(['http-server -p 3000 -a dev.mbst.tv -s -c-1 --cors']));
 
 gulp.task('dev', function () {
-  runSequence('build', 'watch', 'server');
+  runSequence('build', 'watch');
 });
 
 gulp.task('default', ['build']);
