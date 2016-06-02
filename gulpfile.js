@@ -7,7 +7,6 @@ var shell = require('gulp-shell');
 var htmlReplace = require('gulp-html-replace');
 var rename = require('gulp-rename');
 var runSequence = require('run-sequence');
-var gutil = require('gulp-util');
 var dateForVersioning = new Date().getTime();
 
 gulp.task('copyFiles', function () {
@@ -43,7 +42,7 @@ gulp.task('apiDocs', function () {
     .pipe(concat('api-docs-bundle.js'))
     .pipe(uglify({
       mangle: true
-    }).on('error', gutil.log))
+    }))
     .pipe(sourcemaps.write('./sourcemaps'))
     .pipe(gulp.dest('./js'));
 });
