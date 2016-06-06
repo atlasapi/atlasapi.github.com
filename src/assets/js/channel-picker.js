@@ -1,7 +1,18 @@
 var channelPicker = (function () {
   'use strict';
 
-  var apiKey = 'c1e92985ec124202b7f07140bcde6e3f';
+  var getApiKey = function () {
+
+    var theKey = '';
+
+    if (atlasUser.isLoggedIn()) {
+      theKey = $('#apiKey').val() || $('#user-api-keys').val();
+    } else {
+      theKey = $('#apiKey').val();
+    }
+
+    return theKey;
+  };
 
   var channelPickerClick = function () {
     $('.channel-picker-toggle').on('click', function (e) {
@@ -15,6 +26,9 @@ var channelPicker = (function () {
 
   var toggleChannelPicker = function (checkSelectedChannels, options) {
     var $tabPanel = $('#' + options.tabPanel);
+
+    var apiKey = getApiKey();
+
     $.ajax({
       url: 'https://atlas.metabroadcast.com/4/channel_groups.json?type=platform&annotations=channels,regions&key=' + apiKey,
       success: function (data) {
@@ -110,6 +124,9 @@ var channelPicker = (function () {
   };
 
   var getRegionChannels = function (regionId, platformTitle, $tabPanel) {
+
+    var apiKey = getApiKey();
+
     var channelsEndpoint = 'https://atlas.metabroadcast.com/4/channel_groups/';
     var channelsAnnotations = '?annotations=channels';
     var searchResults = [];
