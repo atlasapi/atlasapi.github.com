@@ -213,7 +213,9 @@ var apiExplorer = (function () {
 
       e.preventDefault();
 
-      if (!atlasUser.isLoggedIn()) {
+      var apiKey = getApiKey();
+
+      if (!apiKey) {
         var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
         $('.api-key-warning').hide();
         $apiKeyWarning.show();
@@ -221,9 +223,7 @@ var apiExplorer = (function () {
     });
     $(document).on('click', '.close-api-key-warning', function (e) {
       e.preventDefault();
-      if (!atlasUser.isLoggedIn()) {
-        $(this).closest('.api-key-warning').hide();
-      }
+      $(this).closest('.api-key-warning').hide();
     });
     $(document).on('keyup', function (e) {
       var escKeyCode = 27;
