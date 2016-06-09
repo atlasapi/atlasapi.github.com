@@ -103,8 +103,15 @@ var handleLoggedInStatus = (function () {
       atlasUser.getUserData('//atlas-admin-backend.metabroadcast.com/api/user/groups?' + credentialsQueryString, loadGroupsTemplate);
       events();
     } else {
+      var hostName = window.location.hostname;
+      var referrerUrl;
+      if (hostName === 'atlas.metabroadcast.com') {
+        referrerUrl = 'https://atlas.metabroadcast.com';
+      } else {
+        referrerUrl = 'https://atlas-stage.metabroadcast.com';
+      }
       var template = Handlebars.compile($('#logged-out-template').html());
-      $('#navbar-tools').html(template());
+      $('#navbar-tools').html(template({ referrerUrl: referrerUrl }));
     }
   }
 })();

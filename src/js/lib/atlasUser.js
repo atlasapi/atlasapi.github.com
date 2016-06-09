@@ -6,10 +6,7 @@ var atlasUser = (function () {
   };
 
   var getCredentials = function () {
-    return {
-      oauth_provider: localStorage.getItem('auth.provider'),
-      oauth_token: localStorage.getItem('auth.token')
-    };
+    return Cookies.get('iPlanetDirectoryPro') ? true : false;
   };
 
   var getUserData = function (url, callback) {

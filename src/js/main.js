@@ -20,11 +20,6 @@ $(function () {
   var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
   $('#site-header').html(headerTemplate(envInfo));
   $('#sub-header').html(subHeaderTemplate());
-
-  $(document).on('click', '.navbar-login', function (e) {
-    e.preventDefault();
-    loginToAdmin();
-  });
 });
 
 $(window).load(function () {
@@ -52,8 +47,8 @@ $(window).load(function () {
   }
 
   // Initiate now next widget
-  var nowNextLater = new NowNextLater();
-  nowNextLater.init();
+  // var nowNextLater = new NowNextLater();
+  // nowNextLater.init();
 });
 
 $(window).on('scroll', _.debounce(toggleSelectedNavItem, 250));
