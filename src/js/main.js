@@ -47,8 +47,8 @@ $(window).load(function () {
   }
 
   // Initiate now next widget
-  // var nowNextLater = new NowNextLater();
-  // nowNextLater.init();
+  var nowNextLater = new NowNextLater();
+  nowNextLater.init();
 });
 
 $(window).on('scroll', _.debounce(toggleSelectedNavItem, 250));
