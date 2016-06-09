@@ -4,47 +4,42 @@ var handleLoggedInStatus = (function () {
   var loadUserDataTemplate = function (data) {
     var template = Handlebars.compile($('#logged-in-template').html());
     $('#navbar-tools').html(template(data));
-    if (data.user.role === 'admin') {
-      var adminTemplate = Handlebars.compile($('#admin-menu-template').html());
-      $('#admin-menu').html(adminTemplate());
-    }
-    loadUserPhoto();
-  };
-
-  var sortApplicationsByDateDescending = function (data) {
-    data.applications.sort(function (a, b) {
-      a = new Date(a.created);
-      b = new Date(b.created);
-      return a > b ? -1 : a < b ? 1 : 0;
+    data.role.forEach(function(role) {
+      if (role.id === 'admins') {
+        var adminTemplate = Handlebars.compile($('#admin-menu-template').html());
+        $('#admin-menu').html(adminTemplate());
+      }
     });
-    return data;
+    loadGroupsTemplate(data);
   };
 
   var loadApplicationsTemplate = function (data) {
-    data = sortApplicationsByDateDescending(data);
     var template = Handlebars.compile($('#apps-menu-template').html());
     $('#apps-menu').html(template(data));
   };
 
   var loadGroupsTemplate = function (data) {
-    if (data.length) {
-      data.forEach(function (group) {
-        if (group.name === 'BTBlackout') {
-          group.title = 'EPG';
-          group.url = '/admin?#/epg/bt-tv';
+    var groups = [];
+    if (data.role) {
+      data.role.forEach(function (role) {
+        if (role.id === 'bt-blackout' || role.id === 'admins') {
+          groups.push({
+            title: 'EPG',
+            url: '/admin?#/epg/bt-tv'
+          });
         }
-        if (group.name === 'BBC-YV-Feed') {
-          group.title = 'Feeds';
-          group.url = '/admin?#/feeds';
-        }
-        if (group.name === 'BBC-Scrubbables') {
-          group.title = 'Scrubbables';
-          group.url = '/admin?#/scrubbables';
+        if (role.id === 'youview-feeds' || role.id === 'admins') {
+          groups.push({
+            title: 'Feeds',
+            url: '/admin?#/feeds'
+          });
         }
       });
 
-      var template = Handlebars.compile($('#content-menu-template').html());
-      $('#content-menu').html(template(data));
+      if (groups.length) {
+        var template = Handlebars.compile($('#content-menu-template').html());
+        $('#content-menu').html(template(groups));
+      }
     }
   };
 
@@ -54,8 +49,7 @@ var handleLoggedInStatus = (function () {
   };
 
   var logout = function () {
-    localStorage.removeItem('auth.provider');
-    localStorage.removeItem('auth.token');
+    Cookies.remove('iPlanetDirectoryPro');
     var template = Handlebars.compile($('#logged-out-template').html());
     $('#navbar-tools').html(template());
     $('.user-menu').each(function () {
@@ -79,12 +73,6 @@ var handleLoggedInStatus = (function () {
     });
   };
 
-  var loadUserPhoto = function () {
-    var $userPhoto = $('.profile-picture'),
-        imageUrl = $userPhoto.data('src');
-    $userPhoto.attr('src', imageUrl);
-  };
-
   var events = function () {
     handleClick('.logout', logout);
     handleClick('.has-dropdown-menu > a', toggleDropDownMenu);
@@ -95,12 +83,10 @@ var handleLoggedInStatus = (function () {
 
   return function () {
     if (atlasUser.isLoggedIn()) {
-      var credentials = atlasUser.getCredentials(),
-          credentialsQueryString = encodeQueryData(credentials);
+      var authCookie = atlasUser.getCredentials();
       loadNavigationTemplate();
-      atlasUser.getUserData('https://atlas.metabroadcast.com/4/auth/user.json?' + credentialsQueryString, loadUserDataTemplate);
-      atlasUser.getUserData('https://atlas.metabroadcast.com/4/applications.json?' + credentialsQueryString, loadApplicationsTemplate);
-      atlasUser.getUserData('//atlas-admin-backend.metabroadcast.com/api/user/groups?' + credentialsQueryString, loadGroupsTemplate);
+      atlasUser.getUserData('https://admin-backend.metabroadcast.com/1/user', authCookie, loadUserDataTemplate);
+      loadApplicationsTemplate();
       events();
     } else {
       var hostName = window.location.hostname;

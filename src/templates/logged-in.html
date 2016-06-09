@@ -1,12 +1,11 @@
 <template id="logged-in-template">
   <div class="navbar-user logged-in has-dropdown">
     <a class="user-menu-link user-avatar" href="#">
-      <img class="profile-picture" src="assets/images/user-photo.jpg" data-src="{{user.profile_image}}" alt="{{user.full_name}}">
-      <span class="user-name">{{user.full_name}}</span>
+      <span class="user-name">{{attributes.mail}}</span>
     </a>
     <div class="dropdown user-dropdown-menu">
       <ul>
-        <li><a href="/admin?#/profile">your profile</a></li>
+        <li><a href="/admin?#/contact">contact</a></li>
         <li><a href="/admin?#/terms">terms of use</a></li>
         <li><a class="logout" href="#">log out</a></li>
       </ul>
