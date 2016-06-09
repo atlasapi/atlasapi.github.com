@@ -301,8 +301,10 @@ $(window).load(function () {
   }
 
   // Initiate now next widget
-  var nowNextLater = new NowNextLater();
-  nowNextLater.init();
+  if (window.location.pathname !== '/api-docs/') {
+    var nowNextLater = new NowNextLater();
+    nowNextLater.init();
+  }
 });
 
 $(window).on('scroll', _.debounce(_libHelpersJs.toggleSelectedNavItem, 250));
