@@ -1,0 +1,40 @@
+.container {
+  @include outer-container(960px);
+  width: 96%;
+  position: relative;
+}
+
+.row {
+  @include row();
+}
+
+.split {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(6);
+    @include omega(2n);
+  }
+}
+
+.span-3 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(3);
+  }
+}
+
+.span-4 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(4);
+  }
+}
+
+.span-8 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(8);
+  }
+}
+
+.span-9 {
+  @media only screen and (min-width: 700px) {
+    @include span-columns(9);
+  }
+}

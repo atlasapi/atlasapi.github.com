@@ -1,0 +1,337 @@
+.sub-header {
+  width: 100%;
+  border-bottom: 1px solid #306;
+  background: #eee;
+  box-shadow: 1px 1px 7px rgba(0,0,0,0.3);
+  text-transform: lowercase;
+
+  @media only screen and (min-width: 700px) {
+    position: fixed;
+    top: 100px;
+    z-index: 1400;
+  }
+}
+
+.sub-nav {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+
+  @media only screen and (min-width: 700px) {
+    float: left;
+  }
+}
+
+.sub-nav-tools {
+
+  @media only screen and (min-width: 700px) {
+    float: right;
+  }
+}
+
+.sub-nav > li {
+  float: left;
+  font-weight: 400;
+  font: 16px 'Raleway', sans-serif;
+
+  @media only screen and (min-width: 700px) {
+    font-size: 18px
+  }
+}
+
+.sub-nav a {
+  padding: 5px;
+  display: block;
+  color: #306;
+  text-decoration: none;
+
+  @media only screen and (min-width: 700px) {
+    padding: 10px 14px;
+  }
+}
+
+.sub-nav a:hover,
+.sub-nav a:active,
+.sub-nav a:focus {
+  color: #ff009a;
+}
+
+.sub-nav .selected a {
+  color: #ff009a;
+  background: url(../img/selected.gif) center bottom no-repeat;
+}
+
+// Hidden so nav highlighting works as expected
+.sub-nav-home {
+  display: none;
+}
+
+.has-dropdown {
+  position: relative;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  width: 200px;
+  left: 50%;
+  top: 100%;
+  margin-left: -100px;
+  border: 1px solid $primary-color;
+  background: #eee;
+  border-radius: 5px;
+  padding: 0.75rem 0;
+}
+
+.dropdown:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: $primary-color;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.dropdown li {
+  font-weight: 400;
+  font: 16px 'Raleway', sans-serif;
+}
+
+.dropdown a {
+  padding: 5px;
+  display: block;
+  color: $secondary-color;
+  text-decoration: none;
+
+  @media only screen and (min-width: 700px) {
+    padding: 10px 14px;
+  }
+}
+
+.dropdown a:hover,
+.dropdown a:active,
+.dropdown a:focus {
+  color: $primary-color;
+}
+
+.user-name {
+  color: $secondary-color;
+}
+
+.user-name:hover,
+.user-name:active,
+.user-name:focus {
+  color: $primary-color;
+}
+
+.dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.selected .dropdown a {
+  color: #306;
+}
+
+.dropdown .selected a {
+  color: #ff009a;
+}
+
+.selected .dropdown a,
+.dropdown .selected a {
+  background: none;
+}
+
+.has-dropdown:hover .dropdown,
+.has-dropdown:active .dropdown,
+.has-dropdown:focus .dropdown {
+  display: block;
+}
+
+.hide-dropdown,
+.has-dropdown:hover .hide-dropdown,
+.has-dropdown:active .hide-dropdown,
+.has-dropdown:focus .hide-dropdown {
+  display: none;
+}
+
+.profile-picture {
+  float: right;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.user-menu-link {
+  padding: 0.3rem 0;
+}
+
+.user-menu-link:before,
+.user-menu-link:after {
+  content: " ";
+  display: table;
+}
+
+.user-menu-link:after {
+  clear: both;
+}
+
+.user-avatar {
+  display: block;
+}
+
+.profile-picture {
+  margin-left: 0.5rem;
+}
+
+.user-name {
+  float: left;
+  margin: 0.3rem 0 0;
+}
+
+.navbar-login {
+  display: inline-block;
+  background: $primary-color;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.api-explorer-btn {
+  min-width: 220px;
+  display: inline-block;
+  background: $secondary-color;
+  color: #fff;
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  margin-top: 0.3rem;
+
+  @media only screen and (min-width: 700px) {
+    position: absolute;
+    left: 101%;
+  }
+}
+
+.api-explorer-btn:hover,
+.api-explorer-btn:active,
+.api-explorer-btn:focus {
+  color: #fff;
+}
+
+.icon-search {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background: url(../img/icon-search.png) 0 0 no-repeat;
+}
+
+.api-explorer-btn .icon-search {
+  position: relative;
+  top: 0.2rem;
+  margin-right: 0.25rem;
+}
+
+.navbar-login:hover,
+.navbar-login:active,
+.navbar-login:focus {
+  background: $secondary-color;
+  color: #fff;
+}
+
+.loginWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1600;
+}
+
+.loginHolder {
+  width: 520px;
+  height: auto;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -275px;
+  background: #fff;
+  border-radius: 6px;
+  padding: 30px;
+  text-align: center;
+}
+
+.signInBtn {
+  border-radius: 6px;
+  color: #fff;
+  width: 260px;
+  cursor: pointer;
+  display: block;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  overflow: hidden;
+  padding: 10px 0px 10px 61px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-shadow: none;
+  margin: 0 auto 20px;
+}
+
+.signInBtn:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.unit .signInBtn {
+  margin-right: 10px;
+}
+
+.lastUnit .signInBtn {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.signInBtn .fa {
+  border-right: 1px solid rgba(0,0,0,0.2);
+  text-align: center;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+  font-size: 32px;
+  width: 45px;
+  line-height: 45px;
+}
+
+.btn-github {
+  background-color: #444;
+}
+
+.btn-google {
+  background-color: #DD4B39;
+}
+
+.btn-twitter {
+  background-color: #55ACEE;
+}
+
+.menu-separator {
+  border-bottom: 1px solid #ccc;
+  margin: 0 14px;
+}

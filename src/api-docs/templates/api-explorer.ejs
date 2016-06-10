@@ -1,0 +1,147 @@
+<ul class="ui-tabs-nav api-explorer-nav clearfix unstyled">
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+  <% if (this[i].parameters) { %>
+  <% if (i === 0) { %>
+  <li><a class="ui-tabs-link ui-tabs-active-link" href="#api-<%= this[i].name %>"><%= this[i].name %></a></li>
+  <% } else { %>
+  <li><a class="ui-tabs-link" href="#api-<%= this[i].name %>"><%= this[i].name %></a></li>
+  <% } %>
+  <% } %>
+  <% } %>
+</ul>
+
+<div class="clearfix">
+  <% for (var i = 0, ii = this.length; i < ii; i++) { %>
+  <% if (this[i].parameters) { %>
+  <div class="ui-tabs-panel" id="api-<%= this[i].name %>">
+    <h2><%= this[i].name %></h2>
+    <h3><span class="upper">GET</span> <%= this[i].root_path %></h3>
+    <% if (this[i].description) { %>
+    <p><%= this[i].description %></p>
+    <% } %>
+    <p><a class="open-api-docs-tab" href="#api-docs-<%= this[i].name %>">See documentation</a></p>
+    <form class="queryParametersForm" data-endpoint="<%= this[i].root_path %>">
+      <table class="tbl mbm queryTable">
+        <thead>
+        <tr>
+          <th class="first">Parameter</th>
+          <th class="second">Value</th>
+          <th class="third">Type</th>
+          <th class="fourth">Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (var j = 0, jj = this[i].parameters.length; j < jj; j++) { %>
+        <tr class="api-explorer-param-<%= this[i].parameters[j].name %>" id="<%= this[i].name %>-<%= this[i].parameters[j].name %>-row">
+          <td class="first"><%= this[i].parameters[j].name %></td>
+          <td class="second has-api-key-warning">
+            <% if (Array.isArray(this[i].parameters[j].default_value)) { %>
+            <select class="queryParameter" name="<%= this[i].parameters[j].name %>">
+              <option value="">Select value</option>
+              <% for (var k = 0, kk = this[i].parameters[j].default_value.length; k < kk; k++) { %>
+              <option value="<%= this[i].parameters[j].default_value[k] %>"><%= this[i].parameters[j].default_value[k] %></option>
+              <% } %>
+            </select>
+            <% } else { %>
+            <input class="queryParameter" type="text" name="<%= this[i].parameters[j].name %>" value="<%= this[i].parameters[j].default_value %>" data-default="<%= this[i].parameters[j].default_value %>">
+            <% } %>
+            <% if (this[i].name === 'schedules' && this[i].parameters[j].name === 'id') { %>
+            <a class="channel-picker-toggle toggle-link show-api-key-warning" href="#<%= this[i].name %>-channel-picker">choose channels</a>
+            <% } %>
+            <% if (this[i].name === 'channels' && this[i].parameters[j].name === 'id') { %>
+            <a class="channel-picker-toggle toggle-link show-api-key-warning" href="#<%= this[i].name %>-channel-picker">choose channel</a>
+            <% } %>
+            <% if (this[i].name === 'channel_groups' && this[i].parameters[j].name === 'id') { %>
+            <a class="channel-group-picker-toggle toggle-link show-api-key-warning" href="#<%= this[i].name %>-channel-picker">choose channel group</a>
+            <div class="channel-group-picker-container"></div>
+            <% } %>
+            <% if (this[i].parameters[j].name === 'annotations') { %>
+            <a class="toggle-picker toggle-link" href="#<%= this[i].name %>-annotations-picker">choose annotations</a>
+            <% } %>
+            <div class="api-key-warning">
+              <p>Please use your own key in your app</p>
+              <p><a class="getApiKeyBtn btn" href="https://users.metabroadcast.com/#register">Get Your Free API Key</a></p>
+              <p><a class="close-api-key-warning" href="#">I'm still playing</a></p>
+            </div>
+          </td>
+          <td class="third"><%= this[i].parameters[j].type %></td>
+          <td class="fourth"><%= this[i].parameters[j].description %></td>
+        </tr>
+        <% if (this[i].parameters[j].name === 'annotations') { %>
+        <tr class="hide annotations-picker-row" id="<%= this[i].name %>-annotations-picker">
+          <td colspan="4" class="annotations-row">
+            <a class="btn toggle-picker mbm" href="#<%= this[i].name %>-annotations-picker">&times; close</a>
+            <table class="tbl annotations-picker-table">
+              <thead>
+              <tr>
+                <th>Annotation</th>
+                <th>Type added to the response</th>
+                <th>Description</th>
+              </tr>
+              </thead>
+              <tbody>
+              <% for (var k = 0, kk = this[i].annotations.length; k < kk; k++) { %>
+              <tr>
+                <td>
+                  <label>
+                    <input class="annotation-checkbox" type="checkbox" name="<%= this[i].annotations[k].name %>">
+                    <%= this[i].annotations[k].name %>
+                  </label>
+                </td>
+                <td><a class="api-docs-types-link" href="#api-docs-types-<%= this[i].annotations[k].type.toLowerCase() %>"><%= this[i].annotations[k].type %></a></td>
+                <td><%= this[i].annotations[k].description %></td>
+              </tr>
+              <% } %>
+              </tbody>
+            </table>
+            <a class="btn toggle-picker" href="#<%= this[i].name %>-annotations-picker">&times; close</a>
+          </td>
+        </tr>
+        <% } %>
+        <% } %>
+        </tbody>
+      </table>
+    </form>
+    <div class="api-explorer-examples">
+      <h4>curl</h4>
+      <div class="has-api-key-warning">
+        <p><input class="api-explorer-example-curl show-api-key-warning full-width-input js-select-on-click" type="text" name="curl-example" value=""></p>
+        <div class="api-key-warning">
+          <p>Please use your own key in your app</p>
+          <p><a class="getApiKeyBtn btn" href="https://users.metabroadcast.com/#register">Get Your Free API Key</a></p>
+          <p><a class="close-api-key-warning" href="#">I'm still playing</a></p>
+        </div>
+      </div>
+      <h4>AJAX (with jQuery)</h4>
+      <div class="has-api-key-warning">
+        <pre class="api-explorer-example-ajax code-example js-select-on-click show-api-key-warning"></pre>
+        <div class="api-key-warning">
+          <p>Please use your own key in your app</p>
+          <p><a class="getApiKeyBtn btn" href="https://users.metabroadcast.com/#register">Get Your Free API Key</a></p>
+          <p><a class="close-api-key-warning" href="#">I'm still playing</a></p>
+        </div>
+      </div>
+      <h4>Request</h4>
+      <form class="queryForm mbl has-api-key-warning">
+        <input class="queryUrl show-api-key-warning js-select-on-click" type="text" name="query-url">
+        <button class="btn show-api-key-warning" type="submit">Go</button>
+        <div class="api-key-warning">
+          <p>Please use your own key in your app</p>
+          <p><a class="getApiKeyBtn btn" href="https://users.metabroadcast.com/#register">Get Your Free API Key</a></p>
+          <p><a class="close-api-key-warning" href="#">I'm still playing</a></p>
+        </div>
+      </form>
+      <h4>Response</h4>
+      <div class="queryResponse">
+        <pre class="jsonOutput"></pre>
+      </div>
+      <h4>...or start experimenting with an existing API call</h4>
+      <form class="user-query-form mbl">
+        <input class="user-query-url js-select-on-click" type="text" name="user-query-url" value="">
+        <button class="btn show-api-key-warning" type="submit">Go</button>
+      </form>
+    </div>
+  </div>
+  <% } %>
+  <% } %>
+</div>

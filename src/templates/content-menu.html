@@ -1,0 +1,10 @@
+<template id="content-menu-template">
+  <a class="user-menu-link" href="#">Content</a>
+  <div class="dropdown">
+    <ul>
+      {{# each this}}
+        <li><a href="{{url}}">{{title}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+</template>

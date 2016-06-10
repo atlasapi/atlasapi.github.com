@@ -1,0 +1,49 @@
+.icon-list li {
+  line-height: 32px;
+  margin-bottom: 0.5rem;
+}
+
+.icon-list a {
+  display: block;
+}
+
+.icon {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('../img/icons.png');
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+
+.icon-github {
+  background-position: -192px 0;
+}
+
+.icon-wiki {
+  background-position: -224px 0;
+}
+
+.icon-google {
+  background-position: -160px 0;
+}
+
+.icon-twitter {
+  background-position: 0 0;
+}
+
+.icon-mbst {
+  background-position: -96px 0;
+}
+
+.icon-java {
+  background-position: -128px 0;
+}
+
+.icon-ruby {
+  background-position: -32px 0;
+}
+
+.icon-python {
+  background-position: -64px 0;
+}

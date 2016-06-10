@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>atlas - media data router</title>
+    <!-- build:css css/app.css -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- endbuild -->
+  </head>
+  <body class="homepage">
+
+    <div class="site-header" id="site-header"></div>
+    <div class="sub-header" id="sub-header"></div>
+    <div class="section section-home" id="home"></div>
+    <div class="section" id="widgets"></div>
+    <div class="section" id="examples"></div>
+    <div class="section" id="reference"></div>
+    <div class="section" id="about"></div>
+
+    <!-- templates -->
+    <link rel="import" href="templates/header.html">
+    <link rel="import" href="templates/sub-header.html">
+    <link rel="import" href="templates/home.html">
+    <link rel="import" href="templates/widgets.html">
+    <link rel="import" href="templates/examples.html">
+    <link rel="import" href="templates/reference.html">
+    <link rel="import" href="templates/about.html">
+    <link rel="import" href="templates/carousel.html">
+    <link rel="import" href="templates/fullscreen.html">
+    <link rel="import" href="templates/admin-menu.html">
+    <link rel="import" href="templates/apps-menu.html">
+    <link rel="import" href="templates/content-menu.html">
+    <link rel="import" href="templates/logged-in.html">
+    <link rel="import" href="templates/logged-out.html">
+    <link rel="import" href="templates/user-navigation.html">
+    <!-- /templates -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- build:js js/app.js -->
+    <script src="/components/lodash/lodash.js"></script>
+    <script src="/components/handlebars/handlebars.js"></script>
+    <script src="/components/loglevel/dist/loglevel.js"></script>
+    <script src="/components/moment/moment.js"></script>
+    <script src="/components/exoskeleton/exoskeleton.js"></script>
+    <script src="/components/backbone.nativeajax/backbone.nativeajax.js"></script>
+    <script src="/components/backbone.nativeview/backbone.nativeview.js"></script>
+    <script src="/components/js-cookie/src/js.cookie.js"></script>
+    <script src="/js/lib/jquery.nav.js"></script>
+    <script src="/js/lib/nownext-widget.js"></script>
+    <script src="/js/lib/encodeQueryData.js"></script>
+    <script src="/js/lib/atlasUser.js"></script>
+    <script src="/js/lib/handleLoggedInStatus.js"></script>
+    <script src="/js/main.compiled.js"></script>
+    <!-- endbuild -->
+
+    <script src="https://widgets.metabroadcast.com/loader/1/load.js"></script>
+        <script>
+            MBST = MBST || {};
+            MBST.load({
+                client: 'atlasNowNextLater',
+                widgets: [
+                    {
+                        name: 'epg',
+                        version: '1',
+                        modules: {
+                            grid: {
+                                holder: '.epg-widget'
+                            }
+                        }
+                    }
+                ]
+            });
+        </script>
+
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push([ '_setAccount', 'UA-11621492-3' ]);
+      _gaq.push([ '_trackPageview' ]);
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

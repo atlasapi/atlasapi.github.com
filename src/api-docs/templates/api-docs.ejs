@@ -1,0 +1,181 @@
+<div class="well">
+  <h1>api documentation</h1>
+
+  <div class="clearfix pbl ui-tabs ui-tabs-vertical">
+
+    <!-- Start navigation -->
+    <div class="span-4">
+      <nav class="menu ui-tabs-nav">
+        <h2>Resources</h2>
+        <ul class="unstyled">
+        <% for (var i = 0, ii = resources.length; i < ii; i++) { %>
+          <% if (i === 0) { %>
+            <li><a class="menu-item ui-tabs-link ui-tabs-active-link" href="#api-docs-<%= resources[i].name %>"><%= resources[i].name %></a></li>
+          <% } else { %>
+            <li><a class="menu-item ui-tabs-link" href="#api-docs-<%= resources[i].name %>"><%= resources[i].name %></a></li>
+          <% } %>
+        <% } %>
+        </ul>
+        <h2>Types</h2>
+        <ul class="unstyled">
+        <% for (var i = 0, ii = types.length; i < ii; i++) { %>
+          <li><a class="menu-item ui-tabs-link" href="#api-docs-types-<%= types[i].name %>"><%= types[i].name %></a></li>
+        <% } %>
+        </ul>
+      </nav>
+    </div>
+    <!-- End navigation -->
+
+    <!-- Start panels -->
+    <div class="span-8">
+
+      <!-- Start resources panels -->
+      <% for (var i = 0, ii = resources.length; i < ii; i++) { %>
+        <div class="ui-tabs-panel pll" id="api-docs-<%= resources[i].name %>">
+          <h2><%= resources[i].name %></h2>
+          <% if (resources[i].description) { %>
+            <h3>Description</h3>
+            <p><%= resources[i].description %></p>
+          <% } %>
+          <h3>Resources</h3>
+          <% for (var j = 0, jj = resources[i].operations.length; j < jj; j++) { %>
+            <pre><code><%= resources[i].operations[j].method %> <%= resources[i].root_path %><%= resources[i].operations[j].path %></code></pre>
+          <% } %>
+          <h3>Status</h3>
+          <p>Current service level: <%= resources[i].service_level %></p>
+          <h3>Example response</h3>
+          <div class="api-docs-example-response clearfix"></div>
+          <h3>Parameters</h3>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (var k = 0, kk = resources[i].parameters.length; k < kk; k++) { %>
+                <tr>
+                  <td><%= resources[i].parameters[k].name %></td>
+                  <td><%= resources[i].parameters[k].type %></td>
+                  <td><%= resources[i].parameters[k].description %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <h3>Available annotations</h3>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type added to the response</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (var l = 0, ll = resources[i].annotations.length; l < ll; l++) { %>
+                <tr>
+                  <td><%= resources[i].annotations[l].name %></td>
+                  <td>
+                    <% if (resources[i].annotations[l].type !== '') { %>
+                      <a class="api-docs-types-link" href="#api-docs-types-<%= resources[i].annotations[l].type.toLowerCase() %>"><%= resources[i].annotations[l].type %></a>
+                    <% } %>
+                  </td>
+                  <td><%= resources[i].annotations[l].description %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <div class="api-docs-response"></div>
+          <h3>Error messages</h3>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Status code</th>
+                <th>Error code</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (var l = 0, ll = resources[i].error_messages.length; l < ll; l++) { %>
+                <tr>
+                  <td><%= resources[i].error_messages[l].status_code %></td>
+                  <td><%= resources[i].error_messages[l].error_code %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+      <!-- End resources panels -->
+
+      <!-- Start types panels -->
+      <% for (var i = 0, ii = types.length; i < ii; i++) { %>
+        <div class="ui-tabs-panel pll" id="api-docs-types-<%= types[i].name %>">
+          <h2><%= types[i].name %></h2>
+          <% if (types[i].description) { %>
+            <h3>Description</h3>
+            <p><%= types[i].description %></p>
+          <% } %>
+          <h3>Fields</h3>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>JSON Type</th>
+                <th>Multiple</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for (var j = 0, jj = types[i].fields.length; j < jj; j++) { %>
+                <tr>
+                  <td><%= types[i].fields[j].name %></td>
+                  <td>
+                    <% if (jQuery.inArray(types[i].fields[j].type.toLowerCase(), typesToLink) > -1) { %>
+                      <a class="api-docs-types-link" href="#api-docs-types-<%= types[i].fields[j].type.toLowerCase() %>"><%= types[i].fields[j].type %></a>
+                    <% } else { %>
+                      <%= types[i].fields[j].type %>
+                    <% } %>
+                  </td>
+                  <td><%= types[i].fields[j].json_type %></td>
+                  <td><%= types[i].fields[j].is_multiple %></td>
+                  <td><%= types[i].fields[j].description %></td>
+                </tr>
+              <% } %>
+            </tbody>
+          </table>
+          <div class="api-docs-annotations-resource clearfix">
+            <h3>Annotation types per resource</h3>
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th>Resource</th>
+                  <th>Annotation</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% for (var k = 0, kk = resources.length; k < kk; k++) { %>
+                  <% for (var l = 0, ll = resources[k].annotations.length; l < ll; l++) { %>
+                    <% if (resources[k].annotations[l].type === types[i].name) { %>
+                      <tr>
+                        <td><%= resources[k].name %></td>
+                        <td><%= resources[k].annotations[l].name %></td>
+                        <td><%= resources[k].annotations[l].description %></td>
+                      </tr>
+                    <% } %>
+                  <% } %>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      <% } %>
+      <!-- End types panels -->
+
+    </div>
+    <!-- End panels -->
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>api documentation - atlas</title>
+    <!-- build:css /css/app.css -->
+    <link rel="stylesheet" href="/css/app.css">
+    <!-- endbuild -->
+  </head>
+  <body>
+
+    <div class="site-header" id="site-header"></div>
+    <div class="sub-header" id="sub-header"></div>
+
+    <section class="api-docs section-api-docs container" id="api-docs">
+      <div class="docs-loading">
+        <h1>Loading API documentation...</h1>
+        <p><img src="/img/loader.gif" alt="Loading..."></p>
+      </div>
+    </section>
+
+    <section class="api-explorer container hide" id="apiExplorer">
+      <h1 class="api-explorer-title">API Explorer</h1>
+      <div class="api-explorer-inner">
+        <div class="explorerWrapper" id="explorerWrapper">
+          <div class="row">
+            <form class="split" id="apiKeyForm">
+              <label for="apiKey" class=" apiKeyLabel">Have an API key? Put it here: </label>
+              <input type="text" class="apiKey" name="apiKey" data-title="apiKey" id="apiKey" value="" />
+            </form>
+            <div class="split">
+              <div class="getApiKeyBtnHolder" id="getApiKeyBtnHolder">Loading API keys...</div>
+            </div>
+          </div>
+          <p><small><a href="/3/apiexplorer">looking for the old api explorer?</a></small></p>
+          <div class="ui-tabs ui-tabs-horizontal" id="api-explorer-tabs">
+            <div class="docs-loading">
+              <h1>Loading API Explorer...</h1>
+              <p><img src="/img/loader.gif" alt="Loading..."></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- templates -->
+    <link rel="import" href="/templates/header.html">
+    <link rel="import" href="/templates/sub-header.html">
+    <link rel="import" href="/templates/home.html">
+    <link rel="import" href="/templates/widgets.html">
+    <link rel="import" href="/templates/examples.html">
+    <link rel="import" href="/templates/reference.html">
+    <link rel="import" href="/templates/about.html">
+    <link rel="import" href="/templates/carousel.html">
+    <link rel="import" href="/templates/fullscreen.html">
+    <link rel="import" href="/templates/admin-menu.html">
+    <link rel="import" href="/templates/apps-menu.html">
+    <link rel="import" href="/templates/content-menu.html">
+    <link rel="import" href="/templates/logged-in.html">
+    <link rel="import" href="/templates/logged-out.html">
+    <link rel="import" href="/templates/user-navigation.html">
+    <!-- /templates -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+    <!-- build:js js/app.js -->
+    <script src="/components/lodash/lodash.js"></script>
+    <script src="/components/handlebars/handlebars.js"></script>
+    <script src="/components/loglevel/dist/loglevel.js"></script>
+    <script src="/components/moment/moment.js"></script>
+    <script src="/components/exoskeleton/exoskeleton.js"></script>
+    <script src="/components/backbone.nativeajax/backbone.nativeajax.js"></script>
+    <script src="/components/backbone.nativeview/backbone.nativeview.js"></script>
+    <script src="/components/js-cookie/src/js.cookie.js"></script>
+    <script src="/js/lib/jquery.nav.js"></script>
+    <script src="/js/lib/nownext-widget.js"></script>
+    <script src="/js/lib/encodeQueryData.js"></script>
+    <script src="/js/lib/atlasUser.js"></script>
+    <script src="/js/lib/handleLoggedInStatus.js"></script>
+    <script src="/js/main.compiled.js"></script>
+    <!-- endbuild -->
+
+    <!-- Only for api docs/explorer -->
+    <script src="js/ejs.min.js"></script>
+    <script src="js/jquery.selectText.js"></script>
+    <script src="js/api-data.js"></script>
+    <script src="js/encode-query-data.js"></script>
+    <script src="js/highlight.pack.js"></script>
+    <script src="js/typeahead.bundle.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/create-query-params-object.js"></script>
+    <script src="js/channel-picker.js"></script>
+    <script src="js/channel-group-picker.js"></script>
+    <script src="js/api-docs.js"></script>
+    <script src="js/api-explorer.js"></script>
+    <script>
+      var MBST = MBST || {};
+      $(function () {
+        // Grabs api documentation data
+        apiData.init(function (data) {
+          // Initiate api docs if on page
+          if ($('#api-docs').length) {
+            apiDocs.init(data);
+          }
+          // Initiate api explorer if on page
+          if ($('#apiExplorer').length) {
+            apiExplorer.init(data);
+          }
+        });
+        // Select text on click
+        $(document).on('click', '.js-select-on-click', function () {
+          $(this).select();
+        });
+        $(document).on('click', '.code-example', function () {
+          $(this).selectText();
+        });
+      });
+
+      $(window).load(function () {
+        // Initiate tabs if api docs and explorer are present
+        if ($('#api-docs').length && $('#apiExplorer').length) {
+          uiTabs();
+        }
+
+        $('.sub-nav a').on('click', function () {
+          uiTabs();
+        });
+
+        var scrollToApiExplorer = function () {
+          $('html, body').animate({
+            scrollTop: $('#apiExplorer').offset().top - 145
+          }, 200);
+        };
+
+        $(document).on('click', '.api-explorer-btn', function (e) {
+          e.preventDefault();
+          scrollToApiExplorer();
+        });
+      });
+    </script>
+
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push([ '_setAccount', 'UA-11621492-3' ]);
+      _gaq.push([ '_trackPageview' ]);
+      (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  </body>
+</html>

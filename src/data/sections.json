@@ -1,0 +1,29 @@
+{
+  "sections": [
+    {
+      "title": "Home",
+      "containerId": "#home",
+      "templateId": "#home-template"
+    },
+    {
+      "title": "Widgets",
+      "containerId": "#widgets",
+      "templateId": "#widgets-template"
+    },
+    {
+      "title": "Examples",
+      "containerId": "#examples",
+      "templateId": "#examples-template"
+    },
+    {
+      "title": "Reference",
+      "containerId": "#reference",
+      "templateId": "#reference-template"
+    },
+    {
+      "title": "About",
+      "containerId": "#about",
+      "templateId": "#about-template"
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+<template id="reference-template">
+  <div class="container">
+    <div class="well">
+      <h1>Reference</h1>
+      <h2 id="reference-overview">Overview</h2>
+      <p>Atlas is a metadata aggregator built for multiple data sets. It ingests data from many different sources, indexes it, matches equivalent items and then makes the data available through a simple RESTful API as well as several standard feed formats.</p>
+      <p>Users of the API can control how data from different sources is merged to create a single output, or choose to view equivalent items as separate linked resources. Underlying everything is a common data model that all sources are mapped to.</p>
+      <hr>
+      <h2 id="reference-data-model">Data model</h2>
+      <p>The Atlas data model has a number of key resource types. They are containers and items (collectively know as content), content groups, topics, products and channels.</p>
+      <h3>Containers</h3>
+      <p>Containers represent a collection of items within a programme hierarchy. They can be either brands or series. This is used to model programme hierarchies like Doctor Who (brand), Series 1 (series). Containers are returned with a list of the items they contain, but note that not all items are in a container (e.g. one-off items and films).</p>
+      <h3>Items</h3>
+      <p>Items represent individual pieces of content. They can be episodes, one-off items, films or clips. Items that are episodes are also in a container.</p>
+      <p>In addition to descriptive metadata such as titles, descriptions, genres and people, items also list the different places in which the content is available to watch or listen to. Broadcasts describe when the item is available on air, while locations list the places the content is available to watch on demand.</p>
+      <h3>Content groups</h3>
+      <p>Content groups are arbitrary collections of items outside the normal programme hierarchy. They can be used to group together any content, including containers and items. Content groups are used to model broadcast seasons, related brands and flexible playlists of items.</p>
+      <h3>Topics</h3>
+      <p>Topics are the things that a programme is about. Topics can be music artists, people, places, events, products, artistic works or just general subjects. They have a many to many relationship with content, so a piece of content can have many topics and you can ask for the content for a topic.</p>
+      <h3>Products</h3>
+      <p>Products represent physical products, such a CDs and DVDs. They have a many to many relationship with content, so a single piece of content can have many related products and a product can be related to many pieces of content. Products also have availability information that links to the places where the product can be purchased.</p>
+      <h3>Channels</h3>
+      <p>Broadcast channels are also modelled as resources in Atlas. When asking for a schedule, you will have to provide the correct channel id, which is available from the API.</p>
+      <h3>Channel groups</h3>
+      <p>Channel groups are sets of channels that represent broadcast platforms and regions, such as Freeview and BBC Scotland. By combining channel groups you can get a list of all of the channels available on a certain platform in a particular region.</p>
+      <hr>
+      <h2 id="reference-sources">Sources</h2>
+      <p>Atlas works with data from the following sources:</p>
+      <h3>International long-form</h3>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Access</th>
+            <th>Status</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hulu</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Free on-demand shows</td>
+          </tr>
+          <tr>
+            <td>iTunes</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Pay on-demand shows</td>
+          </tr>
+          <tr>
+            <td>TV Blob</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>EPG</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>UK long-form</h3>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Access</th>
+            <th>Status</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BBC</td>
+            <td>Restricted</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Free on-demand shows, EPG, Clips</td>
+          </tr>
+          <tr>
+            <td>Channel 4</td>
+            <td>Restricted</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Free on-demand shows, EPG, Clips</td>
+          </tr>
+          <tr>
+            <td>Five</td>
+            <td>Restricted</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Free on-demand shows</td>
+          </tr>
+          <tr>
+            <td>ITV</td>
+            <td>Restricted</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Free on-demand shows</td>
+          </tr>
+          <tr>
+            <td>MSN Video</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Free on-demand shows</td>
+          </tr>
+          <tr>
+            <td>Press Association</td>
+            <td>Restricted</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>EPG</td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>International short-form</h3>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Access</th>
+            <th>Status</th>
+            <th>Type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>archive.org</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+          <tr>
+            <td>blip.tv</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+          <tr>
+            <td>Daily Motion</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+          <tr>
+            <td>Podcasts</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+          <tr>
+            <td>TED.com</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+          <tr>
+            <td>Vimeo</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+          <tr>
+            <td>YouTube</td>
+            <td>Public</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Clips</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="message"><small>Please contact MetaBroadcast if you are interested in using restricted sources.</small></p>
+      <hr>
+      <h2 id="reference-feeds">Feeds</h2>
+      <p>In addition to the RESTful API, Atlas also provides data in a variety of feed formats</p>
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th>Format</th>
+            <th>Base type</th>
+            <th>Status</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BBC Interlinking</td>
+            <td>MRSS</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Data to feed broadcast data into BBC iPlayer</td>
+          </tr>
+          <tr>
+            <td>Google Video Sitemaps</td>
+            <td>MRSS</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Data to feed Google Video Search</td>
+          </tr>
+          <tr>
+            <td>UK Radioplayer</td>
+            <td>DAB-EPG</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Data to feed UK Radio Player Search</td>
+          </tr>
+          <tr>
+            <td>Xbox LIVE</td>
+            <td>Lakeview</td>
+            <td class="status"><img src="/img/status.png" alt="Green"></td>
+            <td>Data to feed Xbox LIVE TV Search</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="message"><small>Contact MetaBroadcast for help producing data in these formats</small></p>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,29 @@
+{
+  "name": "mbst-common-style",
+  "version": "0.1.12",
+  "authors": [
+    "Jason Howmans <jason@metabroadcast.com>",
+    "Steve Rydz <steve@metabroadcast.com>",
+    "Luke <luke@metabroadcast.com>"
+  ],
+  "main": "scss/base.scss",
+  "description": "A collection of common styles that align with the mbst brand",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "package.json",
+    "gulpfile.js"
+  ],
+  "_release": "0.1.12",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.1.12",
+    "commit": "b36fc0b89db1c8c03b44e76f4005668a4e3b9f31"
+  },
+  "_source": "git@bitbucket.org:mbst/common-style.git",
+  "_target": "~0.1.12",
+  "_originalSource": "git@bitbucket.org:mbst/common-style.git"
+}

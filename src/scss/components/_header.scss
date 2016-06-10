@@ -1,0 +1,35 @@
+.site-header {
+  width: 100%;
+  background: #306;
+  color: #fff;
+
+  @media only screen and (min-width: 700px) {
+    position: fixed;
+    top: 0;
+    z-index: 1500;
+  }
+}
+
+.site-logo {
+  float: right;
+  width: 38%;
+  margin: 15px 0 0;
+  padding: 0;
+
+  @media only screen and (min-width: 700px) {
+    width: 23%;
+  }
+
+  @media only screen and (min-width: 700px) {
+    width: 23%;
+  }
+
+  @media only screen and (min-width: 960px) {
+    width: 220px;
+  }
+}
+
+.site-logo img {
+  display: block;
+  margin: 0 auto;
+}

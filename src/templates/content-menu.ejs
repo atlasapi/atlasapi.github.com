@@ -1,7 +1,0 @@
-<% if (this.admin === true || this.blackout === true || this.youview === true) { %>
-  <a class="user-menu-link" href="#">Content</a>
-  <ul class="content-dropdown submenu">
-    <% if (this.admin === true || this.blackout === true) { %><li><a href="/admin?#/epg/bt-tv">EPG</a></li><% } %>
-    <% if (this.admin === true || this.youview === true) { %><li><a href="/admin?#/feeds">Feeds</a></li><% } %>
-  </ul>
-<% } %>

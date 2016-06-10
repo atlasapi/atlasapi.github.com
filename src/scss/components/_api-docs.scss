@@ -1,0 +1,49 @@
+.open-api-docs-tab {
+  color: #ef308f;
+  box-shadow: none;
+}
+
+.api-docs-types-link {
+  color: #ef308f;
+  text-decoration: underline !important; // This is dirty as hell, but necessary to override a third-party stylesheet
+}
+
+.api-docs-types-link:hover,
+.api-docs-types-link:active,
+.api-docs-types-link:focus {
+  text-decoration: none !important; // This is dirty as hell, but necessary to override a third-party stylesheet
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  display: block;
+  padding: 5px;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.menu-item-selected {
+  background: $primary-color;
+  color: #fff;
+  text-shadow: none;
+}
+
+.api-docs .btn {
+  margin-left: 0;
+}
+
+.docs-loading {
+  text-align: center;
+  margin: 6rem 0 3rem;
+  padding: 3rem 0 0;
+}

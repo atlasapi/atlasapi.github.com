@@ -1,0 +1,80 @@
+.client-list {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+  text-align: center;
+}
+
+.client-list li {
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.client-logo {
+  display: inline-block;
+  width: 93px;
+  height: 30px;
+  opacity: 0.6;
+  background-image: url(../img/client-logo-sprite.png);
+  background-repeat: no-repeat;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+
+.ted-logo { background-position: 0 0; }
+.amazon-logo { background-position: -93px 0px; }
+.amazon-prime-instant-video-logo { background-position: -186px 0px; }
+.android-logo { background-position: -279px 0px; }
+.apple-logo { background-position: -372px 0px; }
+.barb-logo { background-position: -465px 0px; }
+.bbc-logo { background-position: -558px 0px; }
+.belfast-telegraph-logo { background-position: -651px 0px; }
+.bloomberg-logo { background-position: -744px 0px; }
+.bt-logo { background-position: -837px 0px; }
+.channel4-logo { background-position: -930px 0px; }
+.channel5-logo { background-position: -1023px 0px; }
+.daily-express-logo { background-position: -1116px 0px; }
+.daily-mail-logo { background-position: -1206px 0px; }
+.echonest-logo { background-position: -1299px 0px; }
+.ericsson-logo { background-position: -1392px 0px; }
+.facebook-logo { background-position: -1482px 0px; }
+.flickr-logo { background-position: -1575px 0px; }
+.freebase-logo { background-position: -1668px 0px; }
+.getty-images-logo { background-position: -1761px 0px; }
+.global-radio-logo { background-position: -1854px 0px; }
+.google-logo { background-position: -1947px 0px; }
+.gracenote-logo { background-position: -2040px 0px; }
+.insidesoap-logo { background-position: -2130px 0px; }
+.irish-independent-logo { background-position: -2223px 0px; }
+.itv-logo { background-position: -2316px 0px; }
+.iva-logo { background-position: -2409px 0px; }
+.knowledgemotion-logo { background-position: -2502px 0px; }
+.lionsgate-logo { background-position: -2595px 0px; }
+.msn-logo { background-position: -2688px 0px; }
+.musicbrainz-logo { background-position: -2781px 0px; }
+.netflix-logo { background-position: -2874px 0px; }
+.opta-logo { background-position: -2967px 0px; }
+.pagesuite-logo { background-position: -3060px 0px; }
+.press-association-logo { background-position: -3153px 0px; }
+.radio-times-logo { background-position: -3246px 0px; }
+.radioplayer-logo { background-position: -3339px 0px; }
+.rdio-logo { background-position: -3432px 0px; }
+.rightster-logo { background-position: -3525px 0px; }
+.rovi-logo { background-position: -3618px 0px; }
+.rte-logo { background-position: -3708px 0px; }
+.soundcloud-logo { background-position: -3801px 0px; }
+.spotify-logo { background-position: -3894px 0px; }
+.talktalk-logo { background-position: -3987px 0px; }
+.the-platform-logo { background-position: -4080px 0px; }
+.the-space-logo { background-position: -4170px 0px; }
+.the-sun-logo { background-position: -4263px 0px; }
+.tv-choice-logo { background-position: -4356px 0px; }
+.tvdb-logo { background-position: -4449px 0px; }
+.twitter-logo { background-position: -4539px 0px; }
+.uktv-logo { background-position: -4632px 0px; }
+.universal-logo { background-position: -4725px 0px; }
+.vimeo-logo { background-position: -4818px 0px; }
+.wikipedia-logo { background-position: -4911px 0px; }
+.xbox-logo { background-position: -5004px 0px; }
+.youtube-logo { background-position: -5097px 0px; }
+.youview-logo { background-position: -5190px 0px; }

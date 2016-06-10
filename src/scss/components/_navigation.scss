@@ -1,0 +1,141 @@
+.site-nav {
+  float: left;
+  list-style: none;
+  margin: 48px 0 0;
+  padding: 0;
+}
+
+.site-nav > li {
+  float: left;
+  font: 21px 'Raleway', sans-serif;
+  font-weight: 400;
+  margin: 0;
+}
+
+.site-nav a {
+  display: block;
+  height: 52px;
+  line-height: 44px;
+  vertical-align: baseline;
+  padding: 10px 14px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a:active,
+.site-nav a:focus {
+  color: #ff009a;
+  background-color: transparent;
+}
+
+.site-nav img {
+  margin: 0;
+}
+
+.nav-atlas a,
+.nav-voila a {
+  display: block;
+  height: 52px;
+  text-indent: -9999px;
+  background-image: url(../img/logo-sprite.png);
+  background-repeat: no-repeat;
+}
+
+.nav-atlas a {
+  width: 81px;
+  background-position: 0 -52px;
+  background-color: #eee;
+}
+
+.nav-voila a {
+  width: 78px;
+  background-position: -81px 0;
+}
+
+.nav-atlas a:hover,
+.nav-atlas a:active,
+.nav-atlas a:focus {
+  background-position: 0 -52px;
+  background-color: #eee;
+}
+
+.nav-voila a:hover,
+.nav-voila a:active,
+.nav-voila a:focus {
+  background-position: -81px -52px;
+  background-color: #eee;
+}
+
+
+@media only screen and (max-width: 900px) {
+  .site-nav {
+    max-width: 55%;
+    margin-top: 0;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .site-nav {
+    box-sizing: border-box;
+    display: block;
+    float: left;
+    max-width: 60%;
+    position: static;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .site-logo {
+    margin: 10px 0;
+  }
+
+  .site-nav {
+    margin: 20px 0;
+  }
+
+  .site-nav li {
+    font-size: 14px;
+  }
+
+  .site-nav a {
+    height: 22px;
+    line-height: 20px;
+    padding: 5px 8px;
+    color: #fff;
+  }
+
+  .nav-atlas a,
+  .nav-voila a {
+    height: 22px;
+    background-image: url(../img/logo-sprite-small.png);
+  }
+
+  .nav-atlas a {
+    width: 44px;
+  }
+
+  .nav-voila a {
+    width: 41px;
+    background-position: -40px 0;
+  }
+
+  .nav-atlas a:hover,
+  .nav-atlas a:active,
+  .nav-atlas a:focus {
+    background-position: 0 -26px;
+  }
+
+  .nav-voila a,
+  .nav-voila a:hover,
+  .nav-voila a:active,
+  .nav-voila a:focus {
+    background-position: -40px -26px;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .site-nav {
+    margin: 10px 0;
+  }
+}
