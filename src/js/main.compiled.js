@@ -263,7 +263,7 @@ var _libHelpersJs = require('./lib/helpers.js');
 
 var envInfo = {};
 
-if (window.location.hostname !== 'voila.metabroadcast.com') {
+if (window.location.hostname !== 'atlas.metabroadcast.com') {
   envInfo.isDev = true;
 }
 

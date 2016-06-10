@@ -323,16 +323,17 @@ var apiExplorer = (function () {
   };
 
   var getApplicationData = function(data) {
-
     $.ajax({
       url: 'https://admin-backend.metabroadcast.com/1/applications/atlas?email=' + data.attributes.mail,
       headers: {
         iPlanetDirectoryPro: Cookies.get('iPlanetDirectoryPro')
       },
       success: function(data) {
+        console.log('success');
         loadUserApiKeyDropdown(data);
       },
       error: function (jqXHR, textStatus, errorThrown) {
+        console.log('error');
         log.error(errorThrown);
       }
     });
@@ -345,9 +346,8 @@ var apiExplorer = (function () {
     $('#api-explorer-tabs').html(compiledTemplate);
     events(endpointsData);
     if (atlasUser.isLoggedIn()) {
-      var credentials = atlasUser.getCredentials();
-      var credentialsQueryString = encodeQueryData(credentials);
-      atlasUser.getUserData(getApplicationData);
+      var authCookie = atlasUser.getCredentials();
+      atlasUser.getUserData('https://admin-backend.metabroadcast.com/1/user', authCookie, getApplicationData);
     } else {
       loadApiKeyButton();
     }
