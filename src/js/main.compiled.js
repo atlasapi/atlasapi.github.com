@@ -61,12 +61,12 @@ exports['default'] = Backbone.View.extend({
 module.exports = exports['default'];
 
 },{"../Views/SectionView.js":4}],4:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports["default"] = Backbone.View.extend({
+exports['default'] = Backbone.View.extend({
   initialize: function initialize(options) {
     if ($(options.templateId)) {
       this.template = Handlebars.compile($(options.templateId).html());
@@ -78,9 +78,22 @@ exports["default"] = Backbone.View.extend({
     if (this.el) {
       this.el.innerHTML = this.template();
     }
+
+    MBST.load({
+      client: 'atlasNowNextLater',
+      widgets: [{
+        name: 'epg',
+        version: '1',
+        modules: {
+          grid: {
+            holder: '.epg-widget'
+          }
+        }
+      }]
+    });
   }
 });
-module.exports = exports["default"];
+module.exports = exports['default'];
 
 },{}],5:[function(require,module,exports){
 'use strict';
