@@ -10,5 +10,20 @@ export default Backbone.View.extend({
     if (this.el) {
       this.el.innerHTML = this.template();
     }
+
+    MBST.load({
+      client: 'atlasNowNextLater',
+      widgets: [
+        {
+          name: 'epg',
+          version: '1',
+          modules: {
+            grid: {
+              holder: '.epg-widget'
+            }
+          }
+        }
+      ]
+    });
   }
 });
