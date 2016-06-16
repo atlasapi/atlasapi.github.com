@@ -2,27 +2,25 @@ import './lib/init.js';
 import {loadTemplates} from './lib/templates.js';
 import ContentCollection from './Collections/ContentCollection.js';
 import ContentCollectionView from './Views/ContentCollectionView.js';
-import SectionView from './Views/SectionView.js';
 import {tooltip, dropdowns, toggleSelectedNavItem} from './lib/helpers.js';
 
 var envInfo = {};
 
 if (window.location.hostname !== 'atlas.metabroadcast.com' || window.location.hostname !== 'stage.metabroadcast.com') {
   envInfo.isDev = true;
-  //loadTemplates();
+  loadTemplates();
 }
 
-$(function () {
-  var contentCollection = new ContentCollection();
-  var contentCollectionView = new ContentCollectionView({ collection: contentCollection });
-  console.log(document.getElementById('header-template'));
-  var headerTemplate = Handlebars.compile($('#header-template').html());
-  var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
-  $('#site-header').html(headerTemplate(envInfo));
-  $('#sub-header').html(subHeaderTemplate());
-});
-
 $(window).load(function () {
+  $(function () {
+    var contentCollection = new ContentCollection();
+    var contentCollectionView = new ContentCollectionView({ collection: contentCollection });
+    var headerTemplate = Handlebars.compile($('#header-template').html());
+    var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
+    $('#site-header').html(headerTemplate(envInfo));
+    $('#sub-header').html(subHeaderTemplate());
+  });
+
   var onePageNavOptions = {
     currentClass: 'selected',
     changeHash: true,

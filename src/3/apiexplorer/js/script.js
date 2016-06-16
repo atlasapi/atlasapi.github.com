@@ -1884,7 +1884,7 @@ $(document).ready(function(){
 
     apiData.init(function (data) {
         var compiledTemplate = new EJS({
-          url: 'assets/templates/api-docs-submenu.ejs'
+          url: '/api-docs/assets/templates/api-docs-submenu.ejs'
       }).render(data);
         $('#api-docs-submenu').html(compiledTemplate);
         // apiDocs.init(data);

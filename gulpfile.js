@@ -110,14 +110,14 @@ gulp.task('useref', ['templates'], function () {
     .pipe(gulpif('*.css', minify({
       processImport: false
     })))
-    .pipe(rev())
+    //.pipe(rev())
     .pipe(assets.restore())
     .pipe(useref())
-    .pipe(revReplace())
+    //.pipe(revReplace())
     .pipe(gulp.dest('./build'));
 });
 
-gulp.task('moveTemplate', ['useref'], function () {
+gulp.task('moveTemplate', ['copyApiDocs'], function () {
   return gulp.src('./build/_index.html')
     .pipe(rename('index.html'))
     .pipe(gulp.dest('./build'));
@@ -213,9 +213,26 @@ gulp.task('images', function () {
 /**
  * Copy api docs and explorer to build
  */
-gulp.task('copyApiDocs', function () {
+gulp.task('copyApiDocs', ['useref'], function () {
+  var assets = useref.assets();
+
   gulp.src('./src/3/**/*').pipe(gulp.dest('./build/3'));
   gulp.src('./src/api-docs/**/*').pipe(gulp.dest('./build/api-docs'));
+  gulp.src('./src/api-docs/index.html')
+    .pipe(spock({
+      verbose: true,
+      outputDir: './build/api-docs/'
+    }))
+    .pipe(assets)
+    .pipe(gulpif('*.js', uglify()))
+    .pipe(gulpif('*.css', minify({
+      processImport: false
+    })))
+    .pipe(rev())
+    .pipe(assets.restore())
+    .pipe(useref())
+    .pipe(revReplace())
+    .pipe(gulp.dest('./build/api-docs/'));
 });
 
 /**
@@ -225,12 +242,23 @@ gulp.task('json', function () {
   gulp.src('./src/data/**/*').pipe(gulp.dest('./build/data'));
 });
 
-gulp.task('server', shell.task(['http-server src -p 8080 -a dev.mbst.tv --cors']));
+gulp.task('server', shell.task(['http-server build -p 8080 -a dev.mbst.tv --cors']));
 
 /**
  *  The tasks that should be run on a day to day basis
  */
-gulp.task('build', ['getEnvironment', 'reset', '6to5', 'scss', 'images', 'json', 'templates', 'copyApiDocs', 'useref', 'moveTemplate', 'clean']);
+gulp.task('build', [
+  'getEnvironment',
+  'reset',
+  '6to5',
+  'scss',
+  'images',
+  'json',
+  'templates',
+  'useref',
+  'copyApiDocs',
+  'moveTemplate'
+]);
 
 gulp.task('upload', ['gitPush']);
 

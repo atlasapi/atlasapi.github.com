@@ -254,30 +254,25 @@ var _ViewsContentCollectionViewJs = require('./Views/ContentCollectionView.js');
 
 var _ViewsContentCollectionViewJs2 = _interopRequireDefault(_ViewsContentCollectionViewJs);
 
-var _ViewsSectionViewJs = require('./Views/SectionView.js');
-
-var _ViewsSectionViewJs2 = _interopRequireDefault(_ViewsSectionViewJs);
-
 var _libHelpersJs = require('./lib/helpers.js');
 
 var envInfo = {};
 
 if (window.location.hostname !== 'atlas.metabroadcast.com' || window.location.hostname !== 'stage.metabroadcast.com') {
   envInfo.isDev = true;
-  //loadTemplates();
+  (0, _libTemplatesJs.loadTemplates)();
 }
 
-$(function () {
-  var contentCollection = new _CollectionsContentCollectionJs2['default']();
-  var contentCollectionView = new _ViewsContentCollectionViewJs2['default']({ collection: contentCollection });
-  console.log(document.getElementById('header-template'));
-  var headerTemplate = Handlebars.compile($('#header-template').html());
-  var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
-  $('#site-header').html(headerTemplate(envInfo));
-  $('#sub-header').html(subHeaderTemplate());
-});
-
 $(window).load(function () {
+  $(function () {
+    var contentCollection = new _CollectionsContentCollectionJs2['default']();
+    var contentCollectionView = new _ViewsContentCollectionViewJs2['default']({ collection: contentCollection });
+    var headerTemplate = Handlebars.compile($('#header-template').html());
+    var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
+    $('#site-header').html(headerTemplate(envInfo));
+    $('#sub-header').html(subHeaderTemplate());
+  });
+
   var onePageNavOptions = {
     currentClass: 'selected',
     changeHash: true,
@@ -310,7 +305,7 @@ $(window).load(function () {
 
 $(window).on('scroll', _.debounce(_libHelpersJs.toggleSelectedNavItem, 250));
 
-},{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./Views/SectionView.js":4,"./lib/helpers.js":6,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
+},{"./Collections/ContentCollection.js":1,"./Views/ContentCollectionView.js":3,"./lib/helpers.js":6,"./lib/init.js":7,"./lib/templates.js":8}]},{},[9])
 
 
 //# sourceMappingURL=main.compiled.js.map

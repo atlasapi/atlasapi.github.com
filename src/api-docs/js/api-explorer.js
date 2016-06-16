@@ -309,7 +309,7 @@ var apiExplorer = (function () {
       application.shortKey += apiKey.substring(apiKey.length - 3);
     });
     var compiledTemplate = new EJS({
-      url: 'templates/api-key-dropdown.ejs'
+      url: '/api-docs/templates/api-key-dropdown.ejs'
     }).render(data.applications);
     $('#getApiKeyBtnHolder').html(compiledTemplate);
     $('#user-api-keys').trigger('change');
@@ -317,7 +317,7 @@ var apiExplorer = (function () {
 
   var loadApiKeyButton = function () {
     var compiledTemplate = new EJS({
-      url: 'templates/api-key-button.ejs'
+      url: '/api-docs/templates/api-key-button.ejs'
     }).render();
     $('#getApiKeyBtnHolder').html(compiledTemplate);
   };
@@ -341,7 +341,7 @@ var apiExplorer = (function () {
 
   var init = function (endpointsData) {
     var compiledTemplate = new EJS({
-      url: 'templates/api-explorer.ejs'
+      url: '/api-docs/templates/api-explorer.ejs'
     }).render(endpointsData);
     $('#api-explorer-tabs').html(compiledTemplate);
     events(endpointsData);
