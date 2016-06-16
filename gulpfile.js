@@ -115,6 +115,12 @@ gulp.task('useref', ['templates'], function () {
     .pipe(gulp.dest('./build'));
 });
 
+gulp.task('moveTemplate', ['useref'], function () {
+  return gulp.src('./build/_index.html')
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest('./build'));
+});
+
 /**
  *  Process the scss
  */
@@ -222,7 +228,7 @@ gulp.task('server', shell.task(['http-server src -p 8080 -a dev.mbst.tv --cors']
 /**
  *  The tasks that should be run on a day to day basis
  */
-gulp.task('build', ['getEnvironment', 'reset', '6to5', 'scss', 'images', 'json', 'templates', 'copyApiDocs', 'useref', 'clean']);
+gulp.task('build', ['getEnvironment', 'reset', '6to5', 'scss', 'images', 'json', 'templates', 'copyApiDocs', 'useref', 'moveTemplate', 'clean']);
 
 gulp.task('upload', ['gitPush']);
 

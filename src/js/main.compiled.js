@@ -213,7 +213,6 @@ var importTemplates = function importTemplates(templates) {
   templates = (0, _libHelpersJs.elementListToArray)(templates);
   templates.forEach(function (template) {
     var clone = document.importNode(template, true);
-
     document.body.appendChild(clone);
   });
 };
@@ -225,7 +224,9 @@ var loadTemplates = function loadTemplates() {
 
   if (templates) {
     templates.forEach(function (template) {
-      var templateElements = template['import'].querySelectorAll('template');
+      var templateElements = undefined;
+
+      templateElements = template['import'].querySelectorAll('script[type="text/x-handlebars-template"]');
 
       if (templateElements) {
         importTemplates(templateElements);
@@ -259,17 +260,17 @@ var _ViewsSectionViewJs2 = _interopRequireDefault(_ViewsSectionViewJs);
 
 var _libHelpersJs = require('./lib/helpers.js');
 
-(0, _libTemplatesJs.loadTemplates)();
-
 var envInfo = {};
 
-if (window.location.hostname !== 'atlas.metabroadcast.com') {
+if (window.location.hostname !== 'atlas.metabroadcast.com' || window.location.hostname !== 'stage.metabroadcast.com') {
   envInfo.isDev = true;
+  //loadTemplates();
 }
 
 $(function () {
   var contentCollection = new _CollectionsContentCollectionJs2['default']();
   var contentCollectionView = new _ViewsContentCollectionViewJs2['default']({ collection: contentCollection });
+  console.log(document.getElementById('header-template'));
   var headerTemplate = Handlebars.compile($('#header-template').html());
   var subHeaderTemplate = Handlebars.compile($('#sub-header-template').html());
   $('#site-header').html(headerTemplate(envInfo));

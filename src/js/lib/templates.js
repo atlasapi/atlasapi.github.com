@@ -4,7 +4,6 @@ var importTemplates = function (templates) {
   templates = elementListToArray(templates);
   templates.forEach(function (template) {
     let clone = document.importNode(template, true);
-
     document.body.appendChild(clone);
   });
 };
@@ -16,7 +15,9 @@ var loadTemplates = function () {
 
   if (templates) {
     templates.forEach(function (template) {
-      let templateElements = template.import.querySelectorAll('template');
+      let templateElements;
+
+      templateElements = template.import.querySelectorAll('script[type="text/x-handlebars-template"]');
 
       if (templateElements) {
         importTemplates(templateElements);
