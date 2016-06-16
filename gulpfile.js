@@ -107,7 +107,9 @@ gulp.task('useref', ['templates'], function () {
   return gulp.src('./src/**/*.html')
     .pipe(assets)
     .pipe(gulpif('*.js', uglify()))
-    .pipe(gulpif('*.css', minify()))
+    .pipe(gulpif('*.css', minify({
+      processImport: false
+    })))
     .pipe(rev())
     .pipe(assets.restore())
     .pipe(useref())
