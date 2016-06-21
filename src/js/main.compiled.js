@@ -80,15 +80,39 @@ exports['default'] = Backbone.View.extend({
     }
 
     MBST.load({
-      client: 'atlasNowNextLater',
+      client: 'demo',
       widgets: [{
         name: 'epg',
         version: '1',
         modules: {
+          common: {
+            useAtlas4: true
+          },
           grid: {
-            holder: '.epg-widget'
+            holder: '#GRID',
+            showTimes: true,
+            nav: {
+              days: 7,
+              fixed: true,
+              showDates: true,
+              showTime: true,
+              dateFormat: ["ddd", "D"],
+              friendlyDayNames: {
+                today: true,
+                yesterday: true
+              }
+            }
+          },
+          "featured": {
+            holder: "#FEATURED",
+            items: 3,
+            useGrid: false,
+            arrowOverlap: true,
+            showDescription: false
           }
-        }
+        },
+        customStyle: true,
+        customScript: true
       }]
     });
   }
