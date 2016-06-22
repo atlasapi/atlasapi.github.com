@@ -43,12 +43,6 @@ $(window).load(function () {
     var target = window.location.hash;
     $('.sub-nav').find('a[href=' + target + ']').trigger('click');
   }
-
-  // Initiate now next widget
-  if (window.location.pathname !== '/api-docs/') {
-    var nowNextLater = new NowNextLater();
-    nowNextLater.init();
-  }
 });
 
 $(window).on('scroll', _.debounce(toggleSelectedNavItem, 250));

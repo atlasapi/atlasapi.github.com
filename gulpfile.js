@@ -242,7 +242,7 @@ gulp.task('json', function () {
   gulp.src('./src/data/**/*').pipe(gulp.dest('./build/data'));
 });
 
-gulp.task('server', shell.task(['http-server build -p 8080 -a dev.mbst.tv --cors']));
+gulp.task('server', shell.task(['http-server src -p 8080 -a dev.mbst.tv --cors']));
 
 /**
  *  The tasks that should be run on a day to day basis
