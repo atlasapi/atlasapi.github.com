@@ -49,7 +49,16 @@ var handleLoggedInStatus = (function () {
   };
 
   var logout = function () {
-    Cookies.remove('iPlanetDirectoryPro');
+    if (window.location.host === 'dev.mbst.tv') {
+      Cookies.remove('iPlanetDirectoryPro', {
+        path: '/'
+      });
+    } else {
+      Cookies.remove('iPlanetDirectoryPro', {
+        path: '/',
+        domain: 'metabroadcast.com'
+      });
+    }
     var template = Handlebars.compile($('#logged-out-template').html());
     $('#navbar-tools').html(template());
     $('.user-menu').each(function () {
