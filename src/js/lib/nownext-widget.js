@@ -1,7 +1,7 @@
 var NowNextLater = function () {
   'use strict';
 
-  this.apiKey = '84097c4de516445eb7bb58f4b73d2842';
+  this.apiKey = 'b580679ff95b448ebb65b5e5523362c2';
   this.channelGroupsEndpointURL = '//users-atlas.metabroadcast.com/3.0/channel_groups/';
   this.channelGroupsID = 'cbgZ';
   this.channelGroupsAnnotations = ['channels'];
