@@ -181,7 +181,16 @@ var apiExplorer = (function () {
       var $this = $(this);
       $this.on('submit', function (e) {
         e.preventDefault();
-        sendQuery($this);
+
+        var apiKey = getApiKey();
+
+        if (!apiKey) {
+          var $apiKeyWarning = $this.closest('.has-api-key-warning').find('.api-key-warning');
+          $('.api-key-warning').hide();
+          $apiKeyWarning.show();
+        } else {
+          sendQuery($this);
+        }
       });
     });
     $(document).on('click', '.apiExplorerContentLink', function (e) {
@@ -208,18 +217,6 @@ var apiExplorer = (function () {
     $(document).on('click', '.logout', function () {
       loadApiKeyButton();
       $('#apiKey').val('').trigger('change');
-    });
-    $(document).on('click', '.show-api-key-warning', function (e) {
-
-      e.preventDefault();
-
-      var apiKey = getApiKey();
-
-      if (!apiKey) {
-        var $apiKeyWarning = $(this).closest('.has-api-key-warning').find('.api-key-warning');
-        $('.api-key-warning').hide();
-        $apiKeyWarning.show();
-      }
     });
     $(document).on('click', '.close-api-key-warning', function (e) {
       e.preventDefault();
