@@ -2,15 +2,21 @@ var handleLoggedInStatus = (function () {
   'use strict';
 
   var loadUserDataTemplate = function (data) {
-    var template = Handlebars.compile($('#logged-in-template').html());
-    $('#navbar-tools').html(template(data));
-    data.role.forEach(function(role) {
-      if (role.id === 'admins') {
-        var adminTemplate = Handlebars.compile($('#admin-menu-template').html());
-        $('#admin-menu').html(adminTemplate());
+    return new Promise(function (resolve, reject) {
+      var template = Handlebars.compile($('#logged-in-template').html());
+      $('#navbar-tools').html(template(data));
+      if (!data.role) {
+        reject();
       }
+      data.role.forEach(function (role) {
+        if (role.id === 'admins') {
+          var adminTemplate = Handlebars.compile($('#admin-menu-template').html());
+          $('#admin-menu').html(adminTemplate());
+        }
+      });
+      loadGroupsTemplate(data);
+      resolve();
     });
-    loadGroupsTemplate(data);
   };
 
   var loadApplicationsTemplate = function (data) {
@@ -91,13 +97,8 @@ var handleLoggedInStatus = (function () {
   };
 
   return function () {
-    if (atlasUser.isLoggedIn()) {
-      var authCookie = atlasUser.getCredentials();
-      loadNavigationTemplate();
-      atlasUser.getUserData('https://admin-backend.metabroadcast.com/1/user', authCookie, loadUserDataTemplate);
-      loadApplicationsTemplate();
-      events();
-    } else {
+
+    function notLoggedIn() {
       var hostName = window.location.hostname;
       var referrerUrl;
       if (hostName === 'atlas.metabroadcast.com') {
@@ -107,6 +108,18 @@ var handleLoggedInStatus = (function () {
       }
       var template = Handlebars.compile($('#logged-out-template').html());
       $('#navbar-tools').html(template({ referrerUrl: referrerUrl }));
+    }
+
+    if (atlasUser.isLoggedIn()) {
+      var authCookie = atlasUser.getCredentials();
+      loadNavigationTemplate();
+      atlasUser.getUserData('https://admin-backend.metabroadcast.com/1/user', authCookie)
+        .then(loadUserDataTemplate)
+        .catch(notLoggedIn);
+      loadApplicationsTemplate();
+      events();
+    } else {
+      notLoggedIn();
     }
   }
 })();
