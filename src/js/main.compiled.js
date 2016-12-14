@@ -85,6 +85,16 @@ exports['default'] = Backbone.View.extend({
       if (window.location.pathname !== '/api-docs/') {
         var nowNextLater = new NowNextLater();
         nowNextLater.init();
+
+        $('.row .blog-posts').blogPostCarousel({
+          listType: 'posts',
+          posts_per_page: '3',
+          filters: {
+            categories: '117',
+            order: 'asc',
+            orderBy: 'title'
+          }
+        });
       }
     }
 

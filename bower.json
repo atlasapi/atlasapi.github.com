@@ -23,6 +23,7 @@
     "backbone.nativeview": "~0.3.2",
     "common-style": "git@bitbucket.org:mbst/common-style.git#~0.1.12",
     "handlebars": "~4.0.4",
-    "js-cookie": "^2.1.2"
+    "js-cookie": "^2.1.2",
+    "blog-post-carousel": "git+ssh://git@gitlab.com/mbst/blog-post-carousel.git"
   }
 }
