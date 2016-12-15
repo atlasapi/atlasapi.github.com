@@ -24,7 +24,7 @@ export default Backbone.View.extend({
           filters: {
             categories: '117',
             order: 'asc',
-            orderBy: 'title'
+            orderby: 'title'
           }
         });
       }
