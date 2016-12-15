@@ -88,7 +88,7 @@ exports['default'] = Backbone.View.extend({
 
         $('.row .blog-posts').blogPostCarousel({
           listType: 'posts',
-          posts_per_page: '3',
+          posts_per_page: '4',
           filters: {
             categories: '117',
             order: 'asc',
