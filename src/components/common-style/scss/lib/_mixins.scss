@@ -1,3 +1,0 @@
-@mixin border-radius($radii) {
-  @include prefixer(border-radius, $radii, spec);
-}
