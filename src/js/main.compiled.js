@@ -87,12 +87,36 @@ exports['default'] = Backbone.View.extend({
         nowNextLater.init();
 
         $('.row .blog-posts').blogPostCarousel({
-          listType: 'posts',
-          posts_per_page: '4',
-          filters: {
-            categories: '117',
-            order: 'asc',
-            orderby: 'title'
+          posts: {
+            listType: 'posts',
+            filters: {
+              categories: '117',
+              order: 'asc',
+              orderby: 'title'
+            }
+          },
+          carousel: {
+            slidesToShow: 4,
+            slidesToScroll: 4,
+            responsive: [{
+              breakpoint: 930,
+              settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3
+              }
+            }, {
+              breakpoint: 730,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2
+              }
+            }, {
+              breakpoint: 530,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+              }
+            }]
           }
         });
       }
