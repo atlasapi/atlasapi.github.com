@@ -91,7 +91,7 @@ exports['default'] = Backbone.View.extend({
             listType: 'posts',
             filters: {
               categories: '117',
-              order: 'asc',
+              order: 'desc',
               orderby: 'title'
             }
           },

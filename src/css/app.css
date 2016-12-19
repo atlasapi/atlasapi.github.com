@@ -824,6 +824,10 @@ pre {
 .btn:hover, .btn:active, .btn:focus {
   text-decoration: none; }
 
+.home-list {
+  list-style: none;
+  padding: 0; }
+
 .highlight {
   color: #ff009a; }
 
@@ -1260,7 +1264,7 @@ pre {
   margin: 0.75rem 0; }
 
 .section-home .blog-posts {
-  padding: 1rem 0; }
+  padding: 1.5rem 0; }
 
 @media only screen and (min-width: 700px) {
   .section-home {
@@ -1283,6 +1287,9 @@ pre {
 .section-api-docs .well {
   margin-top: 0;
   border-radius: 0 0 5px 5px; }
+
+.well-home {
+  margin: 0; }
 
 .client-list {
   list-style: none;
