@@ -24,6 +24,6 @@
     "common-style": "git+ssh://git@gitlab.com/mbst/common-style.git#~0.1.12",
     "handlebars": "~4.0.4",
     "js-cookie": "^2.1.2",
-    "blog-post-carousel": "git+ssh://git@gitlab.com/mbst/blog-post-carousel.git#~1.0.11"
+    "blog-post-carousel": "git+ssh://git@gitlab.com/mbst/blog-post-carousel.git#~1.0.12"
   }
 }
