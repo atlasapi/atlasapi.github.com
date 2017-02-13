@@ -8,12 +8,6 @@ var handleLoggedInStatus = (function () {
       if (!data.role) {
         reject();
       }
-      data.role.forEach(function (role) {
-        if (role.id === 'admins') {
-          var adminTemplate = Handlebars.compile($('#admin-menu-template').html());
-          $('#admin-menu').html(adminTemplate());
-        }
-      });
       loadGroupsTemplate(data);
       resolve();
     });
@@ -37,7 +31,7 @@ var handleLoggedInStatus = (function () {
         if (role.id === 'youview-feeds' || role.id === 'admins') {
           groups.push({
             title: 'Feeds',
-            url: '/admin?#/feeds'
+            url: 'https://columbus.metabroadcast.com/bbc-youview-feed/'
           });
         }
       });
