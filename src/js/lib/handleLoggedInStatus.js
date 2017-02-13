@@ -31,7 +31,7 @@ var handleLoggedInStatus = (function () {
         if (role.id === 'bt-blackout' || role.id === 'admins') {
           groups.push({
             title: 'EPG',
-            url: '/admin?#/epg/bt-tv'
+            url: 'https://shaman.metabroadcast.com/blackouts/'
           });
         }
         if (role.id === 'youview-feeds' || role.id === 'admins') {
