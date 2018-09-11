@@ -16,7 +16,6 @@ var del = require('del');
 var zip = require('gulp-zip');
 var maven = require('maven-deploy');
 var bump = require('gulp-bump');
-var git = require('gulp-git');
 var shell = require('gulp-shell');
 var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
@@ -190,18 +189,6 @@ gulp.task('bump', ['maven'], function () {
   }
 });
 
-gulp.task('gitCommit', ['bump'], function () {
-  var version = require('./package.json').version;
-  return gulp.src('.')
-    .pipe(git.commit("Update package version to " + version, {args: '-a'}));
-});
-
-gulp.task('gitPush', ['gitCommit'], function () {
-  return git.push('origin', 'master', function (err) {
-    if (err) throw err;
-  }, null);
-});
-
 /**
  * Copy images to build
  */
@@ -259,8 +246,6 @@ gulp.task('build', [
   'copyApiDocs',
   'moveTemplate'
 ]);
-
-gulp.task('upload', ['gitPush']);
 
 gulp.task('watch', ['6to5', 'scss'], function () {
   gulp.watch('src/**/*.js', ['6to5']);
