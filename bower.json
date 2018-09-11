@@ -22,7 +22,6 @@
     "es6-module-loader": "~0.16.6",
     "backbone.nativeview": "~0.3.2",
     "handlebars": "~4.0.4",
-    "js-cookie": "^2.1.2",
-    "blog-post-carousel": "git+ssh://git@gitlab.com/mbst/blog-post-carousel.git#~1.0.14"
+    "js-cookie": "^2.1.2"w
   }
 }
