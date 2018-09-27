@@ -31,7 +31,7 @@
     "gulp-shell": "^0.5.0",
     "gulp-sourcemaps": "^1.12.1",
     "http-server": "^0.8.5",
-    "common-style": "git://git@gitlab.com/mbst/common-style.git"
+    "common-style": "git+ssh://git@gitlab.com/mbst/common-style.git"
   },
   "scripts": {
     "postinstall": "node node_modules/bower/bin/bower install"
