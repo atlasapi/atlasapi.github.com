@@ -360,6 +360,18 @@ html {
 *, *::after, *::before {
   box-sizing: inherit; }
 
+.cf::after,
+.clearfix::after {
+  clear: both;
+  content: "";
+  display: table; }
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
+
 body {
   font: 100%/1.4 "Open Sans", sans-serif; }
 
@@ -527,18 +539,16 @@ ul.list {
     height: 24px;
     border-radius: 12px;
     margin: 0 auto; }
+    .tbl tbody td.status .status-icon i {
+      position: relative;
+      top: 2px;
+      color: white; }
   .tbl tbody td.status.status-ok .status-icon {
     background: #52A300; }
-    .tbl tbody td.status.status-ok .status-icon:before {
-      content: '\10004';
-      color: #fff; }
   .tbl tbody td.status.status-glitch .status-icon {
     background: #CC6600; }
   .tbl tbody td.status.status-degradation .status-icon {
     background: #CC0000; }
-    .tbl tbody td.status.status-degradation .status-icon:before {
-      content: '\10008';
-      color: #fff; }
 
 /*
   DETAILS
@@ -603,11 +613,35 @@ ul.tabs {
   .tabContent.show {
     display: block; }
 
-.cf::after,
-.clearfix::after {
-  clear: both;
-  content: "";
-  display: table; }
+.mb-contact-form-label {
+  font-weight: 700;
+  margin-bottom: .3rem; }
+
+.mb-contact-form-field {
+  margin-bottom: .6rem; }
+
+.mb-contact-form-hidden {
+  margin: 0; }
+
+input.mb-contact-form-input[type=text],
+textarea.mb-contact-form-input {
+  box-sizing: border-box;
+  width: 100%;
+  background: #efefef;
+  padding: .3rem .4rem;
+  border: 0;
+  border-radius: 5px;
+  outline: 0 none; }
+
+.mb-contact-form-checkbox label {
+  display: inline-block; }
+
+.mb-contact-form-checkbox .mb-contact-form-field-wrapper {
+  float: left;
+  margin-right: .3rem; }
+
+input:required:focus {
+  box-shadow: inset 0 0 1px rgba(255, 0, 0, 0.5); }
 
 .btn {
   border-radius: 3px;
@@ -686,6 +720,45 @@ ul.tabs {
 
 .cbtn:hover {
   text-decoration: none; }
+
+.btn {
+  position: relative;
+  margin-left: 10px;
+  overflow: hidden; }
+  .btn.save span {
+    display: block;
+    transition: transform .3s ease; }
+  .btn.save:before {
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-top: 3px solid rgba(255, 255, 255, 0.8);
+    content: '';
+    position: absolute;
+    top: -100%;
+    left: 0;
+    right: 0;
+    width: 1.5em;
+    line-height: 1.5em;
+    height: 1.5em;
+    margin: -0.75em auto 0 auto;
+    border-radius: 1em;
+    transition: top 0.3s ease; }
+  .btn.save.saving span {
+    transform: translateY(100%);
+    animation: spin .5s linear infinite; }
+  .btn.save.saving:before {
+    top: 50%; }
+
+.float-left {
+  float: left; }
+
+.float-right {
+  float: right; }
+
+.clear-left {
+  clear: left; }
+
+.clear-right {
+  clear: right; }
 
 .container {
   max-width: 960px;
